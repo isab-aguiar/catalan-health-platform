@@ -96,9 +96,14 @@ export default function Home() {
                         <MessageCircle size={14} className="text-green-600" />
                         <span>(37) 99152-0024</span>
                       </a>
-                      <p className="text-sm text-neutral-600">
-                        Horário: 07:00 - 16:00
-                      </p>
+                      <div className="flex items-start gap-2 mt-2">
+                        <Clock size={14} className="text-neutral-500 mt-0.5 flex-shrink-0" />
+                        <div className="text-sm text-neutral-600">
+                          <span className="font-medium">Horário de Atendimento ao Público:</span>
+                          <br />
+                          07:00 às 12:00 | 13:00 às 16:30
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -119,9 +124,14 @@ export default function Home() {
                       >
                         (37) 3229-6082
                       </a>
-                      <p className="text-sm text-neutral-600">
-                        Horário: 07:00 - 16:00
-                      </p>
+                      <div className="flex items-start gap-2 mt-2">
+                        <Clock size={14} className="text-neutral-500 mt-0.5 flex-shrink-0" />
+                        <div className="text-sm text-neutral-600">
+                          <span className="font-medium">Horário de Atendimento ao Público:</span>
+                          <br />
+                          07:00 às 11:00 | 13:00 às 16:00
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -142,9 +152,14 @@ export default function Home() {
                       >
                         (37) 3229-6081
                       </a>
-                      <p className="text-sm text-neutral-600">
-                        Horário: 07:00 - 16:00
-                      </p>
+                      <div className="flex items-start gap-2 mt-2">
+                        <Clock size={14} className="text-neutral-500 mt-0.5 flex-shrink-0" />
+                        <div className="text-sm text-neutral-600">
+                          <span className="font-medium">Horário de Atendimento ao Público:</span>
+                          <br />
+                          07:30 às 16:00
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
