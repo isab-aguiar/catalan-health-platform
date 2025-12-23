@@ -358,7 +358,7 @@ export default function Sala4() {
                     <strong className="text-slate-800">Manhã</strong>
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    09h00 às 12h00
+                    07h00 às 11h00
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-600">
                     Atendimento presencial
@@ -404,9 +404,9 @@ export default function Sala4() {
                     <strong className="text-slate-800">Manhã</strong>
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Renata Vieira - Técnica de Enfermagem
+                    Isabela Aguiar - Técnica de Enfermagem
                     <br />
-                    Darlei Camargos - Técnico de Enfermagem
+                   
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -414,8 +414,8 @@ export default function Sala4() {
                     <strong className="text-slate-800">Tarde</strong>
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Thaciene Araújo - Técnica de Enfermagem <br />
-                    Cristiane Silva - Técnica de Enfermagem
+                    Isabela Aguiar - Técnica de Enfermagem<br />
+                    
                   </td>
                 </tr>
               </tbody>

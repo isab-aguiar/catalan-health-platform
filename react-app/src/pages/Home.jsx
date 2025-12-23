@@ -91,11 +91,14 @@ export default function Home() {
                         href="https://wa.me/5537991520024"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-neutral-700 hover:text-green-600 hover:underline transition-colors"
+                        className="flex items-center gap-1.5 text-sm text-neutral-700 hover:text-green-600 hover:underline transition-colors mb-2"
                       >
                         <MessageCircle size={14} className="text-green-600" />
                         <span>(37) 99152-0024</span>
                       </a>
+                      <p className="text-sm text-neutral-600">
+                        Horário: 07:00 - 16:00
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -112,10 +115,13 @@ export default function Home() {
                       </h3>
                       <a
                         href="tel:+553732296082"
-                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block"
+                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block mb-2"
                       >
                         (37) 3229-6082
                       </a>
+                      <p className="text-sm text-neutral-600">
+                        Horário: 07:00 - 16:00
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -132,10 +138,13 @@ export default function Home() {
                       </h3>
                       <a
                         href="tel:+553732296081"
-                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block"
+                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block mb-2"
                       >
                         (37) 3229-6081
                       </a>
+                      <p className="text-sm text-neutral-600">
+                        Horário: 07:00 - 16:00
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -199,7 +208,7 @@ export default function Home() {
                   </a>
                   <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
                   <a
-                    href="https://instagram.com/ubssaojose"
+                    href="https://instagram.com/esfcatalao"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-pink-600 hover:underline transition-colors"
