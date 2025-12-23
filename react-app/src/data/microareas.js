@@ -3,6 +3,7 @@ import enesJuniorPhoto from '../assets/images/acs-enesjunior.png';
 import renataPhoto from '../assets/images/acs-renata.png';
 import wasleyPhoto from '../assets/images/acs-waslei.png';
 import danielPhoto from '../assets/images/acs-daniel.png';
+import daviPhoto from '../assets/images/acs-davi.png';
 
 export const microareasData = {
   "ESF CATALÃO": {
@@ -112,6 +113,7 @@ export const microareasData = {
       {
         numero: "01",
         acs: "Davi de Castro",
+        photo: daviPhoto,
         ruas: [
           { nome: "Guapé", numeros: "180 até 1030 (somente pares)" },
           { nome: "Muriaé", numeros: "ímpar 57 até 1351 / par 30 até 1010" },
