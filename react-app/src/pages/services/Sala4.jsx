@@ -414,7 +414,7 @@ export default function Sala4() {
                     <strong className="text-slate-800">Tarde</strong>
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Isabela Aguiar - Técnica de Enfermagem<br />
+                    Thaciane Souza - Técnica de Enfermagem<br />
                     
                   </td>
                 </tr>
