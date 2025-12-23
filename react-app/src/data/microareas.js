@@ -1,5 +1,5 @@
 import erikaPhoto from '../assets/images/acs-erika.png';
-import enesJuniorPhoto from '../assets/images/acs-enesjunior.png';
+import enesJuniorPhoto from '../assets/images/acs-enesjunior.png.jpeg';
 import renataPhoto from '../assets/images/acs-renata.png';
 import wasleyPhoto from '../assets/images/acs-waslei.png';
 import danielPhoto from '../assets/images/acs-daniel.png';
