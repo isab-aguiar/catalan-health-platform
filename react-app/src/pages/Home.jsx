@@ -15,6 +15,8 @@ import {
   Pill,
   Smile,
   Mail,
+  MessageCircle,
+  Instagram,
 } from "lucide-react";
 
 export default function Home() {
@@ -49,17 +51,19 @@ export default function Home() {
                 {/* Phone Numbers */}
                 <div className="bg-white rounded-lg p-5 border border-neutral-200">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Phone size={20} className="text-white" />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
                         Recepção
                       </h3>
-                      <p className="text-sm text-neutral-700 mb-1">
+                      <a
+                        href="tel:+553732296080"
+                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block"
+                      >
                         (37) 3229-6080
-                      </p>
-                      <p className="text-xs text-neutral-500">Ramal 201</p>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -74,10 +78,24 @@ export default function Home() {
                       <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
                         Administrativo
                       </h3>
-                      <p className="text-sm text-neutral-700 mb-1">
-                        (37) 3229-6080
-                      </p>
-                      <p className="text-xs text-neutral-500">Ramal 202</p>
+                      <a
+                        href="https://wa.me/5537991770200"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-sm text-neutral-700 hover:text-green-600 hover:underline transition-colors mb-1"
+                      >
+                        <MessageCircle size={14} className="text-green-600" />
+                        <span>(37) 99177-0200</span>
+                      </a>
+                      <a
+                        href="https://wa.me/5537991520024"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1.5 text-sm text-neutral-700 hover:text-green-600 hover:underline transition-colors"
+                      >
+                        <MessageCircle size={14} className="text-green-600" />
+                        <span>(37) 99152-0024</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -90,12 +108,14 @@ export default function Home() {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
-                        Odontologia
+                        Consultório Odontológico
                       </h3>
-                      <p className="text-sm text-neutral-700 mb-1">
-                        (37) 3229-6080
-                      </p>
-                      <p className="text-xs text-neutral-500">Ramal 203</p>
+                      <a
+                        href="tel:+553732296082"
+                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block"
+                      >
+                        (37) 3229-6082
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -110,10 +130,12 @@ export default function Home() {
                       <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
                         Farmácia
                       </h3>
-                      <p className="text-sm text-neutral-700 mb-1">
-                        (37) 3229-6080
-                      </p>
-                      <p className="text-xs text-neutral-500">Ramal 204</p>
+                      <a
+                        href="tel:+553732296081"
+                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block"
+                      >
+                        (37) 3229-6081
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -131,7 +153,7 @@ export default function Home() {
                       <p className="text-sm text-neutral-700 mb-1">
                         Segunda a Sexta: 07:00 - 17:00
                       </p>
-                      <p className="text-xs text-neutral-500">
+                      <p className="text-sm text-neutral-700 mb-1">
                         Saúde na Hora: 17:00 - 22:00
                       </p>
                     </div>
@@ -148,13 +170,18 @@ export default function Home() {
                       <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
                         Endereço
                       </h3>
-                      <p className="text-sm text-neutral-700">
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Rua+Júlio+Nogueira+1320+São+José+Divinópolis+MG"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block"
+                      >
                         Rua Júlio Nogueira, 1320
                         <br />
                         Bairro São José
                         <br />
                         Divinópolis - MG
-                      </p>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -163,20 +190,41 @@ export default function Home() {
               {/* Additional Info Bar */}
               <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
                 <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-neutral-700">
-                  <div className="flex items-center gap-2">
+                  <a
+                    href="mailto:staff.sj21@gmail.com"
+                    className="flex items-center gap-2 hover:text-primary-600 hover:underline transition-colors"
+                  >
                     <Mail size={16} className="text-neutral-600" />
-                    <span>ubssaojose@divinopolis.mg.gov.br</span>
-                  </div>
+                    <span>staff.sj21@gmail.com</span>
+                  </a>
                   <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
-                  <div className="flex items-center gap-2">
+                  <a
+                    href="https://instagram.com/ubssaojose"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-pink-600 hover:underline transition-colors"
+                  >
+                    <Instagram size={16} className="text-neutral-600" />
+                    <span>@ubssaojose</span>
+                  </a>
+                  <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
+                  <a
+                    href="tel:192"
+                    className="flex items-center gap-2 hover:text-error hover:underline transition-colors"
+                  >
                     <Phone size={16} className="text-neutral-600" />
                     <span>Emergência SAMU: 192</span>
-                  </div>
+                  </a>
                   <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
-                  <div className="flex items-center gap-2">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=UPA+Padre+Roberto+Divinópolis+MG"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-primary-600 hover:underline transition-colors"
+                  >
                     <Hospital size={16} className="text-neutral-600" />
-                    <span>Plantão 24h: UPA Centro-Oeste</span>
-                  </div>
+                    <span>Plantão 24h: UPA Padre Roberto</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -245,7 +293,7 @@ export default function Home() {
                 Grupos de Atividades Coletivas
               </h3>
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
-                Grupos de Atividades Coletivas e atividades coletivas
+                Grupo de Atividade Coletiva
               </p>
               <div className="flex items-center gap-2 text-sm font-semibold text-accent-600 group-hover:text-accent-700">
                 <span>Consultar</span>
