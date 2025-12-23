@@ -17,6 +17,7 @@ import {
   Mail,
   MessageCircle,
   Instagram,
+  Droplet,
 } from "lucide-react";
 
 export default function Home() {
@@ -26,11 +27,16 @@ export default function Home() {
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-4">
-              Bem-vindo à <span className="text-primary-600">UBS São José</span>
-            </h1>
-            <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto">
-              Atendimento humanizado e profissional para toda a comunidade
+            <div className="mb-3">
+              <p className="text-sm md:text-base font-medium text-neutral-500 uppercase tracking-wider mb-2">
+                Estratégia Saúde da Família
+              </p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-2">
+                <span className="text-primary-600">ESF Catalão</span>
+              </h1>
+            </div>
+            <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+              Atendimento humanizado e profissional para toda a comunidade das ESFs Bela Vista -  Catalão - São José
             </p>
           </div>
 
@@ -48,60 +54,85 @@ export default function Home() {
             <div className="p-6">
               {/* Main Contact Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                {/* Phone Numbers */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                {/* Reception */}
+                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone size={20} className="text-white" />
+                    <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone size={22} className="text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
                         Recepção
                       </h3>
-                      <a
-                        href="tel:+553732296080"
-                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block"
-                      >
-                        (37) 3229-6080
-                      </a>
+                      <div className="space-y-3">
+                        <div>
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-1">
+                            Telefone
+                          </p>
+                          <a
+                            href="tel:+553732296080"
+                            className="text-base font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
+                          >
+                            (37) 3229-6080
+                          </a>
+                        </div>
+                        <div className="pt-2 border-t border-neutral-200">
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                            Horário de Funcionamento
+                          </p>
+                          <div className="space-y-1 text-sm text-neutral-700">
+                            <p>Segunda a Sexta: 07:00 - 17:00</p>
+                            <p>Saúde na Hora: 17:00 - 22:00</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Administrative Services */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Building2 size={20} className="text-white" />
+                    <div className="w-12 h-12 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Building2 size={22} className="text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
                         Administrativo
                       </h3>
-                      <a
-                        href="https://wa.me/5537991770200"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-neutral-700 hover:text-green-600 hover:underline transition-colors mb-1"
-                      >
-                        <MessageCircle size={14} className="text-green-600" />
-                        <span>(37) 99177-0200</span>
-                      </a>
-                      <a
-                        href="https://wa.me/5537991520024"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-1.5 text-sm text-neutral-700 hover:text-green-600 hover:underline transition-colors mb-2"
-                      >
-                        <MessageCircle size={14} className="text-green-600" />
-                        <span>(37) 99152-0024</span>
-                      </a>
-                      <div className="flex items-start gap-2 mt-2">
-                        <Clock size={14} className="text-neutral-500 mt-0.5 flex-shrink-0" />
-                        <div className="text-sm text-neutral-600">
-                          <span className="font-medium">Horário de Atendimento ao Público:</span>
-                          <br />
-                          07:00 às 12:00 | 13:00 às 16:30
+                      <div className="space-y-3">
+                        <div>
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                            WhatsApp
+                          </p>
+                          <div className="space-y-2">
+                            <a
+                              href="https://wa.me/5537991770200"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 text-sm font-semibold text-neutral-900 hover:text-green-600 transition-colors"
+                            >
+                              <MessageCircle size={16} className="text-green-600" />
+                              <span>(37) 99177-0200</span>
+                            </a>
+                            <a
+                              href="https://wa.me/5537991520024"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 text-sm font-semibold text-neutral-900 hover:text-green-600 transition-colors"
+                            >
+                              <MessageCircle size={16} className="text-green-600" />
+                              <span>(37) 99152-0024</span>
+                            </a>
+                          </div>
+                        </div>
+                        <div className="pt-2 border-t border-neutral-200">
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                            Horário de Atendimento ao Público
+                          </p>
+                          <p className="text-sm text-neutral-700">
+                            07:00 às 12:00 | 13:00 às 16:30
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -109,27 +140,34 @@ export default function Home() {
                 </div>
 
                 {/* Dentist */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Smile size={20} className="text-white" />
+                    <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Smile size={22} className="text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
                         Consultório Odontológico
                       </h3>
-                      <a
-                        href="tel:+553732296082"
-                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block mb-2"
-                      >
-                        (37) 3229-6082
-                      </a>
-                      <div className="flex items-start gap-2 mt-2">
-                        <Clock size={14} className="text-neutral-500 mt-0.5 flex-shrink-0" />
-                        <div className="text-sm text-neutral-600">
-                          <span className="font-medium">Horário de Atendimento ao Público:</span>
-                          <br />
-                          07:00 às 11:00 | 13:00 às 16:00
+                      <div className="space-y-3">
+                        <div>
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-1">
+                            Telefone
+                          </p>
+                          <a
+                            href="tel:+553732296082"
+                            className="text-base font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
+                          >
+                            (37) 3229-6082
+                          </a>
+                        </div>
+                        <div className="pt-2 border-t border-neutral-200">
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                            Horário de Atendimento ao Público
+                          </p>
+                          <p className="text-sm text-neutral-700">
+                            07:00 às 12:00 | 13:00 às 17:00
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -137,75 +175,94 @@ export default function Home() {
                 </div>
 
                 {/* Pharmacy */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Pill size={20} className="text-white" />
+                    <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Pill size={22} className="text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
                         Farmácia
                       </h3>
-                      <a
-                        href="tel:+553732296081"
-                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block mb-2"
-                      >
-                        (37) 3229-6081
-                      </a>
-                      <div className="flex items-start gap-2 mt-2">
-                        <Clock size={14} className="text-neutral-500 mt-0.5 flex-shrink-0" />
-                        <div className="text-sm text-neutral-600">
-                          <span className="font-medium">Horário de Atendimento ao Público:</span>
-                          <br />
-                          07:30 às 16:00
+                      <div className="space-y-3">
+                        <div>
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-1">
+                            Telefone
+                          </p>
+                          <a
+                            href="tel:+553732296081"
+                            className="text-base font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
+                          >
+                            (37) 3229-6081
+                          </a>
+                        </div>
+                        <div className="pt-2 border-t border-neutral-200">
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                            Horário de Atendimento ao Público
+                          </p>
+                          <p className="text-sm text-neutral-700">
+                            07:30 às 16:00
+                          </p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Hours */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                {/* Blood Collection */}
+                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Clock size={20} className="text-white" />
+                    <div className="w-12 h-12 bg-red-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Droplet size={22} className="text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
-                        Horário de Atendimento
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
+                        Coleta de Sangue
                       </h3>
-                      <p className="text-sm text-neutral-700 mb-1">
-                        Segunda a Sexta: 07:00 - 17:00
-                      </p>
-                      <p className="text-sm text-neutral-700 mb-1">
-                        Saúde na Hora: 17:00 - 22:00
-                      </p>
+                      <div className="space-y-3">
+                        <div className="pt-2">
+                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                            Horário de Atendimento ao Público
+                          </p>
+                          <p className="text-sm text-neutral-700 mb-1">
+                            07:00 às 08:00
+                          </p>
+                          <p className="text-xs text-neutral-500 italic">
+                            Mediante horário agendado
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Address */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin size={20} className="text-white" />
+                    <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MapPin size={22} className="text-white" />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
                         Endereço
                       </h3>
-                      <a
-                        href="https://www.google.com/maps/search/?api=1&query=Rua+Júlio+Nogueira+1320+São+José+Divinópolis+MG"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-neutral-700 hover:text-primary-600 hover:underline transition-colors block"
-                      >
-                        Rua Júlio Nogueira, 1320
-                        <br />
-                        Bairro São José
-                        <br />
-                        Divinópolis - MG
-                      </a>
+                      <div>
+                        <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                          Localização
+                        </p>
+                        <a
+                          href="https://www.google.com/maps/search/?api=1&query=Rua+Júlio+Nogueira+1320+São+José+Divinópolis+MG"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm text-neutral-700 hover:text-primary-600 transition-colors block leading-relaxed"
+                        >
+                          Rua Júlio Nogueira, 1320
+                          <br />
+                          Bairro São José
+                          <br />
+                          Divinópolis - MG
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
