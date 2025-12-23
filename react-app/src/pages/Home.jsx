@@ -11,6 +11,10 @@ import {
   BookOpen,
   GraduationCap,
   HeartHandshake,
+  Building2,
+  Pill,
+  Smile,
+  Mail,
 } from "lucide-react";
 
 export default function Home() {
@@ -28,51 +32,151 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Quick Info Cards */}
-          <div className="grid md:grid-cols-3 gap-4 mb-12">
-            <div className="bg-white rounded-xl p-4 shadow-soft border border-neutral-200">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary-50 rounded-lg flex items-center justify-center">
-                  <Phone size={20} className="text-primary-600" />
-                </div>
-                <div>
-                  <p className="text-sm text-neutral-600">Contato</p>
-                  <p className="font-semibold text-neutral-900">
-                    (37) 3229-6080
-                  </p>
-                </div>
-              </div>
+          {/* Contact Information Section */}
+          <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-12">
+            <div className="border-b border-neutral-200 px-6 py-4 bg-neutral-50">
+              <h2 className="text-2xl font-semibold text-neutral-900">
+                Informações de Contato
+              </h2>
+              <p className="text-neutral-600 text-sm mt-1">
+                Entre em contato conosco pelos canais abaixo
+              </p>
             </div>
 
-            <div className="bg-white rounded-xl p-4 shadow-soft border border-neutral-200">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary-50 rounded-lg flex items-center justify-center">
-                  <Clock size={20} className="text-primary-600" />
+            <div className="p-6">
+              {/* Main Contact Grid */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                {/* Phone Numbers */}
+                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                        Recepção
+                      </h3>
+                      <p className="text-sm text-neutral-700 mb-1">
+                        (37) 3229-6080
+                      </p>
+                      <p className="text-xs text-neutral-500">Ramal 201</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-neutral-600">Horário</p>
-                  <p className="font-semibold text-neutral-900">
-                    07:00 - 17:00
-                  </p>
-                  <p className="text-xs text-neutral-500 mt-1">
-                    Saúde na Hora: 17:00 - 22:00
-                  </p>
+
+                {/* Administrative Services */}
+                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Building2 size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                        Administrativo
+                      </h3>
+                      <p className="text-sm text-neutral-700 mb-1">
+                        (37) 3229-6080
+                      </p>
+                      <p className="text-xs text-neutral-500">Ramal 202</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Dentist */}
+                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Smile size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                        Odontologia
+                      </h3>
+                      <p className="text-sm text-neutral-700 mb-1">
+                        (37) 3229-6080
+                      </p>
+                      <p className="text-xs text-neutral-500">Ramal 203</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pharmacy */}
+                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Pill size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                        Farmácia
+                      </h3>
+                      <p className="text-sm text-neutral-700 mb-1">
+                        (37) 3229-6080
+                      </p>
+                      <p className="text-xs text-neutral-500">Ramal 204</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hours */}
+                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Clock size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                        Horário de Atendimento
+                      </h3>
+                      <p className="text-sm text-neutral-700 mb-1">
+                        Segunda a Sexta: 07:00 - 17:00
+                      </p>
+                      <p className="text-xs text-neutral-500">
+                        Saúde na Hora: 17:00 - 22:00
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Address */}
+                <div className="bg-white rounded-lg p-5 border border-neutral-200">
+                  <div className="flex items-start gap-3">
+                    <div className="w-10 h-10 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MapPin size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                        Endereço
+                      </h3>
+                      <p className="text-sm text-neutral-700">
+                        Rua Júlio Nogueira, 1320
+                        <br />
+                        Bairro São José
+                        <br />
+                        Divinópolis - MG
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="bg-white rounded-xl p-4 shadow-soft border border-neutral-200">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-primary-50 rounded-lg flex items-center justify-center">
-                  <MapPin size={20} className="text-primary-600" />
-                </div>
-                <div>
-                  <p className="text-sm text-neutral-600">Endereço</p>
-                  <p className="font-semibold text-neutral-900">
-                    Rua Júlio Nogueira, 1320
-                    <br />
-                    São José, Divinópolis - MG
-                  </p>
+              {/* Additional Info Bar */}
+              <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
+                <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-neutral-700">
+                  <div className="flex items-center gap-2">
+                    <Mail size={16} className="text-neutral-600" />
+                    <span>ubssaojose@divinopolis.mg.gov.br</span>
+                  </div>
+                  <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
+                  <div className="flex items-center gap-2">
+                    <Phone size={16} className="text-neutral-600" />
+                    <span>Emergência SAMU: 192</span>
+                  </div>
+                  <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
+                  <div className="flex items-center gap-2">
+                    <Hospital size={16} className="text-neutral-600" />
+                    <span>Plantão 24h: UPA Centro-Oeste</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -138,10 +242,10 @@ export default function Home() {
                 <Users size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
-                Grupos de Atividade Coletiva
+                Grupos de Atividades Coletivas
               </h3>
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
-                Grupos de Atividade Coletiva e atividades coletivas
+                Grupos de Atividades Coletivas e atividades coletivas
               </p>
               <div className="flex items-center gap-2 text-sm font-semibold text-accent-600 group-hover:text-accent-700">
                 <span>Consultar</span>
