@@ -68,7 +68,7 @@ export default function SearchSection({ className = "" }) {
           value={query}
           onChange={handleSearchChange}
           onKeyDown={handleKeyDown}
-          placeholder="Digite o nome da sua rua"
+          placeholder="Ex: Rua Amazonas, Av. Brasil, ou digite seu endereço completo..."
         />
 
         {/* Autocomplete Suggestions */}
@@ -117,10 +117,8 @@ export default function SearchSection({ className = "" }) {
       {/* Initial Help Text */}
       {query.length === 0 && (
         <div className="mt-6 max-w-3xl mx-auto text-center">
-          <p className="text-white text-sm">
-            <strong className="font-semibold">Dica:</strong> Informe o nome da
-            rua com ou sem número. Aceita variações como "Rua", "Avenida" ou
-            apenas o nome.
+          <p className="text-white/90 text-sm">
+            Digite o nome da sua rua ou endereço completo para localizar sua equipe de saúde
           </p>
         </div>
       )}
