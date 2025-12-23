@@ -286,7 +286,7 @@ export default function Home() {
                     className="flex items-center gap-2 hover:text-pink-600 hover:underline transition-colors"
                   >
                     <Instagram size={16} className="text-neutral-600" />
-                    <span>@ubssaojose</span>
+                    <span>@esfcatalao</span>
                   </a>
                   <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
                   <a
