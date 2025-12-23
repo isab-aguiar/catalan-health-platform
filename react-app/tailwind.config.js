@@ -96,6 +96,7 @@ export default {
       fontFamily: {
         sans: ['Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
         heading: ['Roboto', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
+        display: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
       },
       boxShadow: {
         soft: '0 2px 8px rgba(0, 0, 0, 0.08)',

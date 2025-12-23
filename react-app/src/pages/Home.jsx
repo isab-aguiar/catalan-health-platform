@@ -32,11 +32,11 @@ export default function Home() {
                 Estratégia Saúde da Família
               </p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-2">
-                <span className="text-primary-600">ESF Catalão</span>
+                <span className="text-primary-600 font-display font-extrabold tracking-tight uppercase">ESF CATALÃO</span>
               </h1>
             </div>
             <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-              Atendimento humanizado e profissional para toda a comunidade das ESFs Bela Vista -  Catalão - São José
+              Atendimento humanizado e profissional para toda a comunidade das <span className="whitespace-nowrap">ESFs Bela Vista - Catalão - São José</span>
             </p>
           </div>
 
