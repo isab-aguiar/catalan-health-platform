@@ -95,6 +95,7 @@ const Avisos = lazyLoad(() => import("./pages/admin/Avisos"));
 const Campanhas = lazyLoad(() => import("./pages/admin/Campanhas"));
 const Users = lazyLoad(() => import("./pages/admin/Users"));
 const ChatIA = lazyLoad(() => import("./pages/admin/ChatIA"));
+const CorrigirPermissoes = lazyLoad(() => import("./pages/admin/CorrigirPermissoes"));
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -180,6 +181,14 @@ function App() {
 
                     {/* Admin Routes */}
                     <Route path="/admin/login" element={<Login />} />
+                    <Route 
+                      path="/admin/corrigir-permissoes" 
+                      element={
+                        <ProtectedRoute>
+                          <CorrigirPermissoes />
+                        </ProtectedRoute>
+                      } 
+                    />
                     <Route 
                       path="/admin/painel" 
                       element={

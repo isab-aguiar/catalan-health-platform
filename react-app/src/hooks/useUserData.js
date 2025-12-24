@@ -28,6 +28,15 @@ export function useUserData(uid) {
       return;
     }
 
+    // Se o Firebase não foi inicializado, retornar erro
+    if (!db) {
+      console.warn('⚠️ Firestore não disponível - variáveis de ambiente não configuradas');
+      setUserData(null);
+      setLoading(false);
+      setError('Firebase não configurado. Configure as variáveis de ambiente.');
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
