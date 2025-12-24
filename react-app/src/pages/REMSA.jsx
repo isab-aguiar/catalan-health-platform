@@ -34,7 +34,6 @@ export default function REMSA() {
           </div>
         </div>
 
-        {/* O que é a REMSA */}
         <InfoBox title="O que é a REMSA?">
           <p className="text-slate-700 leading-relaxed mb-5">
             A <strong>Residência Multiprofissional em Saúde (REMSA)</strong> é
@@ -52,7 +51,6 @@ export default function REMSA() {
           </p>
         </InfoBox>
 
-        {/* O que o REMSA oferece */}
         <InfoBox title="O que o REMSA oferece?">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -131,7 +129,6 @@ export default function REMSA() {
           </div>
         </InfoBox>
 
-        {/* Áreas Profissionais */}
         <InfoBox title="Áreas Profissionais Aceitas">
           <p className="text-slate-700 mb-5">
             O programa é multiprofissional e aceita residentes de diversas áreas
@@ -193,7 +190,6 @@ export default function REMSA() {
           </div>
         </InfoBox>
 
-        {/* Como ter acesso */}
         <InfoBox title="Como ter acesso ao programa?">
           <p className="text-slate-700 leading-relaxed mb-5">
             O ingresso na REMSA ocorre através de{" "}
@@ -277,7 +273,6 @@ export default function REMSA() {
           </div>
         </InfoBox>
 
-        {/* Características do Programa */}
         <InfoBox title="Características do Programa">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -326,7 +321,6 @@ export default function REMSA() {
           </div>
         </InfoBox>
 
-        {/* UBS São José como Campo de Prática */}
         <InfoBox title="UBS São José como Campo de Prática" variant="highlight">
           <p className="text-slate-700 leading-relaxed mb-5">
             A <strong>UBS São José</strong> é um dos principais campos de
@@ -386,7 +380,6 @@ export default function REMSA() {
           </div>
         </InfoBox>
 
-        {/* Parceria */}
         <InfoBox title="Parceria UFSJ e Prefeitura">
           <div className="space-y-5">
             <div>
@@ -412,7 +405,6 @@ export default function REMSA() {
           </div>
         </InfoBox>
 
-        {/* Informações e Contato */}
         <div className="mb-6">
           <Alert type="info">
             <strong>Quer saber mais sobre a REMSA?</strong>

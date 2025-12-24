@@ -248,8 +248,8 @@ export default function Home() {
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
                           <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
-                            Horário de Atendimento ao Público<br/>
-s                          </p>
+                            Horário de Atendimento ao Público
+                          </p>
                           <p className="text-sm text-neutral-700">
                             07:00 às 12:00 | 13:00 às 17:00
                           </p>

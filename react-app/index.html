@@ -11,7 +11,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     
-    <!-- VLibras - Acessibilidade em Libras -->
     <div vw class="enabled">
       <div vw-access-button class="active"></div>
       <div vw-plugin-wrapper>
@@ -23,9 +22,7 @@
       new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
     
-    <!-- Estilos personalizados para VLibras -->
     <style>
-      /* Posicionamento do botão VLibras */
       [vw-access-button] {
         position: fixed !important;
         bottom: 20px !important;
@@ -35,7 +32,6 @@
         z-index: 999999 !important;
       }
       
-      /* Responsivo para mobile */
       @media (max-width: 768px) {
         [vw-access-button] {
           bottom: 80px !important;
@@ -43,7 +39,6 @@
         }
       }
       
-      /* Plugin do VLibras */
       [vw-plugin-wrapper] {
         z-index: 999998 !important;
       }
