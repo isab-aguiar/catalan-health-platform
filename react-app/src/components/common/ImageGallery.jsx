@@ -44,7 +44,7 @@ export default function ImageGallery({ images = [] }) {
           <img
             src={currentImage.src}
             alt={currentImage.caption || `Galeria ${currentIndex + 1}`}
-            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+            className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
             loading="lazy"
           />
           {/* Overlay gradient for better text visibility */}
@@ -105,10 +105,10 @@ export default function ImageGallery({ images = [] }) {
               <img
                 src={image.src || image}
                 alt={image.caption || `Thumbnail ${index + 1}`}
-                className={`w-full h-full object-cover transition-transform duration-200 ${
+                className={`w-full h-full object-cover object-top transition-transform duration-200 ${
                   index === currentIndex
                     ? "scale-100"
-                    : "hover:scale-110 opacity-80 hover:opacity-100"
+                    : "hover:scale-105 opacity-80 hover:opacity-100"
                 }`}
                 loading="lazy"
               />

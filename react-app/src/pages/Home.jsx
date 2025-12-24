@@ -36,12 +36,34 @@ const getCaptionFromFilename = (imagePath) => {
   
   // Mapeamento de padrões de nomes de arquivos para legendas
   const captionMap = [
-    { pattern: 'foto-unidade', caption: 'Foto da unidade ESF Catalão' },
-    { pattern: 'equipe-esf-catalao-belavista-saojose', caption: 'Foto da equipe ESF Catalão, Bela Vista e São José' },
-    { pattern: 'equipe.jpg', caption: 'Foto da equipe multiprofissional' },
-    { pattern: 'grupo-foco-na-saude', caption: 'Foto do grupo de atividades coletivas Foco na Saúde' },
-    { pattern: 'grupo-viva-leve', caption: 'Foto do grupo de atividades coletivas Viva Leve' },
-    { pattern: 'outubro-rosa', caption: 'Foto do evento Outubro Rosa' },
+    { 
+      pattern: 'foto-unidade', 
+      caption: 'Fachada da Unidade de Saúde ESF Catalão - Rua Júlio Nogueira, 1320, São José' 
+    },
+    { 
+      pattern: 'equipe-esf-catalao-belavista-saojose', 
+      caption: 'Equipe multiprofissional das ESFs Catalão, Bela Vista e São José reunida para foto oficial' 
+    },
+    { 
+      pattern: 'equipe.jpg', 
+      caption: 'Profissionais da equipe multiprofissional da ESF Catalão comprometidos com o cuidado integral à saúde' 
+    },
+    { 
+      pattern: 'grupo-foco-na-saude', 
+      caption: 'Grupo de atividades coletivas "Foco na Saúde" - Prevenção e diagnóstico do câncer de pele (Dezembro Laranja) e promoção da saúde' 
+    },
+    { 
+      pattern: 'grupo-viva-leve', 
+      caption: 'Grupo de atividades coletivas "Viva Leve" - Cuidado e orientação para pacientes com dor crônica e fibromialgia' 
+    },
+    { 
+      pattern: 'outubro-rosa', 
+      caption: 'Campanha Outubro Rosa - Conscientização e prevenção do câncer de mama na ESF Catalão' 
+    },
+    { 
+      pattern: 'viver-bem-diabetes', 
+      caption: 'Grupo de atividades coletivas "Viver Bem com Diabetes" - Educação e orientação para pacientes diabéticos' 
+    },
   ];
   
   // Buscar correspondência por padrão
@@ -60,10 +82,17 @@ const getCaptionFromFilename = (imagePath) => {
   // Tratamento especial para grupos
   if (formattedName.toLowerCase().includes('grupo')) {
     const grupoName = formattedName.replace(/^grupo\s+/i, '').trim();
-    return `Foto do grupo de atividades coletivas ${grupoName}`;
+    return `Grupo de atividades coletivas "${grupoName}" - Promoção de saúde e bem-estar na comunidade`;
   }
   
-  return `Foto ${formattedName}`;
+  // Tratamento para eventos e atividades
+  if (formattedName.toLowerCase().includes('evento') || 
+      formattedName.toLowerCase().includes('campanha') ||
+      formattedName.toLowerCase().includes('ação')) {
+    return `${formattedName} realizado na ESF Catalão`;
+  }
+  
+  return `${formattedName} - ESF Catalão`;
 };
 
 // Converter o objeto de módulos em array de objetos {src, caption}
@@ -578,30 +607,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer CTA */}
-      <section className="py-12 px-4 bg-neutral-900 text-white">
-        <div className="container mx-auto max-w-6xl text-center">
-          <h3 className="text-2xl font-bold mb-4 text-white">Precisa de Ajuda?</h3>
-          <p className="text-neutral-300 mb-6">
-            Nossa equipe está pronta para melhor atendê-lo de segunda a
-            sexta-feira
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/servicos/sala-4"
-              className="px-6 py-3 bg-primary-600 hover:bg-primary-700 rounded-lg font-semibold transition-colors"
-            >
-              Como Agendar uma Consulta?
-            </Link>
-            <Link
-              to="/acs"
-              className="px-6 py-3 bg-white text-neutral-900 hover:bg-neutral-100 rounded-lg font-semibold transition-colors"
-            >
-              Encontrar Meu Agente de Saúde
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
