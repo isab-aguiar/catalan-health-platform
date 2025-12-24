@@ -125,7 +125,10 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-neutral-300 mt-8 pt-6 text-center">
           <p className="text-sm text-neutral-600">
-            © {new Date().getFullYear()} ESF CATALÃO - Prefeitura de Divinópolis
+            © {new Date().getFullYear()} Estratégia Saúde da Família ESF Catalão - Todos os direitos reservados
+          </p>
+          <p className="text-xs text-neutral-500 mt-2">
+            Unidade de Saúde vinculada à Secretaria Municipal de Saúde de Divinópolis/MG
           </p>
         </div>
       </div>
