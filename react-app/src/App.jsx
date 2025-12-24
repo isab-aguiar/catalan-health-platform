@@ -92,7 +92,7 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen overflow-x-hidden w-full">
           {/* Sidebar para desktop */}
           <Sidebar
             isOpen={isSidebarOpen}
@@ -100,9 +100,9 @@ function App() {
           />
 
           {/* Conteúdo principal */}
-          <div className="flex flex-col flex-1">
+          <div className="flex flex-col flex-1 min-w-0 overflow-x-hidden">
             <Header />
-            <main className="flex-1">
+            <main className="flex-1 overflow-x-hidden w-full">
               <Suspense fallback={<LoadingSpinner />}>
                 <ErrorBoundary>
                   <Routes>

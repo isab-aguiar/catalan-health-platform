@@ -12,6 +12,8 @@
 @layer base {
   html {
     @apply scroll-smooth;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   body {
@@ -20,6 +22,14 @@
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
     font-size: 16px;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
+  #root {
+    overflow-x: hidden;
+    width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -38,5 +48,51 @@
   /* Melhoria de acessibilidade - foco visível */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary-500;
+  }
+}
+
+/* Utility classes */
+@layer utilities {
+  /* Prevenir overflow horizontal em todos os níveis */
+  .no-overflow-x {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Container responsivo seguro */
+  .container-safe {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-safe {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-safe {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Garantir que imagens não causem overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Prevenir text overflow */
+  .text-safe {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
   }
 }
