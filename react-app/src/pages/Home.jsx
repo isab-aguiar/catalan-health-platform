@@ -455,10 +455,10 @@ export default function Home() {
                 <Users size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
-                Grupos de Atividades Coletivas
+                Atividades Coletivas
               </h3>
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
-                Grupo de Atividade Coletiva
+                Grupos de atividades coletivas e promoção de saúde
               </p>
               <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-accent-700">
                 <span>Consultar</span>
