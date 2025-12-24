@@ -21,6 +21,14 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
     };
   }, [isOpen]);
 
+  const handleLinkClick = (e, link) => {
+    if (link.onClick) {
+      link.onClick(e);
+    } else {
+      onClose();
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -39,7 +47,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
               <li key={link.path}>
                 <Link
                   to={link.path}
-                  onClick={onClose}
+                  onClick={(e) => handleLinkClick(e, link)}
                   className="block px-4 py-3 text-lg font-medium text-neutral-900 hover:bg-primary-50 hover:text-primary-600 rounded-lg transition-colors"
                 >
                   {link.name}

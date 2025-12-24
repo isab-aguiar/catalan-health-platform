@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, Search } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import GlobalSearch from "../search/GlobalSearch";
@@ -12,6 +12,7 @@ export default function Header() {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const searchRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
   const searchResults = usePageSearch(searchQuery);
 
   useEffect(() => {
@@ -50,6 +51,28 @@ export default function Header() {
     }
   };
 
+  const handleContatoClick = (e) => {
+    e.preventDefault();
+
+    const scrollToElement = () => {
+      const element = document.getElementById('contato');
+      if (element) {
+        const yOffset = -80;
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    };
+
+    if (location.pathname === '/') {
+      scrollToElement();
+    } else {
+      navigate('/');
+      setTimeout(scrollToElement, 300);
+    }
+
+    setIsMobileMenuOpen(false);
+  };
+
   const navLinks = [
     { name: "Início", path: "/" },
     { name: "Serviços", path: "/servicos" },
@@ -58,6 +81,7 @@ export default function Header() {
     { name: "Remsa", path: "/remsa" },
     { name: "ACS", path: "/acs" },
     { name: "Educação", path: "/educacao" },
+    { name: "Contato", path: "/#contato", isAnchor: true, onClick: handleContatoClick },
   ];
 
   return (

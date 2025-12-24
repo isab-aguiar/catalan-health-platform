@@ -19,21 +19,22 @@ export default function Footer() {
     if (link.isAnchor) {
       e.preventDefault();
 
-      if (location.pathname === '/') {
-        // Se já estiver na home, apenas rola
+      const scrollToElement = () => {
         const element = document.getElementById('contato');
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const yOffset = -80; // Offset para compensar o header fixo
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
+      };
+
+      if (location.pathname === '/') {
+        // Se já estiver na home, apenas rola
+        scrollToElement();
       } else {
         // Se estiver em outra página, navega para home e depois rola
         navigate('/');
-        setTimeout(() => {
-          const element = document.getElementById('contato');
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 100);
+        setTimeout(scrollToElement, 300);
       }
     }
   };
