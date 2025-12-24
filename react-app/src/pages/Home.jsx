@@ -113,59 +113,59 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <div className="mb-3">
-              <p className="text-sm md:text-base font-medium text-neutral-500 uppercase tracking-wider mb-2">
+              <p className="text-base md:text-lg font-medium text-neutral-500 uppercase tracking-wider mb-2">
                 Estratégia Saúde da Família
               </p>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-2">
                 <span className="text-primary-600 font-display font-bold tracking-wide uppercase">ESF CATALÃO</span>
               </h1>
             </div>
-            <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed px-4">
               Atendimento humanizado e profissional para toda a comunidade das <span className="whitespace-nowrap">ESFs Bela Vista - Catalão - São José</span>
             </p>
           </div>
 
           {/* Contact Information Section */}
           <div id="contato" className="bg-white rounded-lg shadow-md border border-neutral-200 mb-12">
-            <div className="border-b border-neutral-200 px-6 py-4 bg-neutral-50">
-              <h2 className="text-2xl font-semibold text-neutral-900">
+            <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
                 Informações de Contato
               </h2>
-              <p className="text-neutral-600 text-sm mt-1">
+              <p className="text-neutral-600 text-sm sm:text-base mt-1">
                 Entre em contato conosco pelos canais abaixo
               </p>
             </div>
 
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               {/* Main Contact Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                 {/* Reception */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
+                <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone size={22} className="text-white" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Phone size={24} className="text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
                         Recepção
                       </h3>
                       <div className="space-y-3">
                         <div>
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-1">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-1">
                             Telefone
                           </p>
                           <a
                             href="tel:+553732296080"
-                            className="text-base font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
+                            className="text-lg sm:text-xl font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
                           >
                             (37) 3229-6080
                           </a>
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
                             Horário de Funcionamento
                           </p>
-                          <div className="space-y-1 text-sm text-neutral-700">
+                          <div className="space-y-1 text-sm sm:text-base text-neutral-700">
                             <p>Segunda a Sexta: 07:00 - 17:00</p>
                             <p>Saúde na Hora: 17:00 - 22:00</p>
                           </div>
@@ -176,18 +176,18 @@ export default function Home() {
                 </div>
 
                 {/* Administrative Services */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
+                <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Building2 size={22} className="text-white" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Building2 size={24} className="text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
                         Administrativo
                       </h3>
                       <div className="space-y-3">
                         <div>
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
                             WhatsApp
                           </p>
                           <div className="space-y-2">
@@ -195,27 +195,27 @@ export default function Home() {
                               href="https://wa.me/5537991770200"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-sm font-semibold text-neutral-900 hover:text-green-600 transition-colors"
+                              className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-green-600 transition-colors"
                             >
-                              <MessageCircle size={16} className="text-green-600" />
+                              <MessageCircle size={18} className="text-green-600 flex-shrink-0" />
                               <span>(37) 99177-0200</span>
                             </a>
                             <a
                               href="https://wa.me/5537991520024"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-sm font-semibold text-neutral-900 hover:text-green-600 transition-colors"
+                              className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-green-600 transition-colors"
                             >
-                              <MessageCircle size={16} className="text-green-600" />
+                              <MessageCircle size={18} className="text-green-600 flex-shrink-0" />
                               <span>(37) 99152-0024</span>
                             </a>
                           </div>
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
                             Horário de Atendimento ao Público
                           </p>
-                          <p className="text-sm text-neutral-700">
+                          <p className="text-sm sm:text-base text-neutral-700">
                             07:00 às 12:00 | 13:00 às 16:30
                           </p>
                         </div>
@@ -225,32 +225,32 @@ export default function Home() {
                 </div>
 
                 {/* Dentist */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
+                <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Smile size={22} className="text-white" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Smile size={24} className="text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
                         Consultório Odontológico
                       </h3>
                       <div className="space-y-3">
                         <div>
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-1">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-1">
                             Telefone
                           </p>
                           <a
                             href="tel:+553732296082"
-                            className="text-base font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
+                            className="text-lg sm:text-xl font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
                           >
                             (37) 3229-6082
                           </a>
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
                             Horário de Atendimento ao Público
                           </p>
-                          <p className="text-sm text-neutral-700">
+                          <p className="text-sm sm:text-base text-neutral-700">
                             07:00 às 12:00 | 13:00 às 17:00
                           </p>
                         </div>
@@ -260,32 +260,32 @@ export default function Home() {
                 </div>
 
                 {/* Pharmacy */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
+                <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Pill size={22} className="text-white" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Pill size={24} className="text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
                         Farmácia
                       </h3>
                       <div className="space-y-3">
                         <div>
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-1">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-1">
                             Telefone
                           </p>
                           <a
                             href="tel:+553732296081"
-                            className="text-base font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
+                            className="text-lg sm:text-xl font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
                           >
                             (37) 3229-6081
                           </a>
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
                             Horário de Atendimento ao Público
                           </p>
-                          <p className="text-sm text-neutral-700">
+                          <p className="text-sm sm:text-base text-neutral-700">
                             07:30 às 16:00
                           </p>
                         </div>
@@ -295,24 +295,24 @@ export default function Home() {
                 </div>
 
                 {/* Blood Collection */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
+                <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 bg-red-700 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Droplet size={22} className="text-white" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-red-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Droplet size={24} className="text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
                         Coleta de Sangue
                       </h3>
                       <div className="space-y-3">
                         <div className="pt-2">
-                          <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                          <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
                             Horário de Atendimento ao Público
                           </p>
-                          <p className="text-sm text-neutral-700 mb-1">
+                          <p className="text-sm sm:text-base text-neutral-700 mb-1">
                             07:00 às 08:00
                           </p>
-                          <p className="text-xs text-neutral-500 italic">
+                          <p className="text-sm text-neutral-500 italic">
                             Mediante horário agendado
                           </p>
                         </div>
@@ -322,24 +322,24 @@ export default function Home() {
                 </div>
 
                 {/* Address */}
-                <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow">
+                <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
-                    <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin size={22} className="text-white" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <MapPin size={24} className="text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-neutral-900 mb-3 text-base">
+                      <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
                         Endereço
                       </h3>
                       <div>
-                        <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
+                        <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-2">
                           Localização
                         </p>
                         <a
                           href="https://www.google.com/maps/search/?api=1&query=Rua+Júlio+Nogueira+1320+São+José+Divinópolis+MG"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm text-neutral-700 hover:text-primary-600 transition-colors block leading-relaxed"
+                          className="text-sm sm:text-base text-neutral-700 hover:text-primary-600 transition-colors block leading-relaxed"
                         >
                           Rua Júlio Nogueira, 1320
                           <br />
@@ -354,8 +354,8 @@ export default function Home() {
               </div>
 
               {/* Additional Info Bar */}
-              <div className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
-                <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-neutral-700">
+              <div className="bg-neutral-50 rounded-lg p-4 sm:p-5 border border-neutral-200">
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm sm:text-base text-neutral-700">
                   <a
                     href="mailto:staff.sj21@gmail.com"
                     className="flex items-center gap-2 hover:text-primary-600 hover:underline transition-colors"
@@ -399,7 +399,7 @@ export default function Home() {
       </section>
 
       {/* Image Gallery Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-white to-neutral-50">
+      <section className="pt-8 pb-16 px-4 bg-gradient-to-b from-white to-neutral-50">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-8 text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-3">

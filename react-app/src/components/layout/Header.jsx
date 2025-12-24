@@ -126,7 +126,7 @@ export default function Header() {
         </Link>
       )}
 
-      <header className="sticky top-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-12 sm:pl-[140px] md:pl-[200px] pr-12 sm:pr-[60px] overflow-x-hidden w-full">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-12 sm:pl-[140px] md:pl-[200px] pr-12 sm:pr-[60px] overflow-x-hidden w-full">
         <div className="w-full h-[70px] flex items-center justify-center px-4">
           <div
             ref={searchRef}

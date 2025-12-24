@@ -27,6 +27,34 @@
     position: relative;
   }
 
+  /* Tamanhos de fonte mobile-first */
+  @media (max-width: 640px) {
+    body {
+      font-size: 15px;
+    }
+
+    h1 {
+      font-size: 1.875rem; /* 30px */
+    }
+
+    h2 {
+      font-size: 1.5rem; /* 24px */
+    }
+
+    h3 {
+      font-size: 1.25rem; /* 20px */
+    }
+
+    h4 {
+      font-size: 1.125rem; /* 18px */
+    }
+
+    p {
+      font-size: 0.9375rem; /* 15px */
+      line-height: 1.6;
+    }
+  }
+
   #root {
     overflow-x: hidden;
     width: 100%;

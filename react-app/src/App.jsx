@@ -102,7 +102,7 @@ function App() {
           {/* Conteúdo principal */}
           <div className="flex flex-col flex-1 min-w-0 overflow-x-hidden">
             <Header />
-            <main className="flex-1 overflow-x-hidden w-full">
+            <main className="flex-1 overflow-x-hidden w-full pt-[70px]">
               <Suspense fallback={<LoadingSpinner />}>
                 <ErrorBoundary>
                   <Routes>
