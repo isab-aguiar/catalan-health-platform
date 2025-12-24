@@ -117,7 +117,7 @@ export default function SearchSection({ className = "" }) {
       {/* Initial Help Text */}
       {query.length === 0 && (
         <div className="mt-6 max-w-3xl mx-auto text-center">
-          <p className="text-white/90 text-sm">
+          <p className="text-white text-sm">
             Digite o nome da sua rua ou endereço completo para localizar sua equipe de saúde
           </p>
         </div>

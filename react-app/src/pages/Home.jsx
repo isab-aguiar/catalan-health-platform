@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SearchSection from "../components/search/SearchSection";
+import ImageGallery from "../components/common/ImageGallery";
 import {
   Phone,
   MapPin,
@@ -20,11 +21,79 @@ import {
   Droplet,
 } from "lucide-react";
 
+// Importar imagens da galeria dinamicamente
+// import.meta.glob importa todas as imagens da pasta automaticamente
+const galleryImagesModules = import.meta.glob(
+  "../assets/images/galeria-photos/*.{png,jpg,jpeg}",
+  { eager: true }
+);
+
+// Mapeamento de legendas baseado no nome do arquivo
+const getCaptionFromFilename = (imagePath) => {
+  if (!imagePath || typeof imagePath !== 'string') return '';
+  
+  const filename = imagePath.split('/').pop().toLowerCase();
+  
+  // Mapeamento de padrões de nomes de arquivos para legendas
+  const captionMap = [
+    { pattern: 'foto-unidade', caption: 'Foto da unidade ESF Catalão' },
+    { pattern: 'equipe-esf-catalao-belavista-saojose', caption: 'Foto da equipe ESF Catalão, Bela Vista e São José' },
+    { pattern: 'equipe.jpg', caption: 'Foto da equipe multiprofissional' },
+    { pattern: 'grupo-foco-na-saude', caption: 'Foto do grupo de atividades coletivas Foco na Saúde' },
+    { pattern: 'grupo-viva-leve', caption: 'Foto do grupo de atividades coletivas Viva Leve' },
+    { pattern: 'outubro-rosa', caption: 'Foto do evento Outubro Rosa' },
+  ];
+  
+  // Buscar correspondência por padrão
+  for (const { pattern, caption } of captionMap) {
+    if (filename.includes(pattern.toLowerCase())) {
+      return caption;
+    }
+  }
+  
+  // Se não encontrar, gerar legenda baseada no nome do arquivo
+  const nameWithoutExt = filename.replace(/\.(png|jpg|jpeg)$/i, '');
+  let formattedName = nameWithoutExt
+    .replace(/[-_]/g, ' ')
+    .replace(/\b\w/g, (l) => l.toUpperCase());
+  
+  // Tratamento especial para grupos
+  if (formattedName.toLowerCase().includes('grupo')) {
+    const grupoName = formattedName.replace(/^grupo\s+/i, '').trim();
+    return `Foto do grupo de atividades coletivas ${grupoName}`;
+  }
+  
+  return `Foto ${formattedName}`;
+};
+
+// Converter o objeto de módulos em array de objetos {src, caption}
+// Garantir que foto-unidade.png seja sempre a primeira
+const getGalleryImages = () => {
+  const imageEntries = Object.entries(galleryImagesModules).map(([path, module]) => ({
+    src: module.default,
+    caption: getCaptionFromFilename(path),
+  }));
+  
+  // Separar foto-unidade.png do resto
+  const fotoUnidade = imageEntries.find((img) => 
+    img.src.includes('foto-unidade')
+  );
+  const outrasImagens = imageEntries.filter((img) => 
+    !img.src.includes('foto-unidade')
+  );
+  
+  // Ordenar o resto alfabeticamente por src
+  outrasImagens.sort((a, b) => a.src.localeCompare(b.src));
+  
+  // Retornar com foto-unidade primeiro
+  return fotoUnidade ? [fotoUnidade, ...outrasImagens] : outrasImagens;
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white">
       {/* Hero Section */}
-      <section className="py-16 px-4">
+      <section className="pt-16 pb-8 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <div className="mb-3">
@@ -32,7 +101,7 @@ export default function Home() {
                 Estratégia Saúde da Família
               </p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-2">
-                <span className="text-primary-600 font-display font-extrabold tracking-tight uppercase">ESF CATALÃO</span>
+                <span className="text-primary-600 font-display font-bold tracking-wide uppercase">ESF CATALÃO</span>
               </h1>
             </div>
             <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed">
@@ -313,6 +382,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Image Gallery Section */}
+      <section className="py-16 px-4 bg-gradient-to-b from-white to-neutral-50">
+        <div className="container mx-auto max-w-6xl">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-3">
+              Nossa Unidade
+            </h2>
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+              Conheça nossa equipe, estrutura e instalações
+            </p>
+          </div>
+          <ImageGallery images={getGalleryImages()} />
+        </div>
+      </section>
+
       {/* ACS Search Section */}
       <section className="py-16 px-4 bg-gradient-to-br from-primary-500 to-primary-700">
         <div className="container mx-auto max-w-6xl">
@@ -320,7 +404,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
               Encontre sua Equipe de Saúde
             </h2>
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-white max-w-2xl mx-auto">
               Informe o nome da sua rua para localizar seu Agente Comunitário de
               Saúde e a equipe multiprofissional responsável
             </p>
@@ -365,9 +449,9 @@ export default function Home() {
 
             <Link
               to="/grupos"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-accent-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-accent-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-accent-100 flex items-center justify-center text-accent-600 group-hover:bg-accent-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-accent-500 group-hover:text-white transition-colors">
                 <Users size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -376,7 +460,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Grupo de Atividade Coletiva
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-accent-600 group-hover:text-accent-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-accent-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -387,9 +471,9 @@ export default function Home() {
 
             <Link
               to="/equipe"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-secondary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-secondary-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-secondary-100 flex items-center justify-center text-secondary-600 group-hover:bg-secondary-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-secondary-500 group-hover:text-white transition-colors">
                 <BriefcaseMedical size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -398,7 +482,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Conheça nossa equipe multiprofissional
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-secondary-600 group-hover:text-secondary-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-secondary-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -409,9 +493,9 @@ export default function Home() {
 
             <Link
               to="/educacao"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-green-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-green-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center text-green-600 group-hover:bg-green-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-green-500 group-hover:text-white transition-colors">
                 <BookOpen size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -420,7 +504,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Informações e orientações sobre saúde e prevenção
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-green-600 group-hover:text-green-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-green-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -431,9 +515,9 @@ export default function Home() {
 
             <Link
               to="/remsa"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-purple-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-purple-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-purple-500 group-hover:text-white transition-colors">
                 <GraduationCap size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -442,7 +526,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Residência Multiprofissional em Saúde
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-purple-600 group-hover:text-purple-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-purple-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -453,9 +537,9 @@ export default function Home() {
 
             <Link
               to="/acs"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-amber-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-amber-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-amber-500 group-hover:text-white transition-colors">
                 <HeartHandshake size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -464,7 +548,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Encontre o ACS responsável pela sua área
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-amber-600 group-hover:text-amber-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-amber-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -497,7 +581,7 @@ export default function Home() {
       {/* Footer CTA */}
       <section className="py-12 px-4 bg-neutral-900 text-white">
         <div className="container mx-auto max-w-6xl text-center">
-          <h3 className="text-2xl font-bold mb-4">Precisa de Ajuda?</h3>
+          <h3 className="text-2xl font-bold mb-4 text-white">Precisa de Ajuda?</h3>
           <p className="text-neutral-300 mb-6">
             Nossa equipe está pronta para melhor atendê-lo de segunda a
             sexta-feira

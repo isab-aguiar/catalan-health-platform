@@ -52,8 +52,8 @@ export default function Sidebar({ isOpen, onClose }) {
 
       {/* Sidebar */}
       <aside className="hidden lg:flex fixed right-0 top-0 h-full w-64 bg-white border-l border-neutral-200 flex-col z-50 shadow-xl transform transition-transform duration-300 ease-in-out">
-        {/* Logo (não clicável) e Botão Fechar */}
-        <div className="p-6 border-b border-neutral-200 flex items-center justify-between">
+        {/* Botão Fechar */}
+        <div className="p-6 flex items-center justify-end">
           <button
             onClick={onClose}
             className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
@@ -61,14 +61,6 @@ export default function Sidebar({ isOpen, onClose }) {
           >
             <X size={20} className="text-neutral-700" />
           </button>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shadow-soft">
-              <Building2 size={24} className="text-white" />
-            </div>
-            <span className="font-bold text-lg text-neutral-900">
-              UBS São José
-            </span>
-          </div>
         </div>
 
         {/* Navigation */}

@@ -32,7 +32,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 gap-8">
           {/* About */}
           <div>
-            <h3 className="font-bold text-xl mb-3 text-white">ESF Catalão</h3>
+            <h3 className="font-display font-bold text-lg md:text-xl mb-3 text-white tracking-wide uppercase">ESF Catalão</h3>
             <p className="text-neutral-400 text-sm leading-relaxed">
               Estratégia Saúde da Família comprometida com o atendimento humanizado
               para toda a comunidade das ESFs Bela Vista -  Catalão - São José

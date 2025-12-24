@@ -69,18 +69,24 @@ export default function Header() {
 
   return (
     <>
-      {/* Logo Fixo - Canto Superior Esquerdo */}
-      <Link
-        to="/"
-        className="fixed top-0 left-0 z-50 p-3 bg-white hover:bg-neutral-50 transition-colors border-b border-r border-neutral-200 rounded-br-lg lg:border-0 lg:rounded-none flex items-center gap-2 group"
-      >
-        <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center shadow-soft group-hover:shadow-medium transition-shadow">
-          <Building2 size={24} className="text-white" />
-        </div>
-        <span className="font-bold text-lg text-neutral-900 hidden sm:inline">
-          UBS São José
-        </span>
-      </Link>
+      {/* Logo Fixo - Canto Superior Esquerdo - Oculta quando menu mobile está aberto */}
+      {!isMobileMenuOpen && (
+        <Link
+          to="/"
+          className="fixed top-0 left-0 z-50 p-3 bg-white hover:bg-neutral-50 transition-colors flex items-center justify-center group overflow-hidden"
+        >
+          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-soft group-hover:shadow-medium transition-shadow overflow-hidden flex-shrink-0">
+            <img
+              src="/favicon.png"
+              alt="ESF Catalão - Saúde da Família"
+              className="w-full h-full object-contain object-center"
+              style={{
+                imageRendering: 'high-quality',
+              }}
+            />
+          </div>
+        </Link>
+      )}
 
       <header className="sticky top-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-[140px] sm:pl-[200px] pr-[60px]">
         <div className="w-full h-[70px] flex items-center justify-center">
@@ -185,10 +191,11 @@ export default function Header() {
       {/* Global Search Modal */}
       {isSearchOpen && <GlobalSearch onClose={() => setIsSearchOpen(false)} />}
 
-      {/* Mobile Menu Toggle - Fixo no canto superior direito */}
+      {/* Mobile Menu Toggle - Fixo alinhado com o bottom do header */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-0 right-0 z-50 p-3 bg-white hover:bg-neutral-100 transition-colors border-b border-l border-neutral-200 rounded-bl-lg"
+        className="lg:hidden fixed right-0 z-50 p-3 bg-white hover:bg-neutral-100 transition-colors"
+        style={{ top: '12px' }}
         aria-label="Menu"
       >
         {isMobileMenuOpen ? (
