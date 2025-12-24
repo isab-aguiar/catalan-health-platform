@@ -19,13 +19,19 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
     clearMessages,
     cancelProcessing,
     refineCampanha,
-    publishCampanha
+    publishCampanha,
+    // Novo sistema de fluxo com botões
+    campanhaFlowActive,
+    startCampanhaFlow,
+    handleFlowButtonClick,
+    handleFlowInputSubmit,
+    handleFlowFileUpload
   } = useGemini();
 
   // Wrapper para incluir userId ao enviar
   const handleSend = (data) => {
     console.log('🔵 ChatBot handleSend recebeu:', data);
-    
+
     // data pode ser string (texto simples) ou objeto { texto, arquivo, tipo }
     const isObject = typeof data === 'object' && data !== null;
     const texto = isObject ? data.texto : data;
@@ -34,14 +40,28 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
     console.log('📝 Texto:', texto);
     console.log('📎 Arquivo:', arquivo);
     console.log('📋 Draft Campanha:', draftCampanha);
+    console.log('🎬 Fluxo Ativo:', campanhaFlowActive);
 
-    // Se tem rascunho de campanha e não tem arquivo, é refinamento
+    // Se o fluxo de botões estiver ativo, ignorar (inputs são tratados por handleFlowInputSubmit)
+    if (campanhaFlowActive) {
+      console.log('⚠️ Fluxo de botões ativo, mensagem ignorada (usar inputs do fluxo)');
+      return;
+    }
+
+    // Se tem arquivo de imagem, iniciar NOVO FLUXO COM BOTÕES
+    if (arquivo && arquivo.type?.startsWith('image/')) {
+      console.log('🎬 Iniciando novo fluxo de campanha com imagem...');
+      startCampanhaFlow(arquivo);
+      return;
+    }
+
+    // Se tem rascunho de campanha e não tem arquivo, é refinamento (SISTEMA ANTIGO)
     if (draftCampanha && !arquivo && texto?.trim()) {
-      console.log('✏️ Refinando campanha...');
+      console.log('✏️ Refinando campanha (sistema antigo)...');
       refineCampanha(texto);
     } else if (arquivo) {
-      // Enviar arquivo para análise de campanha
-      console.log('📸 Enviando arquivo para análise...');
+      // Arquivo não-imagem - enviar para análise (SISTEMA ANTIGO)
+      console.log('📸 Enviando arquivo para análise (sistema antigo)...');
       console.log('📸 Arquivo detalhes:', {
         name: arquivo.name,
         size: arquivo.size,
@@ -79,11 +99,13 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
     id: 'welcome',
     role: 'assistant',
     content: '👋 Olá! Sou o assistente da ESF Catalão.\n\n' +
-      '**📋 Criar Campanha COM IMAGEM:**\n' +
-      '1. Clique em 📎 e anexe a imagem\n' +
-      '2. Eu analiso e crio sugestão profissional\n' +
-      '3. Você refina com comandos\n' +
-      '4. Publicamos juntos\n\n' +
+      '**🆕 Criar Campanha COM IMAGEM (NOVO!):**\n' +
+      '1. 📎 Clique e anexe a imagem\n' +
+      '2. ✨ Fluxo interativo com botões\n' +
+      '3. ✍️ Eu reformulo tudo em linguagem formal\n' +
+      '4. ✅ Você aprova cada etapa\n' +
+      '5. 🖼️ Adicione mais imagens se quiser\n' +
+      '6. 🎉 Preview final e publicação\n\n' +
       '**📝 Criar Aviso/Campanha SEM IMAGEM:**\n' +
       'Digite: **"criar aviso"**\n' +
       '• Faço perguntas interativas\n' +
@@ -159,6 +181,9 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
               message={message}
               onCreateAviso={onCreateAviso}
               onEditAviso={onEditAviso}
+              onButtonClick={handleFlowButtonClick}
+              onInputSubmit={handleFlowInputSubmit}
+              onFileUpload={(file) => handleFlowFileUpload(file, userId)}
             />
           ))}
           <div ref={messagesEndRef} />

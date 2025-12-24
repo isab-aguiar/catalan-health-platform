@@ -549,6 +549,114 @@ function parseCampanhaResponse(text) {
 }
 
 /**
+ * Reformula texto para linguagem formal e profissional do governo (área da saúde)
+ * @param {string} userText - Texto casual/informal do usuário
+ * @param {string} field - Campo sendo reformulado (titulo, descricao, etc)
+ * @returns {Promise<Object>} Texto reformulado
+ */
+export async function reformulateToFormal(userText, field = 'texto') {
+  try {
+    if (!userText || !userText.trim()) {
+      return {
+        success: false,
+        error: 'Texto vazio'
+      };
+    }
+
+    // Prompt especializado para reformulação formal
+    const FORMAL_SYSTEM_PROMPT = `Você é um especialista em comunicação institucional governamental na área da saúde pública.
+
+TAREFA: Reformular o texto fornecido pelo usuário em linguagem FORMAL, PROFISSIONAL e adequada para comunicação oficial de órgãos de saúde pública brasileiros.
+
+DIRETRIZES OBRIGATÓRIAS:
+1. Tom formal, respeitoso e acolhedor
+2. Vocabulário técnico apropriado para saúde pública
+3. Estrutura clara e objetiva
+4. Linguagem acessível mas profissional
+5. Evitar completamente gírias, informalidades e expressões coloquiais
+6. Usar termos técnicos da saúde quando apropriado
+7. Manter informações essenciais do texto original
+8. Linguagem inclusiva e acessível para toda população
+9. Tom institucional da Estratégia de Saúde da Família (ESF)
+
+EXEMPLOS DE TRANSFORMAÇÃO:
+Casual: "Vem pra vacina da gripe!"
+Formal: "A Estratégia de Saúde da Família convida a população para imunização contra Influenza"
+
+Casual: "Tá com dúvida? Vem aqui!"
+Formal: "Para esclarecimentos adicionais, dirija-se à unidade de saúde mais próxima"
+
+Casual: "proteja você e sua família"
+Formal: "Proteja sua saúde e de seus familiares"
+
+Casual: "a vacina da gripe tá disponível pra todo mundo. é de graça e tem pra toda idade"
+Formal: "A Estratégia de Saúde da Família disponibiliza gratuitamente a vacina contra Influenza para todos os grupos etários. A imunização é fundamental para a prevenção de complicações decorrentes da gripe."
+
+TEXTO DO USUÁRIO:
+"${userText.trim()}"
+
+INSTRUÇÕES FINAIS:
+- Responda APENAS com o texto reformulado
+- NÃO adicione explicações, comentários ou aspas
+- NÃO adicione "Texto reformulado:" ou similar
+- Apenas o texto final reformulado`;
+
+    const url = `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [
+              {
+                text: FORMAL_SYSTEM_PROMPT
+              }
+            ]
+          }
+        ],
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 500,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data.candidates || data.candidates.length === 0) {
+      throw new Error('Nenhuma resposta do Gemini');
+    }
+
+    const reformulatedText = data.candidates[0].content.parts[0].text.trim();
+
+    return {
+      success: true,
+      original: userText.trim(),
+      reformulated: reformulatedText,
+      field: field
+    };
+
+  } catch (error) {
+    console.error('Erro ao reformular texto:', error);
+    return {
+      success: false,
+      error: error.message,
+      original: userText
+    };
+  }
+}
+
+/**
  * Testa a conexão com a API Gemini
  * @returns {Promise<Object>} Resultado do teste
  */

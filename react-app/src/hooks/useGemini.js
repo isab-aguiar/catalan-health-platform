@@ -4,11 +4,12 @@
 // Hook para gerenciar estado e interações com o Gemini
 
 import { useState, useCallback, useRef } from 'react';
-import { sendMessageToGemini, analyzeImageForCampanha } from '../services/geminiService';
+import { sendMessageToGemini, analyzeImageForCampanha, reformulateToFormal } from '../services/geminiService';
 import { prepararParaIA } from '../services/uploadService';
 import { uploadArquivo } from '../services/uploadService';
 import { criarCampanha } from '../services/campanhasService';
 import { useInteractiveForm } from './useInteractiveForm';
+import { useCampanhaFlow } from './useCampanhaFlow';
 
 /**
  * Hook para usar o serviço Gemini
@@ -22,9 +23,12 @@ export function useGemini() {
   const [draftCampanha, setDraftCampanha] = useState(null); // Rascunho de campanha em edição
   const [uploadedFile, setUploadedFile] = useState(null); // Arquivo já enviado
   const abortControllerRef = useRef(null);
-  
-  // Sistema de perguntas interativas
+
+  // Sistema de perguntas interativas (legado)
   const interactiveForm = useInteractiveForm();
+
+  // Novo sistema de fluxo de campanha com botões
+  const campanhaFlow = useCampanhaFlow();
 
   /**
    * Cancela o processamento atual
@@ -628,11 +632,11 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
       };
 
       setMessages(prev => [...prev, successMsg]);
-      
+
       // Limpar rascunho
       setDraftCampanha(null);
       setUploadedFile(null);
-      
+
       return {
         ...draftCampanha,
         id: campanhaResult.id
@@ -649,12 +653,517 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
 
       setMessages(prev => [...prev, errorMsg]);
       setError(err.message);
-      
+
       return null;
     } finally {
       setLoading(false);
     }
   }, [draftCampanha]);
+
+  /**
+   * ========================================
+   * NOVO SISTEMA DE FLUXO COM BOTÕES
+   * ========================================
+   */
+
+  /**
+   * Inicia o fluxo interativo de criação de campanha
+   * @param {File} initialImage - Imagem inicial (opcional)
+   */
+  const startCampanhaFlow = useCallback(async (initialImage = null) => {
+    console.log('🎬 Iniciando novo fluxo de campanha com botões');
+
+    // Fazer upload da imagem primeiro se houver
+    let uploadResult = null;
+    if (initialImage) {
+      try {
+        setLoading(true);
+        uploadResult = await uploadArquivo(initialImage, 'temp-user');
+        if (!uploadResult.sucesso) {
+          throw new Error('Falha no upload da imagem');
+        }
+        console.log('✅ Imagem inicial carregada:', uploadResult.url);
+      } catch (err) {
+        console.error('❌ Erro ao fazer upload da imagem:', err);
+        setError(err.message);
+        setLoading(false);
+        return;
+      }
+    }
+
+    // Iniciar fluxo
+    const flowResult = campanhaFlow.startFlow(uploadResult);
+
+    // Adicionar imagem ao array se houver
+    if (uploadResult) {
+      campanhaFlow.addImages([uploadResult]);
+    }
+
+    // Criar mensagem da IA com o primeiro passo
+    const aiMsg = {
+      id: Date.now(),
+      role: 'assistant',
+      content: flowResult.step.message,
+      buttons: flowResult.step.buttons,
+      stepId: flowResult.step.id,
+      stepType: flowResult.step.type,
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, aiMsg]);
+    setLoading(false);
+  }, [campanhaFlow]);
+
+  /**
+   * Handler para cliques em botões do fluxo
+   * @param {Object} button - Botão clicado
+   * @param {Object} message - Mensagem que contém o botão
+   */
+  const handleFlowButtonClick = useCallback(async (button, message) => {
+    console.log('🔘 Botão clicado:', button.label, 'Value:', button.value);
+    console.log('📋 Step atual:', message.stepId);
+
+    const stepId = message.stepId;
+    const currentStep = campanhaFlow.currentStep;
+
+    // Adicionar mensagem do usuário mostrando escolha
+    const userMsg = {
+      id: Date.now(),
+      role: 'user',
+      content: `${button.label}`,
+      timestamp: new Date()
+    };
+    setMessages(prev => [...prev, userMsg]);
+
+    // Processar a etapa com o valor do botão
+    const result = campanhaFlow.processStep(stepId, button.value);
+
+    if (!result) {
+      console.error('❌ Erro ao processar etapa');
+      return;
+    }
+
+    // Se o fluxo foi completado
+    if (result.completed) {
+      console.log('✅ Fluxo completado!', campanhaFlow.campanhaData);
+
+      // Criar preview da campanha
+      const campanhaData = {
+        ...campanhaFlow.campanhaData,
+        imagens: campanhaFlow.uploadedImages
+      };
+
+      const previewMsg = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: '🎉 **Confira o preview da sua campanha:**',
+        showGallery: true,
+        campanhaData: campanhaData,
+        onPublish: () => handlePublishFromFlow(campanhaData),
+        onRefine: () => handleRefineFromFlow(),
+        onCancel: () => handleCancelFlow(),
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, previewMsg]);
+      return;
+    }
+
+    // Próxima etapa
+    const nextStep = result.step;
+
+    // Se for etapa de refinamento (menu)
+    if (stepId === 'preview' && button.value === 'refine') {
+      const refineMsg = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: nextStep.message || '✏️ **O que deseja editar?**',
+        buttons: campanhaFlow.STEPS.refine_menu.buttons,
+        stepId: 'refine_menu',
+        stepType: 'buttons',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, refineMsg]);
+      return;
+    }
+
+    // Se escolheu item do menu de refinamento
+    if (stepId === 'refine_menu') {
+      const targetStep = campanhaFlow.goToStep(button.value);
+      if (targetStep) {
+        const editMsg = {
+          id: Date.now() + 1,
+          role: 'assistant',
+          content: targetStep.step.message,
+          stepId: targetStep.step.id,
+          stepType: targetStep.step.type,
+          buttons: targetStep.step.buttons,
+          inputField: targetStep.step.type === 'text' || targetStep.step.type === 'date' || targetStep.step.type === 'textarea' ? {
+            type: targetStep.step.type,
+            field: targetStep.step.field,
+            maxLength: targetStep.step.maxLength,
+            placeholder: targetStep.step.placeholder,
+            rows: targetStep.step.rows
+          } : null,
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, editMsg]);
+      }
+      return;
+    }
+
+    // Se for etapa de approval que precisa de reformulação
+    if (nextStep.type === 'approval' && nextStep.field) {
+      const textToReformulate = campanhaFlow.campanhaData[nextStep.field];
+
+      if (textToReformulate) {
+        setLoading(true);
+
+        try {
+          // Reformular usando Gemini
+          const reformulated = await reformulateToFormal(textToReformulate, nextStep.field);
+
+          if (reformulated) {
+            // Salvar reformulação pendente
+            campanhaFlow.saveReformulation(nextStep.field, reformulated);
+
+            // Mostrar texto reformulado com botões de aprovação
+            const approvalMsg = {
+              id: Date.now() + 1,
+              role: 'assistant',
+              content: nextStep.message,
+              reformulatedText: reformulated,
+              buttons: nextStep.buttons,
+              stepId: nextStep.id,
+              stepType: nextStep.type,
+              timestamp: new Date()
+            };
+
+            setMessages(prev => [...prev, approvalMsg]);
+          }
+        } catch (err) {
+          console.error('❌ Erro ao reformular:', err);
+          const errorMsg = {
+            id: Date.now() + 1,
+            role: 'assistant',
+            content: `Erro ao reformular texto: ${err.message}. Vou usar o texto original.`,
+            isError: true,
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, errorMsg]);
+        } finally {
+          setLoading(false);
+        }
+      }
+      return;
+    }
+
+    // Etapa normal com botões
+    if (nextStep.type === 'buttons') {
+      const nextMsg = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: nextStep.message,
+        buttons: nextStep.buttons,
+        stepId: nextStep.id,
+        stepType: nextStep.type,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, nextMsg]);
+      return;
+    }
+
+    // Etapa com input de texto/data/textarea
+    if (nextStep.type === 'text' || nextStep.type === 'date' || nextStep.type === 'textarea') {
+      const inputMsg = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: nextStep.message + (nextStep.hint ? `\n\n💡 ${nextStep.hint}` : ''),
+        stepId: nextStep.id,
+        stepType: nextStep.type,
+        inputField: {
+          type: nextStep.type,
+          field: nextStep.field,
+          maxLength: nextStep.maxLength,
+          placeholder: nextStep.placeholder,
+          rows: nextStep.rows,
+          canSkip: nextStep.canSkip
+        },
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, inputMsg]);
+      return;
+    }
+
+  }, [campanhaFlow]);
+
+  /**
+   * Handler para submissão de inputs do fluxo
+   * @param {string} value - Valor do input
+   * @param {Object} inputField - Configuração do campo
+   * @param {string} stepId - ID da etapa
+   */
+  const handleFlowInputSubmit = useCallback(async (value, inputField, stepId) => {
+    console.log('📝 Input submetido:', value);
+    console.log('📋 Campo:', inputField.field);
+
+    // Validação básica
+    if (!value || !value.trim()) {
+      if (inputField.canSkip) {
+        // Permitir pular
+        const skipResult = campanhaFlow.skipStep(stepId);
+        if (skipResult) {
+          const nextMsg = {
+            id: Date.now(),
+            role: 'assistant',
+            content: skipResult.step.message,
+            stepId: skipResult.step.id,
+            stepType: skipResult.step.type,
+            buttons: skipResult.step.buttons,
+            inputField: skipResult.step.type === 'text' || skipResult.step.type === 'date' ? {
+              type: skipResult.step.type,
+              field: skipResult.step.field
+            } : null,
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, nextMsg]);
+        }
+        return;
+      } else {
+        const errorMsg = {
+          id: Date.now(),
+          role: 'assistant',
+          content: '⚠️ Este campo é obrigatório. Por favor, preencha.',
+          isError: true,
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, errorMsg]);
+        return;
+      }
+    }
+
+    // Adicionar mensagem do usuário
+    const userMsg = {
+      id: Date.now(),
+      role: 'user',
+      content: value,
+      timestamp: new Date()
+    };
+    setMessages(prev => [...prev, userMsg]);
+
+    // Processar etapa
+    const result = campanhaFlow.processStep(stepId, value.trim());
+
+    if (!result) {
+      console.error('❌ Erro ao processar input');
+      return;
+    }
+
+    const nextStep = result.step;
+
+    // Se for etapa de approval (precisa reformular)
+    if (nextStep.type === 'approval') {
+      setLoading(true);
+
+      try {
+        const textToReformulate = value.trim();
+        const reformulated = await reformulateToFormal(textToReformulate, inputField.field);
+
+        if (reformulated) {
+          campanhaFlow.saveReformulation(nextStep.field, reformulated);
+
+          const approvalMsg = {
+            id: Date.now() + 1,
+            role: 'assistant',
+            content: nextStep.message,
+            reformulatedText: reformulated,
+            buttons: nextStep.buttons,
+            stepId: nextStep.id,
+            stepType: nextStep.type,
+            timestamp: new Date()
+          };
+
+          setMessages(prev => [...prev, approvalMsg]);
+        }
+      } catch (err) {
+        console.error('❌ Erro ao reformular:', err);
+        const errorMsg = {
+          id: Date.now() + 1,
+          role: 'assistant',
+          content: `Erro ao reformular: ${err.message}`,
+          isError: true,
+          timestamp: new Date()
+        };
+        setMessages(prev => [...prev, errorMsg]);
+      } finally {
+        setLoading(false);
+      }
+      return;
+    }
+
+    // Próxima etapa normal
+    if (nextStep.type === 'text' || nextStep.type === 'date' || nextStep.type === 'textarea') {
+      const nextMsg = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: nextStep.message + (nextStep.hint ? `\n\n💡 ${nextStep.hint}` : ''),
+        stepId: nextStep.id,
+        stepType: nextStep.type,
+        inputField: {
+          type: nextStep.type,
+          field: nextStep.field,
+          maxLength: nextStep.maxLength,
+          placeholder: nextStep.placeholder,
+          rows: nextStep.rows,
+          canSkip: nextStep.canSkip
+        },
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, nextMsg]);
+    } else if (nextStep.type === 'buttons') {
+      const nextMsg = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: nextStep.message,
+        buttons: nextStep.buttons,
+        stepId: nextStep.id,
+        stepType: nextStep.type,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, nextMsg]);
+    }
+
+  }, [campanhaFlow]);
+
+  /**
+   * Handler para upload de arquivo durante o fluxo
+   */
+  const handleFlowFileUpload = useCallback(async (file, userId) => {
+    console.log('📤 Upload de arquivo no fluxo:', file.name);
+
+    setLoading(true);
+
+    try {
+      const uploadResult = await uploadArquivo(file, userId || 'temp-user');
+
+      if (!uploadResult.sucesso) {
+        throw new Error('Falha no upload');
+      }
+
+      // Adicionar ao array de imagens
+      campanhaFlow.addImages([uploadResult]);
+
+      const successMsg = {
+        id: Date.now(),
+        role: 'assistant',
+        content: `✅ Imagem adicionada! Total de imagens: ${campanhaFlow.uploadedImages.length + 1}`,
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, successMsg]);
+
+    } catch (err) {
+      console.error('❌ Erro no upload:', err);
+
+      const errorMsg = {
+        id: Date.now(),
+        role: 'assistant',
+        content: `Erro ao fazer upload: ${err.message}`,
+        isError: true,
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, errorMsg]);
+    } finally {
+      setLoading(false);
+    }
+
+  }, [campanhaFlow]);
+
+  /**
+   * Publica campanha criada pelo fluxo
+   */
+  const handlePublishFromFlow = useCallback(async (campanhaData, userId) => {
+    console.log('📤 Publicando campanha do fluxo:', campanhaData);
+
+    setLoading(true);
+
+    try {
+      // Preparar dados para publicação
+      const dataToPublish = {
+        ...campanhaData,
+        imagemURL: campanhaData.imagens?.[0]?.url || null,
+        imagemCaminho: campanhaData.imagens?.[0]?.caminho || null
+      };
+
+      const result = await criarCampanha(dataToPublish, userId, dataToPublish.imagemURL);
+
+      const successMsg = {
+        id: Date.now(),
+        role: 'assistant',
+        content: '🎉 **Campanha publicada com sucesso!**\n\nSua campanha está visível na página inicial.',
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, successMsg]);
+
+      // Resetar fluxo
+      campanhaFlow.resetFlow();
+
+      return result;
+
+    } catch (err) {
+      console.error('❌ Erro ao publicar:', err);
+
+      const errorMsg = {
+        id: Date.now(),
+        role: 'assistant',
+        content: `Erro ao publicar campanha: ${err.message}`,
+        isError: true,
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, errorMsg]);
+
+      return null;
+    } finally {
+      setLoading(false);
+    }
+
+  }, [campanhaFlow]);
+
+  /**
+   * Abre menu de refinamento
+   */
+  const handleRefineFromFlow = useCallback(() => {
+    const refineMsg = {
+      id: Date.now(),
+      role: 'assistant',
+      content: '✏️ **O que deseja editar?**',
+      buttons: campanhaFlow.STEPS.refine_menu.buttons,
+      stepId: 'refine_menu',
+      stepType: 'buttons',
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, refineMsg]);
+  }, [campanhaFlow]);
+
+  /**
+   * Cancela o fluxo
+   */
+  const handleCancelFlow = useCallback(() => {
+    campanhaFlow.resetFlow();
+
+    const cancelMsg = {
+      id: Date.now(),
+      role: 'assistant',
+      content: '❌ Criação de campanha cancelada.',
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, cancelMsg]);
+  }, [campanhaFlow]);
 
   return {
     messages,
@@ -667,7 +1176,13 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
     clearLastAviso,
     cancelProcessing,
     refineCampanha,
-    publishCampanha
+    publishCampanha,
+    // Novo sistema de fluxo com botões
+    campanhaFlowActive: campanhaFlow.isActive,
+    startCampanhaFlow,
+    handleFlowButtonClick,
+    handleFlowInputSubmit,
+    handleFlowFileUpload
   };
 }
 

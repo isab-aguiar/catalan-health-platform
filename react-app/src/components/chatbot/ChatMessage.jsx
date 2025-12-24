@@ -4,11 +4,22 @@
 // Exibe uma mensagem individual do chat (usuário ou IA)
 
 import { User, Bot, AlertCircle, FileText } from 'lucide-react';
+import { useState, useRef } from 'react';
 import AvisoPreview from './AvisoPreview';
+import CampanhaGallery from '../common/CampanhaGallery';
 
-export default function ChatMessage({ message, onCreateAviso, onEditAviso }) {
+export default function ChatMessage({
+  message,
+  onCreateAviso,
+  onEditAviso,
+  onButtonClick,
+  onInputSubmit,
+  onFileUpload
+}) {
   const isUser = message.role === 'user';
   const isError = message.isError;
+  const [inputValue, setInputValue] = useState('');
+  const fileInputRef = useRef(null);
 
   // Formatar hora
   const formatTime = (date) => {
@@ -16,6 +27,23 @@ export default function ChatMessage({ message, onCreateAviso, onEditAviso }) {
       hour: '2-digit',
       minute: '2-digit'
     });
+  };
+
+  // Handler para envio de input
+  const handleInputSubmit = (e) => {
+    e?.preventDefault();
+    if (inputValue.trim() && onInputSubmit) {
+      onInputSubmit(message.inputField?.field, inputValue, message);
+      setInputValue('');
+    }
+  };
+
+  // Handler para seleção de arquivo
+  const handleFileSelect = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > 0 && onFileUpload) {
+      onFileUpload(files, message);
+    }
   };
 
   return (
@@ -237,6 +265,188 @@ export default function ChatMessage({ message, onCreateAviso, onEditAviso }) {
                 )}
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Botões Interativos */}
+        {message.buttons && message.buttons.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-2 max-w-[85%]">
+            {message.buttons.map((button) => (
+              <button
+                key={button.id}
+                onClick={() => onButtonClick && onButtonClick(button, message)}
+                className={`px-4 py-2 rounded-lg font-medium transition-all text-sm shadow-md hover:shadow-lg ${
+                  button.variant === 'success'
+                    ? 'bg-green-600 hover:bg-green-700 text-white'
+                    : button.variant === 'danger'
+                    ? 'bg-red-600 hover:bg-red-700 text-white'
+                    : button.variant === 'secondary'
+                    ? 'bg-gray-600 hover:bg-gray-700 text-white'
+                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                }`}
+              >
+                {button.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Campo de Input */}
+        {message.inputField && (
+          <div className="mt-3 max-w-[85%]">
+            <form onSubmit={handleInputSubmit} className="space-y-2">
+              {message.inputField.hint && (
+                <p className="text-xs text-gray-600 italic">{message.inputField.hint}</p>
+              )}
+
+              {/* Input de Data */}
+              {message.inputField.type === 'date' && (
+                <div className="space-y-2">
+                  <input
+                    type="date"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-sm"
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      type="submit"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                    >
+                      Confirmar
+                    </button>
+                    {message.inputField.canSkip && (
+                      <button
+                        type="button"
+                        onClick={() => onButtonClick && onButtonClick({ id: 'skip', value: 'skip' }, message)}
+                        className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                      >
+                        Pular
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Input de Texto */}
+              {message.inputField.type === 'text' && (
+                <div className="space-y-2">
+                  <input
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    maxLength={message.inputField.maxLength}
+                    placeholder={message.inputField.placeholder}
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-sm"
+                    autoFocus
+                  />
+                  {message.inputField.maxLength && (
+                    <p className="text-xs text-gray-500">
+                      {inputValue.length}/{message.inputField.maxLength} caracteres
+                    </p>
+                  )}
+                  <div className="flex gap-2">
+                    <button
+                      type="submit"
+                      disabled={!inputValue.trim()}
+                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                    >
+                      Enviar
+                    </button>
+                    {message.inputField.canSkip && (
+                      <button
+                        type="button"
+                        onClick={() => onButtonClick && onButtonClick({ id: 'skip', value: 'skip' }, message)}
+                        className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                      >
+                        Pular
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Textarea */}
+              {message.inputField.type === 'textarea' && (
+                <div className="space-y-2">
+                  <textarea
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    maxLength={message.inputField.maxLength}
+                    rows={message.inputField.rows || 4}
+                    placeholder={message.inputField.placeholder}
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-sm resize-none"
+                    autoFocus
+                  />
+                  {message.inputField.maxLength && (
+                    <p className="text-xs text-gray-500">
+                      {inputValue.length}/{message.inputField.maxLength} caracteres
+                    </p>
+                  )}
+                  <div className="flex gap-2">
+                    <button
+                      type="submit"
+                      disabled={!inputValue.trim()}
+                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                    >
+                      Enviar
+                    </button>
+                    {message.inputField.canSkip && (
+                      <button
+                        type="button"
+                        onClick={() => onButtonClick && onButtonClick({ id: 'skip', value: 'skip' }, message)}
+                        className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                      >
+                        Pular
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* File Upload */}
+              {message.inputField.type === 'file' && (
+                <div className="space-y-2">
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept={message.inputField.accept || 'image/*'}
+                    multiple={message.inputField.multiple}
+                    onChange={handleFileSelect}
+                    className="hidden"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg text-sm font-medium flex items-center justify-center gap-2"
+                  >
+                    📷 {message.inputField.label || 'Selecionar arquivos'}
+                  </button>
+                </div>
+              )}
+            </form>
+          </div>
+        )}
+
+        {/* Preview de Campanha com Galeria Completa (se showGallery = true) */}
+        {message.showGallery && message.campanhaData && (
+          <div className="mt-3">
+            <CampanhaGallery
+              campanha={message.campanhaData}
+              isPreview={true}
+              onPublish={message.onPublish}
+              onRefine={message.onRefine}
+              onCancel={message.onCancel}
+            />
+          </div>
+        )}
+
+        {/* Texto de Reformulação (se houver) */}
+        {message.reformulatedText && (
+          <div className="mt-3 max-w-[85%] bg-green-50 border-2 border-green-300 rounded-lg p-4">
+            <p className="text-sm text-green-900 font-medium leading-relaxed">
+              {message.reformulatedText}
+            </p>
           </div>
         )}
 
