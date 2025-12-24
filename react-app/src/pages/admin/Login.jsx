@@ -63,7 +63,7 @@ export default function Login() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-neutral-900">
-                  ESF Catalão
+                  ESF CATALÃO
                 </h1>
                 <p className="text-xs text-neutral-500">Sistema Interno</p>
               </div>
