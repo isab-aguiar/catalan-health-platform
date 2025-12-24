@@ -240,15 +240,20 @@ export function useCampanhaFlow() {
     const step = CAMPAIGN_STEPS[stepId];
 
     if (!step) {
-      console.error('Etapa não encontrada:', stepId);
+      console.error('❌ Etapa não encontrada:', stepId);
+      console.error('📋 Etapas disponíveis:', Object.keys(CAMPAIGN_STEPS));
       return null;
     }
 
     // Atualizar dados da campanha com o input do usuário
+    // Para campos opcionais, permitir valor vazio
     if (step.field && userInput !== null && userInput !== undefined) {
+      // Se o campo é opcional e o valor está vazio, usar null
+      const valueToSave = (userInput === '' && !step.required) ? null : userInput;
+      
       setCampanhaData(prev => ({
         ...prev,
-        [step.field]: userInput
+        [step.field]: valueToSave
       }));
     }
 
@@ -270,6 +275,14 @@ export function useCampanhaFlow() {
     }
 
     const nextStep = CAMPAIGN_STEPS[nextStepId];
+    
+    // Verificar se próxima etapa existe
+    if (!nextStep) {
+      console.error('❌ Próxima etapa não encontrada:', nextStepId);
+      console.error('📋 Etapas disponíveis:', Object.keys(CAMPAIGN_STEPS));
+      return null;
+    }
+    
     setCurrentStepId(nextStepId);
 
     return {

@@ -881,7 +881,7 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
         id: Date.now() + 1,
         role: 'assistant',
         content: nextStep.message + (nextStep.hint ? `\n\n💡 ${nextStep.hint}` : ''),
-        stepId: nextStep.id,
+        stepId: nextStep.id, // ✅ GARANTIR stepId sempre presente
         stepType: nextStep.type,
         inputField: {
           type: nextStep.type,
@@ -889,7 +889,8 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
           maxLength: nextStep.maxLength,
           placeholder: nextStep.placeholder,
           rows: nextStep.rows,
-          canSkip: nextStep.canSkip
+          canSkip: nextStep.canSkip,
+          hint: nextStep.hint // ✅ Incluir hint no inputField também
         },
         timestamp: new Date()
       };
@@ -907,25 +908,74 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
    */
   const handleFlowInputSubmit = useCallback(async (value, inputField, stepId) => {
     console.log('📝 Input submetido:', value);
-    console.log('📋 Campo:', inputField.field);
+    console.log('📋 Campo:', inputField?.field);
+    console.log('📋 StepId:', stepId);
 
-    // Validação básica
-    if (!value || !value.trim()) {
-      if (inputField.canSkip) {
-        // Permitir pular
-        const skipResult = campanhaFlow.skipStep(stepId);
-        if (skipResult) {
+    // Validar stepId
+    if (!stepId) {
+      console.error('❌ Erro: stepId não fornecido');
+      const errorMsg = {
+        id: Date.now(),
+        role: 'assistant',
+        content: '⚠️ Erro interno: etapa não identificada. Por favor, recomece o fluxo.',
+        isError: true,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMsg]);
+      return;
+    }
+
+    // Validação básica - para campos de data, valor vazio é válido se pode pular
+    const isEmpty = !value || !value.trim();
+    
+    if (isEmpty) {
+      if (inputField?.canSkip) {
+        // Permitir pular - processar com valor vazio
+        console.log('⏭️ Pulando etapa opcional:', stepId);
+        
+        // Processar etapa com valor vazio (será tratado como skip)
+        const result = campanhaFlow.processStep(stepId, '');
+        
+        if (!result) {
+          console.error('❌ Erro ao pular etapa');
+          return;
+        }
+        
+        const nextStep = result.step;
+        
+        // Se chegou no final
+        if (result.completed) {
+          return;
+        }
+        
+        // Criar mensagem da próxima etapa
+        if (nextStep.type === 'text' || nextStep.type === 'date' || nextStep.type === 'textarea') {
           const nextMsg = {
             id: Date.now(),
             role: 'assistant',
-            content: skipResult.step.message,
-            stepId: skipResult.step.id,
-            stepType: skipResult.step.type,
-            buttons: skipResult.step.buttons,
-            inputField: skipResult.step.type === 'text' || skipResult.step.type === 'date' ? {
-              type: skipResult.step.type,
-              field: skipResult.step.field
-            } : null,
+            content: nextStep.message + (nextStep.hint ? `\n\n💡 ${nextStep.hint}` : ''),
+            stepId: nextStep.id,
+            stepType: nextStep.type,
+            inputField: {
+              type: nextStep.type,
+              field: nextStep.field,
+              maxLength: nextStep.maxLength,
+              placeholder: nextStep.placeholder,
+              rows: nextStep.rows,
+              canSkip: nextStep.canSkip,
+              hint: nextStep.hint
+            },
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, nextMsg]);
+        } else if (nextStep.type === 'buttons') {
+          const nextMsg = {
+            id: Date.now(),
+            role: 'assistant',
+            content: nextStep.message,
+            buttons: nextStep.buttons,
+            stepId: nextStep.id,
+            stepType: nextStep.type,
             timestamp: new Date()
           };
           setMessages(prev => [...prev, nextMsg]);
@@ -957,11 +1007,58 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
     const result = campanhaFlow.processStep(stepId, value.trim());
 
     if (!result) {
-      console.error('❌ Erro ao processar input');
+      console.error('❌ Erro ao processar input - stepId:', stepId);
+      const errorMsg = {
+        id: Date.now(),
+        role: 'assistant',
+        content: '⚠️ Erro ao processar sua resposta. A etapa não foi encontrada. Por favor, recomece o fluxo.',
+        isError: true,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMsg]);
+      return;
+    }
+
+    // Se o fluxo foi completado
+    if (result.completed) {
+      console.log('✅ Fluxo completado!');
+      // Criar preview da campanha
+      const campanhaData = {
+        ...campanhaFlow.campanhaData,
+        imagens: campanhaFlow.uploadedImages
+      };
+
+      const previewMsg = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        content: '🎉 **Confira o preview da sua campanha:**',
+        showGallery: true,
+        campanhaData: campanhaData,
+        onPublish: () => handlePublishFromFlow(campanhaData),
+        onRefine: () => handleRefineFromFlow(),
+        onCancel: () => handleCancelFlow(),
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, previewMsg]);
       return;
     }
 
     const nextStep = result.step;
+    
+    // Verificar se nextStep existe
+    if (!nextStep) {
+      console.error('❌ Próxima etapa não encontrada após processar:', stepId);
+      const errorMsg = {
+        id: Date.now(),
+        role: 'assistant',
+        content: '⚠️ Erro: próxima etapa não encontrada. Por favor, recomece o fluxo.',
+        isError: true,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMsg]);
+      return;
+    }
 
     // Se for etapa de approval (precisa reformular)
     if (nextStep.type === 'approval') {
@@ -1009,7 +1106,7 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
         id: Date.now() + 1,
         role: 'assistant',
         content: nextStep.message + (nextStep.hint ? `\n\n💡 ${nextStep.hint}` : ''),
-        stepId: nextStep.id,
+        stepId: nextStep.id, // ✅ GARANTIR stepId sempre presente
         stepType: nextStep.type,
         inputField: {
           type: nextStep.type,
@@ -1017,7 +1114,8 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
           maxLength: nextStep.maxLength,
           placeholder: nextStep.placeholder,
           rows: nextStep.rows,
-          canSkip: nextStep.canSkip
+          canSkip: nextStep.canSkip,
+          hint: nextStep.hint // ✅ Incluir hint no inputField também
         },
         timestamp: new Date()
       };

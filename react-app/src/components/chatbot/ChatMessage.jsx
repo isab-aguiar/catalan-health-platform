@@ -32,10 +32,33 @@ export default function ChatMessage({
   // Handler para envio de input
   const handleInputSubmit = (e) => {
     e?.preventDefault();
-    if (inputValue.trim() && onInputSubmit) {
-      onInputSubmit(message.inputField?.field, inputValue, message);
-      setInputValue('');
+    if (!onInputSubmit) return;
+    
+    // Garantir que temos stepId
+    if (!message.stepId) {
+      console.error('❌ Erro: stepId não encontrado na mensagem', message);
+      return;
     }
+    
+    const value = inputValue.trim();
+    
+    // Para campos de data, permitir valor vazio se canSkip
+    if (message.inputField?.type === 'date' && !value && message.inputField?.canSkip) {
+      // Pular etapa se vazio e permitir skip - passar stepId para skip
+      onInputSubmit('', message.inputField, message.stepId);
+      setInputValue('');
+      return;
+    }
+    
+    // Validar se tem valor (exceto se pode pular)
+    if (!value && !message.inputField?.canSkip) {
+      return;
+    }
+    
+    // Passar: value, inputField, stepId (da mensagem)
+    console.log('📤 Enviando input:', { value, field: message.inputField?.field, stepId: message.stepId });
+    onInputSubmit(value || '', message.inputField, message.stepId);
+    setInputValue('');
   };
 
   // Handler para seleção de arquivo
