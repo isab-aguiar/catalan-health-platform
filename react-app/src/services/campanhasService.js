@@ -22,6 +22,31 @@ import { db } from '../config/firebase';
 const COLLECTION_NAME = 'campanhas';
 
 /**
+ * Remove campos undefined de um objeto, substituindo por null
+ * Previne erros do Firestore com valores undefined
+ * @param {Object} obj - Objeto a ser sanitizado
+ * @returns {Object} Objeto sem campos undefined
+ */
+function sanitizeUndefined(obj) {
+  const sanitized = {};
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      // Se for undefined, substituir por null
+      // Se for objeto (mas não array, Date, ou Timestamp), sanitizar recursivamente
+      if (value === undefined) {
+        sanitized[key] = null;
+      } else if (value && typeof value === 'object' && !Array.isArray(value) && !(value instanceof Date) && !(value.seconds !== undefined)) {
+        sanitized[key] = sanitizeUndefined(value);
+      } else {
+        sanitized[key] = value;
+      }
+    }
+  }
+  return sanitized;
+}
+
+/**
  * Cria uma nova campanha
  * @param {Object} campanhaData - Dados da campanha
  * @param {string} userId - ID do usuário criador
@@ -92,9 +117,12 @@ export const criarCampanha = async (campanhaData, userId, imagemURL, pdfURL) => 
       cliques: 0
     };
 
+    // Sanitizar dados (remover undefined) antes de salvar
+    const campanhaSanitizada = sanitizeUndefined(campanha);
+
     // Salvar no Firestore
     const campanhasRef = collection(db, COLLECTION_NAME);
-    const docRef = await addDoc(campanhasRef, campanha);
+    const docRef = await addDoc(campanhasRef, campanhaSanitizada);
 
     return {
       success: true,

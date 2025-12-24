@@ -334,7 +334,8 @@ export function useGemini() {
         // NÃO criar campanha ainda - apenas mostrar SUGESTÃO para refinamento
         const campanhaData = {
           ...result.data,
-          imagemURL: uploadResult.url
+          imagemURL: uploadResult.url,
+          imagemCaminho: uploadResult.caminho  // Adicionar caminho do Storage
         };
 
         console.log('📋 Campanha Data criada:', campanhaData);

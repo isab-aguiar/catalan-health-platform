@@ -524,6 +524,18 @@ function parseCampanhaResponse(text) {
       parsed.topicos = [];
     }
 
+    // Inicializar campos opcionais como null (evita undefined no Firestore)
+    parsed.subtitulo = parsed.subtitulo || null;
+    parsed.dataInicio = parsed.dataInicio || null;
+    parsed.dataFim = parsed.dataFim || null;
+    parsed.horario = parsed.horario || null;
+    parsed.publicoAlvo = parsed.publicoAlvo || null;
+    parsed.contato = parsed.contato || null;
+    parsed.imagemCaminho = parsed.imagemCaminho || null;
+    parsed.pdfURL = parsed.pdfURL || null;
+    parsed.pdfNome = parsed.pdfNome || null;
+    parsed.pdfCaminho = parsed.pdfCaminho || null;
+
     // Limitar tamanhos
     parsed.titulo = parsed.titulo.substring(0, 100);
     parsed.descricao = parsed.descricao.substring(0, 600);
