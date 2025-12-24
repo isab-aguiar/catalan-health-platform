@@ -22,7 +22,11 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
   }, [isOpen]);
 
   const handleLinkClick = (e, link) => {
-    if (link.onClick) {
+    // Se o link tem uma função customizada (passada do Header), chama ela
+    // Caso contrário, apenas fecha o menu
+    if (link.handleClick) {
+      link.handleClick(e, link);
+    } else if (link.onClick) {
       link.onClick(e);
     } else {
       onClose();

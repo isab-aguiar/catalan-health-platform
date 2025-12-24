@@ -73,15 +73,37 @@ export default function Header() {
     setIsMobileMenuOpen(false);
   };
 
+  const handleNavClick = (e, link) => {
+    e.preventDefault();
+
+    if (link.onClick) {
+      // Se o link tem um onClick customizado (como Contato), usa ele
+      link.onClick(e);
+    } else {
+      // Para outros links, navega e rola para o topo
+      if (location.pathname === link.path) {
+        // Se já estiver na página, apenas rola para o topo
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Navega para a página e rola para o topo
+        navigate(link.path);
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      }
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   const navLinks = [
-    { name: "Início", path: "/" },
-    { name: "Serviços", path: "/servicos" },
-    { name: "Grupos", path: "/grupos" },
-    { name: "Equipe", path: "/equipe" },
-    { name: "Remsa", path: "/remsa" },
-    { name: "ACS", path: "/acs" },
-    { name: "Educação", path: "/educacao" },
-    { name: "Contato", path: "/#contato", isAnchor: true, onClick: handleContatoClick },
+    { name: "Início", path: "/", handleClick: handleNavClick },
+    { name: "Serviços", path: "/servicos", handleClick: handleNavClick },
+    { name: "Grupos", path: "/grupos", handleClick: handleNavClick },
+    { name: "Equipe", path: "/equipe", handleClick: handleNavClick },
+    { name: "Remsa", path: "/remsa", handleClick: handleNavClick },
+    { name: "ACS", path: "/acs", handleClick: handleNavClick },
+    { name: "Educação", path: "/educacao", handleClick: handleNavClick },
+    { name: "Contato", path: "/#contato", isAnchor: true, onClick: handleContatoClick, handleClick: handleNavClick },
   ];
 
   return (

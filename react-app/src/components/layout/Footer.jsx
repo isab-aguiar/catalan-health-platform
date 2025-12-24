@@ -16,9 +16,10 @@ export default function Footer() {
   ];
 
   const handleLinkClick = (e, link) => {
-    if (link.isAnchor) {
-      e.preventDefault();
+    e.preventDefault();
 
+    if (link.isAnchor) {
+      // Link para seção específica (ex: Contato)
       const scrollToElement = () => {
         const element = document.getElementById('contato');
         if (element) {
@@ -29,12 +30,22 @@ export default function Footer() {
       };
 
       if (location.pathname === '/') {
-        // Se já estiver na home, apenas rola
         scrollToElement();
       } else {
-        // Se estiver em outra página, navega para home e depois rola
         navigate('/');
         setTimeout(scrollToElement, 300);
+      }
+    } else {
+      // Link para outras páginas - rola para o topo
+      if (location.pathname === link.path) {
+        // Se já estiver na página, apenas rola para o topo
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // Navega para a página e rola para o topo
+        navigate(link.path);
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
       }
     }
   };
