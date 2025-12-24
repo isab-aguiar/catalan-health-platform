@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import SearchSection from "../components/search/SearchSection";
 import ImageGallery from "../components/common/ImageGallery";
+import AvisosList from "../components/avisos/AvisosList";
 import {
   Phone,
   MapPin,
@@ -125,6 +126,9 @@ export default function Home() {
               Atendimento humanizado e profissional para toda a comunidade das <span className="whitespace-nowrap">ESFs Bela Vista - Catalão - São José</span>
             </p>
           </div>
+
+          {/* Avisos Públicos */}
+          <AvisosList />
 
           {/* Contact Information Section */}
           <div id="contato" className="bg-white rounded-lg shadow-md border border-neutral-200 mb-12">
