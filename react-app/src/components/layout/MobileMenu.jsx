@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Phone, Clock, MapPin, ClipboardPlus } from "lucide-react";
+import { Phone, Clock, MapPin, ClipboardPlus, Lock, User } from "lucide-react";
+import { useAuth } from "../../contexts/AuthContext";
 
 /**
  * MobileMenu Component
@@ -8,6 +9,9 @@ import { Phone, Clock, MapPin, ClipboardPlus } from "lucide-react";
  */
 
 export default function MobileMenu({ isOpen, onClose, navLinks }) {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
@@ -46,6 +50,33 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
       {/* Menu Panel */}
       <div className="fixed top-[70px] left-0 right-0 bottom-0 bg-white z-50 lg:hidden overflow-y-auto animate-slide-down">
         <nav className="container mx-auto max-w-6xl px-4 py-6">
+          {/* Botão de Login/Acesso (Mobile) */}
+          <div className="mb-4">
+            {currentUser ? (
+              <button
+                onClick={() => {
+                  navigate('/admin/painel');
+                  onClose();
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-colors font-semibold"
+              >
+                <User size={20} />
+                <span>Acessar Painel</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  navigate('/admin/login');
+                  onClose();
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-semibold shadow-md"
+              >
+                <Lock size={20} />
+                <span>Acesso Restrito</span>
+              </button>
+            )}
+          </div>
+
           <ul className="space-y-2">
             {navLinks.map((link) => (
               <li key={link.path}>

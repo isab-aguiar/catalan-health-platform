@@ -6,6 +6,8 @@ import Sidebar from "./components/layout/Sidebar";
 import Footer from "./components/layout/Footer";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ErrorBoundary from "./components/common/ErrorBoundary";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 /**
  * App Component
@@ -86,12 +88,17 @@ const Pediatra = lazyLoad(() => import("./pages/team/Pediatra"));
 const REMSA = lazyLoad(() => import("./pages/REMSA"));
 const Educacao = lazyLoad(() => import("./pages/Educacao"));
 
+// Admin
+const Login = lazyLoad(() => import("./pages/admin/Login"));
+const Painel = lazyLoad(() => import("./pages/admin/Painel"));
+
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <ErrorBoundary>
-      <BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
         <div className="flex min-h-screen overflow-x-hidden w-full">
           {/* Sidebar para desktop */}
           <Sidebar
@@ -167,6 +174,17 @@ function App() {
                     <Route path="/remsa" element={<REMSA />} />
                     <Route path="/educacao" element={<Educacao />} />
 
+                    {/* Admin Routes */}
+                    <Route path="/admin/login" element={<Login />} />
+                    <Route 
+                      path="/admin/painel" 
+                      element={
+                        <ProtectedRoute>
+                          <Painel />
+                        </ProtectedRoute>
+                      } 
+                    />
+
                     {/* 404 */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
@@ -185,7 +203,8 @@ function App() {
             <Menu size={24} className="text-neutral-700" />
           </button>
         </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </AuthProvider>
     </ErrorBoundary>
   );
 }
