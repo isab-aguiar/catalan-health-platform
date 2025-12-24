@@ -75,8 +75,9 @@ export async function getAvisosPublicos() {
 /**
  * Cria um novo aviso
  * @param {Object} aviso - Objeto com título, descricao, categoria, data, exibirNaHomepage
+ * @param {string} createdByUid - UID do usuário que está criando o aviso
  */
-export async function createAviso(aviso) {
+export async function createAviso(aviso, createdByUid = null) {
   try {
     // Validar campos obrigatórios
     if (!aviso.titulo || !aviso.descricao || !aviso.categoria || !aviso.data) {
@@ -97,6 +98,7 @@ export async function createAviso(aviso) {
       categoria: aviso.categoria,
       data: dataTimestamp,
       exibirNaHomepage: aviso.exibirNaHomepage || false,
+      createdBy: createdByUid || null,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now()
     };
@@ -114,8 +116,9 @@ export async function createAviso(aviso) {
  * Atualiza um aviso existente
  * @param {string} id - ID do documento no Firestore
  * @param {Object} aviso - Objeto com campos a atualizar
+ * @param {string} updatedByUid - UID do usuário que está atualizando o aviso
  */
-export async function updateAviso(id, aviso) {
+export async function updateAviso(id, aviso, updatedByUid = null) {
   try {
     if (!id) {
       return { success: false, error: 'ID do aviso é obrigatório' };
@@ -125,7 +128,8 @@ export async function updateAviso(id, aviso) {
     
     // Preparar dados para atualização
     const dadosAtualizacao = {
-      updatedAt: Timestamp.now()
+      updatedAt: Timestamp.now(),
+      updatedBy: updatedByUid || null
     };
 
     if (aviso.titulo !== undefined) {

@@ -6,6 +6,8 @@
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { usePermissions } from '../../hooks/usePermissions';
+import PermissionGate from '../../components/auth/PermissionGate';
 import { 
   LogOut, 
   User, 
@@ -13,13 +15,15 @@ import {
   Bell,
   Settings,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  Users as UsersIcon
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Painel() {
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, userData } = useAuth();
   const navigate = useNavigate();
+  const permissions = usePermissions();
   const [logoutLoading, setLogoutLoading] = useState(false);
 
   // Função de logout
@@ -64,10 +68,16 @@ export default function Painel() {
                   <User className="w-4 h-4 text-primary-600" />
                 </div>
                 <div>
-                  <p className="font-medium text-neutral-700">Admin</p>
+                  <p className="font-medium text-neutral-700">
+                    {userData?.displayName || 'Admin'}
+                  </p>
                   <p className="text-xs text-neutral-500">{currentUser?.email}</p>
                 </div>
               </div>
+              {/* Badge de Role */}
+              <span className={`text-xs font-semibold px-2 py-1 rounded-full ${permissions.getRoleColor()}`}>
+                {permissions.getRoleLabel()}
+              </span>
 
               {/* Botão de Logout */}
               <button
@@ -150,7 +160,7 @@ export default function Painel() {
           </Link>
 
           {/* Card 3 */}
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 opacity-50">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                 <User className="w-6 h-6 text-purple-600" />
@@ -163,8 +173,8 @@ export default function Painel() {
               Múltiplos Níveis de Acesso
             </p>
             <div className="mt-4 pt-4 border-t border-neutral-100">
-              <span className="inline-flex items-center gap-1 text-xs font-medium text-neutral-700 bg-neutral-100 px-2 py-1 rounded-full">
-                Em breve
+              <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded-full">
+                ✓ Completo
               </span>
             </div>
           </div>
@@ -177,19 +187,39 @@ export default function Painel() {
             Ações Rápidas
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Link
-              to="/admin/avisos"
-              className="flex items-center gap-4 p-4 border-2 border-primary-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all group"
-            >
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center group-hover:bg-primary-500 transition-colors">
-                <Bell className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors" />
-              </div>
-              <div className="flex-1">
-                <h4 className="font-semibold text-neutral-900">Gerenciar Avisos</h4>
-                <p className="text-sm text-neutral-600">Criar, editar e deletar avisos</p>
-              </div>
-              <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all" />
-            </Link>
+            <PermissionGate requiredPermission="canViewAvisos">
+              <Link
+                to="/admin/avisos"
+                className="flex items-center gap-4 p-4 border-2 border-primary-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all group"
+              >
+                <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center group-hover:bg-primary-500 transition-colors">
+                  <Bell className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-neutral-900">Gerenciar Avisos</h4>
+                  <p className="text-sm text-neutral-600">
+                    {permissions.canDeleteAvisos() ? 'Criar, editar e deletar avisos' : 'Criar e editar avisos'}
+                  </p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all" />
+              </Link>
+            </PermissionGate>
+            
+            <PermissionGate requiredPermission="canManageUsers">
+              <Link
+                to="/admin/users"
+                className="flex items-center gap-4 p-4 border-2 border-purple-200 rounded-lg hover:border-purple-500 hover:bg-purple-50 transition-all group"
+              >
+                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-500 transition-colors">
+                  <UsersIcon className="w-6 h-6 text-purple-600 group-hover:text-white transition-colors" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-neutral-900">Gerenciar Usuários</h4>
+                  <p className="text-sm text-neutral-600">Criar e editar usuários e permissões</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
+              </Link>
+            </PermissionGate>
           </div>
         </div>
 

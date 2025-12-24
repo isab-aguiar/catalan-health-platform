@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useAvisos } from '../../hooks/useAvisos';
+import { usePermissions } from '../../hooks/usePermissions';
+import PermissionGate from '../../components/auth/PermissionGate';
 import {
   LogOut,
   User,
@@ -24,9 +26,10 @@ import LoadingSpinner from '../../components/common/LoadingSpinner';
 import Alert from '../../components/common/Alert';
 
 export default function Avisos() {
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, userData } = useAuth();
   const navigate = useNavigate();
   const { avisos, loading, error, createAviso, updateAviso, deleteAviso } = useAvisos();
+  const permissions = usePermissions();
   
   const [showModal, setShowModal] = useState(false);
   const [editingAviso, setEditingAviso] = useState(null);
@@ -246,11 +249,17 @@ export default function Avisos() {
                 <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-primary-600" />
                 </div>
-                <div>
-                  <p className="font-medium text-neutral-700">Admin</p>
-                  <p className="text-xs text-neutral-500">{currentUser?.email}</p>
-                </div>
+              <div>
+                <p className="font-medium text-neutral-700">
+                  {userData?.displayName || 'Admin'}
+                </p>
+                <p className="text-xs text-neutral-500">{currentUser?.email}</p>
               </div>
+            </div>
+            {/* Badge de Role */}
+            <span className={`text-xs font-semibold px-2 py-1 rounded-full ${permissions.getRoleColor()}`}>
+              {permissions.getRoleLabel()}
+            </span>
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm font-medium"
@@ -280,13 +289,15 @@ export default function Avisos() {
               Gerencie os avisos que aparecem na homepage
             </p>
           </div>
-          <button
-            onClick={handleNovoAviso}
-            className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium"
-          >
-            <Plus className="w-5 h-5" />
-            Novo Aviso
-          </button>
+          <PermissionGate requiredPermission="canCreateAvisos">
+            <button
+              onClick={handleNovoAviso}
+              className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium"
+            >
+              <Plus className="w-5 h-5" />
+              Novo Aviso
+            </button>
+          </PermissionGate>
         </div>
 
         {/* Lista de Avisos */}
@@ -349,25 +360,29 @@ export default function Avisos() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => handleEditarAviso(aviso)}
-                      className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                      title="Editar"
-                    >
-                      <Edit className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={() => handleDeletar(aviso.id)}
-                      disabled={deleteLoading === aviso.id}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
-                      title="Deletar"
-                    >
-                      {deleteLoading === aviso.id ? (
-                        <div className="w-5 h-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
-                      ) : (
-                        <Trash2 className="w-5 h-5" />
-                      )}
-                    </button>
+                    <PermissionGate requiredPermission="canEditAvisos">
+                      <button
+                        onClick={() => handleEditarAviso(aviso)}
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        title="Editar"
+                      >
+                        <Edit className="w-5 h-5" />
+                      </button>
+                    </PermissionGate>
+                    <PermissionGate requiredPermission="canDeleteAvisos">
+                      <button
+                        onClick={() => handleDeletar(aviso.id)}
+                        disabled={deleteLoading === aviso.id}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                        title="Deletar"
+                      >
+                        {deleteLoading === aviso.id ? (
+                          <div className="w-5 h-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <Trash2 className="w-5 h-5" />
+                        )}
+                      </button>
+                    </PermissionGate>
                   </div>
                 </div>
               </div>

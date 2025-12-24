@@ -12,6 +12,7 @@ import {
   onSnapshot
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
+import { useAuth } from '../contexts/AuthContext';
 import * as avisosService from '../services/avisosService';
 
 const COLLECTION_NAME = 'avisos';
@@ -20,6 +21,7 @@ const COLLECTION_NAME = 'avisos';
  * Hook para gerenciar todos os avisos (uso administrativo)
  */
 export function useAvisos() {
+  const { currentUser } = useAuth();
   const [avisos, setAvisos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -58,7 +60,7 @@ export function useAvisos() {
 
   const createAviso = async (aviso) => {
     setError(null);
-    const result = await avisosService.createAviso(aviso);
+    const result = await avisosService.createAviso(aviso, currentUser?.uid);
     if (!result.success) {
       setError(result.error);
     }
@@ -67,7 +69,7 @@ export function useAvisos() {
 
   const updateAviso = async (id, aviso) => {
     setError(null);
-    const result = await avisosService.updateAviso(id, aviso);
+    const result = await avisosService.updateAviso(id, aviso, currentUser?.uid);
     if (!result.success) {
       setError(result.error);
     }

@@ -11,6 +11,7 @@ import {
   onAuthStateChanged 
 } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import { useUserData } from '../hooks/useUserData';
 
 // Cria o contexto
 const AuthContext = createContext({});
@@ -27,7 +28,10 @@ export const useAuth = () => {
 // Componente Provider que envolve o app e fornece autenticação
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);  // Usuário logado
-  const [loading, setLoading] = useState(true);  // Estado de carregamento
+  const [authLoading, setAuthLoading] = useState(true);  // Estado de carregamento do Auth
+  
+  // Buscar dados do usuário do Firestore
+  const { userData, loading: userDataLoading } = useUserData(currentUser?.uid);
 
   // Função de LOGIN
   const login = async (email, password) => {
@@ -66,20 +70,36 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);  // Atualiza o usuário atual
-      setLoading(false);  // Terminou de carregar
+      setAuthLoading(false);  // Terminou de carregar Auth
     });
 
     // Cleanup: cancela a inscrição quando o componente desmontar
     return unsubscribe;
   }, []);
+  
+  // Loading combinado: Auth + UserData
+  const loading = authLoading || (currentUser && userDataLoading);
+
+  // Helpers de role
+  const userRole = userData?.role || null;
+  const isAdmin = userRole === 'admin';
+  const isProfissional = userRole === 'profissional';
+  const isDiretorio = userRole === 'diretorio';
+  const isActive = userData?.active !== false; // Considera ativo se não houver campo active
 
   // Valores e funções disponíveis para todo o app
   const value = {
-    currentUser,      // Usuário logado (null se não estiver logado)
-    login,            // Função para fazer login
-    logout,           // Função para fazer logout
-    loading,          // Estado de carregamento
-    isAuthenticated: !!currentUser  // Booleano: está logado?
+    currentUser,          // Usuário logado (null se não estiver logado)
+    userData,             // Dados do usuário do Firestore (com role, etc)
+    userRole,             // Role do usuário: admin, profissional, diretorio
+    isAdmin,              // É admin?
+    isProfissional,       // É profissional?
+    isDiretorio,          // É diretório?
+    isActive,             // Usuário está ativo?
+    login,                // Função para fazer login
+    logout,               // Função para fazer logout
+    loading,              // Estado de carregamento
+    isAuthenticated: !!currentUser && isActive  // Booleano: está logado e ativo?
   };
 
   // Enquanto carrega, mostra tela de carregamento

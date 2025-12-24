@@ -92,6 +92,7 @@ const Educacao = lazyLoad(() => import("./pages/Educacao"));
 const Login = lazyLoad(() => import("./pages/admin/Login"));
 const Painel = lazyLoad(() => import("./pages/admin/Painel"));
 const Avisos = lazyLoad(() => import("./pages/admin/Avisos"));
+const Users = lazyLoad(() => import("./pages/admin/Users"));
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -190,6 +191,14 @@ function App() {
                       element={
                         <ProtectedRoute>
                           <Avisos />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/admin/users" 
+                      element={
+                        <ProtectedRoute requiredRole="admin">
+                          <Users />
                         </ProtectedRoute>
                       } 
                     />
