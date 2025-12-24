@@ -3,7 +3,7 @@
  * Botão reutilizável com variantes
  */
 
-export default function Button({
+export function Button({
   children,
   variant = 'primary',
   size = 'md',
@@ -43,3 +43,5 @@ export default function Button({
     </button>
   );
 }
+
+export default Button;

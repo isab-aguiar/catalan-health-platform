@@ -56,7 +56,15 @@ export function useGemini() {
   const sendMessage = useCallback(async (userMessage, userId = null) => {
     console.log('🟣 useGemini sendMessage recebeu:', userMessage);
     console.log('🟣 userId:', userId);
-    
+
+    // Extrair texto e arquivo do input (pode ser string ou objeto)
+    const isObject = typeof userMessage === 'object' && userMessage !== null && !Array.isArray(userMessage);
+    const texto = isObject ? (userMessage.texto || '') : (userMessage || '');
+    const arquivo = isObject ? userMessage.arquivo : null;
+
+    console.log('📝 Texto extraído:', texto);
+    console.log('📎 Arquivo extraído:', arquivo);
+
     // Se já está carregando, cancelar
     if (loading && abortControllerRef.current) {
       console.log('⚠️ Já está carregando, cancelando...');
@@ -67,17 +75,17 @@ export function useGemini() {
     // Se o fluxo interativo estiver ativo, processar resposta
     if (interactiveForm.isActive) {
       console.log('📝 Fluxo interativo ativo, processando resposta...');
-      const result = interactiveForm.processAnswer(userMessage);
-      
+      const result = interactiveForm.processAnswer(texto);
+
       // Adicionar mensagem do usuário
       const userMsg = {
         id: Date.now(),
         role: 'user',
-        content: userMessage,
+        content: texto,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, userMsg]);
-      
+
       if (result.error) {
         // Resposta inválida
         const errorMsg = {
@@ -89,7 +97,7 @@ export function useGemini() {
         setMessages(prev => [...prev, errorMsg]);
         return null;
       }
-      
+
       if (result.completed) {
         // Fluxo concluído
         const completedMsg = {
@@ -108,7 +116,7 @@ export function useGemini() {
         setLastGeneratedAviso(result.data);
         return result.data;
       }
-      
+
       // Próxima pergunta
       const nextMsg = {
         id: Date.now() + 1,
@@ -121,22 +129,22 @@ export function useGemini() {
     }
 
     // Detectar comando "criar aviso"
-    const lowerMsg = userMessage.trim().toLowerCase();
+    const lowerMsg = texto.trim().toLowerCase();
     if (lowerMsg === 'criar aviso' || lowerMsg === 'novo aviso' || lowerMsg === 'criar campanha') {
       console.log('🆕 Comando detectado: iniciar fluxo interativo');
-      
+
       // Adicionar mensagem do usuário
       const userMsg = {
         id: Date.now(),
         role: 'user',
-        content: userMessage,
+        content: texto,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, userMsg]);
-      
+
       // Iniciar fluxo
       const flow = interactiveForm.startFlow();
-      
+
       const aiMsg = {
         id: Date.now() + 1,
         role: 'assistant',
@@ -150,16 +158,16 @@ export function useGemini() {
     // Criar novo AbortController
     abortControllerRef.current = new AbortController();
 
-    // Se for objeto com arquivo, processar campanha
-    if (typeof userMessage === 'object' && userMessage.arquivo) {
-      console.log('📸 Detectado objeto com arquivo, chamando sendCampanha...');
-      console.log('📸 Arquivo:', userMessage.arquivo);
-      return await sendCampanha(userMessage, userId);
+    // Se tiver arquivo, processar campanha
+    if (arquivo) {
+      console.log('📸 Detectado arquivo, chamando sendCampanha...');
+      console.log('📸 Arquivo:', arquivo);
+      return await sendCampanha({ arquivo, texto }, userId);
     }
 
     // Processar como aviso de texto normal
     console.log('💬 Processando como mensagem de texto...');
-    if (!userMessage.trim()) {
+    if (!texto.trim()) {
       console.error('❌ Mensagem vazia');
       setError('Mensagem não pode estar vazia');
       return null;
@@ -169,7 +177,7 @@ export function useGemini() {
     const userMsg = {
       id: Date.now(),
       role: 'user',
-      content: userMessage,
+      content: texto,
       timestamp: new Date()
     };
 
@@ -180,7 +188,7 @@ export function useGemini() {
 
     try {
       // Enviar para Gemini
-      const result = await sendMessageToGemini(userMessage);
+      const result = await sendMessageToGemini(texto);
 
       if (result.success) {
         // Verificar se é conversa casual ou geração de aviso

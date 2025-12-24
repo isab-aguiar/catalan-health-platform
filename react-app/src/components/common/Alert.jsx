@@ -5,7 +5,7 @@ import { Info, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
  * Alertas para mensagens informativas, avisos, erros e sucessos
  */
 
-export default function Alert({ type = 'info', children, className = '' }) {
+export function Alert({ type = 'info', children, className = '' }) {
   const types = {
     info: {
       bg: 'bg-blue-50 border-blue-200',
@@ -46,3 +46,5 @@ export default function Alert({ type = 'info', children, className = '' }) {
     </div>
   );
 }
+
+export default Alert;
