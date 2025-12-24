@@ -179,7 +179,7 @@ function App() {
           {/* Botão de Menu Fixo - Canto Superior Direito (Desktop) */}
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="hidden lg:flex fixed top-0 right-0 z-50 p-3 bg-white hover:bg-neutral-100 transition-colors border-b border-l border-neutral-200 rounded-bl-lg"
+            className="hidden lg:flex fixed top-0 right-0 z-50 p-3 bg-white hover:bg-neutral-100 transition-colors"
             aria-label="Abrir menu"
           >
             <Menu size={24} className="text-neutral-700" />
