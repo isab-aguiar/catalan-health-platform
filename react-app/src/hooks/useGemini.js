@@ -669,16 +669,18 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
   /**
    * Inicia o fluxo interativo de criação de campanha
    * @param {File} initialImage - Imagem inicial (opcional)
+   * @param {string} userId - ID do usuário
    */
-  const startCampanhaFlow = useCallback(async (initialImage = null) => {
+  const startCampanhaFlow = useCallback(async (initialImage = null, userId = null) => {
     console.log('🎬 Iniciando novo fluxo de campanha com botões');
+    console.log('👤 userId:', userId);
 
     // Fazer upload da imagem primeiro se houver
     let uploadResult = null;
     if (initialImage) {
       try {
         setLoading(true);
-        uploadResult = await uploadArquivo(initialImage, 'temp-user');
+        uploadResult = await uploadArquivo(initialImage, userId || 'temp-user');
         if (!uploadResult.sucesso) {
           throw new Error('Falha no upload da imagem');
         }

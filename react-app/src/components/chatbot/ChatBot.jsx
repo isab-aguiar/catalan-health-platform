@@ -51,7 +51,7 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
     // Se tem arquivo de imagem, iniciar NOVO FLUXO COM BOTÕES
     if (arquivo && arquivo.type?.startsWith('image/')) {
       console.log('🎬 Iniciando novo fluxo de campanha com imagem...');
-      startCampanhaFlow(arquivo);
+      startCampanhaFlow(arquivo, userId);
       return;
     }
 
