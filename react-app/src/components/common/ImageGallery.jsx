@@ -39,7 +39,7 @@ export default function ImageGallery({ images = [] }) {
             className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-opacity duration-300 pointer-events-none" />
 
           {currentImage.caption && (
             <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 text-white">

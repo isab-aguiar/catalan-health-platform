@@ -33,6 +33,7 @@ export default function Sidebar({ isOpen, onClose }) {
   const navLinks = [
     { name: "Início", path: "/" },
     { name: "Serviços", path: "/servicos" },
+    { name: "Sala de Vacinação", path: "/servicos/vacinas" },
     { name: "Grupos", path: "/grupos" },
     { name: "Equipe", path: "/equipe" },
     { name: "Remsa", path: "/remsa" },

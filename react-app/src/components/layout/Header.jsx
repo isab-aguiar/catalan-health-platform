@@ -98,6 +98,7 @@ export default function Header() {
   const navLinks = [
     { name: "Início", path: "/", handleClick: handleNavClick },
     { name: "Serviços", path: "/servicos", handleClick: handleNavClick },
+    { name: "Sala de Vacinação", path: "/servicos/vacinas", handleClick: handleNavClick },
     { name: "Grupos", path: "/grupos", handleClick: handleNavClick },
     { name: "Equipe", path: "/equipe", handleClick: handleNavClick },
     { name: "Remsa", path: "/remsa", handleClick: handleNavClick },

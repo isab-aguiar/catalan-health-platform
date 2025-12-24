@@ -83,7 +83,7 @@ export const allPages = [
   },
   {
     id: "vacinas",
-    title: "Sala de Vacinas",
+    title: "Sala de Vacinação",
     description: "Vacinação para todas as idades conforme calendário nacional",
     keywords: [
       "vacina",

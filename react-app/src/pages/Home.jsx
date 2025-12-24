@@ -19,6 +19,7 @@ import {
   MessageCircle,
   Instagram,
   Droplet,
+  Syringe,
 } from "lucide-react";
 
 const galleryImagesModules = import.meta.glob(
@@ -499,6 +500,28 @@ export default function Home() {
                 Conheça nossa equipe multiprofissional
               </p>
               <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-secondary-700">
+                <span>Consultar</span>
+                <ArrowRight
+                  size={18}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </div>
+            </Link>
+
+            <Link
+              to="/servicos/vacinas"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-blue-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+            >
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                <Syringe size={48} strokeWidth={2} />
+              </div>
+              <h3 className="text-2xl font-bold mb-2 text-neutral-900">
+                Sala de Vacinação
+              </h3>
+              <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
+                Calendário Nacional de Vacinação e horários de atendimento
+              </p>
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-blue-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}

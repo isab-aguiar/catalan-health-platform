@@ -9,6 +9,7 @@ export default function Footer() {
   const quickLinks = [
     { name: "Início", path: "/" },
     { name: "Serviços", path: "/servicos" },
+    { name: "Sala de Vacinação", path: "/servicos/vacinas" },
     { name: "Grupos", path: "/grupos" },
     { name: "Equipe", path: "/equipe" },
     { name: "ACS", path: "/acs" },

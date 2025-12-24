@@ -1,5 +1,7 @@
 import { AlertCircle } from "lucide-react";
+import { Link } from 'react-router-dom';
 import BackButton from "../../components/common/BackButton";
+import CalendarioVacinal from "../../components/vacinas/CalendarioVacinal";
 
 function PageContainer({ children }) {
   return (
@@ -60,6 +62,7 @@ function Alert({ type = "info", children }) {
   );
 }
 
+
 export default function Vacinas() {
   return (
     <PageContainer>
@@ -69,76 +72,28 @@ export default function Vacinas() {
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">Sala de Vacinas</h1>
-              <p className="text-slate-600 text-sm mt-1">UBS São José - Unidade Básica de Saúde</p>
+              <h1 className="text-3xl font-bold text-slate-900">Sala de Vacinação</h1>
+              <p className="text-slate-600 text-sm mt-1">Estratégia Saúde da Família ESF Catalão</p>
             </div>
           </div>
         </div>
 
-        <Alert type="info">
-          <strong>Vacinas salvam vidas!</strong> Mantenha sua carteira de vacinação sempre em dia. 
-          A imunização protege você, sua família e toda a comunidade.
-        </Alert>
+        {/* Calendário de Vacinação */}
+        <div className="mb-6">
+          <CalendarioVacinal />
+        </div>
 
-        {/* Sobre o Serviço */}
-        <InfoBox title="Sobre o Serviço">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-slate-800 text-sm">Aplicação de Vacinas</strong>
-                <p className="text-sm text-slate-600 mt-0.5">
-                  Aplicação de vacinas do calendário nacional de vacinação
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-slate-800 text-sm">Vacinação Universal</strong>
-                <p className="text-sm text-slate-600 mt-0.5">
-                  Vacinação de crianças, adolescentes, adultos e idosos conforme protocolos estabelecidos
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-slate-800 text-sm">Vacinas para Gestantes</strong>
-                <p className="text-sm text-slate-600 mt-0.5">
-                  Vacinação de gestantes conforme protocolo do Ministério da Saúde
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-slate-800 text-sm">Atualização de Carteiras de Vacinação</strong>
-                <p className="text-sm text-slate-600 mt-0.5">
-                  Atualização de carteiras de vacinação e fornecimento de orientações
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-slate-800 text-sm">Campanhas de Vacinação</strong>
-                <p className="text-sm text-slate-600 mt-0.5">
-                  Participação em campanhas de vacinação (gripe, sarampo, COVID-19, entre outras)
-                </p>
-              </div>
-            </div>
-          </div>
-        </InfoBox>
-
-        {/* Equipe */}
-        <InfoBox title="Equipe Responsável">
+        {/* Equipe e Horários */}
+        <InfoBox title="Horários de Atendimento">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
               <thead>
                 <tr className="bg-slate-100">
                   <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
                     Período
+                  </th>
+                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                    Horário
                   </th>
                   <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
                     Profissional Responsável
@@ -150,16 +105,33 @@ export default function Vacinas() {
                   <td className="border border-slate-300 px-4 py-3">
                     <strong className="text-slate-800">Manhã</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">Renata Kelly</td>
+                  <td className="border border-slate-300 px-4 py-3 text-slate-700">07h00 às 11h00</td>
+                  <td className="border border-slate-300 px-4 py-3 text-slate-700">Thaciane Souza</td>
                 </tr>
                 <tr className="bg-white">
                   <td className="border border-slate-300 px-4 py-3">
                     <strong className="text-slate-800">Tarde</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">Silvana</td>
+                  <td className="border border-slate-300 px-4 py-3 text-slate-700">13h00 às 17h00</td>
+                  <td className="border border-slate-300 px-4 py-3 text-slate-700">Tatiane Aparecida</td>
+                </tr>
+                <tr className="bg-blue-50">
+                  <td className="border border-slate-300 px-4 py-3">
+                    <strong className="text-slate-800">Saúde na Hora</strong>
+                  </td>
+                  <td className="border border-slate-300 px-4 py-3 text-slate-700">17h00 às 22h00</td>
+                  <td className="border border-slate-300 px-4 py-3 text-slate-700">Alessandra Silva</td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          <div className="mt-4">
+            <Alert type="info">
+              <p className="text-slate-800 text-xs md:text-sm font-normal leading-relaxed">
+                <strong>Observações Importantes:</strong> O atendimento na Sala de Vacinas é realizado de forma livre, por ordem de chegada. Antes de se dirigir à sala de vacinas, é obrigatório realizar o cadastro na recepção da unidade para abertura da ficha de atendimento. <strong>Exceção:</strong> A aplicação da vacina BCG em recém-nascidos requer agendamento prévio, que deve ser realizado na <Link to="/services/sala4" className="text-blue-700 font-semibold hover:text-blue-800 underline">Sala de Agendamentos</Link>.
+              </p>
+            </Alert>
           </div>
         </InfoBox>
 
@@ -189,137 +161,19 @@ export default function Vacinas() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-slate-800 text-sm">Carteira de Vacinação</strong>
-                <p className="text-xs text-slate-600 mt-0.5">Indispensável para registro das doses aplicadas</p>
+                <p className="text-xs text-slate-600 mt-0.5">Quando disponível, para registro das doses aplicadas</p>
               </div>
             </div>
           </div>
 
           <div className="mt-4">
-            <Alert type="warning">
-              <strong>Normativa:</strong> Documento de identificação com foto e CPF são obrigatórios 
-              para qualquer atendimento na unidade.
+            <Alert type="info">
+              <p className="text-slate-800 text-xs md:text-sm font-normal leading-relaxed">
+                <strong>Observação sobre Carteira de Vacinação:</strong> Apresente sua carteira de vacinação em todas as consultas, mesmo que considere estar em dia. A equipe de saúde pode identificar vacinas que necessitam de reforço ou atualização conforme o calendário nacional.
+              </p>
             </Alert>
           </div>
         </InfoBox>
-
-        {/* Horários de Atendimento */}
-        <InfoBox title="Horário de Atendimento">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-slate-300">
-              <thead>
-                <tr className="bg-slate-100">
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
-                    Observações
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Manhã</strong>
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">07h00 às 11h00</td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-600">Atendimento livre, por ordem de chegada</td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Tarde</strong>
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">13h00 às 17h00</td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-600">Atendimento livre, por ordem de chegada</td>
-                </tr>
-                <tr className="bg-blue-50">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Saúde na Hora</strong>
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">17h00 às 22h00</td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-600">Atendimento estendido</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </InfoBox>
-
-        {/* Informação importante */}
-        <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm mb-6">
-          <div>
-            <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-blue-50 leading-relaxed">
-              Antes de se dirigir à sala de vacinas, é necessário passar pela recepção da unidade para 
-              realização da ficha de atendimento. Esta medida é essencial para agilizar o processo de 
-              atendimento e garantir a organização adequada do fluxo de pacientes na unidade.
-            </p>
-          </div>
-        </div>
-
-        {/* Calendário de Vacinação */}
-        <InfoBox title="Calendário de Vacinação (Resumo)">
-          <p className="text-slate-700 mb-6 text-sm">
-            Principais vacinas disponíveis conforme o Calendário Nacional de Vacinação:
-          </p>
-
-          <div className="space-y-4">
-            <div className="p-6 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
-              <h4 className="text-blue-800 font-bold mb-2 text-sm">
-                Crianças (0 a 10 anos)
-              </h4>
-              <p className="text-slate-700 leading-relaxed text-sm">
-                BCG, Hepatite B, Pentavalente, Poliomielite, Rotavírus, Pneumocócica 10-valente,
-                Meningocócica C, Febre Amarela, Tríplice Viral (Sarampo, Caxumba, Rubéola),
-                Hepatite A, Varicela (Catapora), DTP, entre outras.
-              </p>
-            </div>
-
-            <div className="p-6 bg-slate-50 border-l-4 border-slate-500 rounded-lg">
-              <h4 className="text-slate-800 font-bold mb-2 text-sm">
-                Adolescentes (11 a 19 anos)
-              </h4>
-              <p className="text-slate-700 leading-relaxed text-sm">
-                HPV, dT (Difteria e Tétano), Tríplice Viral, Hepatite B, Febre Amarela, Meningocócica ACWY.
-              </p>
-            </div>
-
-            <div className="p-6 bg-amber-50 border-l-4 border-amber-500 rounded-lg">
-              <h4 className="text-amber-800 font-bold mb-2 text-sm">
-                Adultos (20 a 59 anos)
-              </h4>
-              <p className="text-slate-700 leading-relaxed text-sm">
-                dT (Difteria e Tétano), Tríplice Viral, Hepatite B, Febre Amarela, e vacinas específicas
-                para gestantes (dTpa e Influenza).
-              </p>
-            </div>
-
-            <div className="p-6 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
-              <h4 className="text-blue-800 font-bold mb-2 text-sm">
-                Idosos (60 anos ou mais)
-              </h4>
-              <p className="text-slate-700 leading-relaxed text-sm">
-                Influenza (gripe), Pneumocócica 23-valente, dT (Difteria e Tétano), Febre Amarela.
-              </p>
-            </div>
-          </div>
-        </InfoBox>
-
-        <Alert type="warning">
-          <strong>Importante:</strong> Em caso de campanhas de vacinação, os horários podem ser estendidos.
-          Fique atento aos comunicados da unidade e da Secretaria Municipal de Saúde.
-        </Alert>
-
-        <Alert type="success">
-          <strong>Orientação:</strong> Sempre traga sua carteira de vacinação, mesmo que você ache que está em dia.
-          A equipe pode identificar vacinas que precisam de reforço ou atualização.
-        </Alert>
-
-        <Alert type="warning">
-          <strong>Vacina BCG (Recém-Nascidos):</strong> A vacina BCG requer agendamento prévio. Procure a Sala 4 
-          (Central de Agendamento) para marcar a aplicação da BCG para seu bebê.
-        </Alert>
       </div>
     </PageContainer>
   );
