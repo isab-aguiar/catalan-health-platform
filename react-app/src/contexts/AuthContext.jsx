@@ -35,6 +35,9 @@ export function AuthProvider({ children }) {
 
   // Função de LOGIN
   const login = async (email, password) => {
+    if (!auth) {
+      return { success: false, error: 'Firebase não configurado. Configure as variáveis de ambiente.' };
+    }
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       return { success: true, user: result.user };
@@ -58,6 +61,9 @@ export function AuthProvider({ children }) {
 
   // Função de LOGOUT
   const logout = async () => {
+    if (!auth) {
+      return { success: false, error: 'Firebase não configurado' };
+    }
     try {
       await signOut(auth);
       return { success: true };
@@ -68,6 +74,13 @@ export function AuthProvider({ children }) {
 
   // Monitora mudanças no estado de autenticação (login/logout)
   useEffect(() => {
+    // Se o Firebase não foi inicializado, apenas define loading como false
+    if (!auth) {
+      console.warn('⚠️ Firebase Auth não disponível - variáveis de ambiente não configuradas');
+      setAuthLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);  // Atualiza o usuário atual
       setAuthLoading(false);  // Terminou de carregar Auth
@@ -84,17 +97,17 @@ export function AuthProvider({ children }) {
   const userRole = userData?.role || null;
   const isAdmin = userRole === 'admin';
   const isProfissional = userRole === 'profissional';
-  const isDiretorio = userRole === 'diretorio';
+  const isDiretoria = userRole === 'diretoria';
   const isActive = userData?.active !== false; // Considera ativo se não houver campo active
 
   // Valores e funções disponíveis para todo o app
   const value = {
     currentUser,          // Usuário logado (null se não estiver logado)
     userData,             // Dados do usuário do Firestore (com role, etc)
-    userRole,             // Role do usuário: admin, profissional, diretorio
+    userRole,             // Role do usuário: admin, profissional, diretoria
     isAdmin,              // É admin?
     isProfissional,       // É profissional?
-    isDiretorio,          // É diretório?
+    isDiretoria,          // É diretória?
     isActive,             // Usuário está ativo?
     login,                // Função para fazer login
     logout,               // Função para fazer logout

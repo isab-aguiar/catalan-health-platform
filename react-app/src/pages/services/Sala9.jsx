@@ -1,5 +1,7 @@
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
+import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 
 function PageContainer({ children }) {
   return (
@@ -78,6 +80,12 @@ export default function Sala9() {
             </div>
           </div>
         </div>
+
+        {/* Campanhas */}
+        <CampanhasPaginaWrapper pagina="sala-9" />
+
+        {/* Avisos */}
+        <AvisosPaginaWrapper pagina="sala-9" />
 
         {/* Sobre o Serviço */}
         <InfoBox title="Sobre o Serviço">

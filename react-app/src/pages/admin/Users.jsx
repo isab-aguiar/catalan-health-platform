@@ -36,7 +36,7 @@ export default function Users() {
     email: '',
     displayName: '',
     password: '',
-    role: 'diretorio'
+    role: 'diretoria'
   });
   const [formError, setFormError] = useState('');
   const [formLoading, setFormLoading] = useState(false);
@@ -61,7 +61,7 @@ export default function Users() {
       email: '',
       displayName: '',
       password: '',
-      role: 'diretorio'
+      role: 'diretoria'
     });
     setFormError('');
     setShowModal(true);
@@ -88,7 +88,7 @@ export default function Users() {
       email: '',
       displayName: '',
       password: '',
-      role: 'diretorio'
+      role: 'diretoria'
     });
     setFormError('');
   };
@@ -193,7 +193,7 @@ export default function Users() {
     const labels = {
       admin: 'Administrador',
       profissional: 'Profissional',
-      diretorio: 'Diretório'
+      diretoria: 'Diretória'
     };
     return labels[role] || role;
   };
@@ -203,7 +203,7 @@ export default function Users() {
     const colors = {
       admin: 'bg-purple-100 text-purple-700',
       profissional: 'bg-blue-100 text-blue-700',
-      diretorio: 'bg-green-100 text-green-700'
+      diretoria: 'bg-green-100 text-green-700'
     };
     return colors[role] || 'bg-neutral-100 text-neutral-700';
   };
@@ -215,7 +215,7 @@ export default function Users() {
         return Shield;
       case 'profissional':
         return Briefcase;
-      case 'diretorio':
+      case 'diretoria':
         return Eye;
       default:
         return User;
@@ -245,7 +245,7 @@ export default function Users() {
                 <h1 className="text-lg font-bold text-neutral-900">
                   Gerenciar Usuários
                 </h1>
-                <p className="text-xs text-neutral-500">PSF São José</p>
+                <p className="text-xs text-neutral-500">ESF Catalão</p>
               </div>
             </div>
 
@@ -526,12 +526,12 @@ export default function Users() {
                 >
                   <option value="admin">Administrador (acesso total)</option>
                   <option value="profissional">Profissional (criar/editar avisos)</option>
-                  <option value="diretorio">Diretório (apenas visualização)</option>
+                  <option value="diretoria">Diretória (apenas visualização)</option>
                 </select>
                 <p className="text-xs text-neutral-500 mt-1">
                   {formData.role === 'admin' && 'Pode gerenciar usuários e deletar avisos'}
                   {formData.role === 'profissional' && 'Pode criar e editar avisos'}
-                  {formData.role === 'diretorio' && 'Pode apenas visualizar informações'}
+                  {formData.role === 'diretoria' && 'Pode apenas visualizar informações'}
                 </p>
               </div>
             </div>

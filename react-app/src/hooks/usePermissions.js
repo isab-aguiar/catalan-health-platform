@@ -10,7 +10,7 @@ import { useAuth } from '../contexts/AuthContext';
  * Baseado no role do usuário logado
  */
 export function usePermissions() {
-  const { userRole, isAdmin, isProfissional, isDiretorio, isActive } = useAuth();
+  const { userRole, isAdmin, isProfissional, isDiretoria, isActive } = useAuth();
 
   // Verificações de permissões
   const permissions = {
@@ -30,7 +30,7 @@ export function usePermissions() {
     // Helpers de role
     isAdmin: () => isAdmin,
     isProfissional: () => isProfissional,
-    isDiretorio: () => isDiretorio,
+    isDiretoria: () => isDiretoria,
     isActive: () => isActive,
 
     // Getter do role
@@ -43,8 +43,8 @@ export function usePermissions() {
           return 'Administrador';
         case 'profissional':
           return 'Profissional';
-        case 'diretorio':
-          return 'Diretório';
+        case 'diretoria':
+          return 'Diretória';
         default:
           return 'Sem permissão';
       }
@@ -57,7 +57,7 @@ export function usePermissions() {
           return 'bg-purple-100 text-purple-700';
         case 'profissional':
           return 'bg-blue-100 text-blue-700';
-        case 'diretorio':
+        case 'diretoria':
           return 'bg-green-100 text-green-700';
         default:
           return 'bg-neutral-100 text-neutral-700';

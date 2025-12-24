@@ -92,7 +92,7 @@ export async function createUser(userData, password, createdByUid) {
       return { success: false, error: 'Senha deve ter no mínimo 6 caracteres' };
     }
 
-    if (!['admin', 'profissional', 'diretorio'].includes(userData.role)) {
+    if (!['admin', 'profissional', 'diretoria'].includes(userData.role)) {
       return { success: false, error: 'Role inválido' };
     }
 
@@ -147,7 +147,7 @@ export async function createUser(userData, password, createdByUid) {
 /**
  * Atualiza o role de um usuário
  * @param {string} uid - ID do usuário
- * @param {string} role - Novo role (admin, profissional, diretorio)
+ * @param {string} role - Novo role (admin, profissional, diretoria)
  */
 export async function updateUserRole(uid, role) {
   try {
@@ -155,7 +155,7 @@ export async function updateUserRole(uid, role) {
       return { success: false, error: 'UID é obrigatório' };
     }
 
-    if (!['admin', 'profissional', 'diretorio'].includes(role)) {
+    if (!['admin', 'profissional', 'diretoria'].includes(role)) {
       return { success: false, error: 'Role inválido' };
     }
 
@@ -264,7 +264,7 @@ export async function setUserData(uid, userData) {
       uid,
       email: userData.email,
       displayName: userData.displayName || userData.email.split('@')[0],
-      role: userData.role || 'diretorio',
+      role: userData.role || 'diretoria',
       active: userData.active !== undefined ? userData.active : true,
       createdAt: userData.createdAt || Timestamp.now(),
       updatedAt: Timestamp.now(),

@@ -1,5 +1,7 @@
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
+import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
@@ -76,6 +78,12 @@ export default function Sala4() {
             </div>
           </div>
         </div>
+
+        {/* Campanhas */}
+        <CampanhasPaginaWrapper pagina="sala-4" />
+
+        {/* Avisos */}
+        <AvisosPaginaWrapper pagina="sala-4" />
 
         {/* Sobre o Serviço */}
         <InfoBox title="Sobre o Serviço">

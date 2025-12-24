@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import SearchSection from "../components/search/SearchSection";
 import ImageGallery from "../components/common/ImageGallery";
 import AvisosList from "../components/avisos/AvisosList";
+import CampanhaCarousel from "../components/campanha/CampanhaCarousel";
+import { useCampanhas } from "../hooks/useCampanhas";
 import {
   Phone,
   MapPin,
@@ -108,6 +110,9 @@ const getGalleryImages = () => {
 };
 
 export default function Home() {
+  // Buscar campanhas visuais
+  const { campanhas, loading: loadingCampanhas } = useCampanhas();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white">
       {/* Hero Section */}
@@ -126,6 +131,18 @@ export default function Home() {
               Atendimento humanizado e profissional para toda a comunidade das <span className="whitespace-nowrap">ESFs Bela Vista - Catalão - São José</span>
             </p>
           </div>
+
+          {/* Campanhas Visuais */}
+          {campanhas && campanhas.length > 0 && (
+            <div className="mb-12">
+              <div className="text-center mb-8">
+                <p className="text-slate-600">
+                  Confira as campanhas e eventos em destaque
+                </p>
+              </div>
+              <CampanhaCarousel campanhas={campanhas} />
+            </div>
+          )}
 
           {/* Avisos Públicos */}
           <AvisosList />

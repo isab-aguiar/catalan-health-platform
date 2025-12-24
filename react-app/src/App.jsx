@@ -92,7 +92,9 @@ const Educacao = lazyLoad(() => import("./pages/Educacao"));
 const Login = lazyLoad(() => import("./pages/admin/Login"));
 const Painel = lazyLoad(() => import("./pages/admin/Painel"));
 const Avisos = lazyLoad(() => import("./pages/admin/Avisos"));
+const Campanhas = lazyLoad(() => import("./pages/admin/Campanhas"));
 const Users = lazyLoad(() => import("./pages/admin/Users"));
+const ChatIA = lazyLoad(() => import("./pages/admin/ChatIA"));
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -191,6 +193,22 @@ function App() {
                       element={
                         <ProtectedRoute>
                           <Avisos />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/admin/campanhas" 
+                      element={
+                        <ProtectedRoute>
+                          <Campanhas />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/admin/chat-ia" 
+                      element={
+                        <ProtectedRoute>
+                          <ChatIA />
                         </ProtectedRoute>
                       } 
                     />

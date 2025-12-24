@@ -98,6 +98,7 @@ export async function createAviso(aviso, createdByUid = null) {
       categoria: aviso.categoria,
       data: dataTimestamp,
       exibirNaHomepage: aviso.exibirNaHomepage || false,
+      paginaDestino: aviso.paginaDestino || 'home',
       createdBy: createdByUid || null,
       createdAt: Timestamp.now(),
       updatedAt: Timestamp.now()
@@ -153,6 +154,9 @@ export async function updateAviso(id, aviso, updatedByUid = null) {
     }
     if (aviso.exibirNaHomepage !== undefined) {
       dadosAtualizacao.exibirNaHomepage = aviso.exibirNaHomepage;
+    }
+    if (aviso.paginaDestino !== undefined) {
+      dadosAtualizacao.paginaDestino = aviso.paginaDestino;
     }
 
     await updateDoc(avisoRef, dadosAtualizacao);

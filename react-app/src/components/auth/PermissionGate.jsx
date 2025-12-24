@@ -50,8 +50,8 @@ export default function PermissionGate({
       hasPermission = permissions.isAdmin();
     } else if (requiredRole === 'profissional') {
       hasPermission = permissions.isProfissional();
-    } else if (requiredRole === 'diretorio') {
-      hasPermission = permissions.isDiretorio();
+    } else if (requiredRole === 'diretoria') {
+      hasPermission = permissions.isDiretoria();
     } else {
       hasPermission = currentRole === requiredRole;
     }

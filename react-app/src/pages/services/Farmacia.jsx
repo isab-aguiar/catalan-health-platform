@@ -1,5 +1,7 @@
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
+import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 
 function PageContainer({ children }) {
   return (
@@ -68,6 +70,12 @@ export default function Farmacia() {
             </div>
           </div>
         </div>
+
+        {/* Campanhas */}
+        <CampanhasPaginaWrapper pagina="farmacia" />
+
+        {/* Avisos */}
+        <AvisosPaginaWrapper pagina="farmacia" />
 
         <Alert type="warning">
           <strong>Atenção ao Horário Especial:</strong> A Farmácia funciona das <strong>07h30 às 16h00</strong>, 

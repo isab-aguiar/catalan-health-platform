@@ -6,7 +6,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { Lock, Mail, AlertCircle, Shield } from 'lucide-react';
+import { Lock, Mail, AlertCircle, Building2 } from 'lucide-react';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -58,8 +58,8 @@ export default function Login() {
           {/* Cabeçalho */}
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-10 h-10 bg-primary-600 rounded flex items-center justify-center flex-shrink-0">
-                <Shield className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center flex-shrink-0">
+                <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-neutral-900">

@@ -1,5 +1,7 @@
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
+import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 
 function PageContainer({ children }) {
   return (
@@ -68,6 +70,12 @@ export default function Recepcao() {
             </div>
           </div>
         </div>
+
+        {/* Campanhas */}
+        <CampanhasPaginaWrapper pagina="recepcao" />
+
+        {/* Avisos */}
+        <AvisosPaginaWrapper pagina="recepcao" />
 
         <p className="text-center text-slate-700 max-w-2xl mx-auto mb-8 text-sm leading-relaxed">
           A recepção é o setor responsável pelo primeiro atendimento ao usuário na unidade, realizando 

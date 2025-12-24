@@ -1,33 +1,27 @@
 // =========================================
-// PÁGINA ADMINISTRATIVA - GERENCIAR AVISOS
+// PÁGINA GERENCIAR AVISOS
 // =========================================
-// Página para criar, editar e deletar avisos
+// Gerenciamento completo de avisos (OTIMIZADO)
 
 import { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAvisos } from '../../hooks/useAvisos';
 import { usePermissions } from '../../hooks/usePermissions';
+import AdminLayout from '../../layouts/AdminLayout';
+import AvisosTable from '../../components/admin/AvisosTable';
 import PermissionGate from '../../components/auth/PermissionGate';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 import {
-  LogOut,
-  User,
-  Home,
-  Bell,
   Plus,
-  Edit,
-  Trash2,
   X,
   Save,
-  Calendar,
+  MessageSquare,
+  Sparkles,
   AlertCircle
 } from 'lucide-react';
-import LoadingSpinner from '../../components/common/LoadingSpinner';
-import Alert from '../../components/common/Alert';
+import { allPages } from '../../data/services';
 
 export default function Avisos() {
-  const { currentUser, logout, userData } = useAuth();
-  const navigate = useNavigate();
   const { avisos, loading, error, createAviso, updateAviso, deleteAviso } = useAvisos();
   const permissions = usePermissions();
   
@@ -38,23 +32,12 @@ export default function Avisos() {
     descricao: '',
     categoria: 'campanha',
     data: '',
-    exibirNaHomepage: false
+    exibirNaHomepage: false,
+    paginaDestino: 'home'
   });
   const [formError, setFormError] = useState('');
   const [formLoading, setFormLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(null);
-
-  // Função de logout
-  const handleLogout = async () => {
-    if (window.confirm('Tem certeza que deseja sair?')) {
-      const result = await logout();
-      if (result.success) {
-        navigate('/admin/login', { replace: true });
-      } else {
-        alert('Erro ao fazer logout. Tente novamente.');
-      }
-    }
-  };
 
   // Abrir modal para criar novo aviso
   const handleNovoAviso = () => {
@@ -63,8 +46,9 @@ export default function Avisos() {
       titulo: '',
       descricao: '',
       categoria: 'campanha',
-      data: '',
-      exibirNaHomepage: false
+      data: new Date().toISOString().split('T')[0], // Data de hoje por padrão
+      exibirNaHomepage: false,
+      paginaDestino: 'home'
     });
     setFormError('');
     setShowModal(true);
@@ -74,7 +58,6 @@ export default function Avisos() {
   const handleEditarAviso = (aviso) => {
     setEditingAviso(aviso);
     
-    // Converter Timestamp para formato de input date
     let dataFormatada = '';
     if (aviso.data) {
       const date = aviso.data.toDate ? aviso.data.toDate() : new Date(aviso.data);
@@ -86,7 +69,8 @@ export default function Avisos() {
       descricao: aviso.descricao || '',
       categoria: aviso.categoria || 'campanha',
       data: dataFormatada,
-      exibirNaHomepage: aviso.exibirNaHomepage || false
+      exibirNaHomepage: aviso.exibirNaHomepage || false,
+      paginaDestino: aviso.paginaDestino || 'home'
     });
     setFormError('');
     setShowModal(true);
@@ -101,7 +85,8 @@ export default function Avisos() {
       descricao: '',
       categoria: 'campanha',
       data: '',
-      exibirNaHomepage: false
+      exibirNaHomepage: false,
+      paginaDestino: 'home'
     });
     setFormError('');
   };
@@ -109,16 +94,16 @@ export default function Avisos() {
   // Validar formulário
   const validarFormulario = () => {
     if (!formData.titulo.trim() || formData.titulo.trim().length < 3) {
-      return 'Título deve ter no mínimo 3 caracteres';
+      return 'O título deve conter no mínimo 3 caracteres';
     }
     if (!formData.descricao.trim() || formData.descricao.trim().length < 10) {
-      return 'Descrição deve ter no mínimo 10 caracteres';
+      return 'A descrição deve conter no mínimo 10 caracteres';
     }
     if (!formData.categoria) {
-      return 'Categoria é obrigatória';
+      return 'Selecione uma categoria';
     }
     if (!formData.data) {
-      return 'Data é obrigatória';
+      return 'Informe a data do aviso';
     }
     return null;
   };
@@ -137,26 +122,25 @@ export default function Avisos() {
     
     try {
       if (editingAviso) {
-        // Atualizar aviso existente
         const result = await updateAviso(editingAviso.id, formData);
         if (result.success) {
           handleFecharModal();
-          alert('Aviso atualizado com sucesso!');
+          alert('Aviso atualizado com sucesso');
         } else {
-          setFormError(result.error || 'Erro ao atualizar aviso');
+          setFormError(result.error || 'Erro ao atualizar o aviso');
         }
       } else {
-        // Criar novo aviso
         const result = await createAviso(formData);
         if (result.success) {
           handleFecharModal();
-          alert('Aviso criado com sucesso!');
+          alert('Aviso cadastrado com sucesso');
         } else {
-          setFormError(result.error || 'Erro ao criar aviso');
+          setFormError(result.error || 'Erro ao cadastrar o aviso');
         }
       }
     } catch (err) {
       setFormError('Erro inesperado. Tente novamente.');
+      console.error('Erro ao salvar:', err);
     } finally {
       setFormLoading(false);
     }
@@ -164,7 +148,7 @@ export default function Avisos() {
 
   // Deletar aviso
   const handleDeletar = async (id) => {
-    if (!window.confirm('Tem certeza que deseja deletar este aviso?')) {
+    if (!window.confirm('Confirma a exclusão deste aviso?')) {
       return;
     }
 
@@ -172,309 +156,206 @@ export default function Avisos() {
     try {
       const result = await deleteAviso(id);
       if (result.success) {
-        alert('Aviso deletado com sucesso!');
+        alert('Aviso excluído com sucesso');
       } else {
-        alert('Erro ao deletar aviso: ' + (result.error || 'Erro desconhecido'));
+        alert('Erro ao excluir: ' + (result.error || 'Erro desconhecido'));
       }
     } catch (err) {
-      alert('Erro inesperado ao deletar aviso');
+      alert('Erro inesperado ao excluir o aviso');
+      console.error('Erro ao deletar:', err);
     } finally {
       setDeleteLoading(null);
     }
   };
 
-  // Formatar data para exibição
-  const formatarData = (timestamp) => {
-    if (!timestamp) return '-';
-    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-    return date.toLocaleDateString('pt-BR');
-  };
-
-  // Obter label da categoria
-  const getCategoriaLabel = (categoria) => {
-    const labels = {
-      vacina: 'Vacina',
-      material: 'Material',
-      campanha: 'Campanha'
-    };
-    return labels[categoria] || categoria;
-  };
-
-  // Obter cor da categoria
-  const getCategoriaColor = (categoria) => {
-    const colors = {
-      vacina: 'bg-blue-100 text-blue-700',
-      material: 'bg-green-100 text-green-700',
-      campanha: 'bg-amber-100 text-amber-700'
-    };
-    return colors[categoria] || 'bg-neutral-100 text-neutral-700';
-  };
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
-        <LoadingSpinner />
-      </div>
+      <AdminLayout currentPage="avisos">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <LoadingSpinner />
+        </div>
+      </AdminLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50">
-      {/* Header Administrativo */}
-      <header className="bg-white shadow-sm border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            {/* Logo/Título */}
+    <AdminLayout currentPage="avisos">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Header */}
+        <div className="bg-white border border-slate-300 rounded-md shadow-sm p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-slate-900">Gerenciar Avisos</h1>
+              <p className="text-slate-600 text-sm mt-1">
+                Cadastro e manutenção de avisos do sistema
+              </p>
+            </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                <Bell className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-lg font-bold text-neutral-900">
-                  Gerenciar Avisos
-                </h1>
-                <p className="text-xs text-neutral-500">PSF São José</p>
-              </div>
-            </div>
-
-            {/* Navegação */}
-            <div className="flex items-center gap-4">
-              <a
-                href="/admin/painel"
-                className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
-              >
-                Voltar ao Painel
-              </a>
-              <div className="hidden sm:flex items-center gap-2 text-sm">
-                <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-primary-600" />
-                </div>
-              <div>
-                <p className="font-medium text-neutral-700">
-                  {userData?.displayName || 'Admin'}
-                </p>
-                <p className="text-xs text-neutral-500">{currentUser?.email}</p>
-              </div>
-            </div>
-            {/* Badge de Role */}
-            <span className={`text-xs font-semibold px-2 py-1 rounded-full ${permissions.getRoleColor()}`}>
-              {permissions.getRoleLabel()}
-            </span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm font-medium"
-              >
-                <LogOut className="w-4 h-4" />
-                <span className="hidden sm:inline">Sair</span>
-              </button>
+              {permissions.canCreateAvisos() && (
+                <>
+                  <Link
+                    to="/admin/chat-ia"
+                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors font-medium text-sm border border-purple-700 shadow-sm"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    <span className="hidden sm:inline">Assistente IA</span>
+                    <span className="sm:hidden">IA</span>
+                  </Link>
+                  <button
+                    onClick={handleNovoAviso}
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium text-sm border border-blue-700 shadow-sm"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span className="hidden sm:inline">Cadastrar Aviso</span>
+                    <span className="sm:hidden">Novo</span>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
-      </header>
 
-      {/* Conteúdo Principal */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Erro geral */}
         {error && (
-          <div className="mb-6">
-            <Alert type="error">{error}</Alert>
+          <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
+            <div className="flex gap-3">
+              <AlertCircle size={20} className="text-red-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-red-900">{error}</div>
+            </div>
           </div>
         )}
 
-        {/* Botão Novo Aviso */}
-        <div className="mb-6 flex justify-between items-center">
-          <div>
-            <h2 className="text-2xl font-bold text-neutral-900">Avisos</h2>
-            <p className="text-sm text-neutral-600 mt-1">
-              Gerencie os avisos que aparecem na homepage
-            </p>
+        {/* Info sobre IA */}
+        {permissions.canCreateAvisos() && avisos.length > 0 && (
+          <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
+            <div className="flex items-start gap-3">
+              <MessageSquare className="w-5 h-5 text-blue-700 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm text-blue-900 font-semibold">
+                  Utilize o Assistente Inteligente
+                </p>
+                <p className="text-sm text-blue-800 mt-1">
+                  Gere avisos automaticamente descrevendo a situação em linguagem natural.
+                </p>
+              </div>
+            </div>
           </div>
-          <PermissionGate requiredPermission="canCreateAvisos">
-            <button
-              onClick={handleNovoAviso}
-              className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium"
-            >
-              <Plus className="w-5 h-5" />
-              Novo Aviso
-            </button>
-          </PermissionGate>
-        </div>
+        )}
 
-        {/* Lista de Avisos */}
+        {/* Tabela de Avisos */}
         {avisos.length === 0 ? (
-          <div className="bg-white rounded-xl p-12 text-center border border-neutral-200">
-            <Bell className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-              Nenhum aviso cadastrado
+          <div className="bg-white rounded-md p-12 text-center border border-slate-300 shadow-sm">
+            <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-200">
+              <Plus className="w-10 h-10 text-slate-400" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-900 mb-2">
+              Nenhum Aviso Cadastrado
             </h3>
-            <p className="text-neutral-600 mb-6">
-              Clique em "Novo Aviso" para criar o primeiro aviso
+            <p className="text-slate-600 mb-6 max-w-md mx-auto">
+              Cadastre o primeiro aviso do sistema utilizando o formulário manual ou o assistente inteligente
             </p>
-            <button
-              onClick={handleNovoAviso}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium"
-            >
-              <Plus className="w-5 h-5" />
-              Criar Primeiro Aviso
-            </button>
+            <div className="flex items-center justify-center gap-3">
+              {permissions.canCreateAvisos() && (
+                <>
+                  <Link
+                    to="/admin/chat-ia"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors font-medium border border-purple-700 shadow-sm"
+                  >
+                    <Sparkles className="w-5 h-5" />
+                    Usar Assistente IA
+                  </Link>
+                  <button
+                    onClick={handleNovoAviso}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium border border-blue-700 shadow-sm"
+                  >
+                    <Plus className="w-5 h-5" />
+                    Cadastrar Manualmente
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4">
-            {avisos.map((aviso) => (
-              <div
-                key={aviso.id}
-                className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-bold text-neutral-900">
-                        {aviso.titulo}
-                      </h3>
-                      <span
-                        className={`px-2 py-1 rounded-full text-xs font-semibold ${getCategoriaColor(
-                          aviso.categoria
-                        )}`}
-                      >
-                        {getCategoriaLabel(aviso.categoria)}
-                      </span>
-                      {aviso.exibirNaHomepage && (
-                        <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-                          Público
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm text-neutral-600 mb-3 line-clamp-2">
-                      {aviso.descricao}
-                    </p>
-                    <div className="flex items-center gap-4 text-xs text-neutral-500">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        <span>{formatarData(aviso.data)}</span>
-                      </div>
-                      {aviso.createdAt && (
-                        <span>
-                          Criado em: {formatarData(aviso.createdAt)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <PermissionGate requiredPermission="canEditAvisos">
-                      <button
-                        onClick={() => handleEditarAviso(aviso)}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                        title="Editar"
-                      >
-                        <Edit className="w-5 h-5" />
-                      </button>
-                    </PermissionGate>
-                    <PermissionGate requiredPermission="canDeleteAvisos">
-                      <button
-                        onClick={() => handleDeletar(aviso.id)}
-                        disabled={deleteLoading === aviso.id}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
-                        title="Deletar"
-                      >
-                        {deleteLoading === aviso.id ? (
-                          <div className="w-5 h-5 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
-                        ) : (
-                          <Trash2 className="w-5 h-5" />
-                        )}
-                      </button>
-                    </PermissionGate>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <AvisosTable 
+            avisos={avisos}
+            onEdit={handleEditarAviso}
+            onDelete={handleDeletar}
+            deleteLoading={deleteLoading}
+          />
         )}
+      </div>
 
-        {/* Link para voltar */}
-        <div className="mt-8 text-center">
-          <a
-            href="/"
-            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors font-medium"
-          >
-            <Home className="w-4 h-4" />
-            Voltar para o site público
-          </a>
-        </div>
-      </main>
-
-      {/* Modal de Criar/Editar Aviso */}
+      {/* Modal de Criar/Editar */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Header do Modal */}
-            <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-neutral-900">
-                {editingAviso ? 'Editar Aviso' : 'Novo Aviso'}
+          <div className="bg-white rounded-md max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-slate-300">
+            {/* Header */}
+            <div className="sticky top-0 bg-slate-50 border-b border-slate-300 px-6 py-4 flex items-center justify-between">
+              <h3 className="text-xl font-bold text-slate-900">
+                {editingAviso ? 'Editar Aviso' : 'Cadastrar Novo Aviso'}
               </h3>
               <button
                 onClick={handleFecharModal}
-                className="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+                className="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-200 rounded-md transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Conteúdo do Modal */}
+            {/* Conteúdo */}
             <div className="p-6 space-y-4">
               {formError && (
-                <Alert type="error">{formError}</Alert>
+                <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
+                  <div className="flex gap-3">
+                    <AlertCircle size={20} className="text-red-600 flex-shrink-0" />
+                    <div className="text-sm text-red-900">{formError}</div>
+                  </div>
+                </div>
               )}
 
               {/* Título */}
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">
-                  Título <span className="text-red-500">*</span>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Título do Aviso <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.titulo}
-                  onChange={(e) =>
-                    setFormData({ ...formData, titulo: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Ex: Campanha de Vacinação"
+                  onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  placeholder="Exemplo: Campanha de Vacinação contra Gripe"
                   maxLength={100}
                 />
               </div>
 
               {/* Descrição */}
               <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">
-                  Descrição <span className="text-red-500">*</span>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Descrição Completa <span className="text-red-600">*</span>
                 </label>
                 <textarea
                   value={formData.descricao}
-                  onChange={(e) =>
-                    setFormData({ ...formData, descricao: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Descreva o aviso em detalhes..."
+                  onChange={(e) => setFormData({ ...formData, descricao: e.target.value })}
+                  className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  placeholder="Descreva detalhadamente o conteúdo do aviso..."
                   rows={5}
                   maxLength={500}
                 />
-                <p className="text-xs text-neutral-500 mt-1">
+                <p className="text-xs text-slate-500 mt-1">
                   {formData.descricao.length}/500 caracteres
                 </p>
               </div>
 
               {/* Categoria e Data */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Categoria */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Categoria <span className="text-red-500">*</span>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Categoria <span className="text-red-600">*</span>
                   </label>
                   <select
                     value={formData.categoria}
-                    onChange={(e) =>
-                      setFormData({ ...formData, categoria: e.target.value })
-                    }
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    onChange={(e) => setFormData({ ...formData, categoria: e.target.value })}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
                   >
                     <option value="vacina">Vacina</option>
                     <option value="material">Material</option>
@@ -482,57 +363,71 @@ export default function Avisos() {
                   </select>
                 </div>
 
-                {/* Data */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Data <span className="text-red-500">*</span>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Data <span className="text-red-600">*</span>
                   </label>
                   <input
                     type="date"
                     value={formData.data}
-                    onChange={(e) =>
-                      setFormData({ ...formData, data: e.target.value })
-                    }
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    onChange={(e) => setFormData({ ...formData, data: e.target.value })}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   />
                 </div>
               </div>
 
-              {/* Exibir na Homepage */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="exibirNaHomepage"
-                  checked={formData.exibirNaHomepage}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      exibirNaHomepage: e.target.checked
-                    })
-                  }
-                  className="w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
-                />
-                <label
-                  htmlFor="exibirNaHomepage"
-                  className="text-sm font-medium text-neutral-700 cursor-pointer"
-                >
-                  Exibir na homepage (público)
-                </label>
+              {/* Checkbox e Página Destino */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 p-4 bg-slate-50 rounded-md border border-slate-200">
+                  <input
+                    type="checkbox"
+                    id="exibirNaHomepage"
+                    checked={formData.exibirNaHomepage}
+                    onChange={(e) => setFormData({ ...formData, exibirNaHomepage: e.target.checked })}
+                    className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+                  />
+                  <label htmlFor="exibirNaHomepage" className="text-sm font-medium text-slate-700 cursor-pointer">
+                    Exibir na página inicial (público)
+                  </label>
+                </div>
+
+                {!formData.exibirNaHomepage && (
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                      Página Destino
+                    </label>
+                    <select
+                      value={formData.paginaDestino}
+                      onChange={(e) => setFormData({ ...formData, paginaDestino: e.target.value })}
+                      className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
+                    >
+                      <option value="home">Homepage</option>
+                      <optgroup label="Serviços">
+                        {allPages.filter(p => p.category === 'services').map(page => (
+                          <option key={page.id} value={page.id}>{page.title}</option>
+                        ))}
+                      </optgroup>
+                    </select>
+                    <p className="text-xs text-slate-500 mt-1">
+                      Selecione em qual página o aviso será exibido
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Footer do Modal */}
-            <div className="sticky bottom-0 bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-end gap-3">
+            {/* Footer */}
+            <div className="sticky bottom-0 bg-slate-50 border-t border-slate-300 px-6 py-4 flex items-center justify-end gap-3">
               <button
                 onClick={handleFecharModal}
-                className="px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors font-medium"
+                className="px-4 py-2 text-slate-700 hover:bg-slate-200 rounded-md transition-colors font-medium border border-slate-300"
               >
                 Cancelar
               </button>
               <button
                 onClick={handleSalvar}
                 disabled={formLoading}
-                className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 border border-blue-700 shadow-sm"
               >
                 {formLoading ? (
                   <>
@@ -550,7 +445,6 @@ export default function Avisos() {
           </div>
         </div>
       )}
-    </div>
+    </AdminLayout>
   );
 }
-

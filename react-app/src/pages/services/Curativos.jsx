@@ -7,6 +7,8 @@ import {
   AlertCircle,
 } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
+import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
@@ -83,6 +85,12 @@ export default function Curativos() {
             </div>
           </div>
         </div>
+
+        {/* Campanhas */}
+        <CampanhasPaginaWrapper pagina="curativos" />
+
+        {/* Avisos */}
+        <AvisosPaginaWrapper pagina="curativos" />
 
         {/* O que fazemos */}
         <InfoBox title="Sobre o Serviço">
