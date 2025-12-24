@@ -126,7 +126,7 @@ export default function Home() {
           </div>
 
           {/* Contact Information Section */}
-          <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-12">
+          <div id="contato" className="bg-white rounded-lg shadow-md border border-neutral-200 mb-12">
             <div className="border-b border-neutral-200 px-6 py-4 bg-neutral-50">
               <h2 className="text-2xl font-semibold text-neutral-900">
                 Informações de Contato

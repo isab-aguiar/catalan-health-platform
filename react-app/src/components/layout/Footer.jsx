@@ -1,16 +1,42 @@
 import { Phone, Clock, MapPin, Instagram, ChevronRight, Mail } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logoPrefeitura from "../../assets/logo_mobile.png";
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const quickLinks = [
     { name: "Início", path: "/" },
     { name: "Serviços", path: "/servicos" },
     { name: "Grupos", path: "/grupos" },
     { name: "Equipe", path: "/equipe" },
     { name: "ACS", path: "/acs" },
-    { name: "Contato", path: "/#contato" },
+    { name: "Contato", path: "/#contato", isAnchor: true },
   ];
+
+  const handleLinkClick = (e, link) => {
+    if (link.isAnchor) {
+      e.preventDefault();
+
+      if (location.pathname === '/') {
+        // Se já estiver na home, apenas rola
+        const element = document.getElementById('contato');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else {
+        // Se estiver em outra página, navega para home e depois rola
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById('contato');
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+    }
+  };
 
   return (
     <footer className="bg-neutral-100 text-neutral-900 mt-auto relative">
@@ -113,6 +139,7 @@ export default function Footer() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
+                    onClick={(e) => handleLinkClick(e, link)}
                     className="flex items-center gap-2 text-sm text-neutral-700 hover:text-primary-600 transition-colors group"
                   >
                     <ChevronRight size={16} className="text-primary-600 group-hover:translate-x-1 transition-transform" />
