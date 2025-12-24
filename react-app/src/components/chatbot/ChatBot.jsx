@@ -98,21 +98,14 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
   const welcomeMessage = {
     id: 'welcome',
     role: 'assistant',
-    content: '👋 Olá! Sou o assistente da ESF Catalão.\n\n' +
-      '**🆕 Criar Campanha COM IMAGEM (NOVO!):**\n' +
-      '1. 📎 Clique e anexe a imagem\n' +
-      '2. ✨ Fluxo interativo com botões\n' +
-      '3. ✍️ Eu reformulo tudo em linguagem formal\n' +
-      '4. ✅ Você aprova cada etapa\n' +
-      '5. 🖼️ Adicione mais imagens se quiser\n' +
-      '6. 🎉 Preview final e publicação\n\n' +
-      '**📝 Criar Aviso/Campanha SEM IMAGEM:**\n' +
-      'Digite: **"criar aviso"**\n' +
-      '• Faço perguntas interativas\n' +
-      '• Você responde cada uma\n' +
-      '• Crio tudo prontinho!\n\n' +
-      '💬 Também posso conversar normalmente!\n\n' +
-      'O que deseja fazer?',
+    content: '👋 Olá! Sou o assistente virtual da ESF Catalão.\n\n' +
+      '🖼️ CRIAR CAMPANHA COM IMAGEM\n' +
+      'Envie uma imagem e siga o fluxo guiado. Reformulo seus textos para linguagem formal e você aprova cada etapa antes de publicar.\n\n' +
+      '📝 CRIAR AVISO SEM IMAGEM\n' +
+      'Digite "criar aviso" para iniciar um questionário interativo.\n\n' +
+      '💬 CONVERSAÇÃO\n' +
+      'Também posso responder perguntas e tirar dúvidas.\n\n' +
+      'Como posso ajudar?',
     timestamp: new Date()
   };
 
