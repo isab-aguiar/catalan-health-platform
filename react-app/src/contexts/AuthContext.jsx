@@ -91,7 +91,8 @@ export function AuthProvider({ children }) {
   }, []);
   
   // Loading combinado: Auth + UserData
-  const loading = authLoading || (currentUser && userDataLoading);
+  // Não bloquear a UI se já temos o usuário autenticado, apenas mostrar loading enquanto carrega dados
+  const loading = authLoading || (currentUser && userDataLoading && !userData);
 
   // Helpers de role
   const userRole = userData?.role || null;
@@ -99,6 +100,20 @@ export function AuthProvider({ children }) {
   const isProfissional = userRole === 'profissional';
   const isDiretoria = userRole === 'diretoria';
   const isActive = userData?.active !== false; // Considera ativo se não houver campo active
+
+  // Debug: Log dos dados do usuário
+  useEffect(() => {
+    if (currentUser) {
+      console.log('🔐 DADOS DE AUTENTICAÇÃO:');
+      console.log('  - UID:', currentUser.uid);
+      console.log('  - Email:', currentUser.email);
+      console.log('  - UserData:', userData);
+      console.log('  - Role:', userRole);
+      console.log('  - isAdmin:', isAdmin);
+      console.log('  - isActive:', isActive);
+      console.log('  - Loading:', loading);
+    }
+  }, [currentUser, userData, userRole, isAdmin, isActive, loading]);
 
   // Valores e funções disponíveis para todo o app
   const value = {
@@ -115,8 +130,9 @@ export function AuthProvider({ children }) {
     isAuthenticated: !!currentUser && isActive  // Booleano: está logado e ativo?
   };
 
-  // Enquanto carrega, mostra tela de carregamento
-  if (loading) {
+  // Enquanto carrega o Auth inicial, mostra tela de carregamento
+  // Mas não bloqueia se já temos usuário autenticado (permite navegação enquanto carrega dados)
+  if (authLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-neutral-50">
         <div className="text-center">

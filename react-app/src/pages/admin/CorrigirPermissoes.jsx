@@ -28,6 +28,8 @@ export default function CorrigirPermissoes() {
     setResult(null);
 
     try {
+      console.log('🔧 Corrigindo permissões para:', currentUser.uid);
+      
       const result = await setUserData(currentUser.uid, {
         email: currentUser.email || userData?.email || '',
         displayName: userData?.displayName || currentUser.displayName || 'Administrador',
@@ -36,17 +38,25 @@ export default function CorrigirPermissoes() {
       });
 
       if (result.success) {
+        console.log('✅ Permissões corrigidas:', result.data);
         setResult({
           success: true,
-          message: 'Permissões corrigidas com sucesso! Faça logout e login novamente para aplicar as mudanças.'
+          message: 'Permissões corrigidas com sucesso! Os dados serão atualizados automaticamente em alguns segundos. Se não aparecer, faça logout e login novamente.'
         });
+        
+        // Forçar reload dos dados após 2 segundos
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       } else {
+        console.error('❌ Erro ao corrigir:', result.error);
         setResult({
           success: false,
           message: result.error || 'Erro ao corrigir permissões'
         });
       }
     } catch (error) {
+      console.error('❌ Erro ao corrigir permissões:', error);
       setResult({
         success: false,
         message: error.message || 'Erro desconhecido ao corrigir permissões'

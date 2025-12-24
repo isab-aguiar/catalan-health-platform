@@ -51,17 +51,23 @@ export function useUserData(uid) {
             uid: docSnapshot.id,
             ...docSnapshot.data()
           };
+          console.log('✅ Dados do usuário carregados:', data);
           setUserData(data);
           setError(null);
         } else {
           // Documento não existe
+          console.warn('⚠️ Documento do usuário não encontrado no Firestore');
+          console.warn('   UID:', uid);
+          console.warn('   Coleção: users');
           setUserData(null);
-          setError('Dados do usuário não encontrados');
+          setError('Dados do usuário não encontrados. Acesse /admin/corrigir-permissoes para criar.');
         }
         setLoading(false);
       },
       (err) => {
-        console.error('Erro ao escutar dados do usuário:', err);
+        console.error('❌ Erro ao escutar dados do usuário:', err);
+        console.error('   Código:', err.code);
+        console.error('   Mensagem:', err.message);
         setError(err.message);
         setUserData(null);
         setLoading(false);
