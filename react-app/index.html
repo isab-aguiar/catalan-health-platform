@@ -22,5 +22,31 @@
     <script>
       new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
+    
+    <!-- Estilos personalizados para VLibras -->
+    <style>
+      /* Posicionamento do botão VLibras */
+      [vw-access-button] {
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        top: auto !important;
+        left: auto !important;
+        z-index: 999999 !important;
+      }
+      
+      /* Responsivo para mobile */
+      @media (max-width: 768px) {
+        [vw-access-button] {
+          bottom: 80px !important;
+          right: 16px !important;
+        }
+      }
+      
+      /* Plugin do VLibras */
+      [vw-plugin-wrapper] {
+        z-index: 999998 !important;
+      }
+    </style>
   </body>
 </html>

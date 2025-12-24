@@ -1,4 +1,4 @@
-import { Phone, Clock, MapPin, Instagram, ChevronRight, Hand, Mail } from "lucide-react";
+import { Phone, Clock, MapPin, Instagram, ChevronRight, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoPrefeitura from "../../assets/logo_mobile.png";
 
@@ -20,23 +20,6 @@ export default function Footer() {
 
   return (
     <footer className="bg-neutral-100 text-neutral-900 mt-auto relative">
-      {/* Ícone de Acessibilidade - VLibras */}
-      <div className="absolute top-4 right-4">
-        <button
-          onClick={() => {
-            const vlibrasButton = document.querySelector('[vw-access-button]');
-            if (vlibrasButton) {
-              vlibrasButton.click();
-            }
-          }}
-          className="bg-primary-600 hover:bg-primary-700 p-2 rounded transition-colors"
-          aria-label="Acessibilidade - VLibras"
-          title="Acessibilidade - VLibras"
-        >
-          <Hand size={20} className="text-white" />
-        </button>
-      </div>
-
       <div className="container mx-auto max-w-6xl px-4 py-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Seção Esquerda - Logo e Redes Sociais */}

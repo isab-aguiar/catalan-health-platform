@@ -590,20 +590,28 @@ export default function Home() {
       </section>
 
       {/* Emergency Banner */}
-      <section className="py-8 px-4 bg-error/10 border-t border-b border-error/30">
-        <div className="container mx-auto max-w-6xl text-center">
-          <h3 className="text-xl md:text-2xl font-bold text-error mb-2">
-            🚨 Emergência? Ligue 192 (SAMU)
-          </h3>
-          <p className="text-error/80 mb-3">
-            Para casos graves, ligue imediatamente para o SAMU - 192
+      <section className="py-8 px-4 mb-8 bg-neutral-50 border-t border-b border-neutral-200">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex items-center justify-center gap-4 mb-3">
+            <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+              <Phone size={24} className="text-white" />
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold text-neutral-900">
+              Atendimento de Urgência e Emergência
+            </h3>
+          </div>
+          <p className="text-neutral-700 mb-3 text-center text-base">
+            Em situações de emergência médica, acione imediatamente o Serviço de Atendimento Móvel de Urgência (SAMU) pelo telefone <span className="font-bold text-red-600">192</span>
           </p>
-          <Link
-            to="/educacao"
-            className="inline-block text-sm text-error/90 hover:text-error underline transition-colors"
-          >
-            Saiba como identificar uma emergência clínica
-          </Link>
+          <div className="text-center">
+            <Link
+              to="/educacao"
+              className="inline-flex items-center gap-2 text-sm text-neutral-700 hover:text-neutral-900 underline transition-colors font-medium"
+            >
+              <span>Orientações para identificação de emergências clínicas</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
 
