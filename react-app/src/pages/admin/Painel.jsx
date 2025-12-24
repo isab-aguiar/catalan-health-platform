@@ -12,8 +12,10 @@ import {
   Home,
   Bell,
   Settings,
-  CheckCircle
+  CheckCircle,
+  ArrowRight
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Painel() {
   const { currentUser, logout } = useAuth();
@@ -124,10 +126,13 @@ export default function Painel() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 opacity-50">
+          <Link
+            to="/admin/avisos"
+            className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 hover:shadow-md transition-all group"
+          >
             <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Bell className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-500 transition-colors">
+                <Bell className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
               </div>
             </div>
             <h3 className="text-2xl font-bold text-neutral-900 mb-1">
@@ -136,12 +141,13 @@ export default function Painel() {
             <p className="text-sm text-neutral-600">
               Sistema de Avisos
             </p>
-            <div className="mt-4 pt-4 border-t border-neutral-100">
-              <span className="inline-flex items-center gap-1 text-xs font-medium text-neutral-700 bg-neutral-100 px-2 py-1 rounded-full">
-                Em breve
+            <div className="mt-4 pt-4 border-t border-neutral-100 flex items-center justify-between">
+              <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded-full">
+                ✓ Completo
               </span>
+              <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all" />
             </div>
-          </div>
+          </Link>
 
           {/* Card 3 */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 opacity-50">
@@ -161,6 +167,29 @@ export default function Painel() {
                 Em breve
               </span>
             </div>
+          </div>
+        </div>
+
+        {/* Ações Rápidas */}
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-neutral-200 mb-8">
+          <h3 className="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
+            <Settings className="w-5 h-5 text-primary-600" />
+            Ações Rápidas
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Link
+              to="/admin/avisos"
+              className="flex items-center gap-4 p-4 border-2 border-primary-200 rounded-lg hover:border-primary-500 hover:bg-primary-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center group-hover:bg-primary-500 transition-colors">
+                <Bell className="w-6 h-6 text-primary-600 group-hover:text-white transition-colors" />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-semibold text-neutral-900">Gerenciar Avisos</h4>
+                <p className="text-sm text-neutral-600">Criar, editar e deletar avisos</p>
+              </div>
+              <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all" />
+            </Link>
           </div>
         </div>
 
