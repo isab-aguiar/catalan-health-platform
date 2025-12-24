@@ -30,7 +30,7 @@ export default function ImageGallery({ images = [] }) {
   }
 
   return (
-    <div className="relative w-full overflow-x-hidden">
+    <div className="relative w-full">
       <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl bg-white/5 backdrop-blur-sm border border-white/20">
         <div className="relative w-full h-full group">
           <img
@@ -54,14 +54,14 @@ export default function ImageGallery({ images = [] }) {
           <>
             <button
               onClick={prevSlide}
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-neutral-900 rounded-full p-1.5 sm:p-2 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm hover:bg-white text-neutral-900 rounded-full p-1.5 sm:p-2 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
               aria-label="Imagem anterior"
             >
               <ChevronLeft size={20} className="sm:w-6 sm:h-6" />
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-neutral-900 rounded-full p-1.5 sm:p-2 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 bg-white/90 backdrop-blur-sm hover:bg-white text-neutral-900 rounded-full p-1.5 sm:p-2 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
               aria-label="Próxima imagem"
             >
               <ChevronRight size={20} className="sm:w-6 sm:h-6" />
