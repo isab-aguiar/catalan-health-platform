@@ -1,0 +1,132 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ==========================================
+    // FUNÇÕES AUXILIARES
+    // ==========================================
+    
+    // Verifica se o usuário está autenticado
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Pega os dados do usuário atual
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    // Verifica o role do usuário
+    function isAdmin() {
+      return isAuthenticated() && getUserData().role == 'admin';
+    }
+    
+    function isDiretoria() {
+      return isAuthenticated() && getUserData().role == 'diretoria';
+    }
+    
+    function isProfissional() {
+      return isAuthenticated() && getUserData().role == 'profissional';
+    }
+    
+    // Verifica se usuário está ativo
+    function isActive() {
+      return isAuthenticated() && getUserData().active == true;
+    }
+    
+    // ==========================================
+    // CAMPANHAS
+    // ==========================================
+    match /campanhas/{campanhaId} {
+      // LEITURA (READ)
+      allow read: if true ||  // Público pode ver (site público)
+                     isActive() && (isAdmin() || isDiretoria() || isProfissional());
+      
+      // CRIAÇÃO (CREATE)
+      allow create: if isActive() && 
+                       (isAdmin() || isProfissional()) &&
+                       request.resource.data.criadoPor == request.auth.uid;  // Deve marcar como criador
+      
+      // ATUALIZAÇÃO (UPDATE)
+      allow update: if isActive() && (
+        // Admin pode editar qualquer campanha
+        isAdmin() ||
+        // Profissional pode editar APENAS suas próprias campanhas
+        (isProfissional() && resource.data.criadoPor == request.auth.uid)
+      );
+      
+      // DELEÇÃO (DELETE)
+      allow delete: if isActive() && (
+        // APENAS ADMIN pode deletar
+        isAdmin() ||
+        // Profissional pode deletar APENAS suas próprias campanhas
+        (isProfissional() && resource.data.criadoPor == request.auth.uid)
+      );
+    }
+    
+    // ==========================================
+    // AVISOS
+    // ==========================================
+    match /avisos/{avisoId} {
+      // LEITURA (READ)
+      allow read: if true;  // Qualquer um pode ver avisos públicos
+      
+      // CRIAÇÃO (CREATE)
+      allow create: if isActive() && 
+                       (isAdmin() || isProfissional()) &&
+                       request.resource.data.criadoPor == request.auth.uid;
+      
+      // ATUALIZAÇÃO (UPDATE)
+      allow update: if isActive() && (
+        // Admin pode editar qualquer aviso
+        isAdmin() ||
+        // Profissional pode editar APENAS seus próprios avisos
+        (isProfissional() && resource.data.criadoPor == request.auth.uid)
+      );
+      
+      // DELEÇÃO (DELETE)
+      allow delete: if isActive() && (
+        // APENAS ADMIN pode deletar
+        isAdmin() ||
+        // Profissional pode deletar APENAS seus próprios avisos
+        (isProfissional() && resource.data.criadoPor == request.auth.uid)
+      );
+    }
+    
+    // ==========================================
+    // USUÁRIOS
+    // ==========================================
+    match /users/{userId} {
+      // LEITURA (READ)
+      allow read: if isAuthenticated() && (
+        // Usuário pode ler seus próprios dados
+        request.auth.uid == userId ||
+        // Admin pode ler todos os usuários
+        isAdmin() ||
+        // Diretoria pode ler todos (para ver quem criou campanhas/avisos)
+        isDiretoria()
+      );
+      
+      // CRIAÇÃO (CREATE)
+      allow create: if isAuthenticated() && (
+        // Admin pode criar qualquer usuário
+        isAdmin() ||
+        // Permitir que novo usuário crie seu próprio documento (primeiro login)
+        request.auth.uid == userId
+      );
+      
+      // ATUALIZAÇÃO (UPDATE)
+      allow update: if isAuthenticated() && (
+        // Admin pode atualizar qualquer usuário
+        isAdmin() ||
+        // Usuário pode atualizar seus próprios dados (exceto role e active)
+        (request.auth.uid == userId && 
+         !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'active']))
+      );
+      
+      // DELEÇÃO (DELETE)
+      allow delete: if isActive() && isAdmin();  // Apenas admin pode deletar usuários
+    }
+  }
+}
+

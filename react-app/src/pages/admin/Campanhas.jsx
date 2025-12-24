@@ -8,7 +8,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import { usePermissions } from '../../hooks/usePermissions';
 import AdminLayout from '../../layouts/AdminLayout';
 import { 
-  buscarCampanhas, 
+  buscarCampanhas,
+  buscarCampanhasPorCriador, 
   deletarCampanha, 
   ativarCampanha, 
   desativarCampanha,
@@ -40,7 +41,7 @@ import {
 import { Link } from 'react-router-dom';
 
 export default function Campanhas() {
-  const { user, userData } = useAuth();
+  const { currentUser, userData, isAdmin, isProfissional, isDiretoria } = useAuth();
   const permissions = usePermissions();
   const [campanhas, setCampanhas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -63,14 +64,26 @@ export default function Campanhas() {
     try {
       setLoading(true);
       setError(null);
-      const data = await buscarCampanhas({});
       
-      // Combinar campanhas do Firebase com campanhas locais
+      let data = [];
+      
+      // Carregar campanhas baseado no role do usuário
+      if (isAdmin) {
+        // ADMIN: vê TODAS as campanhas
+        data = await buscarCampanhas({});
+        console.log('👑 Admin - Carregando TODAS as campanhas:', data.length);
+      } else if (isProfissional && currentUser?.uid) {
+        // PROFISSIONAL: vê APENAS suas próprias campanhas
+        data = await buscarCampanhasPorCriador(currentUser.uid);
+        console.log('👨‍⚕️ Profissional - Carregando campanhas próprias:', data.length);
+      } else if (isDiretoria) {
+        // DIRETORIA: vê TODAS (mas não pode editar/deletar)
+        data = await buscarCampanhas({});
+        console.log('👁️ Diretoria - Carregando TODAS as campanhas (visualização):', data.length);
+      }
+      
+      // Combinar com campanhas locais (se houver)
       const todasCampanhas = [...data, ...campanhasLocais];
-      
-      console.log('📊 Admin - Campanhas Firebase:', data.length);
-      console.log('📊 Admin - Campanhas Locais:', campanhasLocais.length);
-      console.log('✅ Admin - Total:', todasCampanhas.length);
       
       setCampanhas(todasCampanhas);
     } catch (err) {
@@ -250,14 +263,14 @@ export default function Campanhas() {
       }
 
       // Para campanhas do Firebase, verificar autenticação
-      if (!user?.uid && !userData?.uid) {
+      if (!currentUser?.uid && !userData?.uid) {
         alert('Erro: Usuário não autenticado. Faça login novamente.');
         return;
       }
 
       // Se há nova imagem, fazer upload
       if (newImageFile) {
-        const userId = user?.uid || userData?.uid;
+        const userId = currentUser?.uid || userData?.uid;
         const uploadResult = await uploadArquivo(newImageFile, userId, 'campanhas');
         updatedData.imagemURL = uploadResult.url;
         updatedData.imagemCaminho = uploadResult.caminho;
@@ -838,7 +851,8 @@ export default function Campanhas() {
 
                             {/* Ações */}
                             <div className="flex flex-wrap gap-2 pt-4 border-t border-neutral-200">
-                              {permissions.isAdmin() && (
+                              {/* Botões para ADMIN e PROFISSIONAL (apenas próprias) */}
+                              {(isAdmin || (isProfissional && campanha.criadoPor === currentUser?.uid)) && (
                                 <button
                                   onClick={() => handleEdit(campanha)}
                                   className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
@@ -848,7 +862,7 @@ export default function Campanhas() {
                                 </button>
                               )}
 
-                              {permissions.isAdmin() && (
+                              {(isAdmin || (isProfissional && campanha.criadoPor === currentUser?.uid)) && (
                                 <button
                                   onClick={() => handleToggleAtivo(campanha.id, campanha.ativo)}
                                   className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors text-sm ${
@@ -871,7 +885,7 @@ export default function Campanhas() {
                                 </button>
                               )}
 
-                              {permissions.isAdmin() && (
+                              {(isAdmin || (isProfissional && campanha.criadoPor === currentUser?.uid)) && (
                                 <button
                                   onClick={() => handleDelete(campanha.id)}
                                   className="flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
@@ -883,9 +897,17 @@ export default function Campanhas() {
                                 </button>
                               )}
                               
-                              {!permissions.isAdmin() && (
+                              {/* Mensagem para DIRETORIA */}
+                              {isDiretoria && (
                                 <div className="text-sm text-neutral-500 italic py-2">
-                                  🔒 Apenas administradores podem editar campanhas
+                                  👁️ Diretoria: Você pode visualizar todas as campanhas, mas não pode editar ou deletar
+                                </div>
+                              )}
+                              
+                              {/* Mensagem para PROFISSIONAL vendo campanhas de outros */}
+                              {isProfissional && campanha.criadoPor !== currentUser?.uid && !campanha.isLocal && (
+                                <div className="text-sm text-neutral-400 italic py-2">
+                                  🔒 Esta campanha foi criada por outro profissional
                                 </div>
                               )}
                             </div>

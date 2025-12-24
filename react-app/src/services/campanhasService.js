@@ -181,6 +181,51 @@ export const buscarCampanhasHome = async () => {
 };
 
 /**
+ * Busca campanhas criadas por um usuário específico
+ * @param {string} userId - ID do usuário criador
+ * @returns {Promise<Array>} Lista de campanhas do usuário
+ */
+export const buscarCampanhasPorCriador = async (userId) => {
+  try {
+    if (!userId) {
+      throw new Error('ID do usuário é obrigatório');
+    }
+
+    const campanhasRef = collection(db, COLLECTION_NAME);
+    const q = query(
+      campanhasRef,
+      where('criadoPor', '==', userId)
+    );
+
+    const snapshot = await getDocs(q);
+    
+    const campanhas = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+      dataInicio: doc.data().dataInicio?.toDate() || null,
+      dataFim: doc.data().dataFim?.toDate() || null,
+      criadoEm: doc.data().criadoEm?.toDate() || null,
+      atualizadoEm: doc.data().atualizadoEm?.toDate() || null
+    }));
+
+    // Ordenar por data de criação (mais recente primeiro)
+    campanhas.sort((a, b) => {
+      const dateA = a.criadoEm || new Date(0);
+      const dateB = b.criadoEm || new Date(0);
+      return dateB - dateA;
+    });
+
+    console.log(`✅ Carregadas ${campanhas.length} campanha(s) do usuário ${userId}`);
+
+    return campanhas;
+
+  } catch (error) {
+    console.error('Erro ao buscar campanhas do criador:', error);
+    throw new Error(`Falha ao buscar campanhas: ${error.message}`);
+  }
+};
+
+/**
  * Busca campanhas por página específica
  * @param {string} paginaNome - Nome da página (vacinas, servicos, educacao, etc)
  * @returns {Promise<Array>} Campanhas ativas para a página
@@ -387,6 +432,7 @@ export default {
   criarCampanha,
   buscarCampanhas,
   buscarCampanhasHome,
+  buscarCampanhasPorCriador,
   buscarCampanhaPorId,
   atualizarCampanha,
   desativarCampanha,
