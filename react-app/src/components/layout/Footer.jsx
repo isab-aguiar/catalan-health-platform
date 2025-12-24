@@ -2,12 +2,6 @@ import { Phone, Clock, MapPin, Instagram, ChevronRight, Mail } from "lucide-reac
 import { Link } from "react-router-dom";
 import logoPrefeitura from "../../assets/logo_mobile.png";
 
-/**
- * Footer Component
- * Rodapé com informações de contato e links rápidos
- * Inspirado no footer da Prefeitura de Divinópolis
- */
-
 export default function Footer() {
   const quickLinks = [
     { name: "Início", path: "/" },
@@ -22,9 +16,7 @@ export default function Footer() {
     <footer className="bg-neutral-100 text-neutral-900 mt-auto relative">
       <div className="container mx-auto max-w-6xl px-4 py-8">
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Seção Esquerda - Logo e Redes Sociais */}
           <div>
-            {/* Logo Prefeitura - sem fundo branco */}
             <div className="mb-4">
               <img
                 src={logoPrefeitura}
@@ -52,56 +44,66 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Seção Central - Informações de Contato */}
           <div>
-            <div className="space-y-3">
-              {/* Endereço */}
-              <div className="flex items-start gap-2">
-                <MapPin size={18} className="text-neutral-500 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-neutral-700">
-                  <p>Rua Júlio Nogueira, 1320 - São José</p>
-                  <p>CEP: 35501-170</p>
+            <div className="space-y-6">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <MapPin size={18} className="text-neutral-500" />
+                  <p className="font-semibold text-neutral-900 text-sm">Endereço</p>
+                </div>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Rua+Júlio+Nogueira+1320+São+José+Divinópolis+MG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors leading-relaxed"
+                >
+                  <p>Rua Júlio Nogueira, nº 1320</p>
+                  <p>Bairro São José</p>
+                  <p>Divinópolis - MG</p>
+                  <p className="text-xs text-neutral-600 mt-1">CEP: 35501-170</p>
+                </a>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Clock size={18} className="text-neutral-500" />
+                  <p className="font-semibold text-neutral-900 text-sm">Horário de Atendimento</p>
+                </div>
+                <div className="pl-7 text-sm text-neutral-700 leading-relaxed">
+                  <p>Segunda a Sexta-feira</p>
+                  <p>07h00 às 17h00</p>
+                  <p className="mt-2 text-neutral-900 font-medium">Saúde na Hora: 17h00 às 22h00</p>
                 </div>
               </div>
 
-              {/* Horário */}
-              <div className="flex items-start gap-2">
-                <Clock size={18} className="text-neutral-500 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-neutral-700">
-                  <p>Atendimento da ESF - Segunda a Sexta, das 07:00 às 17:00 horas.</p>
-                  <p>Saúde na Hora: 17:00 às 22:00</p>
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Phone size={18} className="text-neutral-500" />
+                  <p className="font-semibold text-neutral-900 text-sm">Telefone</p>
                 </div>
+                <a
+                  href="tel:+553732296080"
+                  className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors font-medium"
+                >
+                  (37) 3229-6080
+                </a>
               </div>
 
-              {/* Telefone */}
-              <div className="flex items-start gap-2">
-                <Phone size={18} className="text-neutral-500 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-neutral-700">
-                  <a
-                    href="tel:+553732296080"
-                    className="hover:text-primary-600 transition-colors underline-offset-2 hover:underline"
-                  >
-                    (37) 3229-6080
-                  </a>
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <Mail size={18} className="text-neutral-500" />
+                  <p className="font-semibold text-neutral-900 text-sm">E-mail</p>
                 </div>
-              </div>
-
-              {/* Email/Ouvidoria */}
-              <div className="flex items-start gap-2">
-                <Mail size={18} className="text-neutral-500 flex-shrink-0 mt-0.5" />
-                <div className="text-sm text-neutral-700">
-                  <a
-                    href="mailto:staff.sj21@gmail.com"
-                    className="hover:text-primary-600 transition-colors underline-offset-2 hover:underline"
-                  >
-                    staff.sj21@gmail.com
-                  </a>
-                </div>
+                <a
+                  href="mailto:staff.sj21@gmail.com"
+                  className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors break-all"
+                >
+                  staff.sj21@gmail.com
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Seção Direita - Acesso Fácil */}
           <div>
             <h4 className="font-semibold text-lg mb-3 text-neutral-900 border-b border-neutral-300 pb-2">
               Acesso Fácil
@@ -122,7 +124,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="border-t border-neutral-300 mt-8 pt-6 text-center">
           <p className="text-sm text-neutral-600">
             © {new Date().getFullYear()} Estratégia Saúde da Família ESF Catalão - Todos os direitos reservados

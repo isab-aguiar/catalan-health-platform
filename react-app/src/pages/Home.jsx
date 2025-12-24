@@ -21,20 +21,16 @@ import {
   Droplet,
 } from "lucide-react";
 
-// Importar imagens da galeria dinamicamente
-// import.meta.glob importa todas as imagens da pasta automaticamente
 const galleryImagesModules = import.meta.glob(
   "../assets/images/galeria-photos/*.{png,jpg,jpeg}",
   { eager: true }
 );
 
-// Mapeamento de legendas baseado no nome do arquivo
 const getCaptionFromFilename = (imagePath) => {
   if (!imagePath || typeof imagePath !== 'string') return '';
   
   const filename = imagePath.split('/').pop().toLowerCase();
   
-  // Mapeamento de padrões de nomes de arquivos para legendas
   const captionMap = [
     { 
       pattern: 'foto-unidade', 
@@ -66,26 +62,22 @@ const getCaptionFromFilename = (imagePath) => {
     },
   ];
   
-  // Buscar correspondência por padrão
   for (const { pattern, caption } of captionMap) {
     if (filename.includes(pattern.toLowerCase())) {
       return caption;
     }
   }
   
-  // Se não encontrar, gerar legenda baseada no nome do arquivo
   const nameWithoutExt = filename.replace(/\.(png|jpg|jpeg)$/i, '');
   let formattedName = nameWithoutExt
     .replace(/[-_]/g, ' ')
     .replace(/\b\w/g, (l) => l.toUpperCase());
   
-  // Tratamento especial para grupos
   if (formattedName.toLowerCase().includes('grupo')) {
     const grupoName = formattedName.replace(/^grupo\s+/i, '').trim();
     return `Grupo de atividades coletivas "${grupoName}" - Promoção de saúde e bem-estar na comunidade`;
   }
   
-  // Tratamento para eventos e atividades
   if (formattedName.toLowerCase().includes('evento') || 
       formattedName.toLowerCase().includes('campanha') ||
       formattedName.toLowerCase().includes('ação')) {
@@ -95,15 +87,12 @@ const getCaptionFromFilename = (imagePath) => {
   return `${formattedName} - ESF Catalão`;
 };
 
-// Converter o objeto de módulos em array de objetos {src, caption}
-// Garantir que foto-unidade.png seja sempre a primeira
 const getGalleryImages = () => {
   const imageEntries = Object.entries(galleryImagesModules).map(([path, module]) => ({
     src: module.default,
     caption: getCaptionFromFilename(path),
   }));
   
-  // Separar foto-unidade.png do resto
   const fotoUnidade = imageEntries.find((img) => 
     img.src.includes('foto-unidade')
   );
@@ -111,10 +100,8 @@ const getGalleryImages = () => {
     !img.src.includes('foto-unidade')
   );
   
-  // Ordenar o resto alfabeticamente por src
   outrasImagens.sort((a, b) => a.src.localeCompare(b.src));
   
-  // Retornar com foto-unidade primeiro
   return fotoUnidade ? [fotoUnidade, ...outrasImagens] : outrasImagens;
 };
 
@@ -261,8 +248,8 @@ export default function Home() {
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
                           <p className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-2">
-                            Horário de Atendimento ao Público
-                          </p>
+                            Horário de Atendimento ao Público<br/>
+s                          </p>
                           <p className="text-sm text-neutral-700">
                             07:00 às 12:00 | 13:00 às 17:00
                           </p>

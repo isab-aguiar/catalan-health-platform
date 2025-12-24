@@ -1,14 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, Building2, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import GlobalSearch from "../search/GlobalSearch";
 import { usePageSearch } from "../../hooks/usePageSearch";
-
-/**
- * Header Component
- * Cabeçalho sticky com navegação e menu mobile
- */
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,7 +14,6 @@ export default function Header() {
   const navigate = useNavigate();
   const searchResults = usePageSearch(searchQuery);
 
-  // Fechar resultados ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -31,7 +25,6 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Mostrar resultados quando há query
   useEffect(() => {
     if (searchQuery.length >= 3) {
       setShowSearchResults(true);
@@ -69,7 +62,6 @@ export default function Header() {
 
   return (
     <>
-      {/* Logo Fixo - Canto Superior Esquerdo - Oculta quando menu mobile está aberto */}
       {!isMobileMenuOpen && (
         <Link
           to="/"
@@ -90,7 +82,6 @@ export default function Header() {
 
       <header className="sticky top-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-[140px] sm:pl-[200px] pr-[60px]">
         <div className="w-full h-[70px] flex items-center justify-center">
-          {/* Barra de Pesquisa Centralizada - Desktop */}
           <div
             ref={searchRef}
             className="hidden lg:flex w-full max-w-2xl relative"
@@ -126,7 +117,6 @@ export default function Header() {
                 </button>
               )}
 
-              {/* Dropdown de Resultados */}
               {showSearchResults && searchResults.length > 0 && (
                 <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-200 rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
                   {searchResults.slice(0, 5).map((result, index) => {
@@ -188,10 +178,8 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Global Search Modal */}
       {isSearchOpen && <GlobalSearch onClose={() => setIsSearchOpen(false)} />}
 
-      {/* Mobile Menu Toggle - Fixo alinhado com o bottom do header */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         className="lg:hidden fixed right-0 z-50 p-3 bg-white hover:bg-neutral-100 transition-colors"
@@ -205,7 +193,6 @@ export default function Header() {
         )}
       </button>
 
-      {/* Mobile Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
