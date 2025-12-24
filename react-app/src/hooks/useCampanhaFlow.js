@@ -237,10 +237,19 @@ export function useCampanhaFlow() {
    * Processa a escolha do usuário em uma etapa
    */
   const processStep = useCallback((stepId, userInput) => {
-    const step = CAMPAIGN_STEPS[stepId];
+    // Garantir que stepId é uma string
+    const stepIdString = typeof stepId === 'string' ? stepId : (stepId?.id || stepId?.stepId || String(stepId));
+    
+    if (!stepIdString) {
+      console.error('❌ stepId inválido:', stepId);
+      return null;
+    }
+    
+    const step = CAMPAIGN_STEPS[stepIdString];
 
     if (!step) {
-      console.error('❌ Etapa não encontrada:', stepId);
+      console.error('❌ Etapa não encontrada:', stepIdString);
+      console.error('📋 Tipo recebido:', typeof stepId, stepId);
       console.error('📋 Etapas disponíveis:', Object.keys(CAMPAIGN_STEPS));
       return null;
     }
@@ -274,6 +283,12 @@ export function useCampanhaFlow() {
       };
     }
 
+    // Garantir que nextStepId é uma string válida
+    if (typeof nextStepId !== 'string') {
+      console.error('❌ nextStepId inválido:', nextStepId);
+      return null;
+    }
+    
     const nextStep = CAMPAIGN_STEPS[nextStepId];
     
     // Verificar se próxima etapa existe
@@ -318,14 +333,24 @@ export function useCampanhaFlow() {
    * Navega para uma etapa específica (usado no menu de refinamento)
    */
   const goToStep = useCallback((stepId) => {
-    const step = CAMPAIGN_STEPS[stepId];
+    // Garantir que stepId é uma string
+    const stepIdString = typeof stepId === 'string' ? stepId : (stepId?.id || stepId?.stepId || String(stepId));
+    
+    if (!stepIdString) {
+      console.error('❌ stepId inválido no goToStep:', stepId);
+      return null;
+    }
+    
+    const step = CAMPAIGN_STEPS[stepIdString];
 
     if (!step) {
-      console.error('Etapa não encontrada:', stepId);
+      console.error('❌ Etapa não encontrada no goToStep:', stepIdString);
+      console.error('📋 Tipo recebido:', typeof stepId, stepId);
+      console.error('📋 Etapas disponíveis:', Object.keys(CAMPAIGN_STEPS));
       return null;
     }
 
-    setCurrentStepId(stepId);
+    setCurrentStepId(stepIdString);
 
     return {
       step: step,

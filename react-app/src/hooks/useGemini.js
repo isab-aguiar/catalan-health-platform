@@ -723,9 +723,24 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
    */
   const handleFlowButtonClick = useCallback(async (button, message) => {
     console.log('🔘 Botão clicado:', button.label, 'Value:', button.value);
-    console.log('📋 Step atual:', message.stepId);
+    console.log('📋 Step atual:', message.stepId, 'Tipo:', typeof message.stepId);
+    console.log('📋 Mensagem completa:', message);
 
-    const stepId = message.stepId;
+    // Garantir que stepId é uma string
+    let stepId = message.stepId;
+    if (typeof stepId !== 'string') {
+      if (stepId?.id) {
+        stepId = stepId.id;
+      } else if (stepId?.stepId) {
+        stepId = stepId.stepId;
+      } else if (stepId) {
+        stepId = String(stepId);
+      } else {
+        console.error('❌ stepId inválido no botão:', message);
+        return;
+      }
+    }
+    
     const currentStep = campanhaFlow.currentStep;
 
     // Adicionar mensagem do usuário mostrando escolha
@@ -909,11 +924,23 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
   const handleFlowInputSubmit = useCallback(async (value, inputField, stepId) => {
     console.log('📝 Input submetido:', value);
     console.log('📋 Campo:', inputField?.field);
-    console.log('📋 StepId:', stepId);
+    console.log('📋 StepId recebido:', stepId, 'Tipo:', typeof stepId);
+    
+    // Garantir que stepId é uma string
+    let stepIdString = stepId;
+    if (typeof stepId !== 'string') {
+      if (stepId?.id) {
+        stepIdString = stepId.id;
+      } else if (stepId?.stepId) {
+        stepIdString = stepId.stepId;
+      } else if (stepId) {
+        stepIdString = String(stepId);
+      }
+    }
 
     // Validar stepId
-    if (!stepId) {
-      console.error('❌ Erro: stepId não fornecido');
+    if (!stepIdString || typeof stepIdString !== 'string') {
+      console.error('❌ Erro: stepId inválido', { stepId, stepIdString, tipo: typeof stepId });
       const errorMsg = {
         id: Date.now(),
         role: 'assistant',
@@ -924,6 +951,8 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
       setMessages(prev => [...prev, errorMsg]);
       return;
     }
+    
+    console.log('✅ StepId validado:', stepIdString);
 
     // Validação básica - para campos de data, valor vazio é válido se pode pular
     const isEmpty = !value || !value.trim();
@@ -931,10 +960,10 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
     if (isEmpty) {
       if (inputField?.canSkip) {
         // Permitir pular - processar com valor vazio
-        console.log('⏭️ Pulando etapa opcional:', stepId);
+        console.log('⏭️ Pulando etapa opcional:', stepIdString);
         
         // Processar etapa com valor vazio (será tratado como skip)
-        const result = campanhaFlow.processStep(stepId, '');
+        const result = campanhaFlow.processStep(stepIdString, '');
         
         if (!result) {
           console.error('❌ Erro ao pular etapa');
@@ -1004,10 +1033,11 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
     setMessages(prev => [...prev, userMsg]);
 
     // Processar etapa
-    const result = campanhaFlow.processStep(stepId, value.trim());
+    const result = campanhaFlow.processStep(stepIdString, value.trim());
 
     if (!result) {
-      console.error('❌ Erro ao processar input - stepId:', stepId);
+      console.error('❌ Erro ao processar input - stepId:', stepIdString);
+      console.error('❌ Input recebido:', { value, inputField, stepIdOriginal: stepId });
       const errorMsg = {
         id: Date.now(),
         role: 'assistant',
