@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, Lock, User } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import GlobalSearch from "../search/GlobalSearch";
 import { usePageSearch } from "../../hooks/usePageSearch";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const searchResults = usePageSearch(searchQuery);
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -128,7 +130,7 @@ export default function Header() {
       )}
 
       <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-12 sm:pl-[140px] md:pl-[200px] pr-12 sm:pr-[60px] overflow-x-hidden w-full">
-        <div className="w-full h-[70px] flex items-center justify-center px-4">
+        <div className="w-full h-[70px] flex items-center justify-between gap-4 px-4">
           <div
             ref={searchRef}
             className="hidden lg:flex w-full max-w-2xl relative"
@@ -221,6 +223,27 @@ export default function Header() {
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Botão de Login/Acesso (Desktop) */}
+          <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
+            {currentUser ? (
+              <button
+                onClick={() => navigate('/admin/painel')}
+                className="flex items-center gap-2 px-4 py-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-colors font-medium text-sm"
+              >
+                <User size={18} />
+                <span>Painel</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => navigate('/admin/login')}
+                className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium text-sm shadow-sm hover:shadow-md"
+              >
+                <Lock size={18} />
+                <span>Acesso Restrito</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
