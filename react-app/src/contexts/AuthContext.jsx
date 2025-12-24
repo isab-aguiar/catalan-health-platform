@@ -91,35 +91,27 @@ export function AuthProvider({ children }) {
   }, []);
   
   // Loading combinado: Auth + UserData
-  // Não bloquear a UI se já temos o usuário autenticado, apenas mostrar loading enquanto carrega dados
-  const loading = authLoading || (currentUser && userDataLoading && !userData);
+  // IMPORTANTE: Aguardar o UserData carregar COMPLETAMENTE antes de liberar o app
+  // Isso garante que as permissões estarão disponíveis quando o componente renderizar
+  const loading = authLoading || (currentUser && userDataLoading);
 
-  // Helpers de role
+  // Helpers de role - com garantia de que userData está carregado
   const userRole = userData?.role || null;
   const isAdmin = userRole === 'admin';
   const isProfissional = userRole === 'profissional';
   const isDiretoria = userRole === 'diretoria';
   const isActive = userData?.active !== false; // Considera ativo se não houver campo active
   
-  // #region agent log
-  if (currentUser) {
-    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AuthContext.jsx:98',message:'Role helpers computed',data:{userRole:userRole,isAdmin:isAdmin,isProfissional:isProfissional,isDiretoria:isDiretoria,isActive:isActive,hasUserData:!!userData,userDataRaw:userData},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2,H4'})}).catch(()=>{});
+  // Log de debug APENAS para admin (útil para diagnóstico)
+  if (currentUser && userData && isAdmin) {
+    console.log('🔐 Admin autenticado:', {
+      uid: currentUser.uid,
+      email: currentUser.email,
+      role: userRole,
+      isAdmin,
+      isActive
+    });
   }
-  // #endregion
-
-  // Debug: Log dos dados do usuário
-  useEffect(() => {
-    if (currentUser) {
-      console.log('🔐 DADOS DE AUTENTICAÇÃO:');
-      console.log('  - UID:', currentUser.uid);
-      console.log('  - Email:', currentUser.email);
-      console.log('  - UserData:', userData);
-      console.log('  - Role:', userRole);
-      console.log('  - isAdmin:', isAdmin);
-      console.log('  - isActive:', isActive);
-      console.log('  - Loading:', loading);
-    }
-  }, [currentUser, userData, userRole, isAdmin, isActive, loading]);
 
   // Valores e funções disponíveis para todo o app
   const value = {

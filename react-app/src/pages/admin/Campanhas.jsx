@@ -83,38 +83,21 @@ export default function Campanhas() {
 
   // Deletar campanha
   const handleDelete = async (id) => {
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:83',message:'handleDelete called',data:{id:id,userRole:userData?.role,isAdmin:userData?.role==='admin',hasUserData:!!userData,canDelete:permissions.isAdmin()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-    // #endregion
-    
     // 🔒 VERIFICAÇÃO DE PERMISSÃO: Apenas admin pode deletar
     if (!permissions.isAdmin()) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:85',message:'PERMISSION DENIED - Not admin',data:{userRole:userData?.role,isAdmin:permissions.isAdmin()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
-      // #endregion
       alert('❌ Sem permissão: Apenas administradores podem deletar campanhas.');
       return;
     }
     
     const campanha = campanhas.find(c => c.id === id);
     
-    // #region agent log
-    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:84',message:'Campanha found',data:{found:!!campanha,isLocal:campanha?.isLocal,campanhaId:campanha?.id,titulo:campanha?.titulo},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-    // #endregion
-    
     // ⚠️ Aviso especial para campanhas locais
     if (campanha?.isLocal) {
       if (!confirm('⚠️ ATENÇÃO: Esta é uma campanha LOCAL (hardcoded no código).\n\nEla será removida temporariamente da tela, mas VOLTARÁ quando você recarregar a página.\n\nPara removê-la permanentemente, um desenvolvedor precisa editá-la no arquivo "campanhasLocais.js".\n\nDeseja continuar mesmo assim?')) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:86',message:'User cancelled delete (local campaign)',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-        // #endregion
         return;
       }
     } else {
       if (!confirm('Tem certeza que deseja deletar esta campanha PERMANENTEMENTE do Firebase?')) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:86',message:'User cancelled delete',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-        // #endregion
         return;
       }
     }
@@ -122,31 +105,26 @@ export default function Campanhas() {
     try {
       // Se for campanha local, apenas remove do estado (temporariamente)
       if (campanha?.isLocal) {
-        // #region agent log
-        fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:91',message:'LOCAL CAMPAIGN - Only removing from state',data:{id:id,isLocal:true,titulo:campanha.titulo},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-        // #endregion
         setCampanhas(prev => prev.filter(c => c.id !== id));
         alert('✅ Campanha local removida temporariamente.\n\n⚠️ Ela voltará ao recarregar a página.');
         return;
       }
 
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:98',message:'FIREBASE CAMPAIGN - Calling deletarCampanha service',data:{id:id,isLocal:false},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-      // #endregion
-      
+      // Deletar do Firebase
       await deletarCampanha(id);
       
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:99',message:'deletarCampanha SUCCESS - removing from state',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-      // #endregion
-      
+      // Remover do estado local
       setCampanhas(prev => prev.filter(c => c.id !== id));
+      
+      // Recarregar lista para garantir sincronização
+      await loadCampanhas();
+      
       alert('✅ Campanha deletada PERMANENTEMENTE do Firebase!');
     } catch (err) {
-      // #region agent log
-      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:101',message:'DELETE ERROR CAUGHT',data:{id:id,errorMessage:err.message,errorName:err.name,errorCode:err.code},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
-      // #endregion
+      console.error('Erro ao deletar campanha:', err);
       alert(`❌ Erro ao deletar: ${err.message}`);
+      // Recarregar lista em caso de erro para sincronizar
+      await loadCampanhas();
     }
   };
 

@@ -18,10 +18,10 @@ import { Shield } from 'lucide-react';
  * @param {string} requiredPermission - Permissão necessária (ex: "canManageUsers")
  */
 export default function ProtectedRoute({ children, requiredRole, requiredPermission }) {
-  const { currentUser, loading, isActive } = useAuth();
+  const { currentUser, loading, isActive, userData, isAdmin: isAdminFromContext } = useAuth();
   const permissions = usePermissions();
 
-  // Se ainda está carregando, mostra spinner
+  // Se ainda está carregando (Auth OU UserData), mostra spinner
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -29,6 +29,11 @@ export default function ProtectedRoute({ children, requiredRole, requiredPermiss
   // Se não está logado, redireciona para login
   if (!currentUser) {
     return <Navigate to="/admin/login" replace />;
+  }
+
+  // Se userData ainda não carregou (safety check), aguarda
+  if (currentUser && !userData) {
+    return <LoadingSpinner />;
   }
 
   // Se usuário está desativado, redireciona para login
@@ -42,17 +47,17 @@ export default function ProtectedRoute({ children, requiredRole, requiredPermiss
     
     // Se role for admin e usuário não for admin
     if (requiredRole === 'admin' && !permissions.isAdmin()) {
-      return <AccessDenied />;
+      return <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />;
     }
     
     // Se role for profissional e usuário não for admin nem profissional
     if (requiredRole === 'profissional' && !permissions.isAdmin() && !permissions.isProfissional()) {
-      return <AccessDenied />;
+      return <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />;
     }
     
     // Verificação genérica de role
     if (currentRole !== requiredRole && !permissions.isAdmin()) {
-      return <AccessDenied />;
+      return <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />;
     }
   }
 
@@ -60,7 +65,7 @@ export default function ProtectedRoute({ children, requiredRole, requiredPermiss
   if (requiredPermission) {
     const permissionFn = permissions[requiredPermission];
     if (typeof permissionFn === 'function' && !permissionFn()) {
-      return <AccessDenied />;
+      return <AccessDenied requiredPermission={requiredPermission} />;
     }
   }
 
@@ -71,7 +76,7 @@ export default function ProtectedRoute({ children, requiredRole, requiredPermiss
 /**
  * Componente de acesso negado
  */
-function AccessDenied() {
+function AccessDenied({ currentRole, requiredRole, requiredPermission }) {
   return (
     <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg border border-neutral-200 p-8 text-center">
@@ -81,9 +86,15 @@ function AccessDenied() {
         <h1 className="text-2xl font-bold text-neutral-900 mb-2">
           Acesso Negado
         </h1>
-        <p className="text-neutral-600 mb-6">
+        <p className="text-neutral-600 mb-4">
           Você não tem permissão para acessar esta página.
         </p>
+        {currentRole && (
+          <p className="text-sm text-neutral-500 mb-6">
+            Seu perfil: <strong>{currentRole}</strong>
+            {requiredRole && ` | Requerido: ${requiredRole}`}
+          </p>
+        )}
         <div className="flex gap-3 justify-center">
           <a
             href="/admin/painel"

@@ -132,8 +132,8 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Campanhas Visuais */}
-          {campanhas && campanhas.length > 0 && (
+          {/* Campanhas Visuais - Carrega somente se houver campanhas */}
+          {!loadingCampanhas && campanhas && campanhas.length > 0 && (
             <div className="mb-12">
               <div className="text-center mb-8">
                 <p className="text-slate-600">
