@@ -173,16 +173,35 @@ export async function updateAviso(id, aviso, updatedByUid = null) {
  * @param {string} id - ID do documento no Firestore
  */
 export async function deleteAviso(id) {
+  // #region agent log
+  fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'avisosService.js:175',message:'deleteAviso called',data:{id:id,hasDb:!!db},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+  // #endregion
+  
   try {
     if (!id) {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'avisosService.js:177',message:'deleteAviso: ID missing',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+      // #endregion
       return { success: false, error: 'ID do aviso é obrigatório' };
     }
 
     const avisoRef = doc(db, COLLECTION_NAME, id);
+    
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'avisosService.js:181',message:'deleteAviso: Before deleteDoc call',data:{id:id,collection:COLLECTION_NAME},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+    // #endregion
+    
     await deleteDoc(avisoRef);
+    
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'avisosService.js:182',message:'deleteAviso: After deleteDoc SUCCESS',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+    // #endregion
     
     return { success: true };
   } catch (error) {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'avisosService.js:185',message:'deleteAviso: CATCH ERROR',data:{id:id,errorCode:error.code,errorMessage:error.message,errorName:error.name},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+    // #endregion
     console.error('Erro ao deletar aviso:', error);
     return { success: false, error: error.message };
   }

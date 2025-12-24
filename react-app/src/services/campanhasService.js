@@ -316,9 +316,22 @@ export const ativarCampanha = async (campanhaId) => {
  * @returns {Promise<Object>} Resultado
  */
 export const deletarCampanha = async (campanhaId) => {
+  // #region agent log
+  fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'campanhasService.js:318',message:'deletarCampanha SERVICE called',data:{campanhaId:campanhaId,hasDb:!!db},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+  // #endregion
+  
   try {
     const campanhaRef = doc(db, COLLECTION_NAME, campanhaId);
+    
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'campanhasService.js:320',message:'Before deleteDoc Firestore call',data:{campanhaId:campanhaId,collection:COLLECTION_NAME},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+    // #endregion
+    
     await deleteDoc(campanhaRef);
+    
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'campanhasService.js:321',message:'After deleteDoc SUCCESS',data:{campanhaId:campanhaId},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+    // #endregion
 
     return {
       success: true,
@@ -326,6 +339,9 @@ export const deletarCampanha = async (campanhaId) => {
     };
 
   } catch (error) {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'campanhasService.js:328',message:'deletarCampanha ERROR CAUGHT',data:{campanhaId:campanhaId,errorCode:error.code,errorMessage:error.message,errorName:error.name},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+    // #endregion
     console.error('Erro ao deletar campanha:', error);
     throw new Error(`Falha ao deletar campanha: ${error.message}`);
   }

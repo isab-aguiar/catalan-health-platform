@@ -100,6 +100,12 @@ export function AuthProvider({ children }) {
   const isProfissional = userRole === 'profissional';
   const isDiretoria = userRole === 'diretoria';
   const isActive = userData?.active !== false; // Considera ativo se não houver campo active
+  
+  // #region agent log
+  if (currentUser) {
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'AuthContext.jsx:98',message:'Role helpers computed',data:{userRole:userRole,isAdmin:isAdmin,isProfissional:isProfissional,isDiretoria:isDiretoria,isActive:isActive,hasUserData:!!userData,userDataRaw:userData},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2,H4'})}).catch(()=>{});
+  }
+  // #endregion
 
   // Debug: Log dos dados do usuário
   useEffect(() => {

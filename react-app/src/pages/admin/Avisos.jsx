@@ -148,19 +148,39 @@ export default function Avisos() {
 
   // Deletar aviso
   const handleDeletar = async (id) => {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Avisos.jsx:150',message:'handleDeletar called',data:{id:id,canDelete:permissions.canDeleteAvisos()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2,H3'})}).catch(()=>{});
+    // #endregion
+    
     if (!window.confirm('Confirma a exclusão deste aviso?')) {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Avisos.jsx:151',message:'User cancelled deletion',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+      // #endregion
       return;
     }
 
     setDeleteLoading(id);
+    
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Avisos.jsx:155',message:'Before deleteAviso service call',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+    // #endregion
+    
     try {
       const result = await deleteAviso(id);
+      
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Avisos.jsx:157',message:'After deleteAviso service call',data:{id:id,success:result.success,error:result.error},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+      // #endregion
+      
       if (result.success) {
         alert('Aviso excluído com sucesso');
       } else {
         alert('Erro ao excluir: ' + (result.error || 'Erro desconhecido'));
       }
     } catch (err) {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Avisos.jsx:163',message:'handleDeletar CATCH ERROR',data:{id:id,errorMessage:err.message,errorName:err.name},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+      // #endregion
       alert('Erro inesperado ao excluir o aviso');
       console.error('Erro ao deletar:', err);
     } finally {

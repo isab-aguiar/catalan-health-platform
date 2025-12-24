@@ -5,6 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { usePermissions } from '../../hooks/usePermissions';
 import AdminLayout from '../../layouts/AdminLayout';
 import { 
   buscarCampanhas, 
@@ -40,6 +41,7 @@ import { Link } from 'react-router-dom';
 
 export default function Campanhas() {
   const { user, userData } = useAuth();
+  const permissions = usePermissions();
   const [campanhas, setCampanhas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -81,25 +83,70 @@ export default function Campanhas() {
 
   // Deletar campanha
   const handleDelete = async (id) => {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:83',message:'handleDelete called',data:{id:id,userRole:userData?.role,isAdmin:userData?.role==='admin',hasUserData:!!userData,canDelete:permissions.isAdmin()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
+    // #endregion
+    
+    // 🔒 VERIFICAÇÃO DE PERMISSÃO: Apenas admin pode deletar
+    if (!permissions.isAdmin()) {
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:85',message:'PERMISSION DENIED - Not admin',data:{userRole:userData?.role,isAdmin:permissions.isAdmin()},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H2'})}).catch(()=>{});
+      // #endregion
+      alert('❌ Sem permissão: Apenas administradores podem deletar campanhas.');
+      return;
+    }
+    
     const campanha = campanhas.find(c => c.id === id);
     
-    if (!confirm('Tem certeza que deseja deletar esta campanha permanentemente?')) {
-      return;
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:84',message:'Campanha found',data:{found:!!campanha,isLocal:campanha?.isLocal,campanhaId:campanha?.id,titulo:campanha?.titulo},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+    // #endregion
+    
+    // ⚠️ Aviso especial para campanhas locais
+    if (campanha?.isLocal) {
+      if (!confirm('⚠️ ATENÇÃO: Esta é uma campanha LOCAL (hardcoded no código).\n\nEla será removida temporariamente da tela, mas VOLTARÁ quando você recarregar a página.\n\nPara removê-la permanentemente, um desenvolvedor precisa editá-la no arquivo "campanhasLocais.js".\n\nDeseja continuar mesmo assim?')) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:86',message:'User cancelled delete (local campaign)',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+        // #endregion
+        return;
+      }
+    } else {
+      if (!confirm('Tem certeza que deseja deletar esta campanha PERMANENTEMENTE do Firebase?')) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:86',message:'User cancelled delete',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+        // #endregion
+        return;
+      }
     }
 
     try {
-      // Se for campanha local, apenas remove do estado
+      // Se for campanha local, apenas remove do estado (temporariamente)
       if (campanha?.isLocal) {
+        // #region agent log
+        fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:91',message:'LOCAL CAMPAIGN - Only removing from state',data:{id:id,isLocal:true,titulo:campanha.titulo},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+        // #endregion
         setCampanhas(prev => prev.filter(c => c.id !== id));
-        alert('Campanha removida com sucesso.');
+        alert('✅ Campanha local removida temporariamente.\n\n⚠️ Ela voltará ao recarregar a página.');
         return;
       }
 
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:98',message:'FIREBASE CAMPAIGN - Calling deletarCampanha service',data:{id:id,isLocal:false},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+      // #endregion
+      
       await deletarCampanha(id);
+      
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:99',message:'deletarCampanha SUCCESS - removing from state',data:{id:id},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+      // #endregion
+      
       setCampanhas(prev => prev.filter(c => c.id !== id));
-      alert('Campanha deletada com sucesso.');
+      alert('✅ Campanha deletada PERMANENTEMENTE do Firebase!');
     } catch (err) {
-      alert(`Erro ao deletar: ${err.message}`);
+      // #region agent log
+      fetch('http://127.0.0.1:7242/ingest/fc0d6d5a-42f3-44ff-9ec4-159e190f7ca3',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Campanhas.jsx:101',message:'DELETE ERROR CAUGHT',data:{id:id,errorMessage:err.message,errorName:err.name,errorCode:err.code},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'H3'})}).catch(()=>{});
+      // #endregion
+      alert(`❌ Erro ao deletar: ${err.message}`);
     }
   };
 
@@ -813,42 +860,56 @@ export default function Campanhas() {
 
                             {/* Ações */}
                             <div className="flex flex-wrap gap-2 pt-4 border-t border-neutral-200">
-                              <button
-                                onClick={() => handleEdit(campanha)}
-                                className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
-                              >
-                                <Edit className="w-4 h-4" />
-                                Editar
-                              </button>
+                              {permissions.isAdmin() && (
+                                <button
+                                  onClick={() => handleEdit(campanha)}
+                                  className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                                >
+                                  <Edit className="w-4 h-4" />
+                                  Editar
+                                </button>
+                              )}
 
-                              <button
-                                onClick={() => handleToggleAtivo(campanha.id, campanha.ativo)}
-                                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors text-sm ${
-                                  campanha.ativo 
-                                    ? 'bg-yellow-600 text-white hover:bg-yellow-700' 
-                                    : 'bg-green-600 text-white hover:bg-green-700'
-                                }`}
-                              >
-                                {campanha.ativo ? (
-                                  <>
-                                    <EyeOff className="w-4 h-4" />
-                                    Desativar
-                                  </>
-                                ) : (
-                                  <>
-                                    <Eye className="w-4 h-4" />
-                                    Ativar
-                                  </>
-                                )}
-                              </button>
+                              {permissions.isAdmin() && (
+                                <button
+                                  onClick={() => handleToggleAtivo(campanha.id, campanha.ativo)}
+                                  className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors text-sm ${
+                                    campanha.ativo 
+                                      ? 'bg-yellow-600 text-white hover:bg-yellow-700' 
+                                      : 'bg-green-600 text-white hover:bg-green-700'
+                                  }`}
+                                >
+                                  {campanha.ativo ? (
+                                    <>
+                                      <EyeOff className="w-4 h-4" />
+                                      Desativar
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Eye className="w-4 h-4" />
+                                      Ativar
+                                    </>
+                                  )}
+                                </button>
+                              )}
 
-                              <button
-                                onClick={() => handleDelete(campanha.id)}
-                                className="flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
-                              >
-                                <Trash2 className="w-4 h-4" />
-                                Deletar
-                              </button>
+                              {permissions.isAdmin() && (
+                                <button
+                                  onClick={() => handleDelete(campanha.id)}
+                                  className="flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
+                                  title={campanha.isLocal ? "⚠️ Campanha local - remoção temporária" : "Deletar permanentemente"}
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                  Deletar
+                                  {campanha.isLocal && <span className="text-xs">(temp)</span>}
+                                </button>
+                              )}
+                              
+                              {!permissions.isAdmin() && (
+                                <div className="text-sm text-neutral-500 italic py-2">
+                                  🔒 Apenas administradores podem editar campanhas
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
