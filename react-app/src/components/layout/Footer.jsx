@@ -90,7 +90,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-neutral-800 mt-6 pt-6 text-center">
           <p className="text-sm text-neutral-400">
-            © {new Date().getFullYear()} ESF Catalão
+            © {new Date().getFullYear()} ESF CATALÃO
           </p>
         </div>
       </div>
