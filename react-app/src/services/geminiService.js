@@ -310,10 +310,11 @@ Confirma? Digite 'sim' para eu gerar o JSON final."
 **SOMENTE APÓS "SIM" FINAL → Retornar JSON no formato:**
 {
   "template": "vacinacao",
-  "titulo": "...",
-  "descricao": "...",
+  "titulo": "Título da campanha",
+  "descricao": "Descrição completa",
   "paginaDestino": "home",
-  etc...
+  "urgente": false,
+  "destaque": true
 }
 
 **REGRAS DO FLUXO CONVERSACIONAL:**
