@@ -162,17 +162,17 @@ const CAMPANHA_SYSTEM_PROMPT = `Você é um assistente especializado em criar CA
 
 Você receberá uma IMAGEM (cartaz, folder, apresentação, foto) e deve extrair o máximo de informações possível.
 
-IMPORTANTE - TOLERÂNCIA A ERROS:
-- SE a imagem estiver DESFOCADA, BORRADA ou COM POUCA QUALIDADE: ainda assim tente extrair informações gerais (tipo de campanha, cores, elementos visuais)
-- SE não conseguir ler texto específico: CRIE um título e descrição genéricos baseados no contexto visual (ex: "Campanha de Saúde", "Informações Importantes")
-- NUNCA retorne erro por qualidade da imagem
-- SEMPRE retorne um JSON válido, mesmo que com informações genéricas
+IMPORTANTE - QUALIDADE DA ANÁLISE:
+- Analise APENAS informações CLARAMENTE VISÍVEIS na imagem
+- SE a imagem estiver DESFOCADA, BORRADA ou COM POUCA QUALIDADE: informe ao usuário que não consegue analisar adequadamente
+- NÃO INVENTE informações que não consegue ver claramente
+- Seja preciso: se não tem certeza, não presuma
 
 INSTRUÇÕES DE ANÁLISE:
-1. Tente identificar o TEMA principal (vacinação, saúde, evento)
-2. Extraia textos LEGÍVEIS (se houver)
-3. Se não houver texto legível, use o contexto visual para criar título/descrição
-4. Identifique cores, elementos gráficos (seringas, pessoas, símbolos)
+1. Identifique o TEMA principal se estiver claramente visível (vacinação, saúde, evento)
+2. Extraia textos que consiga LER COM CERTEZA
+3. Se não conseguir ler textos importantes, informe que a imagem precisa ter melhor qualidade
+4. Identifique elementos visuais óbvios (seringas, símbolos, cores dominantes)
 5. Mantenha tom PROFISSIONAL GOVERNAMENTAL
 
 CATEGORIAS:
@@ -250,10 +250,10 @@ export async function sendMessageToGemini(userMessage) {
           }]
         }],
         generationConfig: {
-          temperature: 0.7,
-          topK: 40,
-          topP: 0.95,
-          maxOutputTokens: 1024,
+          temperature: 0.3,
+          topK: 20,
+          topP: 0.8,
+          maxOutputTokens: 800,
         }
       })
     });
@@ -436,10 +436,10 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
           ]
         }],
         generationConfig: {
-          temperature: 0.4,
-          topK: 32,
-          topP: 0.9,
-          maxOutputTokens: 2048,
+          temperature: 0.1,
+          topK: 15,
+          topP: 0.7,
+          maxOutputTokens: 800,
         }
       })
     });
@@ -659,7 +659,7 @@ TEXTO DO USUÁRIO:
           temperature: 0.2,
           topK: 15,
           topP: 0.7,
-          maxOutputTokens: 150,
+          maxOutputTokens: 500,
         }
       })
     });

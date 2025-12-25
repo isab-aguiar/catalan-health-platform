@@ -87,11 +87,17 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
     }
   };
 
-  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
 
-  // Auto-scroll para última mensagem
+  // Auto-scroll para última mensagem dentro do container
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesContainerRef.current) {
+      const container = messagesContainerRef.current;
+      container.scroll({
+        top: container.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
   }, [messages]);
 
   // Mensagem de boas-vindas compacta
@@ -166,7 +172,11 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
       </div>
 
       {/* Área de Mensagens com Scroll - Altura calculada automaticamente */}
-      <div className="flex-1 overflow-y-auto px-3 py-3" style={{ height: 0 }}>
+      <div
+        className="flex-1 overflow-y-auto px-3 py-3"
+        style={{ height: 0 }}
+        ref={messagesContainerRef}
+      >
         <div className="max-w-3xl mx-auto space-y-3">
           {allMessages.map((message) => (
             <ChatMessage
@@ -179,7 +189,6 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
               onFileUpload={(file) => handleFlowFileUpload(file, userId)}
             />
           ))}
-          <div ref={messagesEndRef} />
         </div>
       </div>
 
