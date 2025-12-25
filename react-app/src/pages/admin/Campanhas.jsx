@@ -604,7 +604,16 @@ export default function Campanhas() {
                               </label>
                               <select
                                 value={editForm.paginaDestino}
-                                onChange={(e) => setEditForm({ ...editForm, paginaDestino: e.target.value })}
+                                onChange={(e) => {
+                                  const novaPagina = e.target.value;
+                                  setEditForm({
+                                    ...editForm,
+                                    paginaDestino: novaPagina,
+                                    // Se selecionar "home", marca exibirNaHomepage como true
+                                    // Caso contrário, marca como false
+                                    exibirNaHomepage: novaPagina === 'home'
+                                  });
+                                }}
                                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                               >
                                 <option value="home">Homepage</option>
