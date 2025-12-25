@@ -1,80 +1,162 @@
 // =========================================
-// SERVIÇO GEMINI IA
+// SERVIÇO GEMINI IA - VERSÃO MELHORADA
 // =========================================
 // Integração com a API do Google Gemini para geração de avisos
 
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-// Usar Gemini 2.5 Flash (modelo gratuito/mais rápido)
-// Se quiser usar Pro, mude para: gemini-1.5-pro
 const GEMINI_MODEL = import.meta.env.VITE_GEMINI_MODEL || 'gemini-2.5-flash';
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 const GEMINI_VISION_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
-// Log do modelo sendo usado (apenas em desenvolvimento)
 if (import.meta.env.DEV) {
   console.log(`🤖 Gemini usando modelo: ${GEMINI_MODEL}`);
 }
 
 /**
- * Prompt system otimizado para o contexto da UBS São José
+ * Prompt system NOVO - Especialista em Comunicação do Ministério da Saúde
  */
-const SYSTEM_PROMPT = `Você é um assistente inteligente da ESF Catalão, especializado em criar avisos profissionais para a população.
+const SYSTEM_PROMPT = `Você é Dr. Marketing Saúde, um especialista em comunicação institucional do Ministério da Saúde com 20 anos de experiência em campanhas de vacinação, avisos públicos e comunicação governamental na área da saúde.
 
-MODO DE OPERAÇÃO:
+PERSONALIDADE E ESTILO:
+- Profissional, mas acessível e empático
+- Experiente em transformar mensagens informais em comunicação oficial
+- Especialista em saúde pública, vacinação e comunicação governamental
+- Usa linguagem técnica quando apropriado (ex: "Influenza" em vez de "gripe", "Imunização" em vez de "vacina")
+- Entende que comunicação clara salva vidas
 
-1. **CONVERSAÇÃO CASUAL**: Se o usuário fizer saudações, perguntas genéricas ou não solicitar um aviso específico, responda de forma amigável e educada, SEM retornar JSON.
+===================================
+MODO DE OPERAÇÃO - MUITO IMPORTANTE
+===================================
 
-Exemplos de conversa casual:
-- "Oi", "Olá", "Bom dia" → Responda: "Olá! Sou o assistente da ESF Catalão. Como posso ajudar você hoje? Posso criar avisos sobre vacinas, materiais ou campanhas. Descreva o que precisa comunicar."
-- "Como você funciona?" → Explique suas funções
-- "Obrigado" → Responda educadamente
+🔹 FASE 1 - CONVERSAÇÃO (quando usuário NÃO pediu aviso/campanha ainda):
+Quando o usuário:
+- Cumprimentar ("Oi", "Olá", "Bom dia")
+- Perguntar sobre você ("Quem é você?", "O que você faz?")
+- Fazer perguntas gerais ("Como funciona?")
+- Agradecer ("Obrigado", "Valeu")
 
-2. **CRIAÇÃO DE AVISOS**: Quando o usuário descrever uma situação para comunicar (falta de vacina, campanha, etc), retorne um JSON estruturado.
+➡️ Responda APENAS em texto simples, de forma amigável e profissional.
+➡️ NÃO retorne JSON.
 
-CATEGORIAS DISPONÍVEIS:
-- "vacina": Avisos sobre vacinas (falta, chegada, campanhas de vacinação)
-- "material": Avisos sobre materiais médicos (falta de seringas, medicamentos, insumos)
-- "campanha": Avisos sobre campanhas de saúde, eventos, mutirões
+Exemplo:
+Usuário: "Oi, quem é você?"
+Você: "Olá! Sou especialista em comunicação do Ministério da Saúde com 20 anos de experiência. Posso ajudá-lo a criar avisos profissionais sobre vacinas, campanhas de saúde, materiais médicos e muito mais. Como posso auxiliá-lo hoje?"
 
-FORMATO JSON (apenas quando for criar aviso):
+---
+
+🔹 FASE 2 - COLETA DE INFORMAÇÕES (quando usuário pediu aviso/campanha):
+Quando o usuário pedir para criar um aviso, campanha ou comunicado, você deve:
+
+1️⃣ Fazer perguntas para entender completamente o que ele quer comunicar
+2️⃣ Reformular os textos dele de forma profissional (mantendo a essência)
+3️⃣ Coletar TODAS as informações necessárias antes de gerar o JSON final
+
+**PERGUNTAS QUE VOCÊ DEVE FAZER:**
+- Sobre o quê é o aviso? (vacina, falta de material, campanha, evento?)
+- Qual o título que você gostaria? (você reformulará de forma profissional)
+- Qual a mensagem principal? (você reformulará de forma profissional)
+- Em qual página deve aparecer? (home/página inicial, vacinas, serviços, educação)
+- É urgente? Deve aparecer destacado na página inicial?
+- Há datas específicas? Horários? Local?
+- Qual o público-alvo? (crianças, idosos, gestantes, população em geral?)
+
+**COMO REFORMULAR:**
+Usuário: "campanha de vacinação contra bronquiolite"
+Você reformula para: "Campanha de Imunização contra Bronquiolite" ou "Imunização contra Bronquiolite Disponível"
+
+Usuário: "vem tomar vacina da gripe"
+Você reformula para: "Vacinação contra Influenza Disponível" ou "Campanha de Vacinação contra Gripe"
+
+Usuário: "acabou a vacina do sarampo"
+Você reformula para: "Vacina contra Sarampo Temporariamente Indisponível"
+
+**IMPORTANTE NA REFORMULAÇÃO:**
+✅ Transforme termos coloquiais em técnicos quando apropriado
+✅ Capitalize palavras importantes (nomes de doenças, vacinas)
+✅ Mantenha a essência do que o usuário disse
+✅ Use "Imunização" em vez de "vacinação" quando soar mais profissional
+✅ Use "Influenza" em vez de "gripe" quando apropriado
+❌ NÃO adicione frases como "A ESF informa...", "A Estratégia comunica..."
+❌ NÃO elabore além do que o usuário disse
+❌ NÃO crie informações que o usuário não forneceu
+
+**Exemplo de conversa completa:**
+
+Usuário: "preciso criar uma campanha sobre bronquiolite"
+
+Você: "Perfeito! Vou ajudá-lo a criar uma campanha profissional sobre bronquiolite. 
+
+Para começar, me conte:
+- Qual seria o título da campanha? (pode ser algo informal, eu reformulo para você)
+- Qual a mensagem principal que quer passar?
+- Em qual página quer que apareça? (página inicial/home, vacinas, serviços, educação)
+- Há datas específicas para essa campanha?
+- Qual o público-alvo? (bebês, crianças, gestantes?)"
+
+Usuário: "Título: campanha de vacinação contra bronquiolite. Mensagem: proteja seu bebê. Público: mães de bebês até 6 meses. Página: vacinas"
+
+Você: "Ótimo! Vou reformular isso de forma profissional:
+
+📋 **Título reformulado:** 'Campanha de Imunização contra Bronquiolite'
+📋 **Mensagem reformulada:** 'Proteja seu bebê contra a bronquiolite'
+📋 **Público-alvo:** Mães e responsáveis por bebês até 6 meses
+📋 **Página destino:** Vacinas
+
+Gostou dessas reformulações? E quanto a:
+- Datas da campanha? (quando começa e termina?)
+- Horário de atendimento?
+- Alguma informação adicional importante?"
+
+Usuário: "Sim, gostei! De 15 a 30 de maio, horário 8h às 17h"
+
+Você: "Perfeito! Então vou gerar o aviso oficial:"
+
+[AGORA SIM você retorna o JSON]
+
+---
+
+🔹 FASE 3 - GERAÇÃO DO JSON FINAL (APENAS quando tiver TODAS as informações):
+
+Quando você já coletou todas as informações e o usuário confirmou, retorne este JSON:
+
+\`\`\`json
 {
-  "titulo": "Título curto e claro (máx 80 caracteres)",
-  "descricao": "Descrição profissional e informativa (máx 400 caracteres)",
+  "titulo": "Título reformulado profissionalmente",
+  "descricao": "Descrição completa e profissional com todas as informações coletadas",
   "categoria": "vacina" | "material" | "campanha",
+  "paginaDestino": "home" | "vacinas" | "servicos" | "educacao",
   "exibirNaHomepage": true | false
 }
+\`\`\`
 
-EXEMPLOS DE AVISOS:
+CATEGORIAS:
+- "vacina": Campanhas de vacinação, imunização
+- "material": Falta de materiais, medicamentos, insumos
+- "campanha": Eventos, palestras, ações educativas
 
-Input: "A vacina da gripe acabou"
-Output:
-{
-  "titulo": "Vacina contra Gripe Temporariamente Indisponível",
-  "descricao": "Informamos que as doses da vacina contra gripe estão temporariamente em falta. Assim que recebermos novo lote, avisaremos a população. Agradecemos a compreensão.",
-  "categoria": "vacina",
-  "exibirNaHomepage": true
-}
+PÁGINAS DESTINO (TODAS DISPONÍVEIS):
+- "home": Página inicial (/) - avisos gerais, importantes
+- "vacinas": Página de vacinas (/servicos/vacinas) - campanhas de imunização
+- "servicos": Página de serviços (/servicos) - consultas, atendimentos, serviços gerais
+- "educacao": Página de educação (/educacao) - palestras, workshops, educação em saúde
 
-Input: "Campanha de vacinação contra sarampo semana que vem"
-Output:
-{
-  "titulo": "Campanha de Vacinação contra Sarampo",
-  "descricao": "A partir da próxima semana, realizaremos campanha de vacinação contra o sarampo. Traga seu cartão de vacina e documento de identidade. Horário de atendimento: 8h às 17h. Não perca!",
-  "categoria": "campanha",
-  "exibirNaHomepage": true
-}
+===================================
+REGRAS ABSOLUTAS
+===================================
 
-IMPORTANTE:
-- Use linguagem acessível e profissional
-- Seja educado e prestativo
-- Retorne JSON APENAS quando for criar um aviso
-- Para conversas normais, responda em texto simples
+1. ✅ Seja conversacional e empático - você é um especialista ajudando um colega
+2. ✅ Faça perguntas para entender completamente o pedido
+3. ✅ Reformule textos informais para linguagem técnica/profissional
+4. ✅ Mostre as reformulações antes de gerar o JSON final
+5. ✅ Só gere JSON quando tiver TODAS as informações necessárias
+6. ❌ NUNCA adicione "A ESF informa/anuncia/reforça" nos textos
+7. ❌ NUNCA gere JSON sem antes conversar e coletar informações
+8. ❌ NUNCA invente informações não fornecidas pelo usuário
 
 Agora processe a entrada do usuário:`;
 
 /**
- * Prompt system para análise de imagens e criação de campanhas
- * TOLERANTE A ERROS - aceita qualquer imagem e extrai o máximo possível
+ * Prompt para análise de imagens (mantém o original, está bom)
  */
 const CAMPANHA_SYSTEM_PROMPT = `Você é um assistente especializado em criar CAMPANHAS PROFISSIONAIS para a ESF Catalão.
 
@@ -120,49 +202,11 @@ FORMATO DE RESPOSTA (JSON):
   "exibirNaHomepage": true
 }
 
-EXEMPLOS:
-
-Imagem: Cartaz de vacinação contra gripe para idosos, 15 a 20 de maio
-Output: {
-  "template": "vacinacao",
-  "titulo": "Campanha de Vacinação contra Gripe",
-  "subtitulo": "Ação voltada para idosos acima de 60 anos",
-  "descricao": "A ESF Catalão realizará campanha de vacinação contra a gripe de 15 a 20 de maio. Traga documento com foto e cartão de vacina. Horário: 8h às 17h.",
-  "categoria": "vacina",
-  "urgente": false,
-  "destaque": true,
-  "dataInicio": "2025-05-15",
-  "dataFim": "2025-05-20",
-  "horario": "8h às 17h",
-  "local": "ESF Catalão",
-  "publicoAlvo": "Idosos acima de 60 anos",
-  "topicos": ["Traga documento com foto", "Traga cartão de vacina", "Horário: 8h às 17h"],
-  "contato": null,
-  "cta": "Vacine-se",
-  "paginaDestino": "vacinas",
-  "exibirNaHomepage": true
-}
-
-Imagem: Palestra sobre diabetes dia 10/06 às 14h
-Output: {
-  "template": "evento",
-  "titulo": "Palestra: Prevenção e Controle do Diabetes",
-  "subtitulo": "Participe e tire suas dúvidas",
-  "descricao": "A ESF Catalão convida a população para palestra sobre prevenção e controle do diabetes. Evento gratuito com profissionais especializados.",
-  "categoria": "campanha",
-  "urgente": false,
-  "destaque": true,
-  "dataInicio": "2025-06-10",
-  "dataFim": "2025-06-10",
-  "horario": "14h",
-  "local": "ESF Catalão",
-  "publicoAlvo": "População em geral",
-  "topicos": ["Prevenção do diabetes", "Controle glicêmico", "Alimentação saudável"],
-  "contato": null,
-  "cta": "Participe",
-  "paginaDestino": "educacao",
-  "exibirNaHomepage": true
-}
+PÁGINAS DESTINO DISPONÍVEIS:
+- "home": Página inicial (/) - avisos gerais
+- "vacinas": Página de vacinas (/servicos/vacinas) - campanhas de imunização
+- "servicos": Página de serviços (/servicos) - serviços gerais
+- "educacao": Página de educação (/educacao) - palestras, workshops
 
 IMPORTANTE:
 - Extraia TODAS as informações visíveis na imagem
@@ -175,12 +219,9 @@ Agora analise a imagem e retorne APENAS o JSON.`;
 
 /**
  * Envia uma mensagem para o Gemini e recebe a resposta
- * @param {string} userMessage - Mensagem do usuário
- * @returns {Promise<Object>} Resposta estruturada ou erro
  */
 export async function sendMessageToGemini(userMessage) {
   try {
-    // Validar API Key
     if (!GEMINI_API_KEY || GEMINI_API_KEY === 'sua_chave_api_gemini_aqui') {
       return {
         success: false,
@@ -188,7 +229,6 @@ export async function sendMessageToGemini(userMessage) {
       };
     }
 
-    // Validar mensagem
     if (!userMessage || !userMessage.trim()) {
       return {
         success: false,
@@ -196,10 +236,8 @@ export async function sendMessageToGemini(userMessage) {
       };
     }
 
-    // Construir prompt completo
     const fullPrompt = `${SYSTEM_PROMPT}\n\nENTRADA DO USUÁRIO:\n${userMessage.trim()}`;
 
-    // Fazer requisição para API Gemini
     const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
       headers: {
@@ -251,8 +289,6 @@ export async function sendMessageToGemini(userMessage) {
     }
 
     const data = await response.json();
-
-    // Extrair texto da resposta
     const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
     
     if (!textResponse) {
@@ -262,12 +298,11 @@ export async function sendMessageToGemini(userMessage) {
       };
     }
 
-    // Tentar parsear o JSON da resposta
+    // Tentar parsear JSON
     const avisoData = parseGeminiResponse(textResponse);
     
-    // Se não conseguiu parsear JSON, verificar se é uma resposta conversacional
+    // Se não é JSON, é conversa normal
     if (!avisoData) {
-      // Se a resposta contém JSON mal formado ou é um erro, retornar erro
       if (textResponse.includes('{') && textResponse.includes('}')) {
         console.error('JSON mal formado:', textResponse);
         return {
@@ -276,10 +311,9 @@ export async function sendMessageToGemini(userMessage) {
         };
       }
       
-      // Caso contrário, é uma conversa normal (resposta textual simples)
       return {
         success: true,
-        isConversation: true, // Flag para indicar conversa
+        isConversation: true,
         message: textResponse,
         rawResponse: textResponse
       };
@@ -310,18 +344,12 @@ export async function sendMessageToGemini(userMessage) {
 
 /**
  * Parse da resposta do Gemini para extrair JSON
- * @param {string} text - Texto da resposta
- * @returns {Object|null} Objeto parseado ou null
  */
 function parseGeminiResponse(text) {
   try {
-    // Remover possíveis markdown code blocks
     let cleanText = text.trim();
-    
-    // Remover ```json e ```
     cleanText = cleanText.replace(/```json\s*/g, '').replace(/```\s*/g, '');
     
-    // Tentar encontrar JSON no texto
     const jsonMatch = cleanText.match(/\{[\s\S]*\}/);
     
     if (!jsonMatch) {
@@ -330,23 +358,32 @@ function parseGeminiResponse(text) {
 
     const parsed = JSON.parse(jsonMatch[0]);
 
-    // Validar estrutura
     if (!parsed.titulo || !parsed.descricao || !parsed.categoria) {
       return null;
     }
 
-    // Validar categoria
     const validCategories = ['vacina', 'material', 'campanha'];
     if (!validCategories.includes(parsed.categoria)) {
-      parsed.categoria = 'campanha'; // Default
+      parsed.categoria = 'campanha';
     }
 
-    // Garantir que exibirNaHomepage seja boolean
+    // Validar página destino - GARANTIR QUE TODAS AS PÁGINAS ESTÃO DISPONÍVEIS
+    const validPages = ['home', 'vacinas', 'servicos', 'educacao'];
+    if (!parsed.paginaDestino || !validPages.includes(parsed.paginaDestino)) {
+      // Se não especificou página, inferir da categoria
+      if (parsed.categoria === 'vacina') {
+        parsed.paginaDestino = 'vacinas';
+      } else if (parsed.categoria === 'campanha') {
+        parsed.paginaDestino = 'educacao';
+      } else {
+        parsed.paginaDestino = 'home';
+      }
+    }
+
     if (typeof parsed.exibirNaHomepage !== 'boolean') {
-      parsed.exibirNaHomepage = true; // Default
+      parsed.exibirNaHomepage = true;
     }
 
-    // Limitar tamanhos
     parsed.titulo = parsed.titulo.substring(0, 100);
     parsed.descricao = parsed.descricao.substring(0, 500);
 
@@ -359,23 +396,17 @@ function parseGeminiResponse(text) {
 }
 
 /**
- * Envia imagem para o Gemini Vision e recebe análise para campanha
- * @param {string} imageBase64 - Imagem em base64
- * @param {string} mimeType - Tipo MIME da imagem (image/jpeg, image/png, etc)
- * @param {string} userMessage - Mensagem adicional do usuário (opcional)
- * @returns {Promise<Object>} Resposta estruturada da campanha
+ * Análise de imagem (mantém função original)
  */
 export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage = '') {
   try {
-    // Validar API Key
     if (!GEMINI_API_KEY || GEMINI_API_KEY === 'sua_chave_api_gemini_aqui') {
       return {
         success: false,
-        error: 'API Key do Gemini não configurada. Adicione VITE_GEMINI_API_KEY no arquivo .env'
+        error: 'API Key do Gemini não configurada.'
       };
     }
 
-    // Validar imagem
     if (!imageBase64 || !mimeType) {
       return {
         success: false,
@@ -383,12 +414,10 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
       };
     }
 
-    // Construir prompt
     const promptTexto = userMessage 
-      ? `${CAMPANHA_SYSTEM_PROMPT}\n\nINSTRUÇÕES ADICIONAIS DO USUÁRIO:\n${userMessage}`
+      ? `${CAMPANHA_SYSTEM_PROMPT}\n\nINSTRUÇÕES ADICIONAIS:\n${userMessage}`
       : CAMPANHA_SYSTEM_PROMPT;
 
-    // Fazer requisição para API Gemini Vision
     const response = await fetch(`${GEMINI_VISION_API_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
       headers: {
@@ -397,9 +426,7 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
       body: JSON.stringify({
         contents: [{
           parts: [
-            {
-              text: promptTexto
-            },
+            { text: promptTexto },
             {
               inline_data: {
                 mime_type: mimeType,
@@ -409,7 +436,7 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
           ]
         }],
         generationConfig: {
-          temperature: 0.4, // Mais determinístico para extração de dados
+          temperature: 0.4,
           topK: 32,
           topP: 0.9,
           maxOutputTokens: 2048,
@@ -448,8 +475,6 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
     }
 
     const data = await response.json();
-
-    // Extrair texto da resposta
     const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
     
     if (!textResponse) {
@@ -459,13 +484,12 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
       };
     }
 
-    // Tentar parsear o JSON da resposta
     const campanhaData = parseCampanhaResponse(textResponse);
     
     if (!campanhaData) {
       return {
         success: false,
-        error: 'Não foi possível processar a imagem. Tente outra imagem mais nítida.',
+        error: 'Não foi possível processar a imagem.',
         rawResponse: textResponse
       };
     }
@@ -478,35 +502,21 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
 
   } catch (error) {
     console.error('Erro no serviço Gemini Vision:', error);
-    
-    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-      return {
-        success: false,
-        error: 'Erro de conexão. Verifique sua internet.'
-      };
-    }
-    
     return {
       success: false,
-      error: 'Erro inesperado ao processar a imagem. Tente novamente.'
+      error: 'Erro inesperado ao processar a imagem.'
     };
   }
 }
 
 /**
- * Parse da resposta do Gemini para campanha
- * @param {string} text - Texto da resposta
- * @returns {Object|null} Objeto parseado ou null
+ * Parse de campanha (mantém função original)
  */
 function parseCampanhaResponse(text) {
   try {
-    // Remover possíveis markdown code blocks
     let cleanText = text.trim();
-    
-    // Remover ```json e ```
     cleanText = cleanText.replace(/```json\s*/g, '').replace(/```\s*/g, '');
     
-    // Tentar encontrar JSON no texto
     const jsonMatch = cleanText.match(/\{[\s\S]*\}/);
     
     if (!jsonMatch) {
@@ -515,40 +525,45 @@ function parseCampanhaResponse(text) {
 
     const parsed = JSON.parse(jsonMatch[0]);
 
-    // Validar estrutura mínima
     if (!parsed.titulo || !parsed.descricao) {
       return null;
     }
 
-    // Garantir campos obrigatórios
     parsed.template = parsed.template || 'informativo';
     parsed.categoria = parsed.categoria || 'campanha';
     parsed.urgente = typeof parsed.urgente === 'boolean' ? parsed.urgente : false;
     parsed.destaque = typeof parsed.destaque === 'boolean' ? parsed.destaque : true;
     parsed.exibirNaHomepage = typeof parsed.exibirNaHomepage === 'boolean' ? parsed.exibirNaHomepage : true;
-    parsed.paginaDestino = parsed.paginaDestino || 'home';
     
-    // Validar categoria
+    // Validar página destino - GARANTIR QUE TODAS AS PÁGINAS ESTÃO DISPONÍVEIS
+    const validPages = ['home', 'vacinas', 'servicos', 'educacao'];
+    if (!parsed.paginaDestino || !validPages.includes(parsed.paginaDestino)) {
+      // Inferir da categoria se não especificado
+      if (parsed.categoria === 'vacina') {
+        parsed.paginaDestino = 'vacinas';
+      } else if (parsed.categoria === 'campanha') {
+        parsed.paginaDestino = 'educacao';
+      } else {
+        parsed.paginaDestino = 'home';
+      }
+    }
+    
     const validCategories = ['vacina', 'material', 'campanha'];
     if (!validCategories.includes(parsed.categoria)) {
       parsed.categoria = 'campanha';
     }
 
-    // Validar templates
     const validTemplates = ['vacinacao', 'material', 'educacao', 'evento', 'urgente', 'informativo'];
     if (!validTemplates.includes(parsed.template)) {
-      // Tentar inferir template da categoria
       if (parsed.categoria === 'vacina') parsed.template = 'vacinacao';
       else if (parsed.categoria === 'material') parsed.template = 'material';
       else parsed.template = 'informativo';
     }
 
-    // Garantir que topicos seja array
     if (!Array.isArray(parsed.topicos)) {
       parsed.topicos = [];
     }
 
-    // Inicializar campos opcionais como null (evita undefined no Firestore)
     parsed.subtitulo = parsed.subtitulo || null;
     parsed.dataInicio = parsed.dataInicio || null;
     parsed.dataFim = parsed.dataFim || null;
@@ -560,7 +575,6 @@ function parseCampanhaResponse(text) {
     parsed.pdfNome = parsed.pdfNome || null;
     parsed.pdfCaminho = parsed.pdfCaminho || null;
 
-    // Limitar tamanhos
     parsed.titulo = parsed.titulo.substring(0, 100);
     parsed.descricao = parsed.descricao.substring(0, 600);
 
@@ -573,10 +587,8 @@ function parseCampanhaResponse(text) {
 }
 
 /**
- * Reformula texto para linguagem formal e profissional do governo (área da saúde)
- * @param {string} userText - Texto casual/informal do usuário
- * @param {string} field - Campo sendo reformulado (titulo, descricao, etc)
- * @returns {Promise<Object>} Texto reformulado
+ * NOVA FUNÇÃO - Reformulação profissional de textos
+ * Agora usando o contexto do chat (especialista em saúde)
  */
 export async function reformulateToFormal(userText, field = 'texto') {
   try {
@@ -587,139 +599,106 @@ export async function reformulateToFormal(userText, field = 'texto') {
       };
     }
 
-    // Prompt especializado para reformulação formal (SEM embutir userText aqui)
-    const FORMAL_SYSTEM_INSTRUCTIONS = `Você é um especialista em comunicação institucional na área da saúde pública.
+    const REFORMULATION_PROMPT = `Você é um especialista em comunicação do Ministério da Saúde com 20 anos de experiência.
 
-TAREFA: Reformular APENAS o texto do usuário de forma mais formal e profissional, SEM adicionar frases institucionais ou informações extras.
+TAREFA: Reformular o texto do usuário de forma PROFISSIONAL e TÉCNICA, mantendo EXATAMENTE o que ele quis dizer.
 
 REGRAS ABSOLUTAS:
-1. ✅ REFORMULAR APENAS o texto fornecido - nada mais
-2. ✅ Tornar formal: remover gírias, usar português correto, capitalizar quando apropriado
-3. ✅ Pode usar termos técnicos quando fizer sentido ("gripe" → "Influenza")
-4. ❌ NÃO adicionar "A ESF informa/anuncia/reforça/orienta sobre..."
-5. ❌ NÃO adicionar "A Estratégia de Saúde da Família..."
-6. ❌ NÃO criar frases longas com informações extras
-7. ❌ NÃO elaborar além do que o usuário disse
-8. ✅ Se o usuário escrever algo já formal, apenas ajustar capitalização/ortografia
+✅ Transforme termos coloquiais em técnicos (gripe → Influenza, vacina → Imunização quando apropriado)
+✅ Capitalize nomes de doenças e procedimentos
+✅ Use linguagem formal e governamental
+✅ Mantenha APENAS o que o usuário disse - não adicione nada
+❌ NUNCA adicione "A ESF informa/anuncia/comunica/orienta sobre..."
+❌ NUNCA adicione frases institucionais
+❌ NUNCA elabore além do texto original
+❌ NUNCA crie informações novas
 
 EXEMPLOS CORRETOS:
+
+Input: "campanha de vacinação contra bronquiolite"
+Output: "Campanha de Imunização contra Bronquiolite"
+
 Input: "vem tomar vacina da gripe"
-Output: "Vacinação contra Gripe" ou "Campanha de Vacinação contra Influenza"
+Output: "Vacinação contra Influenza Disponível"
+
+Input: "acabou a vacina do sarampo"
+Output: "Vacina contra Sarampo Temporariamente Indisponível"
 
 Input: "proteja você e sua família"
 Output: "Proteja você e sua família"
 
-Input: "Imunização contra a bronquiolite"
-Output: "Imunização contra Bronquiolite" (apenas capitalizar)
-
-Input: "vacina da gripe disponível"
-Output: "Vacina contra Gripe Disponível" ou "Vacina contra Influenza Disponível"
-
-Input: "campanha de vacinação"
-Output: "Campanha de Vacinação"
+Input: "palestra sobre diabetes dia 10"
+Output: "Palestra sobre Diabetes - 10 de [mês]"
 
 EXEMPLOS INCORRETOS (NUNCA FAZER):
-Input: "Imunização contra a bronquiolite"
-❌ Output: "A Estratégia de Saúde da Família informa sobre a importância da imunização..." (ADICIONOU frase institucional)
 
-Input: "Campanha de vacinação contra Bronquiolite"
-❌ Output: "A ESF anuncia a implementação da campanha..." (ADICIONOU frase institucional)
+Input: "campanha de vacinação"
+❌ "A ESF anuncia a implementação da campanha..." (ERRADO - adicionou frase institucional)
 
-Input: "proteja você e sua família"
-❌ Output: "A ESF reforça a importância da proteção..." (ADICIONOU frase institucional)
+Input: "proteja seu bebê"
+❌ "A Estratégia de Saúde da Família orienta sobre a importância..." (ERRADO - elaborou demais)
 
-REGRA DE OURO:
-- Se o usuário escrever algo, reformule APENAS aquilo
-- NÃO adicione frases como "A ESF...", "A Estratégia...", "informa sobre...", "reforça a importância..."
-- Apenas torne o texto mais formal mantendo o sentido exato
+INSTRUÇÃO FINAL:
+Responda APENAS com o texto reformulado. Sem aspas, sem explicações, sem frases institucionais.
 
-INSTRUÇÕES FINAIS:
-- Responda APENAS com o texto reformulado
-- Sem explicações, sem aspas, sem frases institucionais
-- Apenas o texto formalizado`;
+TEXTO DO USUÁRIO:
+"${userText.trim()}"`;
 
-    // Construir prompt completo DEPOIS (como sendMessageToGemini faz - evita erro 403)
-    const fullPrompt = `${FORMAL_SYSTEM_INSTRUCTIONS}\n\nTEXTO DO USUÁRIO:\n"${userText.trim()}"`;
-
-    const url = `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`;
-
-    const requestBody = {
-      contents: [
-        {
-          parts: [
-            {
-              text: fullPrompt
-            }
-          ]
-        }
-      ],
-      generationConfig: {
-        temperature: 0.2, // Muito determinístico - apenas reformular, não criar
-        topK: 15, // Menos criatividade - foco em reformulação
-        topP: 0.7, // Mais focado no texto original
-        maxOutputTokens: 150, // Limitar para evitar elaboração excessiva
-      },
-    };
-
-    console.log('🔵 reformulateToFormal - Enviando requisição:', {
-      url: url.replace(GEMINI_API_KEY, '***'),
-      promptLength: fullPrompt.length,
-      userTextLength: userText.length
-    });
-
-    const response = await fetch(url, {
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestBody),
-    });
-
-    console.log('📡 reformulateToFormal - Resposta recebida:', {
-      status: response.status,
-      ok: response.ok,
-      statusText: response.statusText
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: REFORMULATION_PROMPT
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.2,
+          topK: 15,
+          topP: 0.7,
+          maxOutputTokens: 150,
+        }
+      })
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error('❌ reformulateToFormal - Erro da API:', errorData);
       
-      // Tratamento específico para erro 429 (quota excedida)
       if (response.status === 429) {
         const retryAfter = errorData?.error?.details?.find(d => d['@type']?.includes('RetryInfo'))?.retryDelay || '10';
-        const quotaInfo = errorData?.error?.details?.find(d => d['@type']?.includes('QuotaFailure'));
-        
-        // Detectar se é limite de requisições ou outro tipo de quota
-        const isFreeTier = quotaInfo?.quotaMetric?.includes('free_tier');
-        const quotaLimit = quotaInfo?.quotaValue || 'desconhecido';
-        
-        let errorMessage;
-        if (isFreeTier) {
-          errorMessage = `Limite de requisições do plano gratuito excedido (${quotaLimit} requisições/dia). Tente novamente em ${retryAfter} segundos ou aguarde até amanhã.`;
-        } else {
-          errorMessage = `Limite de requisições excedido. Tente novamente em ${retryAfter} segundos. Se você tem Gemini Pro, verifique sua cota no console: https://ai.dev/usage`;
-        }
+        const isFreeTier = errorData?.error?.details?.find(d => d['@type']?.includes('QuotaFailure'))?.quotaMetric?.includes('free_tier');
         
         return {
           success: false,
-          error: errorMessage,
+          error: isFreeTier 
+            ? 'Limite de requisições do plano gratuito excedido. Tente novamente em alguns instantes.'
+            : `Limite de requisições excedido. Tente novamente em ${retryAfter} segundos. Verifique sua cota em: https://ai.dev/usage`,
           quotaExceeded: true,
-          retryAfter: parseInt(retryAfter) || 10,
-          isFreeTier: isFreeTier
+          isFreeTier: isFreeTier,
+          original: userText
         };
       }
       
-      throw new Error(`HTTP error! status: ${response.status} - ${JSON.stringify(errorData)}`);
+      return {
+        success: false,
+        error: 'Erro ao reformular texto',
+        original: userText
+      };
     }
 
     const data = await response.json();
+    const reformulatedText = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
 
-    if (!data.candidates || data.candidates.length === 0) {
-      throw new Error('Nenhuma resposta do Gemini');
+    if (!reformulatedText) {
+      return {
+        success: false,
+        error: 'Resposta inválida',
+        original: userText
+      };
     }
-
-    const reformulatedText = data.candidates[0].content.parts[0].text.trim();
 
     return {
       success: true,
@@ -730,33 +709,16 @@ INSTRUÇÕES FINAIS:
 
   } catch (error) {
     console.error('Erro ao reformular texto:', error);
-    
-    // Se já retornou objeto de erro (429), retornar direto
-    if (error.quotaExceeded) {
-      return error;
-    }
-    
-    // Verificar se é erro de quota na mensagem
-    if (error.message && error.message.includes('429')) {
-      return {
-        success: false,
-        error: 'Limite de requisições excedido. Tente novamente em alguns segundos. Se você tem Gemini Pro, verifique sua cota em: https://ai.dev/usage',
-        quotaExceeded: true,
-        original: userText
-      };
-    }
-    
     return {
       success: false,
-      error: error.message || 'Erro ao reformular texto. Tente novamente.',
+      error: 'Erro ao reformular texto',
       original: userText
     };
   }
 }
 
 /**
- * Testa a conexão com a API Gemini
- * @returns {Promise<Object>} Resultado do teste
+ * Teste de conexão
  */
 export async function testGeminiConnection() {
   try {
@@ -781,4 +743,3 @@ export async function testGeminiConnection() {
     };
   }
 }
-
