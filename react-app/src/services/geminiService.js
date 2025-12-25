@@ -644,6 +644,20 @@ INSTRUÇÕES FINAIS:
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       console.error('❌ reformulateToFormal - Erro da API:', errorData);
+      
+      // Tratamento específico para erro 429 (quota excedida)
+      if (response.status === 429) {
+        const retryAfter = errorData?.error?.details?.[0]?.retryDelay || '10';
+        const quotaInfo = errorData?.error?.details?.find(d => d['@type']?.includes('QuotaFailure'));
+        
+        return {
+          success: false,
+          error: `Limite de requisições excedido. O plano gratuito permite 20 requisições por dia. Tente novamente em ${retryAfter} segundos ou aguarde até amanhã.`,
+          quotaExceeded: true,
+          retryAfter: parseInt(retryAfter) || 10
+        };
+      }
+      
       throw new Error(`HTTP error! status: ${response.status} - ${JSON.stringify(errorData)}`);
     }
 
@@ -664,9 +678,25 @@ INSTRUÇÕES FINAIS:
 
   } catch (error) {
     console.error('Erro ao reformular texto:', error);
+    
+    // Se já retornou objeto de erro (429), retornar direto
+    if (error.quotaExceeded) {
+      return error;
+    }
+    
+    // Verificar se é erro de quota na mensagem
+    if (error.message && error.message.includes('429')) {
+      return {
+        success: false,
+        error: 'Limite de requisições excedido. O plano gratuito permite 20 requisições por dia. Tente novamente mais tarde.',
+        quotaExceeded: true,
+        original: userText
+      };
+    }
+    
     return {
       success: false,
-      error: error.message,
+      error: error.message || 'Erro ao reformular texto. Tente novamente.',
       original: userText
     };
   }

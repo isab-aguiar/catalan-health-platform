@@ -859,22 +859,51 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
             setMessages(prev => [...prev, approvalMsg]);
           } else {
             // Erro na reformulação
+            let errorMessage = result.error || 'Erro desconhecido';
+            
+            // Mensagem especial para quota excedida
+            if (result.quotaExceeded) {
+              errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
+                `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
+                `**Opções:**\n` +
+                `• Aguarde até amanhã para usar novamente\n` +
+                `• Use o texto original (sem reformulação)\n` +
+                `• Considere fazer upgrade do plano Gemini\n\n` +
+                `Por enquanto, vou usar o texto original.`;
+            }
+            
             const errorMsg = {
               id: Date.now() + 1,
               role: 'assistant',
-              content: `Erro ao reformular: ${result.error || 'Erro desconhecido'}`,
+              content: errorMessage,
               isError: true,
+              useOriginalText: result.quotaExceeded, // Flag para usar texto original
+              originalText: textToReformulate,
+              buttons: result.quotaExceeded ? [
+                { label: 'Usar Texto Original', value: 'use_original', action: 'approve' }
+              ] : null,
               timestamp: new Date()
             };
             setMessages(prev => [...prev, errorMsg]);
           }
         } catch (err) {
           console.error('❌ Erro ao reformular:', err);
+          
+          let errorMessage = `Erro ao reformular texto: ${err.message}. Vou usar o texto original.`;
+          
+          if (err.message && err.message.includes('429')) {
+            errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
+              `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
+              `Vou usar o texto original sem reformulação.`;
+          }
+          
           const errorMsg = {
             id: Date.now() + 1,
             role: 'assistant',
-            content: `Erro ao reformular texto: ${err.message}. Vou usar o texto original.`,
+            content: errorMessage,
             isError: true,
+            useOriginalText: true,
+            originalText: textToReformulate,
             timestamp: new Date()
           };
           setMessages(prev => [...prev, errorMsg]);
@@ -1125,22 +1154,51 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
           setMessages(prev => [...prev, approvalMsg]);
         } else {
           // Erro na reformulação
+          let errorMessage = result.error || 'Erro desconhecido';
+          
+          // Mensagem especial para quota excedida
+          if (result.quotaExceeded) {
+            errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
+              `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
+              `**Opções:**\n` +
+              `• Aguarde até amanhã para usar novamente\n` +
+              `• Use o texto original (sem reformulação)\n` +
+              `• Considere fazer upgrade do plano Gemini\n\n` +
+              `Por enquanto, vou usar o texto original.`;
+          }
+          
           const errorMsg = {
             id: Date.now() + 1,
             role: 'assistant',
-            content: `Erro ao reformular: ${result.error || 'Erro desconhecido'}`,
+            content: errorMessage,
             isError: true,
+            useOriginalText: result.quotaExceeded,
+            originalText: textToReformulate,
+            buttons: result.quotaExceeded ? [
+              { label: 'Usar Texto Original', value: 'use_original', action: 'approve' }
+            ] : null,
             timestamp: new Date()
           };
           setMessages(prev => [...prev, errorMsg]);
         }
       } catch (err) {
         console.error('❌ Erro ao reformular:', err);
+        
+        let errorMessage = `Erro ao reformular: ${err.message}`;
+        
+        if (err.message && err.message.includes('429')) {
+          errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
+            `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
+            `Vou usar o texto original sem reformulação.`;
+        }
+        
         const errorMsg = {
           id: Date.now() + 1,
           role: 'assistant',
-          content: `Erro ao reformular: ${err.message}`,
+          content: errorMessage,
           isError: true,
+          useOriginalText: true,
+          originalText: value.trim(),
           timestamp: new Date()
         };
         setMessages(prev => [...prev, errorMsg]);
