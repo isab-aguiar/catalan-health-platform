@@ -38,21 +38,43 @@ export function AuthProvider({ children }) {
     if (!auth) {
       return { success: false, error: 'Firebase não configurado. Configure as variáveis de ambiente.' };
     }
+    
+    // Validação de email
+    if (!email || !email.includes('@')) {
+      return { success: false, error: 'Email inválido' };
+    }
+    
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
       return { success: true, user: result.user };
     } catch (error) {
+      // Log detalhado do erro para diagnóstico
+      console.error('Erro no login:', {
+        code: error.code,
+        message: error.message,
+        email: email
+      });
+      
       // Tratamento de erros em português
       let errorMessage = 'Erro ao fazer login';
       
-      if (error.code === 'auth/invalid-credential') {
+      if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
         errorMessage = 'Email ou senha incorretos';
       } else if (error.code === 'auth/user-not-found') {
         errorMessage = 'Usuário não encontrado';
-      } else if (error.code === 'auth/wrong-password') {
-        errorMessage = 'Senha incorreta';
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = 'Email inválido';
       } else if (error.code === 'auth/too-many-requests') {
         errorMessage = 'Muitas tentativas. Tente novamente mais tarde';
+      } else if (error.code === 'auth/network-request-failed') {
+        errorMessage = 'Erro de conexão. Verifique sua internet';
+      } else if (error.code === 'auth/invalid-api-key' || error.message?.includes('API key')) {
+        errorMessage = 'Configuração do Firebase inválida. Verifique as variáveis de ambiente';
+      } else if (error.code?.startsWith('auth/')) {
+        errorMessage = `Erro de autenticação: ${error.code}`;
+      } else {
+        // Para erros 400 ou outros erros não categorizados
+        errorMessage = `Erro: ${error.message || 'Requisição inválida. Verifique as configurações do Firebase.'}`;
       }
       
       return { success: false, error: errorMessage };
