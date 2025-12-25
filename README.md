@@ -1,46 +1,86 @@
-# 🏥 PSF São José - Sistema Web
+# ESF Catalão - Sistema Web
 
-Sistema web moderno para a Unidade Básica de Saúde (UBS) São José, desenvolvido com React + Vite e Tailwind CSS.
+<div align="center">
+  <img src="public/favicon.png" alt="Logo do Site da ESF Catalão" width="120" />
+  
+  <h3>Plataforma de Gestão Digital e Atendimento Humanizado</h3>
+  
+  <p>Ecossistema moderno para conectar pacientes, ACS e profissionais de saúde.<br />
+  Otimizado para performance, acessibilidade e design governamental.</p>
+  
+  <div>
+    <img src="https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+    <img src="https://img.shields.io/badge/Vite-7.2-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+    <img src="https://img.shields.io/badge/Tailwind-4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/Firebase-Backend-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
+  </div>
+  
+  <p>
+    <a href="#-sobre">Sobre</a> •
+    <a href="#-funcionalidades">Funcionalidades</a> •
+    <a href="#-tecnologias">Tecnologias</a> •
+    <a href="#-instalação">Instalação</a> •
+    <a href="#-configuração">Configuração</a> •
+    <a href="#-deploy">Deploy</a>
+  </p>
+</div>
 
-## 🚀 Tecnologias
+---
 
-- **React 19.2.3** - Biblioteca JavaScript para interfaces
-- **Vite 7.2.4** - Build tool e dev server
-- **React Router DOM 7.10.1** - Roteamento client-side
-- **Tailwind CSS 4.1.8** - Framework CSS utility-first
-- **Lucide React 0.561.0** - Ícones profissionais
-- **Vercel** - Hospedagem e deploy contínuo
+## 📋 Sobre o Projeto
+
+O **ESF Catalão Web** é a evolução digital da Unidade Básica de Saúde São José. Desenvolvido para substituir processos manuais e páginas estáticas, o sistema oferece uma experiência SPA (Single Page Application) fluida, permitindo que a população acesse serviços e que a equipe administre fluxos com eficiência.
+
+**Status:** 🟢 Em Produção (Versão 2.0.0)
+
+---
 
 ## ✨ Funcionalidades
 
-### 📄 Páginas Principais
+### 🏥 Serviços Clínicos Migrados
 
-- **Home** - Apresentação da unidade e busca territorial
-- **Serviços** - Catálogo completo de serviços de saúde
-- **Equipe Multi** - Profissionais da equipe multiprofissional
-- **Grupos** - Grupos de aividades Coletivas (Hiperdia, Fibromialgia)
-- **ACS** - Agentes Comunitários de Saúde por microárea
-- **REMSA** - Residência Multiprofissional em Saúde
+Digitalizamos 100% dos fluxos de atendimento para a nova arquitetura React:
 
-### 🏥 Serviços Migrados (100% React)
+| Especialidade | Status | Recurso |
+|--------------|--------|---------|
+| Enfermagem | ✅ | Triagem e Consultas |
+| Farmácia | ✅ | Gestão de Estoque e Dispensação |
+| Odontologia | ✅ | Agendamentos e Prontuário |
+| Médico | ✅ | Clínico Geral e Pediatria |
+| Equipe Multi | ✅ | Psicologia, Social e Fisioterapia |
 
-- ✅ Consultas de Enfermagem
-- ✅ Consultório Farmacêutico
-- ✅ Fisioterapia
-- ✅ Ginecologia e Pré-natal
-- ✅ Odontologia
-- ✅ Psicologia
-- ✅ Serviço Social
-- ✅ Atendimento Médico
-- ✅ Pediatria
+### 🚀 Recursos Exclusivos
 
-### 🎨 Design System
+- **Busca Territorial**: Localização inteligente de microáreas para ACS
+- **Grupos Operativos**: Páginas dedicadas (Hiperdia, Tabagismo, Fibromialgia)
+- **Design System Governamental**: Interface sóbria, focada na usabilidade e confiança
+- **Acessibilidade**: Ícones profissionais Lucide React (Zero Emojis no código)
+- **Painel Administrativo**: Gestão completa de avisos, campanhas, usuários e estoque de vacinas
 
-- Componentes reutilizáveis (InfoBox, Alert, Card)
-- Ícones profissionais Lucide React (zero emojis)
-- Layout responsivo mobile-first
-- Tema de cores consistente
-- Animações suaves e acessibilidade
+---
+
+## 🛠️ Tecnologias
+
+### Core
+- **React 19** - Biblioteca JavaScript para interfaces
+- **Vite 7.2** - Build tool e dev server
+- **React Router DOM 7** - Roteamento client-side
+
+### Estilização
+- **Tailwind CSS 4.1** - Framework CSS utility-first
+- **Lucide React** - Biblioteca de ícones profissional
+
+### Backend & Infraestrutura
+- **Firebase Authentication** - Autenticação de usuários
+- **Cloud Firestore** - Banco de dados NoSQL
+- **Firebase Storage** - Armazenamento de arquivos
+- **Vercel** - Hospedagem e CI/CD
+
+### Ferramentas
+- **ESLint** - Linter para qualidade de código
+- **PostCSS** - Processamento de CSS
+
+---
 
 ## 📦 Estrutura do Projeto
 
@@ -48,183 +88,163 @@ Sistema web moderno para a Unidade Básica de Saúde (UBS) São José, desenvolv
 react-app/
 ├── src/
 │   ├── components/
-│   │   ├── common/          # Componentes reutilizáveis
-│   │   │   ├── Alert.jsx
-│   │   │   ├── Card.jsx
-│   │   │   └── InfoBox.jsx
-│   │   ├── layout/          # Layout principal
-│   │   │   ├── Header.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   ├── MobileMenu.jsx
-│   │   │   └── PageContainer.jsx
-│   │   └── search/          # Busca global
-│   │       └── GlobalSearch.jsx
+│   │   ├── admin/          # Componentes administrativos
+│   │   ├── common/         # UI Kit (Alert, Card, InfoBox)
+│   │   ├── layout/         # Estrutura (Header, Sidebar, Footer)
+│   │   └── search/         # Motor de busca global
 │   ├── pages/
-│   │   ├── Home.jsx
-│   │   ├── REMSA.jsx
-│   │   ├── groups/          # Páginas de grupos
-│   │   │   └── GroupsIndex.jsx
-│   │   ├── team/            # Equipe multiprofissional
-│   │   │   ├── Enfermeiras.jsx
-│   │   │   ├── Farmaceutica.jsx
-│   │   │   ├── Fisioterapeuta.jsx
-│   │   │   ├── Ginecologista.jsx
-│   │   │   ├── Dentistas.jsx
-│   │   │   ├── Psicologa.jsx
-│   │   │   ├── AssistenteSocial.jsx
-│   │   │   ├── Medicos.jsx
-│   │   │   └── Pediatra.jsx
-│   │   └── services/        # Serviços da UBS
-│   ├── data/                # Dados estruturados
-│   ├── App.jsx              # Componente raiz
-│   └── main.jsx             # Entry point
-├── public/                  # Assets estáticos
-├── vercel.json             # Configuração Vercel
-└── package.json
+│   │   ├── services/       # Páginas de Serviços (Vacina, Curativo...)
+│   │   ├── team/           # Perfis da Equipe
+│   │   ├── groups/         # Grupos Operativos
+│   │   └── admin/          # Painel Administrativo
+│   ├── hooks/              # Custom Hooks (useVacinas, useAvisos...)
+│   ├── contexts/           # Context API (AuthContext)
+│   ├── config/             # Configurações (Firebase)
+│   ├── data/               # Mock data e constantes estruturadas
+│   ├── App.jsx             # Roteamento Principal
+│   └── main.jsx            # Entry Point
+├── scripts/                # Scripts utilitários
+├── public/                 # Assets estáticos
+└── package.json           # Dependências e scripts
 ```
-
-## 🛠️ Instalação e Desenvolvimento
-
-### Pré-requisitos
-
-- Node.js 18+
-- npm ou yarn
-
-### Instalação
-
-```bash
-# Clone o repositório
-git clone https://github.com/Isaguiar-Dev/psf-saojose-web.git
-cd psf-saojose-web/react-app
-
-# Instale as dependências
-npm install
-
-# Inicie o servidor de desenvolvimento
-npm run dev
-
-# Acesse http://localhost:5173
-```
-
-### Build para Produção
-
-```bash
-# Gerar build otimizado
-npm run build
-
-# Preview do build de produção
-npm run preview
-```
-
-## 📱 Responsividade
-
-O sistema é totalmente responsivo com breakpoints:
-
-- **Mobile**: < 640px
-- **Tablet**: 640px - 1024px
-- **Desktop**: > 1024px
-
-## 🎯 Padrões de Código
-
-### Componentes
-
-- Componentes funcionais com hooks
-- Props tipadas com JSDoc (quando necessário)
-- Decomposição em componentes pequenos e reutilizáveis
-
-### Estilo
-
-- Tailwind CSS utility classes
-- Nomenclatura semântica (primary, secondary, neutral)
-- Espaçamento consistente (gap, padding, margin)
-
-### Ícones
-
-- Lucide React para todos os ícones
-- Tamanhos padronizados: 16px, 20px, 24px, 32px, 40px
-
-## 🚀 Deploy
-
-O projeto está configurado para deploy automático na Vercel:
-
-1. Push para `main` dispara deploy automático
-2. Build é feito com `npm run build`
-3. Vercel serve o conteúdo de `dist/`
-4. Rewrites configurados para SPA routing
-
-### Variáveis de Ambiente
-
-O projeto requer variáveis de ambiente do Firebase para funcionar. Configure-as de uma das seguintes formas:
-
-#### Opção 1: Arquivo .env (desenvolvimento local)
-
-1. Crie um arquivo `.env` na pasta `react-app/`:
-
-```env
-# Firebase Configuration
-VITE_FIREBASE_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=seu-projeto-id
-VITE_FIREBASE_STORAGE_BUCKET=seu-projeto.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=123456789012
-VITE_FIREBASE_APP_ID=1:123456789012:web:abcdefghijklmnop
-
-# Gemini (Opcional - para chat com IA)
-VITE_GEMINI_API_KEY=sua-chave-gemini-aqui
-```
-
-2. **Como obter as credenciais do Firebase:**
-   - Acesse: https://console.firebase.google.com
-   - Selecione seu projeto
-   - Vá em: **Project Settings** (ícone de engrenagem) > **General**
-   - Na seção "Your apps", encontre ou crie uma Web App
-   - Copie os valores dos campos de configuração
-
-#### Opção 2: Vercel (produção)
-
-1. Acesse: https://vercel.com
-2. Selecione seu projeto
-3. Vá em: **Settings** > **Environment Variables**
-4. Adicione cada variável `VITE_FIREBASE_*` listada acima
-5. Selecione os ambientes (Production, Preview, Development)
-6. Clique em **Save**
-
-⚠️ **Importante:** Após adicionar variáveis na Vercel, é necessário fazer um novo deploy.
-
-## 📊 Métricas
-
-- **Total de páginas**: 20+ páginas React
-- **Componentes reutilizáveis**: 15+
-- **Linhas de código migradas**: ~2.700 linhas (HTML → React)
-- **Ícones Lucide**: 40+ ícones profissionais
-- **Performance**: Lighthouse Score 90+
-
-## 🔧 Manutenção
-
-### Adicionar Nova Página
-
-1. Criar componente em `src/pages/`
-2. Adicionar rota em `App.jsx`
-3. Usar componentes do design system
-4. Seguir padrão: `PageContainer > InfoBox > Alert`
-
-### Adicionar Novo Serviço
-
-1. Criar em `src/pages/services/NomeServico.jsx`
-2. Usar ícones Lucide React
-3. Manter estrutura consistente com outras páginas
-4. Atualizar navegação se necessário
-
-## 📄 Licença
-
-Este projeto é de uso interno da ESF Catalão.
-
-## 👥 Equipe
-
-Desenvolvido para a **Unidade Básica de Saúde São José**
-Divinópolis, Minas Gerais
 
 ---
 
-**Última atualização**: Dezembro 2025
-**Versão**: 2.0.0 (React Migration Complete)
+## 🚀 Instalação
+
+### Pré-requisitos
+
+- Node.js 18 ou superior
+- NPM ou Yarn
+
+### Passos
+
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/Isaguiar-Dev/psf-saojose-web.git
+   cd psf-saojose-web/react-app
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Execute o servidor de desenvolvimento**
+   ```bash
+   npm run dev
+   ```
+
+4. **Acesse a aplicação**
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## ⚙️ Configuração
+
+### Variáveis de Ambiente
+
+Crie um arquivo `.env` na raiz de `react-app/` com as seguintes variáveis:
+
+```env
+# Firebase Configuration
+VITE_FIREBASE_API_KEY=AIzaSy...
+VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=seu-projeto-id
+VITE_FIREBASE_STORAGE_BUCKET=seu-projeto.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=123456...
+VITE_FIREBASE_APP_ID=1:123456...
+
+# Admin Credentials (para scripts)
+ADMIN_EMAIL=admin@exemplo.com
+ADMIN_PASSWORD=sua_senha_segura
+
+# IA (Opcional)
+VITE_GEMINI_API_KEY=sua_chave_gemini
+```
+
+### Como Obter as Credenciais do Firebase
+
+1. Acesse [Firebase Console](https://console.firebase.google.com/)
+2. Selecione seu projeto
+3. Vá em **Project Settings** (ícone de engrenagem)
+4. Na seção **Your apps**, copie as credenciais do SDK
+
+---
+
+## 🚢 Deploy
+
+### Vercel (Recomendado)
+
+O projeto está configurado para deploy automático na Vercel:
+
+- **Trigger**: Qualquer push na branch `main` dispara um novo deploy
+- **Build Command**: `npm run build`
+- **Output Directory**: `react-app/dist`
+- **Environment Variables**: Configure no painel da Vercel
+
+### Deploy Manual
+
+```bash
+npm run build
+```
+
+Os arquivos estáticos serão gerados em `react-app/dist/`
+
+---
+
+## 📊 Métricas de Qualidade
+
+| Métrica | Valor |
+|---------|-------|
+| Lighthouse Score | 🟢 90+ |
+| Responsividade | Mobile, Tablet & Desktop |
+| Componentização | 15+ Componentes Reutilizáveis |
+| Clean Code | Padrões de Hooks e Props Tipadas |
+| Acessibilidade | WCAG 2.1 Level AA |
+
+---
+
+## 🔧 Guia de Manutenção
+
+### Adicionar Nova Página
+
+1. Crie o componente em `src/pages/`
+2. Adicione a rota no arquivo `App.jsx`
+3. Utilize o wrapper padrão: `PageContainer > InfoBox > Conteúdo`
+
+### Adicionar Novo Serviço
+
+1. Crie o arquivo em `src/pages/services/NomeServico.jsx`
+2. Importe ícones do Lucide React
+3. Atualize o catálogo em `src/data/services.js`
+
+### Scripts Disponíveis
+
+```bash
+npm run dev          # Servidor de desenvolvimento
+npm run build        # Build de produção
+npm run preview      # Preview do build
+npm run lint         # Executar linter
+```
+
+---
+
+## 📄 Licença
+
+Este projeto é de uso exclusivo da **ESF Catalão**.
+
+---
+
+## 👥 Créditos
+
+**Desenvolvido por:** Isabela Aguiar   
+**Localização:** Divinópolis, Minas Gerais
+
+---
+
+<div align="center">
+  <sub>Copyright © 2025 - ESF Catalão. Todos os direitos reservados.</sub>
+</div>
