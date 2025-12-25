@@ -863,13 +863,23 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
             
             // Mensagem especial para quota excedida
             if (result.quotaExceeded) {
-              errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
-                `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
-                `**Opções:**\n` +
-                `• Aguarde até amanhã para usar novamente\n` +
-                `• Use o texto original (sem reformulação)\n` +
-                `• Considere fazer upgrade do plano Gemini\n\n` +
-                `Por enquanto, vou usar o texto original.`;
+              if (result.isFreeTier) {
+                errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
+                  `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
+                  `**Opções:**\n` +
+                  `• Aguarde até amanhã para usar novamente\n` +
+                  `• Use o texto original (sem reformulação)\n` +
+                  `• Considere fazer upgrade do plano Gemini\n\n` +
+                  `Por enquanto, vou usar o texto original.`;
+              } else {
+                errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
+                  `Você atingiu o limite de requisições do seu plano Gemini Pro.\n\n` +
+                  `**Opções:**\n` +
+                  `• Aguarde alguns segundos e tente novamente\n` +
+                  `• Use o texto original (sem reformulação)\n` +
+                  `• Verifique sua cota em: https://ai.dev/usage\n\n` +
+                  `Por enquanto, vou usar o texto original.`;
+              }
             }
             
             const errorMsg = {
@@ -893,8 +903,9 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
           
           if (err.message && err.message.includes('429')) {
             errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
-              `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
-              `Vou usar o texto original sem reformulação.`;
+              `Você atingiu o limite de requisições do seu plano Gemini Pro.\n\n` +
+              `Aguarde alguns segundos e tente novamente, ou use o texto original sem reformulação.\n\n` +
+              `Verifique sua cota em: https://ai.dev/usage`;
           }
           
           const errorMsg = {
@@ -1158,13 +1169,23 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
           
           // Mensagem especial para quota excedida
           if (result.quotaExceeded) {
-            errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
-              `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
-              `**Opções:**\n` +
-              `• Aguarde até amanhã para usar novamente\n` +
-              `• Use o texto original (sem reformulação)\n` +
-              `• Considere fazer upgrade do plano Gemini\n\n` +
-              `Por enquanto, vou usar o texto original.`;
+            if (result.isFreeTier) {
+              errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
+                `O plano gratuito do Gemini permite 20 requisições por dia.\n\n` +
+                `**Opções:**\n` +
+                `• Aguarde até amanhã para usar novamente\n` +
+                `• Use o texto original (sem reformulação)\n` +
+                `• Considere fazer upgrade do plano Gemini\n\n` +
+                `Por enquanto, vou usar o texto original.`;
+            } else {
+              errorMessage = `⚠️ **Limite de requisições excedido**\n\n` +
+                `Você atingiu o limite de requisições do seu plano Gemini Pro.\n\n` +
+                `**Opções:**\n` +
+                `• Aguarde alguns segundos e tente novamente\n` +
+                `• Use o texto original (sem reformulação)\n` +
+                `• Verifique sua cota em: https://ai.dev/usage\n\n` +
+                `Por enquanto, vou usar o texto original.`;
+            }
           }
           
           const errorMsg = {
