@@ -4,25 +4,74 @@
 // Este script cria o documento do usuário Admin no Firestore
 // IMPORTANTE: Você deve criar o usuário no Firebase Authentication primeiro!
 //
-// Execute: node --env-file=../.env scripts/criar-admin-firestore.js
+// Execute: node scripts/criar-admin-firestore.js
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, setDoc, getDoc, Timestamp } from 'firebase/firestore';
+import { readFileSync } from 'fs';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+// Obter diretório atual
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Função para carregar variáveis de ambiente
+function loadEnv() {
+  const envPaths = [
+    join(__dirname, '..', '.env'),
+    join(__dirname, '..', '..', '.env'),
+    join(process.cwd(), '.env')
+  ];
+
+  for (const envPath of envPaths) {
+    try {
+      const envContent = readFileSync(envPath, 'utf-8');
+      const envVars = {};
+      
+      envContent.split('\n').forEach(line => {
+        const trimmedLine = line.trim();
+        if (trimmedLine && !trimmedLine.startsWith('#')) {
+          const [key, ...valueParts] = trimmedLine.split('=');
+          if (key && valueParts.length > 0) {
+            envVars[key.trim()] = valueParts.join('=').trim().replace(/^["']|["']$/g, '');
+          }
+        }
+      });
+
+      return envVars;
+    } catch (err) {
+      // Continuar tentando outros caminhos
+    }
+  }
+
+  return {};
+}
+
+// Carregar variáveis de ambiente
+const envVars = loadEnv();
 
 // ✅ CONFIGURAÇÃO DO FIREBASE (usando variáveis de ambiente)
 const firebaseConfig = {
-  apiKey: process.env.VITE_FIREBASE_API_KEY,
-  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.VITE_FIREBASE_APP_ID
+  apiKey: process.env.VITE_FIREBASE_API_KEY || envVars.VITE_FIREBASE_API_KEY,
+  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || envVars.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.VITE_FIREBASE_PROJECT_ID || envVars.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET || envVars.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID || envVars.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VITE_FIREBASE_APP_ID || envVars.VITE_FIREBASE_APP_ID
 };
 
 // Validar variáveis de ambiente
-if (!firebaseConfig.apiKey) {
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
   console.error('❌ ERRO: Variáveis de ambiente não configuradas!');
-  console.error('Execute: node --env-file=../.env scripts/criar-admin-firestore.js');
+  console.error('Certifique-se de que o arquivo .env existe em react-app/.env ou na raiz do projeto');
+  console.error('\nVariáveis necessárias:');
+  console.error('  VITE_FIREBASE_API_KEY');
+  console.error('  VITE_FIREBASE_AUTH_DOMAIN');
+  console.error('  VITE_FIREBASE_PROJECT_ID');
+  console.error('  VITE_FIREBASE_STORAGE_BUCKET');
+  console.error('  VITE_FIREBASE_MESSAGING_SENDER_ID');
+  console.error('  VITE_FIREBASE_APP_ID');
   process.exit(1);
 }
 
@@ -34,9 +83,9 @@ const db = getFirestore(app);
 // DADOS DO ADMINISTRADOR
 // ============================================
 
-const ADMIN_UID = "c7QFLlMEMmWBZvvkibp1Q8oFRfj1"; // UID do Firebase Authentication
-const ADMIN_EMAIL = "root@esfcatalao.com";
-const ADMIN_NOME = "Administrador ESF Catalão";
+const ADMIN_UID = "c7QFLlMEMmWBZvvkibp1Q8oFRfj1"; // UID do Firebase Authentication (permissão total)
+const ADMIN_EMAIL = "root@esfcatalao.com"; // Email do admin
+const ADMIN_NOME = "Administrador ESF Catalão"; // Nome do admin
 
 // ============================================
 // FUNÇÃO PRINCIPAL

@@ -68,8 +68,13 @@ export function AuthProvider({ children }) {
         errorMessage = 'Muitas tentativas. Tente novamente mais tarde';
       } else if (error.code === 'auth/network-request-failed') {
         errorMessage = 'Erro de conexão. Verifique sua internet';
-      } else if (error.code === 'auth/invalid-api-key' || error.message?.includes('API key')) {
-        errorMessage = 'Configuração do Firebase inválida. Verifique as variáveis de ambiente';
+      } else if (error.code === 'auth/invalid-api-key' || 
+                 error.message?.includes('API key') || 
+                 error.message?.includes('INVALID_ARGUMENT') ||
+                 error.message?.includes('badRequest')) {
+        errorMessage = 'Erro de configuração: API Key do Firebase inválida. Verifique as variáveis de ambiente no console.';
+        console.error('🔑 API Key inválida detectada durante login');
+        console.error('   Verifique o console do navegador para instruções detalhadas');
       } else if (error.code?.startsWith('auth/')) {
         errorMessage = `Erro de autenticação: ${error.code}`;
       } else {

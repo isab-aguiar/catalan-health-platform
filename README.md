@@ -152,12 +152,44 @@ O projeto está configurado para deploy automático na Vercel:
 3. Vercel serve o conteúdo de `dist/`
 4. Rewrites configurados para SPA routing
 
-### Variáveis de Ambiente (se necessário)
+### Variáveis de Ambiente
+
+O projeto requer variáveis de ambiente do Firebase para funcionar. Configure-as de uma das seguintes formas:
+
+#### Opção 1: Arquivo .env (desenvolvimento local)
+
+1. Crie um arquivo `.env` na pasta `react-app/`:
 
 ```env
-# Adicione em vercel.com > Settings > Environment Variables
-VITE_API_URL=https://api.example.com
+# Firebase Configuration
+VITE_FIREBASE_API_KEY=AIzaSyXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=seu-projeto-id
+VITE_FIREBASE_STORAGE_BUCKET=seu-projeto.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=123456789012
+VITE_FIREBASE_APP_ID=1:123456789012:web:abcdefghijklmnop
+
+# Gemini (Opcional - para chat com IA)
+VITE_GEMINI_API_KEY=sua-chave-gemini-aqui
 ```
+
+2. **Como obter as credenciais do Firebase:**
+   - Acesse: https://console.firebase.google.com
+   - Selecione seu projeto
+   - Vá em: **Project Settings** (ícone de engrenagem) > **General**
+   - Na seção "Your apps", encontre ou crie uma Web App
+   - Copie os valores dos campos de configuração
+
+#### Opção 2: Vercel (produção)
+
+1. Acesse: https://vercel.com
+2. Selecione seu projeto
+3. Vá em: **Settings** > **Environment Variables**
+4. Adicione cada variável `VITE_FIREBASE_*` listada acima
+5. Selecione os ambientes (Production, Preview, Development)
+6. Clique em **Save**
+
+⚠️ **Importante:** Após adicionar variáveis na Vercel, é necessário fazer um novo deploy.
 
 ## 📊 Métricas
 
