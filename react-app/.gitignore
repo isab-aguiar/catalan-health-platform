@@ -25,4 +25,17 @@ dist-ssr
 .vercel
 .env*.local
 .env*
+.env
+
+# Firebase Service Account Key (sensitive - never commit!)
 serviceAccountKey.json
+*.serviceAccountKey.json
+**/serviceAccountKey.json
+
+# Other sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+credentials.json
+firebase-adminsdk-*.json
