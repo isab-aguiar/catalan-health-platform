@@ -9,10 +9,17 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,json,css,html}\"",
-    "format:check": "prettier --check \"src/**/*.{js,jsx,json,css,html}\""
+    "format:check": "prettier --check \"src/**/*.{js,jsx,json,css,html}\"",
+    "upload:vacinas": "node --env-file=.env scripts/upload-vacinas-firestore.js",
+    "upload:vacinas:force": "node --env-file=.env scripts/upload-vacinas-firestore.js --force",
+    "upload:vacinas:admin": "node --env-file=.env scripts/upload-vacinas-admin.js",
+    "upload:vacinas:admin:force": "node --env-file=.env scripts/upload-vacinas-admin.js --force",
+    "list:vacinas": "node --env-file=.env scripts/upload-vacinas-firestore.js --list",
+    "list:vacinas:admin": "node --env-file=.env scripts/upload-vacinas-admin.js --list"
   },
   "dependencies": {
     "firebase": "^12.7.0",
+    "firebase-admin": "^13.6.0",
     "fuse.js": "^7.1.0",
     "html2pdf.js": "^0.12.1",
     "lucide-react": "^0.561.0",

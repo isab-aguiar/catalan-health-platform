@@ -1,0 +1,167 @@
+export const vacinas2025 = [
+    {
+      id: "bcg",
+      nome: "BCG",
+      finalidade: "Prevenção das formas graves da tuberculose (miliar e meníngea)",
+      publicoAlvo: "Crianças (Ao nascer até 4 anos)",
+      quantidade: 0
+    },
+    {
+      id: "hepatite-b",
+      nome: "Hepatite B",
+      finalidade: "Prevenção da infecção pelo vírus da hepatite B",
+      publicoAlvo: "Crianças e Adultos",
+      quantidade: 0
+    },
+    {
+      id: "penta",
+      nome: "Penta (DTP/Hib/HepB)",
+      finalidade: "Difteria, tétano, coqueluche, hepatite B e Haemophilus influenzae b",
+      publicoAlvo: "Crianças (2, 4 e 6 meses)",
+      quantidade: 0
+    },
+    {
+      id: "vip",
+      nome: "Pólio Inativada (VIP)",
+      finalidade: "Prevenção da poliomielite (paralisia infantil)",
+      publicoAlvo: "Crianças (1, 2, 3 doses e reforço)",
+      quantidade: 0
+    },
+    {
+      id: "rotavirus",
+      nome: "Rotavírus",
+      finalidade: "Prevenção de diarreia grave por rotavírus",
+      publicoAlvo: "Crianças (2 e 4 meses)",
+      quantidade: 0
+    },
+    {
+      id: "pneumo10",
+      nome: "Pneumocócica 10v",
+      finalidade: "Prevenção de pneumonias, meningites e otites",
+      publicoAlvo: "Crianças (até 4 anos)",
+      quantidade: 0
+    },
+    {
+      id: "meningo-c",
+      nome: "Meningocócica C",
+      finalidade: "Prevenção de doenças meningocócicas (meningite, encefalite, meningoencefalite) pelo meningococo C",
+      publicoAlvo: "Crianças (até 4 anos)",
+      quantidade: 0
+    },
+    {
+      id: "febre-amarela",
+      nome: "Febre Amarela",
+      finalidade: "Prevenção da febre amarela",
+      publicoAlvo: "A partir de 9 meses (Todo o país)",
+      quantidade: 0
+    },
+    {
+      id: "triplice-viral",
+      nome: "Tríplice Viral",
+      finalidade: "Sarampo, caxumba e rubéola",
+      publicoAlvo: "A partir de 12 meses",
+      quantidade: 0
+    },
+    {
+      id: "tetra-viral",
+      nome: "Tetraviral",
+      finalidade: "Sarampo, caxumba, rubéola e varicela",
+      publicoAlvo: "Crianças (15 meses)",
+      quantidade: 0
+    },
+    {
+      id: "hepatite-a",
+      nome: "Hepatite A",
+      finalidade: "Prevenção da hepatite A",
+      publicoAlvo: "Crianças (15 meses)",
+      quantidade: 0
+    },
+    {
+      id: "dtp",
+      nome: "DTP (Tríplice Bacteriana)",
+      finalidade: "Difteria, tétano e coqueluche (Reforço)",
+      publicoAlvo: "Crianças (15 meses e 4 anos)",
+      quantidade: 0
+    },
+    {
+      id: "varicela",
+      nome: "Varicela",
+      finalidade: "Prevenção da varicela (catapora)",
+      publicoAlvo: "Crianças (4 anos)",
+      quantidade: 0
+    },
+    {
+      id: "hpv4",
+      nome: "HPV Quadrivalente",
+      finalidade: "Prevenção de cânceres (colo do útero, pênis, boca) e verrugas",
+      publicoAlvo: "9 a 14 anos e Imunossuprimidos",
+      quantidade: 0
+    },
+    {
+      id: "meningo-acwy",
+      nome: "Meningocócica ACWY",
+      finalidade: "Meningites A, C, W e Y",
+      publicoAlvo: "Adolescentes (11 a 14 anos)",
+      quantidade: 0
+    },
+  
+    // --- ADULTO, GESTANTE E IDOSO ---
+    {
+      id: "dt",
+      nome: "Dupla Adulto (dT)",
+      finalidade: "Difteria e tétano (Reforço a cada 10 anos)",
+      publicoAlvo: "A partir de 7 anos",
+      quantidade: 0
+    },
+    {
+      id: "tt",
+      nome: "Antitetânica (TT)",
+      finalidade: "Prevenção do tétano (Isolada)",
+      publicoAlvo: "Situações especiais/Alergia a componentes da dT",
+      quantidade: 0
+    },
+    {
+      id: "dtpa",
+      nome: "dTpa (Acelular)",
+      finalidade: "Proteção do recém-nascido contra coqueluche",
+      publicoAlvo: "Gestantes e Profissionais de Saúde",
+      quantidade: 0
+    },
+    {
+      id: "pneumo23",
+      nome: "Pneumocócica 23v",
+      finalidade: "Prevenção de infecções graves por pneumococos",
+      publicoAlvo: "Idosos institucionalizados e Indígenas",
+      quantidade: 0
+    },
+  
+    // --- CAMPANHAS E ESPECIAIS ---
+    {
+      id: "influenza",
+      nome: "Influenza (Gripe)",
+      finalidade: "Prevenção da gripe sazonal",
+      publicoAlvo: "Campanha Anual (Grupos prioritários)",
+      quantidade: 0
+    },
+    {
+      id: "covid",
+      nome: "Covid-19",
+      finalidade: "Prevenção de formas graves e óbitos por Covid-19",
+      publicoAlvo: "Crianças e Grupos prioritários",
+      quantidade: 0
+    },
+    {
+      id: "dengue",
+      nome: "Dengue (Qdenga)",
+      finalidade: "Redução de hospitalizações por dengue",
+      publicoAlvo: "Crianças/Adolescentes 10 a 14 anos (Regiões selecionadas)",
+      quantidade: 0
+    },
+    {
+      id: "vsr",
+      nome: "VSR (Abrysvo)",
+      finalidade: "Prevenção de bronquiolite no bebê",
+      publicoAlvo: "Gestantes da 28 semanas ate 36 semanas (Sazonal/Específico)",
+      quantidade: 0
+    }
+  ];
