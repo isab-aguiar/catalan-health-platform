@@ -166,15 +166,18 @@ export const buscarCampanhas = async (filtros = {}) => {
     // Buscar documentos
     const snapshot = await getDocs(q);
     
-    const campanhas = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-      // Converter Timestamps para Date
-      dataInicio: doc.data().dataInicio?.toDate() || null,
-      dataFim: doc.data().dataFim?.toDate() || null,
-      criadoEm: doc.data().criadoEm?.toDate() || null,
-      atualizadoEm: doc.data().atualizadoEm?.toDate() || null
-    }));
+    const campanhas = snapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        // Converter Timestamps para Date (com verificação de tipo)
+        dataInicio: data.dataInicio?.toDate ? data.dataInicio.toDate() : (data.dataInicio || null),
+        dataFim: data.dataFim?.toDate ? data.dataFim.toDate() : (data.dataFim || null),
+        criadoEm: data.criadoEm?.toDate ? data.criadoEm.toDate() : (data.criadoEm ? new Date(data.criadoEm) : null),
+        atualizadoEm: data.atualizadoEm?.toDate ? data.atualizadoEm.toDate() : (data.atualizadoEm ? new Date(data.atualizadoEm) : null)
+      };
+    });
 
     // Ordenar por data de criação (mais recente primeiro)
     campanhas.sort((a, b) => {
@@ -227,14 +230,18 @@ export const buscarCampanhasPorCriador = async (userId) => {
 
     const snapshot = await getDocs(q);
     
-    const campanhas = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-      dataInicio: doc.data().dataInicio?.toDate() || null,
-      dataFim: doc.data().dataFim?.toDate() || null,
-      criadoEm: doc.data().criadoEm?.toDate() || null,
-      atualizadoEm: doc.data().atualizadoEm?.toDate() || null
-    }));
+    const campanhas = snapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        // Converter Timestamps para Date (com verificação de tipo)
+        dataInicio: data.dataInicio?.toDate ? data.dataInicio.toDate() : (data.dataInicio || null),
+        dataFim: data.dataFim?.toDate ? data.dataFim.toDate() : (data.dataFim || null),
+        criadoEm: data.criadoEm?.toDate ? data.criadoEm.toDate() : (data.criadoEm ? new Date(data.criadoEm) : null),
+        atualizadoEm: data.atualizadoEm?.toDate ? data.atualizadoEm.toDate() : (data.atualizadoEm ? new Date(data.atualizadoEm) : null)
+      };
+    });
 
     // Ordenar por data de criação (mais recente primeiro)
     campanhas.sort((a, b) => {
@@ -270,14 +277,18 @@ export const buscarCampanhasPorPagina = async (paginaNome) => {
 
     const snapshot = await getDocs(q);
     
-    const campanhas = snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-      dataInicio: doc.data().dataInicio?.toDate() || null,
-      dataFim: doc.data().dataFim?.toDate() || null,
-      criadoEm: doc.data().criadoEm?.toDate() || null,
-      atualizadoEm: doc.data().atualizadoEm?.toDate() || null
-    }));
+    const campanhas = snapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        // Converter Timestamps para Date (com verificação de tipo)
+        dataInicio: data.dataInicio?.toDate ? data.dataInicio.toDate() : (data.dataInicio || null),
+        dataFim: data.dataFim?.toDate ? data.dataFim.toDate() : (data.dataFim || null),
+        criadoEm: data.criadoEm?.toDate ? data.criadoEm.toDate() : (data.criadoEm ? new Date(data.criadoEm) : null),
+        atualizadoEm: data.atualizadoEm?.toDate ? data.atualizadoEm.toDate() : (data.atualizadoEm ? new Date(data.atualizadoEm) : null)
+      };
+    });
 
     // Ordenar por data de criação
     campanhas.sort((a, b) => {
@@ -316,10 +327,11 @@ export const buscarCampanhaPorId = async (campanhaId) => {
     return {
       id: campanhaSnap.id,
       ...data,
-      dataInicio: data.dataInicio?.toDate() || null,
-      dataFim: data.dataFim?.toDate() || null,
-      criadoEm: data.criadoEm?.toDate() || null,
-      atualizadoEm: data.atualizadoEm?.toDate() || null
+      // Converter Timestamps para Date (com verificação de tipo)
+      dataInicio: data.dataInicio?.toDate ? data.dataInicio.toDate() : (data.dataInicio || null),
+      dataFim: data.dataFim?.toDate ? data.dataFim.toDate() : (data.dataFim || null),
+      criadoEm: data.criadoEm?.toDate ? data.criadoEm.toDate() : (data.criadoEm ? new Date(data.criadoEm) : null),
+      atualizadoEm: data.atualizadoEm?.toDate ? data.atualizadoEm.toDate() : (data.atualizadoEm ? new Date(data.atualizadoEm) : null)
     };
 
   } catch (error) {
