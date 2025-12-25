@@ -1,10 +1,10 @@
 // =========================================
-// HOOK useGemini (AGORA USA CLAUDE)
+// HOOK useGemini
 // =========================================
-// Hook para gerenciar estado e interações com IA (Claude Anthropic)
+// Hook para gerenciar estado e interações com o Gemini
 
 import { useState, useCallback, useRef } from 'react';
-import { sendMessageToClaude as sendMessageToGemini, analyzeImageForCampanha, reformulateToFormal } from '../services/claudeService';
+import { sendMessageToGemini, analyzeImageForCampanha, reformulateToFormal } from '../services/geminiService';
 import { prepararParaIA } from '../services/uploadService';
 import { uploadArquivo } from '../services/uploadService';
 import { criarCampanha } from '../services/campanhasService';
