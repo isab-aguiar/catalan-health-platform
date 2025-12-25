@@ -48,11 +48,13 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
       return;
     }
 
-    // Se tem arquivo de imagem, iniciar NOVO FLUXO COM BOTÕES
+    // DESABILITADO: Fluxo com botões (agora usa fluxo conversacional)
+    // Se tem arquivo de imagem, enviar para análise conversacional com Gemini
     if (arquivo && arquivo.type?.startsWith('image/')) {
-      console.log('🎬 Iniciando novo fluxo de campanha com imagem...');
-      startCampanhaFlow(arquivo, userId);
-      return;
+      console.log('🎬 Enviando imagem para análise conversacional com Gemini...');
+      // Deixa o fluxo normal processar (sendMessage abaixo vai fazer análise)
+      // startCampanhaFlow(arquivo, userId); // DESABILITADO - usava botões
+      // return; // REMOVIDO - continua para fluxo conversacional
     }
 
     // Se tem rascunho de campanha e não tem arquivo, é refinamento (SISTEMA ANTIGO)
