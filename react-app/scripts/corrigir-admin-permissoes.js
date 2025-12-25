@@ -23,7 +23,7 @@ const db = getFirestore(app);
 
 // DADOS DO ADMINISTRADOR
 const ADMIN_DATA = {
-  uid: "tXDNFTFJVZcijOYJNtKZtuFlFhv2",
+  uid: "DLtg8Ik1cOSycUmdGUVnun7Mmur2",
   email: "root@esfcatalao.com",
   displayName: "Administrador",
   role: "admin",
