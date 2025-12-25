@@ -117,14 +117,29 @@ export function useAvisosPublicos() {
 
   useEffect(() => {
     setLoading(true);
-    
+    let timeoutId = null;
+
+    // Timeout de 10 segundos - se não carregar, considera que não tem dados (não erro)
+    timeoutId = setTimeout(() => {
+      console.log('⏱️ Timeout ao carregar avisos - assumindo que não há dados');
+      setLoading(false);
+      setAvisos([]);
+      setError(null); // Não é erro, apenas não tem dados
+    }, 10000);
+
     try {
       const avisosRef = collection(db, COLLECTION_NAME);
-      
+
       // Real-time listener SEM where e orderBy
       const unsubscribe = onSnapshot(
         avisosRef,
         (snapshot) => {
+          // Cancelar timeout se recebeu resposta
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+          }
+
           const avisosData = [];
           snapshot.forEach((doc) => {
             const data = doc.data();
@@ -136,29 +151,61 @@ export function useAvisosPublicos() {
               });
             }
           });
-          
+
           // Ordenar no cliente
           avisosData.sort((a, b) => {
             const dateA = a.data?.toDate?.() || new Date(a.data || 0);
             const dateB = b.data?.toDate?.() || new Date(b.data || 0);
             return dateB - dateA;
           });
-          
+
           setAvisos(avisosData);
           setLoading(false);
-          setError(null);
+          setError(null); // Sucesso, sem erro
         },
         (err) => {
+          // Cancelar timeout
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+            timeoutId = null;
+          }
+
           console.error('Erro ao escutar avisos públicos:', err);
-          setError('Erro ao carregar avisos');
+
+          // Verificar tipo de erro
+          if (err.code === 'permission-denied') {
+            // Permissão negada é normal para usuário não logado em algumas coleções
+            console.log('⚠️ Permissão negada (normal para usuário não autenticado)');
+            setAvisos([]);
+            setError(null); // Não mostrar erro, apenas lista vazia
+          } else if (err.code === 'unavailable') {
+            // Firestore offline
+            console.log('📡 Firestore offline ou sem conexão');
+            setError(null); // Não mostrar erro visual, apenas não carrega
+            setAvisos([]);
+          } else {
+            // Erro real
+            setError('Erro ao carregar avisos');
+          }
+
           setLoading(false);
         }
       );
 
-      return () => unsubscribe();
+      return () => {
+        unsubscribe();
+        if (timeoutId) clearTimeout(timeoutId);
+      };
     } catch (err) {
+      // Cancelar timeout
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+
       console.error('Erro ao configurar listener:', err);
-      setError('Erro ao inicializar');
+      setAvisos([]);
+      setError(null); // Não mostrar erro, apenas não carrega
       setLoading(false);
     }
   }, []);

@@ -42,18 +42,42 @@ export function useCampanhas() {
       const cacheValido = campanhasCache && cacheTimestamp && (agora - cacheTimestamp < CACHE_DURATION);
 
       let campanhasFirebase;
-      
+
       if (cacheValido) {
         // Usar cache
         campanhasFirebase = campanhasCache;
         console.log('📦 Usando cache de campanhas');
       } else {
-        // Buscar do Firebase
-        campanhasFirebase = await buscarCampanhasHome();
-        // Atualizar cache
-        campanhasCache = campanhasFirebase;
-        cacheTimestamp = agora;
-        console.log('🔄 Campanhas carregadas do Firebase');
+        // Buscar do Firebase com timeout de 10 segundos
+        const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error('TIMEOUT')), 10000);
+        });
+
+        try {
+          campanhasFirebase = await Promise.race([
+            buscarCampanhasHome(),
+            timeoutPromise
+          ]);
+          // Atualizar cache
+          campanhasCache = campanhasFirebase;
+          cacheTimestamp = agora;
+          console.log('🔄 Campanhas carregadas do Firebase');
+        } catch (err) {
+          // Timeout ou erro do Firebase
+          if (err.message === 'TIMEOUT') {
+            console.log('⏱️ Timeout ao carregar campanhas - assumindo que não há dados');
+            campanhasFirebase = [];
+          } else if (err.code === 'permission-denied') {
+            console.log('⚠️ Permissão negada (normal para usuário não autenticado)');
+            campanhasFirebase = [];
+          } else if (err.code === 'unavailable') {
+            console.log('📡 Firestore offline ou sem conexão');
+            campanhasFirebase = [];
+          } else {
+            // Erro real - propagar
+            throw err;
+          }
+        }
       }
 
       // Combinar Firebase + locais (apenas os da home)
@@ -66,10 +90,16 @@ export function useCampanhas() {
       }
     } catch (err) {
       console.error('Erro ao carregar campanhas:', err);
-      
+
       if (isMounted.current) {
-        setError(err.message);
-        // Se erro, mostrar apenas locais
+        // Não mostrar erro se for problema de permissão/conexão
+        if (err.code === 'permission-denied' || err.code === 'unavailable') {
+          setError(null);
+        } else {
+          setError(err.message);
+        }
+
+        // Sempre mostrar campanhas locais como fallback
         const locaisFiltradas = campanhasLocais.filter(c => c.exibirNaHomepage && c.ativo);
         setCampanhas(locaisFiltradas);
         setLoading(false);
