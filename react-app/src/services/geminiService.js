@@ -766,9 +766,10 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
     const campanhaData = parseCampanhaResponse(textResponse);
 
     if (!campanhaData) {
-      console.error('❌ JSON não encontrado na resposta do Gemini');
-      console.error('📄 Resposta recebida:', textResponse);
-      console.error('💡 Dica: Verifique se o prompt está instruindo corretamente o Gemini a retornar JSON');
+      // Log apenas em desenvolvimento
+      if (import.meta.env.DEV) {
+        console.error('Falha ao processar resposta:', textResponse.substring(0, 200));
+      }
       return {
         success: false,
         error: 'Não foi possível processar a imagem.',
@@ -811,12 +812,10 @@ function parseCampanhaResponse(text) {
     // Em vez de retornar null (que causa erro), usamos valores padrão
     if (!parsed.titulo) {
       parsed.titulo = 'Nova Campanha de Saúde (aguardando refinamento)';
-      console.warn('⚠️ Título não identificado na imagem - usando padrão');
     }
 
     if (!parsed.descricao) {
       parsed.descricao = 'Campanha de saúde da ESF Catalão. Descrição será refinada pelo usuário.';
-      console.warn('⚠️ Descrição não identificada na imagem - usando padrão');
     }
 
     parsed.template = parsed.template || 'informativo';

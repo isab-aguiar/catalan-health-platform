@@ -268,17 +268,9 @@ export function useGemini() {
    * @param {string} userId - ID do usuário
    */
   const sendCampanha = useCallback(async (data, userId) => {
-    console.log('🟠 sendCampanha iniciado');
-    console.log('🟠 Data recebida:', data);
-    console.log('🟠 userId:', userId);
-    
     const { arquivo, texto } = data;
 
-    console.log('📎 Arquivo extraído:', arquivo);
-    console.log('📝 Texto extraído:', texto);
-
     if (!arquivo) {
-      console.error('❌ Nenhum arquivo fornecido!');
       setError('Nenhum arquivo fornecido');
       return null;
     }
@@ -293,33 +285,23 @@ export function useGemini() {
       timestamp: new Date()
     };
 
-    console.log('💬 Adicionando mensagem do usuário:', userMsg);
     setMessages(prev => [...prev, userMsg]);
     setLoading(true);
     setError(null);
     setLastGeneratedAviso(null);
-    
-    console.log('✅ Estado atualizado, iniciando processamento...');
 
     try {
-      console.log('📤 Iniciando processamento de arquivo:', arquivo.name);
-      
       // Preparar arquivo para IA
-      console.log('🔄 Preparando arquivo para IA...');
       const arquivoPreparado = await prepararParaIA(arquivo);
-      console.log('✅ Arquivo preparado:', arquivoPreparado.tipo);
 
       // Fazer upload primeiro
-      console.log('☁️ Fazendo upload para Firebase Storage...');
       const uploadResult = await uploadArquivo(arquivo, userId);
       if (!uploadResult.sucesso) {
         throw new Error('Falha no upload do arquivo');
       }
-      console.log('✅ Upload concluído:', uploadResult.url);
 
       // Enviar para Gemini 2.5 Flash com timeout de 30 segundos
-      console.log('🤖 Enviando para Gemini 2.5 Flash...');
-      const timeoutPromise = new Promise((_, reject) => 
+      const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error('Timeout: A API demorou muito para responder. Tente uma imagem menor ou mais simples.')), 30000)
       );
 
@@ -331,8 +313,6 @@ export function useGemini() {
         ),
         timeoutPromise
       ]);
-      
-      console.log('✅ Gemini respondeu:', result.success ? 'Sucesso' : 'Erro');
 
       if (result.success) {
         // NÃO criar campanha ainda - apenas mostrar SUGESTÃO para refinamento
@@ -341,9 +321,6 @@ export function useGemini() {
           imagemURL: uploadResult.url,
           imagemCaminho: uploadResult.caminho  // Adicionar caminho do Storage
         };
-
-        console.log('📋 Campanha Data criada:', campanhaData);
-        console.log('🖼️ URL da imagem:', uploadResult.url);
 
         // Salvar como rascunho para edição colaborativa
         setDraftCampanha(campanhaData);
@@ -358,9 +335,6 @@ export function useGemini() {
           isDraft: true, // Indica que é rascunho editável
           timestamp: new Date()
         };
-
-        console.log('💬 Mensagem da IA criada:', aiMsg);
-        console.log('🖼️ imagemURL na mensagem:', aiMsg.campanhaData?.imagemURL);
 
         setMessages(prev => [...prev, aiMsg]);
 
