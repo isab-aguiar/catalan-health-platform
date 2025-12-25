@@ -10,16 +10,24 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs, deleteDoc, doc, setDoc, Timestamp } from 'firebase/firestore';
 import * as readline from 'readline';
 
-// ⚠️ PREENCHA COM SUAS CREDENCIAIS DO FIREBASE
-// (Você pode pegar do .env ou diretamente do Firebase Console)
+// ✅ CONFIGURAÇÃO DO FIREBASE
+// IMPORTANTE: Configure as variáveis de ambiente no arquivo .env
+// Execute: node --env-file=../.env scripts/corrigir-campanhas-e-usuarios.mjs
 const firebaseConfig = {
-  apiKey: process.env.VITE_FIREBASE_API_KEY || "AIzaSyDaJIRmyeAn0j4V3V1H1XZKWZ3n_9hBPJw",
-  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || "esf-catalao-divinopolis.firebaseapp.com",
-  projectId: process.env.VITE_FIREBASE_PROJECT_ID || "esf-catalao-divinopolis",
-  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET || "esf-catalao-divinopolis.firebasestorage.app",
-  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "1:221260640186:web:8327ba3bc7acd0c3bc7783",
-  appId: process.env.VITE_FIREBASE_APP_ID || "AIzaSyDx6skAZE81ivk9DNhQ2cOEUvjd9bnGzGc"
+  apiKey: process.env.VITE_FIREBASE_API_KEY,
+  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VITE_FIREBASE_APP_ID
 };
+
+// Validar que as variáveis de ambiente estão configuradas
+if (!firebaseConfig.apiKey) {
+  console.error('❌ ERRO: Variáveis de ambiente não configuradas!');
+  console.error('Execute o script com: node --env-file=../.env scripts/corrigir-campanhas-e-usuarios.mjs');
+  process.exit(1);
+}
 
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
