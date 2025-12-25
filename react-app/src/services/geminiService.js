@@ -4,8 +4,16 @@
 // Integração com a API do Google Gemini para geração de avisos
 
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-const GEMINI_VISION_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+// Usar Gemini 2.5 Flash (modelo gratuito/mais rápido)
+// Se quiser usar Pro, mude para: gemini-1.5-pro
+const GEMINI_MODEL = import.meta.env.VITE_GEMINI_MODEL || 'gemini-2.5-flash';
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+const GEMINI_VISION_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
+// Log do modelo sendo usado (apenas em desenvolvimento)
+if (import.meta.env.DEV) {
+  console.log(`🤖 Gemini usando modelo: ${GEMINI_MODEL}`);
+}
 
 /**
  * Prompt system otimizado para o contexto da UBS São José
@@ -222,9 +230,17 @@ export async function sendMessageToGemini(userMessage) {
           error: 'Erro na requisição. Verifique sua API Key.'
         };
       } else if (response.status === 429) {
+        const errorData = await response.json().catch(() => ({}));
+        const retryAfter = errorData?.error?.details?.find(d => d['@type']?.includes('RetryInfo'))?.retryDelay || '10';
+        const isFreeTier = errorData?.error?.details?.find(d => d['@type']?.includes('QuotaFailure'))?.quotaMetric?.includes('free_tier');
+        
         return {
           success: false,
-          error: 'Limite de requisições excedido. Tente novamente em alguns instantes.'
+          error: isFreeTier 
+            ? 'Limite de requisições do plano gratuito excedido. Tente novamente em alguns instantes.'
+            : `Limite de requisições excedido. Tente novamente em ${retryAfter} segundos. Verifique sua cota em: https://ai.dev/usage`,
+          quotaExceeded: true,
+          isFreeTier: isFreeTier
         };
       } else {
         return {
@@ -411,9 +427,17 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
           error: 'Erro na requisição. Verifique a imagem e tente novamente.'
         };
       } else if (response.status === 429) {
+        const errorData = await response.json().catch(() => ({}));
+        const retryAfter = errorData?.error?.details?.find(d => d['@type']?.includes('RetryInfo'))?.retryDelay || '10';
+        const isFreeTier = errorData?.error?.details?.find(d => d['@type']?.includes('QuotaFailure'))?.quotaMetric?.includes('free_tier');
+        
         return {
           success: false,
-          error: 'Limite de requisições excedido. Tente novamente em alguns instantes.'
+          error: isFreeTier 
+            ? 'Limite de requisições do plano gratuito excedido. Tente novamente em alguns instantes.'
+            : `Limite de requisições excedido. Tente novamente em ${retryAfter} segundos. Verifique sua cota em: https://ai.dev/usage`,
+          quotaExceeded: true,
+          isFreeTier: isFreeTier
         };
       } else {
         return {
@@ -647,14 +671,26 @@ INSTRUÇÕES FINAIS:
       
       // Tratamento específico para erro 429 (quota excedida)
       if (response.status === 429) {
-        const retryAfter = errorData?.error?.details?.[0]?.retryDelay || '10';
+        const retryAfter = errorData?.error?.details?.find(d => d['@type']?.includes('RetryInfo'))?.retryDelay || '10';
         const quotaInfo = errorData?.error?.details?.find(d => d['@type']?.includes('QuotaFailure'));
+        
+        // Detectar se é limite de requisições ou outro tipo de quota
+        const isFreeTier = quotaInfo?.quotaMetric?.includes('free_tier');
+        const quotaLimit = quotaInfo?.quotaValue || 'desconhecido';
+        
+        let errorMessage;
+        if (isFreeTier) {
+          errorMessage = `Limite de requisições do plano gratuito excedido (${quotaLimit} requisições/dia). Tente novamente em ${retryAfter} segundos ou aguarde até amanhã.`;
+        } else {
+          errorMessage = `Limite de requisições excedido. Tente novamente em ${retryAfter} segundos. Se você tem Gemini Pro, verifique sua cota no console: https://ai.dev/usage`;
+        }
         
         return {
           success: false,
-          error: `Limite de requisições excedido. O plano gratuito permite 20 requisições por dia. Tente novamente em ${retryAfter} segundos ou aguarde até amanhã.`,
+          error: errorMessage,
           quotaExceeded: true,
-          retryAfter: parseInt(retryAfter) || 10
+          retryAfter: parseInt(retryAfter) || 10,
+          isFreeTier: isFreeTier
         };
       }
       
@@ -688,7 +724,7 @@ INSTRUÇÕES FINAIS:
     if (error.message && error.message.includes('429')) {
       return {
         success: false,
-        error: 'Limite de requisições excedido. O plano gratuito permite 20 requisições por dia. Tente novamente mais tarde.',
+        error: 'Limite de requisições excedido. Tente novamente em alguns segundos. Se você tem Gemini Pro, verifique sua cota em: https://ai.dev/usage',
         quotaExceeded: true,
         original: userText
       };
