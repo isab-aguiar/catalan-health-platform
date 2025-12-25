@@ -22,7 +22,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
-
 export default function GroupsIndex() {
   return (
     <PageContainer>
@@ -32,26 +31,23 @@ export default function GroupsIndex() {
           <Users size={40} />
           Grupos de Atividade Coletiva e Atividades Coletivas
         </h1>
-
         <Alert type="info">
           <div className="flex items-start gap-3">
             <Heart size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
             <div>
               <strong>Bem-vindo aos nossos grupos!</strong>
               <br />
-              Os Grupos de Atividade Coletiva são espaços de acolhimento, troca de
-              experiências e aprendizado coletivo. Aqui você encontra pessoas
+              Os Grupos de Atividade Coletiva são espaços de acolhimento, troca
+              de experiências e aprendizado coletivo. Aqui você encontra pessoas
               que compartilham situações semelhantes e profissionais de saúde
               comprometidos com seu bem-estar.
             </div>
           </div>
         </Alert>
-
         <h2 className="text-2xl md:text-3xl font-bold text-primary-600 mt-8 mb-4">
           Nossos Grupos
         </h2>
-
-        {/* Grupo Hiperdia */}
+        {}
         <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
@@ -61,7 +57,6 @@ export default function GroupsIndex() {
               Grupo de Diabetes e Hipertensão (Hiperdia)
             </h3>
           </div>
-
           <InfoBox title="Como funciona" icon={<ClipboardList size={24} />}>
             <p className="text-neutral-700 leading-relaxed mb-4">
               O Hiperdia é um grupo voltado para pessoas que convivem com
@@ -100,7 +95,6 @@ export default function GroupsIndex() {
               </li>
             </ul>
           </InfoBox>
-
           <InfoBox
             title="Dias e Horários"
             icon={<Calendar size={24} />}
@@ -130,7 +124,7 @@ export default function GroupsIndex() {
                       07:30
                     </td>
                     <td className="border border-neutral-300 px-4 py-3">
-                      Sala de Grupos - UBS São José
+                      Sala de Grupos - ESF Catalão
                     </td>
                   </tr>
                 </tbody>
@@ -141,7 +135,6 @@ export default function GroupsIndex() {
               alterações.
             </p>
           </InfoBox>
-
           <Alert type="success">
             <div className="flex items-start gap-3">
               <Users
@@ -155,7 +148,6 @@ export default function GroupsIndex() {
               </div>
             </div>
           </Alert>
-
           <div className="mt-4">
             <Link
               to="/grupos/hiperdia"
@@ -165,8 +157,7 @@ export default function GroupsIndex() {
             </Link>
           </div>
         </div>
-
-        {/* Grupo Fibromialgia */}
+        {}
         <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
@@ -176,7 +167,6 @@ export default function GroupsIndex() {
               Grupo de Fibromialgia
             </h3>
           </div>
-
           <InfoBox title="Como funciona" icon={<ClipboardList size={24} />}>
             <p className="text-neutral-700 leading-relaxed mb-4">
               Espaço de acolhimento para pessoas que convivem com fibromialgia.
@@ -215,7 +205,6 @@ export default function GroupsIndex() {
               </li>
             </ul>
           </InfoBox>
-
           <InfoBox
             title="Dias e Horários"
             icon={<Calendar size={24} />}
@@ -245,7 +234,7 @@ export default function GroupsIndex() {
                       08:00
                     </td>
                     <td className="border border-neutral-300 px-4 py-3">
-                      Sala de Grupos - UBS São José
+                      Sala de Grupos - ESF Catalão
                     </td>
                   </tr>
                 </tbody>
@@ -256,7 +245,6 @@ export default function GroupsIndex() {
               alterações.
             </p>
           </InfoBox>
-
           <Alert type="success">
             <div className="flex items-start gap-3">
               <Users
@@ -270,7 +258,6 @@ export default function GroupsIndex() {
               </div>
             </div>
           </Alert>
-
           <div className="mt-4">
             <Link
               to="/grupos/dores-cronicas"
@@ -280,8 +267,7 @@ export default function GroupsIndex() {
             </Link>
           </div>
         </div>
-
-        {/* Outros Grupos em Planejamento */}
+        {}
         <InfoBox
           title="Outros Grupos em Planejamento"
           icon={<Rocket size={24} />}
@@ -291,7 +277,6 @@ export default function GroupsIndex() {
             Estamos trabalhando para ampliar nossas atividades coletivas. Em
             breve, teremos:
           </p>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
               <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
@@ -305,7 +290,6 @@ export default function GroupsIndex() {
                 Em breve
               </span>
             </div>
-
             <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
               <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
                 <Brain size={18} /> Grupo de Saúde Mental
@@ -318,7 +302,6 @@ export default function GroupsIndex() {
                 Em breve
               </span>
             </div>
-
             <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
               <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
                 <UserPlus size={18} /> Grupo de Idosos
@@ -331,7 +314,6 @@ export default function GroupsIndex() {
                 Em breve
               </span>
             </div>
-
             <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
               <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
                 <Scale size={18} /> Grupo de Obesidade
@@ -344,7 +326,6 @@ export default function GroupsIndex() {
                 Em breve
               </span>
             </div>
-
             <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
               <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
                 <Palette size={18} /> Grupo de Artesanato
@@ -358,7 +339,6 @@ export default function GroupsIndex() {
             </div>
           </div>
         </InfoBox>
-
         <Alert type="info">
           <div className="flex items-start gap-3">
             <Lightbulb
@@ -374,13 +354,11 @@ export default function GroupsIndex() {
             </div>
           </div>
         </Alert>
-
-        {/* Benefícios dos Grupos */}
+        {}
         <h2 className="text-2xl md:text-3xl font-bold text-primary-600 mt-8 mb-4 flex items-center gap-2">
           <Sparkles size={32} />
           Benefícios de Participar
         </h2>
-
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="text-center p-6 bg-white rounded-lg shadow-md">
             <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -391,7 +369,6 @@ export default function GroupsIndex() {
               Conhecer pessoas que vivem situações semelhantes
             </p>
           </div>
-
           <div className="text-center p-6 bg-white rounded-lg shadow-md">
             <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <ClipboardList size={32} className="text-primary-600" />
@@ -401,7 +378,6 @@ export default function GroupsIndex() {
               Informações sobre sua condição de saúde
             </p>
           </div>
-
           <div className="text-center p-6 bg-white rounded-lg shadow-md">
             <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <Activity size={32} className="text-primary-600" />
@@ -411,7 +387,6 @@ export default function GroupsIndex() {
               Incentivo para seguir o tratamento
             </p>
           </div>
-
           <div className="text-center p-6 bg-white rounded-lg shadow-md">
             <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <Heart size={32} className="text-primary-600" />

@@ -2,23 +2,18 @@ import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
-
 function PageContainer({ children }) {
-  return (
-    <div className="min-h-screen bg-slate-50 py-8 px-4">
-      {children}
-    </div>
-  );
+  return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
 }
-
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
     default: "bg-white border-slate-200",
-    highlight: "bg-blue-50 border-blue-300"
+    highlight: "bg-blue-50 border-blue-300",
   };
-  
   return (
-    <div className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}>
+    <div
+      className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
+    >
       <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
         {icon && <div className="text-blue-700">{icon}</div>}
         <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
@@ -27,61 +22,69 @@ function InfoBox({ title, icon, children, variant = "default" }) {
     </div>
   );
 }
-
 function Alert({ type = "info", children }) {
   const types = {
     info: {
       bg: "bg-blue-50",
       border: "border-blue-300",
       text: "text-blue-900",
-      icon: "text-blue-600"
+      icon: "text-blue-600",
     },
     warning: {
       bg: "bg-amber-50",
       border: "border-amber-300",
       text: "text-amber-900",
-      icon: "text-amber-600"
-    }
+      icon: "text-amber-600",
+    },
   };
-  
   const style = types[type];
-  
   return (
-    <div className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}>
+    <div
+      className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
+    >
       <div className="flex gap-3">
-        <AlertCircle size={20} className={`flex-shrink-0 mt-0.5 ${style.icon}`} />
+        <AlertCircle
+          size={20}
+          className={`flex-shrink-0 mt-0.5 ${style.icon}`}
+        />
         <div className="text-sm leading-relaxed">{children}</div>
       </div>
     </div>
   );
 }
-
 export default function ECG() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 Eletrocardiograma{" "}
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Unidade Básica de Saúde
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
-        {/* Campanhas */}
+        {}
         <CampanhasPaginaWrapper pagina="ecg" />
-
-        {/* Avisos */}
+        {}
         <AvisosPaginaWrapper pagina="ecg" />
-
-        {/* Sobre o Serviço */}
+        {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-slate-700 leading-relaxed mb-5">
             O Eletrocardiograma é um exame que registra a atividade elétrica do
@@ -90,7 +93,6 @@ export default function ECG() {
             insuficiência cardíaca e outras alterações do sistema
             cardiovascular.
           </p>
-
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div className="bg-slate-50 border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
@@ -111,7 +113,6 @@ export default function ECG() {
               </p>
             </div>
           </div>
-
           <div className="bg-blue-50 border border-blue-200 rounded p-4">
             <h3 className="font-semibold text-slate-800 mb-3 text-sm">
               Preparo para o Exame
@@ -137,7 +138,11 @@ export default function ECG() {
                     Evitar o uso excessivo de bijuterias e acessórios de metal
                   </strong>
                   <p className="text-slate-600 mt-1 text-xs">
-                  Objetos metálicos (pulseiras, colares, relógios, anéis, entre outros) podem interferir na captação do sinal elétrico do coração, provocando distorções no traçado eletrocardiográfico e prejudicando a qualidade e a interpretação do exame.
+                    Objetos metálicos (pulseiras, colares, relógios, anéis,
+                    entre outros) podem interferir na captação do sinal elétrico
+                    do coração, provocando distorções no traçado
+                    eletrocardiográfico e prejudicando a qualidade e a
+                    interpretação do exame.
                   </p>
                 </div>
               </div>
@@ -159,8 +164,7 @@ export default function ECG() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Horários de Atendimento */}
+        {}
         <InfoBox title="Horários de Atendimento">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -198,14 +202,12 @@ export default function ECG() {
             titular.
           </p>
         </InfoBox>
-
-        {/* Documentação Necessária */}
+        {}
         <InfoBox title="Documentação Necessária" variant="highlight">
           <p className="text-slate-700 mb-4 text-sm">
             Para realização do exame, é obrigatória a apresentação da seguinte
             documentação:
           </p>
-
           <div className="space-y-2">
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -219,7 +221,6 @@ export default function ECG() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -231,7 +232,6 @@ export default function ECG() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -244,7 +244,6 @@ export default function ECG() {
               </div>
             </div>
           </div>
-
           <div className="mt-4">
             <Alert type="warning">
               <strong>Normativa:</strong> Documento de identificação com foto e
@@ -252,8 +251,7 @@ export default function ECG() {
             </Alert>
           </div>
         </InfoBox>
-
-        {/* Informação importante final */}
+        {}
         <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>

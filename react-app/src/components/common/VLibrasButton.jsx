@@ -1,27 +1,19 @@
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState } from "react";
 export default function VLibrasButton() {
   const [isVisible, setIsVisible] = useState(false);
-
   useEffect(() => {
-    // Mostrar o botão após um pequeno delay para garantir que o VLibras carregou
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 1000);
-
     return () => clearTimeout(timer);
   }, []);
-
   const handleClick = () => {
-    // Simular clique no botão original do VLibras
-    const vlibrasButton = document.querySelector('[vw-access-button]');
+    const vlibrasButton = document.querySelector("[vw-access-button]");
     if (vlibrasButton) {
       vlibrasButton.click();
     }
   };
-
   if (!isVisible) return null;
-
   return (
     <button
       onClick={handleClick}

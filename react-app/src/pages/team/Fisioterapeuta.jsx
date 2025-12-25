@@ -1,17 +1,14 @@
 import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
-
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
 }
-
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
     default: "bg-white border-slate-200",
     highlight: "bg-blue-50 border-blue-300",
   };
-
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
@@ -24,7 +21,6 @@ function InfoBox({ title, icon, children, variant = "default" }) {
     </div>
   );
 }
-
 function Alert({ type = "info", children }) {
   const types = {
     info: {
@@ -46,9 +42,7 @@ function Alert({ type = "info", children }) {
       icon: "text-green-600",
     },
   };
-
   const style = types[type];
-
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -63,36 +57,43 @@ function Alert({ type = "info", children }) {
     </div>
   );
 }
-
 export default function Fisioterapeuta() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 Fisioterapia
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Unidade Básica de Saúde
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
-        {/* Sobre o Serviço */}
+        {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-slate-700 leading-relaxed mb-5">
-            A Fisioterapia na UBS São José oferece tratamento e reabilitação
+            A Fisioterapia na ESF Catalão oferece tratamento e reabilitação
             física para pacientes com dificuldades de movimento, dores
             musculares e articulares, sequelas de acidentes ou doenças, e
             necessidades de recuperação funcional. Trabalhamos para melhorar sua
             qualidade de vida e independência nas atividades do dia a dia.
           </p>
-
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -105,7 +106,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -117,7 +117,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -129,7 +128,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -141,7 +139,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -155,8 +152,7 @@ export default function Fisioterapeuta() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Quem é a profissional */}
+        {}
         <InfoBox title="Quem é a profissional?">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -183,8 +179,7 @@ export default function Fisioterapeuta() {
             </table>
           </div>
         </InfoBox>
-
-        {/* Para quem é indicado */}
+        {}
         <InfoBox title="Para quem é indicado?">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -220,8 +215,7 @@ export default function Fisioterapeuta() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Acesso ao Serviço */}
+        {}
         <InfoBox title="Acesso ao Serviço">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -238,7 +232,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                 2
@@ -266,7 +259,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                 3
@@ -281,7 +273,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                 4
@@ -298,8 +289,7 @@ export default function Fisioterapeuta() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Alerta Informativo */}
+        {}
         <div className="mb-6">
           <Alert type="info">
             <div>
@@ -317,8 +307,7 @@ export default function Fisioterapeuta() {
             </div>
           </Alert>
         </div>
-
-        {/* Documentação Necessária */}
+        {}
         <InfoBox title="Documentação Necessária" variant="highlight">
           <div className="space-y-2">
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
@@ -333,7 +322,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -345,7 +333,6 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -357,8 +344,7 @@ export default function Fisioterapeuta() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Horário de Atendimento */}
+        {}
         <InfoBox title="Horário de Atendimento">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -393,8 +379,7 @@ export default function Fisioterapeuta() {
             </table>
           </div>
         </InfoBox>
-
-        {/* Informação importante final */}
+        {}
         <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
           <div className="flex items-start gap-3">
             <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />

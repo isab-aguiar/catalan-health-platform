@@ -2,17 +2,14 @@ import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
-
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
 }
-
 function InfoBox({ title, icon, children, variant = "default", id }) {
   const variants = {
     default: "bg-white border-slate-200",
     highlight: "bg-blue-50 border-blue-300",
   };
-
   return (
     <div
       id={id}
@@ -26,7 +23,6 @@ function InfoBox({ title, icon, children, variant = "default", id }) {
     </div>
   );
 }
-
 function Alert({ type = "info", children }) {
   const types = {
     info: {
@@ -42,9 +38,7 @@ function Alert({ type = "info", children }) {
       icon: "text-amber-600",
     },
   };
-
   const style = types[type];
-
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -59,33 +53,39 @@ function Alert({ type = "info", children }) {
     </div>
   );
 }
-
 export default function Sala4() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 Sala de Agendamento
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Unidade Básica de Saúde
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
-        {/* Campanhas */}
+        {}
         <CampanhasPaginaWrapper pagina="sala-4" />
-
-        {/* Avisos */}
+        {}
         <AvisosPaginaWrapper pagina="sala-4" />
-
-        {/* Sobre o Serviço */}
+        {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-slate-700 leading-relaxed mb-5">
             Este setor da Unidade Básica de Saúde São José é responsável pelo
@@ -95,7 +95,6 @@ export default function Sala4() {
             garantindo o acesso organizado aos serviços de saúde disponíveis na
             unidade e na rede de atenção à saúde.
           </p>
-
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div className="bg-slate-50 border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
@@ -135,7 +134,6 @@ export default function Sala4() {
               </p>
             </div>
           </div>
-
           <div className="bg-blue-50 border border-blue-200 rounded p-4">
             <h3 className="font-semibold text-slate-800 mb-2 text-sm">
               SUS Fácil
@@ -151,8 +149,7 @@ export default function Sala4() {
             </p>
           </div>
         </InfoBox>
-
-        {/* Documentação Necessária */}
+        {}
         <InfoBox
           id="documentacao-necessaria"
           title="Documentação Necessária"
@@ -162,7 +159,6 @@ export default function Sala4() {
             Para atendimento neste setor, é obrigatória a apresentação da
             seguinte documentação, conforme o tipo de serviço solicitado:
           </p>
-
           <div className="space-y-3">
             <div className="bg-white border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">
@@ -205,7 +201,6 @@ export default function Sala4() {
                 </div>
               </div>
             </div>
-
             <div className="bg-white border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">
                 Agendamento de Consultas e Exames
@@ -235,7 +230,6 @@ export default function Sala4() {
                 </div>
               </div>
             </div>
-
             <div className="bg-white border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-3 text-sm">
                 Protocolo / SUS Fácil (Cirurgias e Alto Custo)
@@ -277,14 +271,12 @@ export default function Sala4() {
               </div>
             </div>
           </div>
-
           <div className="space-y-3 mt-4">
             <Alert type="info">
               <strong>Atualização de Cadastro:</strong> Mantenha seus dados
               cadastrais atualizados. A atualização pode ser realizada neste
               mesmo setor, mediante apresentação da documentação necessária.
             </Alert>
-
             <Alert type="warning">
               <strong>Normativa:</strong> Documento de identificação com foto e
               CPF do titular são obrigatórios para qualquer atendimento na
@@ -292,8 +284,7 @@ export default function Sala4() {
             </Alert>
           </div>
         </InfoBox>
-
-        {/* Como Agendar */}
+        {}
         <InfoBox title="Como Agendar">
           <div className="space-y-4">
             <div>
@@ -307,7 +298,6 @@ export default function Sala4() {
                 o tipo de serviço solicitado.
               </p>
             </div>
-
             <div className="bg-slate-50 border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
                 Orientações para Agendamento
@@ -342,8 +332,7 @@ export default function Sala4() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Horários de Atendimento */}
+        {}
         <InfoBox title="Horários de Atendimento">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -391,8 +380,7 @@ export default function Sala4() {
             operacional da unidade.
           </p>
         </InfoBox>
-
-        {/* Equipe */}
+        {}
         <InfoBox title="Equipe Responsável">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -414,7 +402,6 @@ export default function Sala4() {
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
                     Isabela Aguiar - Técnica de Enfermagem
                     <br />
-                   
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -422,16 +409,15 @@ export default function Sala4() {
                     <strong className="text-slate-800">Tarde</strong>
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Thaciane Souza - Técnica de Enfermagem<br />
-                    
+                    Thaciane Souza - Técnica de Enfermagem
+                    <br />
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </InfoBox>
-
-        {/* Funcionamento */}
+        {}
         <InfoBox title="Modalidades de Atendimento">
           <div className="space-y-4">
             <div className="bg-white border border-slate-200 rounded p-4">
@@ -445,7 +431,6 @@ export default function Sala4() {
                 atendimento e otimização do tempo de espera.
               </p>
             </div>
-
             <div className="bg-amber-50 border border-amber-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
                 Atendimento Sob Demanda (Sem Agendamento)
@@ -454,7 +439,6 @@ export default function Sala4() {
                 O atendimento sob demanda está disponível mediante triagem
                 clínica inicial realizada no período das 07h00 às 08h00.
               </p>
-
               <div className="bg-white border-l-4 border-amber-500 p-3 rounded-r">
                 <p className="text-sm text-slate-800 leading-relaxed">
                   <strong>Como funciona a Triagem:</strong> A triagem é uma
@@ -470,8 +454,7 @@ export default function Sala4() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Informação importante final */}
+        {}
         <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>

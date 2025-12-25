@@ -217,7 +217,7 @@ VITE_GEMINI_API_KEY=sua-chave-gemini-aqui
 
 ## 📄 Licença
 
-Este projeto é de uso interno da UBS São José.
+Este projeto é de uso interno da ESF Catalão.
 
 ## 👥 Equipe
 

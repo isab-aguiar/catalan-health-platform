@@ -1,21 +1,14 @@
-/* Google Fonts - Roboto (padrão governo) */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-/* Google Fonts - Montserrat (fonte profissional corporativa) */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
-
-/* Tailwind directives */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Base styles */
 @layer base {
   html {
     @apply scroll-smooth;
     overflow-x: hidden;
     width: 100%;
   }
-
   body {
     @apply font-sans bg-neutral-50 text-neutral-900;
     -webkit-font-smoothing: antialiased;
@@ -26,68 +19,55 @@
     width: 100%;
     position: relative;
   }
-
-  /* Tamanhos de fonte mobile-first */
   @media (max-width: 640px) {
     body {
       font-size: 15px;
     }
-
     h1 {
-      font-size: 1.875rem; /* 30px */
+      font-size: 1.875rem;
     }
-
     h2 {
-      font-size: 1.5rem; /* 24px */
+      font-size: 1.5rem;
     }
-
     h3 {
-      font-size: 1.25rem; /* 20px */
+      font-size: 1.25rem;
     }
-
     h4 {
-      font-size: 1.125rem; /* 18px */
+      font-size: 1.125rem;
     }
-
     p {
-      font-size: 0.9375rem; /* 15px */
+      font-size: 0.9375rem;
       line-height: 1.6;
     }
   }
-
   #root {
     overflow-x: hidden;
     width: 100%;
   }
-
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold text-neutral-900;
     line-height: 1.25;
   }
-
   a {
     @apply transition-colors duration-200;
   }
-
   img {
     @apply max-w-full h-auto block;
   }
-
-  /* Melhoria de acessibilidade - foco visível */
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary-500;
   }
 }
-
-/* Utility classes */
 @layer utilities {
-  /* Prevenir overflow horizontal em todos os níveis */
   .no-overflow-x {
     overflow-x: hidden;
     max-width: 100vw;
   }
-
-  /* Container responsivo seguro */
   .container-safe {
     width: 100%;
     max-width: 100%;
@@ -96,74 +76,52 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
-
   @media (min-width: 640px) {
     .container-safe {
       padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
-
   @media (min-width: 1024px) {
     .container-safe {
       padding-left: 2rem;
       padding-right: 2rem;
     }
   }
-
-  /* Garantir que imagens não causem overflow */
   img {
     max-width: 100%;
     height: auto;
   }
-
-  /* Prevenir text overflow */
   .text-safe {
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
   }
 }
-
-/* =========================================
-   VLIBRAS - CORREÇÃO DE CLIQUE E ESPAÇAMENTO
-   ========================================= */
-
-/* Container principal do VLibras - reduzir área clicável */
 div[vw].enabled {
-  pointer-events: none !important; /* Desabilita cliques na div pai */
+  pointer-events: none !important;
   width: auto !important;
   height: auto !important;
 }
-
-/* Botão de acesso - APENAS ELE deve ser clicável */
 div[vw-access-button] {
-  pointer-events: auto !important; /* Reabilita cliques apenas no botão */
-  width: 64px !important; /* Tamanho fixo do botão */
+  pointer-events: auto !important;
+  width: 64px !important;
   height: 64px !important;
   border-radius: 50%;
   transition: all 0.3s ease;
   z-index: 9998 !important;
 }
-
-/* Hover no botão - aumenta levemente */
 div[vw-access-button]:hover {
   transform: scale(1.1);
 }
-
-/* Imagem do botão de acesso */
 div[vw-access-button] img.vp-access-button {
   width: 64px !important;
   height: 64px !important;
   cursor: pointer;
 }
-
-/* Popup de imagem - esconder por padrão */
 div[vw-access-button] img.vp-pop-up {
   display: none !important;
 }
-
-/* Mostrar popup apenas quando botão estiver ativo E com hover */
 div[vw-access-button].active:hover img.vp-pop-up {
   display: block !important;
   position: absolute;
@@ -174,32 +132,24 @@ div[vw-access-button].active:hover img.vp-pop-up {
   height: auto;
   z-index: 9999;
 }
-
-/* Plugin wrapper - SEMPRE permite interação em todos os elementos internos */
 div[vw-plugin-wrapper],
 div[vw-plugin-wrapper] *,
 div[vp],
 div[vp] * {
-  pointer-events: auto !important; /* Permite cliques em TUDO dentro do plugin */
+  pointer-events: auto !important;
   z-index: 9999 !important;
 }
-
-/* Garantir que elementos abaixo do VLibras sejam clicáveis */
 div[vw].enabled ~ * {
   pointer-events: auto !important;
 }
-
-/* Mobile - ajustar posição para não atrapalhar */
 @media (max-width: 768px) {
   div[vw].enabled {
     right: 10px !important;
   }
-
   div[vw-access-button] {
     width: 56px !important;
     height: 56px !important;
   }
-
   div[vw-access-button] img.vp-access-button {
     width: 56px !important;
     height: 56px !important;

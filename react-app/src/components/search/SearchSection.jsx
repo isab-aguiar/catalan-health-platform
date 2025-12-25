@@ -5,19 +5,11 @@ import AutocompleteDropdown from "./AutocompleteDropdown";
 import ACSModal from "./ACSModal";
 import MigrationAlert from "./MigrationAlert";
 import Alert from "../common/Alert";
-
-/**
- * SearchSection Component
- * Seção completa de busca com autocomplete e modal de resultados
- * Integra SearchBar + AutocompleteDropdown + ACSModal
- */
-
 export default function SearchSection({ className = "" }) {
   const { query, setQuery, results, suggestions } = useACSSearch();
   const [selectedACS, setSelectedACS] = useState(null);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = useRef(null);
-
   // Fechar sugestões ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -25,12 +17,9 @@ export default function SearchSection({ className = "" }) {
         setShowSuggestions(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  // Mostrar sugestões quando usuário digita
   useEffect(() => {
     if (query.length >= 2) {
       setShowSuggestions(true);
@@ -38,31 +27,27 @@ export default function SearchSection({ className = "" }) {
       setShowSuggestions(false);
     }
   }, [query]);
-
   const handleSearchChange = (e) => {
     setQuery(e.target.value);
-    setSelectedACS(null); // Limpar resultado ao digitar
+    setSelectedACS(null);
   };
-
   const handleSuggestionSelect = (suggestion) => {
     setQuery(suggestion.street);
     setShowSuggestions(false);
-    setSelectedACS(suggestion); // Abre o modal
+    setSelectedACS(suggestion);
   };
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && results.length > 0) {
-      setSelectedACS(results[0]); // Abre o modal com o primeiro resultado
+      setSelectedACS(results[0]);
       setShowSuggestions(false);
     }
     if (e.key === "Escape") {
       setShowSuggestions(false);
     }
   };
-
   return (
     <div className={className}>
-      {/* Search Input */}
+      {}
       <div ref={searchRef} className="relative max-w-3xl mx-auto">
         <SearchBar
           value={query}
@@ -70,8 +55,7 @@ export default function SearchSection({ className = "" }) {
           onKeyDown={handleKeyDown}
           placeholder="Ex: Rua Amazonas, Av. Brasil, ou digite seu endereço completo..."
         />
-
-        {/* Autocomplete Suggestions */}
+        {}
         {showSuggestions && (
           <AutocompleteDropdown
             suggestions={suggestions}
@@ -80,7 +64,6 @@ export default function SearchSection({ className = "" }) {
           />
         )}
       </div>
-
       {/* Modal de ACS ou Alerta de Migração */}
       {selectedACS && (
         <>
@@ -94,7 +77,6 @@ export default function SearchSection({ className = "" }) {
           )}
         </>
       )}
-
       {/* No Results Message */}
       {query.length >= 2 && results.length === 0 && !selectedACS && (
         <div className="mt-8 max-w-3xl mx-auto">
@@ -113,12 +95,12 @@ export default function SearchSection({ className = "" }) {
           </Alert>
         </div>
       )}
-
-      {/* Initial Help Text */}
+      {}
       {query.length === 0 && (
         <div className="mt-6 max-w-3xl mx-auto text-center">
           <p className="text-white text-sm">
-            Digite o nome da sua rua ou endereço completo para localizar sua equipe de saúde
+            Digite o nome da sua rua ou endereço completo para localizar sua
+            equipe de saúde
           </p>
         </div>
       )}

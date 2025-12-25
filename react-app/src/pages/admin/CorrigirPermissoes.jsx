@@ -1,71 +1,59 @@
-// =========================================
-// PÁGINA PARA CORRIGIR PERMISSÕES DO ADMIN
-// =========================================
-// Página administrativa para corrigir permissões diretamente do navegador
-
-import { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { setUserData } from '../../services/usersService';
-import { Alert } from '../../components/common/Alert';
-import { Button } from '../../components/common/Button';
-import { Shield, CheckCircle, XCircle, Loader } from 'lucide-react';
-
+import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
+import { setUserData } from "../../services/usersService";
+import { Alert } from "../../components/common/Alert";
+import { Button } from "../../components/common/Button";
+import { Shield, CheckCircle, XCircle, Loader } from "lucide-react";
 export default function CorrigirPermissoes() {
   const { currentUser, userData } = useAuth();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
-
   const corrigirPermissoes = async () => {
     if (!currentUser) {
       setResult({
         success: false,
-        message: 'Você precisa estar logado para corrigir permissões'
+        message: "Você precisa estar logado para corrigir permissões",
       });
       return;
     }
-
     setLoading(true);
     setResult(null);
-
     try {
-      console.log('🔧 Corrigindo permissões para:', currentUser.uid);
-      
+      console.log("🔧 Corrigindo permissões para:", currentUser.uid);
       const result = await setUserData(currentUser.uid, {
-        email: currentUser.email || userData?.email || '',
-        displayName: userData?.displayName || currentUser.displayName || 'Administrador',
-        role: 'admin',
-        active: true
+        email: currentUser.email || userData?.email || "",
+        displayName:
+          userData?.displayName || currentUser.displayName || "Administrador",
+        role: "admin",
+        active: true,
       });
-
       if (result.success) {
-        console.log('✅ Permissões corrigidas:', result.data);
+        console.log("✅ Permissões corrigidas:", result.data);
         setResult({
           success: true,
-          message: 'Permissões corrigidas com sucesso! Os dados serão atualizados automaticamente em alguns segundos. Se não aparecer, faça logout e login novamente.'
+          message:
+            "Permissões corrigidas com sucesso! Os dados serão atualizados automaticamente em alguns segundos. Se não aparecer, faça logout e login novamente.",
         });
-        
-        // Forçar reload dos dados após 2 segundos
         setTimeout(() => {
           window.location.reload();
         }, 2000);
       } else {
-        console.error('❌ Erro ao corrigir:', result.error);
+        console.error("❌ Erro ao corrigir:", result.error);
         setResult({
           success: false,
-          message: result.error || 'Erro ao corrigir permissões'
+          message: result.error || "Erro ao corrigir permissões",
         });
       }
     } catch (error) {
-      console.error('❌ Erro ao corrigir permissões:', error);
+      console.error("❌ Erro ao corrigir permissões:", error);
       setResult({
         success: false,
-        message: error.message || 'Erro desconhecido ao corrigir permissões'
+        message: error.message || "Erro desconhecido ao corrigir permissões",
       });
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="container-custom py-8">
       <div className="max-w-2xl mx-auto">
@@ -76,33 +64,35 @@ export default function CorrigirPermissoes() {
               Corrigir Permissões de Admin
             </h1>
           </div>
-
           <div className="space-y-4 mb-6">
             <Alert type="info">
-              Esta ferramenta corrige suas permissões de administrador no banco de dados.
-              Use se você perdeu acesso ao painel administrativo.
+              Esta ferramenta corrige suas permissões de administrador no banco
+              de dados. Use se você perdeu acesso ao painel administrativo.
             </Alert>
-
             {currentUser && (
               <div className="bg-neutral-50 rounded-lg p-4 space-y-2">
-                <p className="text-sm font-medium text-neutral-700">Usuário atual:</p>
+                <p className="text-sm font-medium text-neutral-700">
+                  Usuário atual:
+                </p>
                 <p className="text-sm text-neutral-600">
                   <strong>UID:</strong> {currentUser.uid}
                 </p>
                 <p className="text-sm text-neutral-600">
-                  <strong>Email:</strong> {currentUser.email || userData?.email || 'Não informado'}
+                  <strong>Email:</strong>{" "}
+                  {currentUser.email || userData?.email || "Não informado"}
                 </p>
                 <p className="text-sm text-neutral-600">
-                  <strong>Role atual:</strong> {userData?.role || 'não definido'}
+                  <strong>Role atual:</strong>{" "}
+                  {userData?.role || "não definido"}
                 </p>
                 <p className="text-sm text-neutral-600">
-                  <strong>Status:</strong> {userData?.active !== false ? 'Ativo' : 'Inativo'}
+                  <strong>Status:</strong>{" "}
+                  {userData?.active !== false ? "Ativo" : "Inativo"}
                 </p>
               </div>
             )}
-
             {result && (
-              <Alert type={result.success ? 'success' : 'error'}>
+              <Alert type={result.success ? "success" : "error"}>
                 <div className="flex items-start gap-2">
                   {result.success ? (
                     <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
@@ -114,7 +104,6 @@ export default function CorrigirPermissoes() {
               </Alert>
             )}
           </div>
-
           <div className="flex gap-3">
             <Button
               onClick={corrigirPermissoes}
@@ -134,7 +123,6 @@ export default function CorrigirPermissoes() {
               )}
             </Button>
           </div>
-
           <div className="mt-6 pt-6 border-t border-neutral-200">
             <p className="text-sm text-neutral-600">
               <strong>O que este botão faz:</strong>
@@ -145,7 +133,8 @@ export default function CorrigirPermissoes() {
               <li>Atualiza seus dados no Firestore</li>
             </ul>
             <p className="text-sm text-neutral-600 mt-4">
-              <strong>Importante:</strong> Após corrigir, faça logout e login novamente para que as mudanças tenham efeito.
+              <strong>Importante:</strong> Após corrigir, faça logout e login
+              novamente para que as mudanças tenham efeito.
             </p>
           </div>
         </div>
@@ -153,4 +142,3 @@ export default function CorrigirPermissoes() {
     </div>
   );
 }
-

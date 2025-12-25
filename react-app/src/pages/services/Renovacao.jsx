@@ -2,17 +2,14 @@ import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
-
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
 }
-
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
     default: "bg-white border-slate-200",
     highlight: "bg-blue-50 border-blue-300",
   };
-
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
@@ -25,7 +22,6 @@ function InfoBox({ title, icon, children, variant = "default" }) {
     </div>
   );
 }
-
 function Alert({ type = "info", children }) {
   const types = {
     info: {
@@ -41,9 +37,7 @@ function Alert({ type = "info", children }) {
       icon: "text-amber-600",
     },
   };
-
   const style = types[type];
-
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -58,33 +52,39 @@ function Alert({ type = "info", children }) {
     </div>
   );
 }
-
 export default function Renovacao() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 Renovação de Receitas
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Unidade Básica de Saúde
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
-        {/* Campanhas */}
+        {}
         <CampanhasPaginaWrapper pagina="renovacao" />
-
-        {/* Avisos */}
+        {}
         <AvisosPaginaWrapper pagina="renovacao" />
-
-        {/* O que é */}
+        {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-slate-700 leading-relaxed">
             A Renovação de Receitas é um serviço oferecido para pacientes que
@@ -94,8 +94,7 @@ export default function Renovacao() {
             que exigem tratamento prolongado e acompanhamento regular.
           </p>
         </InfoBox>
-
-        {/* Para quem é indicado */}
+        {}
         <InfoBox title="Para quem é indicado?">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -126,15 +125,13 @@ export default function Renovacao() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Prazo de Validade das Receitas */}
+        {}
         <InfoBox title="Você sabe qual o prazo de validade de sua receita?">
           <p className="text-slate-700 mb-4 text-sm">
             É importante conhecer o prazo de validade da sua receita para evitar
             que ela expire antes da renovação. Os prazos variam conforme o tipo
             de medicamento prescrito:
           </p>
-
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-amber-50 border border-amber-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
@@ -152,7 +149,6 @@ export default function Renovacao() {
                 legislação vigente.
               </p>
             </div>
-
             <div className="bg-blue-50 border border-blue-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
                 Medicamentos de Uso Contínuo
@@ -170,7 +166,6 @@ export default function Renovacao() {
               </p>
             </div>
           </div>
-
           <div className="mt-4">
             <Alert type="info">
               <strong>Importante:</strong> Verifique sempre a data de emissão da
@@ -179,8 +174,7 @@ export default function Renovacao() {
             </Alert>
           </div>
         </InfoBox>
-
-        {/* Horários de Atendimento */}
+        {}
         <InfoBox title="Horários de Atendimento">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -224,8 +218,7 @@ export default function Renovacao() {
             </table>
           </div>
         </InfoBox>
-
-        {/* Documentos Necessários */}
+        {}
         <InfoBox title="Documentos Necessários" variant="highlight">
           <p className="text-slate-700 mb-4 text-sm">
             Para solicitar a renovação de receitas, é obrigatória a apresentação
@@ -244,7 +237,6 @@ export default function Renovacao() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -256,7 +248,6 @@ export default function Renovacao() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -269,7 +260,6 @@ export default function Renovacao() {
               </div>
             </div>
           </div>
-
           <div className="mt-4">
             <Alert type="warning">
               <strong>Normativa:</strong> Documento de identificação com foto e
@@ -277,8 +267,7 @@ export default function Renovacao() {
             </Alert>
           </div>
         </InfoBox>
-
-        {/* Informação importante final */}
+        {}
         <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Como Funciona</p>

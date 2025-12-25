@@ -1,17 +1,10 @@
-import { Search } from 'lucide-react';
-
-/**
- * SearchBar Component
- * Barra de busca com ícone e placeholder
- * Usado para busca de endereços/ACS
- */
-
+import { Search } from "lucide-react";
 export default function SearchBar({
   value,
   onChange,
   onKeyDown,
-  placeholder = 'Ex: Rua Amazonas 330 ou Av Amazonas 330',
-  className = '',
+  placeholder = "Ex: Rua Amazonas 330 ou Av Amazonas 330",
+  className = "",
   autoFocus = false,
 }) {
   return (

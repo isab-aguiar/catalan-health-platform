@@ -3,9 +3,7 @@ import PageContainer from "../../components/layout/PageContainer";
 import Card from "../../components/common/Card";
 import { allPages, serviceCategories } from "../../data/services";
 import BackButton from "../../components/common/BackButton";
-
 export default function ServicesIndex() {
-  // Verificação de segurança
   if (!allPages || !serviceCategories) {
     return (
       <PageContainer>
@@ -17,9 +15,9 @@ export default function ServicesIndex() {
       </PageContainer>
     );
   }
-
-  const services = allPages.filter(page => page && page.category === "services");
-
+  const services = allPages.filter(
+    (page) => page && page.category === "services"
+  );
   if (!services || services.length === 0) {
     return (
       <PageContainer>
@@ -31,7 +29,6 @@ export default function ServicesIndex() {
       </PageContainer>
     );
   }
-
   return (
     <PageContainer>
       <div className="max-w-6xl mx-auto space-y-8">
@@ -44,14 +41,12 @@ export default function ServicesIndex() {
             Conheça todos os serviços e atendimentos disponíveis na unidade
           </p>
         </div>
-
         {serviceCategories.map((category, index) => {
           if (!category || !category.services) return null;
-          
-          const categoryServices = services.filter(s => s && category.services.includes(s.id));
-          
+          const categoryServices = services.filter(
+            (s) => s && category.services.includes(s.id)
+          );
           if (categoryServices.length === 0) return null;
-          
           return (
             <div key={category.name || index} className="space-y-4">
               <h2 className="text-2xl font-bold text-neutral-900">
@@ -60,7 +55,6 @@ export default function ServicesIndex() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {categoryServices.map((service) => {
                   if (!service || !service.id) return null;
-                  
                   return (
                     <Card
                       key={service.id}
@@ -68,7 +62,7 @@ export default function ServicesIndex() {
                       description={service.description || ""}
                       icon={service.icon}
                       href={service.path}
-                      colorScheme={service.colorScheme || 'primary'}
+                      colorScheme={service.colorScheme || "primary"}
                     />
                   );
                 })}

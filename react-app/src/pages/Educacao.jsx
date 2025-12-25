@@ -19,7 +19,6 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
-
 export default function Educacao() {
   const temasEmergencia = [
     {
@@ -79,7 +78,6 @@ export default function Educacao() {
       cor: "purple",
     },
   ];
-
   const coresClasses = {
     red: {
       border: "border-red-200",
@@ -117,26 +115,34 @@ export default function Educacao() {
       hoverText: "text-purple-700",
     },
   };
-
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 Educação em Saúde
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Atenção Primária à Saúde
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
-        {/* Sobre a Educação em Saúde */}
+        {}
         <InfoBox title="Sobre a Educação em Saúde">
           <p className="text-slate-700 leading-relaxed mb-5">
             A educação em saúde é fundamental para promover o autocuidado,
@@ -152,8 +158,7 @@ export default function Educacao() {
             médico de emergência.
           </p>
         </InfoBox>
-
-        {/* Quando procurar a UBS vs Emergência */}
+        {}
         <InfoBox title="Quando procurar a UBS e quando é emergência?">
           <p className="text-slate-700 leading-relaxed mb-5">
             É muito importante saber a diferença entre casos que podem ser
@@ -162,14 +167,13 @@ export default function Educacao() {
             atendimento e garantir que você receba o cuidado adequado no lugar
             certo.
           </p>
-
           <div className="grid md:grid-cols-2 gap-6 mb-5">
-            {/* Casos para UBS */}
+            {}
             <div className="bg-green-50 border-2 border-green-200 rounded-lg p-5">
               <div className="flex items-center gap-3 mb-4">
                 <CheckCircle size={24} className="text-green-600" />
                 <h3 className="text-lg font-bold text-green-800">
-                  Procure a UBS São José
+                  Procure a ESF Catalão
                 </h3>
               </div>
               <p className="text-slate-700 text-sm mb-3">
@@ -210,8 +214,7 @@ export default function Educacao() {
                 </div>
               </div>
             </div>
-
-            {/* Casos de Emergência */}
+            {}
             <div className="bg-red-50 border-2 border-red-200 rounded-lg p-5">
               <div className="flex items-center gap-3 mb-4">
                 <XCircle size={24} className="text-red-600" />
@@ -256,7 +259,6 @@ export default function Educacao() {
               </div>
             </div>
           </div>
-
           <div className="mt-5">
             <Alert type="info">
               <strong>Dúvida?</strong> Em caso de dúvida sobre a gravidade da
@@ -265,19 +267,16 @@ export default function Educacao() {
             </Alert>
           </div>
         </InfoBox>
-
-        {/* Temas de Emergência */}
+        {}
         <InfoBox title="Temas de Emergência Clínica">
           <p className="text-slate-700 mb-6">
             Selecione um tema para aprender como identificar e proceder em
             situações de emergência:
           </p>
-
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {temasEmergencia.map((tema) => {
               const Icon = tema.icone;
               const cores = coresClasses[tema.cor];
-
               return (
                 <Link
                   key={tema.id}
@@ -329,8 +328,7 @@ export default function Educacao() {
             })}
           </div>
         </InfoBox>
-
-        {/* Alerta Importante */}
+        {}
         <div className="mb-6">
           <Alert type="warning">
             <div>

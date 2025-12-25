@@ -1,58 +1,41 @@
-import { useState } from 'react';
-import { FileText, Download, AlertCircle, Maximize2 } from 'lucide-react';
-
-/**
- * PDFViewer - Renders PDFs inline with fallback options
- *
- * @param {string} pdfURL - Firebase Storage URL for PDF
- * @param {string} pdfNome - Display name of PDF
- * @param {string} className - Optional CSS classes
- * @param {number} height - Height in pixels (default: 600)
- * @param {boolean} showControls - Show download/fullscreen buttons
- */
+import { useState } from "react";
+import { FileText, Download, AlertCircle, Maximize2 } from "lucide-react";
 export default function PDFViewer({
   pdfURL,
-  pdfNome = 'documento.pdf',
-  className = '',
+  pdfNome = "documento.pdf",
+  className = "",
   height = 600,
-  showControls = true
+  showControls = true,
 }) {
   const [loadError, setLoadError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
   // Handle iframe load error
   const handleError = () => {
     setLoadError(true);
     setIsLoading(false);
   };
-
   // Handle successful load
   const handleLoad = () => {
     setIsLoading(false);
     setLoadError(false);
   };
-
   // Download PDF
   const handleDownload = () => {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = pdfURL;
     link.download = pdfNome;
-    link.target = '_blank';
+    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
-
-  // Open in new tab (fullscreen)
   const handleFullscreen = () => {
-    window.open(pdfURL, '_blank');
+    window.open(pdfURL, "_blank");
   };
-
   if (!pdfURL) return null;
-
   return (
     <div className={`relative ${className}`}>
-      {/* Controls Bar */}
+      {}
       {showControls && (
         <div className="flex items-center justify-between bg-slate-100 border border-slate-300 rounded-t-lg px-4 py-2">
           <div className="flex items-center gap-2 text-slate-700">
@@ -81,8 +64,7 @@ export default function PDFViewer({
           </div>
         </div>
       )}
-
-      {/* Loading State */}
+      {}
       {isLoading && !loadError && (
         <div
           className="flex items-center justify-center bg-slate-50 border border-slate-300"
@@ -94,12 +76,11 @@ export default function PDFViewer({
           </div>
         </div>
       )}
-
-      {/* PDF Iframe */}
+      {}
       {!loadError && (
         <iframe
           src={`${pdfURL}#toolbar=1&navpanes=0&scrollbar=1`}
-          className={`w-full border border-slate-300 ${showControls ? 'rounded-b-lg' : 'rounded-lg'} ${isLoading ? 'hidden' : 'block'}`}
+          className={`w-full border border-slate-300 ${showControls ? "rounded-b-lg" : "rounded-lg"} ${isLoading ? "hidden" : "block"}`}
           style={{ height: `${height}px` }}
           title={pdfNome}
           onLoad={handleLoad}
@@ -107,8 +88,7 @@ export default function PDFViewer({
           sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
         />
       )}
-
-      {/* Error Fallback */}
+      {}
       {loadError && (
         <div
           className="flex flex-col items-center justify-center bg-red-50 border border-red-200 rounded-lg p-8"
@@ -119,7 +99,8 @@ export default function PDFViewer({
             Não foi possível exibir o PDF
           </h3>
           <p className="text-sm text-red-700 text-center mb-4 max-w-md">
-            Seu navegador pode não suportar visualização de PDFs. Clique abaixo para baixar o documento.
+            Seu navegador pode não suportar visualização de PDFs. Clique abaixo
+            para baixar o documento.
           </p>
           <button
             onClick={handleDownload}

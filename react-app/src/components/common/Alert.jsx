@@ -1,50 +1,46 @@
-import { Info, AlertTriangle, CheckCircle, XCircle } from 'lucide-react';
-
-/**
- * Alert Component
- * Alertas para mensagens informativas, avisos, erros e sucessos
- */
-
-export function Alert({ type = 'info', children, className = '' }) {
+import { Info, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
+export function Alert({ type = "info", children, className = "" }) {
   const types = {
     info: {
-      bg: 'bg-blue-50 border-blue-200',
-      text: 'text-blue-800',
+      bg: "bg-slate-50 border-slate-300",
+      text: "text-slate-800",
       icon: Info,
-      iconColor: 'text-blue-600',
+      iconColor: "text-slate-600",
     },
     warning: {
-      bg: 'bg-amber-50 border-amber-200',
-      text: 'text-amber-800',
+      bg: "bg-amber-50 border-amber-300",
+      text: "text-amber-900",
       icon: AlertTriangle,
-      iconColor: 'text-amber-600',
+      iconColor: "text-amber-700",
     },
     success: {
-      bg: 'bg-green-50 border-green-200',
-      text: 'text-green-800',
+      bg: "bg-green-50 border-green-300",
+      text: "text-green-900",
       icon: CheckCircle,
-      iconColor: 'text-green-600',
+      iconColor: "text-green-700",
     },
     error: {
-      bg: 'bg-red-50 border-red-200',
-      text: 'text-red-800',
+      bg: "bg-red-50 border-red-300",
+      text: "text-red-900",
       icon: XCircle,
-      iconColor: 'text-red-600',
+      iconColor: "text-red-700",
     },
   };
-
   const config = types[type];
   const Icon = config.icon;
-
   return (
     <div
       role="alert"
-      className={`${config.bg} border-2 ${config.text} rounded-lg p-4 flex items-start gap-3 ${className}`}
+      className={`${config.bg} border ${config.text} rounded-md p-4 flex items-start gap-3 ${className}`}
+      style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
     >
-      <Icon size={20} className={`${config.iconColor} flex-shrink-0 mt-0.5`} strokeWidth={2} />
+      <Icon
+        size={18}
+        className={`${config.iconColor} flex-shrink-0 mt-0.5`}
+        strokeWidth={2}
+      />
       <div className="flex-1 text-sm leading-relaxed">{children}</div>
     </div>
   );
 }
-
 export default Alert;

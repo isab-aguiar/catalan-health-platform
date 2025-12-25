@@ -1,27 +1,22 @@
-// =========================================
-// TABELA DE AVISOS
-// =========================================
-// Tabela profissional para gerenciamento de avisos
-
-import { useState, useMemo, memo } from 'react';
-import { Edit, Trash2, Calendar, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
-import PermissionGate from '../auth/PermissionGate';
-
-function AvisosTable({ 
-  avisos, 
-  onEdit, 
-  onDelete, 
-  deleteLoading 
-}) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterCategoria, setFilterCategoria] = useState('todas');
+import { useState, useMemo, memo } from "react";
+import {
+  Edit,
+  Trash2,
+  Calendar,
+  Search,
+  Filter,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import PermissionGate from "../auth/PermissionGate";
+function AvisosTable({ avisos, onEdit, onDelete, deleteLoading }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategoria, setFilterCategoria] = useState("todas");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
-  // Filtrar e buscar avisos
   const filteredAvisos = useMemo(() => {
-    return avisos.filter(aviso => {
-      if (filterCategoria !== 'todas' && aviso.categoria !== filterCategoria) {
+    return avisos.filter((aviso) => {
+      if (filterCategoria !== "todas" && aviso.categoria !== filterCategoria) {
         return false;
       }
       if (searchTerm) {
@@ -34,56 +29,47 @@ function AvisosTable({
       return true;
     });
   }, [avisos, searchTerm, filterCategoria]);
-
-  // Paginação
   const totalPages = Math.ceil(filteredAvisos.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedAvisos = filteredAvisos.slice(startIndex, startIndex + itemsPerPage);
-
-  // Resetar página ao filtrar
+  const paginatedAvisos = filteredAvisos.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
   const handleSearch = (value) => {
     setSearchTerm(value);
     setCurrentPage(1);
   };
-
   const handleFilterCategoria = (value) => {
     setFilterCategoria(value);
     setCurrentPage(1);
   };
-
-  // Formatar data
   const formatarData = (timestamp) => {
-    if (!timestamp) return '-';
+    if (!timestamp) return "-";
     const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-    return date.toLocaleDateString('pt-BR');
+    return date.toLocaleDateString("pt-BR");
   };
-
-  // Obter cor da categoria
   const getCategoriaColor = (categoria) => {
     const colors = {
-      vacina: 'bg-blue-100 text-blue-800 border-blue-200',
-      material: 'bg-green-100 text-green-800 border-green-200',
-      campanha: 'bg-amber-100 text-amber-800 border-amber-200'
+      vacina: "bg-blue-100 text-blue-800 border-blue-200",
+      material: "bg-green-100 text-green-800 border-green-200",
+      campanha: "bg-amber-100 text-amber-800 border-amber-200",
     };
-    return colors[categoria] || 'bg-slate-100 text-slate-800 border-slate-200';
+    return colors[categoria] || "bg-slate-100 text-slate-800 border-slate-200";
   };
-
-  // Obter label da categoria
   const getCategoriaLabel = (categoria) => {
     const labels = {
-      vacina: 'Vacina',
-      material: 'Material',
-      campanha: 'Campanha'
+      vacina: "Vacina",
+      material: "Material",
+      campanha: "Campanha",
     };
     return labels[categoria] || categoria;
   };
-
   return (
     <div className="bg-white rounded-md shadow-sm border border-slate-300">
-      {/* Filtros e Busca */}
+      {}
       <div className="p-4 border-b border-slate-300 bg-slate-50">
         <div className="flex flex-col sm:flex-row gap-3">
-          {/* Campo de Busca */}
+          {}
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
             <input
@@ -94,8 +80,7 @@ function AvisosTable({
               className="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
             />
           </div>
-
-          {/* Filtro de Categoria */}
+          {}
           <div className="flex items-center gap-2">
             <Filter className="w-5 h-5 text-slate-400 hidden sm:block" />
             <select
@@ -110,14 +95,15 @@ function AvisosTable({
             </select>
           </div>
         </div>
-
-        {/* Info de resultados */}
+        {}
         <p className="text-sm text-slate-600 mt-3 font-medium">
-          {filteredAvisos.length} {filteredAvisos.length === 1 ? 'aviso encontrado' : 'avisos encontrados'}
+          {filteredAvisos.length}{" "}
+          {filteredAvisos.length === 1
+            ? "aviso encontrado"
+            : "avisos encontrados"}
         </p>
       </div>
-
-      {/* Tabela */}
+      {}
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead className="bg-slate-100 border-b border-slate-300">
@@ -142,21 +128,33 @@ function AvisosTable({
           <tbody className="divide-y divide-slate-200 bg-white">
             {paginatedAvisos.length === 0 ? (
               <tr>
-                <td colSpan="5" className="px-6 py-12 text-center text-slate-500 text-sm">
+                <td
+                  colSpan="5"
+                  className="px-6 py-12 text-center text-slate-500 text-sm"
+                >
                   Nenhum aviso encontrado com os critérios selecionados
                 </td>
               </tr>
             ) : (
               paginatedAvisos.map((aviso) => (
-                <tr key={aviso.id} className="hover:bg-slate-50 transition-colors">
+                <tr
+                  key={aviso.id}
+                  className="hover:bg-slate-50 transition-colors"
+                >
                   <td className="px-6 py-4">
                     <div>
-                      <p className="font-semibold text-slate-900 text-sm">{aviso.titulo}</p>
-                      <p className="text-sm text-slate-600 line-clamp-1 mt-0.5">{aviso.descricao}</p>
+                      <p className="font-semibold text-slate-900 text-sm">
+                        {aviso.titulo}
+                      </p>
+                      <p className="text-sm text-slate-600 line-clamp-1 mt-0.5">
+                        {aviso.descricao}
+                      </p>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`inline-flex px-3 py-1 rounded-md text-xs font-semibold border ${getCategoriaColor(aviso.categoria)}`}>
+                    <span
+                      className={`inline-flex px-3 py-1 rounded-md text-xs font-semibold border ${getCategoriaColor(aviso.categoria)}`}
+                    >
                       {getCategoriaLabel(aviso.categoria)}
                     </span>
                   </td>
@@ -210,8 +208,7 @@ function AvisosTable({
           </tbody>
         </table>
       </div>
-
-      {/* Paginação */}
+      {}
       {totalPages > 1 && (
         <div className="px-6 py-4 border-t border-slate-300 bg-slate-50 flex items-center justify-between">
           <p className="text-sm text-slate-700 font-medium">
@@ -219,14 +216,14 @@ function AvisosTable({
           </p>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
               className="p-2 text-slate-600 hover:bg-slate-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-slate-300"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
-              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
               className="p-2 text-slate-600 hover:bg-slate-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-slate-300"
             >
@@ -238,5 +235,4 @@ function AvisosTable({
     </div>
   );
 }
-
 export default memo(AvisosTable);

@@ -1,81 +1,63 @@
-// =========================================
-// ROTA PROTEGIDA
-// =========================================
-// Este componente protege rotas que só usuários logados podem acessar
-// Se não estiver logado, redireciona para a página de login
-// Suporta verificação de role específico
-
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
-import { usePermissions } from '../../hooks/usePermissions';
-import LoadingSpinner from '../common/LoadingSpinner';
-import { Shield } from 'lucide-react';
-
-/**
- * Componente de rota protegida
- * @param {ReactNode} children - Conteúdo da rota
- * @param {string} requiredRole - Role necessário (ex: "admin", "profissional")
- * @param {string} requiredPermission - Permissão necessária (ex: "canManageUsers")
- */
-export default function ProtectedRoute({ children, requiredRole, requiredPermission }) {
-  const { currentUser, loading, isActive, userData, isAdmin: isAdminFromContext } = useAuth();
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+import { usePermissions } from "../../hooks/usePermissions";
+import LoadingSpinner from "../common/LoadingSpinner";
+import { Shield } from "lucide-react";
+export default function ProtectedRoute({
+  children,
+  requiredRole,
+  requiredPermission,
+}) {
+  const {
+    currentUser,
+    loading,
+    isActive,
+    userData,
+    isAdmin: isAdminFromContext,
+  } = useAuth();
   const permissions = usePermissions();
-
-  // Se ainda está carregando (Auth OU UserData), mostra spinner
   if (loading) {
     return <LoadingSpinner />;
   }
-
-  // Se não está logado, redireciona para login
   if (!currentUser) {
     return <Navigate to="/admin/login" replace />;
   }
-
-  // Se userData ainda não carregou (safety check), aguarda
   if (currentUser && !userData) {
     return <LoadingSpinner />;
   }
-
-  // Se usuário está desativado, redireciona para login
   if (!isActive) {
     return <Navigate to="/admin/login" replace />;
   }
-
-  // Verificar role específico
   if (requiredRole) {
     const currentRole = permissions.getRole();
-    
-    // Se role for admin e usuário não for admin
-    if (requiredRole === 'admin' && !permissions.isAdmin()) {
-      return <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />;
+    if (requiredRole === "admin" && !permissions.isAdmin()) {
+      return (
+        <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />
+      );
     }
-    
-    // Se role for profissional e usuário não for admin nem profissional
-    if (requiredRole === 'profissional' && !permissions.isAdmin() && !permissions.isProfissional()) {
-      return <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />;
+    if (
+      requiredRole === "profissional" &&
+      !permissions.isAdmin() &&
+      !permissions.isProfissional()
+    ) {
+      return (
+        <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />
+      );
     }
-    
-    // Verificação genérica de role
     if (currentRole !== requiredRole && !permissions.isAdmin()) {
-      return <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />;
+      return (
+        <AccessDenied currentRole={currentRole} requiredRole={requiredRole} />
+      );
     }
   }
-
-  // Verificar permissão específica
   if (requiredPermission) {
     const permissionFn = permissions[requiredPermission];
-    if (typeof permissionFn === 'function' && !permissionFn()) {
+    if (typeof permissionFn === "function" && !permissionFn()) {
       return <AccessDenied requiredPermission={requiredPermission} />;
     }
   }
-
-  // Se passou todas as verificações, mostra o conteúdo protegido
   return children;
 }
-
-/**
- * Componente de acesso negado
- */
 function AccessDenied({ currentRole, requiredRole, requiredPermission }) {
   return (
     <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-4">
@@ -113,4 +95,3 @@ function AccessDenied({ currentRole, requiredRole, requiredPermission }) {
     </div>
   );
 }
-

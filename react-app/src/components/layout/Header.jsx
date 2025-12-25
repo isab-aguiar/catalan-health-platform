@@ -5,7 +5,6 @@ import MobileMenu from "./MobileMenu";
 import GlobalSearch from "../search/GlobalSearch";
 import { usePageSearch } from "../../hooks/usePageSearch";
 import { useAuth } from "../../contexts/AuthContext";
-
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -16,18 +15,15 @@ export default function Header() {
   const location = useLocation();
   const searchResults = usePageSearch(searchQuery);
   const { currentUser } = useAuth();
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSearchResults(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
   useEffect(() => {
     if (searchQuery.length >= 3) {
       setShowSearchResults(true);
@@ -35,7 +31,6 @@ export default function Header() {
       setShowSearchResults(false);
     }
   }, [searchQuery]);
-
   const handleSearchKeyDown = (e) => {
     if (e.key === "Enter" && searchQuery.length >= 3) {
       if (searchResults.length > 0) {
@@ -52,32 +47,27 @@ export default function Header() {
       setSearchQuery("");
     }
   };
-
   const handleContatoClick = (e) => {
     e.preventDefault();
-
     const scrollToElement = () => {
-      const element = document.getElementById('contato');
+      const element = document.getElementById("contato");
       if (element) {
         const yOffset = -80;
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        const y =
+          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
     };
-
-    if (location.pathname === '/') {
+    if (location.pathname === "/") {
       scrollToElement();
     } else {
-      navigate('/');
+      navigate("/");
       setTimeout(scrollToElement, 300);
     }
-
     setIsMobileMenuOpen(false);
   };
-
   const handleNavClick = (e, link) => {
     e.preventDefault();
-
     if (link.onClick) {
       // Se o link tem um onClick customizado (como Contato), usa ele
       link.onClick(e);
@@ -85,30 +75,38 @@ export default function Header() {
       // Para outros links, navega e rola para o topo
       if (location.pathname === link.path) {
         // Se já estiver na página, apenas rola para o topo
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         // Navega para a página e rola para o topo
         navigate(link.path);
         setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }, 100);
       }
       setIsMobileMenuOpen(false);
     }
   };
-
   const navLinks = [
     { name: "Início", path: "/", handleClick: handleNavClick },
     { name: "Serviços", path: "/servicos", handleClick: handleNavClick },
-    { name: "Sala de Vacinação", path: "/servicos/vacinas", handleClick: handleNavClick },
+    {
+      name: "Sala de Vacinação",
+      path: "/servicos/vacinas",
+      handleClick: handleNavClick,
+    },
     { name: "Grupos", path: "/grupos", handleClick: handleNavClick },
     { name: "Equipe", path: "/equipe", handleClick: handleNavClick },
     { name: "Remsa", path: "/remsa", handleClick: handleNavClick },
     { name: "ACS", path: "/acs", handleClick: handleNavClick },
     { name: "Educação", path: "/educacao", handleClick: handleNavClick },
-    { name: "Contato", path: "/#contato", isAnchor: true, onClick: handleContatoClick, handleClick: handleNavClick },
+    {
+      name: "Contato",
+      path: "/#contato",
+      isAnchor: true,
+      onClick: handleContatoClick,
+      handleClick: handleNavClick,
+    },
   ];
-
   return (
     <>
       {!isMobileMenuOpen && (
@@ -122,13 +120,12 @@ export default function Header() {
               alt="ESF Catalão - Saúde da Família"
               className="w-full h-full object-contain object-center"
               style={{
-                imageRendering: 'high-quality',
+                imageRendering: "high-quality",
               }}
             />
           </div>
         </Link>
       )}
-
       <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-12 sm:pl-[140px] md:pl-[200px] pr-12 sm:pr-[60px] overflow-x-hidden w-full">
         <div className="w-full h-[70px] flex items-center justify-between gap-4 px-4">
           <div
@@ -165,7 +162,6 @@ export default function Header() {
                   <X size={18} />
                 </button>
               )}
-
               {showSearchResults && searchResults.length > 0 && (
                 <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-200 rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
                   {searchResults.slice(0, 5).map((result, index) => {
@@ -175,7 +171,6 @@ export default function Header() {
                       (typeof IconComponent === "function" ||
                         (typeof IconComponent === "object" &&
                           IconComponent?.$$typeof));
-
                     return (
                       <button
                         key={index}
@@ -224,12 +219,11 @@ export default function Header() {
               )}
             </div>
           </div>
-
-          {/* Botão de Login/Acesso (Desktop) */}
+          {}
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
             {currentUser ? (
               <button
-                onClick={() => navigate('/admin/painel')}
+                onClick={() => navigate("/admin/painel")}
                 className="flex items-center gap-2 px-4 py-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-colors font-medium text-sm"
               >
                 <User size={18} />
@@ -237,7 +231,7 @@ export default function Header() {
               </button>
             ) : (
               <button
-                onClick={() => navigate('/admin/login')}
+                onClick={() => navigate("/admin/login")}
                 className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium text-sm shadow-sm hover:shadow-md"
               >
                 <Lock size={18} />
@@ -247,13 +241,11 @@ export default function Header() {
           </div>
         </div>
       </header>
-
       {isSearchOpen && <GlobalSearch onClose={() => setIsSearchOpen(false)} />}
-
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         className="lg:hidden fixed right-0 z-50 p-3 bg-white hover:bg-neutral-100 transition-colors"
-        style={{ top: '12px' }}
+        style={{ top: "12px" }}
         aria-label="Menu"
       >
         {isMobileMenuOpen ? (
@@ -262,7 +254,6 @@ export default function Header() {
           <Menu size={24} className="text-neutral-700" />
         )}
       </button>
-
       <MobileMenu
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}

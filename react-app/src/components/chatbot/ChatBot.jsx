@@ -1,14 +1,8 @@
-// =========================================
-// COMPONENTE CHAT BOT
-// =========================================
-// Interface completa do chat com IA
-
-import { useEffect, useRef } from 'react';
-import { Bot, Trash2, X } from 'lucide-react';
-import ChatMessage from './ChatMessage';
-import ChatInput from './ChatInput';
-import { useGemini } from '../../hooks/useGemini';
-
+import { useEffect, useRef } from "react";
+import { Bot, Trash2, X } from "lucide-react";
+import ChatMessage from "./ChatMessage";
+import ChatInput from "./ChatInput";
+import { useGemini } from "../../hooks/useGemini";
 export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
   const {
     messages,
@@ -20,109 +14,85 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
     cancelProcessing,
     refineCampanha,
     publishCampanha,
-    // Novo sistema de fluxo com botões
     campanhaFlowActive,
     startCampanhaFlow,
     handleFlowButtonClick,
     handleFlowInputSubmit,
-    handleFlowFileUpload
+    handleFlowFileUpload,
   } = useGemini();
-
-  // Wrapper para incluir userId ao enviar
   const handleSend = (data) => {
-    console.log('🔵 ChatBot handleSend recebeu:', data);
-
-    // data pode ser string (texto simples) ou objeto { texto, arquivo, tipo }
-    const isObject = typeof data === 'object' && data !== null;
+    console.log("🔵 ChatBot handleSend recebeu:", data);
+    const isObject = typeof data === "object" && data !== null;
     const texto = isObject ? data.texto : data;
     const arquivo = isObject ? data.arquivo : null;
-
-    console.log('📝 Texto:', texto);
-    console.log('📎 Arquivo:', arquivo);
-    console.log('📋 Draft Campanha:', draftCampanha);
-    console.log('🎬 Fluxo Ativo:', campanhaFlowActive);
-
-    // Se o fluxo de botões estiver ativo, ignorar (inputs são tratados por handleFlowInputSubmit)
+    console.log("📝 Texto:", texto);
+    console.log("📎 Arquivo:", arquivo);
+    console.log("📋 Draft Campanha:", draftCampanha);
+    console.log("🎬 Fluxo Ativo:", campanhaFlowActive);
     if (campanhaFlowActive) {
-      console.log('⚠️ Fluxo de botões ativo, mensagem ignorada (usar inputs do fluxo)');
+      console.log(
+        "⚠️ Fluxo de botões ativo, mensagem ignorada (usar inputs do fluxo)"
+      );
       return;
     }
-
-    // DESABILITADO: Fluxo com botões (agora usa fluxo conversacional)
-    // Se tem arquivo de imagem, enviar para análise conversacional com Gemini
-    if (arquivo && arquivo.type?.startsWith('image/')) {
-      console.log('🎬 Enviando imagem para análise conversacional com Gemini...');
-      // Deixa o fluxo normal processar (sendMessage abaixo vai fazer análise)
-      // startCampanhaFlow(arquivo, userId); // DESABILITADO - usava botões
-      // return; // REMOVIDO - continua para fluxo conversacional
+    if (arquivo && arquivo.type?.startsWith("image/")) {
+      console.log(
+        "🎬 Enviando imagem para análise conversacional com Gemini..."
+      );
     }
-
-    // Se tem rascunho de campanha e não tem arquivo, é refinamento (SISTEMA ANTIGO)
     if (draftCampanha && !arquivo && texto?.trim()) {
-      console.log('✏️ Refinando campanha (sistema antigo)...');
+      console.log("✏️ Refinando campanha (sistema antigo)...");
       refineCampanha(texto);
     } else if (arquivo) {
-      // Arquivo não-imagem - enviar para análise (SISTEMA ANTIGO)
-      console.log('📸 Enviando arquivo para análise (sistema antigo)...');
-      console.log('📸 Arquivo detalhes:', {
+      console.log("📸 Enviando arquivo para análise (sistema antigo)...");
+      console.log("📸 Arquivo detalhes:", {
         name: arquivo.name,
         size: arquivo.size,
-        type: arquivo.type
+        type: arquivo.type,
       });
       sendMessage({ arquivo, texto }, userId);
     } else if (texto?.trim()) {
-      // Enviar mensagem normal para criar aviso
-      console.log('💬 Enviando mensagem de texto...');
+      console.log("💬 Enviando mensagem de texto...");
       sendMessage(texto, userId);
     } else {
-      console.warn('⚠️ Nenhuma ação executada - sem texto nem arquivo');
+      console.warn("⚠️ Nenhuma ação executada - sem texto nem arquivo");
     }
   };
-
-  // Publicar campanha finalizada
   const handlePublishCampanha = async () => {
     if (!draftCampanha) return;
-    
     const result = await publishCampanha(userId);
     if (result) {
-      alert('Campanha publicada com sucesso!');
+      alert("Campanha publicada com sucesso!");
     }
   };
-
   const messagesContainerRef = useRef(null);
-
-  // Auto-scroll para última mensagem dentro do container
   useEffect(() => {
     if (messagesContainerRef.current) {
       const container = messagesContainerRef.current;
       container.scroll({
         top: container.scrollHeight,
-        behavior: 'smooth'
+        behavior: "smooth",
       });
     }
   }, [messages]);
-
-  // Mensagem de boas-vindas compacta
   const welcomeMessage = {
-    id: 'welcome',
-    role: 'assistant',
-    content: '👋 Olá! Sou o assistente virtual da ESF Catalão.\n\n' +
-      '🖼️ CRIAR CAMPANHA COM IMAGEM\n' +
-      'Envie uma imagem e siga o fluxo guiado. Reformulo seus textos para linguagem formal e você aprova cada etapa antes de publicar.\n\n' +
-      '📝 CRIAR AVISO SEM IMAGEM\n' +
+    id: "welcome",
+    role: "assistant",
+    content:
+      "👋 Olá! Sou o assistente virtual da ESF Catalão.\n\n" +
+      "🖼️ CRIAR CAMPANHA COM IMAGEM\n" +
+      "Envie uma imagem e siga o fluxo guiado. Reformulo seus textos para linguagem formal e você aprova cada etapa antes de publicar.\n\n" +
+      "📝 CRIAR AVISO SEM IMAGEM\n" +
       'Digite "criar aviso" para iniciar um questionário interativo.\n\n' +
-      '💬 CONVERSAÇÃO\n' +
-      'Também posso responder perguntas e tirar dúvidas.\n\n' +
-      'Como posso ajudar?',
-    timestamp: new Date()
+      "💬 CONVERSAÇÃO\n" +
+      "Também posso responder perguntas e tirar dúvidas.\n\n" +
+      "Como posso ajudar?",
+    timestamp: new Date(),
   };
-
-  // Todas as mensagens (boas-vindas + histórico)
   const allMessages = messages.length === 0 ? [welcomeMessage] : messages;
-
   return (
     <div className="flex flex-col h-full bg-gradient-to-b from-neutral-50 to-white">
-      {/* Header Compacto do Chat */}
+      {}
       <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2.5 border-b border-blue-700 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -132,11 +102,11 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
             <div>
               <h2 className="font-semibold text-sm">Chat IA</h2>
               <p className="text-[10px] text-blue-100 leading-tight">
-                {loading 
-                  ? 'Processando...' 
-                  : draftCampanha 
-                    ? 'Modo Edição' 
-                    : 'Online'}
+                {loading
+                  ? "Processando..."
+                  : draftCampanha
+                    ? "Modo Edição"
+                    : "Online"}
               </p>
             </div>
           </div>
@@ -172,8 +142,7 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
           </div>
         </div>
       </div>
-
-      {/* Área de Mensagens com Scroll - Altura calculada automaticamente */}
+      {}
       <div
         className="flex-1 overflow-y-auto px-3 py-3"
         style={{ height: 0 }}
@@ -193,8 +162,7 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
           ))}
         </div>
       </div>
-
-      {/* Input Fixo na Base */}
+      {}
       <div className="flex-shrink-0 border-t border-neutral-200 bg-white">
         <ChatInput
           onSend={handleSend}
@@ -206,4 +174,3 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
     </div>
   );
 }
-

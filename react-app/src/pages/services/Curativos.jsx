@@ -9,17 +9,14 @@ import {
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
-
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
 }
-
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
     default: "bg-white border-slate-200",
     highlight: "bg-blue-50 border-blue-300",
   };
-
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
@@ -32,7 +29,6 @@ function InfoBox({ title, icon, children, variant = "default" }) {
     </div>
   );
 }
-
 function Alert({ type = "info", children }) {
   const types = {
     info: {
@@ -48,9 +44,7 @@ function Alert({ type = "info", children }) {
       icon: "text-amber-600",
     },
   };
-
   const style = types[type];
-
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -65,34 +59,40 @@ function Alert({ type = "info", children }) {
     </div>
   );
 }
-
 export default function Curativos() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 Serviço de Curativos
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Unidade Básica de Saúde
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
-        {/* Campanhas */}
+        {}
         <CampanhasPaginaWrapper pagina="curativos" />
-
-        {/* Avisos */}
+        {}
         <AvisosPaginaWrapper pagina="curativos" />
-
-        {/* O que fazemos */}
+        {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-slate-700 leading-relaxed mb-5">
             O Serviço de Curativos da Unidade Básica de Saúde São José é
@@ -104,7 +104,6 @@ export default function Curativos() {
             curativo, priorizando a segurança do paciente e a otimização do
             processo de cicatrização tecidual.
           </p>
-
           <div className="grid md:grid-cols-3 gap-4">
             <div className="bg-slate-50 border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
@@ -137,8 +136,7 @@ export default function Curativos() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Dispensação de Material */}
+        {}
         <InfoBox title="Dispensação de Material para Curativos">
           <p className="text-slate-700 leading-relaxed mb-4">
             A unidade disponibiliza materiais para realização de curativos
@@ -147,7 +145,6 @@ export default function Curativos() {
             micropore, esparadrapo, luvas descartáveis, solução fisiológica,
             ataduras e demais insumos necessários para o tratamento.
           </p>
-
           <div className="space-y-3">
             <Alert type="warning">
               <strong>Normativa de Dispensação:</strong> A entrega de materiais
@@ -156,7 +153,6 @@ export default function Curativos() {
               a dispensação de materiais em quantidade superior à estabelecida
               na prescrição médica.
             </Alert>
-
             <Alert type="info">
               <strong>Orientação:</strong> Solicitamos que o usuário traga seu
               próprio recipiente ou saco plástico para transporte dos materiais
@@ -166,8 +162,7 @@ export default function Curativos() {
             </Alert>
           </div>
         </InfoBox>
-
-        {/* Documentação Necessária */}
+        {}
         <InfoBox
           title="Documentação Necessária"
           icon={<FileText size={24} />}
@@ -177,7 +172,6 @@ export default function Curativos() {
             Para atendimento na sala de curativos e dispensação de materiais, é
             obrigatória a apresentação da seguinte documentação:
           </p>
-
           <div className="space-y-2">
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -191,7 +185,6 @@ export default function Curativos() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -204,7 +197,6 @@ export default function Curativos() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -218,8 +210,7 @@ export default function Curativos() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Como ter acesso */}
+        {}
         <InfoBox title="Como Agendar" icon={<Calendar size={24} />}>
           <div className="space-y-4">
             <div>
@@ -233,7 +224,6 @@ export default function Curativos() {
                 "Horários de Atendimento" desta página.
               </p>
             </div>
-
             <div>
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
                 Atendimento por Demanda Espontânea
@@ -247,7 +237,6 @@ export default function Curativos() {
                 avaliação clínica.
               </p>
             </div>
-
             <p className="text-slate-700 leading-relaxed text-sm">
               O atendimento é realizado mediante horários agendados e casos de
               urgência, conforme disponibilidade da equipe e protocolos
@@ -255,8 +244,7 @@ export default function Curativos() {
             </p>
           </div>
         </InfoBox>
-
-        {/* Horários de Atendimento */}
+        {}
         <InfoBox title="Horários de Atendimento" icon={<Clock size={24} />}>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -328,8 +316,7 @@ export default function Curativos() {
             estabelecidos pela unidade.
           </p>
         </InfoBox>
-
-        {/* Informação importante final */}
+        {}
         <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
           <div className="flex items-start gap-3">
             <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />

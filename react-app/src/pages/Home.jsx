@@ -26,119 +26,112 @@ import {
   Droplet,
   Syringe,
 } from "lucide-react";
-
-// Lazy loading de imagens - carrega apenas quando necessário (melhora performance inicial)
 const galleryImagesModules = import.meta.glob(
   "../assets/images/galeria-photos/*.{png,jpg,jpeg}",
   { eager: false }
 );
-
 const getCaptionFromFilename = (imagePath) => {
-  if (!imagePath || typeof imagePath !== 'string') return '';
-  
-  const filename = imagePath.split('/').pop().toLowerCase();
-  
+  if (!imagePath || typeof imagePath !== "string") return "";
+  const filename = imagePath.split("/").pop().toLowerCase();
   const captionMap = [
-    { 
-      pattern: 'foto-unidade', 
-      caption: 'Fachada da Unidade de Saúde ESF Catalão - Rua Júlio Nogueira, 1320, São José' 
+    {
+      pattern: "foto-unidade",
+      caption:
+        "Fachada da Unidade de Saúde ESF Catalão - Rua Júlio Nogueira, 1320, São José",
     },
-    { 
-      pattern: 'equipe-esf-catalao-belavista-saojose', 
-      caption: 'Equipe multiprofissional das ESFs Catalão, Bela Vista e São José reunida para foto oficial' 
+    {
+      pattern: "equipe-esf-catalao-belavista-saojose",
+      caption:
+        "Equipe multiprofissional das ESFs Catalão, Bela Vista e São José reunida para foto oficial",
     },
-    { 
-      pattern: 'equipe.jpg', 
-      caption: 'Profissionais da equipe multiprofissional da ESF Catalão comprometidos com o cuidado integral à saúde' 
+    {
+      pattern: "equipe.jpg",
+      caption:
+        "Profissionais da equipe multiprofissional da ESF Catalão comprometidos com o cuidado integral à saúde",
     },
-    { 
-      pattern: 'grupo-foco-na-saude', 
-      caption: 'Grupo de atividades coletivas "Foco na Saúde" - Prevenção e diagnóstico do câncer de pele (Dezembro Laranja) e promoção da saúde' 
+    {
+      pattern: "grupo-foco-na-saude",
+      caption:
+        'Grupo de atividades coletivas "Foco na Saúde" - Prevenção e diagnóstico do câncer de pele (Dezembro Laranja) e promoção da saúde',
     },
-    { 
-      pattern: 'grupo-viva-leve', 
-      caption: 'Grupo de atividades coletivas "Viva Leve" - Cuidado e orientação para pacientes com dor crônica e fibromialgia' 
+    {
+      pattern: "grupo-viva-leve",
+      caption:
+        'Grupo de atividades coletivas "Viva Leve" - Cuidado e orientação para pacientes com dor crônica e fibromialgia',
     },
-    { 
-      pattern: 'outubro-rosa', 
-      caption: 'Campanha Outubro Rosa - Conscientização e prevenção do câncer de mama na ESF Catalão' 
+    {
+      pattern: "outubro-rosa",
+      caption:
+        "Campanha Outubro Rosa - Conscientização e prevenção do câncer de mama na ESF Catalão",
     },
-    { 
-      pattern: 'viver-bem-diabetes', 
-      caption: 'Grupo de atividades coletivas "Viver Bem com Diabetes" - Educação e orientação para pacientes diabéticos' 
+    {
+      pattern: "viver-bem-diabetes",
+      caption:
+        'Grupo de atividades coletivas "Viver Bem com Diabetes" - Educação e orientação para pacientes diabéticos',
     },
   ];
-  
   for (const { pattern, caption } of captionMap) {
     if (filename.includes(pattern.toLowerCase())) {
       return caption;
     }
   }
-  
-  const nameWithoutExt = filename.replace(/\.(png|jpg|jpeg)$/i, '');
+  const nameWithoutExt = filename.replace(/\.(png|jpg|jpeg)$/i, "");
   let formattedName = nameWithoutExt
-    .replace(/[-_]/g, ' ')
+    .replace(/[-_]/g, " ")
     .replace(/\b\w/g, (l) => l.toUpperCase());
-  
-  if (formattedName.toLowerCase().includes('grupo')) {
-    const grupoName = formattedName.replace(/^grupo\s+/i, '').trim();
+  if (formattedName.toLowerCase().includes("grupo")) {
+    const grupoName = formattedName.replace(/^grupo\s+/i, "").trim();
     return `Grupo de atividades coletivas "${grupoName}" - Promoção de saúde e bem-estar na comunidade`;
   }
-  
-  if (formattedName.toLowerCase().includes('evento') || 
-      formattedName.toLowerCase().includes('campanha') ||
-      formattedName.toLowerCase().includes('ação')) {
+  if (
+    formattedName.toLowerCase().includes("evento") ||
+    formattedName.toLowerCase().includes("campanha") ||
+    formattedName.toLowerCase().includes("ação")
+  ) {
     return `${formattedName} realizado na ESF Catalão`;
   }
-  
   return `${formattedName} - ESF Catalão`;
 };
-
 export default function Home() {
-  // Buscar campanhas visuais
   const { campanhas, loading: loadingCampanhas } = useCampanhas();
-  
-  // Carregamento lazy das imagens da galeria (melhora performance inicial)
   const [galleryImages, setGalleryImages] = useState([]);
   const [loadingImages, setLoadingImages] = useState(true);
-  
   useEffect(() => {
-    // Carrega imagens de forma assíncrona após o primeiro render
     const loadImages = async () => {
       try {
         const modules = await Promise.all(
-          Object.keys(galleryImagesModules).map(path => galleryImagesModules[path]())
+          Object.keys(galleryImagesModules).map((path) =>
+            galleryImagesModules[path]()
+          )
         );
-        
         const imageEntries = modules.map((module, index) => ({
           src: module.default,
-          caption: getCaptionFromFilename(Object.keys(galleryImagesModules)[index]),
+          caption: getCaptionFromFilename(
+            Object.keys(galleryImagesModules)[index]
+          ),
         }));
-        
-        const fotoUnidade = imageEntries.find((img) => 
-          img.src.includes('foto-unidade')
+        const fotoUnidade = imageEntries.find((img) =>
+          img.src.includes("foto-unidade")
         );
-        const outrasImagens = imageEntries.filter((img) => 
-          !img.src.includes('foto-unidade')
+        const outrasImagens = imageEntries.filter(
+          (img) => !img.src.includes("foto-unidade")
         );
-        
         outrasImagens.sort((a, b) => a.src.localeCompare(b.src));
-        
-        setGalleryImages(fotoUnidade ? [fotoUnidade, ...outrasImagens] : outrasImagens);
+        setGalleryImages(
+          fotoUnidade ? [fotoUnidade, ...outrasImagens] : outrasImagens
+        );
       } catch (error) {
-        console.error('Erro ao carregar imagens da galeria:', error);
+        console.error("Erro ao carregar imagens da galeria:", error);
         setGalleryImages([]);
       } finally {
         setLoadingImages(false);
       }
     };
-    
     loadImages();
   }, []);
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white">
-      {/* Hero Section */}
+      {}
       <section className="pt-16 pb-8 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
@@ -147,15 +140,19 @@ export default function Home() {
                 Estratégia Saúde da Família
               </p>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-2">
-                <span className="text-primary-600 font-display font-bold tracking-wide uppercase">ESF CATALÃO</span>
+                <span className="text-primary-600 font-display font-bold tracking-wide uppercase">
+                  ESF CATALÃO
+                </span>
               </h1>
             </div>
             <p className="text-base sm:text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed px-4">
-              Atendimento humanizado e profissional para toda a comunidade das <span className="whitespace-nowrap">ESFs Bela Vista - Catalão - São José</span>
+              Atendimento humanizado e profissional para toda a comunidade das{" "}
+              <span className="whitespace-nowrap">
+                ESFs Bela Vista - Catalão - São José
+              </span>
             </p>
           </div>
-
-          {/* Campanhas Visuais - Carrega somente se houver campanhas */}
+          {}
           {!loadingCampanhas && campanhas && campanhas.length > 0 && (
             <div className="mb-12">
               <div className="text-center mb-8">
@@ -166,12 +163,13 @@ export default function Home() {
               <CampanhaCarousel campanhas={campanhas} />
             </div>
           )}
-
-          {/* Avisos Públicos */}
+          {}
           <AvisosList />
-
-          {/* Contact Information Section */}
-          <div id="contato" className="bg-white rounded-lg shadow-md border border-neutral-200 mb-12">
+          {}
+          <div
+            id="contato"
+            className="bg-white rounded-lg shadow-md border border-neutral-200 mb-12"
+          >
             <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
               <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
                 Informações de Contato
@@ -180,11 +178,10 @@ export default function Home() {
                 Entre em contato conosco pelos canais abaixo
               </p>
             </div>
-
             <div className="p-4 sm:p-6">
-              {/* Main Contact Grid */}
+              {}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-                {/* Reception */}
+                {}
                 <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -219,8 +216,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
-                {/* Administrative Services */}
+                {}
                 <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-neutral-700 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -242,7 +238,10 @@ export default function Home() {
                               rel="noopener noreferrer"
                               className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-green-600 transition-colors"
                             >
-                              <MessageCircle size={18} className="text-green-600 flex-shrink-0" />
+                              <MessageCircle
+                                size={18}
+                                className="text-green-600 flex-shrink-0"
+                              />
                               <span>(37) 99177-0200</span>
                             </a>
                             <a
@@ -251,7 +250,10 @@ export default function Home() {
                               rel="noopener noreferrer"
                               className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-green-600 transition-colors"
                             >
-                              <MessageCircle size={18} className="text-green-600 flex-shrink-0" />
+                              <MessageCircle
+                                size={18}
+                                className="text-green-600 flex-shrink-0"
+                              />
                               <span>(37) 99152-0024</span>
                             </a>
                           </div>
@@ -268,8 +270,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
-                {/* Dentist */}
+                {}
                 <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -303,8 +304,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
-                {/* Pharmacy */}
+                {}
                 <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -338,8 +338,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
-                {/* Blood Collection */}
+                {}
                 <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-red-700 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -365,8 +364,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
-                {/* Address */}
+                {}
                 <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-12 h-12 sm:w-14 sm:h-14 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -397,8 +395,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-
-              {/* Additional Info Bar */}
+              {}
               <div className="bg-neutral-50 rounded-lg p-4 sm:p-5 border border-neutral-200">
                 <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm sm:text-base text-neutral-700">
                   <a
@@ -442,8 +439,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Image Gallery Section */}
+      {}
       <section className="pt-8 pb-16 px-4 bg-gradient-to-b from-white to-neutral-50">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-8 text-center">
@@ -463,8 +459,7 @@ export default function Home() {
           )}
         </div>
       </section>
-
-      {/* ACS Search Section */}
+      {}
       <section className="py-16 px-4 bg-gradient-to-br from-primary-500 to-primary-700">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-8">
@@ -479,8 +474,7 @@ export default function Home() {
           <SearchSection />
         </div>
       </section>
-
-      {/* Hubs Section */}
+      {}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-3 text-center">
@@ -490,7 +484,6 @@ export default function Home() {
             Navegue pelos diferentes serviços e profissionais disponíveis na
             unidade
           </p>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Link
               to="/servicos"
@@ -513,7 +506,6 @@ export default function Home() {
                 />
               </div>
             </Link>
-
             <Link
               to="/grupos"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-accent-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
@@ -535,7 +527,6 @@ export default function Home() {
                 />
               </div>
             </Link>
-
             <Link
               to="/equipe"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-secondary-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
@@ -557,7 +548,6 @@ export default function Home() {
                 />
               </div>
             </Link>
-
             <Link
               to="/servicos/vacinas"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-blue-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
@@ -579,7 +569,6 @@ export default function Home() {
                 />
               </div>
             </Link>
-
             <Link
               to="/educacao"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-green-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
@@ -601,7 +590,6 @@ export default function Home() {
                 />
               </div>
             </Link>
-
             <Link
               to="/remsa"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-purple-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
@@ -623,7 +611,6 @@ export default function Home() {
                 />
               </div>
             </Link>
-
             <Link
               to="/acs"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-amber-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
@@ -648,8 +635,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Emergency Banner */}
+      {}
       <section className="py-8 px-4 mb-8 bg-neutral-50 border-t border-b border-neutral-200">
         <div className="container mx-auto max-w-6xl">
           <div className="flex items-center justify-center gap-4 mb-3">
@@ -661,20 +647,23 @@ export default function Home() {
             </h3>
           </div>
           <p className="text-neutral-700 mb-3 text-center text-base">
-            Em situações de emergência médica, acione imediatamente o Serviço de Atendimento Móvel de Urgência (SAMU) pelo telefone <span className="font-bold text-red-600">192</span>
+            Em situações de emergência médica, acione imediatamente o Serviço de
+            Atendimento Móvel de Urgência (SAMU) pelo telefone{" "}
+            <span className="font-bold text-red-600">192</span>
           </p>
           <div className="text-center">
             <Link
               to="/educacao"
               className="inline-flex items-center gap-2 text-sm text-neutral-700 hover:text-neutral-900 underline transition-colors font-medium"
             >
-              <span>Orientações para identificação de emergências clínicas</span>
+              <span>
+                Orientações para identificação de emergências clínicas
+              </span>
               <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
-
     </div>
   );
 }

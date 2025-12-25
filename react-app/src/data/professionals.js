@@ -9,7 +9,6 @@ import {
   Smile,
   Baby,
 } from "lucide-react";
-
 export const professionalsData = [
   {
     id: "enfermeiras",

@@ -1,90 +1,65 @@
-// =========================================
-// COMPONENTE: Vacinas Disponíveis (Público)
-// =========================================
-// Tabela pública mostrando vacinas disponíveis na ESF Catalão
-// Exibe apenas vacinas publicadas e dentro do período válido
-
-import { useMemo } from 'react';
-import { useVacinas } from '../../hooks/useVacinas';
-import LoadingSpinner from '../common/LoadingSpinner';
-import { CheckCircle2, XCircle, Calendar } from 'lucide-react';
-
+import { useMemo } from "react";
+import { useVacinas } from "../../hooks/useVacinas";
+import LoadingSpinner from "../common/LoadingSpinner";
+import { CheckCircle2, XCircle, Shield } from "lucide-react";
 export default function VacinasDisponiveis() {
   const { vacinas, loading, error } = useVacinas();
-
-  // Filtrar e processar vacinas disponíveis
   const vacinasDisponiveis = useMemo(() => {
     if (!vacinas || vacinas.length === 0) return [];
-
     const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0); // Zerar horas para comparação apenas de data
-
+    hoje.setHours(0, 0, 0, 0);
     return vacinas
       .filter((v) => {
-        // Apenas vacinas publicadas
         if (!v.publicado) return false;
-
-        // Verificar período
         const inicio = v.periodoInicio
-          ? (v.periodoInicio.toDate ? v.periodoInicio.toDate() : new Date(v.periodoInicio))
+          ? v.periodoInicio.toDate
+            ? v.periodoInicio.toDate()
+            : new Date(v.periodoInicio)
           : null;
         const fim = v.periodoFim
-          ? (v.periodoFim.toDate ? v.periodoFim.toDate() : new Date(v.periodoFim))
+          ? v.periodoFim.toDate
+            ? v.periodoFim.toDate()
+            : new Date(v.periodoFim)
           : null;
-
         if (!inicio || !fim) return false;
-
-        // Zerar horas para comparação
         const inicioDate = new Date(inicio);
         inicioDate.setHours(0, 0, 0, 0);
         const fimDate = new Date(fim);
         fimDate.setHours(0, 0, 0, 0);
-
-        // Verificar se está dentro do período
         const dentroDoPeriodo = hoje >= inicioDate && hoje <= fimDate;
-
-        // Verificar se tem quantidade disponível
         const temQuantidade = (v.quantidade || 0) > 0;
-
         return dentroDoPeriodo && temQuantidade;
       })
       .sort((a, b) => {
-        // Ordenar por nome
-        const nomeA = a.nome || '';
-        const nomeB = b.nome || '';
-        return nomeA.localeCompare(nomeB, 'pt-BR');
+        const nomeA = a.nome || "";
+        const nomeB = b.nome || "";
+        return nomeA.localeCompare(nomeB, "pt-BR");
       });
   }, [vacinas]);
-
-  // Função para verificar se uma vacina está disponível
   const vacinaDisponivel = (v) => {
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
-
     const inicio = v.periodoInicio
-      ? (v.periodoInicio.toDate ? v.periodoInicio.toDate() : new Date(v.periodoInicio))
+      ? v.periodoInicio.toDate
+        ? v.periodoInicio.toDate()
+        : new Date(v.periodoInicio)
       : null;
     const fim = v.periodoFim
-      ? (v.periodoFim.toDate ? v.periodoFim.toDate() : new Date(v.periodoFim))
+      ? v.periodoFim.toDate
+        ? v.periodoFim.toDate()
+        : new Date(v.periodoFim)
       : null;
-
     if (!inicio || !fim) return false;
-
     const inicioDate = new Date(inicio);
     inicioDate.setHours(0, 0, 0, 0);
     const fimDate = new Date(fim);
     fimDate.setHours(0, 0, 0, 0);
-
     const dentroDoPeriodo = hoje >= inicioDate && hoje <= fimDate;
     const temQuantidade = (v.quantidade || 0) > 0;
-
     return dentroDoPeriodo && temQuantidade;
   };
-
-  // Formatar data para exibição
   const formatarData = (timestamp) => {
-    if (!timestamp) return '--';
-    
+    if (!timestamp) return "--";
     let date;
     if (timestamp.toDate) {
       date = timestamp.toDate();
@@ -93,10 +68,8 @@ export default function VacinasDisponiveis() {
     } else {
       date = new Date(timestamp);
     }
-
-    return date.toLocaleDateString('pt-BR');
+    return date.toLocaleDateString("pt-BR");
   };
-
   if (loading) {
     return (
       <div className="bg-white border border-slate-200 rounded-md shadow-sm p-8">
@@ -106,64 +79,99 @@ export default function VacinasDisponiveis() {
       </div>
     );
   }
-
   if (error) {
+    const isPermissionError =
+      error.toLowerCase().includes("permission") ||
+      error.toLowerCase().includes("permissão") ||
+      error.toLowerCase().includes("permission-denied");
     return (
       <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
-        <p className="text-sm text-red-900">
-          Erro ao carregar informações de vacinas. Tente novamente mais tarde.
+        <p className="text-sm text-red-900 font-medium mb-2">
+          Erro ao carregar informações de vacinas
         </p>
+        <p className="text-xs text-red-700 mb-2">
+          {isPermissionError
+            ? "Erro de permissão: As regras do Firestore podem não estar configuradas corretamente. Verifique o console do navegador (F12) para mais detalhes."
+            : error}
+        </p>
+        {isPermissionError && (
+          <div className="mt-3 p-3 bg-red-100 rounded text-xs text-red-800">
+            <p className="font-semibold mb-1">Como resolver:</p>
+            <ol className="list-decimal list-inside space-y-1 ml-2">
+              <li>Abra o console do navegador (F12)</li>
+              <li>Verifique a mensagem de erro completa</li>
+              <li>Confirme que as regras do Firestore foram publicadas</li>
+              <li>Tente limpar o cache do navegador (Ctrl+Shift+R)</li>
+            </ol>
+          </div>
+        )}
       </div>
     );
   }
-
-  // Buscar todas as vacinas publicadas (não apenas as disponíveis) para mostrar na tabela
   const vacinasPublicadas = vacinas.filter((v) => v.publicado === true);
-
   if (vacinasPublicadas.length === 0) {
     return (
       <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6">
-        <h2 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-          <Calendar className="w-5 h-5 text-blue-600" />
-          Vacinas Disponíveis
+        <h2 className="text-lg font-semibold text-slate-900 mb-3 flex items-center gap-2">
+          <Shield className="w-5 h-5 text-blue-700" />
+          Programa de Vacinação
         </h2>
         <p className="text-slate-600 text-sm">
-          Nenhuma informação de vacinação disponível no momento.
+          Não há informações de vacinação disponíveis no momento.
         </p>
       </div>
     );
   }
-
   return (
     <div className="bg-white border border-slate-200 rounded-md shadow-sm overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6">
-        <h2 className="text-xl font-bold text-white flex items-center gap-2">
-          <Calendar className="w-5 h-5" />
-          Vacinas Disponíveis na ESF Catalão
+      <div className="bg-gradient-to-r from-blue-700 to-blue-800 p-5">
+        <h2
+          className="text-lg font-semibold text-white flex items-center gap-2"
+          style={{
+            fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+          }}
+        >
+          <Shield className="w-5 h-5" />
+          Programa de Vacinação - ESF Catalão
         </h2>
-        <p className="text-blue-100 text-sm mt-1">
-          Informações atualizadas em tempo real
+        <p
+          className="text-blue-50 text-xs mt-1.5"
+          style={{
+            fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+          }}
+        >
+          Vacinas disponíveis na unidade - Atualização semanal
         </p>
       </div>
-
-      {/* Versão Mobile - Cards */}
+      {}
       <div className="md:hidden divide-y divide-slate-200">
         {vacinasPublicadas.map((v) => {
           const disponivel = vacinaDisponivel(v);
-
           return (
             <div
               key={v.id}
               className="p-4 border-b border-slate-200 last:border-b-0"
             >
-              <div className="flex items-start justify-between mb-2">
-                <h3 className="font-semibold text-slate-900 text-base">{v.nome}</h3>
+              <div className="flex items-start justify-between mb-3">
+                <h3
+                  className="font-semibold text-slate-900 text-base"
+                  style={{
+                    fontFamily:
+                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                  }}
+                >
+                  {v.nome}
+                </h3>
                 <span
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold flex-shrink-0 ml-2 ${
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold flex-shrink-0 ml-2 ${
                     disponivel
-                      ? 'bg-green-100 text-green-800 border border-green-300'
-                      : 'bg-red-100 text-red-800 border border-red-300'
+                      ? "bg-green-50 text-green-800 border border-green-400"
+                      : "bg-red-50 text-red-800 border border-red-400"
                   }`}
+                  style={{
+                    fontFamily:
+                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                  }}
                 >
                   {disponivel ? (
                     <>
@@ -178,62 +186,100 @@ export default function VacinasDisponiveis() {
                   )}
                 </span>
               </div>
-              <div className="space-y-2 text-sm">
+              <div
+                className="space-y-2.5 text-sm mt-3"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 <div>
-                  <span className="font-medium text-slate-700">Para que serve: </span>
-                  <span className="text-slate-600">{v.finalidade}</span>
+                  <span className="font-semibold text-slate-800 text-xs uppercase tracking-wide">
+                    Indicação:{" "}
+                  </span>
+                  <p className="text-slate-700 mt-1 leading-relaxed">
+                    {v.finalidade}
+                  </p>
                 </div>
                 <div>
-                  <span className="font-medium text-slate-700">Público-Alvo: </span>
-                  <span className="text-slate-600">{v.publicoAlvo}</span>
+                  <span className="font-semibold text-slate-800 text-xs uppercase tracking-wide">
+                    Público-Alvo:{" "}
+                  </span>
+                  <p className="text-slate-700 mt-1">{v.publicoAlvo}</p>
                 </div>
-                {v.periodoInicio && v.periodoFim && (
-                  <div>
-                    <span className="font-medium text-slate-700">Período: </span>
-                    <span className="text-slate-600 text-xs">
-                      {formatarData(v.periodoInicio)} até {formatarData(v.periodoFim)}
-                    </span>
-                  </div>
-                )}
               </div>
             </div>
           );
         })}
       </div>
-
-      {/* Versão Desktop - Tabela */}
+      {}
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-slate-200">
+          <thead className="bg-slate-100 border-b-2 border-slate-300">
             <tr>
-              <th className="text-left p-4 font-semibold text-slate-700">Vacina</th>
-              <th className="text-left p-4 font-semibold text-slate-700">Para que serve</th>
-              <th className="text-left p-4 font-semibold text-slate-700">Público-Alvo</th>
-              <th className="text-left p-4 font-semibold text-slate-700">Status</th>
-              <th className="text-left p-4 font-semibold text-slate-700">Período</th>
+              <th
+                className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Vacina
+              </th>
+              <th
+                className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Indicação
+              </th>
+              <th
+                className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Público-Alvo
+              </th>
+              <th
+                className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Situação
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200">
             {vacinasPublicadas.map((v) => {
               const disponivel = vacinaDisponivel(v);
-
               return (
                 <tr
                   key={v.id}
                   className="hover:bg-slate-50 transition-colors"
+                  style={{
+                    fontFamily:
+                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                  }}
                 >
                   <td className="p-4">
                     <div className="font-semibold text-slate-900">{v.nome}</div>
                   </td>
-                  <td className="p-4 text-slate-600">{v.finalidade}</td>
-                  <td className="p-4 text-slate-600">{v.publicoAlvo}</td>
+                  <td className="p-4 text-slate-700 leading-relaxed">
+                    {v.finalidade}
+                  </td>
+                  <td className="p-4 text-slate-700">{v.publicoAlvo}</td>
                   <td className="p-4">
                     <span
                       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${
                         disponivel
-                          ? 'bg-green-100 text-green-800 border border-green-300'
-                          : 'bg-red-100 text-red-800 border border-red-300'
+                          ? "bg-green-100 text-green-800 border border-green-300"
+                          : "bg-red-100 text-red-800 border border-red-300"
                       }`}
+                      style={{
+                        fontFamily:
+                          'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                      }}
                     >
                       {disponivel ? (
                         <>
@@ -248,28 +294,23 @@ export default function VacinasDisponiveis() {
                       )}
                     </span>
                   </td>
-                  <td className="p-4 text-xs text-slate-600">
-                    {v.periodoInicio && v.periodoFim ? (
-                      <span>
-                        {formatarData(v.periodoInicio)} até {formatarData(v.periodoFim)}
-                      </span>
-                    ) : (
-                      <span className="text-slate-400">--</span>
-                    )}
-                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
-
       <div className="bg-slate-50 border-t border-slate-200 p-4">
-        <p className="text-xs text-slate-600 text-center">
-          Este painel tem caráter informativo. A disponibilidade pode mudar conforme a demanda.
+        <p
+          className="text-xs text-slate-600 text-center leading-relaxed"
+          style={{
+            fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+          }}
+        >
+          Esta lista é atualizada semanalmente pela equipe de saúde. A
+          disponibilidade pode variar conforme a demanda e o estoque da unidade.
         </p>
       </div>
     </div>
   );
 }
-

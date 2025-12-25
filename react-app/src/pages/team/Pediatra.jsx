@@ -1,17 +1,14 @@
 import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
-
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
 }
-
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
     default: "bg-white border-slate-200",
     highlight: "bg-blue-50 border-blue-300",
   };
-
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
@@ -24,7 +21,6 @@ function InfoBox({ title, icon, children, variant = "default" }) {
     </div>
   );
 }
-
 function Alert({ type = "info", children }) {
   const types = {
     info: {
@@ -46,9 +42,7 @@ function Alert({ type = "info", children }) {
       icon: "text-green-600",
     },
   };
-
   const style = types[type];
-
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -63,34 +57,43 @@ function Alert({ type = "info", children }) {
     </div>
   );
 }
-
 export default function Pediatra() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">Pediatria</h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Unidade Básica de Saúde
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Pediatria
+              </h1>
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
-        {/* Sobre o Serviço */}
+        {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-slate-700 leading-relaxed mb-5">
-            O atendimento pediátrico na UBS São José oferece cuidado
+            O atendimento pediátrico na ESF Catalão oferece cuidado
             especializado para crianças desde o nascimento até a adolescência.
             Realizamos consultas de puericultura (acompanhamento do
             desenvolvimento infantil), atendimentos de urgências pediátricas e
             orientações aos pais sobre saúde e desenvolvimento dos filhos.
           </p>
-
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -101,7 +104,6 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -113,7 +115,6 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -125,7 +126,6 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -137,7 +137,6 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -151,8 +150,7 @@ export default function Pediatra() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Quem é o profissional */}
+        {}
         <InfoBox title="Quem é o profissional?">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -189,8 +187,7 @@ export default function Pediatra() {
             .
           </p>
         </InfoBox>
-
-        {/* Para quem é indicado */}
+        {}
         <InfoBox title="Para quem é indicado?">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -225,8 +222,7 @@ export default function Pediatra() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Acesso ao Serviço */}
+        {}
         <InfoBox title="Acesso ao Serviço">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -256,7 +252,6 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
                 2
@@ -273,8 +268,7 @@ export default function Pediatra() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Alerta Informativo */}
+        {}
         <div className="mb-6">
           <Alert type="info">
             <div>
@@ -292,8 +286,7 @@ export default function Pediatra() {
             </div>
           </Alert>
         </div>
-
-        {/* Documentação Necessária */}
+        {}
         <InfoBox title="Documentação Necessária" variant="highlight">
           <div className="space-y-2">
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
@@ -307,7 +300,6 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -319,7 +311,6 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -329,7 +320,6 @@ export default function Pediatra() {
                 <p className="text-xs text-slate-600 mt-0.5">RG ou CNH</p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -341,8 +331,7 @@ export default function Pediatra() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Informação importante final */}
+        {}
         <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
           <div className="flex items-start gap-3">
             <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />

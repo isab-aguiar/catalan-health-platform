@@ -1,20 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { usePageSearch } from '../../hooks/usePageSearch';
-import Card from '../../components/common/Card';
-import { Search } from 'lucide-react';
-
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { usePageSearch } from "../../hooks/usePageSearch";
+import Card from "../../components/common/Card";
+import { Search } from "lucide-react";
 export default function SearchResults() {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
+  const query = searchParams.get("query") || "";
   const results = usePageSearch(query);
-
   return (
     <div className="container mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold text-neutral-900 mb-6">
-        Resultados da Busca para "<span className="text-primary-600">{query}</span>"
+        Resultados da Busca para "
+        <span className="text-primary-600">{query}</span>"
       </h1>
-
       {results.length > 0 ? (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {results.map((result, index) => (

@@ -2,7 +2,6 @@ import PageContainer from "../../components/layout/PageContainer";
 import Card from "../../components/common/Card";
 import BackButton from "../../components/common/BackButton";
 import { professionalsData } from "../../data/professionals";
-
 export default function TeamIndex() {
   return (
     <PageContainer>
@@ -16,7 +15,6 @@ export default function TeamIndex() {
             Conheça nossa equipe multiprofissional dedicada ao seu cuidado
           </p>
         </div>
-
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {professionalsData.map((professional) => (
             <Card

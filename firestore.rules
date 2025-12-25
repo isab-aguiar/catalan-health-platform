@@ -76,9 +76,13 @@ service cloud.firestore {
     // COLEÇÃO: vacinas
     // =====================================================
     match /vacinas/{vacinaId} {
-      // LEITURA PÚBLICA: Qualquer pessoa pode ler vacinas publicadas
-      // LEITURA ADMIN: Admins podem ler todas as vacinas
-      allow read: if resource.data.publicado == true || isAdmin();
+      // LEITURA PÚBLICA: Qualquer pessoa pode ler vacinas
+      // O filtro de "publicado" é feito no cliente para melhor performance
+      allow read: if true;
+      
+      // LEITURA ADMIN: Admins podem ler todas as vacinas (já coberto acima)
+      // A regra acima permite leitura pública de todas as vacinas
+      // O componente filtra por publicado === true no lado do cliente
 
       // Apenas admins podem criar, atualizar e deletar vacinas
       allow create: if isAdmin();

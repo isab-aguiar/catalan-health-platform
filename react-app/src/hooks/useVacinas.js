@@ -1,35 +1,26 @@
-// =========================================
-// HOOK useVacinas
-// =========================================
-// Hook para gerenciar vacinas do Firestore com real-time updates
-
-import { useState, useEffect } from 'react';
-import { collection, doc, updateDoc, setDoc, onSnapshot, Timestamp } from 'firebase/firestore';
-import { db } from '../config/firebase';
-
-const COLLECTION_NAME = 'vacinas';
-
-/**
- * Hook para gerenciar vacinas
- * Retorna lista de vacinas e função de atualização
- */
+import { useState, useEffect } from "react";
+import {
+  collection,
+  doc,
+  updateDoc,
+  setDoc,
+  onSnapshot,
+  Timestamp,
+} from "firebase/firestore";
+import { db } from "../config/firebase";
+const COLLECTION_NAME = "vacinas";
 export function useVacinas() {
   const [vacinas, setVacinas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     if (!db) {
-      setError('Firebase não configurado');
+      setError("Firebase não configurado");
       setLoading(false);
       return;
     }
-
     setLoading(true);
-    
     const vacinasRef = collection(db, COLLECTION_NAME);
-    
-    // Real-time listener
     const unsubscribe = onSnapshot(
       vacinasRef,
       (snapshot) => {
@@ -37,114 +28,119 @@ export function useVacinas() {
         snapshot.forEach((doc) => {
           vacinasData.push({
             id: doc.id,
-            ...doc.data()
+            ...doc.data(),
           });
         });
-        
-        // Ordenar por nome
         vacinasData.sort((a, b) => {
-          const nomeA = a.nome || '';
-          const nomeB = b.nome || '';
-          return nomeA.localeCompare(nomeB, 'pt-BR');
+          const nomeA = a.nome || "";
+          const nomeB = b.nome || "";
+          return nomeA.localeCompare(nomeB, "pt-BR");
         });
-        
         setVacinas(vacinasData);
         setLoading(false);
         setError(null);
       },
       (err) => {
-        console.error('Erro ao escutar vacinas:', err);
-        setError('Erro ao carregar vacinas. Verifique sua conexão.');
+        console.error("Erro ao escutar vacinas:", err);
+        console.error("Código do erro:", err.code);
+        console.error("Mensagem do erro:", err.message);
+        let errorMessage = "Erro ao carregar vacinas. Verifique sua conexão.";
+        if (
+          err.code === "permission-denied" ||
+          err.message?.includes("permission") ||
+          err.message?.includes("permissão")
+        ) {
+          errorMessage =
+            'Erro de permissão: Verifique as regras do Firestore para a coleção "vacinas".';
+        } else if (
+          err.code === "unavailable" ||
+          err.message?.includes("unavailable")
+        ) {
+          errorMessage =
+            "Serviço temporariamente indisponível. Tente novamente em alguns instantes.";
+        } else if (
+          err.code === "unauthenticated" ||
+          err.message?.includes("unauthenticated")
+        ) {
+          errorMessage = "Erro de autenticação. Recarregue a página.";
+        }
+        setError(errorMessage);
         setLoading(false);
       }
     );
-
-    // Cleanup
     return () => unsubscribe();
   }, []);
-
-  /**
-   * Atualiza um campo específico de uma vacina
-   */
   const updateVacina = async (id, campo, valor) => {
     if (!db) {
-      setError('Firebase não configurado');
-      return { success: false, error: 'Firebase não configurado' };
+      setError("Firebase não configurado");
+      return { success: false, error: "Firebase não configurado" };
     }
-
     try {
       const vacinaRef = doc(db, COLLECTION_NAME, id);
-      
-      // Converter Date para Timestamp se necessário
       let valorFinal = valor;
       if (valor instanceof Date) {
         valorFinal = Timestamp.fromDate(valor);
-      } else if (valor === null || valor === '') {
+      } else if (valor === null || valor === "") {
         valorFinal = null;
       }
-      
-      await updateDoc(vacinaRef, { 
+      await updateDoc(vacinaRef, {
         [campo]: valorFinal,
-        updatedAt: Timestamp.now()
+        updatedAt: Timestamp.now(),
       });
       return { success: true };
     } catch (err) {
-      console.error('Erro ao atualizar vacina:', err);
+      console.error("Erro ao atualizar vacina:", err);
       setError(err.message);
       return { success: false, error: err.message };
     }
   };
-
   /**
    * Cria uma nova vacina
    */
   const createVacina = async (vacinaData) => {
     if (!db) {
-      setError('Firebase não configurado');
-      return { success: false, error: 'Firebase não configurado' };
+      setError("Firebase não configurado");
+      return { success: false, error: "Firebase não configurado" };
     }
-
     try {
-      // Gerar ID único baseado no nome (normalizado)
       const id = vacinaData.nome
         .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '') // Remove acentos
-        .replace(/[^a-z0-9]+/g, '-') // Substitui espaços e caracteres especiais por hífen
-        .replace(/^-+|-+$/g, ''); // Remove hífens do início e fim
-
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // Remove acentos
+        .replace(/[^a-z0-9]+/g, "-") // Substitui espaços e caracteres especiais por hífen
+        .replace(/^-+|-+$/g, ""); // Remove hífens do início e fim
       const vacinaRef = doc(db, COLLECTION_NAME, id);
-
       // Preparar dados
       const dadosVacina = {
         id: id,
         nome: vacinaData.nome,
-        finalidade: vacinaData.finalidade || '',
-        publicoAlvo: vacinaData.publicoAlvo || '',
+        finalidade: vacinaData.finalidade || "",
+        publicoAlvo: vacinaData.publicoAlvo || "",
         quantidade: vacinaData.quantidade || 0,
-        periodoInicio: vacinaData.periodoInicio ? Timestamp.fromDate(new Date(vacinaData.periodoInicio)) : null,
-        periodoFim: vacinaData.periodoFim ? Timestamp.fromDate(new Date(vacinaData.periodoFim)) : null,
+        periodoInicio: vacinaData.periodoInicio
+          ? Timestamp.fromDate(new Date(vacinaData.periodoInicio))
+          : null,
+        periodoFim: vacinaData.periodoFim
+          ? Timestamp.fromDate(new Date(vacinaData.periodoFim))
+          : null,
         publicado: vacinaData.publicado ?? false,
         ativo: true,
         createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now()
+        updatedAt: Timestamp.now(),
       };
-
       await setDoc(vacinaRef, dadosVacina);
       return { success: true, id };
     } catch (err) {
-      console.error('Erro ao criar vacina:', err);
+      console.error("Erro ao criar vacina:", err);
       setError(err.message);
       return { success: false, error: err.message };
     }
   };
-
   return {
     vacinas,
     loading,
     error,
     updateVacina,
-    createVacina
+    createVacina,
   };
 }
-

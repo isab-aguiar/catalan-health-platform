@@ -3,18 +3,26 @@ import { glob } from 'glob';
 import fs from 'fs';
 import path from 'path';
 
-// Configuração: Onde procurar arquivos
-const padraoArquivos = 'src/**/*.{js,jsx,ts,tsx,css}'; 
+
+const padraoArquivos = '**/*.{js,jsx,ts,tsx,css}'; 
 
 async function limpar() {
-    console.log('🧹 Iniciando limpeza TOTAL de comentários (Modo ESM)...');
+    console.log('🧹 Iniciando varredura COMPLETA (src, scripts, raiz)...');
 
     try {
-        // Busca arquivos usando a versão moderna do glob (com await)
-        const arquivos = await glob(padraoArquivos);
+        
+        const arquivos = await glob(padraoArquivos, {
+            ignore: [
+                '**/node_modules/**', 
+                '**/dist/**',        
+                '**/build/**',        
+                '**/.git/**',         
+                '**/limpar-codigo.js' 
+            ]
+        });
 
         if (arquivos.length === 0) {
-            console.log('⚠️ Nenhum arquivo encontrado na pasta src.');
+            console.log('⚠️ Nenhum arquivo encontrado.');
             return;
         }
 
@@ -26,28 +34,31 @@ async function limpar() {
             try {
                 const conteudoOriginal = fs.readFileSync(caminhoCompleto, 'utf8');
                 
-                // Remove comentários mantendo a estrutura segura
+                
                 const conteudoLimpo = strip(conteudoOriginal, {
-                    line: true,
-                    block: true,
-                    keepProtected: false 
+                    line: true,     
+                    block: true,  
+                    keepProtected: false, 
+                    preserveNewlines: false 
                 });
 
-                // Só grava se houve mudança
-                if (conteudoOriginal !== conteudoLimpo) {
-                    fs.writeFileSync(caminhoCompleto, conteudoLimpo);
+                
+                const conteudoFinal = conteudoLimpo.replace(/^\s*[\r\n]/gm, '');
+
+                if (conteudoOriginal !== conteudoFinal) {
+                    fs.writeFileSync(caminhoCompleto, conteudoFinal);
                     console.log(`✅ Limpo: ${arquivo}`);
                     contagem++;
                 }
             } catch (erroLeitura) {
-                console.error(`Erro ao ler ${arquivo}:`, erroLeitura.message);
+                
             }
         }
 
-        console.log(`\n🎉 Concluído! ${contagem} arquivos foram limpos.`);
+        console.log(`\n🎉 FIM! ${contagem} arquivos foram completamente limpos.`);
         
     } catch (err) {
-        console.error('Erro fatal ao buscar arquivos:', err);
+        console.error('Erro:', err);
     }
 }
 

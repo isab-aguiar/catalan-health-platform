@@ -1,14 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-
-/**
- * BackButton Component
- * Botão profissional de navegação para voltar à página anterior
- * Posicionado no fluxo da página, abaixo do header fixo
- */
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 export default function BackButton({ className = "" }) {
   const navigate = useNavigate();
-
   return (
     <div className={`mb-6 ${className}`}>
       <button
@@ -26,9 +19,14 @@ export default function BackButton({ className = "" }) {
         aria-label="Voltar para a página anterior"
       >
         <div className="w-5 h-5 flex items-center justify-center rounded-lg bg-slate-100 group-hover:bg-primary-100 transition-colors duration-300">
-          <ArrowLeft size={16} className="text-slate-600 group-hover:text-primary-600 transition-colors duration-300" />
+          <ArrowLeft
+            size={16}
+            className="text-slate-600 group-hover:text-primary-600 transition-colors duration-300"
+          />
         </div>
-        <span className="group-hover:text-primary-700 transition-colors duration-300">Voltar</span>
+        <span className="group-hover:text-primary-700 transition-colors duration-300">
+          Voltar
+        </span>
       </button>
     </div>
   );

@@ -2,32 +2,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Phone, Clock, MapPin, ClipboardPlus, Lock, User } from "lucide-react";
 import { useAuth } from "../../contexts/AuthContext";
-
-/**
- * MobileMenu Component
- * Menu overlay para navegação mobile
- */
-
 export default function MobileMenu({ isOpen, onClose, navLinks }) {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
-
-  // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
-
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
-
   const handleLinkClick = (e, link) => {
-    // Se o link tem uma função customizada (passada do Header), chama ela
-    // Caso contrário, apenas fecha o menu
     if (link.handleClick) {
       link.handleClick(e, link);
     } else if (link.onClick) {
@@ -36,26 +24,23 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
       onClose();
     }
   };
-
   if (!isOpen) return null;
-
   return (
     <>
-      {/* Backdrop */}
+      {}
       <div
         className="fixed inset-0 bg-black/50 z-50 lg:hidden animate-fade-in"
         onClick={onClose}
       />
-
-      {/* Menu Panel */}
+      {}
       <div className="fixed top-[70px] left-0 right-0 bottom-0 bg-white z-50 lg:hidden overflow-y-auto animate-slide-down">
         <nav className="container mx-auto max-w-6xl px-4 py-6">
-          {/* Botão de Login/Acesso (Mobile) */}
+          {}
           <div className="mb-4">
             {currentUser ? (
               <button
                 onClick={() => {
-                  navigate('/admin/painel');
+                  navigate("/admin/painel");
                   onClose();
                 }}
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-colors font-semibold"
@@ -66,7 +51,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
             ) : (
               <button
                 onClick={() => {
-                  navigate('/admin/login');
+                  navigate("/admin/login");
                   onClose();
                 }}
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-semibold shadow-md"
@@ -76,7 +61,6 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
               </button>
             )}
           </div>
-
           <ul className="space-y-2">
             {navLinks.map((link) => (
               <li key={link.path}>
@@ -90,8 +74,7 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
               </li>
             ))}
           </ul>
-
-          {/* Contact Info */}
+          {}
           <div className="mt-8 p-4 bg-primary-50 rounded-lg">
             <h3 className="font-bold text-primary-700 mb-3">Contato</h3>
             <div className="space-y-2 text-sm text-neutral-700">

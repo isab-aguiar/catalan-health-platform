@@ -10,8 +10,6 @@ import {
   FileText,
   PillBottle,
 } from "lucide-react";
-
-// Mapeamento de ícones para evitar problemas de serialização
 export const serviceIcons = {
   Calendar,
   ClipboardList,
@@ -24,9 +22,7 @@ export const serviceIcons = {
   FileText,
   PillBottle,
 };
-
 export const allPages = [
-  // SERVIÇOS
   {
     id: "sala-4",
     title: "Sala de Agendamento",
@@ -169,11 +165,9 @@ export const allPages = [
     colorScheme: "accent",
   },
 ];
-
 export const serviceCategories = [
   {
     name: "Atendimento",
-
     services: ["sala-4", "sala-9", "triagem", "recepcao"],
   },
   {

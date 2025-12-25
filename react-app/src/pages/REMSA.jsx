@@ -14,26 +14,34 @@ import {
   FileText,
   CheckCircle,
 } from "lucide-react";
-
 export default function REMSA() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 Residência Multiprofissional em Saúde (REMSA)
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Atenção Primária à Saúde
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
         <InfoBox title="O que é a REMSA?">
           <p className="text-slate-700 leading-relaxed mb-5">
             A <strong>Residência Multiprofissional em Saúde (REMSA)</strong> é
@@ -50,7 +58,6 @@ export default function REMSA() {
             oferecidos à população.
           </p>
         </InfoBox>
-
         <InfoBox title="O que o REMSA oferece?">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -97,7 +104,7 @@ export default function REMSA() {
                   Vivência Real no SUS
                 </strong>
                 <p className="text-slate-700 text-sm mt-1">
-                  Atuação em Unidades de Atenção Primária, como a UBS São José,
+                  Atuação em Unidades de Atenção Primária, como a ESF Catalão,
                   com experiência prática no Sistema Único de Saúde
                 </p>
               </div>
@@ -128,7 +135,6 @@ export default function REMSA() {
             </div>
           </div>
         </InfoBox>
-
         <InfoBox title="Áreas Profissionais Aceitas">
           <p className="text-slate-700 mb-5">
             O programa é multiprofissional e aceita residentes de diversas áreas
@@ -189,7 +195,6 @@ export default function REMSA() {
             </div>
           </div>
         </InfoBox>
-
         <InfoBox title="Como ter acesso ao programa?">
           <p className="text-slate-700 leading-relaxed mb-5">
             O ingresso na REMSA ocorre através de{" "}
@@ -197,7 +202,6 @@ export default function REMSA() {
             é coordenado pela UFSJ em parceria com a Prefeitura Municipal de
             Divinópolis.
           </p>
-
           <h3 className="font-semibold text-slate-800 mb-3 text-sm">
             Requisitos para Inscrição:
           </h3>
@@ -229,7 +233,6 @@ export default function REMSA() {
               </div>
             </div>
           </div>
-
           <h3 className="font-semibold text-slate-800 mb-3 text-sm">
             Processo Seletivo:
           </h3>
@@ -272,7 +275,6 @@ export default function REMSA() {
             </div>
           </div>
         </InfoBox>
-
         <InfoBox title="Características do Programa">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -320,11 +322,10 @@ export default function REMSA() {
             </div>
           </div>
         </InfoBox>
-
-        <InfoBox title="UBS São José como Campo de Prática" variant="highlight">
+        <InfoBox title="ESF Catalão como Campo de Prática" variant="highlight">
           <p className="text-slate-700 leading-relaxed mb-5">
-            A <strong>UBS São José</strong> é um dos principais campos de
-            atuação da REMSA em Divinópolis. Nossa unidade recebe residentes de
+            A <strong>ESF Catalão</strong> é um dos principais campos de atuação
+            da REMSA em Divinópolis. Nossa unidade recebe residentes de
             diferentes áreas que, juntamente com a equipe local, desenvolvem
             atividades como:
           </p>
@@ -348,8 +349,8 @@ export default function REMSA() {
                   Grupos e Atividades Coletivas
                 </strong>
                 <p className="text-slate-700 text-sm mt-1">
-                  Organização de grupos e atividades coletivas, de promoção da saúde na
-                  comunidade
+                  Organização de grupos e atividades coletivas, de promoção da
+                  saúde na comunidade
                 </p>
               </div>
             </div>
@@ -379,7 +380,6 @@ export default function REMSA() {
             </div>
           </div>
         </InfoBox>
-
         <InfoBox title="Parceria UFSJ e Prefeitura">
           <div className="space-y-5">
             <div>
@@ -404,14 +404,13 @@ export default function REMSA() {
             </div>
           </div>
         </InfoBox>
-
         <div className="mb-6">
           <Alert type="info">
             <strong>Quer saber mais sobre a REMSA?</strong>
             <br />
             Entre em contato com a coordenação do programa na UFSJ ou fale com a
-            equipe da UBS São José para obter informações sobre editais,
-            processo seletivo e requisitos.
+            equipe da ESF Catalão para obter informações sobre editais, processo
+            seletivo e requisitos.
           </Alert>
         </div>
       </div>

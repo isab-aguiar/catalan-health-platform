@@ -1,16 +1,13 @@
 import { Calendar, Clock, AlertCircle, Users } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
-
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
 }
-
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
     default: "bg-white border-slate-200",
     highlight: "bg-blue-50 border-blue-300",
   };
-
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
@@ -23,7 +20,6 @@ function InfoBox({ title, icon, children, variant = "default" }) {
     </div>
   );
 }
-
 function Alert({ type = "info", children }) {
   const types = {
     info: {
@@ -45,9 +41,7 @@ function Alert({ type = "info", children }) {
       icon: "text-green-600",
     },
   };
-
   const style = types[type];
-
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -62,27 +56,35 @@ function Alert({ type = "info", children }) {
     </div>
   );
 }
-
 export default function Tabagismo() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Cabeçalho */}
+        {}
         <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900">
+              <h1
+                className="text-3xl font-bold text-slate-900"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
                 Grupo de Tabagismo
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
-                UBS São José - Unidade Básica de Saúde
+              <p
+                className="text-slate-500 text-xs mt-1"
+                style={{
+                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
+                }}
+              >
+                Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
           </div>
         </div>
-
-        {/* Sobre o Grupo */}
+        {}
         <InfoBox title="Sobre o Grupo">
           <p className="text-slate-700 leading-relaxed mb-5">
             O Grupo de Tabagismo é um programa de apoio e tratamento para
@@ -93,7 +95,6 @@ export default function Tabagismo() {
             relacionadas ao tabaco e melhorar a qualidade de vida dos
             participantes.
           </p>
-
           <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div className="bg-slate-50 border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
@@ -117,14 +118,12 @@ export default function Tabagismo() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Atividades Desenvolvidas */}
+        {}
         <InfoBox title="Atividades Desenvolvidas">
           <p className="text-slate-700 mb-4 text-sm">
             Durante os encontros do grupo, são desenvolvidas as seguintes
             atividades:
           </p>
-
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -138,7 +137,6 @@ export default function Tabagismo() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -151,7 +149,6 @@ export default function Tabagismo() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -164,7 +161,6 @@ export default function Tabagismo() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -178,7 +174,6 @@ export default function Tabagismo() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -191,7 +186,6 @@ export default function Tabagismo() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
@@ -206,8 +200,7 @@ export default function Tabagismo() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Horários */}
+        {}
         <InfoBox title="Dias e Horários" variant="highlight">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
@@ -233,7 +226,7 @@ export default function Tabagismo() {
                     A definir
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-600">
-                    Sala de Grupos - UBS São José
+                    Sala de Grupos - ESF Catalão
                   </td>
                 </tr>
               </tbody>
@@ -245,15 +238,13 @@ export default function Tabagismo() {
             unidade.
           </p>
         </InfoBox>
-
-        {/* Como Participar */}
+        {}
         <InfoBox title="Como Participar">
           <p className="text-slate-700 mb-4 text-sm">
             A participação no Grupo de Tabagismo é gratuita e aberta a todos os
             usuários da unidade que desejam parar de fumar, independentemente do
             tempo de tabagismo ou quantidade de cigarros consumidos.
           </p>
-
           <div className="space-y-2">
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -267,7 +258,6 @@ export default function Tabagismo() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
@@ -283,14 +273,12 @@ export default function Tabagismo() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Benefícios */}
+        {}
         <InfoBox title="Benefícios da Cessação do Tabagismo">
           <p className="text-slate-700 mb-4 text-sm">
             Parar de fumar traz benefícios imediatos e a longo prazo para a
             saúde:
           </p>
-
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-slate-50 border border-slate-200 rounded p-4">
               <h3 className="font-semibold text-slate-800 mb-2 text-sm">
@@ -316,8 +304,7 @@ export default function Tabagismo() {
             </div>
           </div>
         </InfoBox>
-
-        {/* Orientação Importante */}
+        {}
         <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>

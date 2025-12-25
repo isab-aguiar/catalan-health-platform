@@ -1,87 +1,66 @@
-// =========================================
-// HOOK useUserData
-// =========================================
-// Hook para buscar dados do usuário logado do Firestore com real-time updates
-
-import { useState, useEffect } from 'react';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../config/firebase';
-
-const COLLECTION_NAME = 'users';
-
-/**
- * Hook para buscar e monitorar dados do usuário logado
- * @param {string} uid - UID do usuário do Firebase Auth
- * @returns {Object} { userData, loading, error }
- */
+import { useState, useEffect } from "react";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "../config/firebase";
+const COLLECTION_NAME = "users";
 export function useUserData(uid) {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   useEffect(() => {
-    // Se não houver UID, resetar estado
     if (!uid) {
       setUserData(null);
       setLoading(false);
       setError(null);
       return;
     }
-
-    // Se o Firebase não foi inicializado, retornar erro
     if (!db) {
-      console.warn('⚠️ Firestore não disponível - variáveis de ambiente não configuradas');
+      console.warn(
+        "⚠️ Firestore não disponível - variáveis de ambiente não configuradas"
+      );
       setUserData(null);
       setLoading(false);
-      setError('Firebase não configurado. Configure as variáveis de ambiente.');
+      setError("Firebase não configurado. Configure as variáveis de ambiente.");
       return;
     }
-
     setLoading(true);
     setError(null);
-
     const userRef = doc(db, COLLECTION_NAME, uid);
-
-    // Real-time listener para o documento do usuário
     const unsubscribe = onSnapshot(
       userRef,
       (docSnapshot) => {
         if (docSnapshot.exists()) {
           const data = {
             uid: docSnapshot.id,
-            ...docSnapshot.data()
+            ...docSnapshot.data(),
           };
-          console.log('✅ Dados do usuário carregados:', data);
+          console.log("✅ Dados do usuário carregados:", data);
           setUserData(data);
           setError(null);
         } else {
-          // Documento não existe
-          console.warn('⚠️ Documento do usuário não encontrado no Firestore');
-          console.warn('   UID:', uid);
-          console.warn('   Coleção: users');
+          console.warn("⚠️ Documento do usuário não encontrado no Firestore");
+          console.warn("   UID:", uid);
+          console.warn("   Coleção: users");
           setUserData(null);
-          setError('Dados do usuário não encontrados. Acesse /admin/corrigir-permissoes para criar.');
+          setError(
+            "Dados do usuário não encontrados. Acesse /admin/corrigir-permissoes para criar."
+          );
         }
         setLoading(false);
       },
       (err) => {
-        console.error('❌ Erro ao escutar dados do usuário:', err);
-        console.error('   Código:', err.code);
-        console.error('   Mensagem:', err.message);
+        console.error("❌ Erro ao escutar dados do usuário:", err);
+        console.error("   Código:", err.code);
+        console.error("   Mensagem:", err.message);
         setError(err.message);
         setUserData(null);
         setLoading(false);
       }
     );
-
-    // Cleanup: cancelar subscription quando componente desmontar ou uid mudar
     return () => unsubscribe();
   }, [uid]);
-
   return {
     userData,
     loading,
-    error
+    error,
   };
 }
-
