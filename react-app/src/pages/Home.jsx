@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import SearchSection from "../components/search/SearchSection";
 import ImageGallery from "../components/common/ImageGallery";
 import AvisosList from "../components/avisos/AvisosList";
 import CampanhaCarousel from "../components/campanha/CampanhaCarousel";
 import { useCampanhas } from "../hooks/useCampanhas";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 import {
   Phone,
   MapPin,
@@ -25,9 +27,10 @@ import {
   Syringe,
 } from "lucide-react";
 
+// Lazy loading de imagens - carrega apenas quando necessário (melhora performance inicial)
 const galleryImagesModules = import.meta.glob(
   "../assets/images/galeria-photos/*.{png,jpg,jpeg}",
-  { eager: true }
+  { eager: false }
 );
 
 const getCaptionFromFilename = (imagePath) => {
@@ -91,27 +94,47 @@ const getCaptionFromFilename = (imagePath) => {
   return `${formattedName} - ESF Catalão`;
 };
 
-const getGalleryImages = () => {
-  const imageEntries = Object.entries(galleryImagesModules).map(([path, module]) => ({
-    src: module.default,
-    caption: getCaptionFromFilename(path),
-  }));
-  
-  const fotoUnidade = imageEntries.find((img) => 
-    img.src.includes('foto-unidade')
-  );
-  const outrasImagens = imageEntries.filter((img) => 
-    !img.src.includes('foto-unidade')
-  );
-  
-  outrasImagens.sort((a, b) => a.src.localeCompare(b.src));
-  
-  return fotoUnidade ? [fotoUnidade, ...outrasImagens] : outrasImagens;
-};
-
 export default function Home() {
   // Buscar campanhas visuais
   const { campanhas, loading: loadingCampanhas } = useCampanhas();
+  
+  // Carregamento lazy das imagens da galeria (melhora performance inicial)
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [loadingImages, setLoadingImages] = useState(true);
+  
+  useEffect(() => {
+    // Carrega imagens de forma assíncrona após o primeiro render
+    const loadImages = async () => {
+      try {
+        const modules = await Promise.all(
+          Object.keys(galleryImagesModules).map(path => galleryImagesModules[path]())
+        );
+        
+        const imageEntries = modules.map((module, index) => ({
+          src: module.default,
+          caption: getCaptionFromFilename(Object.keys(galleryImagesModules)[index]),
+        }));
+        
+        const fotoUnidade = imageEntries.find((img) => 
+          img.src.includes('foto-unidade')
+        );
+        const outrasImagens = imageEntries.filter((img) => 
+          !img.src.includes('foto-unidade')
+        );
+        
+        outrasImagens.sort((a, b) => a.src.localeCompare(b.src));
+        
+        setGalleryImages(fotoUnidade ? [fotoUnidade, ...outrasImagens] : outrasImagens);
+      } catch (error) {
+        console.error('Erro ao carregar imagens da galeria:', error);
+        setGalleryImages([]);
+      } finally {
+        setLoadingImages(false);
+      }
+    };
+    
+    loadImages();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white">
@@ -431,7 +454,13 @@ export default function Home() {
               Conheça nossa equipe, estrutura e instalações
             </p>
           </div>
-          <ImageGallery images={getGalleryImages()} />
+          {loadingImages ? (
+            <div className="flex justify-center py-12">
+              <LoadingSpinner />
+            </div>
+          ) : (
+            <ImageGallery images={galleryImages} />
+          )}
         </div>
       </section>
 

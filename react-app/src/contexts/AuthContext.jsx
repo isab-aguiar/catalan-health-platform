@@ -150,19 +150,9 @@ export function AuthProvider({ children }) {
     isAuthenticated: !!currentUser && isActive  // Booleano: está logado e ativo?
   };
 
-  // Enquanto carrega o Auth inicial, mostra tela de carregamento
-  // Mas não bloqueia se já temos usuário autenticado (permite navegação enquanto carrega dados)
-  if (authLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-neutral-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-          <p className="text-neutral-600">Carregando...</p>
-        </div>
-      </div>
-    );
-  }
-
+  // NÃO bloqueia o render inicial - permite que páginas públicas carreguem imediatamente
+  // O loading será gerenciado individualmente por rotas protegidas que precisam de auth
+  // Isso melhora drasticamente o tempo de carregamento inicial para usuários não autenticados
   return (
     <AuthContext.Provider value={value}>
       {children}

@@ -45,8 +45,15 @@ const lazyLoad = (importFunc) => {
   );
 };
 
-// Lazy load pages
+// Home - pré-carrega para melhor performance (página mais visitada)
 const Home = lazyLoad(() => import("./pages/Home"));
+
+// Pré-carrega a Home quando o usuário está inativo (após 2 segundos)
+if (typeof window !== 'undefined') {
+  setTimeout(() => {
+    import("./pages/Home").catch(() => {});
+  }, 2000);
+}
 const SearchResultsPage = lazyLoad(() => import("./pages/SearchResultsPage"));
 const ACSPage = lazyLoad(() => import("./pages/ACS"));
 const NotFound = lazyLoad(() => import("./pages/NotFound"));
