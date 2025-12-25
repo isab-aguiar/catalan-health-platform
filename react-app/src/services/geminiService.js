@@ -4,7 +4,7 @@
 // Integração com a API do Google Gemini para geração de avisos
 
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
-const GEMINI_MODEL = import.meta.env.VITE_GEMINI_MODEL || 'gemini-2.5-flash';
+const GEMINI_MODEL = import.meta.env.VITE_GEMINI_MODEL || 'gemini-2.5-pro';
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 const GEMINI_VISION_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
@@ -253,7 +253,7 @@ export async function sendMessageToGemini(userMessage) {
           temperature: 0.3,
           topK: 20,
           topP: 0.8,
-          maxOutputTokens: 800,
+          maxOutputTokens: 4096,
         }
       })
     });
@@ -439,7 +439,7 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
           temperature: 0.1,
           topK: 15,
           topP: 0.7,
-          maxOutputTokens: 800,
+          maxOutputTokens: 4096,
         }
       })
     });
@@ -659,7 +659,7 @@ TEXTO DO USUÁRIO:
           temperature: 0.2,
           topK: 15,
           topP: 0.7,
-          maxOutputTokens: 500,
+          maxOutputTokens: 2048,
         }
       })
     });

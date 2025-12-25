@@ -1,14 +1,20 @@
 // =========================================
 // SERVIÇO CLAUDE IA - ANTHROPIC
 // =========================================
-// Integração com a API da Anthropic (Claude) para geração de avisos
+// Integração com a API da Anthropic (Claude) via Serverless Function
 
-const CLAUDE_API_KEY = import.meta.env.VITE_ANTHROPICSK_API_KEY;
 const CLAUDE_MODEL = import.meta.env.VITE_CLAUDE_MODEL || 'claude-3-5-sonnet-20241022';
-const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
+
+// URL da função serverless (Vercel)
+// Em produção: /api/claude
+// Em desenvolvimento local: http://localhost:3000/api/claude ou usar a API direta
+const CLAUDE_API_URL = import.meta.env.DEV
+  ? '/api/claude'  // Proxy local (se configurado) ou serverless
+  : '/api/claude'; // Serverless na Vercel
 
 if (import.meta.env.DEV) {
   console.log(`🤖 Claude usando modelo: ${CLAUDE_MODEL}`);
+  console.log(`🌐 API URL: ${CLAUDE_API_URL}`);
 }
 
 /**
