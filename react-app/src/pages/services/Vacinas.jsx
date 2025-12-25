@@ -87,11 +87,6 @@ export default function Vacinas() {
         {/* Avisos específicos da página de vacinas */}
         <AvisosPaginaWrapper pagina="vacinas" />
 
-        {/* Tabela de Vacinas Disponíveis */}
-        <div className="mb-6">
-          <VacinasDisponiveis />
-        </div>
-
         {/* Calendário de Vacinação */}
         <div className="mb-6">
           <CalendarioVacinal />
@@ -151,6 +146,11 @@ export default function Vacinas() {
 
         {/* Documentos Necessários */}
         <InfoBox title="Documentos Necessários" variant="highlight">
+          {/* Tabela de Vacinas Disponíveis */}
+          <div className="mb-6">
+            <VacinasDisponiveis />
+          </div>
+
           <p className="text-slate-700 mb-4 text-sm">
             Para vacinação, é obrigatória a apresentação da seguinte documentação:
           </p>

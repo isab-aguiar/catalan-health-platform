@@ -1,0 +1,131 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =====================================================
+    // FUNÇÕES AUXILIARES
+    // =====================================================
+
+    // Verifica se o usuário está autenticado
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Obtém dados do usuário do Firestore
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    // Verifica se o documento do usuário existe
+    function userExists() {
+      return isAuthenticated() &&
+             exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    // Verifica se o usuário é admin
+    function isAdmin() {
+      return userExists() &&
+             getUserData().role == 'admin' &&
+             getUserData().active == true;
+    }
+
+    // Verifica se o usuário é profissional
+    function isProfissional() {
+      return userExists() &&
+             getUserData().role == 'profissional' &&
+             getUserData().active == true;
+    }
+
+    // Verifica se o usuário tem role de staff (admin ou profissional)
+    function isStaff() {
+      return isAdmin() || isProfissional();
+    }
+
+    // Verifica se o usuário está ativo
+    function isActive() {
+      return userExists() && getUserData().active == true;
+    }
+
+    // =====================================================
+    // COLEÇÃO: users
+    // =====================================================
+    match /users/{userId} {
+      // Usuários autenticados podem ler seu próprio documento
+      // Admins podem ler todos os documentos
+      allow read: if isAuthenticated() &&
+                     (request.auth.uid == userId || isAdmin());
+
+      // Apenas admins podem criar usuários
+      allow create: if isAdmin();
+
+      // Usuários podem atualizar seu próprio perfil
+      // MAS não podem alterar role ou active (prevenção de escalação de privilégios)
+      // Admins podem atualizar qualquer usuário
+      allow update: if isAdmin() ||
+                       (isAuthenticated() &&
+                        request.auth.uid == userId &&
+                        request.resource.data.role == resource.data.role &&
+                        request.resource.data.active == resource.data.active);
+
+      // Apenas admins podem deletar usuários
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
+    // COLEÇÃO: vacinas
+    // =====================================================
+    match /vacinas/{vacinaId} {
+      // LEITURA PÚBLICA: Qualquer pessoa pode ler vacinas publicadas
+      // LEITURA ADMIN: Admins podem ler todas as vacinas
+      allow read: if resource.data.publicado == true || isAdmin();
+
+      // Apenas admins podem criar, atualizar e deletar vacinas
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
+    // COLEÇÃO: avisos
+    // =====================================================
+    match /avisos/{avisoId} {
+      // Leitura pública de avisos ativos exibidos na homepage
+      // Staff pode ler todos os avisos
+      allow read: if (resource.data.ativo == true &&
+                     resource.data.exibirNaHomepage == true) ||
+                     isStaff();
+
+      // Staff (admin + profissional) pode criar e atualizar avisos
+      allow create: if isStaff();
+      allow update: if isStaff();
+
+      // Apenas admins podem deletar avisos
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
+    // COLEÇÃO: campanhas
+    // =====================================================
+    match /campanhas/{campanhaId} {
+      // Leitura pública de campanhas ativas
+      // Staff pode ler todas as campanhas
+      allow read: if resource.data.ativo == true || isStaff();
+
+      // Staff (admin + profissional) pode criar e atualizar campanhas
+      allow create: if isStaff();
+      allow update: if isStaff();
+
+      // Apenas admins podem deletar campanhas
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
+    // PADRÃO: NEGAR TUDO
+    // =====================================================
+    // Qualquer coleção não explicitamente permitida acima é bloqueada
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
