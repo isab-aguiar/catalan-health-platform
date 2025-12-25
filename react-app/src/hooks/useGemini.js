@@ -363,22 +363,28 @@ export function useGemini() {
         console.log('🖼️ imagemURL na mensagem:', aiMsg.campanhaData?.imagemURL);
 
         setMessages(prev => [...prev, aiMsg]);
-        
+
         return campanhaData;
 
       } else {
         // Erro da API
+        // Em desenvolvimento, mostra a resposta bruta do Gemini para debug
+        const isDev = import.meta.env.DEV;
+        const debugInfo = isDev && result.rawResponse
+          ? `\n\n🔍 Debug (apenas em desenvolvimento):\n${result.rawResponse.substring(0, 500)}${result.rawResponse.length > 500 ? '...' : ''}`
+          : '';
+
         const errorMsg = {
           id: Date.now() + 1,
           role: 'assistant',
-          content: `Erro: ${result.error}`,
+          content: `Erro: ${result.error}${debugInfo}`,
           isError: true,
           timestamp: new Date()
         };
 
         setMessages(prev => [...prev, errorMsg]);
         setError(result.error);
-        
+
         return null;
       }
 

@@ -345,6 +345,158 @@ Confirma? Digite 'sim' para eu gerar o JSON final."
 Agora processe a entrada do usuário e siga o fluxo conversacional.`;
 
 /**
+ * PROMPT ESPECÍFICO PARA ANÁLISE DE IMAGENS (Retorno Imediato de JSON)
+ * Este prompt é usado quando o usuário faz upload de uma imagem de campanha
+ * e esperamos análise instantânea sem fluxo conversacional
+ */
+const CAMPANHA_IMAGE_ANALYSIS_PROMPT = `Você é um assistente especializado em extrair informações de imagens de campanhas de saúde para a ESF (Estratégia de Saúde da Família).
+
+===================================
+🎯 TAREFA: ANÁLISE IMEDIATA DE IMAGEM
+===================================
+
+Analise a imagem fornecida e extraia TODAS as informações visíveis para criar uma campanha profissional.
+
+ETAPAS DE ANÁLISE:
+
+1️⃣ **IDENTIFICAR TÍTULO:**
+   - Procure o maior texto visível na imagem
+   - Geralmente está em destaque, negrito ou fonte maior
+   - Se houver logo/marca, ignore e foque no texto principal
+   - Máximo 100 caracteres
+
+2️⃣ **IDENTIFICAR DESCRIÇÃO:**
+   - Extraia todo o corpo de texto visível
+   - Combine múltiplos parágrafos se houver
+   - Mantenha informações importantes (datas, horários, locais)
+   - Máximo 600 caracteres
+   - Use português formal e profissional
+
+3️⃣ **DETECTAR CATEGORIA (vacina | material | campanha):**
+   - **VACINA**: Se menciona vacinação, imunização, doses, calendário vacinal, vacinas específicas (COVID, Influenza, HPV, etc)
+   - **MATERIAL**: Se menciona medicamentos, insumos, solicitação de material, estoque, farmácia
+   - **CAMPANHA**: Ações educativas, eventos de saúde, campanhas preventivas, conscientização
+
+4️⃣ **INFERIR TEMPLATE (vacinacao | material | educacao | evento | urgente | informativo):**
+   - **vacinacao**: Se for sobre vacinas/imunização
+   - **material**: Se for sobre insumos/medicamentos
+   - **educacao**: Se for campanha educativa sobre saúde
+   - **evento**: Se menciona evento com data específica
+   - **urgente**: Se usa cores de alerta (vermelho/laranja) ou termos como "urgente", "atenção", "importante"
+   - **informativo**: Padrão para informações gerais
+
+5️⃣ **EXTRAIR INFORMAÇÕES OPCIONAIS:**
+   - **Subtítulo**: Texto secundário abaixo do título (se houver)
+   - **Data Início**: Formato DD/MM/AAAA (ex: 15/01/2025)
+   - **Data Fim**: Formato DD/MM/AAAA (ex: 20/01/2025)
+   - **Horário**: Ex: "8h às 17h", "Segunda a Sexta"
+   - **Público-Alvo**: Ex: "Gestantes", "Idosos acima de 60 anos", "Crianças de 0 a 5 anos"
+   - **Contato**: Telefone, email ou endereço visível
+
+6️⃣ **DEFINIR PÁGINA DESTINO:**
+   Baseado na categoria e conteúdo, escolha a página mais apropriada:
+   - Vacinação → "vacinas"
+   - Material/Medicação → "medicacao" ou "farmacia"
+   - Curativos/Feridas → "curativos"
+   - ECG/Exames → "ecg"
+   - Recepção/Atendimento → "recepcao"
+   - Campanhas gerais → "home"
+
+7️⃣ **DEFINIR FLAGS:**
+   - **urgente**: true se cores/texto indicam urgência, false caso contrário
+   - **destaque**: true para campanhas importantes (vacinação, eventos), false para informações simples
+   - **exibirNaHomepage**: true se página destino = "home", false caso contrário
+
+8️⃣ **EXTRAIR TÓPICOS (opcional):**
+   - Liste pontos-chave da campanha como array de strings
+   - Ex: ["Vacina disponível", "Gratuita para todos", "Documentos: RG e Cartão SUS"]
+   - Use [] se não houver tópicos claros
+
+===================================
+⚠️ REGRAS CRÍTICAS
+===================================
+
+✅ **SEMPRE retorne APENAS JSON válido**
+✅ **NÃO adicione texto antes ou depois do JSON**
+✅ **NÃO faça perguntas**
+✅ **NÃO use markdown** - apenas o JSON puro (sem delimitadores de código)
+✅ **Se campo não identificável** → use null ou valor padrão inteligente
+✅ **Use português formal** em títulos e descrições
+✅ **Seja conciso mas informativo**
+
+❌ **NUNCA retorne texto conversacional**
+❌ **NUNCA retorne JSON incompleto**
+❌ **NUNCA invente informações** não visíveis na imagem
+
+===================================
+📋 FORMATO DE SAÍDA OBRIGATÓRIO
+===================================
+
+{
+  "template": "vacinacao",
+  "titulo": "Campanha de Vacinação contra Influenza 2025",
+  "descricao": "A ESF Catalão está realizando campanha de vacinação contra Influenza para toda a população. Vacina disponível gratuitamente. Traga RG e Cartão SUS.",
+  "subtitulo": "Proteja-se contra a gripe",
+  "categoria": "vacina",
+  "paginaDestino": "vacinas",
+  "dataInicio": "15/01/2025",
+  "dataFim": "28/02/2025",
+  "horario": "8h às 17h, segunda a sexta",
+  "publicoAlvo": "Toda a população",
+  "contato": "(35) 3333-3333",
+  "urgente": false,
+  "destaque": true,
+  "exibirNaHomepage": false,
+  "topicos": [
+    "Vacina gratuita",
+    "Disponível para todas as idades",
+    "Traga RG e Cartão SUS"
+  ]
+}
+
+===================================
+🗂️ PÁGINAS DESTINO DISPONÍVEIS
+===================================
+
+- "home" → Homepage (página inicial) - use para campanhas gerais
+- "vacinas" → Sala de Vacinação
+- "sala-4" → Sala de Agendamento
+- "sala-9" → Sala de Atendimento Administrativo
+- "medicacao" → Sala de Medicação
+- "recepcao" → Recepção
+- "ecg" → Eletrocardiograma
+- "curativos" → Sala de Curativos
+- "renovacao" → Renovação de Receitas
+- "farmacia" → Farmácia
+
+===================================
+✅ VALORES PADRÃO INTELIGENTES
+===================================
+
+Se não conseguir identificar um campo obrigatório da imagem:
+
+**Título não identificável:**
+"Nova Campanha de Saúde (aguardando refinamento)"
+
+**Descrição não identificável:**
+"Campanha de saúde da ESF Catalão. Descrição será refinada pelo usuário."
+
+**Categoria não clara:**
+"campanha" (padrão mais genérico)
+
+**Página destino não clara:**
+"home" (página principal)
+
+**Template não claro:**
+"informativo" (padrão mais neutro)
+
+===================================
+🚀 AGORA ANALISE A IMAGEM
+===================================
+
+Analise a imagem fornecida e retorne APENAS o JSON no formato especificado acima.`;
+
+/**
  * Envia uma mensagem para o Gemini e recebe a resposta
  */
 export async function sendMessageToGemini(userMessage) {
@@ -541,9 +693,9 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
       };
     }
 
-    const promptTexto = userMessage 
-      ? `${CAMPANHA_SYSTEM_PROMPT}\n\nINSTRUÇÕES ADICIONAIS:\n${userMessage}`
-      : CAMPANHA_SYSTEM_PROMPT;
+    // Usar prompt específico para análise de imagens (retorno imediato de JSON)
+    // Não usa userMessage pois esperamos análise instantânea sem conversação
+    const promptTexto = CAMPANHA_IMAGE_ANALYSIS_PROMPT;
 
     const response = await fetch(`${GEMINI_VISION_API_URL}?key=${GEMINI_API_KEY}`, {
       method: 'POST',
@@ -612,8 +764,11 @@ export async function analyzeImageForCampanha(imageBase64, mimeType, userMessage
     }
 
     const campanhaData = parseCampanhaResponse(textResponse);
-    
+
     if (!campanhaData) {
+      console.error('❌ JSON não encontrado na resposta do Gemini');
+      console.error('📄 Resposta recebida:', textResponse);
+      console.error('💡 Dica: Verifique se o prompt está instruindo corretamente o Gemini a retornar JSON');
       return {
         success: false,
         error: 'Não foi possível processar a imagem.',
@@ -652,8 +807,16 @@ function parseCampanhaResponse(text) {
 
     const parsed = JSON.parse(jsonMatch[0]);
 
-    if (!parsed.titulo || !parsed.descricao) {
-      return null;
+    // FALLBACKS INTELIGENTES: Sempre retornar um objeto válido
+    // Em vez de retornar null (que causa erro), usamos valores padrão
+    if (!parsed.titulo) {
+      parsed.titulo = 'Nova Campanha de Saúde (aguardando refinamento)';
+      console.warn('⚠️ Título não identificado na imagem - usando padrão');
+    }
+
+    if (!parsed.descricao) {
+      parsed.descricao = 'Campanha de saúde da ESF Catalão. Descrição será refinada pelo usuário.';
+      console.warn('⚠️ Descrição não identificada na imagem - usando padrão');
     }
 
     parsed.template = parsed.template || 'informativo';
