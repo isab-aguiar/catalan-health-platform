@@ -1,0 +1,89 @@
+# =========================================
+# FIREBASE IGNORE
+# =========================================
+# Este arquivo define quais arquivos/pastas devem ser ignorados
+# durante o deploy do Firebase (firebase deploy)
+
+# =========================================
+# NODE MODULES E DEPENDÊNCIAS
+# =========================================
+**/node_modules/**
+**/package-lock.json
+**/yarn.lock
+
+# =========================================
+# ARQUIVOS DE DESENVOLVIMENTO
+# =========================================
+**/.git/**
+**/.gitignore
+**/.vscode/**
+**/.idea/**
+**/.cursor/**
+**/.claude/**
+
+# =========================================
+# ARQUIVOS DE BUILD E CACHE
+# =========================================
+**/dist/**
+**/build/**
+**/.cache/**
+**/.next/**
+**/.nuxt/**
+**/.output/**
+
+# =========================================
+# ARQUIVOS DE AMBIENTE E SEGREDOS
+# =========================================
+**/.env
+**/.env.*
+!**/.env.example
+**/serviceAccountKey.json
+**/credentials.json
+
+# =========================================
+# ARQUIVOS DE LOG E TEMPORÁRIOS
+# =========================================
+**/logs/**
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.DS_Store
+**/Thumbs.db
+
+# =========================================
+# ARQUIVOS DE TESTE
+# =========================================
+**/coverage/**
+**/.nyc_output/**
+**/__tests__/**
+**/*.test.js
+**/*.spec.js
+
+# =========================================
+# VERCEL (não necessário no Firebase)
+# =========================================
+**/.vercel/**
+**/vercel.json
+
+# =========================================
+# API E BACKEND (se houver deploy separado)
+# =========================================
+**/api/**
+
+# =========================================
+# DOCUMENTAÇÃO E SCRIPTS DE DESENVOLVIMENTO
+# =========================================
+**/README.md
+**/CHANGELOG.md
+**/limpar-codico.js
+**/*.md
+!**/firestore.rules
+!**/firebase.json
+
+# =========================================
+# REACT APP (código fonte - já compilado em dist/build)
+# =========================================
+# Descomente se você fizer deploy apenas do build, não do código fonte
+# **/react-app/src/**
+# **/react-app/public/**

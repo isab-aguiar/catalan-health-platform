@@ -53,3 +53,7 @@ Thumbs.db
 
 # cursor
 .cursor/
+
+# Scripts (podem conter dados sensíveis ou temporários)
+scripts/
+react-app/scripts/

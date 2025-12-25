@@ -146,7 +146,63 @@ export default function VacinasDisponiveis() {
         </p>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Versão Mobile - Cards */}
+      <div className="md:hidden divide-y divide-slate-200">
+        {vacinasPublicadas.map((v) => {
+          const disponivel = vacinaDisponivel(v);
+
+          return (
+            <div
+              key={v.id}
+              className="p-4 border-b border-slate-200 last:border-b-0"
+            >
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="font-semibold text-slate-900 text-base">{v.nome}</h3>
+                <span
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold flex-shrink-0 ml-2 ${
+                    disponivel
+                      ? 'bg-green-100 text-green-800 border border-green-300'
+                      : 'bg-red-100 text-red-800 border border-red-300'
+                  }`}
+                >
+                  {disponivel ? (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      Disponível
+                    </>
+                  ) : (
+                    <>
+                      <XCircle className="w-3.5 h-3.5" />
+                      Indisponível
+                    </>
+                  )}
+                </span>
+              </div>
+              <div className="space-y-2 text-sm">
+                <div>
+                  <span className="font-medium text-slate-700">Para que serve: </span>
+                  <span className="text-slate-600">{v.finalidade}</span>
+                </div>
+                <div>
+                  <span className="font-medium text-slate-700">Público-Alvo: </span>
+                  <span className="text-slate-600">{v.publicoAlvo}</span>
+                </div>
+                {v.periodoInicio && v.periodoFim && (
+                  <div>
+                    <span className="font-medium text-slate-700">Período: </span>
+                    <span className="text-slate-600 text-xs">
+                      {formatarData(v.periodoInicio)} até {formatarData(v.periodoFim)}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Versão Desktop - Tabela */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-slate-50 border-b border-slate-200">
             <tr>
