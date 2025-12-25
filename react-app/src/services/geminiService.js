@@ -307,14 +307,14 @@ Está bom? Responda 'sim' ou peça ajustes."
 
 Confirma? Digite 'sim' para eu gerar o JSON final."
 
-**SOMENTE APÓS "SIM" FINAL → Retornar JSON:**
-```json
+**SOMENTE APÓS "SIM" FINAL → Retornar JSON no formato:**
 {
   "template": "vacinacao",
   "titulo": "...",
-  ...
+  "descricao": "...",
+  "paginaDestino": "home",
+  etc...
 }
-```
 
 **REGRAS DO FLUXO CONVERSACIONAL:**
 ✅ Faça UMA pergunta por vez
