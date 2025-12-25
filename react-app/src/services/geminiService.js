@@ -588,39 +588,49 @@ export async function reformulateToFormal(userText, field = 'texto') {
     }
 
     // Prompt especializado para reformulação formal (SEM embutir userText aqui)
-    const FORMAL_SYSTEM_INSTRUCTIONS = `Você é um especialista em comunicação institucional governamental na área da saúde pública.
+    const FORMAL_SYSTEM_INSTRUCTIONS = `Você é um especialista em comunicação institucional na área da saúde pública.
 
-TAREFA: Reformular o texto fornecido pelo usuário em linguagem FORMAL, PROFISSIONAL e adequada para comunicação oficial de órgãos de saúde pública brasileiros.
+TAREFA: Reformular o texto do usuário de forma PROFISSIONAL e FORMAL, mantendo o sentido do que ele disse, mas podendo elaborar levemente para criar um texto institucional adequado.
 
-DIRETRIZES OBRIGATÓRIAS:
-1. Tom formal, respeitoso e acolhedor
-2. Vocabulário técnico apropriado para saúde pública
-3. Estrutura clara e objetiva
-4. Linguagem acessível mas profissional
-5. Evitar completamente gírias, informalidades e expressões coloquiais
-6. Usar termos técnicos da saúde quando apropriado
-7. Manter informações essenciais do texto original
-8. Linguagem inclusiva e acessível para toda população
-9. Tom institucional da Estratégia de Saúde da Família (ESF)
+REGRAS:
+1. ✅ BASEAR-SE no que o usuário disse - não inventar informações novas
+2. ✅ Tornar formal e profissional (remover gírias, usar vocabulário técnico quando apropriado)
+3. ✅ Pode elaborar LEVEMENTE para criar título/subtítulo/descrição profissional
+4. ✅ Usar termos técnicos da saúde quando fizer sentido ("gripe" → "Influenza", "vacina" → "imunização")
+5. ❌ NÃO adicionar informações que o usuário não mencionou
+6. ❌ NÃO criar frases muito longas ou elaboradas demais
+7. ✅ Manter o foco no que o usuário comunicou
+8. ✅ Para títulos: ser conciso e direto (máx 80 caracteres)
 
-EXEMPLOS DE TRANSFORMAÇÃO:
-Casual: "Vem pra vacina da gripe!"
-Formal: "A Estratégia de Saúde da Família convida a população para imunização contra Influenza"
+EXEMPLOS CORRETOS:
+Input: "vem tomar vacina da gripe"
+Output: "Vacinação contra Influenza" ou "Campanha de Vacinação contra Gripe"
 
-Casual: "Tá com dúvida? Vem aqui!"
-Formal: "Para esclarecimentos adicionais, dirija-se à unidade de saúde mais próxima"
+Input: "proteja você e sua família"
+Output: "Proteja você e sua família" ou "Proteja sua saúde e de seus familiares"
 
-Casual: "proteja você e sua família"
-Formal: "Proteja sua saúde e de seus familiares"
+Input: "vacina da gripe disponível pra todo mundo"
+Output: "Vacina contra Influenza Disponível para Todos" ou "Imunização contra Gripe - Disponível para Todos os Grupos"
 
-Casual: "a vacina da gripe tá disponível pra todo mundo. é de graça e tem pra toda idade"
-Formal: "A Estratégia de Saúde da Família disponibiliza gratuitamente a vacina contra Influenza para todos os grupos etários. A imunização é fundamental para a prevenção de complicações decorrentes da gripe."
+Input: "campanha de vacinação semana que vem"
+Output: "Campanha de Vacinação - Próxima Semana"
+
+Input: "bronquiolite"
+Output: "Prevenção da Bronquiolite" ou "Informações sobre Bronquiolite"
+
+EXEMPLOS INCORRETOS (NÃO FAZER):
+Input: "vem tomar vacina da gripe"
+❌ Output: "A Estratégia de Saúde da Família informa sobre a Campanha de Imunização contra Influenza que será realizada..." (MUITO elaborado, adicionou informações)
+
+Input: "proteja você e sua família"
+❌ Output: "A Estratégia de Saúde da Família orienta sobre as medidas preventivas e de cuidado" (MUDOU completamente o sentido)
 
 INSTRUÇÕES FINAIS:
-- Responda APENAS com o texto reformulado
-- NÃO adicione explicações, comentários ou aspas
-- NÃO adicione "Texto reformulado:" ou similar
-- Apenas o texto final reformulado`;
+- Reformule baseado no que o usuário disse
+- Pode elaborar levemente para tornar profissional, mas SEMPRE mantendo o sentido original
+- Use termos técnicos quando apropriado
+- Seja conciso e direto
+- Responda APENAS com o texto reformulado, sem explicações ou aspas`;
 
     // Construir prompt completo DEPOIS (como sendMessageToGemini faz - evita erro 403)
     const fullPrompt = `${FORMAL_SYSTEM_INSTRUCTIONS}\n\nTEXTO DO USUÁRIO:\n"${userText.trim()}"`;
@@ -638,10 +648,10 @@ INSTRUÇÕES FINAIS:
         }
       ],
       generationConfig: {
-        temperature: 0.7,
-        topK: 40,
-        topP: 0.95,
-        maxOutputTokens: 500,
+        temperature: 0.5, // Balanceado: permite elaboração leve mas mantém foco
+        topK: 30, // Permite alguma criatividade para elaboração profissional
+        topP: 0.85, // Mais flexível para elaboração
+        maxOutputTokens: 300, // Permite elaboração leve quando necessário
       },
     };
 
