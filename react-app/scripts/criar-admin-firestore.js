@@ -34,7 +34,7 @@ const db = getFirestore(app);
 // DADOS DO ADMINISTRADOR
 // ============================================
 
-const ADMIN_UID = "DLtg8Ik1cOSycUmdGUVnun7Mmur2"; // UID do Firebase Authentication
+const ADMIN_UID = "Z37PXqvcEZMfNatgmio3dhY8XQR2"; // UID do Firebase Authentication
 const ADMIN_EMAIL = "root@esfcatalao.com";
 const ADMIN_NOME = "Administrador ESF Catalão";
 

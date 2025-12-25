@@ -32,7 +32,7 @@ const db = getFirestore(app);
 // DADOS DO ADMINISTRADOR
 // Se você souber seu UID, substitua aqui. Caso contrário, o script tentará encontrar pelo email
 const ADMIN_EMAIL = "root@esfcatalao.com";
-const ADMIN_UID = "DLtg8Ik1cOSycUmdGUVnun7Mmur2"; // UID do admin no novo projeto
+const ADMIN_UID = "Z37PXqvcEZMfNatgmio3dhY8XQR2"; // UID do admin
 
 async function corrigirPermissoesAdmin() {
   try {
