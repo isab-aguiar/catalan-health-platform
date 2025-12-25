@@ -10,12 +10,12 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,json,css,html}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,json,css,html}\"",
-    "upload:vacinas": "node --env-file=.env scripts/upload-vacinas-firestore.js",
-    "upload:vacinas:force": "node --env-file=.env scripts/upload-vacinas-firestore.js --force",
-    "upload:vacinas:admin": "node --env-file=.env scripts/upload-vacinas-admin.js",
-    "upload:vacinas:admin:force": "node --env-file=.env scripts/upload-vacinas-admin.js --force",
-    "list:vacinas": "node --env-file=.env scripts/upload-vacinas-firestore.js --list",
-    "list:vacinas:admin": "node --env-file=.env scripts/upload-vacinas-admin.js --list"
+    "upload:vacinas": "node --no-warnings --env-file=.env scripts/upload-vacinas-firestore.js",
+    "upload:vacinas:force": "node --no-warnings --env-file=.env scripts/upload-vacinas-firestore.js --force",
+    "upload:vacinas:admin": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js",
+    "upload:vacinas:admin:force": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js --force",
+    "list:vacinas": "node --no-warnings --env-file=.env scripts/upload-vacinas-firestore.js --list",
+    "list:vacinas:admin": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js --list"
   },
   "dependencies": {
     "firebase": "^12.7.0",
