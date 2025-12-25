@@ -124,3 +124,86 @@
     word-break: break-word;
   }
 }
+
+/* =========================================
+   VLIBRAS - CORREÇÃO DE CLIQUE E ESPAÇAMENTO
+   ========================================= */
+
+/* Container principal do VLibras - reduzir área clicável */
+div[vw].enabled {
+  pointer-events: none !important; /* Desabilita cliques na div pai */
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Botão de acesso - APENAS ELE deve ser clicável */
+div[vw-access-button] {
+  pointer-events: auto !important; /* Reabilita cliques apenas no botão */
+  width: 64px !important; /* Tamanho fixo do botão */
+  height: 64px !important;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 9998 !important;
+}
+
+/* Hover no botão - aumenta levemente */
+div[vw-access-button]:hover {
+  transform: scale(1.1);
+}
+
+/* Imagem do botão de acesso */
+div[vw-access-button] img.vp-access-button {
+  width: 64px !important;
+  height: 64px !important;
+  cursor: pointer;
+}
+
+/* Popup de imagem - esconder por padrão */
+div[vw-access-button] img.vp-pop-up {
+  display: none !important;
+}
+
+/* Mostrar popup apenas quando botão estiver ativo E com hover */
+div[vw-access-button].active:hover img.vp-pop-up {
+  display: block !important;
+  position: absolute;
+  left: -220px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+  height: auto;
+  z-index: 9999;
+}
+
+/* Plugin wrapper - só aparece quando aberto */
+div[vw-plugin-wrapper] {
+  pointer-events: auto !important; /* Permite interação quando aberto */
+  z-index: 9999 !important;
+}
+
+/* Quando o plugin NÃO estiver visível, desabilitar cliques */
+div[vw-plugin-wrapper]:not(:has(div[vp][style*="display: block"])) {
+  pointer-events: none !important;
+}
+
+/* Garantir que elementos abaixo do VLibras sejam clicáveis */
+div[vw].enabled ~ * {
+  pointer-events: auto !important;
+}
+
+/* Mobile - ajustar posição para não atrapalhar */
+@media (max-width: 768px) {
+  div[vw].enabled {
+    right: 10px !important;
+  }
+
+  div[vw-access-button] {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  div[vw-access-button] img.vp-access-button {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
