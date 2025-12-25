@@ -4,7 +4,7 @@
 // Hook para gerenciar vacinas do Firestore com real-time updates
 
 import { useState, useEffect } from 'react';
-import { collection, doc, updateDoc, onSnapshot, Timestamp } from 'firebase/firestore';
+import { collection, doc, updateDoc, setDoc, onSnapshot, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
 const COLLECTION_NAME = 'vacinas';
@@ -95,11 +95,56 @@ export function useVacinas() {
     }
   };
 
+  /**
+   * Cria uma nova vacina
+   */
+  const createVacina = async (vacinaData) => {
+    if (!db) {
+      setError('Firebase não configurado');
+      return { success: false, error: 'Firebase não configurado' };
+    }
+
+    try {
+      // Gerar ID único baseado no nome (normalizado)
+      const id = vacinaData.nome
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+        .replace(/[^a-z0-9]+/g, '-') // Substitui espaços e caracteres especiais por hífen
+        .replace(/^-+|-+$/g, ''); // Remove hífens do início e fim
+
+      const vacinaRef = doc(db, COLLECTION_NAME, id);
+
+      // Preparar dados
+      const dadosVacina = {
+        id: id,
+        nome: vacinaData.nome,
+        finalidade: vacinaData.finalidade || '',
+        publicoAlvo: vacinaData.publicoAlvo || '',
+        quantidade: vacinaData.quantidade || 0,
+        periodoInicio: vacinaData.periodoInicio ? Timestamp.fromDate(new Date(vacinaData.periodoInicio)) : null,
+        periodoFim: vacinaData.periodoFim ? Timestamp.fromDate(new Date(vacinaData.periodoFim)) : null,
+        publicado: vacinaData.publicado ?? false,
+        ativo: true,
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now()
+      };
+
+      await setDoc(vacinaRef, dadosVacina);
+      return { success: true, id };
+    } catch (err) {
+      console.error('Erro ao criar vacina:', err);
+      setError(err.message);
+      return { success: false, error: err.message };
+    }
+  };
+
   return {
     vacinas,
     loading,
     error,
-    updateVacina
+    updateVacina,
+    createVacina
   };
 }
 
