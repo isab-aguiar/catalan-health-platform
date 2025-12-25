@@ -175,15 +175,13 @@ div[vw-access-button].active:hover img.vp-pop-up {
   z-index: 9999;
 }
 
-/* Plugin wrapper - só aparece quando aberto */
-div[vw-plugin-wrapper] {
-  pointer-events: auto !important; /* Permite interação quando aberto */
+/* Plugin wrapper - SEMPRE permite interação em todos os elementos internos */
+div[vw-plugin-wrapper],
+div[vw-plugin-wrapper] *,
+div[vp],
+div[vp] * {
+  pointer-events: auto !important; /* Permite cliques em TUDO dentro do plugin */
   z-index: 9999 !important;
-}
-
-/* Quando o plugin NÃO estiver visível, desabilitar cliques */
-div[vw-plugin-wrapper]:not(:has(div[vp][style*="display: block"])) {
-  pointer-events: none !important;
 }
 
 /* Garantir que elementos abaixo do VLibras sejam clicáveis */
