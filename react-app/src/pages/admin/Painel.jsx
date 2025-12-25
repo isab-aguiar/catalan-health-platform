@@ -3,11 +3,12 @@
 // =========================================
 // Página principal do sistema administrativo
 
-import { useMemo, memo } from 'react';
+import { useMemo, memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAvisos } from '../../hooks/useAvisos';
 import { useAllCampanhas } from '../../hooks/useAllCampanhas';
 import { useUsers } from '../../hooks/useUsers';
+import { useVacinas } from '../../hooks/useVacinas';
 import { usePermissions } from '../../hooks/usePermissions';
 import AdminLayout from '../../layouts/AdminLayout';
 import StatsCard from '../../components/admin/StatsCard';
@@ -21,7 +22,10 @@ import {
   Calendar,
   Shield,
   AlertCircle,
-  Megaphone
+  Megaphone,
+  Syringe,
+  CheckCircle2,
+  XCircle
 } from 'lucide-react';
 
 const AvisoItem = memo(({ aviso, getCategoriaColor, formatarData }) => (
@@ -60,6 +64,7 @@ export default function Painel() {
   const { avisos, loading: avisosLoading, error: avisosError } = useAvisos();
   const { campanhas, loading: campanhasLoading } = useAllCampanhas();
   const { users, loading: usersLoading } = useUsers();
+  const { vacinas, loading: vacinasLoading, updateVacina } = useVacinas();
   const permissions = usePermissions();
 
   // Calcular estatísticas
@@ -114,7 +119,7 @@ export default function Painel() {
     return colors[categoria] || 'bg-slate-100 text-slate-800 border-slate-200';
   };
 
-  if (avisosLoading || (permissions.canManageUsers() && usersLoading)) {
+  if (avisosLoading || (permissions.canManageUsers() && usersLoading) || vacinasLoading) {
     return (
       <AdminLayout currentPage="dashboard">
         <div className="flex items-center justify-center min-h-[400px]">
@@ -298,7 +303,156 @@ export default function Painel() {
             </div>
           </div>
         )}
+
+        {/* Painel de Controle de Vacinas */}
+        <div className="bg-white rounded-md shadow-sm border border-slate-300 overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 rounded-md flex items-center justify-center">
+                <Syringe className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-white">Programação de Vacinas</h2>
+                <p className="text-blue-100 text-sm">Gerencie quantidade, período e publicação das vacinas do SUS</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="bg-slate-50 border-b border-slate-200">
+                <tr>
+                  <th className="text-left p-4 font-semibold text-slate-700">Vacina</th>
+                  <th className="text-left p-4 font-semibold text-slate-700">Finalidade</th>
+                  <th className="text-left p-4 font-semibold text-slate-700">Público-Alvo</th>
+                  <th className="text-left p-4 font-semibold text-slate-700">Quantidade</th>
+                  <th className="text-left p-4 font-semibold text-slate-700">Início do Período</th>
+                  <th className="text-left p-4 font-semibold text-slate-700">Fim do Período</th>
+                  <th className="text-left p-4 font-semibold text-slate-700">Publicado</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200">
+                {vacinas.length === 0 ? (
+                  <tr>
+                    <td colSpan="7" className="p-8 text-center text-slate-500">
+                      Nenhuma vacina cadastrada. Execute o script de upload para carregar as vacinas.
+                    </td>
+                  </tr>
+                ) : (
+                  vacinas.map((vacina) => (
+                    <VacinaRow
+                      key={vacina.id}
+                      vacina={vacina}
+                      updateVacina={updateVacina}
+                    />
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </AdminLayout>
   );
 }
+
+// Componente para linha da tabela de vacinas
+const VacinaRow = memo(({ vacina, updateVacina }) => {
+  // Função auxiliar para converter Timestamp para string de data
+  const timestampToDateString = (timestamp) => {
+    if (!timestamp) return '';
+    if (timestamp.toDate) {
+      return timestamp.toDate().toISOString().split('T')[0];
+    }
+    if (timestamp instanceof Date) {
+      return timestamp.toISOString().split('T')[0];
+    }
+    if (typeof timestamp === 'string') {
+      return timestamp.split('T')[0];
+    }
+    return '';
+  };
+
+  const [quantidade, setQuantidade] = useState(vacina.quantidade || 0);
+  const [periodoInicio, setPeriodoInicio] = useState(timestampToDateString(vacina.periodoInicio));
+  const [periodoFim, setPeriodoFim] = useState(timestampToDateString(vacina.periodoFim));
+  const [publicado, setPublicado] = useState(vacina.publicado ?? false);
+
+  // Sincronizar estado quando vacina mudar (atualização do Firestore)
+  useEffect(() => {
+    setQuantidade(vacina.quantidade || 0);
+    setPeriodoInicio(timestampToDateString(vacina.periodoInicio));
+    setPeriodoFim(timestampToDateString(vacina.periodoFim));
+    setPublicado(vacina.publicado ?? false);
+  }, [vacina]);
+
+  const handleUpdate = async (campo, valor) => {
+    await updateVacina(vacina.id, campo, valor);
+  };
+
+  return (
+    <tr className="hover:bg-slate-50 transition-colors">
+      <td className="p-4">
+        <div className="font-semibold text-slate-900">{vacina.nome}</div>
+      </td>
+      <td className="p-4 text-slate-600">{vacina.finalidade}</td>
+      <td className="p-4 text-slate-600">{vacina.publicoAlvo}</td>
+      <td className="p-4">
+        <input
+          type="number"
+          min="0"
+          value={quantidade}
+          onChange={(e) => setQuantidade(Number(e.target.value))}
+          onBlur={(e) => handleUpdate('quantidade', Number(e.target.value))}
+          className="w-24 border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </td>
+      <td className="p-4">
+        <input
+          type="date"
+          value={periodoInicio}
+          onChange={(e) => setPeriodoInicio(e.target.value)}
+          onBlur={(e) => handleUpdate('periodoInicio', e.target.value ? new Date(e.target.value) : null)}
+          className="border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </td>
+      <td className="p-4">
+        <input
+          type="date"
+          value={periodoFim}
+          onChange={(e) => setPeriodoFim(e.target.value)}
+          onBlur={(e) => handleUpdate('periodoFim', e.target.value ? new Date(e.target.value) : null)}
+          className="border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </td>
+      <td className="p-4">
+        <button
+          onClick={() => {
+            const novoStatus = !publicado;
+            setPublicado(novoStatus);
+            handleUpdate('publicado', novoStatus);
+          }}
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            publicado
+              ? 'bg-green-100 text-green-800 hover:bg-green-200 border border-green-300'
+              : 'bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-300'
+          }`}
+        >
+          {publicado ? (
+            <>
+              <CheckCircle2 className="w-4 h-4" />
+              Sim
+            </>
+          ) : (
+            <>
+              <XCircle className="w-4 h-4" />
+              Não
+            </>
+          )}
+        </button>
+      </td>
+    </tr>
+  );
+});
+
+VacinaRow.displayName = 'VacinaRow';

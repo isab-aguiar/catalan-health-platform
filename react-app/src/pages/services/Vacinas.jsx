@@ -2,6 +2,7 @@ import { AlertCircle } from "lucide-react";
 import { Link } from 'react-router-dom';
 import BackButton from "../../components/common/BackButton";
 import CalendarioVacinal from "../../components/vacinas/CalendarioVacinal";
+import VacinasDisponiveis from "../../components/vacinas/VacinasDisponiveis";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 
@@ -85,6 +86,11 @@ export default function Vacinas() {
 
         {/* Avisos específicos da página de vacinas */}
         <AvisosPaginaWrapper pagina="vacinas" />
+
+        {/* Tabela de Vacinas Disponíveis */}
+        <div className="mb-6">
+          <VacinasDisponiveis />
+        </div>
 
         {/* Calendário de Vacinação */}
         <div className="mb-6">
