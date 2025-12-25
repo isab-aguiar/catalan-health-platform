@@ -590,47 +590,53 @@ export async function reformulateToFormal(userText, field = 'texto') {
     // Prompt especializado para reformulação formal (SEM embutir userText aqui)
     const FORMAL_SYSTEM_INSTRUCTIONS = `Você é um especialista em comunicação institucional na área da saúde pública.
 
-TAREFA: Reformular o texto do usuário de forma PROFISSIONAL e FORMAL, mantendo o sentido do que ele disse, mas podendo elaborar levemente para criar um texto institucional adequado.
+TAREFA: Reformular APENAS o texto do usuário de forma mais formal e profissional, SEM adicionar frases institucionais ou informações extras.
 
-REGRAS:
-1. ✅ BASEAR-SE no que o usuário disse - não inventar informações novas
-2. ✅ Tornar formal e profissional (remover gírias, usar vocabulário técnico quando apropriado)
-3. ✅ Pode elaborar LEVEMENTE para criar título/subtítulo/descrição profissional
-4. ✅ Usar termos técnicos da saúde quando fizer sentido ("gripe" → "Influenza", "vacina" → "imunização")
-5. ❌ NÃO adicionar informações que o usuário não mencionou
-6. ❌ NÃO criar frases muito longas ou elaboradas demais
-7. ✅ Manter o foco no que o usuário comunicou
-8. ✅ Para títulos: ser conciso e direto (máx 80 caracteres)
+REGRAS ABSOLUTAS:
+1. ✅ REFORMULAR APENAS o texto fornecido - nada mais
+2. ✅ Tornar formal: remover gírias, usar português correto, capitalizar quando apropriado
+3. ✅ Pode usar termos técnicos quando fizer sentido ("gripe" → "Influenza")
+4. ❌ NÃO adicionar "A ESF informa/anuncia/reforça/orienta sobre..."
+5. ❌ NÃO adicionar "A Estratégia de Saúde da Família..."
+6. ❌ NÃO criar frases longas com informações extras
+7. ❌ NÃO elaborar além do que o usuário disse
+8. ✅ Se o usuário escrever algo já formal, apenas ajustar capitalização/ortografia
 
 EXEMPLOS CORRETOS:
 Input: "vem tomar vacina da gripe"
-Output: "Vacinação contra Influenza" ou "Campanha de Vacinação contra Gripe"
+Output: "Vacinação contra Gripe" ou "Campanha de Vacinação contra Influenza"
 
 Input: "proteja você e sua família"
-Output: "Proteja você e sua família" ou "Proteja sua saúde e de seus familiares"
+Output: "Proteja você e sua família"
 
-Input: "vacina da gripe disponível pra todo mundo"
-Output: "Vacina contra Influenza Disponível para Todos" ou "Imunização contra Gripe - Disponível para Todos os Grupos"
+Input: "Imunização contra a bronquiolite"
+Output: "Imunização contra Bronquiolite" (apenas capitalizar)
 
-Input: "campanha de vacinação semana que vem"
-Output: "Campanha de Vacinação - Próxima Semana"
+Input: "vacina da gripe disponível"
+Output: "Vacina contra Gripe Disponível" ou "Vacina contra Influenza Disponível"
 
-Input: "bronquiolite"
-Output: "Prevenção da Bronquiolite" ou "Informações sobre Bronquiolite"
+Input: "campanha de vacinação"
+Output: "Campanha de Vacinação"
 
-EXEMPLOS INCORRETOS (NÃO FAZER):
-Input: "vem tomar vacina da gripe"
-❌ Output: "A Estratégia de Saúde da Família informa sobre a Campanha de Imunização contra Influenza que será realizada..." (MUITO elaborado, adicionou informações)
+EXEMPLOS INCORRETOS (NUNCA FAZER):
+Input: "Imunização contra a bronquiolite"
+❌ Output: "A Estratégia de Saúde da Família informa sobre a importância da imunização..." (ADICIONOU frase institucional)
+
+Input: "Campanha de vacinação contra Bronquiolite"
+❌ Output: "A ESF anuncia a implementação da campanha..." (ADICIONOU frase institucional)
 
 Input: "proteja você e sua família"
-❌ Output: "A Estratégia de Saúde da Família orienta sobre as medidas preventivas e de cuidado" (MUDOU completamente o sentido)
+❌ Output: "A ESF reforça a importância da proteção..." (ADICIONOU frase institucional)
+
+REGRA DE OURO:
+- Se o usuário escrever algo, reformule APENAS aquilo
+- NÃO adicione frases como "A ESF...", "A Estratégia...", "informa sobre...", "reforça a importância..."
+- Apenas torne o texto mais formal mantendo o sentido exato
 
 INSTRUÇÕES FINAIS:
-- Reformule baseado no que o usuário disse
-- Pode elaborar levemente para tornar profissional, mas SEMPRE mantendo o sentido original
-- Use termos técnicos quando apropriado
-- Seja conciso e direto
-- Responda APENAS com o texto reformulado, sem explicações ou aspas`;
+- Responda APENAS com o texto reformulado
+- Sem explicações, sem aspas, sem frases institucionais
+- Apenas o texto formalizado`;
 
     // Construir prompt completo DEPOIS (como sendMessageToGemini faz - evita erro 403)
     const fullPrompt = `${FORMAL_SYSTEM_INSTRUCTIONS}\n\nTEXTO DO USUÁRIO:\n"${userText.trim()}"`;
@@ -648,10 +654,10 @@ INSTRUÇÕES FINAIS:
         }
       ],
       generationConfig: {
-        temperature: 0.5, // Balanceado: permite elaboração leve mas mantém foco
-        topK: 30, // Permite alguma criatividade para elaboração profissional
-        topP: 0.85, // Mais flexível para elaboração
-        maxOutputTokens: 300, // Permite elaboração leve quando necessário
+        temperature: 0.2, // Muito determinístico - apenas reformular, não criar
+        topK: 15, // Menos criatividade - foco em reformulação
+        topP: 0.7, // Mais focado no texto original
+        maxOutputTokens: 150, // Limitar para evitar elaboração excessiva
       },
     };
 
