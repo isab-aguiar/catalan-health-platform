@@ -838,18 +838,18 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
 
         try {
           // Reformular usando Gemini
-          const reformulated = await reformulateToFormal(textToReformulate, nextStep.field);
+          const result = await reformulateToFormal(textToReformulate, nextStep.field);
 
-          if (reformulated) {
+          if (result.success && result.reformulated) {
             // Salvar reformulação pendente
-            campanhaFlow.saveReformulation(nextStep.field, reformulated);
+            campanhaFlow.saveReformulation(nextStep.field, result.reformulated);
 
             // Mostrar texto reformulado com botões de aprovação
             const approvalMsg = {
               id: Date.now() + 1,
               role: 'assistant',
               content: nextStep.message,
-              reformulatedText: reformulated,
+              reformulatedText: result.reformulated,
               buttons: nextStep.buttons,
               stepId: nextStep.id,
               stepType: nextStep.type,
@@ -857,6 +857,16 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
             };
 
             setMessages(prev => [...prev, approvalMsg]);
+          } else {
+            // Erro na reformulação
+            const errorMsg = {
+              id: Date.now() + 1,
+              role: 'assistant',
+              content: `Erro ao reformular: ${result.error || 'Erro desconhecido'}`,
+              isError: true,
+              timestamp: new Date()
+            };
+            setMessages(prev => [...prev, errorMsg]);
           }
         } catch (err) {
           console.error('❌ Erro ao reformular:', err);
@@ -1096,16 +1106,16 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
 
       try {
         const textToReformulate = value.trim();
-        const reformulated = await reformulateToFormal(textToReformulate, inputField.field);
+        const result = await reformulateToFormal(textToReformulate, inputField.field);
 
-        if (reformulated) {
-          campanhaFlow.saveReformulation(nextStep.field, reformulated);
+        if (result.success && result.reformulated) {
+          campanhaFlow.saveReformulation(nextStep.field, result.reformulated);
 
           const approvalMsg = {
             id: Date.now() + 1,
             role: 'assistant',
             content: nextStep.message,
-            reformulatedText: reformulated,
+            reformulatedText: result.reformulated,
             buttons: nextStep.buttons,
             stepId: nextStep.id,
             stepType: nextStep.type,
@@ -1113,6 +1123,16 @@ Retorne APENAS o JSON com TODOS os campos atualizados conforme solicitação.
           };
 
           setMessages(prev => [...prev, approvalMsg]);
+        } else {
+          // Erro na reformulação
+          const errorMsg = {
+            id: Date.now() + 1,
+            role: 'assistant',
+            content: `Erro ao reformular: ${result.error || 'Erro desconhecido'}`,
+            isError: true,
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, errorMsg]);
         }
       } catch (err) {
         console.error('❌ Erro ao reformular:', err);

@@ -563,8 +563,8 @@ export async function reformulateToFormal(userText, field = 'texto') {
       };
     }
 
-    // Prompt especializado para reformulação formal
-    const FORMAL_SYSTEM_PROMPT = `Você é um especialista em comunicação institucional governamental na área da saúde pública.
+    // Prompt especializado para reformulação formal (SEM embutir userText aqui)
+    const FORMAL_SYSTEM_INSTRUCTIONS = `Você é um especialista em comunicação institucional governamental na área da saúde pública.
 
 TAREFA: Reformular o texto fornecido pelo usuário em linguagem FORMAL, PROFISSIONAL e adequada para comunicação oficial de órgãos de saúde pública brasileiros.
 
@@ -592,43 +592,59 @@ Formal: "Proteja sua saúde e de seus familiares"
 Casual: "a vacina da gripe tá disponível pra todo mundo. é de graça e tem pra toda idade"
 Formal: "A Estratégia de Saúde da Família disponibiliza gratuitamente a vacina contra Influenza para todos os grupos etários. A imunização é fundamental para a prevenção de complicações decorrentes da gripe."
 
-TEXTO DO USUÁRIO:
-"${userText.trim()}"
-
 INSTRUÇÕES FINAIS:
 - Responda APENAS com o texto reformulado
 - NÃO adicione explicações, comentários ou aspas
 - NÃO adicione "Texto reformulado:" ou similar
 - Apenas o texto final reformulado`;
 
+    // Construir prompt completo DEPOIS (como sendMessageToGemini faz - evita erro 403)
+    const fullPrompt = `${FORMAL_SYSTEM_INSTRUCTIONS}\n\nTEXTO DO USUÁRIO:\n"${userText.trim()}"`;
+
     const url = `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`;
+
+    const requestBody = {
+      contents: [
+        {
+          parts: [
+            {
+              text: fullPrompt
+            }
+          ]
+        }
+      ],
+      generationConfig: {
+        temperature: 0.7,
+        topK: 40,
+        topP: 0.95,
+        maxOutputTokens: 500,
+      },
+    };
+
+    console.log('🔵 reformulateToFormal - Enviando requisição:', {
+      url: url.replace(GEMINI_API_KEY, '***'),
+      promptLength: fullPrompt.length,
+      userTextLength: userText.length
+    });
 
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              {
-                text: FORMAL_SYSTEM_PROMPT
-              }
-            ]
-          }
-        ],
-        generationConfig: {
-          temperature: 0.7,
-          topK: 40,
-          topP: 0.95,
-          maxOutputTokens: 500,
-        },
-      }),
+      body: JSON.stringify(requestBody),
+    });
+
+    console.log('📡 reformulateToFormal - Resposta recebida:', {
+      status: response.status,
+      ok: response.ok,
+      statusText: response.statusText
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const errorData = await response.json().catch(() => ({}));
+      console.error('❌ reformulateToFormal - Erro da API:', errorData);
+      throw new Error(`HTTP error! status: ${response.status} - ${JSON.stringify(errorData)}`);
     }
 
     const data = await response.json();
