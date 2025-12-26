@@ -98,7 +98,7 @@ export default function Header() {
       {!isMobileMenuOpen && (
         <Link
           to="/"
-          className="fixed top-0 left-0 z-50 h-[70px] flex items-center justify-center group"
+          className="fixed top-0 left-[15px] z-50 h-[70px] flex items-center justify-center group"
         >
           <img
             src="/favicon.png"
