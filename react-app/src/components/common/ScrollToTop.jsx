@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function ScrollToTop() {
-  const { pathname, hash } = useLocation();
+  const location = useLocation();
 
   useEffect(() => {
     // Preserva comportamento de anchor links (#contato)
-    if (hash) return;
+    if (location.hash) return;
 
     // Scroll suave para o topo
     window.scrollTo({
@@ -14,7 +14,7 @@ export default function ScrollToTop() {
       left: 0,
       behavior: 'smooth'
     });
-  }, [pathname, hash]);
+  }, [location.pathname, location.hash, location.key]);
 
   return null;
 }
