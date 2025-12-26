@@ -79,20 +79,20 @@ export default function AdminSidebar({
   });
   return (
     <div
-      className={`${isMobile ? "w-full h-full" : "w-full h-full border-r border-slate-300 shadow-sm"} bg-white overflow-hidden flex flex-col`}
+      className={`${isMobile ? "w-full h-full" : "w-full h-full border-r border-neutral-300 shadow-sm"} bg-white overflow-hidden flex flex-col`}
     >
       {}
       <div className="h-full overflow-y-auto flex flex-col">
         {}
-        <div className="p-6 border-b border-slate-300 bg-slate-50 flex-shrink-0">
+        <div className="p-6 border-b border-neutral-300 bg-neutral-50 flex-shrink-0">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 bg-slate-700 rounded-md flex items-center justify-center shadow-sm">
+              <div className="w-11 h-11 bg-neutral-700 rounded-md flex items-center justify-center shadow-sm">
                 <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1
-                  className="text-base font-bold text-slate-900 leading-tight"
+                  className="text-base font-bold text-neutral-900 leading-tight"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -101,7 +101,7 @@ export default function AdminSidebar({
                   Sistema Administrativo
                 </h1>
                 <p
-                  className="text-xs text-slate-600 leading-tight"
+                  className="text-xs text-neutral-600 leading-tight"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -115,7 +115,7 @@ export default function AdminSidebar({
             {isMobile && onNavigate && (
               <button
                 onClick={onNavigate}
-                className="p-2 text-slate-600 hover:text-slate-900 hover:bg-slate-200 rounded-lg transition-colors flex-shrink-0"
+                className="p-2 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200 rounded-lg transition-colors flex-shrink-0"
                 aria-label="Fechar menu"
               >
                 <X className="w-6 h-6" />
@@ -135,15 +135,15 @@ export default function AdminSidebar({
                 onClick={handleLinkClick}
                 className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors text-sm font-medium ${
                   isActive
-                    ? "bg-slate-700 text-white shadow-sm"
-                    : "text-slate-700 hover:bg-slate-100"
+                    ? "bg-neutral-700 text-white shadow-sm"
+                    : "text-neutral-700 hover:bg-neutral-100"
                 }`}
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
                 <Icon
-                  className={`w-5 h-5 ${isActive ? "text-white" : "text-slate-500"}`}
+                  className={`w-5 h-5 ${isActive ? "text-white" : "text-neutral-500"}`}
                 />
                 <span>{item.label}</span>
               </Link>
@@ -151,16 +151,16 @@ export default function AdminSidebar({
           })}
         </nav>
         {}
-        <div className="p-4 border-t border-slate-300 bg-slate-50 flex-shrink-0">
-          <div className="flex items-center gap-3 mb-3 p-3 bg-white rounded-md border border-slate-200 shadow-sm">
+        <div className="p-4 border-t border-neutral-300 bg-neutral-50 flex-shrink-0">
+          <div className="flex items-center gap-3 mb-3 p-3 bg-white rounded-md border border-neutral-200 shadow-sm">
             <div
-              className={`w-10 h-10 rounded-md flex items-center justify-center border border-slate-200 ${permissions.getRoleColor()}`}
+              className={`w-10 h-10 rounded-md flex items-center justify-center border border-neutral-200 ${permissions.getRoleColor()}`}
             >
               <User className="w-5 h-5" />
             </div>
             <div className="flex-1 min-w-0">
               <p
-                className="text-sm font-semibold text-slate-900 truncate"
+                className="text-sm font-semibold text-neutral-900 truncate"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -168,7 +168,7 @@ export default function AdminSidebar({
                 {userData?.displayName || "Administrador"}
               </p>
               <p
-                className="text-xs text-slate-600 truncate"
+                className="text-xs text-neutral-600 truncate"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -181,7 +181,7 @@ export default function AdminSidebar({
           <div className="space-y-2">
             <a
               href="/"
-              className="flex items-center gap-2 px-4 py-2 text-sm text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors w-full border border-slate-200"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-md transition-colors w-full border border-neutral-200"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -191,7 +191,7 @@ export default function AdminSidebar({
             </a>
             <button
               onClick={onLogout}
-              className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-slate-700 hover:bg-slate-800 rounded-md transition-colors w-full shadow-sm"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-neutral-700 hover:bg-neutral-800 rounded-md transition-colors w-full shadow-sm"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}

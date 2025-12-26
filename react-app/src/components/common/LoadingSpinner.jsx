@@ -3,8 +3,8 @@ import React from 'react';
 export default function LoadingSpinner() {
   return (
     <div className="flex items-center justify-center min-h-screen">
-      <div className="w-16 h-16 border-4 border-slate-300 border-t-slate-700 rounded-full animate-spin"></div>
-      <p className="ml-4 text-lg text-slate-700">Carregando...</p>
+      <div className="w-16 h-16 border-4 border-neutral-300 border-t-slate-700 rounded-full animate-spin"></div>
+      <p className="ml-4 text-lg text-neutral-700">Carregando...</p>
     </div>
   );
 }

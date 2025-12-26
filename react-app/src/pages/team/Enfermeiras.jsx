@@ -2,21 +2,21 @@ import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 function PageContainer({ children }) {
-  return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
+  return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
 function InfoBox({ title, icon, children, variant = "default", id }) {
   const variants = {
-    default: "bg-white border-slate-200",
-    highlight: "bg-blue-50 border-blue-300",
+    default: "bg-white border-neutral-200",
+    highlight: "bg-info/10 border-info",
   };
   return (
     <div
       id={id}
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
-        {icon && <div className="text-blue-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
+      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-neutral-200">
+        {icon && <div className="text-primary-700">{icon}</div>}
+        <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
       </div>
       {children}
     </div>
@@ -25,22 +25,22 @@ function InfoBox({ title, icon, children, variant = "default", id }) {
 function Alert({ type = "info", children }) {
   const types = {
     info: {
-      bg: "bg-blue-50",
-      border: "border-blue-300",
-      text: "text-blue-900",
-      icon: "text-blue-600",
+      bg: "bg-info/10",
+      border: "border-info",
+      text: "text-info",
+      icon: "text-info",
     },
     warning: {
-      bg: "bg-amber-50",
-      border: "border-amber-300",
-      text: "text-amber-900",
-      icon: "text-amber-600",
+      bg: "bg-warning/10",
+      border: "border-warning",
+      text: "text-warning-dark",
+      icon: "text-warning-dark",
     },
     success: {
-      bg: "bg-green-50",
-      border: "border-green-300",
-      text: "text-green-900",
-      icon: "text-green-600",
+      bg: "bg-success/10",
+      border: "border-success",
+      text: "text-success-dark",
+      icon: "text-success",
     },
   };
   const style = types[type];
@@ -64,11 +64,11 @@ export default function Enfermeiras() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
         {}
-        <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
+        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-slate-900"
+                className="text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -76,7 +76,7 @@ export default function Enfermeiras() {
                 Consulta de Enfermagem
               </h1>
               <p
-                className="text-slate-500 text-xs mt-1"
+                className="text-neutral-500 text-xs mt-1"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -88,7 +88,7 @@ export default function Enfermeiras() {
         </div>
         {}
         <InfoBox title="Sobre o Serviço">
-          <p className="text-slate-700 leading-relaxed mb-5">
+          <p className="text-neutral-700 leading-relaxed mb-5">
             A consulta de enfermagem é uma atividade privativa do enfermeiro,
             fundamentada na Sistematização da Assistência de Enfermagem (SAE).
             Na ESF Catalão, as enfermeiras realizam avaliação clínica,
@@ -96,17 +96,17 @@ export default function Enfermeiras() {
             de cuidados de enfermagem e medicamentos quando indicado, além de
             orientações para promoção da saúde e prevenção de agravos.
           </p>
-          <h3 className="font-semibold text-slate-800 mb-3 text-sm">
+          <h3 className="font-semibold text-neutral-800 mb-3 text-sm">
             Serviços Oferecidos:
           </h3>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Pré-natal de Enfermagem
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Consultas intercaladas com o médico, avaliação obstétrica,
                   solicitação de exames e orientações sobre gestação, parto e
                   puerpério
@@ -116,10 +116,10 @@ export default function Enfermeiras() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Consulta de Puericultura
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Avaliação do crescimento e desenvolvimento infantil,
                   orientações sobre alimentação, vacinação e cuidados com a
                   criança
@@ -129,10 +129,10 @@ export default function Enfermeiras() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Consulta para Hipertensos e Diabéticos
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Avaliação clínica, estratificação de risco cardiovascular,
                   ajustes terapêuticos e orientações sobre autocuidado
                 </p>
@@ -141,10 +141,10 @@ export default function Enfermeiras() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Coleta de Exame Citopatológico (Papanicolau)
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Rastreamento do câncer de colo uterino em mulheres de 25 a 64
                   anos
                 </p>
@@ -153,10 +153,10 @@ export default function Enfermeiras() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Avaliação e Prescrição de Cuidados com Feridas
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Avaliação de lesões, prescrição de coberturas e orientação à
                   equipe técnica de enfermagem para execução dos curativos
                 </p>
@@ -165,10 +165,10 @@ export default function Enfermeiras() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Consultas de Enfermagem Diversas
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Atendimento a condições agudas e crônicas, orientações em
                   saúde e prescrição de cuidados conforme necessidade individual
                 </p>
@@ -178,58 +178,58 @@ export default function Enfermeiras() {
         </InfoBox>
         {}
         <InfoBox title="Profissionais Responsáveis">
-          <p className="text-slate-700 mb-4 text-sm">
+          <p className="text-neutral-700 mb-4 text-sm">
             As enfermeiras atuam integradas às Equipes de Saúde da Família
             (ESF), sendo responsáveis pela assistência de enfermagem à população
             de suas respectivas áreas de abrangência. Conheça as profissionais
             da ESF Catalão:
           </p>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-slate-300">
+            <table className="w-full border-collapse border border-neutral-300">
               <thead>
-                <tr className="bg-slate-100">
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                <tr className="bg-neutral-100">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Enfermeira
                   </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Equipe (ESF)
                   </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
                 <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Fabíola</strong>
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Fabíola</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     ESF São José
                   </td>
                 </tr>
                 <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Aline Macedo</strong>
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Aline Macedo</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     ESF Catalão
                   </td>
                 </tr>
                 <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Naiara</strong>
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Naiara</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     ESF Bela Vista
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="mt-4 text-xs text-slate-500 italic">
+          <p className="mt-4 text-xs text-neutral-500 italic">
             * Cada enfermeira atende sua área de abrangência. Descubra qual é a
             sua equipe usando a{" "}
             <Link
               to="/"
-              className="text-blue-600 hover:text-blue-700 underline font-semibold"
+              className="text-info hover:text-primary-700 underline font-semibold"
             >
               busca territorial na página inicial
             </Link>
@@ -241,41 +241,41 @@ export default function Enfermeiras() {
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-slate-700 text-sm">
+              <div className="text-neutral-700 text-sm">
                 Gestantes em acompanhamento pré-natal de baixo risco
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-slate-700 text-sm">
+              <div className="text-neutral-700 text-sm">
                 Crianças para avaliação do crescimento e desenvolvimento
                 infantil
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-slate-700 text-sm">
+              <div className="text-neutral-700 text-sm">
                 Usuários com hipertensão arterial sistêmica e diabetes mellitus
                 em acompanhamento regular
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-slate-700 text-sm">
+              <div className="text-neutral-700 text-sm">
                 Mulheres de 25 a 64 anos para rastreamento do câncer de colo
                 uterino
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-slate-700 text-sm">
+              <div className="text-neutral-700 text-sm">
                 Usuários com feridas que necessitam de avaliação e prescrição de
                 plano terapêutico
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-slate-700 text-sm">
+              <div className="text-neutral-700 text-sm">
                 População adscrita que necessita de orientações em saúde e
                 avaliação clínica de enfermagem
               </div>
@@ -290,15 +290,15 @@ export default function Enfermeiras() {
                 1
               </div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Agendamento na Central de Marcação
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Dirija-se à Sala 4 para agendamento de consulta de enfermagem.
                   Não esqueça de consultar os{" "}
                   <Link
                     to="/servicos/sala-4#documentacao-necessaria"
-                    className="text-blue-600 hover:text-blue-700 underline font-semibold"
+                    className="text-info hover:text-primary-700 underline font-semibold"
                   >
                     documentos necessários
                   </Link>{" "}
@@ -311,10 +311,10 @@ export default function Enfermeiras() {
                 2
               </div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Identificação da Equipe de Referência
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   A consulta será agendada com o enfermeiro responsável pela sua
                   área de abrangência
                 </p>
@@ -325,10 +325,10 @@ export default function Enfermeiras() {
                 3
               </div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Comparecimento à Consulta
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Apresentar-se no horário agendado com documentação e exames
                   complementares, quando disponíveis
                 </p>
@@ -371,33 +371,33 @@ export default function Enfermeiras() {
           variant="highlight"
         >
           <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Documento de Identificação com Foto
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Carteira de Vacinação
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Para gestantes e crianças
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">Exames</strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <strong className="text-neutral-800 text-sm">Exames</strong>
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Se tiver exames recentes, leve-os
                 </p>
               </div>

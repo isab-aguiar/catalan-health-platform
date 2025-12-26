@@ -60,7 +60,7 @@ export default function AdminLayout({ children, currentPage = 'dashboard' }) {
       </div>
 
       <div className="flex flex-col flex-1 w-full">
-        <header className="fixed top-0 right-0 left-0 z-20 bg-white border-b border-slate-300 shadow-sm">
+        <header className="fixed top-0 right-0 left-0 z-20 bg-white border-b border-neutral-300 shadow-sm">
           <AdminHeader
             onMenuClick={() => setSidebarOpen(true)}
             onLogout={handleLogout}
@@ -71,7 +71,7 @@ export default function AdminLayout({ children, currentPage = 'dashboard' }) {
           <div className="px-4 pt-4 pb-2">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="bg-slate-700 text-white p-3 rounded-md shadow-sm hover:bg-slate-800 transition-colors flex items-center gap-2 px-4"
+              className="bg-neutral-700 text-white p-3 rounded-md shadow-sm hover:bg-neutral-800 transition-colors flex items-center gap-2 px-4"
               aria-label="Abrir menu"
             >
               <Menu className="w-5 h-5" />

@@ -67,15 +67,15 @@ export default function ChatMessage({
       {/* Avatar Compacto */}
       <div
         className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
-          isUser ? "bg-teal-100" : isError ? "bg-red-100" : "bg-blue-100"
+          isUser ? "bg-teal-100" : isError ? "bg-red-100" : "bg-info/10"
         }`}
       >
         {isUser ? (
           <User className="w-3 h-3 text-teal-600" />
         ) : isError ? (
-          <AlertCircle className="w-3 h-3 text-red-600" />
+          <AlertCircle className="w-3 h-3 text-error" />
         ) : (
-          <Bot className="w-3 h-3 text-blue-600" />
+          <Bot className="w-3 h-3 text-info" />
         )}
       </div>
       {/* Conteúdo */}
@@ -86,7 +86,7 @@ export default function ChatMessage({
             isUser
               ? "bg-teal-600 text-white"
               : isError
-                ? "bg-red-50 text-red-900 border border-red-200"
+                ? "bg-error/10 text-error border border-red-200"
                 : "bg-white border border-neutral-200 text-neutral-900"
           }`}
         >
@@ -109,7 +109,7 @@ export default function ChatMessage({
           <div className="mt-2 max-w-[85%]">
             <div
               className={`bg-white border-2 rounded-lg shadow-sm overflow-hidden ${
-                message.isDraft ? "border-yellow-300" : "border-green-300"
+                message.isDraft ? "border-yellow-300" : "border-success"
               }`}
             >
               {message.isDraft && (
@@ -125,7 +125,7 @@ export default function ChatMessage({
                   {/* Se for PDF, mostrar placeholder */}
                   {message.campanhaData.imagemURL.includes(".pdf") ? (
                     <div className="w-full h-32 bg-gradient-to-br from-red-50 to-red-100 flex flex-col items-center justify-center gap-2 border-b border-red-200">
-                      <FileText className="w-8 h-8 text-red-600" />
+                      <FileText className="w-8 h-8 text-error" />
                       <p className="text-xs font-semibold text-red-800">
                         Documento PDF
                       </p>
@@ -133,7 +133,7 @@ export default function ChatMessage({
                         href={message.campanhaData.imagemURL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-blue-600 hover:underline"
+                        className="text-xs text-info hover:underline"
                       >
                         📎 Ver documento original
                       </a>
@@ -151,8 +151,8 @@ export default function ChatMessage({
                         );
                         e.target.style.display = "none";
                         e.target.parentElement.innerHTML = `
-                          <div class="w-full h-32 bg-red-50 flex items-center justify-center">
-                            <p class="text-xs text-red-600">Erro ao carregar imagem</p>
+                          <div class="w-full h-32 bg-error/10 flex items-center justify-center">
+                            <p class="text-xs text-error">Erro ao carregar imagem</p>
                           </div>
                         `;
                       }}
@@ -165,14 +165,14 @@ export default function ChatMessage({
               )}
               {!message.campanhaData.imagemURL && (
                 <div className="w-full h-32 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
-                  <p className="text-xs text-blue-600">
+                  <p className="text-xs text-info">
                     📎 Imagem em processamento...
                   </p>
                 </div>
               )}
               <div className="p-3 space-y-1.5">
                 <div className="flex items-center justify-between flex-wrap gap-1">
-                  <span className="text-[10px] font-semibold px-2 py-0.5 bg-blue-100 text-blue-700 rounded">
+                  <span className="text-[10px] font-semibold px-2 py-0.5 bg-info/10 text-primary-700 rounded">
                     {message.campanhaData.categoria || "Campanha"}
                   </span>
                   {message.campanhaData.urgente && (
@@ -264,7 +264,7 @@ export default function ChatMessage({
                     )}
                   <div className="flex items-center gap-2 pt-1 flex-wrap">
                     {message.campanhaData.cta && (
-                      <span className="text-[9px] px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded border border-blue-200">
+                      <span className="text-[9px] px-1.5 py-0.5 bg-info/10 text-info rounded border border-blue-200">
                         Botão: {message.campanhaData.cta}
                       </span>
                     )}
@@ -305,7 +305,7 @@ export default function ChatMessage({
                       ? "bg-red-600 hover:bg-red-700 text-white"
                       : button.variant === "secondary"
                         ? "bg-gray-600 hover:bg-gray-700 text-white"
-                        : "bg-blue-600 hover:bg-blue-700 text-white"
+                        : "bg-blue-600 hover:bg-info-700 text-white"
                 }`}
               >
                 {button.label}
@@ -334,7 +334,7 @@ export default function ChatMessage({
                   <div className="flex gap-2">
                     <button
                       type="submit"
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                      className="bg-blue-600 hover:bg-info-700 text-white px-4 py-2 rounded-lg text-sm font-medium"
                     >
                       Confirmar
                     </button>
@@ -375,7 +375,7 @@ export default function ChatMessage({
                     <button
                       type="submit"
                       disabled={!inputValue.trim()}
-                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                      className="bg-blue-600 hover:bg-info-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium"
                     >
                       Enviar
                     </button>
@@ -416,7 +416,7 @@ export default function ChatMessage({
                     <button
                       type="submit"
                       disabled={!inputValue.trim()}
-                      className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium"
+                      className="bg-blue-600 hover:bg-info-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium"
                     >
                       Enviar
                     </button>
@@ -449,7 +449,7 @@ export default function ChatMessage({
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg text-sm font-medium flex items-center justify-center gap-2"
+                    className="w-full bg-blue-600 hover:bg-info-700 text-white px-4 py-3 rounded-lg text-sm font-medium flex items-center justify-center gap-2"
                   >
                     📷 {message.inputField.label || "Selecionar arquivos"}
                   </button>
@@ -472,8 +472,8 @@ export default function ChatMessage({
         )}
         {}
         {message.reformulatedText && (
-          <div className="mt-3 max-w-[85%] bg-green-50 border-2 border-green-300 rounded-lg p-4">
-            <p className="text-sm text-green-900 font-medium leading-relaxed">
+          <div className="mt-3 max-w-[85%] bg-success/10 border-2 border-success rounded-lg p-4">
+            <p className="text-sm text-success-dark font-medium leading-relaxed">
               {message.reformulatedText}
             </p>
           </div>

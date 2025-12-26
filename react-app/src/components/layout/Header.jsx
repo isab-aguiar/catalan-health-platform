@@ -99,7 +99,7 @@ export default function Header() {
           className="fixed -top-[3px] left-[20px] z-50 h-[70px] flex items-center justify-center group"
         >
           <img
-            src="/favicon.png"
+            src="/logo-favicon.png"
             alt="Logo"
             className="h-full max-h-10 w-auto object-contain"
           />

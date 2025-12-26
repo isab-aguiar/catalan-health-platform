@@ -33,7 +33,7 @@ export default function GroupsIndex() {
         </h1>
         <Alert type="info">
           <div className="flex items-start gap-3">
-            <Heart size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
+            <Heart size={20} className="text-info flex-shrink-0 mt-0.5" />
             <div>
               <strong>Bem-vindo aos nossos grupos!</strong>
               <br />
@@ -64,31 +64,31 @@ export default function GroupsIndex() {
             </p>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Verificação de pressão arterial e glicemia
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Orientações sobre alimentação saudável
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Prática de atividades físicas leves
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Educação em saúde sobre o manejo das doenças
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Troca de experiências entre os participantes
                 </div>
@@ -139,7 +139,7 @@ export default function GroupsIndex() {
             <div className="flex items-start gap-3">
               <Users
                 size={20}
-                className="text-green-600 flex-shrink-0 mt-0.5"
+                className="text-success flex-shrink-0 mt-0.5"
               />
               <div>
                 <strong>Como participar:</strong> Procure sua equipe de saúde ou
@@ -174,31 +174,31 @@ export default function GroupsIndex() {
             </p>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Técnicas de manejo da dor crônica
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Exercícios terapêuticos e alongamentos
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Relaxamento e mindfulness
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Orientações sobre qualidade de vida
                 </div>
               </li>
               <li className="flex items-start gap-3">
-                <span className="text-green-600 font-bold text-xl">✓</span>
+                <span className="text-success font-bold text-xl">✓</span>
                 <div className="text-neutral-700">
                   Apoio emocional e troca de experiências
                 </div>
@@ -249,7 +249,7 @@ export default function GroupsIndex() {
             <div className="flex items-start gap-3">
               <Users
                 size={20}
-                className="text-green-600 flex-shrink-0 mt-0.5"
+                className="text-success flex-shrink-0 mt-0.5"
               />
               <div>
                 <strong>Como participar:</strong> Procure sua equipe de saúde ou
@@ -343,7 +343,7 @@ export default function GroupsIndex() {
           <div className="flex items-start gap-3">
             <Lightbulb
               size={20}
-              className="text-blue-600 flex-shrink-0 mt-0.5"
+              className="text-info flex-shrink-0 mt-0.5"
             />
             <div>
               <strong>Tem interesse em algum grupo específico?</strong>

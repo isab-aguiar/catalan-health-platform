@@ -307,16 +307,16 @@ export default function Campanhas() {
             {}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h1 className="text-2xl font-bold text-slate-900">
+                <h1 className="text-2xl font-bold text-neutral-900">
                   Gerenciar Campanhas
                 </h1>
-                <p className="text-slate-600 text-sm">
+                <p className="text-neutral-600 text-sm">
                   Edite, ative/desative ou exclua campanhas
                 </p>
               </div>
               <Link
                 to="/admin/chat-ia"
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-info-700 transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 Nova Campanha (IA)
@@ -369,19 +369,19 @@ export default function Campanhas() {
                 <p className="text-sm text-neutral-600 mb-1">
                   Total de Campanhas
                 </p>
-                <p className="text-2xl font-bold text-slate-900">
+                <p className="text-2xl font-bold text-neutral-900">
                   {campanhas.length}
                 </p>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
                 <p className="text-sm text-neutral-600 mb-1">Ativas</p>
-                <p className="text-2xl font-bold text-green-600">
+                <p className="text-2xl font-bold text-success">
                   {campanhas.filter((c) => c.ativo).length}
                 </p>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
                 <p className="text-sm text-neutral-600 mb-1">Inativas</p>
-                <p className="text-2xl font-bold text-red-600">
+                <p className="text-2xl font-bold text-error">
                   {campanhas.filter((c) => !c.ativo).length}
                 </p>
               </div>
@@ -389,12 +389,12 @@ export default function Campanhas() {
             {}
             {loading && (
               <div className="text-center py-12">
-                <div className="inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                <div className="inline-block w-8 h-8 border-4 border-info border-t-transparent rounded-full animate-spin"></div>
                 <p className="mt-4 text-neutral-600">Carregando campanhas...</p>
               </div>
             )}
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
+              <div className="bg-error/10 border border-red-200 rounded-lg p-4 text-red-700">
                 <strong>Erro:</strong> {error}
               </div>
             )}
@@ -421,7 +421,7 @@ export default function Campanhas() {
                       {editingId === campanha.id ? (
                         <div className="p-6 space-y-4">
                           <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-lg font-bold text-slate-900">
+                            <h3 className="text-lg font-bold text-neutral-900">
                               Editando Campanha
                             </h3>
                             <div className="flex gap-2">
@@ -485,7 +485,7 @@ export default function Campanhas() {
                                       >
                                         <XIcon className="w-4 h-4" />
                                       </button>
-                                      <p className="text-xs text-blue-600 font-medium mt-1">
+                                      <p className="text-xs text-info font-medium mt-1">
                                         Nova imagem (será salva ao clicar em
                                         Salvar)
                                       </p>
@@ -493,14 +493,14 @@ export default function Campanhas() {
                                   )}
                                 {}
                                 {newImagePreview === "PDF" && (
-                                  <div className="relative p-4 border-2 border-blue-500 rounded-lg bg-blue-50">
+                                  <div className="relative p-4 border-2 border-blue-500 rounded-lg bg-info/10">
                                     <div className="flex items-center gap-3">
-                                      <FileText className="w-10 h-10 text-blue-600" />
+                                      <FileText className="w-10 h-10 text-info" />
                                       <div className="flex-1">
-                                        <p className="text-sm font-medium text-blue-900">
+                                        <p className="text-sm font-medium text-info">
                                           {newImageFile?.name}
                                         </p>
-                                        <p className="text-xs text-blue-600">
+                                        <p className="text-xs text-info">
                                           PDF selecionado (será salvo ao clicar
                                           em Salvar)
                                         </p>
@@ -526,7 +526,7 @@ export default function Campanhas() {
                                   />
                                   <label
                                     htmlFor="file-upload"
-                                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer text-sm"
+                                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-info-700 transition-colors cursor-pointer text-sm"
                                   >
                                     <Upload className="w-4 h-4" />
                                     {newImageFile
@@ -760,7 +760,7 @@ export default function Campanhas() {
                                       urgente: e.target.checked,
                                     })
                                   }
-                                  className="w-4 h-4 text-blue-600"
+                                  className="w-4 h-4 text-info"
                                 />
                                 <span className="text-sm font-medium text-neutral-700">
                                   Marcar como urgente
@@ -776,7 +776,7 @@ export default function Campanhas() {
                                       destaque: e.target.checked,
                                     })
                                   }
-                                  className="w-4 h-4 text-blue-600"
+                                  className="w-4 h-4 text-info"
                                 />
                                 <span className="text-sm font-medium text-neutral-700">
                                   Destacar campanha
@@ -792,7 +792,7 @@ export default function Campanhas() {
                                       exibirNaHomepage: e.target.checked,
                                     })
                                   }
-                                  className="w-4 h-4 text-blue-600"
+                                  className="w-4 h-4 text-info"
                                 />
                                 <span className="text-sm font-medium text-neutral-700">
                                   Exibir na homepage
@@ -830,10 +830,10 @@ export default function Campanhas() {
                                   <span
                                     className={`text-xs font-semibold px-2 py-1 rounded ${
                                       campanha.categoria === "vacina"
-                                        ? "bg-blue-100 text-blue-700"
+                                        ? "bg-info/10 text-primary-700"
                                         : campanha.categoria === "material"
                                           ? "bg-purple-100 text-purple-700"
-                                          : "bg-green-100 text-green-700"
+                                          : "bg-success/10 text-green-700"
                                     }`}
                                   >
                                     {campanha.categoria}
@@ -853,14 +853,14 @@ export default function Campanhas() {
                                   <span
                                     className={`text-xs font-semibold px-2 py-1 rounded ${
                                       campanha.ativo
-                                        ? "bg-green-100 text-green-700"
+                                        ? "bg-success/10 text-green-700"
                                         : "bg-red-100 text-red-700"
                                     }`}
                                   >
                                     {campanha.ativo ? "Ativa" : "Inativa"}
                                   </span>
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-1">
+                                <h3 className="text-xl font-bold text-neutral-900 mb-1">
                                   {campanha.titulo}
                                 </h3>
                                 {campanha.subtitulo && (
@@ -920,7 +920,7 @@ export default function Campanhas() {
                                   campanha.criadoPor === currentUser?.uid)) && (
                                 <button
                                   onClick={() => handleEdit(campanha)}
-                                  className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+                                  className="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-info-700 transition-colors text-sm"
                                 >
                                   <Edit className="w-4 h-4" />
                                   Editar

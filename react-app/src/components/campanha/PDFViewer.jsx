@@ -37,8 +37,8 @@ export default function PDFViewer({
     <div className={`relative ${className}`}>
       {}
       {showControls && (
-        <div className="flex items-center justify-between bg-slate-100 border border-slate-300 rounded-t-lg px-4 py-2">
-          <div className="flex items-center gap-2 text-slate-700">
+        <div className="flex items-center justify-between bg-neutral-100 border border-neutral-300 rounded-t-lg px-4 py-2">
+          <div className="flex items-center gap-2 text-neutral-700">
             <FileText className="w-4 h-4" />
             <span className="text-sm font-medium truncate max-w-xs">
               {pdfNome}
@@ -47,7 +47,7 @@ export default function PDFViewer({
           <div className="flex items-center gap-2">
             <button
               onClick={handleDownload}
-              className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
+              className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-info-700 transition-colors text-sm"
               title="Baixar PDF"
             >
               <Download className="w-4 h-4" />
@@ -55,7 +55,7 @@ export default function PDFViewer({
             </button>
             <button
               onClick={handleFullscreen}
-              className="flex items-center gap-1 px-3 py-1 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm"
+              className="flex items-center gap-1 px-3 py-1 bg-neutral-600 text-white rounded-lg hover:bg-neutral-700 transition-colors text-sm"
               title="Abrir em tela cheia"
             >
               <Maximize2 className="w-4 h-4" />
@@ -67,12 +67,12 @@ export default function PDFViewer({
       {}
       {isLoading && !loadError && (
         <div
-          className="flex items-center justify-center bg-slate-50 border border-slate-300"
+          className="flex items-center justify-center bg-neutral-50 border border-neutral-300"
           style={{ height: `${height}px` }}
         >
           <div className="text-center">
-            <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-            <p className="text-slate-600 text-sm">Carregando PDF...</p>
+            <div className="w-8 h-8 border-4 border-info border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+            <p className="text-neutral-600 text-sm">Carregando PDF...</p>
           </div>
         </div>
       )}
@@ -80,7 +80,7 @@ export default function PDFViewer({
       {!loadError && (
         <iframe
           src={`${pdfURL}#toolbar=1&navpanes=0&scrollbar=1`}
-          className={`w-full border border-slate-300 ${showControls ? "rounded-b-lg" : "rounded-lg"} ${isLoading ? "hidden" : "block"}`}
+          className={`w-full border border-neutral-300 ${showControls ? "rounded-b-lg" : "rounded-lg"} ${isLoading ? "hidden" : "block"}`}
           style={{ height: `${height}px` }}
           title={pdfNome}
           onLoad={handleLoad}
@@ -91,11 +91,11 @@ export default function PDFViewer({
       {}
       {loadError && (
         <div
-          className="flex flex-col items-center justify-center bg-red-50 border border-red-200 rounded-lg p-8"
+          className="flex flex-col items-center justify-center bg-error/10 border border-red-200 rounded-lg p-8"
           style={{ height: `${height}px` }}
         >
           <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
-          <h3 className="text-lg font-semibold text-red-900 mb-2">
+          <h3 className="text-lg font-semibold text-error mb-2">
             Não foi possível exibir o PDF
           </h3>
           <p className="text-sm text-red-700 text-center mb-4 max-w-md">

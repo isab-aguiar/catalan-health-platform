@@ -38,16 +38,16 @@ export default function Login() {
     <div className="min-h-screen bg-neutral-100 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         {}
-        <div className="bg-white rounded-md shadow-md border border-slate-200 p-8">
+        <div className="bg-white rounded-md shadow-md border border-neutral-200 p-8">
           {}
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-slate-700 rounded-md flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-neutral-700 rounded-md flex items-center justify-center flex-shrink-0">
                 <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1
-                  className="text-lg font-semibold text-slate-900"
+                  className="text-lg font-semibold text-neutral-900"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -56,7 +56,7 @@ export default function Login() {
                   ESF CATALÃO
                 </h1>
                 <p
-                  className="text-xs text-slate-500"
+                  className="text-xs text-neutral-500"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -66,9 +66,9 @@ export default function Login() {
                 </p>
               </div>
             </div>
-            <div className="h-px bg-slate-200 my-4"></div>
+            <div className="h-px bg-neutral-200 my-4"></div>
             <h2
-              className="text-sm font-semibold text-slate-700 uppercase tracking-wide"
+              className="text-sm font-semibold text-neutral-700 uppercase tracking-wide"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -78,8 +78,8 @@ export default function Login() {
           </div>
           {}
           {error && (
-            <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-md flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+            <div className="mb-6 p-3 bg-error/10 border border-red-200 rounded-md flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 text-error flex-shrink-0" />
               <p
                 className="text-sm text-red-700"
                 style={{
@@ -96,7 +96,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide"
+                className="block text-xs font-semibold text-neutral-700 mb-1.5 uppercase tracking-wide"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -105,14 +105,14 @@ export default function Login() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-4 w-4 text-slate-400" />
+                  <Mail className="h-4 w-4 text-neutral-400" />
                 </div>
                 <input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-9 pr-3 py-2.5 border border-slate-300 rounded-md focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors text-sm"
+                  className="block w-full pl-9 pr-3 py-2.5 border border-neutral-300 rounded-md focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 transition-colors text-sm"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -126,7 +126,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wide"
+                className="block text-xs font-semibold text-neutral-700 mb-1.5 uppercase tracking-wide"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -135,14 +135,14 @@ export default function Login() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-4 w-4 text-slate-400" />
+                  <Lock className="h-4 w-4 text-neutral-400" />
                 </div>
                 <input
                   id="password"
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-9 pr-10 py-2.5 border border-slate-300 rounded-md focus:ring-2 focus:ring-slate-500 focus:border-slate-500 transition-colors text-sm"
+                  className="block w-full pl-9 pr-10 py-2.5 border border-neutral-300 rounded-md focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 transition-colors text-sm"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -153,7 +153,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-neutral-400 hover:text-neutral-600 transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? (
@@ -168,7 +168,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-slate-700 hover:bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
+              className="w-full bg-neutral-700 hover:bg-neutral-800 text-white font-semibold py-2.5 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -187,7 +187,7 @@ export default function Login() {
           <div className="mt-6 text-center">
             <a
               href="/"
-              className="text-xs text-slate-600 hover:text-slate-800 transition-colors"
+              className="text-xs text-neutral-600 hover:text-neutral-800 transition-colors"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -198,7 +198,7 @@ export default function Login() {
         </div>
         {}
         <div
-          className="mt-4 text-center text-xs text-slate-600"
+          className="mt-4 text-center text-xs text-neutral-600"
           style={{
             fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
           }}

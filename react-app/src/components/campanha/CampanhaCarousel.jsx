@@ -91,15 +91,15 @@ export default function CampanhaCarousel({ campanhas = [], onCampanhaClick }) {
       </div>
       {}
       <div className="mt-4 space-y-2">
-        <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">
+        <h3 className="text-lg sm:text-xl font-bold text-neutral-900 leading-tight">
           {currentCampanha.titulo}
         </h3>
         {currentCampanha.subtitulo && (
-          <p className="text-sm text-slate-600 italic">
+          <p className="text-sm text-neutral-600 italic">
             {currentCampanha.subtitulo}
           </p>
         )}
-        <p className="text-sm text-slate-700 leading-relaxed line-clamp-2">
+        <p className="text-sm text-neutral-700 leading-relaxed line-clamp-2">
           {currentCampanha.descricao}
         </p>
       </div>
@@ -113,7 +113,7 @@ export default function CampanhaCarousel({ campanhas = [], onCampanhaClick }) {
               disabled={isAnimating}
               className={`relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-lg overflow-hidden border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
                 index === currentIndex
-                  ? "border-blue-600 shadow-lg ring-2 ring-blue-200"
+                  ? "border-info shadow-lg ring-2 ring-blue-200"
                   : "border-white/30 hover:border-white/60 shadow-md"
               }`}
               aria-label={`Ir para ${campanha.titulo}`}

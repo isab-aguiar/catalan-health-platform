@@ -3,20 +3,20 @@ import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 function PageContainer({ children }) {
-  return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
+  return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
-    default: "bg-white border-slate-200",
-    highlight: "bg-blue-50 border-blue-300",
+    default: "bg-white border-neutral-200",
+    highlight: "bg-info/10 border-info",
   };
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
-        {icon && <div className="text-blue-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
+      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-neutral-200">
+        {icon && <div className="text-primary-700">{icon}</div>}
+        <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
       </div>
       {children}
     </div>
@@ -25,16 +25,16 @@ function InfoBox({ title, icon, children, variant = "default" }) {
 function Alert({ type = "info", children }) {
   const types = {
     info: {
-      bg: "bg-blue-50",
-      border: "border-blue-300",
-      text: "text-blue-900",
-      icon: "text-blue-600",
+      bg: "bg-info/10",
+      border: "border-info",
+      text: "text-info",
+      icon: "text-info",
     },
     warning: {
-      bg: "bg-amber-50",
-      border: "border-amber-300",
-      text: "text-amber-900",
-      icon: "text-amber-600",
+      bg: "bg-warning/10",
+      border: "border-warning",
+      text: "text-warning-dark",
+      icon: "text-warning-dark",
     },
   };
   const style = types[type];
@@ -58,11 +58,11 @@ export default function ECG() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
         {}
-        <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
+        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-slate-900"
+                className="text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -70,7 +70,7 @@ export default function ECG() {
                 Eletrocardiograma{" "}
               </h1>
               <p
-                className="text-slate-500 text-xs mt-1"
+                className="text-neutral-500 text-xs mt-1"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -86,7 +86,7 @@ export default function ECG() {
         <AvisosPaginaWrapper pagina="ecg" />
         {}
         <InfoBox title="Sobre o Serviço">
-          <p className="text-slate-700 leading-relaxed mb-5">
+          <p className="text-neutral-700 leading-relaxed mb-5">
             O Eletrocardiograma é um exame que registra a atividade elétrica do
             coração. É um procedimento simples, rápido e indolor que auxilia na
             identificação de problemas cardíacos como arritmias, infarto,
@@ -94,37 +94,37 @@ export default function ECG() {
             cardiovascular.
           </p>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-slate-50 border border-slate-200 rounded p-4">
-              <h3 className="font-semibold text-slate-800 mb-2 text-sm">
+            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Avaliação Cardíaca
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-neutral-600">
                 Identifica alterações no ritmo e função do coração, auxiliando
                 no diagnóstico e acompanhamento de condições cardíacas.
               </p>
             </div>
-            <div className="bg-slate-50 border border-slate-200 rounded p-4">
-              <h3 className="font-semibold text-slate-800 mb-2 text-sm">
+            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Exame Rápido e Indolor
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-neutral-600">
                 Procedimento não invasivo com duração aproximada de 10 a 15
                 minutos.
               </p>
             </div>
           </div>
-          <div className="bg-blue-50 border border-blue-200 rounded p-4">
-            <h3 className="font-semibold text-slate-800 mb-3 text-sm">
+          <div className="bg-info/10 border border-blue-200 rounded p-4">
+            <h3 className="font-semibold text-neutral-800 mb-3 text-sm">
               Preparo para o Exame
             </h3>
-            <div className="space-y-3 text-sm text-slate-700">
+            <div className="space-y-3 text-sm text-neutral-700">
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong className="text-slate-800">
+                  <strong className="text-neutral-800">
                     Não utilizar creme ou óleo corporal no dia do exame
                   </strong>
-                  <p className="text-slate-600 mt-1 text-xs">
+                  <p className="text-neutral-600 mt-1 text-xs">
                     Cremes e óleos corporais interferem na aderência adequada
                     dos eletrodos à pele, podendo comprometer a qualidade do
                     registro e a precisão dos resultados.
@@ -134,10 +134,10 @@ export default function ECG() {
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong className="text-slate-800">
+                  <strong className="text-neutral-800">
                     Evitar o uso excessivo de bijuterias e acessórios de metal
                   </strong>
-                  <p className="text-slate-600 mt-1 text-xs">
+                  <p className="text-neutral-600 mt-1 text-xs">
                     Objetos metálicos (pulseiras, colares, relógios, anéis,
                     entre outros) podem interferir na captação do sinal elétrico
                     do coração, provocando distorções no traçado
@@ -149,10 +149,10 @@ export default function ECG() {
               <div className="flex items-start gap-2">
                 <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong className="text-slate-800">
+                  <strong className="text-neutral-800">
                     Mulheres: Se possível, evitar sutiã com aro metálico
                   </strong>
-                  <p className="text-slate-600 mt-1 text-xs">
+                  <p className="text-neutral-600 mt-1 text-xs">
                     O aro metálico do sutiã pode interferir na captação do sinal
                     elétrico na região torácica, onde são posicionados os
                     eletrodos do exame. Essa interferência pode gerar distorções
@@ -167,36 +167,36 @@ export default function ECG() {
         {}
         <InfoBox title="Horários de Atendimento">
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-slate-300">
+            <table className="w-full border-collapse border border-neutral-300">
               <thead>
-                <tr className="bg-slate-100">
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                <tr className="bg-neutral-100">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Período
                   </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Horário
                   </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Observações
                   </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
                 <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Tarde</strong>
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Tarde</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     12h00 às 16h00
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-600">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
                     Com agendamento prévio
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-500 mt-3">
+          <p className="text-xs text-neutral-500 mt-3">
             * O exame requer agendamento prévio. Dirija-se à Sala 4 -
             Agendamentos em posse do pedido médico original e documentos do
             titular.
@@ -204,41 +204,41 @@ export default function ECG() {
         </InfoBox>
         {}
         <InfoBox title="Documentação Necessária" variant="highlight">
-          <p className="text-slate-700 mb-4 text-sm">
+          <p className="text-neutral-700 mb-4 text-sm">
             Para realização do exame, é obrigatória a apresentação da seguinte
             documentação:
           </p>
           <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Documento de Identificação com Foto
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
                   do titular
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   CPF - Cadastro de Pessoa Física
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Documento físico original ou número do CPF do titular
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Protocolo de Agendamento
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Obrigatória para realização do exame
                 </p>
               </div>

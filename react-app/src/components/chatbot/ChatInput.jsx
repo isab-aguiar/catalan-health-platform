@@ -90,7 +90,7 @@ export default function ChatInput({ onSend, loading, disabled, onCancel }) {
     <div className="bg-white p-4 border-t border-gov-border">
       <div className="max-w-3xl mx-auto space-y-3">
         {erro && (
-          <div className="bg-red-50 border border-red-200 text-red-800 px-3 py-2 rounded-md text-sm flex items-center gap-2 shadow-sm">
+          <div className="bg-error/10 border border-red-200 text-red-800 px-3 py-2 rounded-md text-sm flex items-center gap-2 shadow-sm">
             <XCircle className="w-4 h-4 flex-shrink-0" />
             <span className="flex-1 font-medium">{erro}</span>
           </div>
@@ -121,7 +121,7 @@ export default function ChatInput({ onSend, loading, disabled, onCancel }) {
             
             <button
               onClick={handleRemoverArquivo}
-              className="p-1.5 hover:bg-white rounded-full transition-colors text-gov-muted hover:text-red-600"
+              className="p-1.5 hover:bg-white rounded-full transition-colors text-gov-muted hover:text-error"
               title="Remover arquivo"
             >
               <X className="w-5 h-5" />
@@ -175,7 +175,7 @@ export default function ChatInput({ onSend, loading, disabled, onCancel }) {
             className={`
               p-3 rounded-lg transition-all shadow-sm flex items-center justify-center min-w-[44px]
               ${loading
-                ? "bg-red-50 text-red-600 hover:bg-red-100 border border-red-200"
+                ? "bg-error/10 text-error hover:bg-red-100 border border-red-200"
                 : "bg-gov-blue hover:bg-gov-secondary text-white disabled:opacity-50 disabled:cursor-not-allowed"
               }
             `}

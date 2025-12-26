@@ -51,9 +51,9 @@ export function CampanhaGallery({
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <div className="bg-white rounded-md shadow-sm overflow-hidden border border-slate-200">
+      <div className="bg-white rounded-md shadow-sm overflow-hidden border border-neutral-200">
         {imagens.length > 0 && (
-          <div className="relative h-96 bg-slate-100">
+          <div className="relative h-96 bg-neutral-100">
             <img
               src={imagens[currentImageIndex]?.url}
               alt={campanha.titulo}
@@ -68,7 +68,7 @@ export function CampanhaGallery({
                   aria-label="Imagem anterior"
                 >
                   <ChevronLeft
-                    className="w-6 h-6 text-slate-800"
+                    className="w-6 h-6 text-neutral-800"
                     strokeWidth={2.5}
                   />
                 </button>
@@ -78,7 +78,7 @@ export function CampanhaGallery({
                   aria-label="Próxima imagem"
                 >
                   <ChevronRight
-                    className="w-6 h-6 text-slate-800"
+                    className="w-6 h-6 text-neutral-800"
                     strokeWidth={2.5}
                   />
                 </button>
@@ -110,7 +110,7 @@ export function CampanhaGallery({
             )}
 
             {campanha.paginaDestino && (
-              <div className="absolute top-4 left-4 bg-slate-700 text-white px-3 py-1.5 rounded-md font-medium shadow-md text-sm">
+              <div className="absolute top-4 left-4 bg-neutral-700 text-white px-3 py-1.5 rounded-md font-medium shadow-md text-sm">
                 {campanha.paginaDestino === 'home'
                   ? 'Homepage'
                   : campanha.paginaDestino}
@@ -120,12 +120,12 @@ export function CampanhaGallery({
         )}
 
         <div className="p-6 space-y-4">
-          <h2 className="text-3xl font-bold text-slate-900 leading-tight">
+          <h2 className="text-3xl font-bold text-neutral-900 leading-tight">
             {campanha.titulo}
           </h2>
 
           {campanha.subtitulo && (
-            <p className="text-xl text-slate-700 font-medium">
+            <p className="text-xl text-neutral-700 font-medium">
               {campanha.subtitulo}
             </p>
           )}
@@ -134,7 +134,7 @@ export function CampanhaGallery({
             campanha.dataFim ||
             campanha.horario ||
             campanha.publicoAlvo) && (
-            <div className="flex flex-wrap gap-4 text-sm text-slate-600 py-3 border-t border-b border-slate-200">
+            <div className="flex flex-wrap gap-4 text-sm text-neutral-600 py-3 border-t border-b border-neutral-200">
               {campanha.dataInicio && (
                 <div className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4" />
@@ -165,13 +165,13 @@ export function CampanhaGallery({
             </div>
           )}
 
-          <div className="text-slate-700 leading-relaxed text-base">
+          <div className="text-neutral-700 leading-relaxed text-base">
             {campanha.descricao}
           </div>
 
           {campanha.informacoesExtras && (
-            <div className="mt-4 p-4 bg-slate-50 rounded-md border-l-4 border-slate-500">
-              <p className="text-slate-900 leading-relaxed">
+            <div className="mt-4 p-4 bg-neutral-50 rounded-md border-l-4 border-neutral-500">
+              <p className="text-neutral-900 leading-relaxed">
                 {campanha.informacoesExtras}
               </p>
             </div>
@@ -182,7 +182,7 @@ export function CampanhaGallery({
               {campanha.topicos.map((topico, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium"
+                  className="px-3 py-1 bg-neutral-100 text-neutral-700 rounded-full text-sm font-medium"
                 >
                   {topico}
                 </span>
@@ -191,14 +191,14 @@ export function CampanhaGallery({
           )}
 
           {campanha.contato && (
-            <div className="pt-3 text-sm text-slate-600 flex items-center gap-2">
+            <div className="pt-3 text-sm text-neutral-600 flex items-center gap-2">
               <Phone className="w-4 h-4" />
               <span>{campanha.contato}</span>
             </div>
           )}
 
           {isPreview && (onPublish || onRefine || onCancel) && (
-            <div className="flex gap-3 pt-6 border-t border-slate-200">
+            <div className="flex gap-3 pt-6 border-t border-neutral-200">
               {onPublish && (
                 <button
                   onClick={onPublish}
@@ -211,7 +211,7 @@ export function CampanhaGallery({
               {onRefine && (
                 <button
                   onClick={onRefine}
-                  className="flex-1 bg-slate-700 hover:bg-slate-800 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200 shadow-sm hover:shadow-md"
+                  className="flex-1 bg-neutral-700 hover:bg-neutral-800 text-white font-bold py-3 px-6 rounded-md transition-colors duration-200 shadow-sm hover:shadow-md"
                 >
                   Refinar
                 </button>

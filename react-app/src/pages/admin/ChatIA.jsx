@@ -122,10 +122,10 @@ export default function ChatIA() {
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-slate-900">
+              <h1 className="text-xl font-bold text-neutral-900">
                 Assistente Inteligente
               </h1>
-              <p className="text-xs text-slate-600">
+              <p className="text-xs text-neutral-600">
                 Geração automatizada de avisos e campanhas
               </p>
             </div>
@@ -134,7 +134,7 @@ export default function ChatIA() {
           <div className="relative">
             <button
               onClick={() => setShowHelp(!showHelp)}
-              className="p-2 text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              className="p-2 text-neutral-600 hover:text-info hover:bg-info/10 rounded-lg transition-colors"
               title="Orientações de uso"
             >
               <HelpCircle className="w-5 h-5" />
@@ -148,14 +148,14 @@ export default function ChatIA() {
                   onClick={() => setShowHelp(false)}
                 />
                 {}
-                <div className="absolute right-0 top-full mt-2 w-80 bg-white border border-slate-200 rounded-lg shadow-xl z-20 p-4">
+                <div className="absolute right-0 top-full mt-2 w-80 bg-white border border-neutral-200 rounded-lg shadow-xl z-20 p-4">
                   <div className="flex items-start gap-2 mb-3">
-                    <MessageSquare className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />
-                    <h3 className="font-semibold text-slate-900 text-sm">
+                    <MessageSquare className="w-4 h-4 text-info flex-shrink-0 mt-0.5" />
+                    <h3 className="font-semibold text-neutral-900 text-sm">
                       Orientações de Uso
                     </h3>
                   </div>
-                  <ul className="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                  <ul className="text-xs text-neutral-700 space-y-1.5 list-disc list-inside">
                     <li>Descreva de forma clara o aviso ou anexe uma imagem</li>
                     <li>Especifique material, vacina ou campanha</li>
                     <li>

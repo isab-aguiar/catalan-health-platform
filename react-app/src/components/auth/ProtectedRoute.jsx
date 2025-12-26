@@ -63,7 +63,7 @@ function AccessDenied({ currentRole, requiredRole, requiredPermission }) {
     <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg border border-neutral-200 p-8 text-center">
         <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Shield className="w-8 h-8 text-red-600" />
+          <Shield className="w-8 h-8 text-error" />
         </div>
         <h1 className="text-2xl font-bold text-neutral-900 mb-2">
           Acesso Negado

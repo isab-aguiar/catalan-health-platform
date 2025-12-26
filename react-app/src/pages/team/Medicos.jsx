@@ -2,20 +2,20 @@ import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 function PageContainer({ children }) {
-  return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
+  return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
-    default: "bg-white border-slate-200",
-    highlight: "bg-blue-50 border-blue-300",
+    default: "bg-white border-neutral-200",
+    highlight: "bg-info/10 border-info",
   };
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
-        {icon && <div className="text-blue-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
+      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-neutral-200">
+        {icon && <div className="text-primary-700">{icon}</div>}
+        <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
       </div>
       {children}
     </div>
@@ -24,22 +24,22 @@ function InfoBox({ title, icon, children, variant = "default" }) {
 function Alert({ type = "info", children }) {
   const types = {
     info: {
-      bg: "bg-blue-50",
-      border: "border-blue-300",
-      text: "text-blue-900",
-      icon: "text-blue-600",
+      bg: "bg-info/10",
+      border: "border-info",
+      text: "text-info",
+      icon: "text-info",
     },
     warning: {
-      bg: "bg-amber-50",
-      border: "border-amber-300",
-      text: "text-amber-900",
-      icon: "text-amber-600",
+      bg: "bg-warning/10",
+      border: "border-warning",
+      text: "text-warning-dark",
+      icon: "text-warning-dark",
     },
     success: {
-      bg: "bg-green-50",
-      border: "border-green-300",
-      text: "text-green-900",
-      icon: "text-green-600",
+      bg: "bg-success/10",
+      border: "border-success",
+      text: "text-success-dark",
+      icon: "text-success",
     },
   };
   const style = types[type];
@@ -63,11 +63,11 @@ export default function Medicos() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
         {}
-        <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
+        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-slate-900"
+                className="text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -75,7 +75,7 @@ export default function Medicos() {
                 Atendimento Médico
               </h1>
               <p
-                className="text-slate-500 text-xs mt-1"
+                className="text-neutral-500 text-xs mt-1"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -87,7 +87,7 @@ export default function Medicos() {
         </div>
         {}
         <InfoBox title="Sobre o Serviço">
-          <p className="text-slate-700 leading-relaxed mb-5">
+          <p className="text-neutral-700 leading-relaxed mb-5">
             O atendimento médico na ESF Catalão é realizado pelos médicos de
             família e comunidade, profissionais capacitados para cuidar de toda
             a família, em todas as fases da vida. Eles realizam consultas de
@@ -99,10 +99,10 @@ export default function Medicos() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Consultas de rotina
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Acompanhamento de saúde geral
                 </p>
               </div>
@@ -110,10 +110,10 @@ export default function Medicos() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Atendimentos de urgência
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Para casos agudos (ver semáforo da saúde)
                 </p>
               </div>
@@ -121,10 +121,10 @@ export default function Medicos() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Tratamento de doenças
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Diagnóstico e prescrição de medicamentos
                 </p>
               </div>
@@ -132,10 +132,10 @@ export default function Medicos() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Acompanhamento de crônicos
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Hipertensão, diabetes, entre outras condições
                 </p>
               </div>
@@ -143,10 +143,10 @@ export default function Medicos() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Solicitação de exames
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Quando necessário para diagnóstico
                 </p>
               </div>
@@ -154,10 +154,10 @@ export default function Medicos() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Encaminhamentos para especialistas
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Quando o caso exige atendimento especializado
                 </p>
               </div>
@@ -166,56 +166,56 @@ export default function Medicos() {
         </InfoBox>
         {}
         <InfoBox title="Quem são os médicos?">
-          <p className="text-slate-700 mb-4 text-sm">
+          <p className="text-neutral-700 mb-4 text-sm">
             A ESF Catalão conta com médicos de família em cada equipe. Cada
             médico é responsável por uma área específica (ESF - Estratégia Saúde
             da Família):
           </p>
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-slate-300">
+            <table className="w-full border-collapse border border-neutral-300">
               <thead>
-                <tr className="bg-slate-100">
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                <tr className="bg-neutral-100">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Médico
                   </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Equipe (ESF)
                   </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
                 <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Dr. João</strong>
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Dr. João</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     ESF São José
                   </td>
                 </tr>
                 <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Dr. Frederico</strong>
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Dr. Frederico</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     ESF Catalão
                   </td>
                 </tr>
                 <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Dr. Gustavo</strong>
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Dr. Gustavo</strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     ESF Bela Vista
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="mt-4 text-xs text-slate-500 italic">
+          <p className="mt-4 text-xs text-neutral-500 italic">
             * Cada médico atende sua área de abrangência. Use a{" "}
             <Link
               to="/"
-              className="text-blue-600 hover:text-blue-700 underline font-semibold"
+              className="text-info hover:text-primary-700 underline font-semibold"
             >
               busca territorial na página inicial
             </Link>{" "}
@@ -225,59 +225,59 @@ export default function Medicos() {
         {}
         <InfoBox title="Modalidades de Atendimento">
           <div className="space-y-4">
-            <div className="bg-slate-50 border-l-4 border-blue-600 p-4 rounded">
-              <h4 className="text-blue-700 font-bold mb-2 text-sm">
+            <div className="bg-neutral-50 border-l-4 border-info p-4 rounded">
+              <h4 className="text-primary-700 font-bold mb-2 text-sm">
                 Atendimento Agendado
               </h4>
-              <p className="text-slate-700 leading-relaxed mb-2 text-sm">
+              <p className="text-neutral-700 leading-relaxed mb-2 text-sm">
                 Consultas marcadas com antecedência para acompanhamento de
                 rotina, renovação de receitas, solicitação de exames, entre
                 outros.
               </p>
-              <p className="text-slate-900 text-sm">
+              <p className="text-neutral-900 text-sm">
                 <strong>Como acessar:</strong> Dirija-se à{" "}
                 <Link
                   to="/servicos/sala-4"
-                  className="text-blue-600 hover:text-blue-700 underline font-semibold"
+                  className="text-info hover:text-primary-700 underline font-semibold"
                 >
                   Sala de Agendamentos
                 </Link>
                 . Veja a{" "}
                 <Link
                   to="/servicos/sala-4#documentacao-necessaria"
-                  className="text-blue-600 hover:text-blue-700 underline font-semibold"
+                  className="text-info hover:text-primary-700 underline font-semibold"
                 >
                   documentação necessária para agendar
                 </Link>
                 .
               </p>
             </div>
-            <div className="bg-slate-50 border-l-4 border-amber-600 p-4 rounded">
+            <div className="bg-neutral-50 border-l-4 border-amber-600 p-4 rounded">
               <h4 className="text-amber-700 font-bold mb-2 text-sm">
                 Atendimento Espontâneo (Triagem)
               </h4>
-              <p className="text-slate-700 leading-relaxed mb-2 text-sm">
+              <p className="text-neutral-700 leading-relaxed mb-2 text-sm">
                 Para casos agudos que necessitam de atendimento no dia (febre,
                 dor, mal-estar). Atendimento por ordem de chegada com prioridade
                 para casos mais graves.
               </p>
-              <p className="text-slate-900 text-sm">
+              <p className="text-neutral-900 text-sm">
                 <strong>Horário:</strong> 07h00 às 08h00 (Triagem)
               </p>
             </div>
-            <div className="bg-slate-50 border-l-4 border-slate-600 p-4 rounded">
-              <h4 className="text-slate-700 font-bold mb-2 text-sm">
+            <div className="bg-neutral-50 border-l-4 border-neutral-600 p-4 rounded">
+              <h4 className="text-neutral-700 font-bold mb-2 text-sm">
                 Saúde na Hora (Plantão Noturno)
               </h4>
-              <p className="text-slate-700 leading-relaxed mb-2 text-sm">
+              <p className="text-neutral-700 leading-relaxed mb-2 text-sm">
                 Atendimento médico estendido no período noturno para casos que
                 não podem esperar até o dia seguinte, mas não são emergências
                 que exigem SAMU/hospital.
               </p>
-              <p className="text-slate-900 text-sm">
+              <p className="text-neutral-900 text-sm">
                 <strong>Horário:</strong> 17h00 às 22h00 (Segunda a Sexta)
               </p>
-              <p className="text-slate-600 text-xs mt-2 italic">
+              <p className="text-neutral-600 text-xs mt-2 italic">
                 Ideal para quem trabalha durante o dia e não consegue vir no
                 horário normal
               </p>
@@ -292,21 +292,21 @@ export default function Medicos() {
                 1
               </div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Agendamento na Central de Marcação
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Dirija-se à{" "}
                   <Link
                     to="/servicos/sala-4"
-                    className="text-blue-600 hover:text-blue-700 underline font-semibold"
+                    className="text-info hover:text-primary-700 underline font-semibold"
                   >
                     Sala de Agendamentos
                   </Link>
                   . Veja a{" "}
                   <Link
                     to="/servicos/sala-4#documentacao-necessaria"
-                    className="text-blue-600 hover:text-blue-700 underline font-semibold"
+                    className="text-info hover:text-primary-700 underline font-semibold"
                   >
                     documentação necessária para agendar
                   </Link>
@@ -319,10 +319,10 @@ export default function Medicos() {
                 2
               </div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Identificação da Equipe de Referência
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   A consulta será agendada com o médico responsável pela sua
                   área de abrangência (ESF - Estratégia Saúde da Família)
                 </p>
@@ -333,10 +333,10 @@ export default function Medicos() {
                 3
               </div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Atendimento mediante Triagem
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Disponível mediante triagem clínica inicial em dois períodos:
                   manhã (07h00 às 08h00) e noite - Saúde na Hora (17h30 às
                   18h30). O atendimento será realizado conforme disponibilidade
@@ -349,10 +349,10 @@ export default function Medicos() {
                 4
               </div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Comparecimento à Consulta
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Apresentar-se no horário agendado com documentação completa e
                   exames complementares, quando disponíveis
                 </p>
@@ -388,36 +388,36 @@ export default function Medicos() {
         {}
         <InfoBox title="Documentação Necessária" variant="highlight">
           <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Documento de Identificação com Foto
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
                   do titular
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Comprovante de Residência
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Atualizado (máximo 3 meses)
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Exames e receitas anteriores
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">Se houver</p>
+                <p className="text-xs text-neutral-600 mt-0.5">Se houver</p>
               </div>
             </div>
           </div>

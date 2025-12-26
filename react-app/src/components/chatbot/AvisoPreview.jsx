@@ -4,7 +4,7 @@ export default function AvisoPreview({ aviso, onCreateAviso, onEditAviso }) {
   const getCategoriaColor = (categoria) => {
     const colors = {
       vacina: "bg-primary-100 text-primary-700 border-primary-200",
-      material: "bg-green-100 text-green-700 border-green-200",
+      material: "bg-success/10 text-green-700 border-green-200",
       campanha: "bg-neutral-200 text-neutral-700 border-neutral-300",
     };
     return (
@@ -48,7 +48,7 @@ export default function AvisoPreview({ aviso, onCreateAviso, onEditAviso }) {
           {aviso.exibirNaHomepage ? (
             <>
               <Eye className="w-3 h-3" />
-              <span className="text-green-600 font-medium">Público</span>
+              <span className="text-success font-medium">Público</span>
             </>
           ) : (
             <>

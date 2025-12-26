@@ -231,13 +231,13 @@ export default function Avisos() {
     <AdminLayout currentPage="avisos">
       <div className="max-w-7xl mx-auto space-y-6">
         {}
-        <div className="bg-white border border-slate-300 rounded-md shadow-sm p-6">
+        <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-slate-900">
+              <h1 className="text-2xl font-bold text-neutral-900">
                 Gerenciar Avisos
               </h1>
-              <p className="text-slate-600 text-sm mt-1">
+              <p className="text-neutral-600 text-sm mt-1">
                 Cadastro e manutenção de avisos do sistema
               </p>
             </div>
@@ -254,7 +254,7 @@ export default function Avisos() {
                   </Link>
                   <button
                     onClick={handleNovoAviso}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium text-sm border border-blue-700 shadow-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium text-sm border border-blue-700 shadow-sm"
                   >
                     <Plus className="w-4 h-4" />
                     <span className="hidden sm:inline">Cadastrar Aviso</span>
@@ -267,23 +267,23 @@ export default function Avisos() {
         </div>
         {}
         {error && (
-          <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
+          <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-md">
             <div className="flex gap-3">
               <AlertCircle
                 size={20}
-                className="text-red-600 flex-shrink-0 mt-0.5"
+                className="text-error flex-shrink-0 mt-0.5"
               />
-              <div className="text-sm text-red-900">{error}</div>
+              <div className="text-sm text-error">{error}</div>
             </div>
           </div>
         )}
         {}
         {permissions.canCreateAvisos() && avisos.length > 0 && (
-          <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
+          <div className="bg-info/10 border border-blue-200 rounded-md p-4">
             <div className="flex items-start gap-3">
-              <MessageSquare className="w-5 h-5 text-blue-700 flex-shrink-0 mt-0.5" />
+              <MessageSquare className="w-5 h-5 text-primary-700 flex-shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm text-blue-900 font-semibold">
+                <p className="text-sm text-info font-semibold">
                   Utilize o Assistente Inteligente
                 </p>
                 <p className="text-sm text-blue-800 mt-1">
@@ -296,14 +296,14 @@ export default function Avisos() {
         )}
         {}
         {avisos.length === 0 ? (
-          <div className="bg-white rounded-md p-12 text-center border border-slate-300 shadow-sm">
-            <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-200">
-              <Plus className="w-10 h-10 text-slate-400" />
+          <div className="bg-white rounded-md p-12 text-center border border-neutral-300 shadow-sm">
+            <div className="w-20 h-20 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-neutral-200">
+              <Plus className="w-10 h-10 text-neutral-400" />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 mb-2">
+            <h3 className="text-xl font-bold text-neutral-900 mb-2">
               Nenhum Aviso Cadastrado
             </h3>
-            <p className="text-slate-600 mb-6 max-w-md mx-auto">
+            <p className="text-neutral-600 mb-6 max-w-md mx-auto">
               Cadastre o primeiro aviso do sistema utilizando o formulário
               manual ou o assistente inteligente
             </p>
@@ -319,7 +319,7 @@ export default function Avisos() {
                   </Link>
                   <button
                     onClick={handleNovoAviso}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium border border-blue-700 shadow-sm"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium border border-blue-700 shadow-sm"
                   >
                     <Plus className="w-5 h-5" />
                     Cadastrar Manualmente
@@ -340,15 +340,15 @@ export default function Avisos() {
       {}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-md max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-slate-300">
+          <div className="bg-white rounded-md max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-neutral-300">
             {}
-            <div className="sticky top-0 bg-slate-50 border-b border-slate-300 px-6 py-4 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-slate-900">
+            <div className="sticky top-0 bg-neutral-50 border-b border-neutral-300 px-6 py-4 flex items-center justify-between">
+              <h3 className="text-xl font-bold text-neutral-900">
                 {editingAviso ? "Editar Aviso" : "Cadastrar Novo Aviso"}
               </h3>
               <button
                 onClick={handleFecharModal}
-                className="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-200 rounded-md transition-colors"
+                className="p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 rounded-md transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -356,20 +356,20 @@ export default function Avisos() {
             {}
             <div className="p-6 space-y-4">
               {formError && (
-                <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
+                <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-md">
                   <div className="flex gap-3">
                     <AlertCircle
                       size={20}
-                      className="text-red-600 flex-shrink-0"
+                      className="text-error flex-shrink-0"
                     />
-                    <div className="text-sm text-red-900">{formError}</div>
+                    <div className="text-sm text-error">{formError}</div>
                   </div>
                 </div>
               )}
               {}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Título do Aviso <span className="text-red-600">*</span>
+                <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                  Título do Aviso <span className="text-error">*</span>
                 </label>
                 <input
                   type="text"
@@ -377,42 +377,42 @@ export default function Avisos() {
                   onChange={(e) =>
                     setFormData({ ...formData, titulo: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   placeholder="Exemplo: Campanha de Vacinação contra Gripe"
                   maxLength={100}
                 />
               </div>
               {}
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">
-                  Descrição Completa <span className="text-red-600">*</span>
+                <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                  Descrição Completa <span className="text-error">*</span>
                 </label>
                 <textarea
                   value={formData.descricao}
                   onChange={(e) =>
                     setFormData({ ...formData, descricao: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   placeholder="Descreva detalhadamente o conteúdo do aviso..."
                   rows={5}
                   maxLength={500}
                 />
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-neutral-500 mt-1">
                   {formData.descricao.length}/500 caracteres
                 </p>
               </div>
               {}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    Categoria <span className="text-red-600">*</span>
+                  <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    Categoria <span className="text-error">*</span>
                   </label>
                   <select
                     value={formData.categoria}
                     onChange={(e) =>
                       setFormData({ ...formData, categoria: e.target.value })
                     }
-                    className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
                   >
                     <option value="vacina">Vacina</option>
                     <option value="material">Material</option>
@@ -420,8 +420,8 @@ export default function Avisos() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">
-                    Data <span className="text-red-600">*</span>
+                  <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    Data <span className="text-error">*</span>
                   </label>
                   <input
                     type="date"
@@ -429,13 +429,13 @@ export default function Avisos() {
                     onChange={(e) =>
                       setFormData({ ...formData, data: e.target.value })
                     }
-                    className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
                   />
                 </div>
               </div>
               {}
               <div className="space-y-4">
-                <div className="flex items-center gap-2 p-4 bg-slate-50 rounded-md border border-slate-200">
+                <div className="flex items-center gap-2 p-4 bg-neutral-50 rounded-md border border-neutral-200">
                   <input
                     type="checkbox"
                     id="exibirNaHomepage"
@@ -446,18 +446,18 @@ export default function Avisos() {
                         exibirNaHomepage: e.target.checked,
                       })
                     }
-                    className="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+                    className="w-4 h-4 text-info border-neutral-300 rounded focus:ring-blue-500"
                   />
                   <label
                     htmlFor="exibirNaHomepage"
-                    className="text-sm font-medium text-slate-700 cursor-pointer"
+                    className="text-sm font-medium text-neutral-700 cursor-pointer"
                   >
                     Exibir na página inicial (público)
                   </label>
                 </div>
                 {!formData.exibirNaHomepage && (
                   <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
                       Página Destino
                     </label>
                     <select
@@ -468,7 +468,7 @@ export default function Avisos() {
                           paginaDestino: e.target.value,
                         })
                       }
-                      className="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-white"
                     >
                       <option value="home">Homepage</option>
                       <optgroup label="Serviços">
@@ -481,7 +481,7 @@ export default function Avisos() {
                           ))}
                       </optgroup>
                     </select>
-                    <p className="text-xs text-slate-500 mt-1">
+                    <p className="text-xs text-neutral-500 mt-1">
                       Selecione em qual página o aviso será exibido
                     </p>
                   </div>
@@ -489,17 +489,17 @@ export default function Avisos() {
               </div>
             </div>
             {}
-            <div className="sticky bottom-0 bg-slate-50 border-t border-slate-300 px-6 py-4 flex items-center justify-end gap-3">
+            <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-6 py-4 flex items-center justify-end gap-3">
               <button
                 onClick={handleFecharModal}
-                className="px-4 py-2 text-slate-700 hover:bg-slate-200 rounded-md transition-colors font-medium border border-slate-300"
+                className="px-4 py-2 text-neutral-700 hover:bg-neutral-200 rounded-md transition-colors font-medium border border-neutral-300"
               >
                 Cancelar
               </button>
               <button
                 onClick={handleSalvar}
                 disabled={formLoading}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 border border-blue-700 shadow-sm"
+                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 border border-blue-700 shadow-sm"
               >
                 {formLoading ? (
                   <>

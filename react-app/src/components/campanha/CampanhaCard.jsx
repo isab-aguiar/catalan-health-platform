@@ -133,28 +133,28 @@ const TemplateVacinacao = ({ campanha, estilo, onClick }) => {
         {}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
           {campanha.dataInicio && (
-            <div className="flex items-center gap-2 text-slate-700">
-              <Calendar className="w-5 h-5 text-blue-600" />
+            <div className="flex items-center gap-2 text-neutral-700">
+              <Calendar className="w-5 h-5 text-info" />
               <span className="text-sm">
                 {formatarPeriodo(campanha.dataInicio, campanha.dataFim)}
               </span>
             </div>
           )}
           {campanha.horario && (
-            <div className="flex items-center gap-2 text-slate-700">
-              <Clock className="w-5 h-5 text-blue-600" />
+            <div className="flex items-center gap-2 text-neutral-700">
+              <Clock className="w-5 h-5 text-info" />
               <span className="text-sm">{campanha.horario}</span>
             </div>
           )}
           {campanha.publicoAlvo && (
-            <div className="flex items-center gap-2 text-slate-700">
-              <Users className="w-5 h-5 text-blue-600" />
+            <div className="flex items-center gap-2 text-neutral-700">
+              <Users className="w-5 h-5 text-info" />
               <span className="text-sm">{campanha.publicoAlvo}</span>
             </div>
           )}
           {campanha.local && (
-            <div className="flex items-center gap-2 text-slate-700">
-              <MapPin className="w-5 h-5 text-blue-600" />
+            <div className="flex items-center gap-2 text-neutral-700">
+              <MapPin className="w-5 h-5 text-info" />
               <span className="text-sm">{campanha.local}</span>
             </div>
           )}
@@ -162,16 +162,16 @@ const TemplateVacinacao = ({ campanha, estilo, onClick }) => {
         {}
         {campanha.topicos && campanha.topicos.length > 0 && (
           <div className="mt-4 space-y-2">
-            <h4 className="font-semibold text-slate-800 text-sm">
+            <h4 className="font-semibold text-neutral-800 text-sm">
               Importante:
             </h4>
             <ul className="space-y-1">
               {campanha.topicos.map((topico, index) => (
                 <li
                   key={index}
-                  className="flex items-start gap-2 text-slate-700 text-sm"
+                  className="flex items-start gap-2 text-neutral-700 text-sm"
                 >
-                  <CheckCircle className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-info mt-0.5 flex-shrink-0" />
                   <span>{topico}</span>
                 </li>
               ))}
@@ -246,7 +246,7 @@ const TemplateEducacao = ({ campanha, estilo, onClick }) => {
         )}
         {!campanha.imagemURL && (
           <div className="bg-green-600 text-white p-6">
-            <span className="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-semibold inline-block mb-3">
+            <span className="bg-success/100 text-white px-4 py-2 rounded-full text-sm font-semibold inline-block mb-3">
               <Activity className="w-4 h-4 inline mr-1" />
               Educação em Saúde
             </span>
@@ -356,7 +356,7 @@ const TemplateEvento = ({ campanha, estilo, onClick }) => {
             {campanha.topicos.map((topico, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2 text-slate-700 text-sm"
+                className="flex items-center gap-2 text-neutral-700 text-sm"
               >
                 <CheckCircle className="w-4 h-4 text-violet-600" />
                 <span>{topico}</span>
@@ -403,11 +403,11 @@ const TemplateUrgente = ({ campanha, estilo, onClick }) => {
           </div>
         )}
         {campanha.contato && (
-          <div className="mt-4 flex items-center gap-2 bg-red-50 p-3 rounded-lg">
-            <Phone className="w-5 h-5 text-red-600" />
+          <div className="mt-4 flex items-center gap-2 bg-error/10 p-3 rounded-lg">
+            <Phone className="w-5 h-5 text-error" />
             <div>
-              <div className="text-xs text-slate-600">Contato:</div>
-              <div className="font-semibold text-slate-800">
+              <div className="text-xs text-neutral-600">Contato:</div>
+              <div className="font-semibold text-neutral-800">
                 {campanha.contato}
               </div>
             </div>
@@ -450,7 +450,7 @@ const TemplateInformativo = ({ campanha, estilo, onClick }) => {
         {onClick && (
           <button
             onClick={onClick}
-            className="mt-4 text-blue-600 hover:text-blue-700 font-semibold text-sm flex items-center gap-1"
+            className="mt-4 text-info hover:text-primary-700 font-semibold text-sm flex items-center gap-1"
           >
             {campanha.cta || "Saiba Mais"}
             <ChevronRight className="w-4 h-4" />

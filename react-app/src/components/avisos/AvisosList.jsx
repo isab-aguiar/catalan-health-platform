@@ -15,7 +15,7 @@ export default function AvisosList() {
     return (
       <div className="py-8 px-4">
         <div
-          className="bg-red-50 border border-red-300 text-red-900 rounded-md p-4 text-center"
+          className="bg-error/10 border border-red-300 text-error rounded-md p-4 text-center"
           style={{
             fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
           }}
@@ -36,9 +36,9 @@ export default function AvisosList() {
         {}
         <div className="mb-5 text-center">
           <div className="inline-flex items-center gap-2 mb-2">
-            <Bell className="w-5 h-5 text-slate-700" />
+            <Bell className="w-5 h-5 text-neutral-700" />
             <h2
-              className="text-xl md:text-2xl font-semibold text-slate-900"
+              className="text-xl md:text-2xl font-semibold text-neutral-900"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -47,7 +47,7 @@ export default function AvisosList() {
             </h2>
           </div>
           <p
-            className="text-slate-600 text-sm"
+            className="text-neutral-600 text-sm"
             style={{
               fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
             }}

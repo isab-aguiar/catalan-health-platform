@@ -9,9 +9,9 @@ export default function AdminHeader({ onMenuClick, onLogout }) {
       <div className="flex items-center justify-between h-full">
         {}
         <div className="lg:hidden flex items-center gap-2 mx-auto">
-          <Building2 className="w-5 h-5 text-slate-700" />
+          <Building2 className="w-5 h-5 text-neutral-700" />
           <h1
-            className="text-base font-bold text-slate-900"
+            className="text-base font-bold text-neutral-900"
             style={{
               fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
             }}
@@ -24,13 +24,13 @@ export default function AdminHeader({ onMenuClick, onLogout }) {
         {}
         <div className="hidden sm:flex items-center gap-3">
           <div
-            className={`w-10 h-10 rounded-md flex items-center justify-center border border-slate-300 ${permissions.getRoleColor()}`}
+            className={`w-10 h-10 rounded-md flex items-center justify-center border border-neutral-300 ${permissions.getRoleColor()}`}
           >
             <User className="w-5 h-5" />
           </div>
           <div>
             <p
-              className="text-sm font-semibold text-slate-900"
+              className="text-sm font-semibold text-neutral-900"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -38,7 +38,7 @@ export default function AdminHeader({ onMenuClick, onLogout }) {
               {userData?.displayName || "Administrador"}
             </p>
             <p
-              className="text-xs text-slate-600"
+              className="text-xs text-neutral-600"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -55,7 +55,7 @@ export default function AdminHeader({ onMenuClick, onLogout }) {
         {}
         <button
           onClick={onLogout}
-          className="sm:hidden p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
+          className="sm:hidden p-2 text-error hover:bg-error/10 rounded-md transition-colors"
         >
           <LogOut className="w-5 h-5" />
         </button>

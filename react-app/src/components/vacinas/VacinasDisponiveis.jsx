@@ -28,7 +28,7 @@ export default function VacinasDisponiveis() {
   };
   if (loading) {
     return (
-      <div className="bg-white border border-slate-200 rounded-md shadow-sm p-8">
+      <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-8">
         <div className="flex items-center justify-center">
           <LoadingSpinner />
         </div>
@@ -41,8 +41,8 @@ export default function VacinasDisponiveis() {
       error.toLowerCase().includes('permissão') ||
       error.toLowerCase().includes('permission-denied');
     return (
-      <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
-        <p className="text-sm text-red-900 font-medium mb-2">
+      <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-md">
+        <p className="text-sm text-error font-medium mb-2">
           Erro ao carregar informações de vacinas
         </p>
         <p className="text-xs text-red-700 mb-2">
@@ -67,12 +67,12 @@ export default function VacinasDisponiveis() {
   const vacinasPublicadas = vacinas.filter((v) => v.publicado === true);
   if (vacinasPublicadas.length === 0) {
     return (
-      <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6">
-        <h2 className="text-lg font-semibold text-slate-900 mb-3 flex items-center gap-2">
-          <Shield className="w-5 h-5 text-slate-700" />
+      <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6">
+        <h2 className="text-lg font-semibold text-neutral-900 mb-3 flex items-center gap-2">
+          <Shield className="w-5 h-5 text-neutral-700" />
           Programa de Vacinação
         </h2>
-        <p className="text-slate-600 text-sm">
+        <p className="text-neutral-600 text-sm">
           Não há informações de vacinação disponíveis no momento.
         </p>
       </div>
@@ -80,33 +80,33 @@ export default function VacinasDisponiveis() {
   }
 
   return (
-    <div className="bg-white border border-slate-200 rounded-md shadow-sm overflow-hidden">
-      <div className="bg-slate-700 p-5">
+    <div className="bg-white border border-neutral-200 rounded-md shadow-sm overflow-hidden">
+      <div className="bg-neutral-700 p-5">
         <h2 className="text-lg font-semibold text-white flex items-center gap-2">
           <Shield className="w-5 h-5" />
           Programa de Vacinação - ESF Catalão
         </h2>
-        <p className="text-slate-200 text-xs mt-1.5">
+        <p className="text-neutral-200 text-xs mt-1.5">
           Vacinas disponíveis na unidade - Atualização semanal
         </p>
       </div>
-      <div className="md:hidden divide-y divide-slate-200">
+      <div className="md:hidden divide-y divide-neutral-200">
         {vacinasPublicadas.map((v) => {
           const disponivel = vacinaDisponivel(v);
           return (
             <div
               key={v.id}
-              className="p-4 border-b border-slate-200 last:border-b-0"
+              className="p-4 border-b border-neutral-200 last:border-b-0"
             >
               <div className="flex items-start justify-between mb-3">
-                <h3 className="font-semibold text-slate-900 text-base">
+                <h3 className="font-semibold text-neutral-900 text-base">
                   {v.nome}
                 </h3>
                 <span
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold flex-shrink-0 ml-2 ${
                     disponivel
-                      ? 'bg-green-50 text-green-800 border border-green-400'
-                      : 'bg-red-50 text-red-800 border border-red-400'
+                      ? 'bg-success/10 text-green-800 border border-green-400'
+                      : 'bg-error/10 text-red-800 border border-red-400'
                   }`}
                 >
                   {disponivel ? (
@@ -124,18 +124,18 @@ export default function VacinasDisponiveis() {
               </div>
               <div className="space-y-2.5 text-sm mt-3">
                 <div>
-                  <span className="font-semibold text-slate-800 text-xs uppercase tracking-wide">
+                  <span className="font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Indicação:{' '}
                   </span>
-                  <p className="text-slate-700 mt-1 leading-relaxed">
+                  <p className="text-neutral-700 mt-1 leading-relaxed">
                     {v.finalidade}
                   </p>
                 </div>
                 <div>
-                  <span className="font-semibold text-slate-800 text-xs uppercase tracking-wide">
+                  <span className="font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Público-Alvo:{' '}
                   </span>
-                  <p className="text-slate-700 mt-1">{v.publicoAlvo}</p>
+                  <p className="text-neutral-700 mt-1">{v.publicoAlvo}</p>
                 </div>
               </div>
             </div>
@@ -144,39 +144,39 @@ export default function VacinasDisponiveis() {
       </div>
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-slate-100 border-b-2 border-slate-300">
+          <thead className="bg-neutral-100 border-b-2 border-neutral-300">
             <tr>
-              <th className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide">
+              <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                 Vacina
               </th>
-              <th className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide">
+              <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                 Indicação
               </th>
-              <th className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide">
+              <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                 Público-Alvo
               </th>
-              <th className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide">
+              <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                 Situação
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-200">
+          <tbody className="divide-y divide-neutral-200">
             {vacinasPublicadas.map((v) => {
               const disponivel = vacinaDisponivel(v);
               return (
-                <tr key={v.id} className="hover:bg-slate-50 transition-colors">
+                <tr key={v.id} className="hover:bg-neutral-50 transition-colors">
                   <td className="p-4">
-                    <div className="font-semibold text-slate-900">{v.nome}</div>
+                    <div className="font-semibold text-neutral-900">{v.nome}</div>
                   </td>
-                  <td className="p-4 text-slate-700 leading-relaxed">
+                  <td className="p-4 text-neutral-700 leading-relaxed">
                     {v.finalidade}
                   </td>
-                  <td className="p-4 text-slate-700">{v.publicoAlvo}</td>
+                  <td className="p-4 text-neutral-700">{v.publicoAlvo}</td>
                   <td className="p-4">
                     <span
                       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold ${
                         disponivel
-                          ? 'bg-green-100 text-green-800 border border-green-300'
+                          ? 'bg-success/10 text-green-800 border border-success'
                           : 'bg-red-100 text-red-800 border border-red-300'
                       }`}
                     >
@@ -200,8 +200,8 @@ export default function VacinasDisponiveis() {
         </table>
       </div>
 
-      <div className="bg-slate-50 border-t border-slate-200 p-4">
-        <p className="text-xs text-slate-600 text-center leading-relaxed">
+      <div className="bg-neutral-50 border-t border-neutral-200 p-4">
+        <p className="text-xs text-neutral-600 text-center leading-relaxed">
           Esta lista é atualizada semanalmente pela equipe de saúde. A
           disponibilidade pode variar conforme a demanda e o estoque da unidade.
         </p>

@@ -20,22 +20,22 @@ import pdfGestante from "../../assets/arquivos-vacinas-pdf/Calendário Nacional 
 function Alert({ type = "info", children }) {
   const types = {
     info: {
-      bg: "bg-blue-50",
-      border: "border-blue-300",
-      text: "text-blue-900",
-      icon: "text-blue-600",
+      bg: "bg-info/10",
+      border: "border-info",
+      text: "text-info",
+      icon: "text-info",
     },
     warning: {
-      bg: "bg-amber-50",
-      border: "border-amber-300",
-      text: "text-amber-900",
-      icon: "text-amber-600",
+      bg: "bg-warning/10",
+      border: "border-warning",
+      text: "text-warning-dark",
+      icon: "text-warning-dark",
     },
     success: {
-      bg: "bg-green-50",
-      border: "border-green-300",
-      text: "text-green-900",
-      icon: "text-green-600",
+      bg: "bg-success/10",
+      border: "border-success",
+      text: "text-success-dark",
+      icon: "text-success",
     },
   };
   const style = types[type] || types.info;
@@ -359,9 +359,9 @@ export default function CalendarioVacinal() {
       titulo: "Adulto",
       faixaEtaria: "25 a 59 anos",
       cor: "bg-blue-600",
-      corTexto: "text-blue-700",
-      corBorda: "border-blue-600",
-      corHover: "hover:bg-blue-50",
+      corTexto: "text-primary-700",
+      corBorda: "border-info",
+      corHover: "hover:bg-info/10",
       descricao: "Adulto (25 a 59 anos)",
       texto:
         "Procure uma unidade de saúde e verifique seu Cartão de Vacinas. Mantenha atualizado conforme o Calendário Nacional de Vacinação - Adulto. Para as mulheres, fiquem atentas, mantenham suas vacinas em dia antes da gravidez, durante a gestação e no pós-parto.",
@@ -400,8 +400,8 @@ export default function CalendarioVacinal() {
       faixaEtaria: "a partir de 60 anos",
       cor: "bg-green-600",
       corTexto: "text-green-700",
-      corBorda: "border-green-600",
-      corHover: "hover:bg-green-50",
+      corBorda: "border-success",
+      corHover: "hover:bg-success/10",
       descricao: "Idoso (a partir de 60 anos)",
       texto:
         "A vacinação promove uma vida saudável e contribui para a qualidade de vida e o bem-estar. Em todas as idades, as vacinas são essenciais para prevenir doenças graves. Os idosos devem manter o Cartão de Vacinas atualizado.",
@@ -545,8 +545,8 @@ export default function CalendarioVacinal() {
                   className={`flex items-center gap-3 px-5 py-2.5 rounded-lg font-medium text-sm
                   transition-all duration-200 ${
                     perfilSelecionado === key
-                      ? "bg-white text-blue-900 shadow-md ring-2 ring-blue-500"
-                      : "bg-blue-700 text-white hover:bg-blue-600"
+                      ? "bg-white text-info shadow-md ring-2 ring-blue-500"
+                      : "bg-blue-700 text-white hover:bg-info-600"
                   }`}
                 >
                   <IconComponent size={18} strokeWidth={2.5} />
@@ -568,8 +568,8 @@ export default function CalendarioVacinal() {
                 id="perfil-select"
                 value={perfilSelecionado}
                 onChange={(e) => setPerfilSelecionado(e.target.value)}
-                className="w-full appearance-none bg-white border-2 border-blue-300
-                rounded-lg px-4 py-3 pr-10 font-medium text-sm text-blue-900
+                className="w-full appearance-none bg-white border-2 border-info
+                rounded-lg px-4 py-3 pr-10 font-medium text-sm text-info
                 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent
                 cursor-pointer"
               >
@@ -580,12 +580,12 @@ export default function CalendarioVacinal() {
                 ))}
               </select>
               <ChevronDown
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-600 pointer-events-none"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-info pointer-events-none"
                 size={18}
               />
             </div>
             {}
-            <div className="mt-3 flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="mt-3 flex items-center gap-3 p-3 bg-info/10 rounded-lg border border-blue-200">
               {(() => {
                 const IconComponent = perfilIcones[perfilSelecionado];
                 return (
@@ -602,10 +602,10 @@ export default function CalendarioVacinal() {
                 );
               })()}
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm text-blue-900 truncate">
+                <p className="font-semibold text-sm text-info truncate">
                   {perfis[perfilSelecionado].titulo}
                 </p>
-                <p className="text-xs text-blue-700 truncate">
+                <p className="text-xs text-primary-700 truncate">
                   <span className="font-medium">Faixa etária:</span>{" "}
                   {perfis[perfilSelecionado].faixaEtaria}
                 </p>
@@ -641,16 +641,16 @@ export default function CalendarioVacinal() {
             {}
             <div className="flex-1">
               <h2
-                className="text-base font-semibold text-slate-900 mb-1 leading-tight
+                className="text-base font-semibold text-neutral-900 mb-1 leading-tight
               md:text-lg"
               >
                 {perfilAtual.titulo}
               </h2>
-              <p className="text-xs font-normal text-slate-600 mb-3 md:text-sm">
+              <p className="text-xs font-normal text-neutral-600 mb-3 md:text-sm">
                 <span className="font-medium">Faixa etária:</span>{" "}
                 {perfilAtual.faixaEtaria}
               </p>
-              <p className="text-sm text-slate-700 leading-relaxed">
+              <p className="text-sm text-neutral-700 leading-relaxed">
                 {perfilAtual.texto}
               </p>
             </div>
@@ -660,15 +660,15 @@ export default function CalendarioVacinal() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-3">
               {}
               <div className="relative max-w-md order-2 md:order-1">
-                <div className="bg-white border-2 border-blue-300 rounded-2xl p-4 shadow-lg relative">
-                  <p className="text-sm md:text-base text-slate-800 leading-relaxed flex items-start gap-2">
+                <div className="bg-white border-2 border-info rounded-2xl p-4 shadow-lg relative">
+                  <p className="text-sm md:text-base text-neutral-800 leading-relaxed flex items-start gap-2">
                     <Lightbulb
                       size={20}
-                      className="text-blue-600 flex-shrink-0 mt-0.5"
+                      className="text-info flex-shrink-0 mt-0.5"
                       strokeWidth={2.5}
                     />
                     <span>
-                      <span className="font-bold text-blue-700">
+                      <span className="font-bold text-primary-700">
                         Importante:
                       </span>{" "}
                       Durante campanhas de vacinação, nosso horário pode ser
@@ -749,7 +749,7 @@ export default function CalendarioVacinal() {
                     )}
                   </div>
                   <div className="flex-1 py-2">
-                    <h3 className="text-sm md:text-base font-semibold text-slate-900 tracking-tight">
+                    <h3 className="text-sm md:text-base font-semibold text-neutral-900 tracking-tight">
                       {categoria.idade}
                     </h3>
                   </div>
@@ -757,16 +757,16 @@ export default function CalendarioVacinal() {
                 {}
                 {categoriasAbertas[categoria.id] && (
                   <div
-                    className="ml-12 md:ml-14 mt-3 md:mt-4 bg-slate-50 rounded-lg p-4 md:p-5 border-l-4"
+                    className="ml-12 md:ml-14 mt-3 md:mt-4 bg-neutral-50 rounded-lg p-4 md:p-5 border-l-4"
                     style={{ borderColor: perfilAtual.cor.replace("bg-", "#") }}
                   >
                     {categoria.vacinas.map((vacina, vidx) => (
                       <div
                         key={vidx}
-                        className="mb-4 md:mb-5 last:mb-0 pb-4 md:pb-5 last:pb-0 border-b border-slate-200 last:border-b-0"
+                        className="mb-4 md:mb-5 last:mb-0 pb-4 md:pb-5 last:pb-0 border-b border-neutral-200 last:border-b-0"
                       >
                         {}
-                        <h4 className="text-sm md:text-base font-bold text-slate-900 mb-1 leading-tight tracking-tight">
+                        <h4 className="text-sm md:text-base font-bold text-neutral-900 mb-1 leading-tight tracking-tight">
                           {vacina.nome}
                         </h4>
                         {}
@@ -776,18 +776,18 @@ export default function CalendarioVacinal() {
                           {vacina.dose}
                         </p>
                         {}
-                        <p className="text-slate-700 mb-0 leading-relaxed">
+                        <p className="text-neutral-700 mb-0 leading-relaxed">
                           <span className="font-semibold text-xs md:text-sm">
                             Doenças evitadas:
                           </span>{" "}
-                          <span className="text-blue-700 font-normal text-xs md:text-sm">
+                          <span className="text-primary-700 font-normal text-xs md:text-sm">
                             {vacina.doencas}
                           </span>
                         </p>
                         {}
                         {vacina.obs && (
-                          <div className="mt-3 p-3 md:p-4 bg-amber-50 border-l-4 border-amber-400 rounded-r-md">
-                            <p className="text-xs font-normal text-slate-800 leading-relaxed">
+                          <div className="mt-3 p-3 md:p-4 bg-warning/10 border-l-4 border-amber-400 rounded-r-md">
+                            <p className="text-xs font-normal text-neutral-800 leading-relaxed">
                               <span className="font-bold">Observação:</span>{" "}
                               {vacina.obs}
                             </p>
@@ -802,11 +802,11 @@ export default function CalendarioVacinal() {
           </div>
         </div>
         {}
-        <div className="text-center p-4 md:p-6 bg-slate-50 border-t border-slate-200">
+        <div className="text-center p-4 md:p-6 bg-neutral-50 border-t border-neutral-200">
           <button
             onClick={handleDownloadPDF}
             className="bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600
-            text-blue-900 font-semibold text-sm px-6 py-2.5 md:px-8 md:py-3
+            text-info font-semibold text-sm px-6 py-2.5 md:px-8 md:py-3
             rounded-lg shadow-md hover:shadow-lg transition-all duration-200
             inline-flex items-center gap-2 hover:scale-105
             focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
@@ -818,8 +818,8 @@ export default function CalendarioVacinal() {
         </div>
         {}
         <div className="p-4 md:p-5 lg:p-6">
-          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 md:p-5 rounded-r-lg">
-            <p className="text-slate-800 text-xs md:text-sm font-normal leading-relaxed">
+          <div className="bg-info/10 border-l-4 border-blue-500 p-4 md:p-5 rounded-r-lg">
+            <p className="text-neutral-800 text-xs md:text-sm font-normal leading-relaxed">
               <span className="font-bold">Observação Importante:</span> Pessoas
               que apresentam condições clínicas especiais, congênitas ou
               adquiridas ao longo da vida, ou que possuem condições de saúde que

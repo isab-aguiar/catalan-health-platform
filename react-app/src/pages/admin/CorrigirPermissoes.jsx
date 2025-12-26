@@ -95,9 +95,9 @@ export default function CorrigirPermissoes() {
               <Alert type={result.success ? "success" : "error"}>
                 <div className="flex items-start gap-2">
                   {result.success ? (
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
                   ) : (
-                    <XCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <XCircle className="w-5 h-5 text-error flex-shrink-0 mt-0.5" />
                   )}
                   <p>{result.message}</p>
                 </div>

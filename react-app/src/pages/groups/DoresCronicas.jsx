@@ -1,20 +1,20 @@
 import { Calendar, Clock, AlertCircle, Users } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 function PageContainer({ children }) {
-  return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
+  return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
-    default: "bg-white border-slate-200",
-    highlight: "bg-blue-50 border-blue-300",
+    default: "bg-white border-neutral-200",
+    highlight: "bg-info/10 border-info",
   };
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
-        {icon && <div className="text-blue-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
+      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-neutral-200">
+        {icon && <div className="text-primary-700">{icon}</div>}
+        <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
       </div>
       {children}
     </div>
@@ -23,22 +23,22 @@ function InfoBox({ title, icon, children, variant = "default" }) {
 function Alert({ type = "info", children }) {
   const types = {
     info: {
-      bg: "bg-blue-50",
-      border: "border-blue-300",
-      text: "text-blue-900",
-      icon: "text-blue-600",
+      bg: "bg-info/10",
+      border: "border-info",
+      text: "text-info",
+      icon: "text-info",
     },
     warning: {
-      bg: "bg-amber-50",
-      border: "border-amber-300",
-      text: "text-amber-900",
-      icon: "text-amber-600",
+      bg: "bg-warning/10",
+      border: "border-warning",
+      text: "text-warning-dark",
+      icon: "text-warning-dark",
     },
     success: {
-      bg: "bg-green-50",
-      border: "border-green-300",
-      text: "text-green-900",
-      icon: "text-green-600",
+      bg: "bg-success/10",
+      border: "border-success",
+      text: "text-success-dark",
+      icon: "text-success",
     },
   };
   const style = types[type];
@@ -62,11 +62,11 @@ export default function DoresCronicas() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
         {}
-        <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
+        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-slate-900"
+                className="text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -74,7 +74,7 @@ export default function DoresCronicas() {
                 Grupo de Dores Crônicas
               </h1>
               <p
-                className="text-slate-500 text-xs mt-1"
+                className="text-neutral-500 text-xs mt-1"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -86,7 +86,7 @@ export default function DoresCronicas() {
         </div>
         {}
         <InfoBox title="Sobre o Grupo">
-          <p className="text-slate-700 leading-relaxed mb-5">
+          <p className="text-neutral-700 leading-relaxed mb-5">
             O Grupo de Dores Crônicas é um espaço de acolhimento e tratamento
             voltado para pessoas que convivem com condições como fibromialgia,
             dores crônicas musculoesqueléticas e outras síndromes dolorosas
@@ -96,21 +96,21 @@ export default function DoresCronicas() {
             estratégias de enfrentamento.
           </p>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-slate-50 border border-slate-200 rounded p-4">
-              <h3 className="font-semibold text-slate-800 mb-2 text-sm">
+            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Objetivos do Grupo
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-neutral-600">
                 Promover educação em saúde sobre o manejo da dor crônica,
                 desenvolver estratégias de enfrentamento, melhorar a
                 funcionalidade e qualidade de vida dos participantes.
               </p>
             </div>
-            <div className="bg-slate-50 border border-slate-200 rounded p-4">
-              <h3 className="font-semibold text-slate-800 mb-2 text-sm">
+            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Metodologia
               </h3>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-neutral-600">
                 Encontros quinzenais com atividades educativas, exercícios
                 terapêuticos, técnicas de relaxamento e troca de experiências
                 entre os participantes.
@@ -120,7 +120,7 @@ export default function DoresCronicas() {
         </InfoBox>
         {}
         <InfoBox title="Atividades Desenvolvidas">
-          <p className="text-slate-700 mb-4 text-sm">
+          <p className="text-neutral-700 mb-4 text-sm">
             Durante os encontros do grupo, são desenvolvidas as seguintes
             atividades:
           </p>
@@ -128,10 +128,10 @@ export default function DoresCronicas() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Técnicas de Manejo da Dor Crônica
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Educação sobre estratégias não farmacológicas para o controle
                   da dor, incluindo técnicas de respiração, relaxamento e
                   distração.
@@ -141,10 +141,10 @@ export default function DoresCronicas() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Exercícios Terapêuticos e Alongamentos
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Prática de exercícios físicos adaptados, alongamentos e
                   movimentos terapêuticos orientados para melhoria da
                   funcionalidade e redução da dor.
@@ -154,10 +154,10 @@ export default function DoresCronicas() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Relaxamento e Mindfulness
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Técnicas de relaxamento muscular progressivo, meditação e
                   mindfulness para redução do estresse e melhoria do bem-estar
                   emocional.
@@ -167,10 +167,10 @@ export default function DoresCronicas() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Orientações sobre Qualidade de Vida
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Educação sobre hábitos de vida saudáveis, sono, alimentação e
                   atividades de lazer que contribuem para o manejo da dor
                   crônica.
@@ -180,10 +180,10 @@ export default function DoresCronicas() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Apoio Emocional e Troca de Experiências
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Espaço de acolhimento, compartilhamento de vivências e apoio
                   mútuo entre os participantes, fortalecendo a rede de suporte
                   social.
@@ -195,38 +195,38 @@ export default function DoresCronicas() {
         {}
         <InfoBox title="Dias e Horários" variant="highlight">
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-slate-300">
+            <table className="w-full border-collapse border border-neutral-300">
               <thead>
-                <tr className="bg-slate-100">
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                <tr className="bg-neutral-100">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Dia da Semana
                   </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Horário
                   </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Local
                   </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
                 <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">
                       Quintas-feiras (quinzenal)
                     </strong>
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     08h00
                   </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-600">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
                     Sala de Grupos - ESF Catalão
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-slate-500 mt-3">
+          <p className="text-xs text-neutral-500 mt-3">
             * Confirme os dias e horários na recepção, pois podem sofrer
             alterações conforme a programação da unidade. Os encontros são
             realizados quinzenalmente.
@@ -234,44 +234,44 @@ export default function DoresCronicas() {
         </InfoBox>
         {}
         <InfoBox title="Como Participar">
-          <p className="text-slate-700 mb-4 text-sm">
+          <p className="text-neutral-700 mb-4 text-sm">
             A participação no Grupo de Dores Crônicas é gratuita e aberta a
             todos os usuários da unidade que convivem com dores crônicas,
             fibromialgia ou outras condições dolorosas persistentes.
           </p>
           <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Inscrição na Recepção
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Procure a recepção da unidade para realizar sua inscrição no
                   grupo.
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Contato com a Equipe de Saúde
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Procure sua equipe de saúde (médico, enfermeiro,
                   fisioterapeuta ou agente comunitário de saúde) para obter mais
                   informações e orientações sobre o grupo.
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Recomendações para os Encontros
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Traga roupas confortáveis para a prática de exercícios e
                   alongamentos durante os encontros do grupo.
                 </p>

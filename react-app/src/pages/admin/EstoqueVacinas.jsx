@@ -62,13 +62,13 @@ export default function EstoqueVacinas() {
   if (error) {
     return (
       <AdminLayout currentPage="estoque-vacinas">
-        <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
+        <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-md">
           <div className="flex gap-3">
             <AlertCircle
               size={20}
-              className="text-red-600 flex-shrink-0 mt-0.5"
+              className="text-error flex-shrink-0 mt-0.5"
             />
-            <div className="text-sm text-red-900">{error}</div>
+            <div className="text-sm text-error">{error}</div>
           </div>
         </div>
       </AdminLayout>
@@ -78,14 +78,14 @@ export default function EstoqueVacinas() {
     <AdminLayout currentPage="estoque-vacinas">
       <div className="max-w-7xl mx-auto space-y-6">
         {}
-        <div className="bg-white rounded-md shadow-sm border border-slate-300 p-6">
+        <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 bg-slate-700 rounded-md flex items-center justify-center">
+            <div className="w-12 h-12 bg-neutral-700 rounded-md flex items-center justify-center">
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
               <h1
-                className="text-2xl font-bold text-slate-900"
+                className="text-2xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -93,7 +93,7 @@ export default function EstoqueVacinas() {
                 Estoque de Vacinas
               </h1>
               <p
-                className="text-sm text-slate-600"
+                className="text-sm text-neutral-600"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -105,20 +105,20 @@ export default function EstoqueVacinas() {
         </div>
         {}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="bg-white rounded-md shadow-sm border border-slate-300 p-4">
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
             <div className="flex items-center justify-between mb-2">
               <span
-                className="text-xs font-semibold text-slate-600 uppercase tracking-wide"
+                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
                 Total de Vacinas
               </span>
-              <Package className="w-4 h-4 text-slate-500" />
+              <Package className="w-4 h-4 text-neutral-500" />
             </div>
             <p
-              className="text-2xl font-bold text-slate-900"
+              className="text-2xl font-bold text-neutral-900"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -126,17 +126,17 @@ export default function EstoqueVacinas() {
               {estatisticas.totalVacinas}
             </p>
           </div>
-          <div className="bg-white rounded-md shadow-sm border border-slate-300 p-4">
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
             <div className="flex items-center justify-between mb-2">
               <span
-                className="text-xs font-semibold text-slate-600 uppercase tracking-wide"
+                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
                 Com Estoque
               </span>
-              <TrendingUp className="w-4 h-4 text-green-600" />
+              <TrendingUp className="w-4 h-4 text-success" />
             </div>
             <p
               className="text-2xl font-bold text-green-700"
@@ -147,17 +147,17 @@ export default function EstoqueVacinas() {
               {estatisticas.vacinasComEstoque}
             </p>
           </div>
-          <div className="bg-white rounded-md shadow-sm border border-slate-300 p-4">
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
             <div className="flex items-center justify-between mb-2">
               <span
-                className="text-xs font-semibold text-slate-600 uppercase tracking-wide"
+                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
                 Sem Estoque
               </span>
-              <TrendingDown className="w-4 h-4 text-red-600" />
+              <TrendingDown className="w-4 h-4 text-error" />
             </div>
             <p
               className="text-2xl font-bold text-red-700"
@@ -168,20 +168,20 @@ export default function EstoqueVacinas() {
               {estatisticas.vacinasSemEstoque}
             </p>
           </div>
-          <div className="bg-white rounded-md shadow-sm border border-slate-300 p-4">
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
             <div className="flex items-center justify-between mb-2">
               <span
-                className="text-xs font-semibold text-slate-600 uppercase tracking-wide"
+                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
                 Total de Doses
               </span>
-              <Shield className="w-4 h-4 text-blue-600" />
+              <Shield className="w-4 h-4 text-info" />
             </div>
             <p
-              className="text-2xl font-bold text-blue-700"
+              className="text-2xl font-bold text-primary-700"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -189,20 +189,20 @@ export default function EstoqueVacinas() {
               {formatarNumero(estatisticas.totalDoses)}
             </p>
           </div>
-          <div className="bg-white rounded-md shadow-sm border border-slate-300 p-4">
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
             <div className="flex items-center justify-between mb-2">
               <span
-                className="text-xs font-semibold text-slate-600 uppercase tracking-wide"
+                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
                 Publicadas
               </span>
-              <Shield className="w-4 h-4 text-slate-500" />
+              <Shield className="w-4 h-4 text-neutral-500" />
             </div>
             <p
-              className="text-2xl font-bold text-slate-700"
+              className="text-2xl font-bold text-neutral-700"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}
@@ -212,8 +212,8 @@ export default function EstoqueVacinas() {
           </div>
         </div>
         {}
-        <div className="bg-white rounded-md shadow-sm border border-slate-300 overflow-hidden">
-          <div className="bg-slate-700 p-5">
+        <div className="bg-white rounded-md shadow-sm border border-neutral-300 overflow-hidden">
+          <div className="bg-neutral-700 p-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-md flex items-center justify-center">
@@ -230,7 +230,7 @@ export default function EstoqueVacinas() {
                     Programação de Vacinas
                   </h2>
                   <p
-                    className="text-slate-200 text-xs mt-1"
+                    className="text-neutral-200 text-xs mt-1"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -242,7 +242,7 @@ export default function EstoqueVacinas() {
               </div>
               <button
                 onClick={() => setShowModalVacina(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-white text-slate-700 rounded-md hover:bg-slate-100 transition-colors font-semibold text-sm shadow-sm"
+                className="flex items-center gap-2 px-4 py-2 bg-white text-neutral-700 rounded-md hover:bg-neutral-100 transition-colors font-semibold text-sm shadow-sm"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -254,10 +254,10 @@ export default function EstoqueVacinas() {
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-slate-100 border-b-2 border-slate-300">
+              <thead className="bg-neutral-100 border-b-2 border-neutral-300">
                 <tr>
                   <th
-                    className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -266,7 +266,7 @@ export default function EstoqueVacinas() {
                     Vacina
                   </th>
                   <th
-                    className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -275,7 +275,7 @@ export default function EstoqueVacinas() {
                     Finalidade
                   </th>
                   <th
-                    className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -284,7 +284,7 @@ export default function EstoqueVacinas() {
                     Público-Alvo
                   </th>
                   <th
-                    className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -293,7 +293,7 @@ export default function EstoqueVacinas() {
                     Quantidade
                   </th>
                   <th
-                    className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -302,7 +302,7 @@ export default function EstoqueVacinas() {
                     Início do Período
                   </th>
                   <th
-                    className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -311,7 +311,7 @@ export default function EstoqueVacinas() {
                     Fim do Período
                   </th>
                   <th
-                    className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
+                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -321,12 +321,12 @@ export default function EstoqueVacinas() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-neutral-200">
                 {vacinas.length === 0 ? (
                   <tr>
                     <td
                       colSpan="7"
-                      className="p-8 text-center text-slate-500"
+                      className="p-8 text-center text-neutral-500"
                       style={{
                         fontFamily:
                           'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -367,8 +367,8 @@ const VacinaEstoqueRow = memo(({ vacina, formatarNumero }) => {
   const estoqueBaixo = quantidade > 0 && quantidade < 50;
   const getStatusColor = () => {
     if (!temEstoque) return "bg-red-100 text-red-800 border-red-300";
-    if (estoqueBaixo) return "bg-amber-100 text-amber-800 border-amber-300";
-    return "bg-green-100 text-green-800 border-green-300";
+    if (estoqueBaixo) return "bg-warning/20 text-amber-800 border-warning";
+    return "bg-success/10 text-green-800 border-success";
   };
   const getStatusText = () => {
     if (!temEstoque) return "Sem Estoque";
@@ -382,14 +382,14 @@ const VacinaEstoqueRow = memo(({ vacina, formatarNumero }) => {
   };
   return (
     <tr
-      className="hover:bg-slate-50 transition-colors"
+      className="hover:bg-neutral-50 transition-colors"
       style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
     >
       <td className="p-4">
-        <div className="font-semibold text-slate-900">{vacina.nome}</div>
+        <div className="font-semibold text-neutral-900">{vacina.nome}</div>
       </td>
       <td className="p-4">
-        <div className="font-semibold text-slate-900">
+        <div className="font-semibold text-neutral-900">
           {formatarNumero(quantidade)}
         </div>
       </td>
@@ -403,12 +403,12 @@ const VacinaEstoqueRow = memo(({ vacina, formatarNumero }) => {
       </td>
       <td className="p-4">
         {vacina.publicado ? (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-green-100 text-green-800 border border-green-300">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-success/10 text-green-800 border border-success">
             <Shield className="w-3.5 h-3.5" />
             Sim
           </span>
         ) : (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-300">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold bg-neutral-100 text-neutral-800 border border-neutral-300">
             <Minus className="w-3.5 h-3.5" />
             Não
           </span>
@@ -452,14 +452,14 @@ const VacinaRow = memo(({ vacina, updateVacina }) => {
   };
   return (
     <tr
-      className="hover:bg-slate-50 transition-colors"
+      className="hover:bg-neutral-50 transition-colors"
       style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
     >
       <td className="p-4">
-        <div className="font-semibold text-slate-900">{vacina.nome}</div>
+        <div className="font-semibold text-neutral-900">{vacina.nome}</div>
       </td>
-      <td className="p-4 text-slate-600">{vacina.finalidade}</td>
-      <td className="p-4 text-slate-600">{vacina.publicoAlvo}</td>
+      <td className="p-4 text-neutral-600">{vacina.finalidade}</td>
+      <td className="p-4 text-neutral-600">{vacina.publicoAlvo}</td>
       <td className="p-4">
         <input
           type="number"
@@ -467,7 +467,7 @@ const VacinaRow = memo(({ vacina, updateVacina }) => {
           value={quantidade}
           onChange={(e) => setQuantidade(Number(e.target.value))}
           onBlur={(e) => handleUpdate("quantidade", Number(e.target.value))}
-          className="w-24 border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-24 border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           style={{
             fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
           }}
@@ -484,7 +484,7 @@ const VacinaRow = memo(({ vacina, updateVacina }) => {
               e.target.value ? new Date(e.target.value) : null
             )
           }
-          className="border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           style={{
             fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
           }}
@@ -501,7 +501,7 @@ const VacinaRow = memo(({ vacina, updateVacina }) => {
               e.target.value ? new Date(e.target.value) : null
             )
           }
-          className="border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           style={{
             fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
           }}
@@ -516,8 +516,8 @@ const VacinaRow = memo(({ vacina, updateVacina }) => {
           }}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold transition-colors ${
             publicado
-              ? "bg-green-100 text-green-800 hover:bg-green-200 border border-green-300"
-              : "bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-300"
+              ? "bg-success/10 text-green-800 hover:bg-green-200 border border-success"
+              : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 border border-neutral-300"
           }`}
           style={{
             fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -651,7 +651,7 @@ const ModalCriarVacina = memo(
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
           {}
-          <div className="bg-slate-700 p-6 flex items-center justify-between">
+          <div className="bg-neutral-700 p-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-md flex items-center justify-center">
                 <Plus className="w-6 h-6 text-white" />
@@ -667,7 +667,7 @@ const ModalCriarVacina = memo(
                   Nova Vacina
                 </h2>
                 <p
-                  className="text-slate-200 text-sm"
+                  className="text-neutral-200 text-sm"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -687,14 +687,14 @@ const ModalCriarVacina = memo(
           {}
           <form onSubmit={handleSubmit} className="p-6 space-y-4">
             {error && (
-              <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
+              <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-md">
                 <div className="flex gap-3">
                   <AlertCircle
                     size={20}
-                    className="text-red-600 flex-shrink-0 mt-0.5"
+                    className="text-error flex-shrink-0 mt-0.5"
                   />
                   <div
-                    className="text-sm text-red-900"
+                    className="text-sm text-error"
                     style={{
                       fontFamily:
                         'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -707,9 +707,9 @@ const ModalCriarVacina = memo(
             )}
             {}
             {vacinasDisponiveis.length > 0 && (
-              <div className="bg-slate-50 border border-slate-200 rounded-md p-4">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-md p-4">
                 <label
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-semibold text-neutral-700 mb-2"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -720,7 +720,7 @@ const ModalCriarVacina = memo(
                 <select
                   value={vacinaSelecionada}
                   onChange={(e) => handleSelecionarVacina(e.target.value)}
-                  className="w-full border border-slate-300 rounded-md px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                  className="w-full border border-neutral-300 rounded-md px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -734,7 +734,7 @@ const ModalCriarVacina = memo(
                   ))}
                 </select>
                 <p
-                  className="text-xs text-slate-600 mt-2"
+                  className="text-xs text-neutral-600 mt-2"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -748,7 +748,7 @@ const ModalCriarVacina = memo(
             {}
             <div>
               <label
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-neutral-700 mb-2"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -761,7 +761,7 @@ const ModalCriarVacina = memo(
                 onChange={(e) =>
                   setFormData({ ...formData, nome: e.target.value })
                 }
-                className="w-full border border-slate-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                className="w-full border border-neutral-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -772,7 +772,7 @@ const ModalCriarVacina = memo(
             {}
             <div>
               <label
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-neutral-700 mb-2"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -784,7 +784,7 @@ const ModalCriarVacina = memo(
                 onChange={(e) =>
                   setFormData({ ...formData, finalidade: e.target.value })
                 }
-                className="w-full border border-slate-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                className="w-full border border-neutral-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -796,7 +796,7 @@ const ModalCriarVacina = memo(
             {}
             <div>
               <label
-                className="block text-sm font-semibold text-slate-700 mb-2"
+                className="block text-sm font-semibold text-neutral-700 mb-2"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -809,7 +809,7 @@ const ModalCriarVacina = memo(
                 onChange={(e) =>
                   setFormData({ ...formData, publicoAlvo: e.target.value })
                 }
-                className="w-full border border-slate-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                className="w-full border border-neutral-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -821,7 +821,7 @@ const ModalCriarVacina = memo(
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-semibold text-neutral-700 mb-2"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -836,7 +836,7 @@ const ModalCriarVacina = memo(
                   onChange={(e) =>
                     setFormData({ ...formData, quantidade: e.target.value })
                   }
-                  className="w-full border border-slate-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                  className="w-full border border-neutral-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -845,7 +845,7 @@ const ModalCriarVacina = memo(
               </div>
               <div>
                 <label
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-semibold text-neutral-700 mb-2"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -859,7 +859,7 @@ const ModalCriarVacina = memo(
                   onChange={(e) =>
                     setFormData({ ...formData, periodoInicio: e.target.value })
                   }
-                  className="w-full border border-slate-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                  className="w-full border border-neutral-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -868,7 +868,7 @@ const ModalCriarVacina = memo(
               </div>
               <div>
                 <label
-                  className="block text-sm font-semibold text-slate-700 mb-2"
+                  className="block text-sm font-semibold text-neutral-700 mb-2"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -882,7 +882,7 @@ const ModalCriarVacina = memo(
                   onChange={(e) =>
                     setFormData({ ...formData, periodoFim: e.target.value })
                   }
-                  className="w-full border border-slate-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+                  className="w-full border border-neutral-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:border-transparent"
                   style={{
                     fontFamily:
                       'Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -899,11 +899,11 @@ const ModalCriarVacina = memo(
                 onChange={(e) =>
                   setFormData({ ...formData, publicado: e.target.checked })
                 }
-                className="w-4 h-4 text-slate-600 border-slate-300 rounded focus:ring-slate-500"
+                className="w-4 h-4 text-neutral-600 border-neutral-300 rounded focus:ring-neutral-500"
               />
               <label
                 htmlFor="publicado"
-                className="text-sm font-semibold text-slate-700"
+                className="text-sm font-semibold text-neutral-700"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -912,11 +912,11 @@ const ModalCriarVacina = memo(
               </label>
             </div>
             {}
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-neutral-200">
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 border border-slate-300 rounded-md text-slate-700 hover:bg-slate-50 transition-colors font-semibold"
+                className="px-4 py-2 border border-neutral-300 rounded-md text-neutral-700 hover:bg-neutral-50 transition-colors font-semibold"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -927,7 +927,7 @@ const ModalCriarVacina = memo(
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 bg-slate-700 text-white rounded-md hover:bg-slate-800 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-4 py-2 bg-neutral-700 text-white rounded-md hover:bg-neutral-800 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}

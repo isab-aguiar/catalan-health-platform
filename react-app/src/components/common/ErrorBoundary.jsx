@@ -22,16 +22,16 @@ class ErrorBoundary extends React.Component {
       const isDev = import.meta.env.DEV;
 
       return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-50">
+        <div className="flex items-center justify-center min-h-screen bg-neutral-50">
           <div className="text-center p-8 max-w-md">
-            <h1 className="text-2xl font-bold text-slate-900 mb-4">
+            <h1 className="text-2xl font-bold text-neutral-900 mb-4">
               Ops! Algo deu errado
             </h1>
-            <p className="text-slate-600 mb-6">
+            <p className="text-neutral-600 mb-6">
               Não foi possível carregar esta página. Por favor, tente novamente.
             </p>
             {isDev && error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md text-left">
+              <div className="mb-6 p-4 bg-error/10 border border-red-200 rounded-md text-left">
                 <p className="text-sm font-semibold text-red-800 mb-2">
                   Detalhes do erro (modo desenvolvimento):
                 </p>
@@ -40,7 +40,7 @@ class ErrorBoundary extends React.Component {
                 </p>
                 {error.stack && (
                   <details className="mt-2">
-                    <summary className="text-xs text-red-600 cursor-pointer">
+                    <summary className="text-xs text-error cursor-pointer">
                       Stack trace
                     </summary>
                     <pre className="text-xs text-red-700 mt-2 overflow-auto max-h-40">
@@ -56,13 +56,13 @@ class ErrorBoundary extends React.Component {
                   this.setState({ hasError: false, error: null });
                   window.location.href = '/';
                 }}
-                className="px-6 py-3 bg-slate-700 hover:bg-slate-800 text-white rounded-md font-semibold transition-colors duration-200"
+                className="px-6 py-3 bg-neutral-700 hover:bg-neutral-800 text-white rounded-md font-semibold transition-colors duration-200"
               >
                 Voltar para Início
               </button>
               <button
                 onClick={() => window.location.reload()}
-                className="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-md font-semibold transition-colors duration-200"
+                className="px-6 py-3 bg-neutral-200 hover:bg-neutral-300 text-neutral-800 rounded-md font-semibold transition-colors duration-200"
               >
                 Recarregar
               </button>

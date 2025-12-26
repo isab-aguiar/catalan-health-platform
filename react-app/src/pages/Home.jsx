@@ -156,7 +156,7 @@ export default function Home() {
           {!loadingCampanhas && campanhas && campanhas.length > 0 && (
             <div className="mb-12">
               <div className="text-center mb-8">
-                <p className="text-slate-600">
+                <p className="text-neutral-600">
                   Confira as campanhas e eventos em destaque
                 </p>
               </div>
@@ -236,11 +236,11 @@ export default function Home() {
                               href="https://wa.me/5537991770200"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-green-600 transition-colors"
+                              className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-success transition-colors"
                             >
                               <MessageCircle
                                 size={18}
-                                className="text-green-600 flex-shrink-0"
+                                className="text-success flex-shrink-0"
                               />
                               <span>(37) 99177-0200</span>
                             </a>
@@ -248,11 +248,11 @@ export default function Home() {
                               href="https://wa.me/5537991520024"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-green-600 transition-colors"
+                              className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-success transition-colors"
                             >
                               <MessageCircle
                                 size={18}
-                                className="text-green-600 flex-shrink-0"
+                                className="text-success flex-shrink-0"
                               />
                               <span>(37) 99152-0024</span>
                             </a>
@@ -552,7 +552,7 @@ export default function Home() {
               to="/servicos/vacinas"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-blue-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-info/100 group-hover:text-white transition-colors">
                 <Syringe size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -561,7 +561,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Calendário Nacional de Vacinação e horários de atendimento
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-blue-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -573,7 +573,7 @@ export default function Home() {
               to="/educacao"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-green-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-green-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-success/100 group-hover:text-white transition-colors">
                 <BookOpen size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -615,7 +615,7 @@ export default function Home() {
               to="/acs"
               className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-amber-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-warning/100 group-hover:text-white transition-colors">
                 <HeartHandshake size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -649,7 +649,7 @@ export default function Home() {
           <p className="text-neutral-700 mb-3 text-center text-base">
             Em situações de emergência médica, acione imediatamente o Serviço de
             Atendimento Móvel de Urgência (SAMU) pelo telefone{" "}
-            <span className="font-bold text-red-600">192</span>
+            <span className="font-bold text-error">192</span>
           </p>
           <div className="text-center">
             <Link

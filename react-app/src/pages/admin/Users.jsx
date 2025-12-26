@@ -185,8 +185,8 @@ export default function Users() {
   const getRoleColor = (role) => {
     const colors = {
       admin: "bg-purple-100 text-purple-700",
-      profissional: "bg-blue-100 text-blue-700",
-      diretoria: "bg-green-100 text-green-700",
+      profissional: "bg-info/10 text-primary-700",
+      diretoria: "bg-success/10 text-green-700",
     };
     return colors[role] || "bg-neutral-100 text-neutral-700";
   };
@@ -371,7 +371,7 @@ export default function Users() {
                       <button
                         onClick={() => handleEditarRole(user)}
                         disabled={isCurrentUser}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        className="p-2 text-info hover:bg-info/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                         title="Editar Role"
                       >
                         <Edit className="w-5 h-5" />
@@ -383,8 +383,8 @@ export default function Users() {
                         disabled={actionLoading === user.uid || isCurrentUser}
                         className={`p-2 rounded-lg transition-colors disabled:opacity-50 ${
                           user.active
-                            ? "text-red-600 hover:bg-red-50"
-                            : "text-green-600 hover:bg-green-50"
+                            ? "text-error hover:bg-error/10"
+                            : "text-success hover:bg-success/10"
                         }`}
                         title={user.active ? "Desativar" : "Ativar"}
                       >
