@@ -42,7 +42,7 @@ export default function Login() {
           {}
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-12 h-12 bg-neutral-700 rounded-md flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-primary-700 rounded-md flex items-center justify-center flex-shrink-0">
                 <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -168,7 +168,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-neutral-700 hover:bg-neutral-800 text-white font-semibold py-2.5 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
+              className="w-full bg-primary-700 hover:bg-primary-800 text-white font-semibold py-2.5 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}

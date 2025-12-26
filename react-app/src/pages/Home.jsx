@@ -508,9 +508,9 @@ export default function Home() {
             </Link>
             <Link
               to="/grupos"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-accent-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-accent-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
                 <Users size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -519,7 +519,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Grupos de atividades coletivas e promoção de saúde
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-accent-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -529,9 +529,9 @@ export default function Home() {
             </Link>
             <Link
               to="/equipe"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-secondary-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-secondary-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
                 <BriefcaseMedical size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -540,7 +540,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Conheça nossa equipe multiprofissional
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-secondary-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
