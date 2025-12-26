@@ -9,6 +9,7 @@ import {
   ativarCampanha,
   desativarCampanha,
   atualizarCampanha,
+  criarCampanha,
 } from "../../services/campanhasService";
 import { uploadArquivo } from "../../services/uploadService";
 import { campanhasLocais } from "../../data/campanhasLocais";
@@ -49,6 +50,30 @@ export default function Campanhas() {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [newImageFile, setNewImageFile] = useState(null);
   const [newImagePreview, setNewImagePreview] = useState(null);
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [createForm, setCreateForm] = useState({
+    titulo: "",
+    subtitulo: "",
+    descricao: "",
+    categoria: "campanha",
+    urgente: false,
+    destaque: false,
+    exibirNaHomepage: false,
+    local: "",
+    horario: "",
+    publicoAlvo: "",
+    contato: "",
+    cta: "Saiba Mais",
+    paginaDestino: "home",
+    dataInicio: "",
+    dataFim: "",
+    imagemURL: null,
+  });
+  const [createImageFile, setCreateImageFile] = useState(null);
+  const [createImagePreview, setCreateImagePreview] = useState(null);
+  const [creatingCampanha, setCreatingCampanha] = useState(false);
+  const [createImageFiles, setCreateImageFiles] = useState([]);
+  const [createImagePreviews, setCreateImagePreviews] = useState([]);
   useEffect(() => {
     loadCampanhas();
   }, []);
@@ -285,6 +310,132 @@ export default function Campanhas() {
       setUploadingImage(false);
     }
   };
+  // Funções para criação manual
+  const handleOpenCreateModal = () => {
+    setShowCreateModal(true);
+    setCreateForm({
+      titulo: "",
+      subtitulo: "",
+      descricao: "",
+      categoria: "campanha",
+      urgente: false,
+      destaque: false,
+      exibirNaHomepage: false,
+      local: "",
+      horario: "",
+      publicoAlvo: "",
+      contato: "",
+      cta: "Saiba Mais",
+      paginaDestino: "home",
+      dataInicio: "",
+      dataFim: "",
+      imagemURL: null,
+    });
+    setCreateImageFile(null);
+    setCreateImagePreview(null);
+    setCreateImageFiles([]);
+    setCreateImagePreviews([]);
+  };
+  const handleCloseCreateModal = () => {
+    setShowCreateModal(false);
+    setCreateForm({});
+    setCreateImageFile(null);
+    setCreateImagePreview(null);
+    setCreateImageFiles([]);
+    setCreateImagePreviews([]);
+  };
+  const handleCreateFileSelect = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+    const allowedTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+      "application/pdf",
+    ];
+    const validFiles = [];
+    const newPreviews = [];
+    for (const file of files) {
+      if (!allowedTypes.includes(file.type)) {
+        alert(`Arquivo ${file.name} não suportado. Use: JPG, PNG, WebP ou PDF`);
+        continue;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        alert(`Arquivo ${file.name} muito grande. Máximo: 10MB`);
+        continue;
+      }
+      validFiles.push(file);
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setCreateImagePreviews((prev) => [...prev, e.target.result]);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        newPreviews.push("PDF");
+      }
+    }
+    setCreateImageFiles((prev) => [...prev, ...validFiles]);
+    if (newPreviews.length > 0) {
+      setCreateImagePreviews((prev) => [...prev, ...newPreviews]);
+    }
+  };
+  const handleRemoveCreateImage = (index) => {
+    setCreateImageFiles((prev) => prev.filter((_, i) => i !== index));
+    setCreateImagePreviews((prev) => prev.filter((_, i) => i !== index));
+  };
+  const handleCreateCampanha = async () => {
+    if (
+      createImageFiles.length === 0 &&
+      !createForm.titulo &&
+      !createForm.descricao
+    ) {
+      alert("Por favor, adicione pelo menos uma imagem OU preencha título/descrição.");
+      return;
+    }
+    try {
+      setCreatingCampanha(true);
+      let campanhaData = { ...createForm };
+      if (createImageFiles.length > 0) {
+        const userId = currentUser?.uid || userData?.uid;
+        const uploadedImages = [];
+        for (const file of createImageFiles) {
+          const uploadResult = await uploadArquivo(file, userId, "campanhas");
+          uploadedImages.push({
+            url: uploadResult.url,
+            caminho: uploadResult.caminho,
+          });
+        }
+        if (uploadedImages.length === 1) {
+          campanhaData.imagemURL = uploadedImages[0].url;
+          campanhaData.imagemCaminho = uploadedImages[0].caminho;
+        } else {
+          campanhaData.imagemURL = uploadedImages[0].url;
+          campanhaData.imagemCaminho = uploadedImages[0].caminho;
+          campanhaData.imagens = uploadedImages;
+        }
+      }
+      campanhaData.dataInicio = campanhaData.dataInicio
+        ? new Date(campanhaData.dataInicio)
+        : null;
+      campanhaData.dataFim = campanhaData.dataFim
+        ? new Date(campanhaData.dataFim)
+        : null;
+      campanhaData.criadoPor = currentUser?.uid || userData?.uid;
+      campanhaData.criadoEm = new Date();
+      campanhaData.ativo = true;
+      await criarCampanha(campanhaData);
+      alert("✅ Campanha criada com sucesso!");
+      handleCloseCreateModal();
+      await loadCampanhas();
+    } catch (err) {
+      console.error("Erro ao criar campanha:", err);
+      alert(`❌ Erro ao criar campanha: ${err.message}`);
+    } finally {
+      setCreatingCampanha(false);
+    }
+  };
   const campanhasFiltradas = campanhas.filter((campanha) => {
     const matchSearch =
       searchTerm === "" ||
@@ -314,13 +465,22 @@ export default function Campanhas() {
                   Edite, ative/desative ou exclua campanhas
                 </p>
               </div>
-              <Link
-                to="/admin/chat-ia"
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-info-700 transition-colors"
-              >
-                <Plus className="w-4 h-4" />
-                Nova Campanha (IA)
-              </Link>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleOpenCreateModal}
+                  className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  Criar Manualmente
+                </button>
+                <Link
+                  to="/admin/chat-ia"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-info-700 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  Nova Campanha (IA)
+                </Link>
+              </div>
             </div>
             {}
             <div className="bg-white rounded-xl shadow-sm border border-neutral-200 p-4">
@@ -1002,6 +1162,373 @@ export default function Campanhas() {
           </div>
         </div>
       </div>
+      {/* Modal de Criação Manual */}
+      {showCreateModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-neutral-900">
+                Criar Nova Campanha Manualmente
+              </h2>
+              <button
+                onClick={handleCloseCreateModal}
+                disabled={creatingCampanha}
+                className="p-2 hover:bg-neutral-100 rounded-lg transition-colors disabled:opacity-50"
+              >
+                <XIcon className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-6 space-y-4">
+              {/* Upload de Múltiplas Imagens */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  Imagens ou PDFs da Campanha (Múltiplas)
+                </label>
+                <div className="space-y-3">
+                  {/* Grid de Previews */}
+                  {createImagePreviews.length > 0 && (
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {createImagePreviews.map((preview, index) => (
+                        <div key={index} className="relative">
+                          {preview !== "PDF" ? (
+                            <>
+                              <img
+                                src={preview}
+                                alt={`Preview ${index + 1}`}
+                                className="w-full h-32 object-cover rounded-lg border-2 border-blue-500"
+                              />
+                              <button
+                                onClick={() => handleRemoveCreateImage(index)}
+                                className="absolute top-1 right-1 p-1 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors shadow-lg"
+                                type="button"
+                              >
+                                <XIcon className="w-3 h-3" />
+                              </button>
+                            </>
+                          ) : (
+                            <div className="relative p-3 border-2 border-blue-500 rounded-lg bg-info/10 h-32 flex flex-col items-center justify-center">
+                              <FileText className="w-8 h-8 text-info mb-1" />
+                              <p className="text-xs text-info text-center">
+                                {createImageFiles[index]?.name}
+                              </p>
+                              <button
+                                onClick={() => handleRemoveCreateImage(index)}
+                                className="absolute top-1 right-1 p-1 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors shadow-lg"
+                                type="button"
+                              >
+                                <XIcon className="w-3 h-3" />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div>
+                    <input
+                      type="file"
+                      id="create-file-upload"
+                      accept="image/jpeg,image/jpg,image/png,image/webp,application/pdf"
+                      onChange={handleCreateFileSelect}
+                      className="hidden"
+                      multiple
+                    />
+                    <label
+                      htmlFor="create-file-upload"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-info-700 transition-colors cursor-pointer text-sm"
+                    >
+                      <Upload className="w-4 h-4" />
+                      {createImageFiles.length > 0
+                        ? `Adicionar Mais (${createImageFiles.length} selecionadas)`
+                        : "Selecionar Imagens/PDFs"}
+                    </label>
+                    <p className="text-xs text-neutral-500 mt-1">
+                      Formatos: JPG, PNG, WebP, PDF (máx 10MB cada) - Selecione múltiplos arquivos
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* Formulário */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Título
+                  </label>
+                  <input
+                    type="text"
+                    value={createForm.titulo}
+                    onChange={(e) =>
+                      setCreateForm({ ...createForm, titulo: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Digite o título da campanha (opcional)"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Subtítulo
+                  </label>
+                  <input
+                    type="text"
+                    value={createForm.subtitulo}
+                    onChange={(e) =>
+                      setCreateForm({
+                        ...createForm,
+                        subtitulo: e.target.value,
+                      })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Subtítulo (opcional)"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Descrição
+                  </label>
+                  <textarea
+                    value={createForm.descricao}
+                    onChange={(e) =>
+                      setCreateForm({
+                        ...createForm,
+                        descricao: e.target.value,
+                      })
+                    }
+                    rows={4}
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Descreva a campanha (opcional)..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Categoria
+                  </label>
+                  <select
+                    value={createForm.categoria}
+                    onChange={(e) =>
+                      setCreateForm({
+                        ...createForm,
+                        categoria: e.target.value,
+                      })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="vacina">Vacina</option>
+                    <option value="material">Material</option>
+                    <option value="campanha">Campanha</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Página Destino
+                  </label>
+                  <select
+                    value={createForm.paginaDestino}
+                    onChange={(e) => {
+                      const novaPagina = e.target.value;
+                      setCreateForm({
+                        ...createForm,
+                        paginaDestino: novaPagina,
+                        exibirNaHomepage: novaPagina === "home",
+                      });
+                    }}
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="home">Homepage</option>
+                    <optgroup label="Serviços">
+                      {allPages
+                        .filter((p) => p.category === "services")
+                        .map((page) => (
+                          <option key={page.id} value={page.id}>
+                            {page.title}
+                          </option>
+                        ))}
+                    </optgroup>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Local
+                  </label>
+                  <input
+                    type="text"
+                    value={createForm.local}
+                    onChange={(e) =>
+                      setCreateForm({ ...createForm, local: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Ex: UBS Catalão"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Horário
+                  </label>
+                  <input
+                    type="text"
+                    value={createForm.horario}
+                    onChange={(e) =>
+                      setCreateForm({ ...createForm, horario: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Ex: 08h às 12h"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Público-Alvo
+                  </label>
+                  <input
+                    type="text"
+                    value={createForm.publicoAlvo}
+                    onChange={(e) =>
+                      setCreateForm({
+                        ...createForm,
+                        publicoAlvo: e.target.value,
+                      })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Ex: Gestantes, Idosos"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Contato
+                  </label>
+                  <input
+                    type="text"
+                    value={createForm.contato}
+                    onChange={(e) =>
+                      setCreateForm({ ...createForm, contato: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Ex: (35) 3333-3333"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Data Início
+                  </label>
+                  <input
+                    type="date"
+                    value={createForm.dataInicio}
+                    onChange={(e) =>
+                      setCreateForm({
+                        ...createForm,
+                        dataInicio: e.target.value,
+                      })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Data Fim
+                  </label>
+                  <input
+                    type="date"
+                    value={createForm.dataFim}
+                    onChange={(e) =>
+                      setCreateForm({ ...createForm, dataFim: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-1">
+                    Texto do Botão
+                  </label>
+                  <input
+                    type="text"
+                    value={createForm.cta}
+                    onChange={(e) =>
+                      setCreateForm({ ...createForm, cta: e.target.value })
+                    }
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder="Ex: Saiba Mais"
+                  />
+                </div>
+                <div className="md:col-span-2 space-y-2">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={createForm.urgente}
+                      onChange={(e) =>
+                        setCreateForm({
+                          ...createForm,
+                          urgente: e.target.checked,
+                        })
+                      }
+                      className="w-4 h-4 text-info"
+                    />
+                    <span className="text-sm font-medium text-neutral-700">
+                      Marcar como urgente
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={createForm.destaque}
+                      onChange={(e) =>
+                        setCreateForm({
+                          ...createForm,
+                          destaque: e.target.checked,
+                        })
+                      }
+                      className="w-4 h-4 text-info"
+                    />
+                    <span className="text-sm font-medium text-neutral-700">
+                      Destacar campanha
+                    </span>
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={createForm.exibirNaHomepage}
+                      onChange={(e) =>
+                        setCreateForm({
+                          ...createForm,
+                          exibirNaHomepage: e.target.checked,
+                        })
+                      }
+                      className="w-4 h-4 text-info"
+                    />
+                    <span className="text-sm font-medium text-neutral-700">
+                      Exibir na homepage
+                    </span>
+                  </label>
+                </div>
+              </div>
+              {/* Botões */}
+              <div className="flex gap-3 pt-4 border-t border-neutral-200">
+                <button
+                  onClick={handleCreateCampanha}
+                  disabled={creatingCampanha}
+                  className="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors disabled:bg-green-400 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  {creatingCampanha ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Criando...
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-5 h-5" />
+                      Criar Campanha
+                    </>
+                  )}
+                </button>
+                <button
+                  onClick={handleCloseCreateModal}
+                  disabled={creatingCampanha}
+                  className="px-4 py-3 bg-neutral-200 text-neutral-700 rounded-lg hover:bg-neutral-300 transition-colors disabled:opacity-50"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </AdminLayout>
   );
 }

@@ -181,7 +181,7 @@ export default function ChatIA() {
         </div>
         {}
         <div className="text-center text-xs text-neutral-400 mt-3">
-          Powered by Gemini 2.5 Flash
+          Powered by Gemini 2.0 Flash
         </div>
       </div>
       {}
