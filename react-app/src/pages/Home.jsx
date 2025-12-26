@@ -550,9 +550,9 @@ export default function Home() {
             </Link>
             <Link
               to="/servicos/vacinas"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-blue-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-info/100 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
                 <Syringe size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -571,9 +571,9 @@ export default function Home() {
             </Link>
             <Link
               to="/educacao"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-green-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-success/100 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
                 <BookOpen size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -582,7 +582,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Informações e orientações sobre saúde e prevenção
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-green-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -592,9 +592,9 @@ export default function Home() {
             </Link>
             <Link
               to="/remsa"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-purple-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
                 <GraduationCap size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -603,7 +603,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Residência Multiprofissional em Saúde
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-purple-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
@@ -613,9 +613,9 @@ export default function Home() {
             </Link>
             <Link
               to="/acs"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:border-amber-200 hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-warning/100 group-hover:text-white transition-colors">
+              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
                 <HeartHandshake size={48} strokeWidth={2} />
               </div>
               <h3 className="text-2xl font-bold mb-2 text-neutral-900">
@@ -624,7 +624,7 @@ export default function Home() {
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
                 Encontre o ACS responsável pela sua área
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-amber-700">
+              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
                   size={18}
