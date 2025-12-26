@@ -3,88 +3,100 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Gov.br Primary Blue (Blue Warm Vivid)
         primary: {
-          50: "#EFF6FF",
-          100: "#DBEAFE",
-          200: "#BFDBFE",
-          300: "#93C5FD",
-          400: "#60A5FA",
-          500: "#1E3A8A",
-          600: "#1E40AF",
-          700: "#1E3A8A",
-          800: "#1E3A8A",
-          900: "#0F172A",
-          DEFAULT: "#1E3A8A",
+          50: "#EBF5FB",
+          100: "#D4E9F7",
+          200: "#A9D3EF",
+          300: "#7FBDE7",
+          400: "#54A7DF",
+          500: "#1351B4", // Gov.br Blue Warm Vivid 70
+          600: "#0F4193",
+          700: "#0C326F", // Gov.br Blue Warm Vivid 80
+          800: "#08224A",
+          900: "#041125",
+          DEFAULT: "#1351B4",
         },
+        // Gov.br Secondary Orange
         secondary: {
-          50: "#FEF2F2",
-          100: "#FEE2E2",
-          200: "#FECACA",
-          300: "#FCA5A5",
-          400: "#F87171",
-          500: "#991B1B",
-          600: "#7F1D1D",
-          700: "#7F1D1D",
-          800: "#7F1D1D",
-          900: "#450A0A",
-          DEFAULT: "#991B1B",
+          50: "#FEF3E8",
+          100: "#FCE7D1",
+          200: "#F9CFA3",
+          300: "#F6B775",
+          400: "#F39F47",
+          500: "#F08619", // Gov.br Orange
+          600: "#C06B14",
+          700: "#90500F",
+          800: "#60360A",
+          900: "#301B05",
+          DEFAULT: "#F08619",
         },
+        // Gov.br Supporting Teal
         accent: {
-          50: "#F0FDFA",
-          100: "#CCFBF1",
-          200: "#99F6E4",
-          300: "#5EEAD4",
-          400: "#2DD4BF",
-          500: "#0F766E",
-          600: "#0D9488",
-          700: "#0F766E",
-          800: "#115E59",
-          900: "#134E4A",
-          DEFAULT: "#0F766E",
+          50: "#E6F7F5",
+          100: "#CCEFEB",
+          200: "#99DFD7",
+          300: "#66CFC3",
+          400: "#33BFAF",
+          500: "#00AF9B", // Gov.br Teal
+          600: "#008C7C",
+          700: "#00695D",
+          800: "#00463E",
+          900: "#00231F",
+          DEFAULT: "#00AF9B",
         },
-        green: {
-          50: "#F0FDF4",
-          100: "#DCFCE7",
-          200: "#BBF7D0",
-          300: "#86EFAC",
-          400: "#4ADE80",
-          500: "#047857",
-          600: "#059669",
-          700: "#047857",
-          800: "#065F46",
-          900: "#064E3B",
-          DEFAULT: "#047857",
-        },
+        // Gov.br Neutral Scale (Gray Cool)
         neutral: {
-          50: "#F5F5F5",
-          100: "#E8E8E8",
-          200: "#D1D1D1",
-          300: "#C6C6C6",
-          400: "#9A9A9A",
-          500: "#6E6E6E",
-          600: "#3C3C3C",
-          700: "#2E2E2E",
-          800: "#1A1A1A",
-          900: "#020203",
+          50: "#F8F9FA",   // Gray 2
+          100: "#EDEFF2",  // Gray 5
+          200: "#DCDFE3",  // Gray 10
+          300: "#ADADAD",  // Gray 30
+          400: "#888D94",  // Gray 40
+          500: "#6C717A",  // Gray 50
+          600: "#565C65",  // Gray 60
+          700: "#43464A",  // Gray 70
+          800: "#2E2F31",  // Gray 80
+          900: "#1C1D1F",  // Gray 90
         },
-        success: "#047857",
-        warning: "#D97706",
-        error: "#B91C1C",
-        info: "#1E40AF",
+        // Gov.br Semantic Colors
+        success: {
+          DEFAULT: "#168821", // Gov.br Green Cool Vivid 50
+          light: "#D4EDDA",
+          dark: "#0F5C16",
+        },
+        warning: {
+          DEFAULT: "#FFCD07", // Gov.br Yellow Vivid 20
+          light: "#FFF9DB",
+          dark: "#B38F05",
+        },
+        error: {
+          DEFAULT: "#E52207", // Gov.br Red Vivid 50
+          light: "#F8D7DA",
+          dark: "#A01805",
+        },
+        info: {
+          DEFAULT: "#155BCB", // Gov.br Blue Warm Vivid 60
+          light: "#D4E3F7",
+          dark: "#0E3D8A",
+        },
+        // Text colors
         text: {
-          primary: "#020203",
-          secondary: "#3C3C3C",
-          disabled: "#C6C6C6",
+          primary: "#1C1D1F",    // Gray 90
+          secondary: "#43464A",  // Gray 70
+          disabled: "#ADADAD",   // Gray 30
         },
+        // Background colors
         bg: {
-          body: "#F5F5F5",
+          body: "#F8F9FA",    // Gray 2
           surface: "#FFFFFF",
         },
-        border: "#C6C6C6",
+        // Border color
+        border: "#DCDFE3", // Gray 10
       },
       fontFamily: {
         sans: [
-          "Roboto",
+          "Rawline",
+          "Source Sans Pro",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",
@@ -92,15 +104,8 @@ export default {
           "sans-serif",
         ],
         heading: [
-          "Roboto",
-          "-apple-system",
-          "BlinkMacSystemFont",
-          "Segoe UI",
-          "Arial",
-          "sans-serif",
-        ],
-        display: [
-          "Montserrat",
+          "Rawline",
+          "Source Sans Pro",
           "-apple-system",
           "BlinkMacSystemFont",
           "Segoe UI",

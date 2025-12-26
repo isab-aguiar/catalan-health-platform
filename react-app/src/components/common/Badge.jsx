@@ -5,12 +5,12 @@ export default function Badge({
   className = '',
 }) {
   const variants = {
-    default: 'bg-slate-100 text-slate-800 border border-slate-300',
-    primary: 'bg-slate-700 text-white border border-slate-800',
-    secondary: 'bg-slate-200 text-slate-900 border border-slate-300',
-    warning: 'bg-amber-100 text-amber-900 border border-amber-300',
-    error: 'bg-error text-white border border-error',
-    success: 'bg-green-100 text-green-900 border border-green-300',
+    default: 'bg-neutral-100 text-neutral-800 border border-neutral-300',
+    primary: 'bg-primary-600 text-white border border-primary-700',
+    secondary: 'bg-neutral-200 text-neutral-900 border border-neutral-300',
+    warning: 'bg-warning/20 text-warning-dark border border-warning',
+    error: 'bg-error/10 text-error border border-error',
+    success: 'bg-success/10 text-success-dark border border-success',
   };
 
   const sizes = {

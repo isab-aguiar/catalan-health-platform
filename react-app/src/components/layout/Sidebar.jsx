@@ -1,9 +1,12 @@
 import { useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { X, Lock, User } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Sidebar({ isOpen, onClose }) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const prevPathname = useRef(location.pathname);
 
   useEffect(() => {
@@ -60,6 +63,31 @@ export default function Sidebar({ isOpen, onClose }) {
         </div>
 
         <nav className="flex-1 overflow-y-auto py-4">
+          <div className="px-3 mb-4 -mt-2.5">
+            {currentUser ? (
+              <button
+                onClick={() => {
+                  navigate('/admin/painel');
+                  onClose();
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-colors font-semibold"
+              >
+                <User size={20} />
+                <span>Painel</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  navigate('/admin/login');
+                  onClose();
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-semibold shadow-md"
+              >
+                <Lock size={20} />
+                <span>Acesso Restrito</span>
+              </button>
+            )}
+          </div>
           <ul className="space-y-1 px-3">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;

@@ -2,24 +2,24 @@ import { Info, AlertTriangle, CheckCircle, XCircle, X } from 'lucide-react';
 
 const variants = {
   info: {
-    container: 'bg-slate-50 border-l-4 border-slate-300 text-slate-800',
+    container: 'bg-info/10 border-l-4 border-info text-neutral-900',
     icon: Info,
-    iconColor: 'text-slate-600',
+    iconColor: 'text-info',
   },
   success: {
-    container: 'bg-green-50 border-l-4 border-green-600 text-green-900',
+    container: 'bg-success/10 border-l-4 border-success text-neutral-900',
     icon: CheckCircle,
-    iconColor: 'text-green-600',
+    iconColor: 'text-success',
   },
   warning: {
-    container: 'bg-amber-50 border-l-4 border-amber-500 text-amber-900',
+    container: 'bg-warning/10 border-l-4 border-warning text-neutral-900',
     icon: AlertTriangle,
-    iconColor: 'text-amber-600',
+    iconColor: 'text-warning-dark',
   },
   error: {
-    container: 'bg-red-50 border-l-4 border-red-600 text-red-900',
+    container: 'bg-error/10 border-l-4 border-error text-neutral-900',
     icon: XCircle,
-    iconColor: 'text-red-600',
+    iconColor: 'text-error',
   },
 };
 

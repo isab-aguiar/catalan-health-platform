@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Search, Lock, User } from 'lucide-react';
+import { Menu, X, Search } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import GlobalSearch from '../search/GlobalSearch';
 import { usePageSearch } from '../../hooks/usePageSearch';
-import { useAuth } from '../../contexts/AuthContext';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -15,7 +14,6 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const searchResults = usePageSearch(searchQuery);
-  const { currentUser } = useAuth();
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -98,7 +96,7 @@ export default function Header() {
       {!isMobileMenuOpen && (
         <Link
           to="/"
-          className="fixed top-0 left-[15px] z-50 h-[70px] flex items-center justify-center group"
+          className="fixed -top-[3px] left-[20px] z-50 h-[70px] flex items-center justify-center group"
         >
           <img
             src="/favicon.png"
@@ -111,7 +109,7 @@ export default function Header() {
         <div className="w-full h-[70px] flex items-center justify-between gap-4 px-4">
           <div
             ref={searchRef}
-            className="hidden lg:flex w-full max-w-2xl relative"
+            className="hidden lg:flex w-full max-w-2xl relative ml-[35px]"
           >
             <div className="relative w-full">
               <Search
@@ -200,25 +198,6 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
-            {currentUser ? (
-              <button
-                onClick={() => navigate('/admin/painel')}
-                className="flex items-center gap-2 px-4 py-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-colors font-medium text-sm"
-              >
-                <User size={18} />
-                <span>Painel</span>
-              </button>
-            ) : (
-              <button
-                onClick={() => navigate('/admin/login')}
-                className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium text-sm shadow-sm hover:shadow-md"
-              >
-                <Lock size={18} />
-                <span>Acesso Restrito</span>
-              </button>
-            )}
-          </div>
         </div>
       </header>
       {isSearchOpen && <GlobalSearch onClose={() => setIsSearchOpen(false)} />}
