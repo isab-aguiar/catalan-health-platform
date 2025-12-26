@@ -28,17 +28,21 @@ function Alert({ type = "info", children }) {
     info: {
       bg: "bg-info/10",
       border: "border-info",
-      text: "text-info",
+      text: "text-neutral-900",
       icon: "text-info",
     },
     warning: {
-      bg: "bg-warning/10",
-      border: "border-warning",
-      text: "text-warning-dark",
-      icon: "text-warning-dark",
+      bg: "bg-success/15",
+      border: "border-success",
+      text: "text-neutral-900",
+      icon: "text-success-dark",
     },
   };
   const style = types[type];
+  const childrenText = typeof children === 'string' ? children : children?.props?.children || '';
+  const hasImportante = String(childrenText).toLowerCase().includes('importante:');
+  const textColor = hasImportante ? 'text-info' : 'text-neutral-900';
+  const strongColor = hasImportante ? '[&_strong]:text-info' : (type === 'warning' ? '[&_strong]:text-success-dark' : type === 'info' ? '[&_strong]:text-info' : '');
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -48,7 +52,9 @@ function Alert({ type = "info", children }) {
           size={20}
           className={`flex-shrink-0 mt-0.5 ${style.icon}`}
         />
-        <div className="text-sm leading-relaxed">{children}</div>
+        <div className={`text-sm leading-relaxed ${textColor} font-medium [&_strong]:font-normal ${strongColor}`}>
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -144,8 +150,7 @@ export default function Sala4() {
               necessário apresentar documentação completa para protocolização.
             </p>
             <p className="text-xs text-neutral-500 italic">
-              Nota: O acompanhamento da posição na fila é realizado na Sala 9-
-              Administração.
+              Nota: O acompanhamento da posição na fila é realizado na  Sala de atendimento administrativo.
             </p>
           </div>
         </InfoBox>
@@ -195,7 +200,7 @@ export default function Sala4() {
                       Comprovante de Residência
                     </strong>
                     <p className="text-xs text-neutral-600 mt-0.5">
-                      Atualizado há no máximo 30 dias
+                      Atualizado há no máximo 90 dias
                     </p>
                   </div>
                 </div>
@@ -431,15 +436,15 @@ export default function Sala4() {
                 atendimento e otimização do tempo de espera.
               </p>
             </div>
-            <div className="bg-warning/10 border border-amber-200 rounded p-4">
+            <div className="bg-info/10 border border-info rounded p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Atendimento Sob Demanda (Sem Agendamento)
+                Atendimento Sob Demanda
               </h3>
               <p className="text-neutral-700 leading-relaxed text-sm mb-3">
                 O atendimento sob demanda está disponível mediante triagem
                 clínica inicial realizada no período das 07h00 às 08h00.
               </p>
-              <div className="bg-white border-l-4 border-warning p-3 rounded-r">
+              <div className="bg-white border-l-4 border-info p-3 rounded-r">
                 <p className="text-sm text-neutral-800 leading-relaxed">
                   <strong>Como funciona a Triagem:</strong> A triagem é uma
                   avaliação clínica inicial realizada por profissional de
