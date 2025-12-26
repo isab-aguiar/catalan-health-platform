@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { campanhasLocais } from "../data/campanhasLocais";
 import { onSnapshot, query, collection } from "firebase/firestore";
 import { db } from "../config/firebase";
 export function useAllCampanhas() {
@@ -17,13 +16,12 @@ export function useAllCampanhas() {
           dataInicio: doc.data().dataInicio?.toDate(),
           dataFim: doc.data().dataFim?.toDate(),
         }));
-        const todasCampanhas = [...campanhasFirebase, ...campanhasLocais];
-        setCampanhas(todasCampanhas);
+        setCampanhas(campanhasFirebase);
         setLoading(false);
       },
       (err) => {
         setError(err.message);
-        setCampanhas(campanhasLocais);
+        setCampanhas([]);
         setLoading(false);
       }
     );

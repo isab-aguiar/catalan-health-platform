@@ -5,7 +5,6 @@ import {
   LayoutDashboard,
   Bell,
   Users,
-  MessageSquare,
   User,
   LogOut,
   Home,
@@ -56,13 +55,6 @@ export default function AdminSidebar({
       icon: Users,
       path: "/admin/users",
       permission: "canManageUsers",
-    },
-    {
-      id: "chat-ia",
-      label: "Assistente IA",
-      icon: MessageSquare,
-      path: "/admin/chat-ia",
-      permission: "canCreateAvisos",
     },
     {
       id: "estoque-vacinas",

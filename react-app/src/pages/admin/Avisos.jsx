@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useAvisos } from "../../hooks/useAvisos";
 import { usePermissions } from "../../hooks/usePermissions";
 import AdminLayout from "../../layouts/AdminLayout";
@@ -10,8 +9,6 @@ import {
   Plus,
   X,
   Save,
-  MessageSquare,
-  Sparkles,
   AlertCircle,
 } from "lucide-react";
 import { allPages } from "../../data/services";
@@ -243,24 +240,14 @@ export default function Avisos() {
             </div>
             <div className="flex items-center gap-3">
               {permissions.canCreateAvisos() && (
-                <>
-                  <Link
-                    to="/admin/chat-ia"
-                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors font-medium text-sm border border-purple-700 shadow-sm"
-                  >
-                    <Sparkles className="w-4 h-4" />
-                    <span className="hidden sm:inline">Assistente IA</span>
-                    <span className="sm:hidden">IA</span>
-                  </Link>
-                  <button
-                    onClick={handleNovoAviso}
-                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium text-sm border border-blue-700 shadow-sm"
-                  >
-                    <Plus className="w-4 h-4" />
-                    <span className="hidden sm:inline">Cadastrar Aviso</span>
-                    <span className="sm:hidden">Novo</span>
-                  </button>
-                </>
+                <button
+                  onClick={handleNovoAviso}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium text-sm border border-blue-700 shadow-sm"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span className="hidden sm:inline">Cadastrar Aviso</span>
+                  <span className="sm:hidden">Novo</span>
+                </button>
               )}
             </div>
           </div>
@@ -278,23 +265,6 @@ export default function Avisos() {
           </div>
         )}
         {}
-        {permissions.canCreateAvisos() && avisos.length > 0 && (
-          <div className="bg-info/10 border border-blue-200 rounded-md p-4">
-            <div className="flex items-start gap-3">
-              <MessageSquare className="w-5 h-5 text-primary-700 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm text-info font-semibold">
-                  Utilize o Assistente Inteligente
-                </p>
-                <p className="text-sm text-blue-800 mt-1">
-                  Gere avisos automaticamente descrevendo a situação em
-                  linguagem natural.
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-        {}
         {avisos.length === 0 ? (
           <div className="bg-white rounded-md p-12 text-center border border-neutral-300 shadow-sm">
             <div className="w-20 h-20 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-neutral-200">
@@ -304,27 +274,17 @@ export default function Avisos() {
               Nenhum Aviso Cadastrado
             </h3>
             <p className="text-neutral-600 mb-6 max-w-md mx-auto">
-              Cadastre o primeiro aviso do sistema utilizando o formulário
-              manual ou o assistente inteligente
+              Cadastre o primeiro aviso do sistema utilizando o formulário manual
             </p>
             <div className="flex items-center justify-center gap-3">
               {permissions.canCreateAvisos() && (
-                <>
-                  <Link
-                    to="/admin/chat-ia"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-md transition-colors font-medium border border-purple-700 shadow-sm"
-                  >
-                    <Sparkles className="w-5 h-5" />
-                    Usar Assistente IA
-                  </Link>
-                  <button
-                    onClick={handleNovoAviso}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium border border-blue-700 shadow-sm"
-                  >
-                    <Plus className="w-5 h-5" />
-                    Cadastrar Manualmente
-                  </button>
-                </>
+                <button
+                  onClick={handleNovoAviso}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium border border-blue-700 shadow-sm"
+                >
+                  <Plus className="w-5 h-5" />
+                  Cadastrar Novo Aviso
+                </button>
               )}
             </div>
           </div>

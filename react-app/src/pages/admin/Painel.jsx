@@ -232,25 +232,6 @@ export default function Painel() {
                 <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-success group-hover:translate-x-1 transition-all" />
               </Link>
             )}
-            {permissions.canCreateAvisos() && (
-              <Link
-                to="/admin/chat-ia"
-                className="flex items-center gap-4 p-4 border-2 border-purple-200 rounded-md hover:border-purple-400 hover:bg-purple-50 transition-all group"
-              >
-                <div className="w-12 h-12 bg-purple-100 rounded-md flex items-center justify-center group-hover:bg-purple-600 transition-colors border border-purple-200">
-                  <MessageSquare className="w-6 h-6 text-purple-700 group-hover:text-white transition-colors" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-neutral-900 text-base">
-                    Assistente Inteligente
-                  </h3>
-                  <p className="text-sm text-neutral-600">
-                    Gerar avisos e campanhas com IA
-                  </p>
-                </div>
-                <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
-              </Link>
-            )}
             <Link
               to="/admin/estoque-vacinas"
               className="flex items-center gap-4 p-4 border-2 border-neutral-300 rounded-md hover:border-neutral-500 hover:bg-neutral-50 transition-all group"

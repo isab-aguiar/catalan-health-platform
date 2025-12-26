@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { buscarCampanhasHome } from "../services/campanhasService";
-import { campanhasLocais } from "../data/campanhasLocais";
 let campanhasCache = null;
 let cacheTimestamp = null;
 const CACHE_DURATION = 5 * 60 * 1000;
@@ -51,12 +50,8 @@ export function useCampanhas() {
           }
         }
       }
-      const locaisFiltradas = campanhasLocais.filter(
-        (c) => c.exibirNaHomepage && c.ativo
-      );
-      const todasCampanhas = [...campanhasFirebase, ...locaisFiltradas];
       if (isMounted.current) {
-        setCampanhas(todasCampanhas);
+        setCampanhas(campanhasFirebase);
         setLoading(false);
       }
     } catch (err) {
@@ -66,10 +61,7 @@ export function useCampanhas() {
         } else {
           setError(err.message);
         }
-        const locaisFiltradas = campanhasLocais.filter(
-          (c) => c.exibirNaHomepage && c.ativo
-        );
-        setCampanhas(locaisFiltradas);
+        setCampanhas([]);
         setLoading(false);
       }
     }

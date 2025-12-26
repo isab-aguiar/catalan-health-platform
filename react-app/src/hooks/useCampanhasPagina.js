@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { campanhasLocais } from "../data/campanhasLocais";
 import { onSnapshot, query, collection, where } from "firebase/firestore";
 import { db } from "../config/firebase";
 export function useCampanhasPagina(paginaNome) {
@@ -21,21 +20,12 @@ export function useCampanhasPagina(paginaNome) {
           dataInicio: doc.data().dataInicio?.toDate(),
           dataFim: doc.data().dataFim?.toDate(),
         }));
-        const locaisFiltradas = campanhasLocais.filter(
-          (c) =>
-            c.paginaDestino === paginaNome && c.ativo && !c.exibirNaHomepage
-        );
-        const todasCampanhas = [...campanhasFirebase, ...locaisFiltradas];
-        setCampanhas(todasCampanhas);
+        setCampanhas(campanhasFirebase);
         setLoading(false);
       },
       (err) => {
         setError(err.message);
-        const locaisFiltradas = campanhasLocais.filter(
-          (c) =>
-            c.paginaDestino === paginaNome && c.ativo && !c.exibirNaHomepage
-        );
-        setCampanhas(locaisFiltradas);
+        setCampanhas([]);
         setLoading(false);
       }
     );

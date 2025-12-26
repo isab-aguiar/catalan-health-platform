@@ -12,7 +12,6 @@ import {
   criarCampanha,
 } from "../../services/campanhasService";
 import { uploadArquivo } from "../../services/uploadService";
-import { campanhasLocais } from "../../data/campanhasLocais";
 import { allPages } from "../../data/services";
 import {
   Trash2,
@@ -34,7 +33,6 @@ import {
   Image,
   X as XIcon,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 export default function Campanhas() {
   const { currentUser, userData, isAdmin, isProfissional, isDiretoria } =
     useAuth();
@@ -98,8 +96,7 @@ export default function Campanhas() {
           data.length
         );
       }
-      const todasCampanhas = [...data, ...campanhasLocais];
-      setCampanhas(todasCampanhas);
+      setCampanhas(data);
     } catch (err) {
       setError(err.message);
       console.error("Erro ao carregar campanhas:", err);
@@ -114,32 +111,14 @@ export default function Campanhas() {
       );
       return;
     }
-    const campanha = campanhas.find((c) => c.id === id);
-    if (campanha?.isLocal) {
-      if (
-        !confirm(
-          '⚠️ ATENÇÃO: Esta é uma campanha LOCAL (hardcoded no código).\n\nEla será removida temporariamente da tela, mas VOLTARÁ quando você recarregar a página.\n\nPara removê-la permanentemente, um desenvolvedor precisa editá-la no arquivo "campanhasLocais.js".\n\nDeseja continuar mesmo assim?'
-        )
-      ) {
-        return;
-      }
-    } else {
-      if (
-        !confirm(
-          "Tem certeza que deseja deletar esta campanha PERMANENTEMENTE do Firebase?"
-        )
-      ) {
-        return;
-      }
+    if (
+      !confirm(
+        "Tem certeza que deseja deletar esta campanha PERMANENTEMENTE do Firebase?"
+      )
+    ) {
+      return;
     }
     try {
-      if (campanha?.isLocal) {
-        setCampanhas((prev) => prev.filter((c) => c.id !== id));
-        alert(
-          "✅ Campanha local removida temporariamente.\n\n⚠️ Ela voltará ao recarregar a página."
-        );
-        return;
-      }
       await deletarCampanha(id);
       setCampanhas((prev) => prev.filter((c) => c.id !== id));
       await loadCampanhas();
@@ -151,14 +130,7 @@ export default function Campanhas() {
     }
   };
   const handleToggleAtivo = async (id, ativo) => {
-    const campanha = campanhas.find((c) => c.id === id);
     try {
-      if (campanha?.isLocal) {
-        setCampanhas((prev) =>
-          prev.map((c) => (c.id === id ? { ...c, ativo: !ativo } : c))
-        );
-        return;
-      }
       if (ativo) {
         await desativarCampanha(id);
       } else {
@@ -196,7 +168,6 @@ export default function Campanhas() {
         ? campanha.dataFim.toISOString().split("T")[0]
         : "",
       imagemURL: campanha.imagemURL || null,
-      isLocal: campanha.isLocal || false,
     });
   };
   // Cancelar edição
@@ -243,30 +214,6 @@ export default function Campanhas() {
     try {
       setUploadingImage(true);
       let updatedData = { ...editForm };
-      if (editForm.isLocal) {
-        setCampanhas((prev) =>
-          prev.map((c) =>
-            c.id === id
-              ? {
-                  ...c,
-                  ...updatedData,
-                  dataInicio: updatedData.dataInicio
-                    ? new Date(updatedData.dataInicio)
-                    : null,
-                  dataFim: updatedData.dataFim
-                    ? new Date(updatedData.dataFim)
-                    : null,
-                }
-              : c
-          )
-        );
-        setEditingId(null);
-        setEditForm({});
-        setNewImageFile(null);
-        setNewImagePreview(null);
-        alert("Campanha atualizada com sucesso.");
-        return;
-      }
       if (!currentUser?.uid && !userData?.uid) {
         alert("Erro: Usuário não autenticado. Faça login novamente.");
         return;
@@ -471,15 +418,8 @@ export default function Campanhas() {
                   className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                 >
                   <Plus className="w-4 h-4" />
-                  Criar Manualmente
+                  Nova Campanha
                 </button>
-                <Link
-                  to="/admin/chat-ia"
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-info-700 transition-colors"
-                >
-                  <Plus className="w-4 h-4" />
-                  Nova Campanha (IA)
-                </Link>
               </div>
             </div>
             {}
@@ -981,12 +921,6 @@ export default function Campanhas() {
                             <div className="flex items-start justify-between mb-4">
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-2 flex-wrap">
-                                  {campanha.isLocal && (
-                                    <span className="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-700 rounded flex items-center gap-1 border border-gray-300">
-                                      <FileText className="w-3 h-3" />
-                                      Local (Assets)
-                                    </span>
-                                  )}
                                   <span
                                     className={`text-xs font-semibold px-2 py-1 rounded ${
                                       campanha.categoria === "vacina"
@@ -1121,17 +1055,10 @@ export default function Campanhas() {
                                 <button
                                   onClick={() => handleDelete(campanha.id)}
                                   className="flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm"
-                                  title={
-                                    campanha.isLocal
-                                      ? "⚠️ Campanha local - remoção temporária"
-                                      : "Deletar permanentemente"
-                                  }
+                                  title="Deletar permanentemente"
                                 >
                                   <Trash2 className="w-4 h-4" />
                                   Deletar
-                                  {campanha.isLocal && (
-                                    <span className="text-xs">(temp)</span>
-                                  )}
                                 </button>
                               )}
                               {}
@@ -1143,8 +1070,7 @@ export default function Campanhas() {
                               )}
                               {}
                               {isProfissional &&
-                                campanha.criadoPor !== currentUser?.uid &&
-                                !campanha.isLocal && (
+                                campanha.criadoPor !== currentUser?.uid && (
                                   <div className="text-sm text-neutral-400 italic py-2">
                                     🔒 Esta campanha foi criada por outro
                                     profissional
