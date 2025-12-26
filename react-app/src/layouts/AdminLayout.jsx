@@ -71,7 +71,7 @@ export default function AdminLayout({ children, currentPage = 'dashboard' }) {
           <div className="max-w-5xl mx-auto">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="bg-blue-900 text-white p-3 rounded-md shadow-sm hover:bg-blue-950 transition-colors flex items-center gap-2 px-4 mb-6"
+              className="bg-primary-700 text-white p-3 rounded-md shadow-sm hover:bg-primary-800 transition-colors flex items-center gap-2 px-4 mb-6"
               aria-label="Abrir menu"
             >
               <Menu className="w-5 h-5" />
