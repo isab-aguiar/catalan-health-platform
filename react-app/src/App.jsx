@@ -79,7 +79,6 @@ const Painel = lazyLoad(() => import("./pages/admin/Painel"));
 const Avisos = lazyLoad(() => import("./pages/admin/Avisos"));
 const Campanhas = lazyLoad(() => import("./pages/admin/Campanhas"));
 const Users = lazyLoad(() => import("./pages/admin/Users"));
-const ChatIA = lazyLoad(() => import("./pages/admin/ChatIA"));
 const CorrigirPermissoes = lazyLoad(
   () => import("./pages/admin/CorrigirPermissoes")
 );
@@ -199,14 +198,6 @@ function App() {
                         element={
                           <ProtectedRoute>
                             <Campanhas />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/admin/chat-ia"
-                        element={
-                          <ProtectedRoute>
-                            <ChatIA />
                           </ProtectedRoute>
                         }
                       />
