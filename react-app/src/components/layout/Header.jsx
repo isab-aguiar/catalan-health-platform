@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Search, Lock, User, Shield } from 'lucide-react';
+import { Menu, X, Search, Lock, User } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import GlobalSearch from '../search/GlobalSearch';
 import { usePageSearch } from '../../hooks/usePageSearch';
@@ -98,11 +98,13 @@ export default function Header() {
       {!isMobileMenuOpen && (
         <Link
           to="/"
-          className="fixed top-0 left-0 z-50 p-3 bg-white hover:bg-neutral-50 transition-colors flex items-center justify-center group"
+          className="fixed top-0 left-0 z-50 h-[70px] flex items-center justify-center group"
         >
-          <div className="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center shadow-sm group-hover:bg-slate-800 transition-colors flex-shrink-0">
-            <Shield className="w-6 h-6 text-white" />
-          </div>
+          <img
+            src="/favicon.png"
+            alt="Logo"
+            className="h-full max-h-10 w-auto object-contain"
+          />
         </Link>
       )}
       <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-12 sm:pl-[140px] md:pl-[200px] pr-12 sm:pr-[60px] overflow-x-hidden w-full">
