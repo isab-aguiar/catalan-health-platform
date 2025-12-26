@@ -98,7 +98,7 @@ export const allPages = [
   },
   {
     id: "medicacao",
-    title: "Sala de Medicação",
+    title: "Sala de Administração de Medicamentos'",
     description: "Aplicação de medicamentos injetáveis e nebulização",
     keywords: ["medicação", "injeção", "aplicar", "remédio", "nebulização"],
     icon: Pill,

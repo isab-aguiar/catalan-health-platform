@@ -14,7 +14,7 @@ function InfoBox({ title, icon, children, variant = "default" }) {
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-neutral-200">
+      <div className={`flex items-center gap-3 mb-5 pb-3 border-b ${variant === "highlight" ? "border-neutral-300" : "border-neutral-200"}`}>
         {icon && <div className="text-primary-700">{icon}</div>}
         <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
       </div>
@@ -71,7 +71,7 @@ export default function Medicacao() {
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
-                Sala de Medicação
+                Sala de Administração de Medicamentos
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
@@ -91,10 +91,10 @@ export default function Medicacao() {
         {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-neutral-700 leading-relaxed mb-5">
-            A Sala de Medicação da Unidade Básica de Saúde São José realiza
-            aplicação de medicamentos injetáveis prescritos por médicos, além de
-            outros procedimentos de enfermagem que requerem administração de
-            medicações conforme protocolos estabelecidos.
+            A Sala de Administração de Medicamentosda Unidade Básica de Saúde
+            São José realiza aplicação de medicamentos injetáveis prescritos por
+            médicos, além de outros procedimentos de enfermagem que requerem
+            administração de medicações conforme protocolos estabelecidos.
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
@@ -113,15 +113,6 @@ export default function Medicacao() {
               <p className="text-sm text-neutral-600">
                 Aplicação de medicações conforme prescrição médica e protocolos
                 de segurança estabelecidos.
-              </p>
-            </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Nebulização
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Tratamento de problemas respiratórios mediante administração de
-                medicamentos por via inalatória.
               </p>
             </div>
             <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
@@ -155,10 +146,7 @@ export default function Medicacao() {
                     <strong className="text-neutral-800">Manhã</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Thaciene Araújo - Técnica de Enfermagem
-                    <br />
-                    <br />
-                    Isabela Aguiar - Técnica de Enfermagem
+                    Valéria Costa - Técnica de Enfermagem
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -166,7 +154,7 @@ export default function Medicacao() {
                     <strong className="text-neutral-800">Tarde</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    José Ferreira - Técnico de Enfermagem
+                    Darley Camargos - Técnico de Enfermagem
                   </td>
                 </tr>
               </tbody>
@@ -193,7 +181,9 @@ export default function Medicacao() {
               <tbody className="text-sm">
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Horário Regular</strong>
+                    <strong className="text-neutral-800">
+                      Horário Regular
+                    </strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     07h00 às 17h00
@@ -220,8 +210,8 @@ export default function Medicacao() {
         {}
         <InfoBox title="Documentação Necessária" variant="highlight">
           <p className="text-neutral-700 mb-4 text-sm">
-            Para atendimento na sala de medicação, é obrigatória a apresentação
-            da seguinte documentação:
+            Para atendimento Sala de Administração de Medicamentos, é
+            obrigatória a apresentação da seguinte documentação:
           </p>
           <div className="space-y-2">
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">

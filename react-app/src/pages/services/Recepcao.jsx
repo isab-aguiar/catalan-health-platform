@@ -7,14 +7,14 @@ function PageContainer({ children }) {
 }
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
-    default: "bg-white border-neutral-200",
+    default: "bg-neutral-50 border-neutral-200",
     highlight: "bg-info/10 border-info",
   };
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-neutral-200">
+      <div className={`flex items-center gap-3 mb-5 pb-2 border-b ${variant === "highlight" ? "border-neutral-300" : "border-neutral-200"}`}>
         {icon && <div className="text-primary-700">{icon}</div>}
         <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
       </div>
@@ -107,21 +107,129 @@ export default function Recepcao() {
         </p>
         {}
         <InfoBox title="Equipe Responsável">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <strong className="block text-lg text-neutral-800 mb-1">
-                Denivia
-              </strong>
-              <span className="text-neutral-600 text-sm">Recepcionista</span>
-            </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <strong className="block text-lg text-neutral-800 mb-1">
-                Wasley
-              </strong>
-              <span className="text-neutral-600 text-sm">
-                Agente Comunitário de Saúde
-              </span>
-            </div>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-neutral-300">
+              <thead>
+                <tr className="bg-neutral-100">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Dia da Semana
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Período
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Profissionais
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3" rowSpan="2">
+                    <strong className="text-neutral-800">Segunda-feira</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>07h00 às 17h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 1</div>
+                    <div>Nome do Profissional 2</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>17h00 às 22h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 3</div>
+                    <div>Nome do Profissional 4</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3" rowSpan="2">
+                    <strong className="text-neutral-800">Terça-feira</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>07h00 às 17h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 5</div>
+                    <div>Nome do Profissional 6</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>17h00 às 22h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 7</div>
+                    <div>Nome do Profissional 8</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3" rowSpan="2">
+                    <strong className="text-neutral-800">Quarta-feira</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>07h00 às 17h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 9</div>
+                    <div>Nome do Profissional 10</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>17h00 às 22h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 11</div>
+                    <div>Nome do Profissional 12</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3" rowSpan="2">
+                    <strong className="text-neutral-800">Quinta-feira</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>07h00 às 17h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 13</div>
+                    <div>Nome do Profissional 14</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>17h00 às 22h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 15</div>
+                    <div>Nome do Profissional 16</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3" rowSpan="2">
+                    <strong className="text-neutral-800">Sexta-feira</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>07h00 às 17h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 17</div>
+                    <div>Nome do Profissional 18</div>
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <strong>17h00 às 22h00</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Nome do Profissional 19</div>
+                    <div>Nome do Profissional 20</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </InfoBox>
         {}

@@ -15,7 +15,7 @@ function InfoBox({ title, icon, children, variant = "default", id }) {
       id={id}
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-neutral-200">
+      <div className={`flex items-center gap-3 mb-5 pb-3 border-b ${variant === "highlight" ? "border-neutral-300" : "border-neutral-200"}`}>
         {icon && <div className="text-primary-700">{icon}</div>}
         <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
       </div>
