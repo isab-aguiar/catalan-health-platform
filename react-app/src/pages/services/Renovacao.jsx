@@ -27,16 +27,20 @@ function Alert({ type = "info", children }) {
     info: {
       bg: "bg-info/10",
       border: "border-info",
-      text: "text-info",
+      text: "text-neutral-900",
       icon: "text-info",
     },
     warning: {
       bg: "bg-warning/10",
       border: "border-warning",
-      text: "text-warning-dark",
+      text: "text-neutral-900",
       icon: "text-warning-dark",
     },
   };
+  const childrenText = typeof children === 'string' ? children : children?.props?.children || '';
+  const hasImportante = String(childrenText).toLowerCase().includes('importante:');
+  const textColor = hasImportante ? 'text-info' : (type === 'warning' ? 'text-warning-dark' : 'text-info');
+  const strongColor = hasImportante ? '[&_strong]:text-info' : (type === 'warning' ? '[&_strong]:text-warning-dark' : type === 'info' ? '[&_strong]:text-info' : '');
   const style = types[type];
   return (
     <div
@@ -47,7 +51,7 @@ function Alert({ type = "info", children }) {
           size={20}
           className={`flex-shrink-0 mt-0.5 ${style.icon}`}
         />
-        <div className="text-sm leading-relaxed">{children}</div>
+        <div className={`text-sm leading-relaxed ${textColor} [&_strong]:font-bold ${strongColor}`}>{children}</div>
       </div>
     </div>
   );

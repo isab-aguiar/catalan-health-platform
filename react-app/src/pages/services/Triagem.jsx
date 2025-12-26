@@ -27,16 +27,20 @@ function Alert({ type = "info", children }) {
     info: {
       bg: "bg-info/10",
       border: "border-info",
-      text: "text-info",
+      text: "text-neutral-900",
       icon: "text-info",
     },
     warning: {
       bg: "bg-warning/10",
       border: "border-warning",
-      text: "text-warning-dark",
+      text: "text-neutral-900",
       icon: "text-warning-dark",
     },
   };
+  const childrenText = typeof children === 'string' ? children : children?.props?.children || '';
+  const hasImportante = String(childrenText).toLowerCase().includes('importante:');
+  const textColor = hasImportante ? 'text-info' : (type === 'warning' ? 'text-warning-dark' : 'text-info');
+  const strongColor = hasImportante ? '[&_strong]:text-info' : (type === 'warning' ? '[&_strong]:text-warning-dark' : type === 'info' ? '[&_strong]:text-info' : '');
   const style = types[type];
   return (
     <div
@@ -47,7 +51,7 @@ function Alert({ type = "info", children }) {
           size={20}
           className={`flex-shrink-0 mt-0.5 ${style.icon}`}
         />
-        <div className="text-sm leading-relaxed">{children}</div>
+        <div className={`text-sm leading-relaxed ${textColor} [&_strong]:font-bold ${strongColor}`}>{children}</div>
       </div>
     </div>
   );
@@ -309,6 +313,43 @@ export default function Triagem() {
                 </tr>
               </tbody>
             </table>
+          </div>
+        </InfoBox>
+        {}
+        <InfoBox title="Modalidades de Atendimento">
+          <div className="space-y-4">
+            <div className="bg-white border border-neutral-200 rounded p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
+                Consultas de Rotina
+              </h3>
+              <p className="text-neutral-700 leading-relaxed text-sm">
+                As consultas de rotina devem ser agendadas com antecedência,
+                conforme disponibilidade de horários e necessidade clínica do
+                usuário. O agendamento garante melhor organização do fluxo de
+                atendimento e otimização do tempo de espera.
+              </p>
+            </div>
+            <div className="bg-info/10 border border-info rounded p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
+                Atendimento Sob Demanda
+              </h3>
+              <p className="text-neutral-700 leading-relaxed text-sm mb-3">
+                O atendimento sob demanda está disponível mediante triagem
+                clínica inicial realizada no período das 07h00 às 08h00.
+              </p>
+              <div className="bg-white border-l-4 border-info p-3 rounded-r">
+                <p className="text-sm text-neutral-800 leading-relaxed">
+                  <strong>Como funciona a Triagem:</strong> A triagem é uma
+                  avaliação clínica inicial realizada por profissional de
+                  enfermagem qualificado. Este procedimento não garante consulta
+                  médica imediata, mas avalia a necessidade e prioridade do
+                  atendimento. Conforme a necessidade identificada na triagem, o
+                  usuário será encaminhado para a enfermeira responsável ou para
+                  o médico da área correspondente, conforme protocolos
+                  estabelecidos pela unidade.
+                </p>
+              </div>
+            </div>
           </div>
         </InfoBox>
         {}

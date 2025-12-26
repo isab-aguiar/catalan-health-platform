@@ -33,7 +33,7 @@ function Alert({ type = "info", children }) {
     warning: {
       bg: "bg-warning/10",
       border: "border-warning",
-      text: "text-warning-dark",
+      text: "text-neutral-900",
       icon: "text-warning-dark",
     },
     success: {
@@ -43,7 +43,22 @@ function Alert({ type = "info", children }) {
       icon: "text-success",
     },
   };
-  const style = types[type] || types.info;
+  const childrenText = typeof children === 'string' ? children : children?.props?.children || '';
+  const hasImportante = String(childrenText).toLowerCase().includes('importante:');
+  const hasNormativa = String(childrenText).toLowerCase().includes('normativa:');
+  
+  let style = types[type] || types.info;
+  if (hasNormativa && type === 'warning') {
+    style = {
+      bg: "bg-warning/10",
+      border: "border-warning",
+      text: "text-neutral-900",
+      icon: "text-warning-dark",
+    };
+  }
+  
+  const textColor = hasImportante ? 'text-info' : (type === 'warning' ? 'text-warning-dark' : 'text-info');
+  const strongColor = hasImportante ? '[&_strong]:text-info' : (type === 'warning' ? '[&_strong]:text-warning-dark' : type === 'info' ? '[&_strong]:text-info' : '');
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -53,7 +68,7 @@ function Alert({ type = "info", children }) {
           size={20}
           className={`flex-shrink-0 mt-0.5 ${style.icon}`}
         />
-        <div className="text-sm leading-relaxed">{children}</div>
+        <div className={`text-sm leading-relaxed ${textColor} [&_strong]:font-bold ${strongColor}`}>{children}</div>
       </div>
     </div>
   );
@@ -73,7 +88,7 @@ export default function Sala9() {
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
-                Sala de atendimento administrativo
+                Sala de Atendimento Administrativo
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
@@ -235,22 +250,22 @@ export default function Sala9() {
                   </td>
                 </tr>
                 <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Tarde</strong>
+                <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
+                <strong className="text-neutral-800">Tarde</strong>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                  <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
                     13h00 às 16h30
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
+                  <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
                     Atendimento presencial
                   </td>
                 </tr>
-                <tr className="bg-warning/10">
+                <tr className="bg-red-100">
                   <td
                     colSpan="3"
-                    className="border border-neutral-300 px-4 py-3 text-center"
+                    className="border border-red-700 px-4 py-3 text-center"
                   >
-                    <strong className="text-warning-dark">Atenção:</strong>{" "}
+                    <strong className="text-red-600">Atenção:</strong>{" "}
                     Atendimento apenas às{" "}
                     <strong>Segundas, Quartas e Sextas-feiras</strong>
                   </td>
@@ -260,124 +275,15 @@ export default function Sala9() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Como funciona a Fila do SUS?">
-          <ol className="space-y-3 list-decimal list-inside ml-4 text-neutral-700 text-sm">
-            <li className="mb-2">
-              <strong>Solicitação:</strong> O médico da unidade identifica a
-              necessidade de uma consulta especializada ou exame e faz a
-              solicitação no sistema.
-            </li>
-            <li className="mb-2">
-              <strong>Regulação:</strong> Sua solicitação entra na fila de
-              regulação municipal, onde é analisada e classificada por
-              prioridade.
-            </li>
-            <li className="mb-2">
-              <strong>Classificação de Risco:</strong> As solicitações são
-              priorizadas conforme a gravidade e urgência do caso.
-            </li>
-            <li className="mb-2">
-              <strong>Agendamento:</strong> Quando chegar sua vez, você será
-              notificado e deverá retirar o encaminhamento neste setor.
-            </li>
-            <li>
-              <strong>Consulta/Exame:</strong> Com o encaminhamento em mãos,
-              compareça no local, data e horário indicados.
-            </li>
-          </ol>
-        </InfoBox>
-        <Alert type="info">
-          <strong>Orientação Importante:</strong> Compareça regularmente para
-          consultar sua posição na fila. Quando o encaminhamento estiver
-          disponível, haverá um prazo para a retirada. Não perca esse prazo!
-          Mantenha seu telefone celular atualizado e fique atento, pois a equipe
-          entrará em contato por WhatsApp e/ou ligação para informar sobre a
-          disponibilidade do encaminhamento.
-        </Alert>
-        {}
-        <InfoBox title="Classificação de Prioridade">
-          <div className="space-y-4">
-            <div className="p-4 bg-error/10 border-l-4 border-red-500 rounded-lg">
-              <strong className="text-red-800">Urgente:</strong> Casos graves
-              que necessitam atendimento rápido (até 7 dias)
-            </div>
-            <div className="p-4 bg-warning/10 border-l-4 border-warning rounded-lg">
-              <strong className="text-amber-800">Prioritário:</strong> Casos que
-              exigem atenção em curto prazo (até 30 dias)
-            </div>
-            <div className="p-4 bg-info/10 border-l-4 border-blue-500 rounded-lg">
-              <strong className="text-blue-800">Eletivo:</strong> Casos que
-              podem aguardar sem prejuízo à saúde (conforme disponibilidade)
-            </div>
-          </div>
-        </InfoBox>
-        {}
-        <InfoBox title="Entenda o Encaminhamento (SUS Fácil)">
-          <p className="text-neutral-700 mb-4 text-sm leading-relaxed">
-            Muitos pacientes nos perguntam por que alguns exames ou cirurgias
-            demoram. É importante saber que{" "}
-            <strong>
-              a Unidade de Saúde (ESF) não marca a data desses procedimentos
-            </strong>
-            . Nós fazemos a solicitação, mas quem decide "onde" e "quando" é o
-            sistema estadual.
-          </p>
-          <h4 className="text-neutral-800 font-bold mb-3 text-sm">
-            O que é o SUS Fácil?
-          </h4>
-          <p className="text-neutral-700 mb-4 text-sm">
-            É o sistema computadorizado de regulação do Estado de Minas Gerais.
-            Funciona como uma grande "central de vagas".
-          </p>
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-neutral-800 text-sm">1. O Pedido:</strong>
-                <p className="text-sm text-neutral-600 mt-0.5">
-                  O médico da unidade identifica a necessidade e nossa equipe
-                  insere seu pedido no sistema SUS Fácil.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  2. A Análise (Regulação):
-                </strong>
-                <p className="text-sm text-neutral-600 mt-0.5">
-                  Médicos reguladores em outras cidades analisam a gravidade do
-                  seu caso (classificação de risco), e não apenas a ordem de
-                  chegada.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  3. O Agendamento:
-                </strong>
-                <p className="text-sm text-neutral-600 mt-0.5">
-                  Assim que uma vaga surge em hospitais ou clínicas
-                  especializadas, o sistema libera a autorização. Só então o
-                  profissional da sala de atendimento administrativo consegue
-                  imprimir seu encaminhamento.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="mt-4">
-            <Alert type="warning">
-              <strong>Lembre-se:</strong> A equipe deste setor monitora o
-              sistema diariamente. Assim que sua vaga for liberada pelo Estado,
-              entraremos em contato via WhatsApp ou ligação telefônica. Mantenha
-              seu telefone celular atualizado e fique atento às chamadas e
-              mensagens!
-            </Alert>
-          </div>
-        </InfoBox>
+        <div className="mt-4">
+          <Alert type="warning">
+            <strong>Lembre-se:</strong> A equipe deste setor monitora o
+            sistema diariamente. Assim que sua vaga for liberada pelo Estado,
+            entraremos em contato via WhatsApp ou ligação telefônica. Mantenha
+            seu telefone celular atualizado e fique atento às chamadas e
+            mensagens!
+          </Alert>
+        </div>
       </div>
     </PageContainer>
   );

@@ -27,17 +27,32 @@ function Alert({ type = "info", children }) {
     info: {
       bg: "bg-info/10",
       border: "border-info",
-      text: "text-info",
+      text: "text-neutral-900",
       icon: "text-info",
     },
     warning: {
       bg: "bg-warning/10",
       border: "border-warning",
-      text: "text-warning-dark",
+      text: "text-neutral-900",
       icon: "text-warning-dark",
     },
   };
-  const style = types[type];
+  const childrenText = typeof children === 'string' ? children : children?.props?.children || '';
+  const hasImportante = String(childrenText).toLowerCase().includes('importante:');
+  const hasNormativa = String(childrenText).toLowerCase().includes('normativa:');
+  
+  let style = types[type];
+  if (hasNormativa && type === 'warning') {
+    style = {
+      bg: "bg-warning/10",
+      border: "border-warning",
+      text: "text-neutral-900",
+      icon: "text-warning-dark",
+    };
+  }
+  
+  const textColor = hasImportante ? 'text-info' : (type === 'warning' ? 'text-warning-dark' : 'text-info');
+  const strongColor = hasImportante ? '[&_strong]:text-info' : (type === 'warning' ? '[&_strong]:text-warning-dark' : type === 'info' ? '[&_strong]:text-info' : '');
   return (
     <div
       className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
@@ -47,7 +62,7 @@ function Alert({ type = "info", children }) {
           size={20}
           className={`flex-shrink-0 mt-0.5 ${style.icon}`}
         />
-        <div className="text-sm leading-relaxed">{children}</div>
+        <div className={`text-sm leading-relaxed ${textColor} [&_strong]:font-bold ${strongColor}`}>{children}</div>
       </div>
     </div>
   );
@@ -210,8 +225,8 @@ export default function Recepcao() {
         <InfoBox title="O que você pode retirar aqui?">
           <p className="text-neutral-700 mb-4 text-sm">
             Para agilizar o atendimento, alguns documentos ficam disponíveis
-            diretamente na recepção, sem necessidade de aguardar na Sala 4 ou
-            Sala 9.
+            diretamente na recepção, sem necessidade de aguardar na Sala de Agendamentos ou
+            na Sala de atendimento administrativo.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
@@ -265,7 +280,7 @@ export default function Recepcao() {
           <div className="mt-4">
             <Alert type="warning">
               <strong>Atenção:</strong> Se o seu documento precisa de sua
-              assinatura, ele estará na Sala 9 - Administração, não na recepção.
+              assinatura, ele estará na Sala de atendimento administrativo, não na recepção.
             </Alert>
           </div>
         </InfoBox>
@@ -324,5 +339,5 @@ export default function Recepcao() {
         </InfoBox>
       </div>
     </PageContainer>
-  );
+  );1
 }
