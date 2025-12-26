@@ -4,10 +4,12 @@ import { Menu } from 'lucide-react';
 import AdminHeader from '../components/admin/AdminHeader';
 import AdminSidebar from '../components/admin/AdminSidebar';
 import { useAuth } from '../contexts/AuthContext';
+import { useModal } from '../contexts/ModalContext';
 
 export default function AdminLayout({ children, currentPage = 'dashboard' }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { logout } = useAuth();
+  const { showModal } = useModal();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,12 +24,25 @@ export default function AdminLayout({ children, currentPage = 'dashboard' }) {
   }, [sidebarOpen]);
 
   const handleLogout = async () => {
-    if (window.confirm('Tem certeza que deseja sair?')) {
+    const confirmed = await showModal({
+      type: 'confirmation',
+      title: 'Confirmar Saída',
+      message: 'Tem certeza que deseja sair do sistema?',
+      confirmText: 'Sair',
+      cancelText: 'Cancelar',
+    });
+
+    if (confirmed) {
       const result = await logout();
       if (result.success) {
         navigate('/admin/login', { replace: true });
       } else {
-        alert('Erro ao fazer logout. Tente novamente.');
+        await showModal({
+          type: 'error',
+          title: 'Erro ao Sair',
+          message: 'Não foi possível fazer logout. Tente novamente.',
+          confirmText: 'OK',
+        });
       }
     }
   };

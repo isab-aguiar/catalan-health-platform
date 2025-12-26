@@ -41,14 +41,7 @@ export default function Footer() {
         setTimeout(scrollToElement, 300);
       }
     } else {
-      if (location.pathname === link.path) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate(link.path);
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 100);
-      }
+      navigate(link.path);
     }
   };
 

@@ -18,10 +18,10 @@ function InfoBox({ title, icon, children, variant = "default" }) {
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
       {title && (
-        <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
-          {icon && <div className="text-blue-700">{icon}</div>}
-          <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
-        </div>
+      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
+        {icon && <div className="text-blue-700">{icon}</div>}
+        <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
+      </div>
       )}
       {children}
     </div>

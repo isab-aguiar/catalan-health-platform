@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useModal } from "../../contexts/ModalContext";
 import { usePermissions } from "../../hooks/usePermissions";
 import AdminLayout from "../../layouts/AdminLayout";
 import {
@@ -36,6 +37,7 @@ import {
 export default function Campanhas() {
   const { currentUser, userData, isAdmin, isProfissional, isDiretoria } =
     useAuth();
+  const { showModal } = useModal();
   const permissions = usePermissions();
   const [campanhas, setCampanhas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -106,26 +108,44 @@ export default function Campanhas() {
   };
   const handleDelete = async (id) => {
     if (!permissions.isAdmin()) {
-      alert(
-        "❌ Sem permissão: Apenas administradores podem deletar campanhas."
-      );
+      await showModal({
+        type: 'error',
+        title: 'Sem Permissão',
+        message: 'Apenas administradores podem deletar campanhas.',
+        confirmText: 'OK',
+      });
       return;
     }
-    if (
-      !confirm(
-        "Tem certeza que deseja deletar esta campanha PERMANENTEMENTE do Firebase?"
-      )
-    ) {
-      return;
-    }
+
+    const confirmed = await showModal({
+      type: 'warning',
+      title: 'Confirmar Exclusão',
+      message: 'Tem certeza que deseja deletar esta campanha PERMANENTEMENTE do Firebase?',
+      confirmText: 'Deletar',
+      cancelText: 'Cancelar',
+    });
+
+    if (!confirmed) return;
+
     try {
       await deletarCampanha(id);
       setCampanhas((prev) => prev.filter((c) => c.id !== id));
       await loadCampanhas();
-      alert("✅ Campanha deletada PERMANENTEMENTE do Firebase!");
+
+      await showModal({
+        type: 'success',
+        title: 'Campanha Deletada',
+        message: 'A campanha foi removida permanentemente do Firebase.',
+        confirmText: 'OK',
+      });
     } catch (err) {
       console.error("Erro ao deletar campanha:", err);
-      alert(`❌ Erro ao deletar: ${err.message}`);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Deletar',
+        message: `Não foi possível deletar a campanha: ${err.message}`,
+        confirmText: 'OK',
+      });
       await loadCampanhas();
     }
   };
@@ -140,7 +160,12 @@ export default function Campanhas() {
         prev.map((c) => (c.id === id ? { ...c, ativo: !ativo } : c))
       );
     } catch (err) {
-      alert(`Erro: ${err.message}`);
+      await showModal({
+        type: 'error',
+        title: 'Erro',
+        message: err.message,
+        confirmText: 'OK',
+      });
     }
   };
   const handleEdit = (campanha) => {
@@ -178,7 +203,7 @@ export default function Campanhas() {
     setNewImagePreview(null);
   };
   // Lidar com seleção de arquivo
-  const handleFileSelect = (e) => {
+  const handleFileSelect = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     // Validar tipo
@@ -190,11 +215,21 @@ export default function Campanhas() {
       "application/pdf",
     ];
     if (!allowedTypes.includes(file.type)) {
-      alert("Tipo de arquivo não suportado. Use: JPG, PNG, WebP ou PDF");
+      await showModal({
+        type: 'warning',
+        title: 'Tipo de Arquivo Inválido',
+        message: 'Tipo de arquivo não suportado. Use: JPG, PNG, WebP ou PDF',
+        confirmText: 'OK',
+      });
       return;
     }
     if (file.size > 10 * 1024 * 1024) {
-      alert("Arquivo muito grande. Máximo: 10MB");
+      await showModal({
+        type: 'warning',
+        title: 'Arquivo Muito Grande',
+        message: 'O arquivo excede o tamanho máximo de 10MB',
+        confirmText: 'OK',
+      });
       return;
     }
     setNewImageFile(file);
@@ -215,16 +250,17 @@ export default function Campanhas() {
       setUploadingImage(true);
       let updatedData = { ...editForm };
       if (!currentUser?.uid && !userData?.uid) {
-        alert("Erro: Usuário não autenticado. Faça login novamente.");
+        await showModal({
+          type: 'error',
+          title: 'Erro de Autenticação',
+          message: 'Usuário não autenticado. Faça login novamente.',
+          confirmText: 'OK',
+        });
         return;
       }
       if (newImageFile) {
         const userId = currentUser?.uid || userData?.uid;
-        const uploadResult = await uploadArquivo(
-          newImageFile,
-          userId,
-          "campanhas"
-        );
+        const uploadResult = await uploadArquivo(newImageFile, userId);
         updatedData.imagemURL = uploadResult.url;
         updatedData.imagemCaminho = uploadResult.caminho;
       }
@@ -249,10 +285,21 @@ export default function Campanhas() {
       setEditForm({});
       setNewImageFile(null);
       setNewImagePreview(null);
-      alert("Campanha atualizada com sucesso.");
+
+      await showModal({
+        type: 'success',
+        title: 'Campanha Atualizada',
+        message: 'As alterações foram salvas com sucesso.',
+        confirmText: 'OK',
+      });
     } catch (err) {
       console.error("Erro ao atualizar campanha:", err);
-      alert(`Erro ao atualizar: ${err.message}`);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Atualizar',
+        message: `Não foi possível atualizar a campanha: ${err.message}`,
+        confirmText: 'OK',
+      });
     } finally {
       setUploadingImage(false);
     }
@@ -338,7 +385,12 @@ export default function Campanhas() {
       !createForm.titulo &&
       !createForm.descricao
     ) {
-      alert("Por favor, adicione pelo menos uma imagem OU preencha título/descrição.");
+      await showModal({
+        type: 'warning',
+        title: 'Campos Obrigatórios',
+        message: 'Por favor, adicione pelo menos uma imagem OU preencha título/descrição.',
+        confirmText: 'OK',
+      });
       return;
     }
     try {
@@ -346,14 +398,26 @@ export default function Campanhas() {
       let campanhaData = { ...createForm };
       if (createImageFiles.length > 0) {
         const userId = currentUser?.uid || userData?.uid;
-        const uploadedImages = [];
-        for (const file of createImageFiles) {
-          const uploadResult = await uploadArquivo(file, userId, "campanhas");
-          uploadedImages.push({
-            url: uploadResult.url,
-            caminho: uploadResult.caminho,
-          });
+
+        if (!userId) {
+          throw new Error('Usuário não autenticado');
         }
+
+        const uploadedImages = [];
+
+        for (let i = 0; i < createImageFiles.length; i++) {
+          const file = createImageFiles[i];
+          try {
+            const uploadResult = await uploadArquivo(file, userId);
+            uploadedImages.push({
+              url: uploadResult.url,
+              caminho: uploadResult.caminho,
+            });
+          } catch (uploadError) {
+            throw new Error(`Erro ao enviar ${file.name}: ${uploadError.message}`);
+          }
+        }
+
         if (uploadedImages.length === 1) {
           campanhaData.imagemURL = uploadedImages[0].url;
           campanhaData.imagemCaminho = uploadedImages[0].caminho;
@@ -373,12 +437,24 @@ export default function Campanhas() {
       campanhaData.criadoEm = new Date();
       campanhaData.ativo = true;
       await criarCampanha(campanhaData);
-      alert("✅ Campanha criada com sucesso!");
+
+      await showModal({
+        type: 'success',
+        title: 'Campanha Criada',
+        message: 'A campanha foi criada e publicada com sucesso!',
+        confirmText: 'OK',
+      });
+
       handleCloseCreateModal();
       await loadCampanhas();
     } catch (err) {
       console.error("Erro ao criar campanha:", err);
-      alert(`❌ Erro ao criar campanha: ${err.message}`);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Criar Campanha',
+        message: `Não foi possível criar a campanha: ${err.message}`,
+        confirmText: 'OK',
+      });
     } finally {
       setCreatingCampanha(false);
     }

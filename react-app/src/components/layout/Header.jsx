@@ -69,14 +69,7 @@ export default function Header() {
     if (link.onClick) {
       link.onClick(e);
     } else {
-      if (location.pathname === link.path) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        navigate(link.path);
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 100);
-      }
+      navigate(link.path);
       setIsMobileMenuOpen(false);
     }
   };
@@ -96,12 +89,12 @@ export default function Header() {
       {!isMobileMenuOpen && (
         <Link
           to="/"
-          className="fixed -top-[3px] left-[20px] z-50 h-[70px] flex items-center justify-center group"
+          className="fixed top-0 left-[20px] z-50 h-[70px] flex items-center justify-center group"
         >
           <img
             src="/logo-favicon.png"
             alt="Logo"
-            className="h-full max-h-10 w-auto object-contain"
+            className="h-full max-h-10 w-auto object-contain brightness-110 contrast-110 saturate-110 rounded-lg border-0"
           />
         </Link>
       )}

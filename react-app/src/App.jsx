@@ -7,7 +7,9 @@ import Footer from "./components/layout/Footer";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ModalProvider } from "./contexts/ModalContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ScrollToTop from "./components/common/ScrollToTop";
 const lazyLoad = (importFunc) => {
   return lazy(() =>
     importFunc().catch((error) => {
@@ -74,6 +76,7 @@ const Dentistas = lazyLoad(() => import("./pages/team/Dentistas"));
 const Pediatra = lazyLoad(() => import("./pages/team/Pediatra"));
 const REMSA = lazyLoad(() => import("./pages/REMSA"));
 const Educacao = lazyLoad(() => import("./pages/Educacao"));
+const CampanhaDetalhe = lazyLoad(() => import("./pages/CampanhaDetalhe"));
 const Login = lazyLoad(() => import("./pages/admin/Login"));
 const Painel = lazyLoad(() => import("./pages/admin/Painel"));
 const Avisos = lazyLoad(() => import("./pages/admin/Avisos"));
@@ -87,8 +90,10 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <BrowserRouter>
+      <ModalProvider>
+        <AuthProvider>
+          <BrowserRouter>
+          <ScrollToTop />
           <div className="flex min-h-screen overflow-x-hidden w-full">
             {}
             <Sidebar
@@ -167,6 +172,7 @@ function App() {
                       <Route path="/acs" element={<ACSPage />} />
                       <Route path="/remsa" element={<REMSA />} />
                       <Route path="/educacao" element={<Educacao />} />
+                      <Route path="/campanhas/:id" element={<CampanhaDetalhe />} />
                       {}
                       <Route path="/admin/login" element={<Login />} />
                       <Route
@@ -237,8 +243,9 @@ function App() {
               <Menu size={24} className="text-neutral-700" />
             </button>
           </div>
-        </BrowserRouter>
-      </AuthProvider>
+          </BrowserRouter>
+        </AuthProvider>
+      </ModalProvider>
     </ErrorBoundary>
   );
 }
