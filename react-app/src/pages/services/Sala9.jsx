@@ -251,7 +251,7 @@ export default function Sala9() {
                 </tr>
                 <tr className="bg-white">
                 <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
-                <strong className="text-neutral-800">Tarde</strong>
+                    <strong className="text-neutral-800">Tarde</strong>
                   </td>
                   <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
                     13h00 às 16h30
@@ -275,15 +275,15 @@ export default function Sala9() {
           </div>
         </InfoBox>
         {}
-        <div className="mt-4">
-          <Alert type="warning">
-            <strong>Lembre-se:</strong> A equipe deste setor monitora o
-            sistema diariamente. Assim que sua vaga for liberada pelo Estado,
-            entraremos em contato via WhatsApp ou ligação telefônica. Mantenha
-            seu telefone celular atualizado e fique atento às chamadas e
-            mensagens!
-          </Alert>
-        </div>
+          <div className="mt-4">
+            <Alert type="warning">
+              <strong>Lembre-se:</strong> A equipe deste setor monitora o
+              sistema diariamente. Assim que sua vaga for liberada pelo Estado,
+              entraremos em contato via WhatsApp ou ligação telefônica. Mantenha
+              seu telefone celular atualizado e fique atento às chamadas e
+              mensagens!
+            </Alert>
+          </div>
       </div>
     </PageContainer>
   );

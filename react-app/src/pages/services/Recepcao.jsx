@@ -106,7 +106,7 @@ export default function Recepcao() {
           conforme protocolos e normativas estabelecidas.
         </p>
         {}
-        <InfoBox title="Equipe Responsável e Horários de Atendimento">
+        <InfoBox title="Equipe Responsável">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
@@ -120,9 +120,6 @@ export default function Recepcao() {
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Profissionais
                   </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
-                  </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
@@ -132,27 +129,19 @@ export default function Recepcao() {
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>07h00 às 17h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Horário Regular</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 1</div>
                     <div>Nome do Profissional 2</div>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento geral
-                  </td>
                 </tr>
-                <tr className="bg-info/10">
+                <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>17h00 às 22h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Saúde na Hora</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 3</div>
                     <div>Nome do Profissional 4</div>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento estendido
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -161,27 +150,19 @@ export default function Recepcao() {
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>07h00 às 17h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Horário Regular</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 5</div>
                     <div>Nome do Profissional 6</div>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento geral
-                  </td>
                 </tr>
-                <tr className="bg-info/10">
+                <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>17h00 às 22h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Saúde na Hora</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 7</div>
                     <div>Nome do Profissional 8</div>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento estendido
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -190,27 +171,19 @@ export default function Recepcao() {
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>07h00 às 17h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Horário Regular</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 9</div>
                     <div>Nome do Profissional 10</div>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento geral
-                  </td>
                 </tr>
-                <tr className="bg-info/10">
+                <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>17h00 às 22h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Saúde na Hora</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 11</div>
                     <div>Nome do Profissional 12</div>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento estendido
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -219,27 +192,19 @@ export default function Recepcao() {
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>07h00 às 17h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Horário Regular</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 13</div>
                     <div>Nome do Profissional 14</div>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento geral
-                  </td>
                 </tr>
-                <tr className="bg-info/10">
+                <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>17h00 às 22h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Saúde na Hora</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 15</div>
                     <div>Nome do Profissional 16</div>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento estendido
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -248,27 +213,19 @@ export default function Recepcao() {
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>07h00 às 17h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Horário Regular</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 17</div>
                     <div>Nome do Profissional 18</div>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento geral
-                  </td>
                 </tr>
-                <tr className="bg-info/10">
+                <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <strong>17h00 às 22h00</strong>
-                    <div className="text-xs text-neutral-500 mt-1">Saúde na Hora</div>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     <div className="pb-2">Nome do Profissional 19</div>
                     <div>Nome do Profissional 20</div>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento estendido
                   </td>
                 </tr>
               </tbody>
@@ -326,6 +283,50 @@ export default function Recepcao() {
                 </p>
               </div>
             </div>
+          </div>
+        </InfoBox>
+        {}
+        <InfoBox title="Horários de Atendimento">
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-neutral-300">
+              <thead>
+                <tr className="bg-neutral-100">
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Período
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Horário
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Observações
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Horário Regular</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    07h00 às 17h00
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
+                    Atendimento geral
+                  </td>
+                </tr>
+                <tr className="bg-info/10">
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Saúde na Hora</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    17h00 às 22h00
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
+                    Atendimento estendido
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </InfoBox>
         {}

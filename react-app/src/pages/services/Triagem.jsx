@@ -71,7 +71,7 @@ export default function Triagem() {
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
-                Triagem
+                Triagem de Enfermagem
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
@@ -90,46 +90,84 @@ export default function Triagem() {
         <AvisosPaginaWrapper pagina="triagem" />
         {}
         <InfoBox title="Sobre o Serviço">
-          <p className="text-neutral-700 leading-relaxed mb-5">
-            A Triagem é uma avaliação clínica inicial realizada pela manhã e à
-            noite, onde avaliamos a necessidade de cada paciente e definimos a
-            prioridade do atendimento. É um momento essencial para garantir que
-            casos mais urgentes sejam atendidos rapidamente e que todos recebam
-            o encaminhamento adequado conforme protocolos estabelecidos.
+          <p className="text-neutral-700 leading-relaxed mb-5 text-sm" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
+            Na Unidade básica de saúde do bairro São José<span className="text-base">,</span> o acolhimento e a triagem de enfermagem são etapas fundamentais do cuidado em saúde. Embora complementares<span className="text-base">,</span> cada uma possui um papel específico no atendimento ao usuário<span className="text-base">,</span> sempre com foco no respeito<span className="text-base">,</span> na escuta e na segurança clínica.
           </p>
-          <div className="grid md:grid-cols-2 gap-4">
+          <p className="text-neutral-700 leading-relaxed mb-5 text-sm" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
+            O objetivo é garantir que todas as pessoas sejam recebidas com atenção<span className="text-base">,</span> orientadas corretamente e avaliadas conforme suas necessidades<span className="text-base">,</span> assegurando prioridade aos casos que exigem maior urgência.
+          </p>
+          <div className="space-y-4 mb-5">
             <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Avaliação de Sinais Vitais
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Verificação de pressão arterial, temperatura, frequência
-                cardíaca e respiratória, conforme protocolos de enfermagem.
-              </p>
-            </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Aferição de Peso e Altura
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Medição de peso e altura para atualização do prontuário e
-                cálculo de índices antropométricos quando necessário.
-              </p>
-            </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4 md:col-span-2">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
+              <h3 className="font-semibold text-neutral-800 mb-2 pb-2 border-b border-neutral-200 text-sm">
                 Acolhimento
               </h3>
-              <p className="text-sm text-neutral-600">
-                Realização de acolhimento humanizado, escuta qualificada da
-                queixa do paciente e orientação sobre o fluxo de atendimento na
-                unidade.
+              <p className="text-sm text-neutral-700 leading-relaxed mb-2" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
+                O acolhimento é o primeiro contato do usuário com a unidade. Neste momento<span className="text-base">,</span> a equipe realiza uma escuta qualificada<span className="text-base">,</span> compreendendo a queixa apresentada e orientando sobre o fluxo de atendimento disponível.
               </p>
+              <p className="text-sm text-neutral-700 leading-relaxed" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
+                Mais do que um procedimento<span className="text-base">,</span> o acolhimento é uma prática humanizada<span className="text-base">,</span> que valoriza o diálogo<span className="text-base">,</span> o respeito e o vínculo entre profissional e usuário.
+              </p>
+            </div>
+            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 pb-2 border-b border-neutral-200 text-sm">
+                Triagem de Enfermagem
+              </h3>
+              <p className="text-sm text-neutral-700 leading-relaxed" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
+                A triagem de enfermagem é uma avaliação clínica inicial realizada por profissional de enfermagem capacitado. Seu objetivo é identificar sinais e sintomas<span className="text-base">,</span> avaliar a gravidade do quadro e definir a prioridade de atendimento conforme protocolos estabelecidos.
+              </p>
+              <p className="text-sm text-neutral-700 leading-relaxed mt-2" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
+                A triagem não garante consulta médica imediata<span className="text-base">,</span> mas assegura que cada caso seja direcionado ao serviço mais adequado<span className="text-base">,</span> com segurança e responsabilidade.
+              </p>
+            </div>
+          </div>
+          <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+            <h3 className="font-semibold text-neutral-800 mb-3 pb-2 border-b border-neutral-200 text-sm">
+              Procedimentos Realizados na Triagem
+            </h3>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse border border-neutral-300">
+                <thead>
+                  <tr className="bg-neutral-100">
+                    <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm w-1/3 whitespace-nowrap">
+                      Procedimento
+                    </th>
+                    <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                      Descrição
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  <tr className="bg-white">
+                    <td className="border border-neutral-300 px-4 py-3 whitespace-nowrap">
+                      <strong className="text-neutral-800">Avaliação de Sinais Vitais</strong>
+                    </td>
+                    <td className="border border-neutral-300 px-4 py-3 text-neutral-700" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
+                      Verificação de pressão arterial<span className="text-base">,</span> temperatura corporal<span className="text-base">,</span> frequência cardíaca e respiratória<span className="text-base">,</span> conforme protocolos de enfermagem.
+                    </td>
+                  </tr>
+                  <tr className="bg-white">
+                    <td className="border border-neutral-300 px-4 py-3 whitespace-nowrap">
+                      <strong className="text-neutral-800">Aferição de Peso e Altura</strong>
+                    </td>
+                    <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                      Medição para atualização do prontuário e cálculo de indicadores quando necessário.
+                    </td>
+                  </tr>
+                  <tr className="bg-white">
+                    <td className="border border-neutral-300 px-4 py-3 whitespace-nowrap">
+                      <strong className="text-neutral-800">Avaliação Clínica Inicial</strong>
+                    </td>
+                    <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                      Análise dos sintomas apresentados para definição da prioridade e do encaminhamento adequado.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Equipe Responsável">
+        <InfoBox title="Equipe Responsável e Horários de Atendimento">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
@@ -138,7 +176,13 @@ export default function Triagem() {
                     Período
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Horário
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Profissional
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Observações
                   </th>
                 </tr>
               </thead>
@@ -148,17 +192,29 @@ export default function Triagem() {
                     <strong className="text-neutral-800">Manhã</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Tatiane - Técnica de Enfermagem
+                    07h00 às 08h00
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Darley Camargos - Técnico de Enfermagem
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
+                    Atendimento por ordem de chegada
                   </td>
                 </tr>
-                <tr className="bg-white">
+                <tr className="bg-info/10">
                   <td className="border border-neutral-300 px-4 py-3">
                     <strong className="text-neutral-800">
-                      Responsável Técnica
+                      Noite (Saúde na Hora)
                     </strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    17h30 às 18h30
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     Alessandra - Técnica de Enfermagem
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
+                    Triagem e atendimento estendido
                   </td>
                 </tr>
               </tbody>
@@ -166,14 +222,13 @@ export default function Triagem() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Para quem é indicado?">
+        <InfoBox title="Para quem é indicado">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <p className="text-neutral-700 text-sm">
-                  Pacientes que chegam sem agendamento prévio (demanda
-                  espontânea)
+                  Pacientes sem agendamento prévio
                 </p>
               </div>
             </div>
@@ -189,36 +244,53 @@ export default function Triagem() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <p className="text-neutral-700 text-sm">
-                  Pacientes com sintomas agudos (febre, dor, mal-estar)
+                  Pacientes com sintomas agudos como febre, dor ou mal-estar
                 </p>
               </div>
             </div>
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Como ter acesso?">
-          <ol className="space-y-3 list-decimal list-inside ml-4 text-neutral-700 text-sm">
-            <li className="mb-2">
-              <strong>Compareça à unidade no horário da triagem</strong> - Das
-              07h00 às 08h00 (manhã) ou das 17h30 às 18h30 (noite - Saúde na
-              Hora). Dirija-se à recepção para realização da ficha de
-              atendimento antes de se dirigir à sala de triagem.
-            </li>
-            <li className="mb-2">
-              <strong>Aguarde ser chamado</strong> - A ordem de atendimento é
-              por ordem de chegada.
-            </li>
-            <li className="mb-2">
-              <strong>Converse com o profissional</strong> - Explique sua queixa
-              e sintomas de forma clara e objetiva para facilitar a avaliação
-              clínica.
-            </li>
-            <li>
-              <strong>Receba o encaminhamento</strong> - Após a avaliação, a
-              triagem direcionará você para o serviço adequado conforme a
-              necessidade identificada.
-            </li>
-          </ol>
+        <InfoBox title="Como ter acesso">
+          <div className="space-y-4">
+            <div>
+              <p className="text-neutral-700 text-sm mb-2">
+                <strong>Compareça à unidade no horário da triagem</strong>
+              </p>
+              <div className="ml-4 space-y-1">
+                <p className="text-sm text-neutral-600">
+                  Manhã das 07h00 às 08h00
+                </p>
+                <p className="text-sm text-neutral-600">
+                  Noite das 17h30 às 18h30 (Saúde na Hora)
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-neutral-700 text-sm">
+                Dirija-se à recepção para realização da ficha de atendimento
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-neutral-700 text-sm">
+                Aguarde ser chamado conforme ordem de chegada
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-neutral-700 text-sm">
+                Explique sua queixa de forma clara ao profissional de enfermagem
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-neutral-700 text-sm">
+                Após a avaliação, receba o encaminhamento conforme a necessidade identificada
+              </p>
+            </div>
+          </div>
         </InfoBox>
         {}
         <InfoBox title="Documentação Necessária" variant="highlight">
@@ -250,17 +322,6 @@ export default function Triagem() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Comprovante de Residência
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Atualizado (máximo 3 meses)
-                </p>
-              </div>
-            </div>
           </div>
           <div className="mt-4">
             <Alert type="warning">
@@ -270,56 +331,10 @@ export default function Triagem() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Horário de Atendimento">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 08h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento por ordem de chegada
-                  </td>
-                </tr>
-                <tr className="bg-info/10">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">
-                      Noite (Saúde na Hora)
-                    </strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    17h30 às 18h30
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Triagem e atendimento estendido
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </InfoBox>
-        {}
         <InfoBox title="Modalidades de Atendimento">
           <div className="space-y-4">
             <div className="bg-white border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
+              <h3 className="font-semibold text-neutral-800 mb-2 pb-2 border-b border-neutral-200 text-sm">
                 Consultas de Rotina
               </h3>
               <p className="text-neutral-700 leading-relaxed text-sm">
@@ -330,7 +345,7 @@ export default function Triagem() {
               </p>
             </div>
             <div className="bg-info/10 border border-info rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
+              <h3 className="font-semibold text-neutral-800 mb-2 pb-2 border-b border-neutral-200 text-sm">
                 Atendimento Sob Demanda
               </h3>
               <p className="text-neutral-700 leading-relaxed text-sm mb-3">

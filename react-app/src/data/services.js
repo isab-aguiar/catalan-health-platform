@@ -66,6 +66,7 @@ export const allPages = [
     description: "Atendimento de demanda espontânea e classificação de risco",
     keywords: [
       "triagem",
+      "acolhimento",
       "urgente",
       "emergência",
       "demanda espontânea",
@@ -98,7 +99,7 @@ export const allPages = [
   },
   {
     id: "medicacao",
-    title: "Sala de Administração de Medicamentos'",
+    title: "Administração de Medicamentos",
     description: "Aplicação de medicamentos injetáveis e nebulização",
     keywords: ["medicação", "injeção", "aplicar", "remédio", "nebulização"],
     icon: Pill,

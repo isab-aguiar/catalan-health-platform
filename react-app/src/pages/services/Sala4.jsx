@@ -2,6 +2,7 @@ import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
+import DocumentacaoPorServico from "../../components/services/DocumentacaoPorServico";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -166,140 +167,7 @@ export default function Sala4() {
           </div>
         </InfoBox>
         {}
-        <InfoBox
-          id="documentacao-necessaria"
-          title="Documentação Necessária"
-          variant="highlight"
-        >
-          <p className="text-neutral-700 mb-4 text-sm">
-            Para atendimento neste setor, é obrigatória a apresentação da
-            seguinte documentação, conforme o tipo de serviço solicitado:
-          </p>
-          <div className="space-y-3">
-            <div className="bg-white border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-3 text-sm">
-                Atualização de Cadastro
-              </h3>
-              <div className="space-y-2">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm">
-                      Documento de Identificação com Foto
-                    </strong>
-                    <p className="text-xs text-neutral-600 mt-0.5">
-                      RG (Registro Geral) ou CNH (Carteira Nacional de
-                      Habilitação)
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm">
-                      CPF - Cadastro de Pessoa Física
-                    </strong>
-                    <p className="text-xs text-neutral-600 mt-0.5">
-                      Documento físico original ou número do CPF
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm">
-                      Comprovante de Residência
-                    </strong>
-                    <p className="text-xs text-neutral-600 mt-0.5">
-                      Atualizado há no máximo 90 dias
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-3 text-sm">
-                Agendamento de Consultas e Exames
-              </h3>
-              <div className="space-y-2">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm">
-                      Documento de Identificação com Foto
-                    </strong>
-                    <p className="text-xs text-neutral-600 mt-0.5">
-                      RG ou CNH do titular do atendimento
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm">
-                      Prescrição Médica
-                    </strong>
-                    <p className="text-xs text-neutral-600 mt-0.5">
-                      Obrigatória para agendamento de exames
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-3 text-sm">
-                Protocolo / SUS Fácil (Cirurgias e Alto Custo)
-              </h3>
-              <div className="space-y-2">
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm">
-                      Documento de Identificação com Foto do Titular
-                    </strong>
-                    <p className="text-xs text-neutral-600 mt-0.5">
-                      RG ou CNH do titular do atendimento
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm">
-                      CPF do Titular
-                    </strong>
-                    <p className="text-xs text-neutral-600 mt-0.5">
-                      Documento físico original ou número do CPF
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm">
-                      Guia de Encaminhamento Médico Original
-                    </strong>
-                    <p className="text-xs text-neutral-600 mt-0.5">
-                      Documento original emitido pelo médico assistente
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="space-y-3 mt-4">
-            <Alert type="info">
-              <strong>Atualização de Cadastro:</strong> Mantenha seus dados
-              cadastrais atualizados. A atualização pode ser realizada neste
-              mesmo setor, mediante apresentação da documentação necessária.
-            </Alert>
-            <Alert type="warning">
-              <strong>Normativa:</strong> Documento de identificação com foto e
-              CPF do titular são obrigatórios para qualquer atendimento na
-              unidade, independentemente do serviço solicitado.
-            </Alert>
-          </div>
-        </InfoBox>
+        <DocumentacaoPorServico />
         {}
         <InfoBox title="Como Agendar">
           <div className="space-y-4">
@@ -335,13 +203,7 @@ export default function Sala4() {
                 <li className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
                   <span>
-                    Para exames, traga a prescrição médica original e válida
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <span>
-                    Consulte a disponibilidade de horários antes de comparecer
+                    Para exames, traga sempre o pedido médico original e válido.
                   </span>
                 </li>
               </ul>
@@ -349,7 +211,7 @@ export default function Sala4() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Horários de Atendimento">
+        <InfoBox title="Horários de Atendimento e Equipe Responsável">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
@@ -359,6 +221,9 @@ export default function Sala4() {
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Horário
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Profissionais Responsáveis
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Observações
@@ -373,6 +238,9 @@ export default function Sala4() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     07h00 às 11h00
                   </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Isabela Aguiar - Técnica de Enfermagem
+                  </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
                     Atendimento presencial
                   </td>
@@ -384,6 +252,9 @@ export default function Sala4() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     13h00 às 16h00
                   </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Thaciane Souza - Técnica de Enfermagem
+                  </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
                     Atendimento presencial
                   </td>
@@ -392,46 +263,8 @@ export default function Sala4() {
             </table>
           </div>
           <p className="text-xs text-neutral-500 mt-3">
-            * Os horários podem sofrer alterações conforme necessidade
-            operacional da unidade.
+            * Agendamentos de consultas e exames são realizados exclusivamente de forma presencial.
           </p>
-        </InfoBox>
-        {}
-        <InfoBox title="Equipe Responsável">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissionais Responsáveis
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Isabela Aguiar - Técnica de Enfermagem
-                    <br />
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Tarde</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Thaciane Souza - Técnica de Enfermagem
-                    <br />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
         </InfoBox>
         {}
         <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">

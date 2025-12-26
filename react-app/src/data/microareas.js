@@ -1,4 +1,3 @@
-import erikaPhoto from "../assets/images/acs-erika.png";
 import enesJuniorPhoto from "../assets/images/acs-enesjunior.png";
 import renataPhoto from "../assets/images/acs-renata.png";
 import wasleyPhoto from "../assets/images/acs-waslei.png";
@@ -81,7 +80,6 @@ export const microareasData = {
       {
         numero: "03",
         acs: "Erika",
-        photo: erikaPhoto,
         ruas: [
           {
             nome: "Avenida Contorno",
