@@ -24,12 +24,6 @@ export default function CampanhaInfoCard({ campanha }) {
     });
   };
 
-  // Check if any metadata exists
-  const hasMetadata = campanha.local || campanha.horario || campanha.publicoAlvo ||
-                      campanha.contato || campanha.dataInicio || campanha.dataFim;
-
-  if (!hasMetadata) return null;
-
   return (
     <div className="bg-white rounded-xl border-2 border-primary-100 shadow-soft overflow-hidden max-w-2xl mx-auto">
       {/* Header */}

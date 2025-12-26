@@ -4,6 +4,7 @@ import SearchSection from "../components/search/SearchSection";
 import ImageGallery from "../components/common/ImageGallery";
 import AvisosList from "../components/avisos/AvisosList";
 import CampanhaCarousel from "../components/campanha/CampanhaCarousel";
+import CampanhaInfoCard from "../components/campaign/CampanhaInfoCard";
 import { useCampanhas } from "../hooks/useCampanhas";
 import LoadingSpinner from "../components/common/LoadingSpinner";
 import {
@@ -161,6 +162,13 @@ export default function Home() {
                 </p>
               </div>
               <CampanhaCarousel campanhas={campanhas} />
+
+              {/* Card de informações abaixo do carrossel */}
+              {campanhas.length > 0 && campanhas[0] && (
+                <div className="mt-6">
+                  <CampanhaInfoCard campanha={campanhas[0]} />
+                </div>
+              )}
             </div>
           )}
           {}

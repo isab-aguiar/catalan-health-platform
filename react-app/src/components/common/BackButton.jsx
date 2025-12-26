@@ -4,10 +4,21 @@ import { ArrowLeft } from 'lucide-react';
 export default function BackButton({ className = '' }) {
   const navigate = useNavigate();
 
+  const handleBack = () => {
+    navigate(-1);
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  };
+
   return (
     <div className={`mb-6 ${className}`}>
       <button
-        onClick={() => navigate(-1)}
+        onClick={handleBack}
         className="group inline-flex items-center gap-2.5 px-5 py-2.5 text-sm font-semibold text-neutral-700 bg-white hover:bg-neutral-50 border border-neutral-300 hover:border-neutral-500 rounded-md shadow-sm hover:shadow-md transition-all duration-200"
         aria-label="Voltar para a página anterior"
       >

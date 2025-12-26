@@ -436,7 +436,12 @@ export default function Campanhas() {
       campanhaData.criadoPor = currentUser?.uid || userData?.uid;
       campanhaData.criadoEm = new Date();
       campanhaData.ativo = true;
-      await criarCampanha(campanhaData);
+      await criarCampanha(
+        campanhaData,
+        campanhaData.criadoPor,
+        campanhaData.imagemURL,
+        null
+      );
 
       await showModal({
         type: 'success',
@@ -750,6 +755,9 @@ export default function Campanhas() {
                             <div className="md:col-span-2">
                               <label className="block text-sm font-medium text-neutral-700 mb-1">
                                 Descrição *
+                                <span className="text-xs text-neutral-500 ml-2">
+                                  ({editForm.descricao?.length || 0}/300 caracteres)
+                                </span>
                               </label>
                               <textarea
                                 value={editForm.descricao}
@@ -760,8 +768,12 @@ export default function Campanhas() {
                                   })
                                 }
                                 rows={4}
+                                maxLength={300}
                                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                               />
+                              <p className="text-xs text-neutral-500 mt-1">
+                                Máximo de 300 caracteres para melhor visualização
+                              </p>
                             </div>
                             <div>
                               <label className="block text-sm font-medium text-neutral-700 mb-1">
@@ -1286,6 +1298,9 @@ export default function Campanhas() {
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-neutral-700 mb-1">
                     Descrição
+                    <span className="text-xs text-neutral-500 ml-2">
+                      ({createForm.descricao?.length || 0}/300 caracteres)
+                    </span>
                   </label>
                   <textarea
                     value={createForm.descricao}
@@ -1296,9 +1311,13 @@ export default function Campanhas() {
                       })
                     }
                     rows={4}
+                    maxLength={300}
                     className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                    placeholder="Descreva a campanha (opcional)..."
+                    placeholder="Descreva a campanha (opcional)... máximo 300 caracteres"
                   />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    Máximo de 300 caracteres para melhor visualização
+                  </p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-1">
