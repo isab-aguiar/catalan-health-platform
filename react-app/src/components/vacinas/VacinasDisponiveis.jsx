@@ -81,7 +81,7 @@ export default function VacinasDisponiveis() {
 
   return (
     <div className="bg-white border border-neutral-200 rounded-md shadow-sm overflow-hidden">
-      <div className="bg-neutral-700 p-5">
+      <div className="bg-primary-700 p-5">
         <h2 className="text-lg font-semibold text-white flex items-center gap-2">
           <Shield className="w-5 h-5" />
           Programa de Vacinação - ESF Catalão

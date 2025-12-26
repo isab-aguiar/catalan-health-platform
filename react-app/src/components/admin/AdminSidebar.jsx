@@ -87,7 +87,7 @@ export default function AdminSidebar({
         <div className="p-6 border-b border-neutral-300 bg-neutral-50 flex-shrink-0">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 bg-neutral-700 rounded-md flex items-center justify-center shadow-sm">
+              <div className="w-11 h-11 bg-primary-700 rounded-md flex items-center justify-center shadow-sm">
                 <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -135,7 +135,7 @@ export default function AdminSidebar({
                 onClick={handleLinkClick}
                 className={`flex items-center gap-3 px-4 py-3 rounded-md transition-colors text-sm font-medium ${
                   isActive
-                    ? "bg-neutral-700 text-white shadow-sm"
+                    ? "bg-primary-700 text-white shadow-sm"
                     : "text-neutral-700 hover:bg-neutral-100"
                 }`}
                 style={{
@@ -191,7 +191,7 @@ export default function AdminSidebar({
             </a>
             <button
               onClick={onLogout}
-              className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-neutral-700 hover:bg-neutral-800 rounded-md transition-colors w-full shadow-sm"
+              className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-primary-700 hover:bg-primary-800 rounded-md transition-colors w-full shadow-sm"
               style={{
                 fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
               }}

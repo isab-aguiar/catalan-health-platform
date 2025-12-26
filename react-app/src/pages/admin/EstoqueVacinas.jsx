@@ -80,7 +80,7 @@ export default function EstoqueVacinas() {
         {}
         <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 bg-neutral-700 rounded-md flex items-center justify-center">
+            <div className="w-12 h-12 bg-primary-700 rounded-md flex items-center justify-center">
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -213,7 +213,7 @@ export default function EstoqueVacinas() {
         </div>
         {}
         <div className="bg-white rounded-md shadow-sm border border-neutral-300 overflow-hidden">
-          <div className="bg-neutral-700 p-5">
+          <div className="bg-primary-700 p-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-md flex items-center justify-center">
@@ -651,7 +651,7 @@ const ModalCriarVacina = memo(
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
           {}
-          <div className="bg-neutral-700 p-6 flex items-center justify-between">
+          <div className="bg-primary-700 p-6 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-md flex items-center justify-center">
                 <Plus className="w-6 h-6 text-white" />
@@ -927,7 +927,7 @@ const ModalCriarVacina = memo(
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 bg-neutral-700 text-white rounded-md hover:bg-neutral-800 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-4 py-2 bg-primary-700 text-white rounded-md hover:bg-primary-800 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}

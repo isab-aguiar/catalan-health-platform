@@ -11,16 +11,18 @@ function PageContainer({ children }) {
 function InfoBox({ title, icon, children, variant = "default" }) {
   const variants = {
     default: "bg-white border-slate-200",
-    highlight: "bg-blue-50 border-blue-300",
+    highlight: "bg-blue-50 border-primary-700",
   };
   return (
     <div
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
-        {icon && <div className="text-blue-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
-      </div>
+      {title && (
+        <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
+          {icon && <div className="text-blue-700">{icon}</div>}
+          <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
+        </div>
+      )}
       {children}
     </div>
   );
@@ -173,10 +175,13 @@ export default function Vacinas() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Documentos Necessários" variant="highlight">
+        <InfoBox variant="highlight">
           {}
           <div className="mb-6">
             <VacinasDisponiveis />
+          </div>
+          <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
+            <h2 className="text-xl font-semibold text-slate-800">Documentos Necessários</h2>
           </div>
           <p className="text-slate-700 mb-4 text-sm">
             Para vacinação, é obrigatória a apresentação da seguinte
