@@ -14,7 +14,7 @@ import {
   ArrowRight,
   MessageSquare,
   Calendar,
-  Shield,
+  Building2,
   AlertCircle,
   Megaphone,
   Package,
@@ -113,8 +113,8 @@ export default function Painel() {
         {}
         <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-6">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-md flex items-center justify-center shadow-sm">
-              <Shield className="w-7 h-7 text-white" />
+            <div className="w-14 h-14 bg-neutral-700 rounded-md flex items-center justify-center shadow-sm">
+              <Building2 className="w-7 h-7 text-white" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-neutral-900">
