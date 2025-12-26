@@ -109,7 +109,7 @@ export default function Painel() {
   }
   return (
     <AdminLayout currentPage="dashboard">
-      <div className="max-w-7xl mx-auto space-y-6">
+      <div className="space-y-6">
         {}
         <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-6">
           <div className="flex items-center gap-4">

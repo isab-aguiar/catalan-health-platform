@@ -67,19 +67,18 @@ export default function AdminLayout({ children, currentPage = 'dashboard' }) {
           />
         </header>
 
-        <main className="flex-1 pt-[64px] min-h-screen">
-          <div className="px-4 pt-4 pb-2">
+        <main className="flex-1 pt-[64px] min-h-screen bg-neutral-50 py-8 px-4">
+          <div className="max-w-5xl mx-auto">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="bg-neutral-700 text-white p-3 rounded-md shadow-sm hover:bg-neutral-800 transition-colors flex items-center gap-2 px-4"
+              className="bg-neutral-700 text-white p-3 rounded-md shadow-sm hover:bg-neutral-800 transition-colors flex items-center gap-2 px-4 mb-6"
               aria-label="Abrir menu"
             >
               <Menu className="w-5 h-5" />
               <span className="font-semibold text-sm">Menu</span>
             </button>
+            {children}
           </div>
-
-          <div className="p-4 sm:p-6 lg:p-8">{children}</div>
         </main>
       </div>
     </div>
