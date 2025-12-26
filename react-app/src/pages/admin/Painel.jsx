@@ -113,7 +113,7 @@ export default function Painel() {
         {}
         <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-6">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-neutral-700 rounded-md flex items-center justify-center shadow-sm">
+            <div className="w-14 h-14 bg-primary-700 rounded-md flex items-center justify-center shadow-sm">
               <Building2 className="w-7 h-7 text-white" />
             </div>
             <div>
