@@ -11,7 +11,7 @@ import {
   Lightbulb,
 } from "lucide-react";
 import { useState } from "react";
-import mascoteZe from "../../assets/mascote-ze.svg";
+import mascoteZe from "../../assets/mascote-ze.png";
 import pdfCrianca from "../../assets/arquivos-vacinas-pdf/Calendário Nacional de Vacinação - Criança.pdf";
 import pdfAdolescente from "../../assets/arquivos-vacinas-pdf/Calendário Nacional de Vacinação - Adolescentes e jovens.pdf";
 import pdfAdulto from "../../assets/arquivos-vacinas-pdf/Calendário Nacional de Vacinação - Adulto.pdf";
