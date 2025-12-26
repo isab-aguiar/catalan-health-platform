@@ -21,17 +21,33 @@ const AVISO_FLOW = [
     field: "paginaDestino",
     validate: (value) => {
       const num = parseInt(value);
-      return (
-        num >= 0 &&
-        num <= allPages.filter((p) => p.category === "services").length
-      );
+      const services = allPages.filter((p) => p.category === "services");
+
+      if (!isNaN(num) && num >= 0 && num <= services.length) {
+        return true;
+      }
+
+      const pageNames = services.map((p) => p.title.toLowerCase());
+      if (pageNames.includes(value.toLowerCase())) {
+        return true;
+      }
+
+      return false;
     },
-    errorMsg: "Digite um número válido",
+    errorMsg: "Digite um número válido ou o nome da página",
     transform: (value) => {
       const num = parseInt(value);
-      if (num === 0) return "home";
+      if (!isNaN(num)) {
+        if (num === 0) return "home";
+        const services = allPages.filter((p) => p.category === "services");
+        return services[num - 1]?.id || "home";
+      }
+
       const services = allPages.filter((p) => p.category === "services");
-      return services[num - 1]?.id || "home";
+      const page = services.find(
+        (p) => p.title.toLowerCase() === value.toLowerCase()
+      );
+      return page?.id || "home";
     },
   },
   {
@@ -163,8 +179,70 @@ export function useInteractiveForm() {
   const processAnswer = useCallback(
     (answer) => {
       if (!isActive) return null;
+
       const baseFlow = AVISO_FLOW;
+
+      // Se currentStep está além do fluxo base, estamos no fluxo extra
+      if (currentStep >= baseFlow.length) {
+        const extraStep = currentStep - baseFlow.length;
+        const extraFlow = CAMPANHA_EXTRA_FLOW;
+        const currentQuestion = extraFlow[extraStep];
+
+        if (!currentQuestion) {
+          console.error("❌ Pergunta não encontrada no fluxo extra:", currentStep, extraStep);
+          return null;
+        }
+
+        // Validar resposta
+        if (!currentQuestion.validate(answer)) {
+          return {
+            error: currentQuestion.errorMsg || "Resposta inválida",
+            question: currentQuestion.question,
+            step: currentStep + 1,
+            total: baseFlow.length + extraFlow.length,
+          };
+        }
+
+        // Transformar valor se necessário
+        const value = currentQuestion.transform
+          ? currentQuestion.transform(answer)
+          : answer.trim();
+
+        const newFormData = {
+          ...formData,
+          [currentQuestion.field]: value,
+        };
+        setFormData(newFormData);
+
+        // Se for a última pergunta do fluxo extra, completar
+        if (extraStep === extraFlow.length - 1) {
+          setIsActive(false);
+          return {
+            completed: true,
+            data: newFormData,
+          };
+        }
+
+        // Avançar para próxima pergunta do fluxo extra
+        const nextQuestion = extraFlow[extraStep + 1];
+        setCurrentStep(currentStep + 1);
+        return {
+          question: nextQuestion.question,
+          step: currentStep + 2,
+          total: baseFlow.length + extraFlow.length,
+          isOptional: nextQuestion.optional,
+        };
+      }
+
+      // Estamos no fluxo base
       const currentQuestion = baseFlow[currentStep];
+
+      if (!currentQuestion) {
+        console.error("❌ Pergunta não encontrada no fluxo base:", currentStep);
+        return null;
+      }
+
+      // Validar resposta
       if (!currentQuestion.validate(answer)) {
         return {
           error: currentQuestion.errorMsg,
@@ -173,15 +251,21 @@ export function useInteractiveForm() {
           total: baseFlow.length,
         };
       }
+
+      // Transformar valor se necessário
       const value = currentQuestion.transform
         ? currentQuestion.transform(answer)
         : answer.trim();
+
       const newFormData = {
         ...formData,
         [currentQuestion.field]: value,
       };
       setFormData(newFormData);
+
+      // Se for a última pergunta do fluxo base
       if (currentStep === baseFlow.length - 1) {
+        // Se for tipo campanha (2), iniciar fluxo extra
         if (newFormData.tipo === "2") {
           const extraFlow = CAMPANHA_EXTRA_FLOW;
           const nextQuestion = extraFlow[0];
@@ -193,6 +277,7 @@ export function useInteractiveForm() {
             isOptional: nextQuestion.optional,
           };
         } else {
+          // Se for aviso simples (1), completar
           setIsActive(false);
           return {
             completed: true,
@@ -200,28 +285,12 @@ export function useInteractiveForm() {
           };
         }
       }
-      if (currentStep >= baseFlow.length) {
-        const extraStep = currentStep - baseFlow.length;
-        const extraFlow = CAMPANHA_EXTRA_FLOW;
-        if (extraStep === extraFlow.length - 1) {
-          setIsActive(false);
-          return {
-            completed: true,
-            data: newFormData,
-          };
-        } else {
-          const nextQuestion = extraFlow[extraStep + 1];
-          setCurrentStep(currentStep + 1);
-          return {
-            question: nextQuestion.question,
-            step: currentStep + 2,
-            total: baseFlow.length + extraFlow.length,
-            isOptional: nextQuestion.optional,
-          };
-        }
-      }
+
+      // Avançar para próxima pergunta do fluxo base
       let nextStep = currentStep + 1;
       let nextQuestion = baseFlow[nextStep];
+
+      // Pular perguntas condicionais
       while (
         nextQuestion &&
         nextQuestion.skip &&
@@ -230,6 +299,7 @@ export function useInteractiveForm() {
         nextStep++;
         nextQuestion = baseFlow[nextStep];
       }
+
       setCurrentStep(nextStep);
       return {
         question: nextQuestion.question,

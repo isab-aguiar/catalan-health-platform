@@ -1,123 +1,116 @@
-import {
-  X,
-  MapPin,
-  Users,
-  Phone,
-  Stethoscope,
-  UserCircle2,
-} from "lucide-react";
+import { useState } from 'react';
+import { MapPin, Phone, Stethoscope, UserCircle2, Users, X } from 'lucide-react';
+
 function getGenderFromName(nome) {
-  if (!nome) return "feminino";
+  if (!nome) return 'feminino';
   const nomeNormalizado = nome.trim().toLowerCase();
-  const primeiroNome = nomeNormalizado.split(" ")[0];
+  const primeiroNome = nomeNormalizado.split(' ')[0];
   const nomesMasculinos = [
-    "wasley",
-    "ênes",
-    "davi",
-    "matheus",
-    "maycon",
-    "josé",
-    "joão",
-    "pedro",
-    "carlos",
-    "paulo",
-    "marcos",
-    "lucas",
-    "gabriel",
-    "rafael",
-    "felipe",
-    "bruno",
-    "rodrigo",
-    "ricardo",
-    "andré",
-    "thiago",
-    "guilherme",
-    "daniel",
-    "júnior",
-    "junior",
-    "jose",
-    "jose",
-    "antonio",
-    "antônio",
+    'wasley',
+    'ênes',
+    'davi',
+    'matheus',
+    'maycon',
+    'josé',
+    'joão',
+    'pedro',
+    'carlos',
+    'paulo',
+    'marcos',
+    'lucas',
+    'gabriel',
+    'rafael',
+    'felipe',
+    'bruno',
+    'rodrigo',
+    'ricardo',
+    'andré',
+    'thiago',
+    'guilherme',
+    'daniel',
+    'júnior',
+    'junior',
+    'jose',
+    'antonio',
+    'antônio',
   ];
   const nomesFemininos = [
-    "erika",
-    "renata",
-    "isabel",
-    "amanda",
-    "izabelle",
-    "aline",
-    "helena",
-    "maria",
-    "ana",
-    "juliana",
-    "patricia",
-    "fernanda",
-    "carla",
-    "sandra",
-    "adriana",
-    "vanessa",
-    "tatiane",
-    "cristiane",
-    "silvana",
-    "fabíola",
-    "naiara",
-    "denivia",
-    "taciane",
-    "isabela",
-    "thaciene",
+    'erika',
+    'renata',
+    'isabel',
+    'amanda',
+    'izabelle',
+    'aline',
+    'helena',
+    'maria',
+    'ana',
+    'juliana',
+    'patricia',
+    'fernanda',
+    'carla',
+    'sandra',
+    'adriana',
+    'vanessa',
+    'tatiane',
+    'cristiane',
+    'silvana',
+    'fabíola',
+    'naiara',
+    'denivia',
+    'thaciane',
+    'isabela',
   ];
   if (
     nomesMasculinos.includes(primeiroNome) ||
     nomesMasculinos.some((nomeM) => primeiroNome.includes(nomeM))
   ) {
-    return "masculino";
+    return 'masculino';
   }
   if (
     nomesFemininos.includes(primeiroNome) ||
     nomesFemininos.some((nomeF) => primeiroNome.includes(nomeF))
   ) {
-    return "feminino";
+    return 'feminino';
   }
   const ultimaLetra = primeiroNome.slice(-1);
   if (
-    ultimaLetra === "a" &&
-    !primeiroNome.endsWith("joão") &&
-    !primeiroNome.endsWith("marcos")
+    ultimaLetra === 'a' &&
+    !primeiroNome.endsWith('joão') &&
+    !primeiroNome.endsWith('marcos')
   ) {
-    return "feminino";
+    return 'feminino';
   }
-  return "feminino";
+  return 'feminino';
 }
 export default function ACSModal({ acs, onClose }) {
+  const [imageError, setImageError] = useState(false);
+
   if (!acs) return null;
-  const photoUrl =
-    acs.photo || "https://via.placeholder.com/500x500/2196F3/ffffff?text=ACS";
+
+  const photoUrl = acs.photo || 'https://via.placeholder.com/500x500/2196F3/ffffff?text=ACS';
   const nomeACS = acs.nome || acs.acs;
-  const isAreaDescoberta = nomeACS.includes("Área Descoberta");
-  const isSaoJudas = acs.esf === "ESF SÃO JUDAS";
+  const isAreaDescoberta = nomeACS.includes('Área Descoberta');
+  const isSaoJudas = acs.esf === 'ESF SÃO JUDAS';
   const genero = getGenderFromName(nomeACS);
   const tituloAgente =
-    genero === "masculino"
-      ? "Agente Comunitário de Saúde (ACS)"
-      : "Agente Comunitária de Saúde (ACS)";
+    genero === 'masculino'
+      ? 'Agente Comunitário de Saúde (ACS)'
+      : 'Agente Comunitária de Saúde (ACS)';
   const microareaFormatada = acs.microarea
-    ? String(acs.microarea).padStart(2, "0")
+    ? String(acs.microarea).padStart(2, '0')
     : acs.microarea;
+
   return (
     <>
-      {}
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 animate-fade-in"
         onClick={onClose}
       />
-      {}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div
           className="bg-white rounded-2xl shadow-strong max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-scale-in"
           onClick={(e) => e.stopPropagation()}
         >
-          {}
           <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
             <h2 className="text-2xl font-bold text-neutral-900">
               Agente Comunitário de Saúde
@@ -130,31 +123,28 @@ export default function ACSModal({ acs, onClose }) {
               <X size={24} className="text-neutral-600" />
             </button>
           </div>
-          {}
+
           <div className="p-6">
-            {}
             {!isAreaDescoberta && !isSaoJudas && (
               <div className="w-full max-w-md mx-auto mb-6">
                 <div className="aspect-square w-full rounded-xl overflow-hidden border-4 border-primary-100 shadow-lg">
-                  <img
-                    src={photoUrl}
-                    alt={`Foto de ${acs.nome || acs.acs}`}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.target.style.display = "none";
-                      e.target.parentElement.innerHTML = `
-                        <div class="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-                          <svg class="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                          </svg>
-                        </div>
-                      `;
-                    }}
-                  />
+                  {!imageError ? (
+                    <img
+                      src={photoUrl}
+                      alt={`Foto de ${acs.nome || acs.acs}`}
+                      className="w-full h-full object-cover"
+                      onError={() => setImageError(true)}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
+                      <svg className="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
-            {}
             <div className="text-center mb-6">
               <h3 className="text-3xl font-bold text-neutral-900 mb-3">
                 {acs.nome || acs.acs}
@@ -173,7 +163,7 @@ export default function ACSModal({ acs, onClose }) {
                 </div>
               )}
             </div>
-            {}
+
             {!isAreaDescoberta && !isSaoJudas ? (
               <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl p-6 mb-6">
                 <h4 className="text-lg font-bold text-neutral-900 mb-3 flex items-center gap-2">
@@ -187,9 +177,9 @@ export default function ACSModal({ acs, onClose }) {
                     <>
                       <p className="mb-2">Olá!</p>
                       <p>
-                        Meu nome é <strong>{nomeACS}</strong>, sou{" "}
+                        Meu nome é <strong>{nomeACS}</strong>, sou{' '}
                         {tituloAgente} da <strong>{acs.esf}</strong>,
-                        responsável pela Microárea{" "}
+                        responsável pela Microárea{' '}
                         <strong>{microareaFormatada}</strong>.
                       </p>
                       <p className="mt-2">
@@ -242,7 +232,6 @@ export default function ACSModal({ acs, onClose }) {
                 </div>
               </div>
             )}
-            {}
             <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl p-6 mb-6">
               <h4 className="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
                 <Stethoscope size={20} className="text-primary-600" />
@@ -271,7 +260,7 @@ export default function ACSModal({ acs, onClose }) {
                 )}
               </div>
             </div>
-            {}
+
             <div className="border-2 border-primary-200 rounded-xl p-6">
               <h4 className="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
                 <MapPin size={20} className="text-primary-600" />
@@ -309,7 +298,7 @@ export default function ACSModal({ acs, onClose }) {
                 </>
               )}
             </div>
-            {}
+
             <div className="mt-6 flex justify-center">
               <button
                 onClick={onClose}

@@ -21,24 +21,15 @@ export function useCampanhasPagina(paginaNome) {
           dataInicio: doc.data().dataInicio?.toDate(),
           dataFim: doc.data().dataFim?.toDate(),
         }));
-        console.log(
-          `📊 Campanhas Firebase (${paginaNome}):`,
-          campanhasFirebase.length
-        );
         const locaisFiltradas = campanhasLocais.filter(
           (c) =>
             c.paginaDestino === paginaNome && c.ativo && !c.exibirNaHomepage
         );
         const todasCampanhas = [...campanhasFirebase, ...locaisFiltradas];
-        console.log(
-          `✅ Total Campanhas (${paginaNome}):`,
-          todasCampanhas.length
-        );
         setCampanhas(todasCampanhas);
         setLoading(false);
       },
       (err) => {
-        console.error(`Erro ao buscar campanhas da página ${paginaNome}:`, err);
         setError(err.message);
         const locaisFiltradas = campanhasLocais.filter(
           (c) =>

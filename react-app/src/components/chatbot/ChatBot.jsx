@@ -1,139 +1,117 @@
-import { useEffect, useRef } from "react";
-import { Bot, Trash2, X } from "lucide-react";
-import ChatMessage from "./ChatMessage";
-import ChatInput from "./ChatInput";
-import { useGemini } from "../../hooks/useGemini";
+import React, { useEffect, useRef } from 'react';
+import { Bot, Trash2, X, Check } from 'lucide-react';
+import ChatMessage from './ChatMessage';
+import ChatInput from './ChatInput';
+import { useGemini } from '../../hooks/useGemini';
+
 export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
   const {
     messages,
     loading,
-    error,
     draftCampanha,
     sendMessage,
     clearMessages,
     cancelProcessing,
     refineCampanha,
     publishCampanha,
-    campanhaFlowActive,
-    startCampanhaFlow,
-    handleFlowButtonClick,
-    handleFlowInputSubmit,
-    handleFlowFileUpload,
   } = useGemini();
+
+  const messagesContainerRef = useRef(null);
+
   const handleSend = (data) => {
-    console.log("🔵 ChatBot handleSend recebeu:", data);
-    const isObject = typeof data === "object" && data !== null;
+    const isObject = typeof data === 'object' && data !== null;
     const texto = isObject ? data.texto : data;
     const arquivo = isObject ? data.arquivo : null;
-    console.log("📝 Texto:", texto);
-    console.log("📎 Arquivo:", arquivo);
-    console.log("📋 Draft Campanha:", draftCampanha);
-    console.log("🎬 Fluxo Ativo:", campanhaFlowActive);
-    if (campanhaFlowActive) {
-      console.log(
-        "⚠️ Fluxo de botões ativo, mensagem ignorada (usar inputs do fluxo)"
-      );
-      return;
-    }
-    if (arquivo && arquivo.type?.startsWith("image/")) {
-      console.log(
-        "🎬 Enviando imagem para análise conversacional com Gemini..."
-      );
-    }
+
     if (draftCampanha && !arquivo && texto?.trim()) {
-      console.log("✏️ Refinando campanha (sistema antigo)...");
       refineCampanha(texto);
     } else if (arquivo) {
-      console.log("📸 Enviando arquivo para análise (sistema antigo)...");
-      console.log("📸 Arquivo detalhes:", {
-        name: arquivo.name,
-        size: arquivo.size,
-        type: arquivo.type,
-      });
       sendMessage({ arquivo, texto }, userId);
     } else if (texto?.trim()) {
-      console.log("💬 Enviando mensagem de texto...");
       sendMessage(texto, userId);
-    } else {
-      console.warn("⚠️ Nenhuma ação executada - sem texto nem arquivo");
     }
   };
+
   const handlePublishCampanha = async () => {
     if (!draftCampanha) return;
     const result = await publishCampanha(userId);
     if (result) {
-      alert("Campanha publicada com sucesso!");
+      alert('Campanha publicada com sucesso!');
     }
   };
-  const messagesContainerRef = useRef(null);
+
   useEffect(() => {
     if (messagesContainerRef.current) {
       const container = messagesContainerRef.current;
       container.scroll({
         top: container.scrollHeight,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
     }
   }, [messages]);
+
   const welcomeMessage = {
-    id: "welcome",
-    role: "assistant",
+    id: 'welcome',
+    role: 'assistant',
     content:
-      "👋 Olá! Sou o assistente virtual da ESF Catalão.\n\n" +
-      "🖼️ CRIAR CAMPANHA COM IMAGEM\n" +
-      "Envie uma imagem e siga o fluxo guiado. Reformulo seus textos para linguagem formal e você aprova cada etapa antes de publicar.\n\n" +
-      "📝 CRIAR AVISO SEM IMAGEM\n" +
-      'Digite "criar aviso" para iniciar um questionário interativo.\n\n' +
-      "💬 CONVERSAÇÃO\n" +
-      "Também posso responder perguntas e tirar dúvidas.\n\n" +
-      "Como posso ajudar?",
+      "Seja bem-vindo ao atendimento digital da ESF Catalão.\n\n" +
+      "Sou Atena, assistente virtual técnica da unidade. Estou habilitada para prestar suporte operacional e informações institucionais.\n\n" +
+      "Por favor, descreva sua solicitação.",
     timestamp: new Date(),
   };
+
   const allMessages = messages.length === 0 ? [welcomeMessage] : messages;
+
   return (
-    <div className="flex flex-col h-full bg-gradient-to-b from-neutral-50 to-white">
-      {}
-      <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2.5 border-b border-blue-700 flex-shrink-0">
+    <div className="flex flex-col h-full bg-gov-bg">
+      <div className="bg-gov-blue text-white px-4 py-3 border-b border-gov-dark/20 flex-shrink-0 shadow-sm">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-white bg-opacity-20 rounded-lg flex items-center justify-center">
-              <Bot className="w-4 h-4" />
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+              <Bot className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h2 className="font-semibold text-sm">Chat IA</h2>
-              <p className="text-[10px] text-blue-100 leading-tight">
+              <h2 className="font-bold text-sm tracking-tight">
+                Assistente Virtual
+              </h2>
+              <p className="text-xs text-blue-100 font-medium flex items-center gap-1.5">
+                <span className={`w-1.5 h-1.5 rounded-full ${loading ? 'bg-amber-400 animate-pulse' : 'bg-green-400'}`} />
                 {loading
-                  ? "Processando..."
+                  ? 'Processando...'
                   : draftCampanha
-                    ? "Modo Edição"
-                    : "Online"}
+                  ? 'Modo Edição'
+                  : 'Atena Online'}
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1.5">
+          
+          <div className="flex items-center gap-2">
             {draftCampanha && !loading && (
               <button
                 onClick={handlePublishCampanha}
-                className="px-3 py-1.5 bg-green-500 hover:bg-green-600 rounded-md transition-colors text-xs font-bold"
+                className="px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors text-xs font-bold flex items-center gap-1.5 shadow-sm"
                 title="Publicar campanha"
               >
-                ✅ Publicar
+                <Check className="w-3.5 h-3.5" />
+                Publicar
               </button>
             )}
+            
             {loading && (
               <button
                 onClick={cancelProcessing}
-                className="px-2.5 py-1 bg-red-500 hover:bg-red-600 rounded-md transition-colors text-xs font-semibold flex items-center gap-1"
+                className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-md transition-colors text-xs font-medium flex items-center gap-1.5 border border-white/20"
                 title="Cancelar"
               >
-                <X className="w-3 h-3" />
+                <X className="w-3.5 h-3.5" />
                 Cancelar
               </button>
             )}
+            
             {messages.length > 0 && !loading && !draftCampanha && (
               <button
                 onClick={clearMessages}
-                className="p-1.5 hover:bg-white hover:bg-opacity-20 rounded-md transition-colors"
+                className="p-2 hover:bg-white/10 rounded-md transition-colors text-blue-100 hover:text-white"
                 title="Limpar conversa"
               >
                 <Trash2 className="w-4 h-4" />
@@ -142,34 +120,32 @@ export default function ChatBot({ onCreateAviso, onEditAviso, userId }) {
           </div>
         </div>
       </div>
-      {}
+
       <div
-        className="flex-1 overflow-y-auto px-3 py-3"
-        style={{ height: 0 }}
+        className="flex-1 overflow-y-auto px-4 py-4 h-0 scroll-smooth"
         ref={messagesContainerRef}
       >
-        <div className="max-w-3xl mx-auto space-y-3">
+        <div className="max-w-3xl mx-auto space-y-4">
           {allMessages.map((message) => (
             <ChatMessage
               key={message.id}
               message={message}
               onCreateAviso={onCreateAviso}
               onEditAviso={onEditAviso}
-              onButtonClick={handleFlowButtonClick}
-              onInputSubmit={handleFlowInputSubmit}
-              onFileUpload={(file) => handleFlowFileUpload(file, userId)}
             />
           ))}
         </div>
       </div>
-      {}
-      <div className="flex-shrink-0 border-t border-neutral-200 bg-white">
-        <ChatInput
-          onSend={handleSend}
-          loading={loading}
-          disabled={false}
-          onCancel={cancelProcessing}
-        />
+
+      <div className="flex-shrink-0 border-t border-gov-border bg-white p-4">
+        <div className="max-w-3xl mx-auto">
+          <ChatInput
+            onSend={handleSend}
+            loading={loading}
+            disabled={false}
+            onCancel={cancelProcessing}
+          />
+        </div>
       </div>
     </div>
   );

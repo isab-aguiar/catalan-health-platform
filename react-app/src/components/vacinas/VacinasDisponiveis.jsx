@@ -1,41 +1,9 @@
-import { useMemo } from "react";
-import { useVacinas } from "../../hooks/useVacinas";
-import LoadingSpinner from "../common/LoadingSpinner";
-import { CheckCircle2, XCircle, Shield } from "lucide-react";
+import { CheckCircle2, Shield, XCircle } from 'lucide-react';
+import LoadingSpinner from '../common/LoadingSpinner';
+import { useVacinas } from '../../hooks/useVacinas';
+
 export default function VacinasDisponiveis() {
   const { vacinas, loading, error } = useVacinas();
-  const vacinasDisponiveis = useMemo(() => {
-    if (!vacinas || vacinas.length === 0) return [];
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-    return vacinas
-      .filter((v) => {
-        if (!v.publicado) return false;
-        const inicio = v.periodoInicio
-          ? v.periodoInicio.toDate
-            ? v.periodoInicio.toDate()
-            : new Date(v.periodoInicio)
-          : null;
-        const fim = v.periodoFim
-          ? v.periodoFim.toDate
-            ? v.periodoFim.toDate()
-            : new Date(v.periodoFim)
-          : null;
-        if (!inicio || !fim) return false;
-        const inicioDate = new Date(inicio);
-        inicioDate.setHours(0, 0, 0, 0);
-        const fimDate = new Date(fim);
-        fimDate.setHours(0, 0, 0, 0);
-        const dentroDoPeriodo = hoje >= inicioDate && hoje <= fimDate;
-        const temQuantidade = (v.quantidade || 0) > 0;
-        return dentroDoPeriodo && temQuantidade;
-      })
-      .sort((a, b) => {
-        const nomeA = a.nome || "";
-        const nomeB = b.nome || "";
-        return nomeA.localeCompare(nomeB, "pt-BR");
-      });
-  }, [vacinas]);
   const vacinaDisponivel = (v) => {
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -58,18 +26,6 @@ export default function VacinasDisponiveis() {
     const temQuantidade = (v.quantidade || 0) > 0;
     return dentroDoPeriodo && temQuantidade;
   };
-  const formatarData = (timestamp) => {
-    if (!timestamp) return "--";
-    let date;
-    if (timestamp.toDate) {
-      date = timestamp.toDate();
-    } else if (timestamp instanceof Date) {
-      date = timestamp;
-    } else {
-      date = new Date(timestamp);
-    }
-    return date.toLocaleDateString("pt-BR");
-  };
   if (loading) {
     return (
       <div className="bg-white border border-slate-200 rounded-md shadow-sm p-8">
@@ -81,9 +37,9 @@ export default function VacinasDisponiveis() {
   }
   if (error) {
     const isPermissionError =
-      error.toLowerCase().includes("permission") ||
-      error.toLowerCase().includes("permissão") ||
-      error.toLowerCase().includes("permission-denied");
+      error.toLowerCase().includes('permission') ||
+      error.toLowerCase().includes('permissão') ||
+      error.toLowerCase().includes('permission-denied');
     return (
       <div className="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-md">
         <p className="text-sm text-red-900 font-medium mb-2">
@@ -91,7 +47,7 @@ export default function VacinasDisponiveis() {
         </p>
         <p className="text-xs text-red-700 mb-2">
           {isPermissionError
-            ? "Erro de permissão: As regras do Firestore podem não estar configuradas corretamente. Verifique o console do navegador (F12) para mais detalhes."
+            ? 'Erro de permissão: As regras do Firestore podem não estar configuradas corretamente. Verifique o console do navegador (F12) para mais detalhes.'
             : error}
         </p>
         {isPermissionError && (
@@ -113,7 +69,7 @@ export default function VacinasDisponiveis() {
     return (
       <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6">
         <h2 className="text-lg font-semibold text-slate-900 mb-3 flex items-center gap-2">
-          <Shield className="w-5 h-5 text-blue-700" />
+          <Shield className="w-5 h-5 text-slate-700" />
           Programa de Vacinação
         </h2>
         <p className="text-slate-600 text-sm">
@@ -122,28 +78,18 @@ export default function VacinasDisponiveis() {
       </div>
     );
   }
+
   return (
     <div className="bg-white border border-slate-200 rounded-md shadow-sm overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-700 to-blue-800 p-5">
-        <h2
-          className="text-lg font-semibold text-white flex items-center gap-2"
-          style={{
-            fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-          }}
-        >
+      <div className="bg-slate-700 p-5">
+        <h2 className="text-lg font-semibold text-white flex items-center gap-2">
           <Shield className="w-5 h-5" />
           Programa de Vacinação - ESF Catalão
         </h2>
-        <p
-          className="text-blue-50 text-xs mt-1.5"
-          style={{
-            fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-          }}
-        >
+        <p className="text-slate-200 text-xs mt-1.5">
           Vacinas disponíveis na unidade - Atualização semanal
         </p>
       </div>
-      {}
       <div className="md:hidden divide-y divide-slate-200">
         {vacinasPublicadas.map((v) => {
           const disponivel = vacinaDisponivel(v);
@@ -153,25 +99,15 @@ export default function VacinasDisponiveis() {
               className="p-4 border-b border-slate-200 last:border-b-0"
             >
               <div className="flex items-start justify-between mb-3">
-                <h3
-                  className="font-semibold text-slate-900 text-base"
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
-                >
+                <h3 className="font-semibold text-slate-900 text-base">
                   {v.nome}
                 </h3>
                 <span
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold flex-shrink-0 ml-2 ${
                     disponivel
-                      ? "bg-green-50 text-green-800 border border-green-400"
-                      : "bg-red-50 text-red-800 border border-red-400"
+                      ? 'bg-green-50 text-green-800 border border-green-400'
+                      : 'bg-red-50 text-red-800 border border-red-400'
                   }`}
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
                 >
                   {disponivel ? (
                     <>
@@ -186,15 +122,10 @@ export default function VacinasDisponiveis() {
                   )}
                 </span>
               </div>
-              <div
-                className="space-y-2.5 text-sm mt-3"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
-              >
+              <div className="space-y-2.5 text-sm mt-3">
                 <div>
                   <span className="font-semibold text-slate-800 text-xs uppercase tracking-wide">
-                    Indicação:{" "}
+                    Indicação:{' '}
                   </span>
                   <p className="text-slate-700 mt-1 leading-relaxed">
                     {v.finalidade}
@@ -202,7 +133,7 @@ export default function VacinasDisponiveis() {
                 </div>
                 <div>
                   <span className="font-semibold text-slate-800 text-xs uppercase tracking-wide">
-                    Público-Alvo:{" "}
+                    Público-Alvo:{' '}
                   </span>
                   <p className="text-slate-700 mt-1">{v.publicoAlvo}</p>
                 </div>
@@ -211,41 +142,20 @@ export default function VacinasDisponiveis() {
           );
         })}
       </div>
-      {}
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm">
           <thead className="bg-slate-100 border-b-2 border-slate-300">
             <tr>
-              <th
-                className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
-              >
+              <th className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide">
                 Vacina
               </th>
-              <th
-                className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
-              >
+              <th className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide">
                 Indicação
               </th>
-              <th
-                className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
-              >
+              <th className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide">
                 Público-Alvo
               </th>
-              <th
-                className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
-              >
+              <th className="text-left p-4 font-semibold text-slate-800 text-xs uppercase tracking-wide">
                 Situação
               </th>
             </tr>
@@ -254,14 +164,7 @@ export default function VacinasDisponiveis() {
             {vacinasPublicadas.map((v) => {
               const disponivel = vacinaDisponivel(v);
               return (
-                <tr
-                  key={v.id}
-                  className="hover:bg-slate-50 transition-colors"
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
-                >
+                <tr key={v.id} className="hover:bg-slate-50 transition-colors">
                   <td className="p-4">
                     <div className="font-semibold text-slate-900">{v.nome}</div>
                   </td>
@@ -271,15 +174,11 @@ export default function VacinasDisponiveis() {
                   <td className="p-4 text-slate-700">{v.publicoAlvo}</td>
                   <td className="p-4">
                     <span
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold ${
                         disponivel
-                          ? "bg-green-100 text-green-800 border border-green-300"
-                          : "bg-red-100 text-red-800 border border-red-300"
+                          ? 'bg-green-100 text-green-800 border border-green-300'
+                          : 'bg-red-100 text-red-800 border border-red-300'
                       }`}
-                      style={{
-                        fontFamily:
-                          'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                      }}
                     >
                       {disponivel ? (
                         <>
@@ -300,13 +199,9 @@ export default function VacinasDisponiveis() {
           </tbody>
         </table>
       </div>
+
       <div className="bg-slate-50 border-t border-slate-200 p-4">
-        <p
-          className="text-xs text-slate-600 text-center leading-relaxed"
-          style={{
-            fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-          }}
-        >
+        <p className="text-xs text-slate-600 text-center leading-relaxed">
           Esta lista é atualizada semanalmente pela equipe de saúde. A
           disponibilidade pode variar conforme a demanda e o estoque da unidade.
         </p>

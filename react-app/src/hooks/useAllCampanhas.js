@@ -17,17 +17,11 @@ export function useAllCampanhas() {
           dataInicio: doc.data().dataInicio?.toDate(),
           dataFim: doc.data().dataFim?.toDate(),
         }));
-        console.log("📊 Total Campanhas Firebase:", campanhasFirebase.length);
         const todasCampanhas = [...campanhasFirebase, ...campanhasLocais];
-        console.log(
-          "✅ Total Campanhas (Firebase + Locais):",
-          todasCampanhas.length
-        );
         setCampanhas(todasCampanhas);
         setLoading(false);
       },
       (err) => {
-        console.error("Erro ao buscar todas as campanhas:", err);
         setError(err.message);
         setCampanhas(campanhasLocais);
         setLoading(false);

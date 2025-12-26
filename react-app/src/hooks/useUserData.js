@@ -14,9 +14,6 @@ export function useUserData(uid) {
       return;
     }
     if (!db) {
-      console.warn(
-        "⚠️ Firestore não disponível - variáveis de ambiente não configuradas"
-      );
       setUserData(null);
       setLoading(false);
       setError("Firebase não configurado. Configure as variáveis de ambiente.");
@@ -33,13 +30,9 @@ export function useUserData(uid) {
             uid: docSnapshot.id,
             ...docSnapshot.data(),
           };
-          console.log("✅ Dados do usuário carregados:", data);
           setUserData(data);
           setError(null);
         } else {
-          console.warn("⚠️ Documento do usuário não encontrado no Firestore");
-          console.warn("   UID:", uid);
-          console.warn("   Coleção: users");
           setUserData(null);
           setError(
             "Dados do usuário não encontrados. Acesse /admin/corrigir-permissoes para criar."
@@ -48,9 +41,6 @@ export function useUserData(uid) {
         setLoading(false);
       },
       (err) => {
-        console.error("❌ Erro ao escutar dados do usuário:", err);
-        console.error("   Código:", err.code);
-        console.error("   Mensagem:", err.message);
         setError(err.message);
         setUserData(null);
         setLoading(false);

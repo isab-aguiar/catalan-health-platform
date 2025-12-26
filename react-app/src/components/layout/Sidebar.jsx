@@ -1,44 +1,54 @@
-import { Link, useLocation } from "react-router-dom";
-import { Building2, X } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { X } from 'lucide-react';
+
 export default function Sidebar({ isOpen, onClose }) {
   const location = useLocation();
+  const prevPathname = useRef(location.pathname);
+
   useEffect(() => {
-    if (isOpen) {
-      onClose();
+    if (prevPathname.current !== location.pathname) {
+      if (isOpen) {
+        onClose();
+      }
+      prevPathname.current = location.pathname;
     }
-  }, [location.pathname]);
+  }, [location.pathname, isOpen, onClose]);
+
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     }
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
   const navLinks = [
-    { name: "Início", path: "/" },
-    { name: "Serviços", path: "/servicos" },
-    { name: "Sala de Vacinação", path: "/servicos/vacinas" },
-    { name: "Grupos", path: "/grupos" },
-    { name: "Equipe", path: "/equipe" },
-    { name: "Remsa", path: "/remsa" },
-    { name: "ACS", path: "/acs" },
-    { name: "Educação", path: "/educacao" },
+    { name: 'Início', path: '/' },
+    { name: 'Serviços', path: '/servicos' },
+    { name: 'Sala de Vacinação', path: '/servicos/vacinas' },
+    { name: 'Grupos', path: '/grupos' },
+    { name: 'Equipe', path: '/equipe' },
+    { name: 'Remsa', path: '/remsa' },
+    { name: 'ACS', path: '/acs' },
+    { name: 'Educação', path: '/educacao' },
   ];
+
   if (!isOpen) return null;
+
   return (
     <>
-      {}
       <div
         className="hidden lg:block fixed inset-0 bg-black/50 z-40 animate-fade-in"
         onClick={onClose}
       />
-      {}
-      <aside className="hidden lg:flex fixed right-0 top-0 h-full w-64 bg-white border-l border-neutral-200 flex-col z-50 shadow-xl transform transition-transform duration-300 ease-in-out">
-        {}
+      <aside 
+        className="hidden lg:flex fixed right-0 top-0 h-full w-64 bg-white border-l border-neutral-200 flex-col z-[55] shadow-xl transform transition-transform duration-300 ease-in-out"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="p-6 flex items-center justify-end">
           <button
             onClick={onClose}
@@ -48,7 +58,7 @@ export default function Sidebar({ isOpen, onClose }) {
             <X size={20} className="text-neutral-700" />
           </button>
         </div>
-        {}
+
         <nav className="flex-1 overflow-y-auto py-4">
           <ul className="space-y-1 px-3">
             {navLinks.map((link) => {
@@ -59,8 +69,8 @@ export default function Sidebar({ isOpen, onClose }) {
                     to={link.path}
                     className={`block px-4 py-3 rounded-lg transition-colors ${
                       isActive
-                        ? "bg-primary-50 text-primary-700 font-semibold"
-                        : "text-neutral-700 hover:bg-neutral-50 hover:text-primary-600"
+                        ? 'bg-primary-50 text-primary-700 font-semibold'
+                        : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600'
                     }`}
                   >
                     {link.name}

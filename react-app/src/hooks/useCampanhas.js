@@ -28,7 +28,6 @@ export function useCampanhas() {
       let campanhasFirebase;
       if (cacheValido) {
         campanhasFirebase = campanhasCache;
-        console.log("📦 Usando cache de campanhas");
       } else {
         const timeoutPromise = new Promise((_, reject) => {
           setTimeout(() => reject(new Error("TIMEOUT")), 10000);
@@ -40,20 +39,12 @@ export function useCampanhas() {
           ]);
           campanhasCache = campanhasFirebase;
           cacheTimestamp = agora;
-          console.log("🔄 Campanhas carregadas do Firebase");
         } catch (err) {
           if (err.message === "TIMEOUT") {
-            console.log(
-              "⏱️ Timeout ao carregar campanhas - assumindo que não há dados"
-            );
             campanhasFirebase = [];
           } else if (err.code === "permission-denied") {
-            console.log(
-              "⚠️ Permissão negada (normal para usuário não autenticado)"
-            );
             campanhasFirebase = [];
           } else if (err.code === "unavailable") {
-            console.log("📡 Firestore offline ou sem conexão");
             campanhasFirebase = [];
           } else {
             throw err;
@@ -69,7 +60,6 @@ export function useCampanhas() {
         setLoading(false);
       }
     } catch (err) {
-      console.error("Erro ao carregar campanhas:", err);
       if (isMounted.current) {
         if (err.code === "permission-denied" || err.code === "unavailable") {
           setError(null);

@@ -33,14 +33,12 @@ export function useAvisos() {
           setError(null);
         },
         (err) => {
-          console.error("Erro ao escutar avisos:", err);
           setError("Erro ao carregar avisos. Verifique sua conexão.");
           setLoading(false);
         }
       );
       return () => unsubscribe();
     } catch (err) {
-      console.error("Erro ao configurar listener:", err);
       setError("Erro ao inicializar. Recarregue a página.");
       setLoading(false);
     }
@@ -86,7 +84,6 @@ export function useAvisosPublicos() {
     setLoading(true);
     let timeoutId = null;
     timeoutId = setTimeout(() => {
-      console.log("⏱️ Timeout ao carregar avisos - assumindo que não há dados");
       setLoading(false);
       setAvisos([]);
       setError(null);
@@ -124,15 +121,10 @@ export function useAvisosPublicos() {
             clearTimeout(timeoutId);
             timeoutId = null;
           }
-          console.error("Erro ao escutar avisos públicos:", err);
           if (err.code === "permission-denied") {
-            console.log(
-              "⚠️ Permissão negada (normal para usuário não autenticado)"
-            );
             setAvisos([]);
             setError(null);
           } else if (err.code === "unavailable") {
-            console.log("📡 Firestore offline ou sem conexão");
             setError(null);
             setAvisos([]);
           } else {
@@ -150,7 +142,6 @@ export function useAvisosPublicos() {
         clearTimeout(timeoutId);
         timeoutId = null;
       }
-      console.error("Erro ao configurar listener:", err);
       setAvisos([]);
       setError(null);
       setLoading(false);

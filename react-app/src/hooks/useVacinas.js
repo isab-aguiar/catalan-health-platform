@@ -41,9 +41,6 @@ export function useVacinas() {
         setError(null);
       },
       (err) => {
-        console.error("Erro ao escutar vacinas:", err);
-        console.error("Código do erro:", err.code);
-        console.error("Mensagem do erro:", err.message);
         let errorMessage = "Erro ao carregar vacinas. Verifique sua conexão.";
         if (
           err.code === "permission-denied" ||
@@ -89,14 +86,10 @@ export function useVacinas() {
       });
       return { success: true };
     } catch (err) {
-      console.error("Erro ao atualizar vacina:", err);
       setError(err.message);
       return { success: false, error: err.message };
     }
   };
-  /**
-   * Cria uma nova vacina
-   */
   const createVacina = async (vacinaData) => {
     if (!db) {
       setError("Firebase não configurado");
@@ -110,7 +103,6 @@ export function useVacinas() {
         .replace(/[^a-z0-9]+/g, "-") // Substitui espaços e caracteres especiais por hífen
         .replace(/^-+|-+$/g, ""); // Remove hífens do início e fim
       const vacinaRef = doc(db, COLLECTION_NAME, id);
-      // Preparar dados
       const dadosVacina = {
         id: id,
         nome: vacinaData.nome,
@@ -131,7 +123,6 @@ export function useVacinas() {
       await setDoc(vacinaRef, dadosVacina);
       return { success: true, id };
     } catch (err) {
-      console.error("Erro ao criar vacina:", err);
       setError(err.message);
       return { success: false, error: err.message };
     }

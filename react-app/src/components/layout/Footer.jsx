@@ -5,50 +5,53 @@ import {
   Instagram,
   ChevronRight,
   Mail,
-} from "lucide-react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import logoPrefeitura from "../../assets/logo_mobile.png";
+} from 'lucide-react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import logoPrefeitura from '../../assets/logo_mobile.png';
+
 export default function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
+
   const quickLinks = [
-    { name: "Início", path: "/" },
-    { name: "Serviços", path: "/servicos" },
-    { name: "Sala de Vacinação", path: "/servicos/vacinas" },
-    { name: "Grupos", path: "/grupos" },
-    { name: "Equipe", path: "/equipe" },
-    { name: "ACS", path: "/acs" },
-    { name: "Contato", path: "/#contato", isAnchor: true },
+    { name: 'Início', path: '/' },
+    { name: 'Serviços', path: '/servicos' },
+    { name: 'Sala de Vacinação', path: '/servicos/vacinas' },
+    { name: 'Grupos', path: '/grupos' },
+    { name: 'Equipe', path: '/equipe' },
+    { name: 'ACS', path: '/acs' },
+    { name: 'Contato', path: '/#contato', isAnchor: true },
   ];
+
   const handleLinkClick = (e, link) => {
     e.preventDefault();
     if (link.isAnchor) {
       const scrollToElement = () => {
-        const element = document.getElementById("contato");
+        const element = document.getElementById('contato');
         if (element) {
           const yOffset = -80;
-          const y =
-            element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: "smooth" });
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
         }
       };
-      if (location.pathname === "/") {
+      if (location.pathname === '/') {
         scrollToElement();
       } else {
-        navigate("/");
+        navigate('/');
         setTimeout(scrollToElement, 300);
       }
     } else {
       if (location.pathname === link.path) {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         navigate(link.path);
         setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 100);
       }
     }
   };
+
   return (
     <footer className="bg-neutral-100 text-neutral-900 mt-auto relative">
       <div className="container mx-auto max-w-6xl px-4 py-8">
@@ -59,9 +62,6 @@ export default function Footer() {
                 src={logoPrefeitura}
                 alt="Prefeitura de Divinópolis"
                 className="h-14 w-auto object-contain"
-                style={{
-                  imageRendering: "high-quality",
-                }}
               />
             </div>
             <div className="border-t border-neutral-300 pt-4 mt-4">
@@ -81,6 +81,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
+
           <div>
             <div className="space-y-6">
               <div>
@@ -104,6 +105,7 @@ export default function Footer() {
                   </p>
                 </a>
               </div>
+
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <Clock size={18} className="text-neutral-500" />
@@ -119,6 +121,7 @@ export default function Footer() {
                   </p>
                 </div>
               </div>
+
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <Phone size={18} className="text-neutral-500" />
@@ -133,6 +136,7 @@ export default function Footer() {
                   (37) 3229-6080
                 </a>
               </div>
+
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <Mail size={18} className="text-neutral-500" />
@@ -149,6 +153,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
+
           <div>
             <h4 className="font-semibold text-lg mb-3 text-neutral-900 border-b border-neutral-300 pb-2">
               Acesso Fácil
@@ -172,6 +177,7 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+
         <div className="border-t border-neutral-300 mt-8 pt-6 text-center">
           <p className="text-sm text-neutral-600">
             © {new Date().getFullYear()} Estratégia Saúde da Família ESF Catalão

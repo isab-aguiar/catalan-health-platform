@@ -26,7 +26,6 @@ export function useUsers() {
         setError(null);
       },
       (err) => {
-        console.error("Erro ao escutar usuários:", err);
         setError(err.message);
         setLoading(false);
       }

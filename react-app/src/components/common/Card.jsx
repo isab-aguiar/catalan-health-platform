@@ -1,116 +1,102 @@
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-export default function Card({
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+
+const Card = ({
   title,
   description,
   icon,
   href,
   badge,
-  variant = "default",
-  className = "",
+  className = '',
+  headerAction,
+  onClick,
   children,
-  colorScheme = "primary",
-}) {
-  const baseStyles =
-    "group relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-white shadow-lg";
-  const colorSchemes = {
-    primary: "border-2 border-primary-200",
-    secondary: "border-2 border-secondary-200",
-    accent: "border-2 border-accent-200",
-    green: "border-2 border-green-200",
-    default: "border-2 border-neutral-200",
-  };
-  const iconBackgrounds = {
-    primary:
-      "bg-primary-100 text-primary-600 group-hover:bg-primary-500 group-hover:text-white",
-    secondary:
-      "bg-secondary-100 text-secondary-600 group-hover:bg-secondary-500 group-hover:text-white",
-    accent:
-      "bg-accent-100 text-accent-600 group-hover:bg-accent-500 group-hover:text-white",
-    green:
-      "bg-green-100 text-green-600 group-hover:bg-green-500 group-hover:text-white",
-    default:
-      "bg-neutral-100 text-neutral-600 group-hover:bg-neutral-500 group-hover:text-white",
-  };
-  const textColors = {
-    primary: "text-primary-600 group-hover:text-primary-700",
-    secondary: "text-secondary-600 group-hover:text-secondary-700",
-    accent: "text-accent-600 group-hover:text-accent-700",
-    green: "text-green-600 group-hover:text-green-700",
-    default: "text-neutral-600 group-hover:text-neutral-700",
-  };
-  const CardContent = () => {
-    const IconComponent = icon;
-    const isReactComponent =
-      icon &&
-      (typeof icon === "function" ||
-        (typeof icon === "object" && icon.$$typeof));
-    const validColorScheme = colorSchemes[colorScheme]
-      ? colorScheme
-      : "default";
-    const iconBg = iconBackgrounds[validColorScheme] || iconBackgrounds.default;
-    const textColor = textColors[validColorScheme] || textColors.default;
-    return (
-      <>
-        {}
-        {(icon || badge) && (
-          <div className="flex items-start justify-between mb-4">
-            {icon && (
-              <div
-                className={`w-14 h-14 rounded-xl flex items-center justify-center transition-colors ${iconBg}`}
-              >
-                {isReactComponent ? (
-                  <IconComponent size={28} strokeWidth={2} />
-                ) : (
-                  <span className="text-2xl">{icon}</span>
-                )}
-              </div>
-            )}
-            {badge && (
-              <span className="px-3 py-1 bg-neutral-100 rounded-full text-xs font-semibold text-neutral-700">
-                {badge}
-              </span>
-            )}
+}) => {
+  const IconComponent = icon;
+  const isReactComponent =
+    icon &&
+    (typeof icon === 'function' ||
+      (typeof icon === 'object' && icon.$$typeof));
+
+  const cardClasses = `bg-white rounded-md border border-slate-200 shadow-sm transition-all duration-200 hover:shadow-md hover:border-slate-300 hover:bg-slate-50/50 ${
+    onClick || href ? 'cursor-pointer' : ''
+  } ${className}`;
+
+  const CardContent = () => (
+    <>
+      {(icon || badge) && (
+        <div className="flex items-start justify-between mb-4 px-6 pt-6">
+          {icon && (
+            <div className="w-12 h-12 rounded-md flex items-center justify-center bg-slate-100 text-slate-700">
+              {isReactComponent ? (
+                <IconComponent size={24} strokeWidth={2} />
+              ) : (
+                <span className="text-2xl">{icon}</span>
+              )}
+            </div>
+          )}
+          {badge && (
+            <span className="px-3 py-1 bg-slate-100 rounded-full text-xs font-semibold text-slate-700">
+              {badge}
+            </span>
+          )}
+        </div>
+      )}
+
+      {children ? (
+        <>
+          {title && (
+            <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white rounded-t-md">
+              <h3 className="text-lg font-bold text-slate-900 tracking-tight">
+                {title}
+              </h3>
+              {headerAction && <div>{headerAction}</div>}
+            </div>
+          )}
+          <div className="p-6 text-slate-700 leading-relaxed">
+            {children}
           </div>
-        )}
-        {}
-        {children || (
-          <>
-            <h3 className="text-lg font-bold mb-2 line-clamp-2 text-neutral-900">
-              {title}
-            </h3>
-            <p className="text-sm mb-4 line-clamp-3 text-neutral-600 leading-relaxed">
+        </>
+      ) : (
+        <>
+          {title && (
+            <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-white rounded-t-md">
+              <h3 className="text-lg font-bold text-slate-900 tracking-tight">
+                {title}
+              </h3>
+              {headerAction && <div>{headerAction}</div>}
+            </div>
+          )}
+          {description && (
+            <div className="p-6 text-slate-700 leading-relaxed">
               {description}
-            </p>
-          </>
-        )}
-        {}
-        {href && (
-          <div
-            className={`flex items-center gap-2 text-sm font-semibold ${textColor}`}
-          >
-            <span>Acessar</span>
-            <ArrowRight
-              size={16}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </div>
-        )}
-      </>
-    );
-  };
-  const validColorScheme = colorSchemes[colorScheme] ? colorScheme : "default";
-  const classes = `${baseStyles} ${colorSchemes[validColorScheme]} ${className}`;
+            </div>
+          )}
+        </>
+      )}
+
+      {href && (
+        <div className="px-6 pb-6 flex items-center gap-2 text-sm font-semibold text-slate-700 group-hover:text-slate-900 transition-colors">
+          <span>Acessar</span>
+          <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+        </div>
+      )}
+    </>
+  );
+
   if (href) {
     return (
-      <Link to={href} className={classes}>
+      <Link to={href} className={`group ${cardClasses}`}>
         <CardContent />
       </Link>
     );
   }
+
   return (
-    <div className={classes}>
+    <div onClick={onClick} className={cardClasses}>
       <CardContent />
     </div>
   );
-}
+};
+
+export default Card;

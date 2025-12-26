@@ -1,12 +1,5 @@
-import React from "react";
-import {
-  User,
-  MapPin,
-  Phone,
-  Stethoscope,
-  BriefcaseMedical,
-  Dental,
-} from "lucide-react";
+import { MapPin, Phone, Stethoscope } from 'lucide-react';
+
 export default function ACSCard({
   name,
   esf,
@@ -22,7 +15,7 @@ export default function ACSCard({
       <div className="p-6">
         <div className="flex items-center gap-4 mb-6">
           <img
-            src={photo || "/placeholder-acs.jpg"}
+            src={photo || '/placeholder-acs.jpg'}
             alt={`Foto de ${name}`}
             className="w-24 h-24 rounded-full object-cover border-4 border-primary-100 shadow-soft"
           />
@@ -32,15 +25,18 @@ export default function ACSCard({
             <p className="text-neutral-600">Microárea: {microarea}</p>
           </div>
         </div>
+
         {phone && (
           <div className="flex items-center gap-2 text-neutral-700 mb-4">
             <Phone size={18} className="text-primary-600" />
             <span>{phone}</span>
           </div>
         )}
+
         {bio && (
           <p className="text-sm text-neutral-700 leading-relaxed mb-6">{bio}</p>
         )}
+
         <div className="bg-neutral-50 rounded-lg p-4 mb-4">
           <h4 className="font-semibold text-neutral-900 mb-3 flex items-center gap-2">
             <Stethoscope size={18} className="text-primary-600" />
@@ -50,23 +46,24 @@ export default function ACSCard({
             <li className="flex justify-between items-center">
               <span>Médico:</span>
               <span className="font-medium text-neutral-800">
-                {team?.doctor || "Não disponível"}
+                {team?.doctor || 'Não disponível'}
               </span>
             </li>
             <li className="flex justify-between items-center">
               <span>Enfermeira:</span>
               <span className="font-medium text-neutral-800">
-                {team?.nurse || "Não disponível"}
+                {team?.nurse || 'Não disponível'}
               </span>
             </li>
             <li className="flex justify-between items-center">
               <span>Dentista:</span>
               <span className="font-medium text-neutral-800">
-                {team?.dentist || "Não disponível"}
+                {team?.dentist || 'Não disponível'}
               </span>
             </li>
           </ul>
         </div>
+
         {streets && streets.length > 0 && (
           <div className="bg-neutral-50 rounded-lg p-4">
             <h4 className="font-semibold text-neutral-900 mb-3 flex items-center gap-2">

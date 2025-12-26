@@ -1,49 +1,43 @@
-import { useState, useMemo } from "react";
-import { streetsIndex } from "../data/microareas.js";
-import { normalize, removeStreetPrefix } from "../utils/normalize.js";
-import { isNumberInRange, extractNumber } from "../utils/numberValidator.js";
-import { useDebounce } from "./useDebounce.js";
+import { useMemo, useState } from 'react';
+import { streetsIndex } from '../data/microareas.js';
+import { normalize, removeStreetPrefix } from '../utils/normalize.js';
+import { extractNumber, isNumberInRange } from '../utils/numberValidator.js';
+import { useDebounce } from './useDebounce.js';
+
 export function useACSSearch() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const debouncedQuery = useDebounce(query, 300);
-  // Compute search results
+
   const results = useMemo(() => {
     if (debouncedQuery.length < 2) return [];
     const normalized = normalize(debouncedQuery);
     const number = extractNumber(debouncedQuery);
-    // Remove número da busca de rua e normaliza prefixos
     const searchTerm = removeStreetPrefix(
-      normalized.replace(/\d+/g, "").trim()
+      normalized.replace(/\d+/g, '').trim()
     );
-    // Filtrar ruas
     const matches = streetsIndex.filter((entry) => {
-      // Match street name (must contain search term)
       if (!entry.streetNormalized.includes(searchTerm)) return false;
-      // Se tem número, validar contra o range
       if (number && !isNumberInRange(number, entry.rangeData)) {
         return false;
       }
       return true;
     });
-    // Ordenar por relevância (ruas que começam com o termo primeiro)
     matches.sort((a, b) => {
       const aStarts = a.streetNormalized.startsWith(searchTerm);
       const bStarts = b.streetNormalized.startsWith(searchTerm);
       if (aStarts && !bStarts) return -1;
       if (!aStarts && bStarts) return 1;
-      // Se ambos começam ou nenhum começa, ordenar alfabeticamente
       return a.street.localeCompare(b.street);
     });
-    // Limitar a 8 resultados (mesmo limite do original)
     return matches.slice(0, 8);
   }, [debouncedQuery]);
-  // Compute autocomplete suggestions (para dropdown)
+
   const suggestions = useMemo(() => {
     if (query.length < 2) return [];
     const normalized = normalize(query);
     const number = extractNumber(query);
     const searchTerm = removeStreetPrefix(
-      normalized.replace(/\d+/g, "").trim()
+      normalized.replace(/\d+/g, '').trim()
     );
     const matches = streetsIndex.filter((entry) => {
       if (!entry.streetNormalized.includes(searchTerm)) return false;
@@ -68,6 +62,7 @@ export function useACSSearch() {
     });
     return unique.slice(0, 8);
   }, [query]);
+
   return {
     query,
     setQuery,
@@ -78,6 +73,7 @@ export function useACSSearch() {
     hasSuggestions: suggestions.length > 0,
   };
 }
+
 export function useACSByESF(esfFilter = null) {
   return useMemo(() => {
     const acsMap = new Map();
@@ -105,6 +101,7 @@ export function useACSByESF(esfFilter = null) {
     return Array.from(acsMap.values());
   }, [esfFilter]);
 }
+
 export function useESFList() {
   return useMemo(() => {
     const esfs = new Set();

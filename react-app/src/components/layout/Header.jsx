@@ -1,14 +1,15 @@
-import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Menu, X, Search, Lock, User } from "lucide-react";
-import MobileMenu from "./MobileMenu";
-import GlobalSearch from "../search/GlobalSearch";
-import { usePageSearch } from "../../hooks/usePageSearch";
-import { useAuth } from "../../contexts/AuthContext";
+import { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Menu, X, Search, Lock, User, Shield } from 'lucide-react';
+import MobileMenu from './MobileMenu';
+import GlobalSearch from '../search/GlobalSearch';
+import { usePageSearch } from '../../hooks/usePageSearch';
+import { useAuth } from '../../contexts/AuthContext';
+
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [showSearchResults, setShowSearchResults] = useState(false);
   const searchRef = useRef(null);
   const navigate = useNavigate();
@@ -21,8 +22,8 @@ export default function Header() {
         setShowSearchResults(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
   useEffect(() => {
     if (searchQuery.length >= 3) {
@@ -32,36 +33,35 @@ export default function Header() {
     }
   }, [searchQuery]);
   const handleSearchKeyDown = (e) => {
-    if (e.key === "Enter" && searchQuery.length >= 3) {
+    if (e.key === 'Enter' && searchQuery.length >= 3) {
       if (searchResults.length > 0) {
         navigate(searchResults[0].item.path);
-        setSearchQuery("");
+        setSearchQuery('');
         setShowSearchResults(false);
       } else {
         navigate(`/search-results?query=${searchQuery}`);
-        setSearchQuery("");
+        setSearchQuery('');
         setShowSearchResults(false);
       }
-    } else if (e.key === "Escape") {
+    } else if (e.key === 'Escape') {
       setShowSearchResults(false);
-      setSearchQuery("");
+      setSearchQuery('');
     }
   };
   const handleContatoClick = (e) => {
     e.preventDefault();
     const scrollToElement = () => {
-      const element = document.getElementById("contato");
+      const element = document.getElementById('contato');
       if (element) {
         const yOffset = -80;
-        const y =
-          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
       }
     };
-    if (location.pathname === "/") {
+    if (location.pathname === '/') {
       scrollToElement();
     } else {
-      navigate("/");
+      navigate('/');
       setTimeout(scrollToElement, 300);
     }
     setIsMobileMenuOpen(false);
@@ -69,60 +69,39 @@ export default function Header() {
   const handleNavClick = (e, link) => {
     e.preventDefault();
     if (link.onClick) {
-      // Se o link tem um onClick customizado (como Contato), usa ele
       link.onClick(e);
     } else {
-      // Para outros links, navega e rola para o topo
       if (location.pathname === link.path) {
-        // Se já estiver na página, apenas rola para o topo
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        // Navega para a página e rola para o topo
         navigate(link.path);
         setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         }, 100);
       }
       setIsMobileMenuOpen(false);
     }
   };
   const navLinks = [
-    { name: "Início", path: "/", handleClick: handleNavClick },
-    { name: "Serviços", path: "/servicos", handleClick: handleNavClick },
-    {
-      name: "Sala de Vacinação",
-      path: "/servicos/vacinas",
-      handleClick: handleNavClick,
-    },
-    { name: "Grupos", path: "/grupos", handleClick: handleNavClick },
-    { name: "Equipe", path: "/equipe", handleClick: handleNavClick },
-    { name: "Remsa", path: "/remsa", handleClick: handleNavClick },
-    { name: "ACS", path: "/acs", handleClick: handleNavClick },
-    { name: "Educação", path: "/educacao", handleClick: handleNavClick },
-    {
-      name: "Contato",
-      path: "/#contato",
-      isAnchor: true,
-      onClick: handleContatoClick,
-      handleClick: handleNavClick,
-    },
+    { name: 'Início', path: '/', handleClick: handleNavClick },
+    { name: 'Serviços', path: '/servicos', handleClick: handleNavClick },
+    { name: 'Sala de Vacinação', path: '/servicos/vacinas', handleClick: handleNavClick },
+    { name: 'Grupos', path: '/grupos', handleClick: handleNavClick },
+    { name: 'Equipe', path: '/equipe', handleClick: handleNavClick },
+    { name: 'Equipe Remsa', path: '/remsa', handleClick: handleNavClick },
+    { name: 'ACS', path: '/acs', handleClick: handleNavClick },
+    { name: 'Educação', path: '/educacao', handleClick: handleNavClick },
+    { name: 'Contato', path: '/#contato', isAnchor: true, onClick: handleContatoClick, handleClick: handleNavClick },
   ];
   return (
     <>
       {!isMobileMenuOpen && (
         <Link
           to="/"
-          className="fixed top-0 left-0 z-50 p-3 bg-white hover:bg-neutral-50 transition-colors flex items-center justify-center group overflow-hidden"
+          className="fixed top-0 left-0 z-50 p-3 bg-white hover:bg-neutral-50 transition-colors flex items-center justify-center group"
         >
-          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-soft group-hover:shadow-medium transition-shadow overflow-hidden flex-shrink-0">
-            <img
-              src="/favicon.png"
-              alt="ESF Catalão - Saúde da Família"
-              className="w-full h-full object-contain object-center"
-              style={{
-                imageRendering: "high-quality",
-              }}
-            />
+          <div className="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center shadow-sm group-hover:bg-slate-800 transition-colors flex-shrink-0">
+            <Shield className="w-6 h-6 text-white" />
           </div>
         </Link>
       )}
@@ -153,7 +132,7 @@ export default function Header() {
               {searchQuery && (
                 <button
                   onClick={() => {
-                    setSearchQuery("");
+                    setSearchQuery('');
                     setShowSearchResults(false);
                   }}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
@@ -168,15 +147,14 @@ export default function Header() {
                     const IconComponent = result.item.icon;
                     const isReactComponent =
                       IconComponent &&
-                      (typeof IconComponent === "function" ||
-                        (typeof IconComponent === "object" &&
-                          IconComponent?.$$typeof));
+                      (typeof IconComponent === 'function' ||
+                        (typeof IconComponent === 'object' && IconComponent?.$$typeof));
                     return (
                       <button
                         key={index}
                         onClick={() => {
                           navigate(result.item.path);
-                          setSearchQuery("");
+                          setSearchQuery('');
                           setShowSearchResults(false);
                         }}
                         className="w-full flex items-start gap-3 p-3 hover:bg-neutral-50 transition-colors text-left group border-b border-neutral-100 last:border-b-0"
@@ -207,7 +185,7 @@ export default function Header() {
                     <button
                       onClick={() => {
                         navigate(`/search-results?query=${searchQuery}`);
-                        setSearchQuery("");
+                        setSearchQuery('');
                         setShowSearchResults(false);
                       }}
                       className="w-full p-3 text-sm text-primary-600 hover:bg-primary-50 font-semibold border-t border-neutral-200"
@@ -219,11 +197,11 @@ export default function Header() {
               )}
             </div>
           </div>
-          {}
+
           <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
             {currentUser ? (
               <button
-                onClick={() => navigate("/admin/painel")}
+                onClick={() => navigate('/admin/painel')}
                 className="flex items-center gap-2 px-4 py-2 bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-colors font-medium text-sm"
               >
                 <User size={18} />
@@ -231,7 +209,7 @@ export default function Header() {
               </button>
             ) : (
               <button
-                onClick={() => navigate("/admin/login")}
+                onClick={() => navigate('/admin/login')}
                 className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium text-sm shadow-sm hover:shadow-md"
               >
                 <Lock size={18} />
@@ -243,9 +221,11 @@ export default function Header() {
       </header>
       {isSearchOpen && <GlobalSearch onClose={() => setIsSearchOpen(false)} />}
       <button
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed right-0 z-50 p-3 bg-white hover:bg-neutral-100 transition-colors"
-        style={{ top: "12px" }}
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsMobileMenuOpen(!isMobileMenuOpen);
+        }}
+        className="lg:hidden fixed top-3 right-0 z-[60] p-3 bg-white hover:bg-neutral-100 transition-colors"
         aria-label="Menu"
       >
         {isMobileMenuOpen ? (

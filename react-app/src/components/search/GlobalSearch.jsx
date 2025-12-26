@@ -1,23 +1,27 @@
-import { useState, useEffect, useRef } from "react";
-import { Search, X, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { usePageSearch } from "../../hooks/usePageSearch";
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Search, X } from 'lucide-react';
+import { usePageSearch } from '../../hooks/usePageSearch';
+
 export default function GlobalSearch({ onClose }) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const results = usePageSearch(query);
   const inputRef = useRef(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
+
   const handleResultClick = (path) => {
     navigate(path);
     onClose();
   };
+
   const handleKeyDown = (e) => {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       onClose();
-    } else if (e.key === "Enter" && query.length > 2) {
+    } else if (e.key === 'Enter' && query.length > 2) {
       if (results.length > 0) {
         handleResultClick(results[0].item.path);
       } else {
@@ -26,6 +30,7 @@ export default function GlobalSearch({ onClose }) {
       }
     }
   };
+
   return (
     <div
       className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm animate-fade-in"
@@ -36,7 +41,6 @@ export default function GlobalSearch({ onClose }) {
           className="max-w-2xl mx-auto bg-white rounded-2xl shadow-strong overflow-hidden animate-slide-down"
           onClick={(e) => e.stopPropagation()}
         >
-          {}
           <div className="flex items-center gap-4 p-4 border-b border-neutral-200">
             <Search size={24} className="text-neutral-400 flex-shrink-0" />
             <input
@@ -56,7 +60,7 @@ export default function GlobalSearch({ onClose }) {
               <X size={24} />
             </button>
           </div>
-          {}
+
           {results.length > 0 && (
             <>
               <div className="max-h-96 overflow-y-auto">
@@ -64,9 +68,8 @@ export default function GlobalSearch({ onClose }) {
                   const IconComponent = result.item.icon;
                   const isReactComponent =
                     IconComponent &&
-                    (typeof IconComponent === "function" ||
-                      (typeof IconComponent === "object" &&
-                        IconComponent?.$$typeof));
+                    (typeof IconComponent === 'function' ||
+                      (typeof IconComponent === 'object' && IconComponent?.$$typeof));
                   return (
                     <button
                       key={index}
@@ -101,7 +104,7 @@ export default function GlobalSearch({ onClose }) {
                   );
                 })}
               </div>
-              {}
+
               <div className="border-t border-neutral-200 p-4">
                 <button
                   onClick={() => {
@@ -111,23 +114,23 @@ export default function GlobalSearch({ onClose }) {
                   className="w-full py-3 bg-primary-50 hover:bg-primary-100 text-primary-700 font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
                 >
                   <Search size={18} />
-                  Ver todos os resultados para "{query}"
+                  Ver todos os resultados para &quot;{query}&quot;
                 </button>
               </div>
             </>
           )}
-          {}
+
           {query.length > 2 && results.length === 0 && (
             <div className="p-8 text-center">
               <div className="w-16 h-16 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Search size={32} className="text-neutral-400" />
               </div>
               <p className="text-neutral-600">
-                Nenhum resultado encontrado para <strong>"{query}"</strong>
+                Nenhum resultado encontrado para <strong>&quot;{query}&quot;</strong>
               </p>
             </div>
           )}
-          {}
+
           {query.length <= 2 && (
             <div className="p-8 text-center">
               <div className="w-16 h-16 bg-primary-50 rounded-full flex items-center justify-center mx-auto mb-4">

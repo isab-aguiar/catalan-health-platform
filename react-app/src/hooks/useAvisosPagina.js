@@ -18,15 +18,10 @@ export function useAvisosPagina(paginaNome) {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(
-          `📊 Avisos para página "${paginaNome}":`,
-          avisosData.length
-        );
         setAvisos(avisosData);
         setLoading(false);
       },
       (err) => {
-        console.error(`Erro ao buscar avisos da página ${paginaNome}:`, err);
         setError(err.message);
         setAvisos([]);
         setLoading(false);

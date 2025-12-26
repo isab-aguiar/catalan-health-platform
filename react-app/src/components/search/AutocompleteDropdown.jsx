@@ -1,15 +1,16 @@
-import { MapPin } from "lucide-react";
-import Badge from "../common/Badge";
+import { MapPin } from 'lucide-react';
+import Badge from '../common/Badge';
+
 export default function AutocompleteDropdown({
   suggestions,
   onSelect,
-  searchTerm = "",
-  className = "",
+  searchTerm = '',
+  className = '',
 }) {
   if (!suggestions || suggestions.length === 0) {
     return null;
   }
-  // Função para destacar termo buscado
+
   const highlightMatch = (text, term) => {
     if (!term) return text;
     const index = text.toLowerCase().indexOf(term.toLowerCase());
@@ -27,18 +28,16 @@ export default function AutocompleteDropdown({
       </>
     );
   };
+
   return (
     <div
-      className={`absolute top-full left-0 right-0 mt-2 bg-white border-2 border-primary
-                  rounded-lg shadow-lg max-h-96 overflow-y-auto z-50 animate-slide-down ${className}`}
+      className={`absolute top-full left-0 right-0 mt-2 bg-white border-2 border-primary rounded-lg shadow-lg max-h-96 overflow-y-auto z-50 animate-slide-down ${className}`}
     >
       {suggestions.map((suggestion, index) => (
         <button
           key={index}
           onClick={() => onSelect(suggestion)}
-          className="w-full flex items-center gap-3 p-3.5 hover:bg-primary-surface
-                   transition-colors text-left border-b border-border last:border-b-0
-                   focus:outline-none focus:bg-primary-surface"
+          className="w-full flex items-center gap-3 p-3.5 hover:bg-primary-surface transition-colors text-left border-b border-border last:border-b-0 focus:outline-none focus:bg-primary-surface"
           aria-label={`Selecionar ${suggestion.street}`}
         >
           <MapPin
@@ -55,7 +54,7 @@ export default function AutocompleteDropdown({
             </p>
           </div>
           <Badge variant="primary" size="sm">
-            {suggestion.esf.replace("ESF ", "")}
+            {suggestion.esf.replace('ESF ', '')}
           </Badge>
         </button>
       ))}

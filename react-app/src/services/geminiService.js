@@ -828,6 +828,277 @@ TEXTO DO USUÁRIO:
     };
   }
 }
+export async function refineCompanhaWithNLP(
+  currentCampanhaData,
+  userInstruction,
+  refinementHistory = []
+) {
+  try {
+    if (!GEMINI_API_KEY || GEMINI_API_KEY === "sua_chave_api_gemini_aqui") {
+      return {
+        success: false,
+        error: "API Key do Gemini não configurada",
+        data: currentCampanhaData,
+      };
+    }
+
+    if (!userInstruction || !userInstruction.trim()) {
+      return {
+        success: false,
+        error: "Instrução vazia",
+        data: currentCampanhaData,
+      };
+    }
+
+    const historyContext =
+      refinementHistory.length > 0
+        ? `\nHISTÓRICO DE REFINAMENTOS ANTERIORES:\n` +
+          refinementHistory
+            .map(
+              (item, idx) =>
+                `${idx + 1}. Instrução: "${item.instruction}" → Alterou: ${item.changes.join(", ")}`
+            )
+            .join("\n") +
+          "\n"
+        : "";
+
+    const REFINEMENT_PROMPT = `Você é um editor de JSON de campanhas governamentais da ESF Catalão.
+
+MODO DE OPERAÇÃO: CONSERVADOR
+- Modifique APENAS quando instrução for CLARA
+- Se ambíguo ou vago, responda pedindo clarificação
+- Não faça suposições arriscadas
+- Confiança mínima: 70% para modificar
+
+CAMPANHA ATUAL (JSON):
+${JSON.stringify(currentCampanhaData, null, 2)}
+${historyContext}
+INSTRUÇÃO DO USUÁRIO:
+"${userInstruction.trim()}"
+
+CAMPOS EDITÁVEIS:
+- titulo: string (máx 100 chars)
+- subtitulo: string opcional
+- descricao: string (máx 600 chars)
+- topicos: array de strings
+- template: "vacinacao"|"material"|"educacao"|"evento"|"urgente"|"informativo"
+- urgente: boolean
+- destaque: boolean
+- categoria: "vacina"|"material"|"campanha"
+- paginaDestino: "home"|"vacinas"|"servicos"|"educacao"
+- exibirNaHomepage: boolean
+- dataInicio: YYYY-MM-DD ou null
+- dataFim: YYYY-MM-DD ou null
+- horario: string
+- local: string
+- publicoAlvo: string
+- contato: string
+- cta: string (texto do botão)
+
+INSTRUÇÕES DE NLP CLARAS (ALTA CONFIANÇA ≥ 70%):
+✅ "Mais formal" → reformule titulo/descricao com linguagem técnica
+✅ "Resuma o título" → reduza título mantendo essência
+✅ "Encurte a descrição" → reduza descrição
+✅ "Marcar como urgente" → urgente: true, template: "urgente"
+✅ "Destacar na homepage" → destaque: true, exibirNaHomepage: true
+✅ "Público-alvo: gestantes" → publicoAlvo: "Gestantes"
+✅ "Adicionar telefone (35) 3333-3333" → contato: "(35) 3333-3333"
+
+INSTRUÇÕES AMBÍGUAS (BAIXA CONFIANÇA < 70% - PEDIR CLARIFICAÇÃO):
+⚠️ "Melhor isso" → qual campo? título? descrição?
+⚠️ "Mais curto" → qual campo específico?
+⚠️ "Ajusta" → o que exatamente ajustar?
+⚠️ "Cor azul" → templates têm cores fixas GovBR
+
+COMANDOS DE CONTINUAÇÃO (usar histórico):
+- "Mais um pouco" após encurtar → encurtar novamente o mesmo campo
+- "Agora o título também" → aplicar mesma ação ao título
+
+REGRAS CRÍTICAS:
+1. Se confiança < 70%, NÃO modifique - retorne JSON pedindo clarificação
+2. Se instrução clara, retorne JSON com mudanças
+3. Modifique APENAS campos relacionados à instrução
+4. Mantenha outros campos inalterados
+5. Use histórico para entender comandos de continuação
+6. Cores são FIXAS por template
+
+FORMATO DE RESPOSTA:
+
+CASO 1 - Instrução Clara (confiança ≥ 70%):
+{
+  "confidence": 95,
+  "changes": ["titulo", "descricao"],
+  "reasoning": "Reformulado título e descrição para linguagem técnica formal",
+  "data": { ... JSON COMPLETO da campanha atualizada ... }
+}
+
+CASO 2 - Instrução Ambígua (confiança < 70%):
+{
+  "confidence": 45,
+  "clarification_needed": true,
+  "question": "Você quer encurtar o título ou a descrição? Ou ambos?",
+  "suggestions": ["Encurte o título", "Encurte a descrição", "Encurte ambos"]
+}
+
+Retorne APENAS o JSON válido, sem texto adicional.`;
+
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [
+              {
+                text: REFINEMENT_PROMPT,
+              },
+            ],
+          },
+        ],
+        generationConfig: {
+          temperature: 0.4,
+          topK: 20,
+          topP: 0.8,
+          maxOutputTokens: 4096,
+        },
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      if (response.status === 429) {
+        const isFreeTier = errorData?.error?.details
+          ?.find((d) => d["@type"]?.includes("QuotaFailure"))
+          ?.quotaMetric?.includes("free_tier");
+        return {
+          success: false,
+          error: isFreeTier
+            ? "Limite de requisições do plano gratuito excedido. Tente novamente em alguns instantes."
+            : "Limite de requisições excedido. Aguarde alguns segundos.",
+          quotaExceeded: true,
+          isFreeTier: isFreeTier,
+          data: currentCampanhaData,
+        };
+      }
+      return {
+        success: false,
+        error: `Erro ao conectar com a API (Status: ${response.status})`,
+        data: currentCampanhaData,
+      };
+    }
+
+    const data = await response.json();
+    const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!textResponse) {
+      return {
+        success: false,
+        error: "Resposta inválida da API",
+        data: currentCampanhaData,
+      };
+    }
+
+    const result = parseRefinementResponse(textResponse, currentCampanhaData);
+    return result;
+  } catch (error) {
+    console.error("Erro ao refinar campanha:", error);
+    return {
+      success: false,
+      error: "Erro inesperado ao processar refinamento",
+      data: currentCampanhaData,
+    };
+  }
+}
+
+function parseRefinementResponse(text, originalData) {
+  try {
+    let cleanText = text.trim();
+    cleanText = cleanText.replace(/```json\s*/g, "").replace(/```\s*/g, "");
+    const jsonMatch = cleanText.match(/\{[\s\S]*\}/);
+
+    if (!jsonMatch) {
+      return {
+        success: false,
+        error: "Resposta não contém JSON válido",
+        data: originalData,
+      };
+    }
+
+    const parsed = JSON.parse(jsonMatch[0]);
+
+    if (parsed.clarification_needed) {
+      return {
+        success: false,
+        clarification_needed: true,
+        confidence: parsed.confidence || 0,
+        question: parsed.question || "Pode esclarecer sua instrução?",
+        suggestions: parsed.suggestions || [],
+        data: originalData,
+      };
+    }
+
+    if (parsed.data) {
+      const validatedData = {
+        ...originalData,
+        ...parsed.data,
+      };
+
+      if (validatedData.titulo) {
+        validatedData.titulo = validatedData.titulo.substring(0, 100);
+      }
+      if (validatedData.descricao) {
+        validatedData.descricao = validatedData.descricao.substring(0, 600);
+      }
+
+      const validTemplates = [
+        "vacinacao",
+        "material",
+        "educacao",
+        "evento",
+        "urgente",
+        "informativo",
+      ];
+      if (
+        validatedData.template &&
+        !validTemplates.includes(validatedData.template)
+      ) {
+        validatedData.template = originalData.template || "informativo";
+      }
+
+      const validCategories = ["vacina", "material", "campanha"];
+      if (
+        validatedData.categoria &&
+        !validCategories.includes(validatedData.categoria)
+      ) {
+        validatedData.categoria = originalData.categoria || "campanha";
+      }
+
+      return {
+        success: true,
+        confidence: parsed.confidence || 100,
+        changes: parsed.changes || [],
+        reasoning: parsed.reasoning || "Refinamento aplicado",
+        data: validatedData,
+      };
+    }
+
+    return {
+      success: false,
+      error: "JSON de resposta não contém campo 'data'",
+      data: originalData,
+    };
+  } catch (error) {
+    console.error("Erro ao parsear resposta de refinamento:", error);
+    return {
+      success: false,
+      error: "Não consegui processar a resposta. Tente reformular.",
+      data: originalData,
+    };
+  }
+}
+
 export async function testGeminiConnection() {
   try {
     if (!GEMINI_API_KEY || GEMINI_API_KEY === "sua_chave_api_gemini_aqui") {
