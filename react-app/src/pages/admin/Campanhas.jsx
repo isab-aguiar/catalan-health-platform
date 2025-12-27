@@ -75,13 +75,26 @@ export default function Campanhas() {
   const [createImageFiles, setCreateImageFiles] = useState([]);
   const [createImagePreviews, setCreateImagePreviews] = useState([]);
   useEffect(() => {
-    loadCampanhas();
-  }, []);
+    // Aguarda autenticação estar pronta antes de carregar
+    if (currentUser) {
+      loadCampanhas();
+    }
+  }, [currentUser, isAdmin, isProfissional, isDiretoria]);
+
   const loadCampanhas = async () => {
     try {
       setLoading(true);
       setError(null);
       let data = [];
+
+      console.log("🔍 Carregando campanhas...", {
+        isAdmin,
+        isProfissional,
+        isDiretoria,
+        userRole: userData?.role,
+        userId: currentUser?.uid
+      });
+
       if (isAdmin) {
         data = await buscarCampanhas({});
         console.log("👑 Admin - Carregando TODAS as campanhas:", data.length);
@@ -107,11 +120,18 @@ export default function Campanhas() {
     }
   };
   const handleDelete = async (id) => {
-    if (!permissions.isAdmin()) {
+    // Encontrar a campanha para verificar permissão
+    const campanha = campanhas.find(c => c.id === id);
+
+    // Verifica se é admin OU se é o criador da campanha
+    const podeDeletear = permissions.isAdmin() ||
+                        (isProfissional && campanha?.criadoPor === currentUser?.uid);
+
+    if (!podeDeletear) {
       await showModal({
         type: 'error',
         title: 'Sem Permissão',
-        message: 'Apenas administradores podem deletar campanhas.',
+        message: 'Você só pode deletar campanhas criadas por você.',
         confirmText: 'OK',
       });
       return;
