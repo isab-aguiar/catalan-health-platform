@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useUsers } from "../../hooks/useUsers";
+import { useModal } from "../../contexts/ModalContext";
 import {
   LogOut,
   User,
@@ -23,6 +24,7 @@ import Alert from "../../components/common/Alert";
 export default function Users() {
   const { currentUser, logout, userData } = useAuth();
   const navigate = useNavigate();
+  const { showModal } = useModal();
   const {
     users,
     loading,
@@ -32,7 +34,7 @@ export default function Users() {
     toggleUserActive,
     deleteUser,
   } = useUsers();
-  const [showModal, setShowModal] = useState(false);
+  const [showFormModal, setShowFormModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
@@ -63,7 +65,7 @@ export default function Users() {
       role: "diretoria",
     });
     setFormError("");
-    setShowModal(true);
+    setShowFormModal(true);
   };
   // Abrir modal para editar role do usuário
   const handleEditarRole = (user) => {
@@ -75,11 +77,11 @@ export default function Users() {
       role: user.role,
     });
     setFormError("");
-    setShowModal(true);
+    setShowFormModal(true);
   };
   // Fechar modal
   const handleFecharModal = () => {
-    setShowModal(false);
+    setShowFormModal(false);
     setEditingUser(null);
     setFormData({
       email: "",
@@ -180,24 +182,49 @@ export default function Users() {
   const handleDeleteUser = async (uid, userEmail) => {
     // Não permitir deletar a própria conta
     if (uid === currentUser.uid) {
-      alert("Você não pode deletar sua própria conta!");
+      await showModal({
+        type: 'error',
+        title: 'Ação Não Permitida',
+        message: 'Você não pode deletar sua própria conta!',
+        confirmText: 'OK',
+      });
       return;
     }
 
     // Não permitir deletar o admin root
     if (userEmail === "root@esfcatalao.com") {
-      alert("Não é permitido deletar o usuário administrador root!");
+      await showModal({
+        type: 'error',
+        title: 'Ação Não Permitida',
+        message: 'Não é permitido deletar o usuário administrador root!',
+        confirmText: 'OK',
+      });
       return;
     }
 
-    const confirmMsg = `⚠️ ATENÇÃO: Tem certeza que deseja DELETAR PERMANENTEMENTE o usuário ${userEmail}?\n\nEsta ação NÃO pode ser desfeita!\n\n- O usuário será removido do Firebase Authentication\n- Os dados do usuário serão removidos do Firestore\n- O usuário não poderá mais fazer login`;
+    // Primeira confirmação
+    const confirmed = await showModal({
+      type: 'warning',
+      title: 'Confirmar Exclusão',
+      message: `⚠️ ATENÇÃO: Tem certeza que deseja DELETAR PERMANENTEMENTE o usuário ${userEmail}?\n\nEsta ação NÃO pode ser desfeita!\n\n• O usuário será removido do Firebase Authentication\n• Os dados do usuário serão removidos do Firestore\n• O usuário não poderá mais fazer login`,
+      confirmText: 'Sim, deletar',
+      cancelText: 'Cancelar',
+    });
 
-    if (!window.confirm(confirmMsg)) {
+    if (!confirmed) {
       return;
     }
 
-    // Segundo confirm para segurança
-    if (!window.confirm(`Confirma DELETAR ${userEmail}? Esta é sua última chance de cancelar!`)) {
+    // Segunda confirmação para segurança
+    const doubleConfirmed = await showModal({
+      type: 'error',
+      title: 'Última Confirmação',
+      message: `Confirma DELETAR ${userEmail}?\n\nEsta é sua ÚLTIMA CHANCE de cancelar!\n\nO usuário será PERMANENTEMENTE removido do sistema.`,
+      confirmText: 'DELETAR PERMANENTEMENTE',
+      cancelText: 'Cancelar',
+    });
+
+    if (!doubleConfirmed) {
       return;
     }
 
@@ -205,13 +232,28 @@ export default function Users() {
     try {
       const result = await deleteUser(uid);
       if (result.success) {
-        alert(`Usuário ${userEmail} deletado com sucesso!`);
+        await showModal({
+          type: 'success',
+          title: 'Usuário Deletado',
+          message: `O usuário ${userEmail} foi deletado com sucesso!`,
+          confirmText: 'OK',
+        });
       } else {
-        alert("Erro ao deletar usuário: " + (result.error || "Erro desconhecido"));
+        await showModal({
+          type: 'error',
+          title: 'Erro ao Deletar',
+          message: result.error || 'Não foi possível deletar o usuário. Tente novamente.',
+          confirmText: 'OK',
+        });
       }
     } catch (err) {
-      alert("Erro inesperado ao deletar usuário");
       console.error("Erro ao deletar:", err);
+      await showModal({
+        type: 'error',
+        title: 'Erro Inesperado',
+        message: 'Ocorreu um erro inesperado ao deletar o usuário. Tente novamente.',
+        confirmText: 'OK',
+      });
     } finally {
       setActionLoading(null);
     }
@@ -466,7 +508,7 @@ export default function Users() {
         </div>
       </main>
       {}
-      {showModal && (
+      {showFormModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             {}
