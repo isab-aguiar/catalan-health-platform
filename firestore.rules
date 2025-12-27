@@ -120,8 +120,10 @@ service cloud.firestore {
       allow create: if isStaff();
       allow update: if isStaff();
 
-      // Apenas admins podem deletar campanhas
-      allow delete: if isAdmin();
+      // Admins podem deletar qualquer campanha
+      // Profissionais podem deletar apenas campanhas que eles criaram
+      allow delete: if isAdmin() ||
+                       (isProfissional() && resource.data.criadoPor == request.auth.uid);
     }
 
     // =====================================================
