@@ -16,6 +16,7 @@ import {
   Shield,
   Briefcase,
   Eye,
+  Trash2,
 } from "lucide-react";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Alert from "../../components/common/Alert";
@@ -29,6 +30,7 @@ export default function Users() {
     createUser,
     updateUserRole,
     toggleUserActive,
+    deleteUser,
   } = useUsers();
   const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
@@ -174,6 +176,47 @@ export default function Users() {
       setActionLoading(null);
     }
   };
+
+  const handleDeleteUser = async (uid, userEmail) => {
+    // Não permitir deletar a própria conta
+    if (uid === currentUser.uid) {
+      alert("Você não pode deletar sua própria conta!");
+      return;
+    }
+
+    // Não permitir deletar o admin root
+    if (userEmail === "root@esfcatalao.com") {
+      alert("Não é permitido deletar o usuário administrador root!");
+      return;
+    }
+
+    const confirmMsg = `⚠️ ATENÇÃO: Tem certeza que deseja DELETAR PERMANENTEMENTE o usuário ${userEmail}?\n\nEsta ação NÃO pode ser desfeita!\n\n- O usuário será removido do Firebase Authentication\n- Os dados do usuário serão removidos do Firestore\n- O usuário não poderá mais fazer login`;
+
+    if (!window.confirm(confirmMsg)) {
+      return;
+    }
+
+    // Segundo confirm para segurança
+    if (!window.confirm(`Confirma DELETAR ${userEmail}? Esta é sua última chance de cancelar!`)) {
+      return;
+    }
+
+    setActionLoading(uid);
+    try {
+      const result = await deleteUser(uid);
+      if (result.success) {
+        alert(`Usuário ${userEmail} deletado com sucesso!`);
+      } else {
+        alert("Erro ao deletar usuário: " + (result.error || "Erro desconhecido"));
+      }
+    } catch (err) {
+      alert("Erro inesperado ao deletar usuário");
+      console.error("Erro ao deletar:", err);
+    } finally {
+      setActionLoading(null);
+    }
+  };
+
   const getRoleLabel = (role) => {
     const labels = {
       admin: "Administrador",
