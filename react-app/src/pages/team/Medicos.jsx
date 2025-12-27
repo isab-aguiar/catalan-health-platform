@@ -338,8 +338,8 @@ export default function Medicos() {
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
                   Disponível mediante triagem clínica inicial em dois períodos:
-                  manhã (07h00 às 08h00) e noite - Saúde na Hora (17h30 às
-                  18h30). O atendimento será realizado conforme disponibilidade
+                  manhã (07h00 às 08h00) e noite - Saúde na Hora (18h00 às
+                  19h00). O atendimento será realizado conforme disponibilidade
                   de agenda e necessidade clínica identificada na triagem.
                 </p>
               </div>

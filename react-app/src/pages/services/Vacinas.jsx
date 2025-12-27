@@ -73,7 +73,7 @@ export default function Vacinas() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-slate-900"
+                className="text-xl md:text-3xl font-bold text-slate-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -101,7 +101,8 @@ export default function Vacinas() {
         </div>
         {}
         <InfoBox title="Horários de Atendimento">
-          <div className="overflow-x-auto">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
               <thead>
                 <tr className="bg-slate-100">
@@ -125,7 +126,9 @@ export default function Vacinas() {
                     07h00 às 11h00
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Thaciane Souza
+                    Profissional Responsável:<br/>
+                    Thaciane Souza<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -136,7 +139,9 @@ export default function Vacinas() {
                     13h00 às 17h00
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Tatiane Aparecida
+                    Profissional Responsável:<br/>
+                    Tatiane Aparecida<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
                 <tr className="bg-blue-50">
@@ -147,11 +152,79 @@ export default function Vacinas() {
                     17h00 às 22h00
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Alessandra Silva
+                    Profissional Responsável:<br/>
+                    Alessandra Silva<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Manhã
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Thaciane Souza</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Tarde
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">13h00 às 17h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Tatiane Aparecida</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded">
+                  Saúde na Hora
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">17h00 às 22h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Alessandra Silva</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="mt-4">
             <Alert type="info">
@@ -195,8 +268,7 @@ export default function Vacinas() {
                   Documento de Identificação com Foto
                 </strong>
                 <p className="text-xs text-slate-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
+                  Documento de identidade com foto e/ou Carteira de Habilitação do titular
                 </p>
               </div>
             </div>

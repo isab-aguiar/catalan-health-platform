@@ -83,7 +83,7 @@ export default function Sala9() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-xl md:text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -185,8 +185,7 @@ export default function Sala9() {
                   Documento de Identificação com Foto
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
+                  Documento de identidade com foto e/ou Carteira de Habilitação do titular
                 </p>
               </div>
             </div>
@@ -222,7 +221,8 @@ export default function Sala9() {
         </InfoBox>
         {}
         <InfoBox title="Horário de Atendimento">
-          <div className="overflow-x-auto">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -233,7 +233,7 @@ export default function Sala9() {
                     Horário
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
+                    Profissional
                   </th>
                 </tr>
               </thead>
@@ -245,8 +245,9 @@ export default function Sala9() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     08h00 às 11h00
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento presencial
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Priscila</div>
+                    <div className="pt-2">Rosana</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -256,8 +257,9 @@ export default function Sala9() {
                   <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
                     13h00 às 16h30
                   </td>
-                  <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
-                    Atendimento presencial
+                  <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Priscila</div>
+                    <div className="pt-2">Rosana</div>
                   </td>
                 </tr>
                 <tr className="bg-red-100">
@@ -272,6 +274,57 @@ export default function Sala9() {
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Manhã
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">08h00 às 11h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Priscila</div>
+                    <div className="pt-2">Rosana</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Tarde
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h30</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Priscila</div>
+                    <div className="pt-2">Rosana</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-red-100 border border-red-700 rounded-lg p-4">
+              <p className="text-center text-sm text-red-900">
+                <strong className="text-red-600">Atenção:</strong> Atendimento apenas às <strong>Segundas, Quartas e Sextas-feiras</strong>
+              </p>
+            </div>
           </div>
         </InfoBox>
         {}

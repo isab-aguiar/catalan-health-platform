@@ -1,4 +1,5 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
@@ -62,7 +63,7 @@ export default function Farmacia() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-xl md:text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -84,11 +85,6 @@ export default function Farmacia() {
         <CampanhasPaginaWrapper pagina="farmacia" />
         {}
         <AvisosPaginaWrapper pagina="farmacia" />
-        <Alert type="warning">
-          <strong>Atenção ao Horário Especial:</strong> A Farmácia funciona das{" "}
-          <strong>07h30 às 16h00</strong>, de segunda a sexta-feira. Este
-          horário é diferente do restante da unidade.
-        </Alert>
         {}
         <InfoBox title="Sobre o Serviço">
           <div className="space-y-3">
@@ -132,8 +128,35 @@ export default function Farmacia() {
           </div>
         </InfoBox>
         {}
+        <div className="bg-white rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow mb-6">
+          <div className="flex items-start gap-3">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Phone size={24} className="text-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
+                Contato da Farmácia
+              </h3>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm font-medium text-neutral-500 uppercase tracking-wide mb-1">
+                    Telefone
+                  </p>
+                  <a
+                    href="tel:+553732296081"
+                    className="text-lg sm:text-xl font-semibold text-neutral-900 hover:text-purple-600 transition-colors"
+                  >
+                    (37) 3229-6081
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {}
         <InfoBox title="Horários de Atendimento">
-          <div className="overflow-x-auto">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -144,7 +167,7 @@ export default function Farmacia() {
                     Horário
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
+                    Profissionais Responsáveis
                   </th>
                 </tr>
               </thead>
@@ -156,8 +179,13 @@ export default function Farmacia() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     07h30 às 11h00
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Dispensação de medicamentos
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="mb-2">
+                      <strong>Farmacêutica:</strong> Marcella Oliveira
+                    </div>
+                    <div>
+                      <strong>Atendente:</strong> Marinete Maria
+                    </div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -167,12 +195,70 @@ export default function Farmacia() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     13h00 às 16h00
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Dispensação de medicamentos
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="mb-2">
+                      <strong>Farmacêutica:</strong> Mariana
+                    </div>
+                    <div>
+                      <strong>Atendente:</strong> Zulmira
+                    </div>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Manhã
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h30 às 11h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais Responsáveis</strong></p>
+                  <div className="text-sm text-neutral-700 space-y-1">
+                    <p><strong>Farmacêutica:</strong> Marcella Oliveira</p>
+                    <p><strong>Atendente:</strong> Marinete Maria</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Tarde
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais Responsáveis</strong></p>
+                  <div className="text-sm text-neutral-700 space-y-1">
+                    <p><strong>Farmacêutica:</strong> Mariana</p>
+                    <p><strong>Atendente:</strong> Zulmira</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <Alert type="warning">
+              <strong>Atenção ao Horário Especial:</strong> A Farmácia funciona das{" "}
+              <strong>07h30 às 16h00</strong>, de segunda a sexta-feira. Este
+              horário é diferente do restante da unidade.
+            </Alert>
           </div>
         </InfoBox>
         {}
@@ -200,7 +286,7 @@ export default function Farmacia() {
                   Documento de Identificação
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
+                  Documento de identidade com foto e/ou Carteira de Habilitação
                 </p>
               </div>
             </div>
@@ -211,9 +297,14 @@ export default function Farmacia() {
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>
             <p className="text-sm text-blue-50 leading-relaxed">
-              Traga sempre a receita médica original e válida. Medicamentos
-              controlados têm regras específicas de dispensação conforme
-              legislação vigente.
+              Traga sempre a receita médica original e válida.{" "}
+              <Link
+                to="/servicos/renovacao#prazo-validade"
+                className="underline hover:text-white transition-colors font-semibold"
+              >
+                Consulte os prazos de validade das receitas
+              </Link>{" "}
+              para garantir a dispensação adequada dos seus medicamentos.
             </p>
           </div>
         </div>

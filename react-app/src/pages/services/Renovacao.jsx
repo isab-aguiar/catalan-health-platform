@@ -5,13 +5,14 @@ import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
-function InfoBox({ title, icon, children, variant = "default" }) {
+function InfoBox({ title, icon, children, variant = "default", id }) {
   const variants = {
     default: "bg-white border-neutral-200",
     highlight: "bg-info/10 border-info",
   };
   return (
     <div
+      id={id}
       className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
     >
       <div className={`flex items-center gap-3 mb-5 pb-3 border-b ${variant === "highlight" ? "border-neutral-300" : "border-neutral-200"}`}>
@@ -66,7 +67,7 @@ export default function Renovacao() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-xl md:text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -130,7 +131,7 @@ export default function Renovacao() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Você sabe qual o prazo de validade de sua receita?">
+        <InfoBox title="Você sabe qual o prazo de validade de sua receita?" id="prazo-validade">
           <p className="text-neutral-700 mb-4 text-sm">
             É importante conhecer o prazo de validade da sua receita para evitar
             que ela expire antes da renovação. Os prazos variam conforme o tipo
@@ -180,7 +181,8 @@ export default function Renovacao() {
         </InfoBox>
         {}
         <InfoBox title="Horários de Atendimento">
-          <div className="overflow-x-auto">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -191,7 +193,7 @@ export default function Renovacao() {
                     Horário
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
+                    Profissional Responsável
                   </th>
                 </tr>
               </thead>
@@ -203,8 +205,9 @@ export default function Renovacao() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     09h00 às 12h00
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Renovação de receitas
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Tatiana Costa<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -214,12 +217,58 @@ export default function Renovacao() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     13h00 às 16h00
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Renovação de receitas
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Cristiane Aparecida<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Manhã
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">09h00 às 12h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Tatiana Costa</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Tarde
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Cristiane Aparecida</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
         {}
@@ -236,8 +285,7 @@ export default function Renovacao() {
                   Documento de Identificação com Foto
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
+                  Documento de identidade com foto e/ou Carteira de Habilitação do titular
                 </p>
               </div>
             </div>

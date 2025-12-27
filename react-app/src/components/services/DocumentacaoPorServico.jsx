@@ -38,6 +38,11 @@ const mapearProcedimentos = (procedimentos) => {
   const mapeados = {};
 
   Object.entries(procedimentos).forEach(([key, proc]) => {
+    // Filtra procedimentos sem prestador disponível
+    if (proc.semPrestador) {
+      return;
+    }
+
     // Filtra apenas observações relevantes para o usuário (não informações operacionais)
     const observacoesUsuario = proc.observacoes?.filter(obs => {
       // Remove observações operacionais/internas
@@ -114,7 +119,7 @@ export default function DocumentacaoPorServico() {
     <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-neutral-800 mb-4">
-          Documentação Necessária por Serviço
+          Documentação necessária
         </h2>
 
         <div className="relative" ref={menuRef}>
@@ -122,14 +127,14 @@ export default function DocumentacaoPorServico() {
             onClick={() => setMenuAberto(!menuAberto)}
             className="w-full flex items-center justify-between bg-white border-2 border-neutral-300 rounded-lg px-4 py-3 text-left font-medium text-sm text-neutral-700 hover:border-info focus:outline-none focus:ring-2 focus:ring-info focus:border-transparent transition-colors"
           >
-            <span className="flex items-center gap-2">
-              <Menu size={20} className="text-neutral-500" />
+            <span className="flex items-center gap-2 min-w-0 flex-1">
+              <Menu size={20} className="text-neutral-500 flex-shrink-0" />
               <span className="truncate">{servicoSelecionadoNome}</span>
             </span>
             {menuAberto ? (
-              <X size={18} className="text-neutral-500 flex-shrink-0" />
+              <X size={18} className="text-neutral-500 flex-shrink-0 ml-2" />
             ) : (
-              <ChevronDown size={18} className="text-neutral-500 flex-shrink-0" />
+              <ChevronDown size={18} className="text-neutral-500 flex-shrink-0 ml-2" />
             )}
           </button>
 

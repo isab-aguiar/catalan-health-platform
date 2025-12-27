@@ -106,8 +106,9 @@ export default function Recepcao() {
           conforme protocolos e normativas estabelecidas.
         </p>
         {}
-        <InfoBox title="Equipe Responsável">
-          <div className="overflow-x-auto">
+        <InfoBox title="Horário de Atendimento">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -131,8 +132,8 @@ export default function Recepcao() {
                     <strong>07h00 às 17h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 1</div>
-                    <div>Nome do Profissional 2</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 1</div>
+                    <div className="pt-2">Nome do Profissional 2</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -140,8 +141,8 @@ export default function Recepcao() {
                     <strong>17h00 às 22h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 3</div>
-                    <div>Nome do Profissional 4</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 3</div>
+                    <div className="pt-2">Nome do Profissional 4</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -152,8 +153,8 @@ export default function Recepcao() {
                     <strong>07h00 às 17h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 5</div>
-                    <div>Nome do Profissional 6</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 5</div>
+                    <div className="pt-2">Nome do Profissional 6</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -161,8 +162,8 @@ export default function Recepcao() {
                     <strong>17h00 às 22h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 7</div>
-                    <div>Nome do Profissional 8</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 7</div>
+                    <div className="pt-2">Nome do Profissional 8</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -173,8 +174,8 @@ export default function Recepcao() {
                     <strong>07h00 às 17h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 9</div>
-                    <div>Nome do Profissional 10</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 9</div>
+                    <div className="pt-2">Nome do Profissional 10</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -182,8 +183,8 @@ export default function Recepcao() {
                     <strong>17h00 às 22h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 11</div>
-                    <div>Nome do Profissional 12</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 11</div>
+                    <div className="pt-2">Nome do Profissional 12</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -194,8 +195,8 @@ export default function Recepcao() {
                     <strong>07h00 às 17h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 13</div>
-                    <div>Nome do Profissional 14</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 13</div>
+                    <div className="pt-2">Nome do Profissional 14</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -203,8 +204,8 @@ export default function Recepcao() {
                     <strong>17h00 às 22h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 15</div>
-                    <div>Nome do Profissional 16</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 15</div>
+                    <div className="pt-2">Nome do Profissional 16</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -215,8 +216,8 @@ export default function Recepcao() {
                     <strong>07h00 às 17h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 17</div>
-                    <div>Nome do Profissional 18</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 17</div>
+                    <div className="pt-2">Nome do Profissional 18</div>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -224,12 +225,225 @@ export default function Recepcao() {
                     <strong>17h00 às 22h00</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2">Nome do Profissional 19</div>
-                    <div>Nome do Profissional 20</div>
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 19</div>
+                    <div className="pt-2">Nome do Profissional 20</div>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Segunda-feira
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 17h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 1</div>
+                    <div className="pt-2">Nome do Profissional 2</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Segunda-feira - Saúde na Hora
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">17h00 às 22h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 3</div>
+                    <div className="pt-2">Nome do Profissional 4</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Terça-feira
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 17h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 5</div>
+                    <div className="pt-2">Nome do Profissional 6</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Terça-feira - Saúde na Hora
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">17h00 às 22h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 7</div>
+                    <div className="pt-2">Nome do Profissional 8</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Quarta-feira
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 17h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 9</div>
+                    <div className="pt-2">Nome do Profissional 10</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Quarta-feira - Saúde na Hora
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">17h00 às 22h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 11</div>
+                    <div className="pt-2">Nome do Profissional 12</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Quinta-feira
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 17h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 13</div>
+                    <div className="pt-2">Nome do Profissional 14</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Quinta-feira - Saúde na Hora
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">17h00 às 22h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 15</div>
+                    <div className="pt-2">Nome do Profissional 16</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Sexta-feira
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 17h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 17</div>
+                    <div className="pt-2">Nome do Profissional 18</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Sexta-feira - Saúde na Hora
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Período</p>
+                  <p className="text-sm font-semibold text-neutral-800">17h00 às 22h00</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
+                  <div className="text-sm text-neutral-700">
+                    <div className="pb-2 border-b border-neutral-200">Nome do Profissional 19</div>
+                    <div className="pt-2">Nome do Profissional 20</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
         {}
@@ -286,57 +500,14 @@ export default function Recepcao() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Horários de Atendimento">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Horário Regular</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 17h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento geral
-                  </td>
-                </tr>
-                <tr className="bg-info/10">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Saúde na Hora</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    17h00 às 22h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento estendido
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </InfoBox>
-        {}
         <InfoBox title="O que você pode retirar aqui?">
           <p className="text-neutral-700 mb-4 text-sm">
             Para agilizar o atendimento, alguns documentos ficam disponíveis
             diretamente na recepção, sem necessidade de aguardar na Sala de Agendamentos ou
             na Sala de atendimento administrativo.
           </p>
-          <div className="overflow-x-auto">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -385,6 +556,52 @@ export default function Recepcao() {
               </tbody>
             </table>
           </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <strong className="text-neutral-800 text-sm">
+                  Receitas Renovadas
+                </strong>
+              </div>
+              <div className="pt-1">
+                <p className="text-sm text-neutral-700">
+                  Receitas de uso contínuo que foram deixadas para renovação e
+                  já estão prontas para retirada.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <strong className="text-neutral-800 text-sm">
+                  Guias de Encaminhamento
+                </strong>
+              </div>
+              <div className="pt-1">
+                <p className="text-sm text-neutral-700">
+                  Encaminhamentos ou guias que não necessitam de assinatura do
+                  usuário.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <strong className="text-neutral-800 text-sm">
+                  Resultados de Exames
+                </strong>
+              </div>
+              <div className="pt-1">
+                <p className="text-sm text-neutral-700">
+                  Retirada de resultados de exames e informações sobre a
+                  disponibilidade dos resultados.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="mt-4">
             <Alert type="warning">
               <strong>Atenção:</strong> Se o seu documento precisa de sua
@@ -420,8 +637,7 @@ export default function Recepcao() {
                   Documento de Identificação Original do Titular com Foto
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  original do titular
+                  Documento de identidade com foto e/ou Carteira de Habilitação original do titular
                 </p>
               </div>
             </div>
@@ -447,5 +663,5 @@ export default function Recepcao() {
         </InfoBox>
       </div>
     </PageContainer>
-  );1
+  );
 }

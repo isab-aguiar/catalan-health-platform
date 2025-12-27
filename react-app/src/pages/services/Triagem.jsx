@@ -66,7 +66,7 @@ export default function Triagem() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-xl md:text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -124,7 +124,9 @@ export default function Triagem() {
             <h3 className="font-semibold text-neutral-800 mb-3 pb-2 border-b border-neutral-200 text-sm">
               Procedimentos Realizados na Triagem
             </h3>
-            <div className="overflow-x-auto">
+
+            {/* Versão Desktop */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full border-collapse border border-neutral-300">
                 <thead>
                   <tr className="bg-neutral-100">
@@ -164,11 +166,42 @@ export default function Triagem() {
                 </tbody>
               </table>
             </div>
+
+            {/* Versão Mobile */}
+            <div className="md:hidden space-y-4">
+              <div className="bg-white border border-neutral-200 rounded-lg p-4">
+                <div className="mb-3">
+                  <h4 className="font-semibold text-neutral-800 text-sm">Avaliação de Sinais Vitais</h4>
+                </div>
+                <p className="text-sm text-neutral-700 leading-relaxed" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
+                  Verificação de pressão arterial<span className="text-base">,</span> temperatura corporal<span className="text-base">,</span> frequência cardíaca e respiratória<span className="text-base">,</span> conforme protocolos de enfermagem.
+                </p>
+              </div>
+
+              <div className="bg-white border border-neutral-200 rounded-lg p-4">
+                <div className="mb-3">
+                  <h4 className="font-semibold text-neutral-800 text-sm">Aferição de Peso e Altura</h4>
+                </div>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Medição para atualização do prontuário e cálculo de indicadores quando necessário.
+                </p>
+              </div>
+
+              <div className="bg-white border border-neutral-200 rounded-lg p-4">
+                <div className="mb-3">
+                  <h4 className="font-semibold text-neutral-800 text-sm">Avaliação Clínica Inicial</h4>
+                </div>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Análise dos sintomas apresentados para definição da prioridade e do encaminhamento adequado.
+                </p>
+              </div>
+            </div>
           </div>
         </InfoBox>
         {}
         <InfoBox title="Equipe Responsável e Horários de Atendimento">
-          <div className="overflow-x-auto">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -180,9 +213,6 @@ export default function Triagem() {
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Profissional
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
                   </th>
                 </tr>
               </thead>
@@ -197,9 +227,6 @@ export default function Triagem() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     Darley Camargos - Técnico de Enfermagem
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento por ordem de chegada
-                  </td>
                 </tr>
                 <tr className="bg-info/10">
                   <td className="border border-neutral-300 px-4 py-3">
@@ -208,17 +235,59 @@ export default function Triagem() {
                     </strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    17h30 às 18h30
+                    18h00 às 19h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     Alessandra - Técnica de Enfermagem
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Triagem e atendimento estendido
-                  </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Manhã
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 08h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Darley Camargos</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnico de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded">
+                  Noite (Saúde na Hora)
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">18h00 às 19h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Alessandra</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
         {}
@@ -257,14 +326,6 @@ export default function Triagem() {
               <p className="text-neutral-700 text-sm mb-2">
                 <strong>Compareça à unidade no horário da triagem</strong>
               </p>
-              <div className="ml-4 space-y-1">
-                <p className="text-sm text-neutral-600">
-                  Manhã das 07h00 às 08h00
-                </p>
-                <p className="text-sm text-neutral-600">
-                  Noite das 17h30 às 18h30 (Saúde na Hora)
-                </p>
-              </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -306,8 +367,7 @@ export default function Triagem() {
                   Documento de Identificação com Foto
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
+                  Documento de identidade com foto e/ou Carteira de Habilitação do titular
                 </p>
               </div>
             </div>
@@ -350,7 +410,9 @@ export default function Triagem() {
               </h3>
               <p className="text-neutral-700 leading-relaxed text-sm mb-3">
                 O atendimento sob demanda está disponível mediante triagem
-                clínica inicial realizada no período das 07h00 às 08h00.
+                clínica inicial realizada:<br/>
+                <strong>Período matutino </strong> de  07h00 às 08h00. <br/>
+                <strong>Período noturno </strong>de 18h00 às 19h00.
               </p>
               <div className="bg-white border-l-4 border-info p-3 rounded-r">
                 <p className="text-sm text-neutral-800 leading-relaxed">

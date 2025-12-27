@@ -288,7 +288,8 @@ export const procedimentosMedicos = {
       "Data de corte: 15/04/2024",
       "Agendamento direto pelo paciente"
     ],
-    filaUnica: false
+    filaUnica: false,
+    semPrestador: true
   },
   "cirurgia-bariatrica": {
     nome: "Cirurgia Bariátrica",

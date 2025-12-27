@@ -81,7 +81,7 @@ export default function Sala4() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-xl md:text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -162,14 +162,14 @@ export default function Sala4() {
               necessário apresentar documentação completa para protocolização.
             </p>
             <p className="text-xs text-neutral-500 italic">
-              Nota: O acompanhamento da posição na fila é realizado na  Sala de atendimento administrativo.
+              Nota: O acompanhamento da posição na fila é realizado na  Sala de atendimento Administrativo.
             </p>
           </div>
         </InfoBox>
         {}
         <DocumentacaoPorServico />
         {}
-        <InfoBox title="Como Agendar">
+        <InfoBox title="Como agendar?">
           <div className="space-y-4">
             <div>
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
@@ -211,8 +211,9 @@ export default function Sala4() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Horários de Atendimento e Equipe Responsável">
-          <div className="overflow-x-auto">
+        <InfoBox title="Horários de Atendimento">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -225,9 +226,6 @@ export default function Sala4() {
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Profissionais Responsáveis
                   </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
-                  </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
@@ -239,10 +237,8 @@ export default function Sala4() {
                     07h00 às 11h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Isabela Aguiar - Técnica de Enfermagem
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento presencial
+                    Isabela Aguiar<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -253,16 +249,61 @@ export default function Sala4() {
                     13h00 às 16h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Thaciane Souza - Técnica de Enfermagem
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento presencial
+                    Profissional Responsável:<br/>
+                    Thaciane Souza<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-neutral-500 mt-3">
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Manhã
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Isabela Aguiar</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Tarde
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Thaciane Souza</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-neutral-500 mt-4">
             * Agendamentos de consultas e exames são realizados exclusivamente de forma presencial.
           </p>
         </InfoBox>

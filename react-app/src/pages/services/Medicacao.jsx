@@ -66,12 +66,12 @@ export default function Medicacao() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-xl md:text-3xl font-bold text-neutral-900"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
-                Sala de Administração de Medicamentos
+                Sala de Medicações
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
@@ -127,13 +127,17 @@ export default function Medicacao() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Equipe Responsável">
-          <div className="overflow-x-auto">
+        <InfoBox title="Horários de Atendimento">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Período
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Horário
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Profissional Responsável
@@ -146,7 +150,11 @@ export default function Medicacao() {
                     <strong className="text-neutral-800">Manhã</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Valéria Costa - Técnica de Enfermagem
+                    07h00 às 11h00
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Valéria Costa<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -154,42 +162,11 @@ export default function Medicacao() {
                     <strong className="text-neutral-800">Tarde</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Darley Camargos - Técnico de Enfermagem
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </InfoBox>
-        {}
-        <InfoBox title="Horários de Atendimento">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">
-                      Horário Regular
-                    </strong>
+                    13h00 às 17h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 17h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento livre
+                    Darley Camargos<br/>
+                    Função: Técnico de Enfermagem
                   </td>
                 </tr>
                 <tr className="bg-info/10">
@@ -199,18 +176,85 @@ export default function Medicacao() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     17h00 às 22h00
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento estendido
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Alessandra Souza<br/>
+                    Função: Técnica de Enfermagem
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Manhã
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Valéria Costa</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Tarde
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">13h00 às 17h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Darley Camargos</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnico de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded">
+                  Saúde na Hora
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">17h00 às 22h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Alessandra Souza</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </InfoBox>
         {}
         <InfoBox title="Documentação Necessária" variant="highlight">
           <p className="text-neutral-700 mb-4 text-sm">
-            Para atendimento Sala de Administração de Medicamentos, é
+            Para atendimento Sala de Medicações, é
             obrigatória a apresentação da seguinte documentação:
           </p>
           <div className="space-y-2">
@@ -221,8 +265,7 @@ export default function Medicacao() {
                   Documento de Identificação com Foto
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
+                  Documento de identidade com foto e/ou Carteira de Habilitação do titular
                 </p>
               </div>
             </div>

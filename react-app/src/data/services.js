@@ -100,8 +100,8 @@ export const allPages = [
   {
     id: "medicacao",
     title: "Administração de Medicamentos",
-    description: "Aplicação de medicamentos injetáveis e nebulização",
-    keywords: ["medicação", "injeção", "aplicar", "remédio", "nebulização"],
+    description: "Administração de medicamentos injetáveis, aferição de sinais vitais e procedimentos técnicos de enfermagem.",
+    keywords: ["medicação", "injeção", "aplicar", "remédio"],
     icon: Pill,
     path: "/servicos/medicacao",
     category: "services",
