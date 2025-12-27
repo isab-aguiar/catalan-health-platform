@@ -1,0 +1,50 @@
+{
+  "diretoria": {
+    "uid": "G3huECHzLFbboi2RLFTo6wNyyYy1",
+    "email": "diretoria@esfcatalao.com",
+    "displayName": "Diretoria",
+    "nome": "Diretoria ESF Catalão",
+    "role": "diretoria",
+    "active": true,
+    "emailVerified": false,
+    "photoURL": null,
+    "permissions": {
+      "avisos": {
+        "create": true,
+        "read": true,
+        "update": true,
+        "delete": true
+      },
+      "campanhas": {
+        "create": true,
+        "read": true,
+        "update": true,
+        "delete": true
+      }
+    }
+  },
+  "profissional": {
+    "uid": "RrxUSSuPTpXc4PBDFltzBAvcO3j2",
+    "email": "profissional@esfcatalao.com",
+    "displayName": "Profissional",
+    "nome": "Profissional de Saúde",
+    "role": "profissional",
+    "active": true,
+    "emailVerified": false,
+    "photoURL": null,
+    "permissions": {
+      "avisos": {
+        "create": false,
+        "read": true,
+        "update": false,
+        "delete": false
+      },
+      "campanhas": {
+        "create": false,
+        "read": true,
+        "update": false,
+        "delete": false
+      }
+    }
+  }
+}

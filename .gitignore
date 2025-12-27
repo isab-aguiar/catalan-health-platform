@@ -24,6 +24,12 @@ react-app/serviceAccountKey.json
 **/serviceAccountKey.json
 *.serviceAccountKey.json
 
+# Credenciais e informações sensíveis
+CREDENCIAIS.md
+credenciais.md
+SENHAS.md
+senhas.md
+
 # Logs
 logs
 *.log
