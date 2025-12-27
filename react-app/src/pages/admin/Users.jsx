@@ -439,6 +439,14 @@ export default function Users() {
                           <Power className="w-5 h-5" />
                         )}
                       </button>
+                      <button
+                        onClick={() => handleDeleteUser(user.uid, user.email)}
+                        disabled={actionLoading === user.uid || isCurrentUser || user.email === "root@esfcatalao.com"}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        title="Deletar usuário permanentemente"
+                      >
+                        <Trash2 className="w-5 h-5" />
+                      </button>
                     </div>
                   </div>
                 </div>
