@@ -5,9 +5,12 @@ import {
   Instagram,
   ChevronRight,
   Mail,
+  Facebook,
+  Youtube,
 } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logoPrefeitura from '../../assets/logo_mobile.png';
+import logoSemusa from '../../assets/logo-semusa.png';
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -50,27 +53,102 @@ export default function Footer() {
       <div className="container mx-auto max-w-6xl px-4 py-8">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
+            {/* Logo Prefeitura */}
             <div className="mb-4">
               <img
                 src={logoPrefeitura}
                 alt="Prefeitura de Divinópolis"
-                className="h-14 w-auto object-contain"
+                className="h-12 w-full max-w-xs object-contain object-left"
               />
             </div>
+
+            {/* Divisória */}
+            <div className="border-t border-neutral-200 my-3 w-32"></div>
+
+            {/* Logo SEMUSA */}
+            <div className="mb-4">
+              <img
+                src={logoSemusa}
+                alt="SEMUSA - Secretaria Municipal de Saúde"
+                className="h-20 w-auto object-contain object-left"
+              />
+            </div>
+
             <div className="border-t border-neutral-300 pt-4 mt-4">
-              <p className="text-neutral-700 text-sm mb-3">
+              <p className="text-neutral-700 text-sm font-semibold mb-4">
                 Acompanhe a gente!
               </p>
-              <div className="flex gap-3">
-                <a
-                  href="https://instagram.com/esfcatalao"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-neutral-700 hover:bg-primary-600 flex items-center justify-center transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram size={18} className="text-white" />
-                </a>
+
+              {/* ESF Catalão */}
+              <div className="mb-4">
+                <p className="text-neutral-600 text-xs mb-2 font-medium">
+                  ESF Catalão
+                </p>
+                <div className="flex gap-3">
+                  <a
+                    href="https://instagram.com/esfcatalao"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-neutral-700 hover:bg-gradient-to-tr hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 flex items-center justify-center transition-all duration-300"
+                    aria-label="Instagram ESF Catalão"
+                  >
+                    <Instagram size={18} className="text-white" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Prefeitura de Divinópolis */}
+              <div className="mb-4">
+                <p className="text-neutral-600 text-xs mb-2 font-medium">
+                  Prefeitura de Divinópolis
+                </p>
+                <div className="flex gap-3 flex-wrap">
+                  <a
+                    href="https://www.instagram.com/prefeituradivinopolis/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-neutral-700 hover:bg-gradient-to-tr hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 flex items-center justify-center transition-all duration-300"
+                    aria-label="Instagram Prefeitura de Divinópolis"
+                  >
+                    <Instagram size={18} className="text-white" />
+                  </a>
+                  <a
+                    href="https://www.facebook.com/prefeituradedivinopolis/?locale=pt_BR"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-neutral-700 hover:bg-blue-600 flex items-center justify-center transition-all duration-300"
+                    aria-label="Facebook Prefeitura de Divinópolis"
+                  >
+                    <Facebook size={18} className="text-white" />
+                  </a>
+                  <a
+                    href="https://www.youtube.com/channel/UCZBIy0f8g0QuAUBLngFnNdQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-neutral-700 hover:bg-red-600 flex items-center justify-center transition-all duration-300"
+                    aria-label="YouTube Prefeitura de Divinópolis"
+                  >
+                    <Youtube size={18} className="text-white" />
+                  </a>
+                </div>
+              </div>
+
+              {/* SEMUSA Divinópolis */}
+              <div>
+                <p className="text-neutral-600 text-xs mb-2 font-medium">
+                  SEMUSA Divinópolis
+                </p>
+                <div className="flex gap-3">
+                  <a
+                    href="https://www.instagram.com/semusadivinopolis/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-neutral-700 hover:bg-gradient-to-tr hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 flex items-center justify-center transition-all duration-300"
+                    aria-label="Instagram SEMUSA Divinópolis"
+                  >
+                    <Instagram size={18} className="text-white" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

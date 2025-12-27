@@ -583,6 +583,33 @@ export const procedimentosMedicos = {
       "Demais vacinas por demanda espontânea"
     ],
     filaUnica: false
+  },
+  "noripurum-endovenoso": {
+    nome: "Noripurum Endovenoso - Administração de Medicação",
+    categoria: "Medicamentos",
+    local: "Sala de Agendamentos / Sala de Medicações",
+    orientacoes: [
+      "O serviço de administração de Noripurum Endovenoso é realizado mediante prescrição médica válida",
+      "Realizar agendamento prévio na Sala de Agendamentos",
+      "Agendar data e horário para administração na Sala de Medicações, conforme disponibilidade",
+      "Horários disponíveis: período da tarde, das 11:00 às 17:00",
+      "No dia e horário agendados, comparecer à Unidade de Saúde ESF Catalão",
+      "Dirigir-se à recepção portando toda a documentação exigida",
+      "Realizar ficha de atendimento na recepção",
+      "Aguardar chamada para administração do medicamento"
+    ],
+    documentosNecessarios: [
+      "Documento oficial de identificação com foto do titular (RG ou CNH original)",
+      "CPF físico original ou número do CPF",
+      "Prescrição médica original válida"
+    ],
+    observacoes: [
+      "Administração conforme prescrição médica",
+      "Agendamento obrigatório",
+      "Atendimento exclusivo na Unidade de Saúde ESF Catalão"
+    ],
+    filaUnica: false,
+    horarioEspecifico: "Período da tarde: 11:00 às 17:00"
   }
 };
 

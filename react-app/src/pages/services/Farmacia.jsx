@@ -1,4 +1,4 @@
-import { AlertCircle, Phone } from "lucide-react";
+import { AlertCircle, Phone, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
@@ -83,6 +83,35 @@ export default function Farmacia() {
         </div>
         {}
         <CampanhasPaginaWrapper pagina="farmacia" />
+
+        {/* Consulta de Estoque de Medicamentos */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <ExternalLink size={24} className="text-white" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-lg mb-2">
+                Consulte o Estoque de Medicamentos
+              </h3>
+              <p className="text-white/90 text-sm leading-relaxed mb-4">
+                Para verificar a disponibilidade de medicamentos nas farmácias municipais de Divinópolis,
+                acesse o portal oficial da Prefeitura. O sistema apresenta informações atualizadas sobre
+                o estoque disponível em todas as unidades de saúde do município.
+              </p>
+              <a
+                href="https://www.divinopolis.mg.gov.br/portal/servicos/1074/estoque-de-medicamentos-das-farmacias-municipais/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white text-primary-700 font-semibold px-5 py-2.5 rounded-md hover:bg-neutral-50 transition-colors shadow-sm"
+              >
+                <ExternalLink size={18} />
+                Acessar Portal de Consulta
+              </a>
+            </div>
+          </div>
+        </div>
+
         {}
         <AvisosPaginaWrapper pagina="farmacia" />
         {}
