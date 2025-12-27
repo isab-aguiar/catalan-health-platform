@@ -252,7 +252,21 @@ export default function EstoqueVacinas() {
               </button>
             </div>
           </div>
-          <div className="overflow-x-auto">
+          {/* Mobile Cards */}
+          <div className="md:hidden divide-y divide-neutral-200">
+            {vacinas.length === 0 ? (
+              <div className="p-8 text-center text-neutral-500" style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}>
+                Nenhuma vacina cadastrada. Clique em "Nova Vacina" para adicionar.
+              </div>
+            ) : (
+              vacinas.map((vacina) => (
+                <VacinaCard key={vacina.id} vacina={vacina} updateVacina={updateVacina} />
+              ))
+            )}
+          </div>
+
+          {/* Desktop Table */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-neutral-100 border-b-2 border-neutral-300">
                 <tr>
@@ -540,6 +554,153 @@ const VacinaRow = memo(({ vacina, updateVacina }) => {
   );
 });
 VacinaRow.displayName = "VacinaRow";
+
+const VacinaCard = memo(({ vacina, updateVacina }) => {
+  const timestampToDateString = (timestamp) => {
+    if (!timestamp) return "";
+    if (timestamp.toDate) {
+      return timestamp.toDate().toISOString().split("T")[0];
+    }
+    if (timestamp instanceof Date) {
+      return timestamp.toISOString().split("T")[0];
+    }
+    if (typeof timestamp === "string") {
+      return timestamp.split("T")[0];
+    }
+    return "";
+  };
+
+  const [quantidade, setQuantidade] = useState(vacina.quantidade || 0);
+  const [periodoInicio, setPeriodoInicio] = useState(
+    timestampToDateString(vacina.periodoInicio)
+  );
+  const [periodoFim, setPeriodoFim] = useState(
+    timestampToDateString(vacina.periodoFim)
+  );
+  const [publicado, setPublicado] = useState(vacina.publicado ?? false);
+
+  useEffect(() => {
+    setQuantidade(vacina.quantidade || 0);
+    setPeriodoInicio(timestampToDateString(vacina.periodoInicio));
+    setPeriodoFim(timestampToDateString(vacina.periodoFim));
+    setPublicado(vacina.publicado ?? false);
+  }, [vacina]);
+
+  const handleUpdate = async (campo, valor) => {
+    await updateVacina(vacina.id, campo, valor);
+  };
+
+  return (
+    <div className="p-4 space-y-4" style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}>
+      {/* Nome da Vacina */}
+      <div>
+        <h3 className="font-bold text-base text-neutral-900 mb-1">{vacina.nome}</h3>
+      </div>
+
+      {/* Finalidade */}
+      <div>
+        <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-1">
+          Finalidade
+        </span>
+        <p className="text-sm text-neutral-700">{vacina.finalidade}</p>
+      </div>
+
+      {/* Público-Alvo */}
+      <div>
+        <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-1">
+          Público-Alvo
+        </span>
+        <p className="text-sm text-neutral-700">{vacina.publicoAlvo}</p>
+      </div>
+
+      {/* Quantidade */}
+      <div>
+        <label className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-2">
+          Quantidade
+        </label>
+        <input
+          type="number"
+          min="0"
+          value={quantidade}
+          onChange={(e) => setQuantidade(Number(e.target.value))}
+          onBlur={(e) => handleUpdate("quantidade", Number(e.target.value))}
+          className="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      {/* Períodos */}
+      <div className="grid grid-cols-2 gap-3">
+        <div>
+          <label className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-2">
+            Início
+          </label>
+          <input
+            type="date"
+            value={periodoInicio}
+            onChange={(e) => setPeriodoInicio(e.target.value)}
+            onBlur={(e) =>
+              handleUpdate(
+                "periodoInicio",
+                e.target.value ? new Date(e.target.value) : null
+              )
+            }
+            className="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+        <div>
+          <label className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-2">
+            Fim
+          </label>
+          <input
+            type="date"
+            value={periodoFim}
+            onChange={(e) => setPeriodoFim(e.target.value)}
+            onBlur={(e) =>
+              handleUpdate(
+                "periodoFim",
+                e.target.value ? new Date(e.target.value) : null
+              )
+            }
+            className="w-full border border-neutral-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      {/* Publicado */}
+      <div>
+        <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-2">
+          Publicado
+        </span>
+        <button
+          onClick={() => {
+            const novoStatus = !publicado;
+            setPublicado(novoStatus);
+            handleUpdate("publicado", novoStatus);
+          }}
+          className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-semibold transition-colors ${
+            publicado
+              ? "bg-success/10 text-green-800 hover:bg-green-200 border border-success"
+              : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 border border-neutral-300"
+          }`}
+        >
+          {publicado ? (
+            <>
+              <CheckCircle2 className="w-4 h-4" />
+              Publicado
+            </>
+          ) : (
+            <>
+              <XCircle className="w-4 h-4" />
+              Não Publicado
+            </>
+          )}
+        </button>
+      </div>
+    </div>
+  );
+});
+VacinaCard.displayName = "VacinaCard";
+
 const ModalCriarVacina = memo(
   ({ onClose, onCreate, vacinasExistentes = [] }) => {
     const [formData, setFormData] = useState({

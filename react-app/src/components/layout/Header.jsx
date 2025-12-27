@@ -98,7 +98,7 @@ export default function Header() {
           />
         </Link>
       )}
-      <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-12 sm:pl-[140px] md:pl-[200px] pr-12 sm:pr-[60px] overflow-x-hidden w-full">
+      <header className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-neutral-200 shadow-soft lg:border-l pl-12 sm:pl-[140px] md:pl-[200px] pr-12 sm:pr-[60px] overflow-visible w-full">
         <div className="w-full h-[70px] flex items-center justify-between gap-4 px-4">
           <div
             ref={searchRef}
@@ -135,7 +135,7 @@ export default function Header() {
                 </button>
               )}
               {showSearchResults && searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-200 rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-200 rounded-lg shadow-lg max-h-96 overflow-y-auto z-[100]">
                   {searchResults.slice(0, 5).map((result, index) => {
                     const IconComponent = result.item.icon;
                     const isReactComponent =

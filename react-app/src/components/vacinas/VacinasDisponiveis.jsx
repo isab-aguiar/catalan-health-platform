@@ -1,4 +1,4 @@
-import { CheckCircle2, Shield, XCircle } from 'lucide-react';
+import { CheckCircle2, Syringe, XCircle } from 'lucide-react';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useVacinas } from '../../hooks/useVacinas';
 
@@ -69,8 +69,8 @@ export default function VacinasDisponiveis() {
     return (
       <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6">
         <h2 className="text-lg font-semibold text-neutral-900 mb-3 flex items-center gap-2">
-          <Shield className="w-5 h-5 text-neutral-700" />
-          Programa de Vacinação
+          <Syringe className="w-5 h-5 text-neutral-700" />
+          Vacinas Disponíveis
         </h2>
         <p className="text-neutral-600 text-sm">
           Não há informações de vacinação disponíveis no momento.
@@ -83,11 +83,11 @@ export default function VacinasDisponiveis() {
     <div className="bg-white border border-neutral-200 rounded-md shadow-sm overflow-hidden">
       <div className="bg-primary-700 p-5">
         <h2 className="text-lg font-semibold text-white flex items-center gap-2">
-          <Shield className="w-5 h-5" />
-          Programa de Vacinação - ESF Catalão
+          <Syringe className="w-5 h-5" />
+          Vacinas Disponíveis
         </h2>
         <p className="text-neutral-200 text-xs mt-1.5">
-          Vacinas disponíveis na unidade - Atualização semanal
+          Programa de Vacinação - ESF Catalão
         </p>
       </div>
       <div className="md:hidden divide-y divide-neutral-200">

@@ -86,6 +86,7 @@ const CorrigirPermissoes = lazyLoad(
   () => import("./pages/admin/CorrigirPermissoes")
 );
 const EstoqueVacinas = lazyLoad(() => import("./pages/admin/EstoqueVacinas"));
+const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesPosConsulta"));
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
@@ -220,6 +221,14 @@ function App() {
                         element={
                           <ProtectedRoute>
                             <EstoqueVacinas />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/orientacoes-pos-consulta"
+                        element={
+                          <ProtectedRoute>
+                            <OrientacoesPosConsulta />
                           </ProtectedRoute>
                         }
                       />

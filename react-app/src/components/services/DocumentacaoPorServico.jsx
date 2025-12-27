@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { ChevronDown, AlertCircle, FileText, Menu, X } from "lucide-react";
+import { procedimentosMedicos } from "../../data/procedimentosMedicos";
 
 function Alert({ type = "info", children }) {
   const types = {
@@ -32,434 +33,56 @@ function Alert({ type = "info", children }) {
   );
 }
 
-const servicosDocumentacao = {
-  "administracao-medicacao-noripurum": {
-    nome: "Administração de Medicação Noripurum",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação) do titular",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Prescrição Médica Original",
-        descricao: "Documento original emitido pelo médico assistente com indicação do medicamento",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-    ],
-  },
-  "cirurgias": {
-    nome: "Cirurgias",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto do Titular",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF do Titular",
-        descricao: "Documento físico original ou número do CPF",
-      },
-      {
-        titulo: "Guia de Encaminhamento Médico Original",
-        descricao: "Documento original emitido pelo médico assistente",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Exames Pré-operatórios",
-        descricao: "Resultados dos exames solicitados pelo médico (quando aplicável)",
-      },
-    ],
-  },
-  "consulta-enfermagem": {
-    nome: "Consulta de Enfermagem",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-    ],
-  },
-  "consulta-farmaceutica": {
-    nome: "Consulta Farmacêutica",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Receitas Médicas (quando aplicável)",
-        descricao: "Prescrições médicas para orientação sobre medicamentos",
-      },
-    ],
-  },
-  "consulta-ginecologica": {
-    nome: "Consulta Ginecológica",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Cartão de Pré-natal (quando aplicável)",
-        descricao: "Cartão de acompanhamento pré-natal atualizado",
-      },
-    ],
-  },
-  "consulta-odontologica": {
-    nome: "Consulta Odontológica",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-    ],
-  },
-  "consulta-oftalmologica": {
-    nome: "Consulta Oftalmológica",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Guia de Encaminhamento (quando aplicável)",
-        descricao: "Documento de encaminhamento médico original",
-      },
-    ],
-  },
-  "consulta-pediatrica": {
-    nome: "Consulta Pediátrica",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto do Responsável",
-        descricao: "RG ou CNH do responsável legal",
-      },
-      {
-        titulo: "Documento de Identificação da Criança",
-        descricao: "Certidão de Nascimento ou RG da criança",
-      },
-      {
-        titulo: "CPF do Responsável",
-        descricao: "Documento físico original ou número do CPF",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS) da Criança",
-        descricao: "Cartão do SUS da criança atualizado",
-      },
-      {
-        titulo: "Cartão de Vacinação",
-        descricao: "Cartão de vacinação atualizado",
-      },
-    ],
-  },
-  "consulta-psiquiatrica": {
-    nome: "Consulta Psiquiátrica",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Guia de Encaminhamento Médico",
-        descricao: "Documento de encaminhamento original (quando aplicável)",
-      },
-    ],
-  },
-  "consulta-psicologo": {
-    nome: "Consulta com Psicólogo",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Guia de Encaminhamento (quando aplicável)",
-        descricao: "Documento de encaminhamento médico original",
-      },
-    ],
-  },
-  "consultas-especializadas": {
-    nome: "Consultas Especializadas",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Guia de Encaminhamento Médico Original",
-        descricao: "Documento original emitido pelo médico assistente",
-      },
-    ],
-  },
-  "consultas-medicas": {
-    nome: "Consultas Médicas",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-    ],
-  },
-  "eletrocardiograma-ecg": {
-    nome: "Eletrocardiograma (ECG)",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Prescrição Médica Original",
-        descricao: "Documento original emitido pelo médico assistente",
-      },
-    ],
-  },
-  "exames-rotina": {
-    nome: "Exames de Rotina",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Prescrição Médica Original",
-        descricao: "Documento original emitido pelo médico assistente",
-      },
-    ],
-  },
-  "exames-especializados": {
-    nome: "Exames Especializados",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular do atendimento",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Prescrição Médica Original",
-        descricao: "Documento original emitido pelo médico assistente",
-      },
-      {
-        titulo: "Guia de Solicitação de Exame",
-        descricao: "Documento de solicitação original quando aplicável",
-      },
-    ],
-  },
-  "primeira-consulta-pre-natal": {
-    nome: "Primeira Consulta de Pré-Natal",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH da gestante",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF da gestante",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Comprovante de Gravidez",
-        descricao: "Exame de gravidez positivo ou ultrassom confirmatório",
-      },
-    ],
-  },
-  "puericultura-acompanhamento-infantil": {
-    nome: "Puericultura - Acompanhamento Infantil",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto do Responsável",
-        descricao: "RG ou CNH do responsável legal",
-      },
-      {
-        titulo: "Documento de Identificação da Criança",
-        descricao: "Certidão de Nascimento ou RG da criança",
-      },
-      {
-        titulo: "CPF do Responsável",
-        descricao: "Documento físico original ou número do CPF",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS) da Criança",
-        descricao: "Cartão do SUS da criança atualizado",
-      },
-      {
-        titulo: "Cartão de Vacinação",
-        descricao: "Cartão de vacinação atualizado",
-      },
-      {
-        titulo: "Cartão da Criança",
-        descricao: "Cartão de acompanhamento do crescimento e desenvolvimento",
-      },
-    ],
-  },
-  "vacinacao": {
-    nome: "Vacinação",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG ou CNH do titular (ou do responsável, quando menor de idade)",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS atualizado",
-      },
-      {
-        titulo: "Cartão de Vacinação",
-        descricao: "Cartão de vacinação para registro das doses aplicadas",
-      },
-      {
-        titulo: "Documento da Criança (quando aplicável)",
-        descricao: "Certidão de Nascimento ou RG da criança",
-      },
-    ],
-  },
-  "atualizacao-cadastro": {
-    nome: "Atualização de Cadastro",
-    documentos: [
-      {
-        titulo: "Documento de Identificação com Foto",
-        descricao: "RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação) do titular",
-      },
-      {
-        titulo: "CPF - Cadastro de Pessoa Física",
-        descricao: "Documento físico original ou número do CPF do titular",
-      },
-      {
-        titulo: "Comprovante de Residência",
-        descricao: "Atualizado há no máximo 90 dias (conta de água, luz, telefone ou correspondência bancária)",
-      },
-      {
-        titulo: "Cartão Nacional de Saúde (CNS)",
-        descricao: "Cartão do SUS (quando já possuir)",
-      },
-    ],
-  },
+// Mapeamento dos procedimentos do novo formato para o antigo (somente documentos e observações)
+const mapearProcedimentos = (procedimentos) => {
+  const mapeados = {};
+
+  Object.entries(procedimentos).forEach(([key, proc]) => {
+    // Filtra apenas observações relevantes para o usuário (não informações operacionais)
+    const observacoesUsuario = proc.observacoes?.filter(obs => {
+      // Remove observações operacionais/internas
+      const obsLower = obs.toLowerCase();
+      return !obsLower.includes('protocolar') &&
+             !obsLower.includes('lançar') &&
+             !obsLower.includes('encaminhar') &&
+             !obsLower.includes('passar pela') &&
+             !obsLower.includes('deixar na pasta');
+    }) || [];
+
+    mapeados[key] = {
+      nome: proc.nome,
+      documentos: proc.documentosNecessarios.map(doc => ({
+        titulo: doc,
+        descricao: "" // Não mostrar descrições detalhadas
+      })),
+      observacoes: observacoesUsuario
+    };
+  });
+
+  return mapeados;
 };
+
 
 export default function DocumentacaoPorServico() {
   const [servicoSelecionado, setServicoSelecionado] = useState("");
   const [menuAberto, setMenuAberto] = useState(false);
   const menuRef = useRef(null);
 
+  // Mapeia os procedimentos do arquivo de dados
+  const servicosDocumentacao = useMemo(() => mapearProcedimentos(procedimentosMedicos), []);
+
   const servicoAtual = servicoSelecionado
     ? servicosDocumentacao[servicoSelecionado]
     : null;
 
-  const listaServicos = Object.entries(servicosDocumentacao).map(
-    ([key, servico]) => ({
-      key,
-      nome: servico.nome,
-    })
+  const listaServicos = useMemo(() =>
+    Object.entries(servicosDocumentacao)
+      .map(([key, servico]) => ({
+        key,
+        nome: servico.nome,
+      }))
+      .sort((a, b) => a.nome.localeCompare(b.nome)), // Ordenar alfabeticamente
+    [servicosDocumentacao]
   );
 
   useEffect(() => {
@@ -546,30 +169,40 @@ export default function DocumentacaoPorServico() {
             seguinte documentação:
           </p>
 
-          <div className="space-y-3 mb-4">
+          <div className="space-y-2 mb-4">
             {servicoAtual.documentos.map((documento, index) => (
               <div
                 key={index}
-                className="flex items-start gap-3 bg-white p-4 rounded border border-neutral-200"
+                className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200"
               >
                 <div className="w-1.5 h-1.5 bg-info rounded-full mt-2 flex-shrink-0"></div>
-                <div className="flex-1">
-                  <strong className="text-neutral-800 text-sm block">
-                    {documento.titulo}
-                  </strong>
-                  <p className="text-xs text-neutral-600 mt-1">
-                    {documento.descricao}
-                  </p>
-                </div>
+                <p className="text-sm text-neutral-800 font-medium">
+                  {documento.titulo}
+                </p>
               </div>
             ))}
           </div>
 
-          <Alert type="warning">
-            <strong>Normativa:</strong> Documento de identificação com foto e
-            CPF do titular são obrigatórios para qualquer atendimento na
-            unidade, independentemente do serviço solicitado.
-          </Alert>
+          {servicoAtual.observacoes && servicoAtual.observacoes.length > 0 && (
+            <Alert type="info">
+              <strong>Observações:</strong>
+              <ul className="mt-2 space-y-1 ml-4 list-disc">
+                {servicoAtual.observacoes.map((obs, index) => (
+                  <li key={index} className="text-sm">
+                    {obs}
+                  </li>
+                ))}
+              </ul>
+            </Alert>
+          )}
+
+          {(!servicoAtual.observacoes || servicoAtual.observacoes.length === 0) && (
+            <Alert type="warning">
+              <strong>Normativa:</strong> Documento de identificação com foto e
+              CPF do titular são obrigatórios para qualquer atendimento na
+              unidade, independentemente do serviço solicitado.
+            </Alert>
+          )}
         </div>
       )}
 

@@ -585,7 +585,7 @@ export default function CalendarioVacinal() {
               />
             </div>
             {}
-            <div className="mt-3 flex items-center gap-3 p-3 bg-info/10 rounded-lg border border-blue-200">
+            <div className="mt-3 flex items-center gap-3 p-3 bg-blue-700 rounded-lg border border-blue-600">
               {(() => {
                 const IconComponent = perfilIcones[perfilSelecionado];
                 return (
@@ -602,11 +602,11 @@ export default function CalendarioVacinal() {
                 );
               })()}
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm text-info truncate">
+                <p className="font-semibold text-sm text-white truncate">
                   {perfis[perfilSelecionado].titulo}
                 </p>
-                <p className="text-xs text-primary-700 truncate">
-                  <span className="font-medium">Faixa etária:</span>{" "}
+                <p className="text-xs text-neutral-200 truncate">
+                  <span className="font-semibold">Faixa etária:</span>{" "}
                   {perfis[perfilSelecionado].faixaEtaria}
                 </p>
               </div>
@@ -646,8 +646,8 @@ export default function CalendarioVacinal() {
               >
                 {perfilAtual.titulo}
               </h2>
-              <p className="text-xs font-normal text-neutral-600 mb-3 md:text-sm">
-                <span className="font-medium">Faixa etária:</span>{" "}
+              <p className="text-xs font-normal text-neutral-800 mb-3 md:text-sm">
+                <span className="font-semibold">Faixa etária:</span>{" "}
                 {perfilAtual.faixaEtaria}
               </p>
               <p className="text-sm text-neutral-700 leading-relaxed">

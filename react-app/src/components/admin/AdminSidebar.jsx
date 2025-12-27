@@ -12,6 +12,7 @@ import {
   Megaphone,
   X,
   Package,
+  ClipboardList,
 } from "lucide-react";
 export default function AdminSidebar({
   currentPage,
@@ -61,6 +62,13 @@ export default function AdminSidebar({
       label: "Estoque de Vacinas",
       icon: Package,
       path: "/admin/estoque-vacinas",
+      permission: null,
+    },
+    {
+      id: "orientacoes",
+      label: "Orientações Pós-Consulta",
+      icon: ClipboardList,
+      path: "/admin/orientacoes-pos-consulta",
       permission: null,
     },
   ];
