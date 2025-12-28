@@ -3,6 +3,7 @@ import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import DocumentacaoPorServico from "../../components/services/DocumentacaoPorServico";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -81,7 +82,7 @@ export default function Sala4() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-xl md:text-3xl font-bold text-neutral-900"
+                className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -249,7 +250,6 @@ export default function Sala4() {
                     13h00 às 16h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Profissional Responsável:<br/>
                     Thaciane Souza<br/>
                     Função: Técnica de Enfermagem
                   </td>
@@ -308,10 +308,10 @@ export default function Sala4() {
           </p>
         </InfoBox>
         {}
-        <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-blue-50 leading-relaxed">
+            <p className="text-sm text-white/90 leading-relaxed">
               Para otimizar o atendimento e garantir a organização adequada do
               fluxo de pacientes, é fundamental que o usuário compareça com toda
               a documentação necessária conforme o tipo de serviço solicitado. A
@@ -321,6 +321,9 @@ export default function Sala4() {
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="sala-4" />
     </PageContainer>
   );
 }

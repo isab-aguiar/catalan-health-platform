@@ -587,11 +587,11 @@ export const procedimentosMedicos = {
   "noripurum-endovenoso": {
     nome: "Noripurum Endovenoso - Administração de Medicação",
     categoria: "Medicamentos",
-    local: "Sala de Agendamentos / Sala de Medicações",
+    local: "Sala de Agendamentos / Sala de Procedimentos",
     orientacoes: [
       "O serviço de administração de Noripurum Endovenoso é realizado mediante prescrição médica válida",
       "Realizar agendamento prévio na Sala de Agendamentos",
-      "Agendar data e horário para administração na Sala de Medicações, conforme disponibilidade",
+      "Agendar data e horário para administração na Sala de Procedimentos, conforme disponibilidade",
       "Horários disponíveis: período da tarde, das 11:00 às 17:00",
       "No dia e horário agendados, comparecer à Unidade de Saúde ESF Catalão",
       "Dirigir-se à recepção portando toda a documentação exigida",
@@ -638,5 +638,24 @@ export const informacoesAdicionais = {
       "Sequela de AVC",
       "Fraturas"
     ]
+  },
+  "consultorio-odontologico": {
+    nome: "Consultório Odontológico",
+    categoria: "Odontologia",
+    local: "Consultórios 18 e 19 - 2º andar",
+    orientacoes: [
+      "Agendamento exclusivamente presencial nos Consultórios Odontológicos 18 e 19, 2º andar",
+      "Horário para agendamentos e informações: 10h às 16h",
+      "Para esclarecimento de dúvidas, contato telefônico disponível: (37) 3229-6080",
+      "Atendimento de urgência odontológica diariamente às 07h00"
+    ],
+    documentosNecessarios: ["Documento de identificação com foto do titular (RG, CNH ou Carteira de Trabalho)"],
+    observacoes: [
+      "Agendamento realizado exclusivamente de forma presencial",
+      "Urgências odontológicas (dor intensa, trauma, infecção) são atendidas diariamente às 07h00",
+      "Não é necessário pedido médico para avaliação odontológica",
+      "Serviços oferecidos: Prevenção, Restaurações, Extrações, Endodontia (casos selecionados), Odontopediatria, Pré-natal Odontológico e Urgências"
+    ],
+    filaUnica: false
   }
 };

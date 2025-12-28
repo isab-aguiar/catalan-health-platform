@@ -1,5 +1,6 @@
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -66,12 +67,12 @@ export default function AssistenteSocial() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-3xl font-bold text-neutral-900 whitespace-nowrap"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
               >
-                Serviço Social
+                Bolsa Família e Serviço Social
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
@@ -88,7 +89,7 @@ export default function AssistenteSocial() {
         <InfoBox title="Sobre o Serviço">
           <p className="text-neutral-700 leading-relaxed mb-5">
             O Serviço Social na ESF Catalão atua na garantia dos direitos
-            sociais dos usuários, oferecendo orientação, encaminhamentos e
+            sociais dos usuários, oferecendo informações e orientações sobre Bolsa Família, Serviço Social e outros programas sociais. Trabalhamos com encaminhamentos e
             suporte em situações de vulnerabilidade social. Trabalhamos de forma
             integrada com a equipe de saúde para promover o bem-estar e a
             qualidade de vida da comunidade.
@@ -354,15 +355,15 @@ export default function AssistenteSocial() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-blue-50 leading-relaxed mb-3">
+            <p className="text-sm text-white/90 leading-relaxed mb-3">
               <strong>Atendimento sigiloso:</strong> Todos os atendimentos do
               Serviço Social são confidenciais. Suas informações pessoais são
               protegidas pelo sigilo profissional.
             </p>
-            <p className="text-sm text-blue-50 leading-relaxed">
+            <p className="text-sm text-white/90 leading-relaxed">
               <strong>Você não está sozinho:</strong> O Serviço Social está aqui
               para ajudar você a enfrentar dificuldades e garantir seus
               direitos. Não hesite em procurar apoio quando precisar!
@@ -370,6 +371,9 @@ export default function AssistenteSocial() {
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="assistente-social" />
     </PageContainer>
   );
 }

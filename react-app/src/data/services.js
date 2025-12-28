@@ -9,6 +9,7 @@ import {
   Bandage,
   FileText,
   PillBottle,
+  Shield,
 } from "lucide-react";
 export const serviceIcons = {
   Calendar,
@@ -21,6 +22,7 @@ export const serviceIcons = {
   Bandage,
   FileText,
   PillBottle,
+  Shield,
 };
 export const allPages = [
   {
@@ -98,12 +100,12 @@ export const allPages = [
     colorScheme: "accent",
   },
   {
-    id: "medicacao",
-    title: "Administração de Medicamentos",
+    id: "procedimentos",
+    title: "Sala de Procedimentos",
     description: "Administração de medicamentos injetáveis, aferição de sinais vitais e procedimentos técnicos de enfermagem.",
-    keywords: ["medicação", "injeção", "aplicar", "remédio"],
+    keywords: ["procedimentos", "medicação", "injeção", "aplicar", "remédio"],
     icon: Pill,
-    path: "/servicos/medicacao",
+    path: "/servicos/procedimentos",
     category: "services",
     hub: "Serviços",
     colorScheme: "green",
@@ -165,6 +167,27 @@ export const allPages = [
     hub: "Serviços",
     colorScheme: "accent",
   },
+  {
+    id: "prevencao-hiv",
+    title: "Prevenção Combinada ao HIV",
+    description: "PrEP e PEP - Estratégias de prevenção ao HIV disponíveis no SUS",
+    keywords: [
+      "hiv",
+      "aids",
+      "prep",
+      "pep",
+      "prevenção",
+      "profilaxia",
+      "exposição",
+      "ist",
+      "antirretroviral",
+    ],
+    icon: Shield,
+    path: "/servicos/prevencao-hiv",
+    category: "services",
+    hub: "Serviços",
+    colorScheme: "primary",
+  },
 ];
 export const serviceCategories = [
   {
@@ -173,10 +196,14 @@ export const serviceCategories = [
   },
   {
     name: "Procedimentos",
-    services: ["vacinas", "medicacao", "curativos", "ecg"],
+    services: ["vacinas", "procedimentos", "curativos", "ecg"],
   },
   {
     name: "Medicamentos",
     services: ["farmacia", "renovacao"],
+  },
+  {
+    name: "Prevenção",
+    services: ["prevencao-hiv"],
   },
 ];

@@ -52,12 +52,13 @@ const Sala4 = lazyLoad(() => import("./pages/services/Sala4"));
 const Sala9 = lazyLoad(() => import("./pages/services/Sala9"));
 const Triagem = lazyLoad(() => import("./pages/services/Triagem"));
 const Vacinas = lazyLoad(() => import("./pages/services/Vacinas"));
-const Medicacao = lazyLoad(() => import("./pages/services/Medicacao"));
+const Procedimentos = lazyLoad(() => import("./pages/services/Procedimentos"));
 const Recepcao = lazyLoad(() => import("./pages/services/Recepcao"));
 const ECG = lazyLoad(() => import("./pages/services/ECG"));
 const Curativos = lazyLoad(() => import("./pages/services/Curativos"));
 const Renovacao = lazyLoad(() => import("./pages/services/Renovacao"));
 const Farmacia = lazyLoad(() => import("./pages/services/Farmacia"));
+const PrevencaoHIV = lazyLoad(() => import("./pages/services/PrevencaoHIV"));
 const GroupsIndex = lazyLoad(() => import("./pages/groups/GroupsIndex"));
 const Hiperdia = lazyLoad(() => import("./pages/groups/Hiperdia"));
 const Tabagismo = lazyLoad(() => import("./pages/groups/Tabagismo"));
@@ -121,8 +122,8 @@ function App() {
                       <Route path="/servicos/triagem" element={<Triagem />} />
                       <Route path="/servicos/vacinas" element={<Vacinas />} />
                       <Route
-                        path="/servicos/medicacao"
-                        element={<Medicacao />}
+                        path="/servicos/procedimentos"
+                        element={<Procedimentos />}
                       />
                       <Route path="/servicos/recepcao" element={<Recepcao />} />
                       <Route path="/servicos/ecg" element={<ECG />} />
@@ -135,6 +136,10 @@ function App() {
                         element={<Renovacao />}
                       />
                       <Route path="/servicos/farmacia" element={<Farmacia />} />
+                      <Route
+                        path="/servicos/prevencao-hiv"
+                        element={<PrevencaoHIV />}
+                      />
                       {}
                       <Route path="/grupos" element={<GroupsIndex />} />
                       <Route path="/grupos/hiperdia" element={<Hiperdia />} />

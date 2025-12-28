@@ -14,6 +14,7 @@ import ACSModal from "../components/search/ACSModal";
 import { useACSSearch } from "../hooks/useACSSearch";
 import { normalize } from "../utils/normalize";
 import BackButton from "../components/common/BackButton";
+import RecommendedReadingCarousel from "../components/common/RecommendedReadingCarousel";
 export default function ACSPage() {
   const { query, setQuery, suggestions: acsSearchSuggestions } = useACSSearch();
   const [selectedESF, setSelectedESF] = useState("all");
@@ -142,7 +143,7 @@ export default function ACSPage() {
             <div className="flex items-center gap-2">
               <BackButton className="mb-0 bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/40 backdrop-blur-md shadow-none" />
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold text-white">
+            <h1 className="text-3xl md:text-4xl font-bold text-white whitespace-nowrap">
               Agentes Comunitários de Saúde
             </h1>
           </div>
@@ -295,6 +296,10 @@ export default function ACSPage() {
         </div>
       </section>
       {}
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="acs" />
+
       {selectedACS && (
         <ACSModal acs={selectedACS} onClose={() => setSelectedACS(null)} />
       )}

@@ -12,7 +12,7 @@ import {
 export const professionalsData = [
   {
     id: "enfermeiras",
-    title: "Consultas de Enfermagem",
+    title: "Consultório de Enfermagem",
     description: "Pré-natal, puericultura e procedimentos de enfermagem",
     keywords: [
       "enfermeira",
@@ -28,7 +28,7 @@ export const professionalsData = [
   },
   {
     id: "medicos",
-    title: "Médicos de Família",
+    title: "Consultório Médico",
     description: "Atendimento médico para todas as idades",
     keywords: ["médico", "consulta", "doutor", "dr"],
     icon: Stethoscope,
@@ -48,7 +48,7 @@ export const professionalsData = [
   },
   {
     id: "psicologa",
-    title: "Psicologia",
+    title: "Atendimento Psicológico",
     description: "Atendimento psicológico e apoio emocional",
     keywords: ["psicóloga", "psicologia", "sandra", "terapia", "saúde mental"],
     icon: Brain,
@@ -58,7 +58,7 @@ export const professionalsData = [
   },
   {
     id: "ginecologista",
-    title: "Saúde da Mulher - Ginecologia",
+    title: "Consultório Ginecológico",
     description: "Consultas ginecológicas e pré-natal",
     keywords: [
       "ginecologia",
@@ -74,7 +74,7 @@ export const professionalsData = [
   },
   {
     id: "fisioterapeuta",
-    title: "Fisioterapia",
+    title: "Consultório de Fisioterapia",
     description: "Reabilitação física e tratamento de dores",
     keywords: ["fisioterapia", "luana", "reabilitação", "dor"],
     icon: Dumbbell,
@@ -84,9 +84,9 @@ export const professionalsData = [
   },
   {
     id: "assistente-social",
-    title: "Serviço Social",
-    description: "Orientação sobre direitos sociais e encaminhamentos",
-    keywords: ["assistente social", "noelia", "direitos", "benefícios"],
+    title: "Bolsa Família e Serviço Social",
+    description: "Informações e orientações sobre Bolsa Família, Serviço Social e direitos sociais",
+    keywords: ["assistente social", "noelia", "direitos", "benefícios", "bolsa família"],
     icon: Handshake,
     path: "/equipe/assistente-social",
     category: "team",
@@ -94,9 +94,9 @@ export const professionalsData = [
   },
   {
     id: "dentistas",
-    title: "Odontologia",
-    description: "Atendimento odontológico para todas as idades",
-    keywords: ["dentista", "dente", "odonto", "odontologia"],
+    title: "Consultório Odontológico",
+    description: "Atendimento odontológico completo: prevenção, restaurações, extrações, endodontia, odontopediatria e pré-natal odontológico",
+    keywords: ["dentista", "dente", "odonto", "odontologia", "consultório odontológico", "urgência dentária"],
     icon: Smile,
     path: "/equipe/dentistas",
     category: "team",
@@ -104,7 +104,7 @@ export const professionalsData = [
   },
   {
     id: "pediatra",
-    title: "Pediatria",
+    title: "Consultório Pediátrico",
     description: "Atendimento pediátrico e puericultura",
     keywords: ["pediatra", "criança", "bebê", "puericultura", "antônio"],
     icon: Baby,

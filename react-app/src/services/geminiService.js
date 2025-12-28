@@ -182,7 +182,7 @@ EXEMPLO:
 • Sala de Vacinação
 • Sala de Agendamento
 • Sala de Atendimento Administrativo
-• Sala de Medicação
+• Sala de Procedimentos
 • Recepção
 • Eletrocardiograma (ECG)
 • Sala de Curativos
@@ -245,7 +245,7 @@ Confirma? Digite 'sim' para eu gerar o JSON final."
 - "vacinas" = Sala de Vacinação
 - "sala-4" = Sala de Agendamento
 - "sala-9" = Sala de Atendimento Administrativo
-- "medicacao" = Sala de Medicação
+- "procedimentos" = Sala de Procedimentos
 - "recepcao" = Recepção
 - "ecg" = Eletrocardiograma
 - "curativos" = Sala de Curativos
@@ -290,7 +290,7 @@ ETAPAS DE ANÁLISE:
 6️⃣ **DEFINIR PÁGINA DESTINO:**
    Baseado na categoria e conteúdo, escolha a página mais apropriada:
    - Vacinação → "vacinas"
-   - Material/Medicação → "medicacao" ou "farmacia"
+   - Material/Medicação → "procedimentos" ou "farmacia"
    - Curativos/Feridas → "curativos"
    - ECG/Exames → "ecg"
    - Recepção/Atendimento → "recepcao"
@@ -347,7 +347,7 @@ ETAPAS DE ANÁLISE:
 - "vacinas" → Sala de Vacinação
 - "sala-4" → Sala de Agendamento
 - "sala-9" → Sala de Atendimento Administrativo
-- "medicacao" → Sala de Medicação
+- "procedimentos" → Sala de Procedimentos
 - "recepcao" → Recepção
 - "ecg" → Eletrocardiograma
 - "curativos" → Sala de Curativos

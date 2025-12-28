@@ -2,6 +2,7 @@ import PageContainer from "../components/layout/PageContainer";
 import InfoBox from "../components/common/InfoBox";
 import Alert from "../components/common/Alert";
 import BackButton from "../components/common/BackButton";
+import RecommendedReadingCarousel from "../components/common/RecommendedReadingCarousel";
 import { MessageCircle, Instagram } from "lucide-react";
 import remsaImage from "../assets/remsa/remsa.jpeg";
 
@@ -319,6 +320,9 @@ export default function REMSA() {
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="remsa" />
     </PageContainer>
   );
 }

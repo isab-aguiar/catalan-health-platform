@@ -1,5 +1,8 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Phone, Clock, Youtube, Baby, Smile, ExternalLink } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
+import preNatalImg from "../../assets/saude-bocal/pre-natal.png";
+import ordontoPediatraImg from "../../assets/saude-bocal/ordonto-pediatra.png";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -65,20 +68,10 @@ export default function Dentistas() {
         <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1
-                className="text-3xl font-bold text-neutral-900"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
-              >
-                Odontologia
+              <h1 className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap">
+                Consultório Odontológico
               </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
-              >
+              <p className="text-neutral-500 text-xs mt-1">
                 Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
             </div>
@@ -87,18 +80,17 @@ export default function Dentistas() {
         {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-neutral-700 leading-relaxed mb-5">
-            O serviço de Odontologia da ESF Catalão oferece atendimento
-            odontológico completo para toda a família. Nossa equipe de dentistas
-            realiza desde procedimentos preventivos até tratamentos curativos,
-            sempre com foco na saúde bucal da comunidade.
+            O Consultório Odontológico da ESF Catalão oferece atendimento odontológico completo e humanizado para toda a família. Nossa equipe de cirurgiãs-dentistas realiza desde procedimentos preventivos até tratamentos curativos especializados, sempre com foco na promoção da saúde bucal e no bem-estar da comunidade.
           </p>
+
+          <h3 className="font-semibold text-neutral-800 text-base mb-3">Serviços Oferecidos</h3>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">Prevenção</strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Limpeza, aplicação de flúor, orientações de higiene bucal
+                  Limpeza profissional, aplicação de flúor e orientações sobre higiene bucal adequada
                 </p>
               </div>
             </div>
@@ -106,10 +98,10 @@ export default function Dentistas() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Tratamento de cáries
+                  Restaurações
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Restaurações dentárias
+                  Tratamento de cáries e recuperação da estrutura dentária
                 </p>
               </div>
             </div>
@@ -118,7 +110,7 @@ export default function Dentistas() {
               <div>
                 <strong className="text-neutral-800 text-sm">Extrações</strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Remoção de dentes quando necessário
+                  Remoção de elementos dentários quando necessário
                 </p>
               </div>
             </div>
@@ -126,10 +118,10 @@ export default function Dentistas() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Tratamento de canal
+                  Endodontia
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Endodontia (casos selecionados)
+                  Tratamento de canal em casos selecionados
                 </p>
               </div>
             </div>
@@ -140,7 +132,7 @@ export default function Dentistas() {
                   Odontopediatria
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Atendimento especializado para crianças
+                  Atendimento odontológico especializado para o público infantil
                 </p>
               </div>
             </div>
@@ -148,10 +140,10 @@ export default function Dentistas() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Pré-natal odontológico
+                  Pré-natal Odontológico
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Cuidados bucais para gestantes
+                  Acompanhamento e cuidados odontológicos durante a gestação
                 </p>
               </div>
             </div>
@@ -159,48 +151,13 @@ export default function Dentistas() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Urgências odontológicas
+                  Urgências
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Dor de dente, infecções, traumas
+                  Atendimento imediato para alívio da dor, infecções e traumas dentários
                 </p>
               </div>
             </div>
-          </div>
-        </InfoBox>
-        {}
-        <InfoBox title="Quem são as profissionais?">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Dentista
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Especialidade
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Dra. Mayra</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Cirurgiã-Dentista
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Dra. Helena</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Cirurgiã-Dentista
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </InfoBox>
         {}
@@ -239,93 +196,210 @@ export default function Dentistas() {
           </div>
         </InfoBox>
         {}
+        {/* Card Pré-natal Odontológico */}
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+            <div className="flex items-center gap-3">
+              <Baby size={28} className="text-primary-600" />
+              <div>
+                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                  Pré-natal Odontológico
+                </h2>
+                <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                  Cuidados odontológicos especializados durante a gestação
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 sm:p-6">
+            {/* Imagem */}
+            <div className="mb-6 flex justify-center">
+              <img
+                src={preNatalImg}
+                alt="Pré-natal Odontológico - Cuidados odontológicos durante a gestação"
+                className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm"
+              />
+            </div>
+
+            {/* Descrição */}
+            <p className="text-neutral-700 leading-relaxed mb-5">
+              O pré-natal odontológico é um cuidado essencial para a saúde da gestante e do bebê. Durante a gravidez, a mulher passa por diversas mudanças hormonais que podem afetar a saúde bucal, aumentando a predisposição a problemas como gengivite, cáries e outras doenças. O acompanhamento odontológico durante este período garante tratamento adequado, orientações preventivas e contribui para um desenvolvimento saudável do bebê.
+            </p>
+
+            {/* Grid de Links */}
+            <div className="grid md:grid-cols-1 gap-4">
+              {/* Link para YouTube */}
+              <a
+                href="https://www.youtube.com/watch?v=QMwc-fvZSUU"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Youtube size={24} className="text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
+                      Saiba Mais
+                    </h3>
+                    <p className="text-sm text-neutral-600 mb-2">
+                      Assista ao vídeo informativo sobre pré-natal odontológico e seus benefícios para a saúde da gestante e do bebê.
+                    </p>
+                    <div className="flex items-center gap-2 text-sm text-red-600 font-semibold">
+                      <Youtube size={16} />
+                      <span>Assistir no YouTube</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        {}
+        {/* Card Saúde Bucal da Criança e do Adolescente */}
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+            <div className="flex items-center gap-3">
+              <Smile size={28} className="text-primary-600" />
+              <div>
+                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                  Saúde Bucal da Criança e do Adolescente
+                </h2>
+                <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                  Odontopediatria: cuidados odontológicos especializados para crianças e adolescentes
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 sm:p-6">
+            {/* Imagem */}
+            <div className="mb-6 flex justify-center">
+              <img
+                src={ordontoPediatraImg}
+                alt="Saúde Bucal da Criança e do Adolescente - Odontopediatria"
+                className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm"
+              />
+            </div>
+
+            {/* Descrição */}
+            <p className="text-neutral-700 leading-relaxed mb-5">
+              A saúde bucal da criança e do adolescente é fundamental para um desenvolvimento saudável e para estabelecer hábitos que acompanharão toda a vida. A odontopediatria oferece cuidados especializados desde o nascimento dos primeiros dentes até a adolescência, incluindo prevenção de cáries, orientações sobre higiene bucal adequada, tratamento de problemas dentários específicos da infância e acompanhamento do desenvolvimento da dentição. Cuidar da saúde bucal desde cedo previne problemas futuros e contribui para a saúde geral e bem-estar das crianças e adolescentes.
+            </p>
+
+            {/* Grid de Links */}
+            <div className="grid md:grid-cols-1 gap-4">
+              {/* Link para Ministério da Saúde */}
+              <a
+                href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-da-crianca/primeira-infancia/saude-bucal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <ExternalLink size={24} className="text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
+                      Saiba Mais
+                    </h3>
+                    <p className="text-sm text-neutral-600 mb-2">
+                      Consulte informações completas sobre saúde bucal da criança e do adolescente no site oficial do Ministério da Saúde.
+                    </p>
+                    <div className="flex items-center gap-2 text-sm text-primary-600 font-semibold">
+                      <ExternalLink size={16} />
+                      <span>Acessar Site do Ministério da Saúde</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        {}
         <InfoBox title="Como ter acesso?">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                1
+          <p className="text-neutral-700 leading-relaxed mb-5">
+            Para ter acesso ao atendimento odontológico, o agendamento é realizado exclusivamente de forma presencial. Confira abaixo as informações sobre agendamento e localização:
+          </p>
+
+          {/* Formas de Agendamento */}
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-5 mb-5">
+            <h3 className="font-semibold text-blue-900 text-base mb-4">Agendamento e Informações</h3>
+
+            <div className="space-y-4">
+              {/* Agendamento Presencial */}
+              <div className="bg-white rounded-lg p-4 shadow-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold text-sm">18</span>
+                  </div>
+                  <div className="flex-1">
+                    <strong className="text-neutral-800 text-sm block mb-2">Agendamento Presencial</strong>
+                    <p className="text-xs text-neutral-600 mb-2">
+                      O agendamento é realizado <strong>exclusivamente de forma presencial</strong> nos Consultórios Odontológicos 18 e 19, localizados no <strong>2º andar</strong> da unidade de saúde.
+                    </p>
+                    <p className="text-xs text-neutral-700 font-semibold">
+                      Horário de atendimento para agendamentos e informações: <strong>10h às 16h</strong>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  Agende na Sala 12 (2º andar)
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Agendamento específico para odontologia
-                </p>
+
+              {/* Informações por Telefone */}
+              <div className="bg-white rounded-lg p-4 shadow-sm">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone size={20} className="text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <strong className="text-neutral-800 text-sm block mb-2">Informações por Telefone</strong>
+                    <p className="text-xs text-neutral-600 mb-2">
+                      Para esclarecimento de dúvidas, você pode entrar em contato por telefone. <strong>Importante:</strong> o agendamento é realizado apenas presencialmente.
+                    </p>
+                    <a
+                      href="tel:+553732296080"
+                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md transition-colors text-sm"
+                    >
+                      <Phone size={16} />
+                      (37) 3229-6080
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* Atendimento de Urgência */}
+          <div className="bg-amber-50 border-l-4 border-amber-500 rounded-r-lg p-4 mb-5">
             <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                2
-              </div>
+              <Clock size={20} className="text-amber-600 mt-0.5 flex-shrink-0" />
               <div>
-                <strong className="text-neutral-800 text-sm">
-                  Para urgências
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Procure a recepção e informe a situação
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                3
-              </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  Traga seus documentos
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Documento de identificação com foto
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                4
-              </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  Compareça no horário
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Chegue 10 minutos antes da consulta
+                <h3 className="font-semibold text-amber-900 text-sm mb-2">Atendimento de Urgência</h3>
+                <p className="text-xs text-neutral-700 leading-relaxed">
+                  <strong>Demandas de urgência odontológica</strong> (dor intensa, trauma, infecção) são atendidas <strong>diariamente às 07h00</strong>. Compareça no horário para avaliação prioritária.
                 </p>
               </div>
             </div>
           </div>
-        </InfoBox>
-        {}
-        <InfoBox title="Documentação Necessária" variant="highlight">
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
+
+          {/* Documentação */}
+          <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <h3 className="font-semibold text-neutral-800 text-sm mb-3">Documentação Necessária</h3>
+            <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documento de Identificação com Foto
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Comprovante de Residência
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Atualizado (máximo 3 meses)
-                </p>
-              </div>
+              <p className="text-xs text-neutral-700">
+                <strong>Documento de identificação com foto do titular</strong> (RG, CNH ou Carteira de Trabalho)
+              </p>
             </div>
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Horário de Atendimento">
-          <div className="overflow-x-auto">
+        <InfoBox title="Profissionais e Horários de Atendimento">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -334,6 +408,9 @@ export default function Dentistas() {
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Horário
+                  </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Profissionais Responsáveis
                   </th>
                 </tr>
               </thead>
@@ -345,6 +422,11 @@ export default function Dentistas() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     07h00 às 11h00
                   </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Dra. Mayra Paula Morais</div>
+                    <div>Dra. Helena Dias</div>
+                    <span className="text-neutral-600 text-xs block mt-2">Cirurgiãs-Dentistas</span>
+                  </td>
                 </tr>
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
@@ -353,36 +435,80 @@ export default function Dentistas() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     13h00 às 16h00
                   </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    <div className="pb-2">Dra. Mayra Paula Morais</div>
+                    <div>Dra. Helena Dias</div>
+                    <span className="text-neutral-600 text-xs block mt-2">Cirurgiãs-Dentistas</span>
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-4">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Manhã
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais Responsáveis</strong></p>
+                  <p className="text-sm text-neutral-700 pb-2">Dra. Mayra Paula Morais</p>
+                  <p className="text-sm text-neutral-700">Dra. Helena Dias</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Cirurgiãs-Dentistas</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="mb-3">
+                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
+                  Tarde
+                </span>
+              </div>
+              <div className="space-y-3">
+                <div className="pb-3 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
+                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
+                </div>
+                <div className="pb-2 border-b border-neutral-300">
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais Responsáveis</strong></p>
+                  <p className="text-sm text-neutral-700 pb-2">Dra. Mayra Paula Morais</p>
+                  <p className="text-sm text-neutral-700">Dra. Helena Dias</p>
+                </div>
+                <div className="pt-1">
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Cirurgiãs-Dentistas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-neutral-500 mt-4">
+            * Atendimento odontológico mediante agendamento prévio exclusivamente presencial nos Consultórios 18 e 19, 2º andar, das 10h às 16h.
+          </p>
         </InfoBox>
         {}
-        <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div>
-            <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-blue-50 leading-relaxed mb-3">
-              <strong>Agendamento na Sala 12 - 2º Andar:</strong> O agendamento
-              para consultas odontológicas é feito na Sala 12, localizada no
-              segundo andar da unidade. Procure diretamente esse setor para
-              marcar sua consulta!
-            </p>
-            <p className="text-sm text-blue-50 leading-relaxed mb-3">
-              <strong>Dica Importante:</strong> Mantenha uma boa higiene bucal!
-              Escove os dentes pelo menos 3 vezes ao dia, use fio dental
-              diariamente e faça visitas regulares ao dentista para prevenção.
-              Prevenir é sempre melhor que remediar!
-            </p>
-            <p className="text-sm text-blue-50 leading-relaxed">
-              <strong>Gestantes e Crianças:</strong> Temos atendimento
-              especializado para gestantes (pré-natal odontológico) e crianças
-              (odontopediatria). A saúde bucal começa desde cedo - agende
-              consultas regulares!
+            <p className="font-semibold mb-2">Orientações Importantes</p>
+            <p className="text-sm text-white/90 leading-relaxed">
+              <strong>Saúde Bucal Preventiva:</strong> Mantenha uma rotina de higiene bucal adequada! Escove os dentes pelo menos três vezes ao dia, utilize fio dental diariamente e realize visitas regulares ao dentista. A prevenção é a melhor estratégia para manter sua saúde bucal em dia.
             </p>
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="dentistas" />
     </PageContainer>
   );
 }

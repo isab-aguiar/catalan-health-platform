@@ -1,10 +1,11 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Syringe, MapPin, Phone, Clock, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import CalendarioVacinal from "../../components/vacinas/CalendarioVacinal";
 import VacinasDisponiveis from "../../components/vacinas/VacinasDisponiveis";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
 }
@@ -73,7 +74,7 @@ export default function Vacinas() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-xl md:text-3xl font-bold text-slate-900"
+                className="text-xl md:text-3xl font-bold text-slate-900 whitespace-nowrap"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -307,7 +308,319 @@ export default function Vacinas() {
             </Alert>
           </div>
         </InfoBox>
+
+        {/* Seção Profilaxia da Raiva Humana */}
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Shield size={28} className="text-white" />
+              </div>
+              <div>
+                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                  Profilaxia da Raiva Humana
+                </h2>
+                <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                  Atendimento especializado com vacina e soro antirrábico
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 sm:p-6">
+            {/* Sobre o Tratamento */}
+            <div className="mb-6">
+              <h3 className="font-semibold text-neutral-800 text-lg mb-4">
+                Sobre o Tratamento
+              </h3>
+              <p className="text-neutral-700 leading-relaxed mb-4">
+                A profilaxia da raiva humana é composta por dois tipos de imunobiológicos,
+                indicados conforme a gravidade da exposição ao vírus (mordidas, arranhões
+                ou contato com mucosas de animais suspeitos ou confirmados):
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-4 mb-5">
+                {/* Vacina */}
+                <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <Syringe size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-blue-900 mb-2">
+                        Vacina Antirrábica
+                      </h4>
+                      <p className="text-sm text-neutral-700 leading-relaxed">
+                        Estimula o sistema imunológico a produzir seus próprios anticorpos
+                        contra o vírus da raiva. É utilizada na prevenção da doença após
+                        exposições de risco, promovendo imunidade ativa.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Soro */}
+                <div className="bg-purple-50 border-l-4 border-purple-600 rounded-r-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <Shield size={20} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-purple-900 mb-2">
+                        Imunoglobulina (Soro) Antirrábica
+                      </h4>
+                      <p className="text-sm text-neutral-700 leading-relaxed">
+                        Indicada para casos graves ou específicos. Fornece anticorpos prontos
+                        para uma proteção imediata enquanto o organismo desenvolve a resposta
+                        vacinal, conferindo imunidade passiva.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Critérios de Atendimento */}
+            <div className="bg-amber-50 border-l-4 border-amber-600 rounded-r-lg p-5 mb-6">
+              <h3 className="font-semibold text-amber-900 text-lg mb-4">
+                Critérios de Atendimento
+              </h3>
+              <div className="space-y-3 text-sm text-neutral-700">
+                <div className="flex items-start gap-2">
+                  <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+                  <p>
+                    <strong className="text-amber-900">Atenção:</strong> A aplicação destes
+                    imunobiológicos segue rigorosamente os protocolos definidos pelo Ministério da Saúde.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+                  <p>
+                    <strong className="text-amber-900">Avaliação Obrigatória:</strong> A administração
+                    da vacina ou do soro é condicionada à avaliação profissional prévia no local de atendimento.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+                  <p>
+                    <strong className="text-amber-900">Exclusividade:</strong> As unidades listadas
+                    abaixo são referências técnicas para este procedimento. Elas não realizam atendimentos
+                    de rotina ou outras vacinações fora deste escopo específico nos horários indicados.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Unidades de Referência */}
+            <div className="mb-4">
+              <h3 className="font-semibold text-neutral-800 text-lg mb-4">
+                Unidades de Referência
+              </h3>
+              <p className="text-neutral-700 mb-5 text-sm">
+                Relação das unidades de saúde habilitadas para a aplicação da vacina e do soro antirrábico:
+              </p>
+
+              <div className="space-y-4">
+                {/* Central de Imunização */}
+                <div className="bg-white border-2 border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <h4 className="font-bold text-neutral-900 mb-3 text-base">
+                    Central de Imunização
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Rua+Olimpio+Moreira,+369,+Interlagos,+Divinópolis,+MG"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-700 hover:text-primary-600 transition-colors"
+                      >
+                        Rua Olimpio Moreira, 369 – Bairro Interlagos
+                      </a>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <div className="flex flex-wrap gap-2">
+                        <a href="tel:+553732296831" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          (37) 3229-6831
+                        </a>
+                        <span className="text-neutral-400">/</span>
+                        <a href="tel:+553732296832" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          6832
+                        </a>
+                        <span className="text-neutral-400">/</span>
+                        <a href="tel:+553732296833" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          6833
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ESF Afonso Pena */}
+                <div className="bg-white border-2 border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <h4 className="font-bold text-neutral-900 mb-3 text-base">
+                    ESF Afonso Pena
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Rua+Nova+Serrana,+68,+Afonso+Pena,+Divinópolis,+MG"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-700 hover:text-primary-600 transition-colors"
+                      >
+                        Rua Nova Serrana, 68 – Bairro Afonso Pena
+                      </a>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <div className="flex flex-wrap gap-2">
+                        <a href="tel:+553732296880" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          (37) 3229-6880
+                        </a>
+                        <span className="text-neutral-400">/</span>
+                        <a href="tel:+553732296879" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          6879
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00 e das 18:00 às 21:00</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ESF Niterói */}
+                <div className="bg-white border-2 border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <h4 className="font-bold text-neutral-900 mb-3 text-base">
+                    ESF Niterói
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Rua+Esmeralda,+160,+Niterói,+Divinópolis,+MG"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-700 hover:text-primary-600 transition-colors"
+                      >
+                        Rua Esmeralda, 160 – Bairro Niterói
+                      </a>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <div className="flex flex-wrap gap-2">
+                        <a href="tel:+553732296010" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          (37) 3229-6010
+                        </a>
+                        <span className="text-neutral-400">/</span>
+                        <a href="tel:+553732296012" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          6012
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00 e das 18:00 às 21:00</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ESF Planalto */}
+                <div className="bg-white border-2 border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <h4 className="font-bold text-neutral-900 mb-3 text-base">
+                    ESF Planalto
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Rua+Itambé,+5,+Planalto,+Divinópolis,+MG"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-700 hover:text-primary-600 transition-colors"
+                      >
+                        Rua Itambé, 5 – Bairro Planalto
+                      </a>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <div className="flex flex-wrap gap-2">
+                        <a href="tel:+553732296031" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          (37) 3229-6031
+                        </a>
+                        <span className="text-neutral-400">/</span>
+                        <a href="tel:+553732296032" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          6032
+                        </a>
+                        <span className="text-neutral-400">/</span>
+                        <a href="tel:+553732296033" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          6033
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00 e das 18:00 às 21:00</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ESF Morada Nova / São Judas Tadeu */}
+                <div className="bg-white border-2 border-neutral-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <h4 className="font-bold text-neutral-900 mb-3 text-base">
+                    ESF Morada Nova / São Judas Tadeu
+                  </h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-start gap-2">
+                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <a
+                        href="https://www.google.com/maps/search/?api=1&query=Rua+Castro+Alves,+2085,+São+José,+Divinópolis,+MG"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-700 hover:text-primary-600 transition-colors"
+                      >
+                        Rua Castro Alves, 2085 – Bairro São José
+                      </a>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <a href="tel:+553732296086" className="text-neutral-700 hover:text-primary-600 transition-colors">
+                        (37) 3229-6086
+                      </a>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Aviso Final */}
+            <div className="bg-red-50 border-l-4 border-red-600 rounded-r-lg p-4 mt-6">
+              <div className="flex items-start gap-3">
+                <AlertCircle size={20} className="text-red-600 mt-0.5 flex-shrink-0" />
+                <div className="text-sm text-neutral-700">
+                  <p className="font-semibold text-red-900 mb-2">Importante</p>
+                  <p className="leading-relaxed">
+                    Em caso de exposição ao vírus da raiva (mordida, arranhão ou contato com mucosas de
+                    animais), procure imediatamente uma das unidades de referência listadas acima.
+                    O tratamento profilático deve ser iniciado o mais breve possível para garantir sua eficácia.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="vacinas" />
     </PageContainer>
   );
 }

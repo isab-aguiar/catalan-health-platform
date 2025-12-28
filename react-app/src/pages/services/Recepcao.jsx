@@ -2,6 +2,7 @@ import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -77,7 +78,7 @@ export default function Recepcao() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-3xl font-bold text-neutral-900 whitespace-nowrap"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -662,6 +663,9 @@ export default function Recepcao() {
           </div>
         </InfoBox>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="recepcao" />
     </PageContainer>
   );
 }

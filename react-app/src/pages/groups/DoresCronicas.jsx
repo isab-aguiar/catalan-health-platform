@@ -1,5 +1,6 @@
 import { Calendar, Clock, AlertCircle, Users } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -280,10 +281,10 @@ export default function DoresCronicas() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-blue-50 leading-relaxed">
+            <p className="text-sm text-white/90 leading-relaxed">
               A participação no grupo não substitui o acompanhamento médico e
               tratamento individualizado. É fundamental manter as consultas
               agendadas e seguir as orientações da equipe de saúde. Os
@@ -293,6 +294,9 @@ export default function DoresCronicas() {
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="dores-cronicas" />
     </PageContainer>
   );
 }

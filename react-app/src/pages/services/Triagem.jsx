@@ -2,6 +2,7 @@ import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -66,7 +67,7 @@ export default function Triagem() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-xl md:text-3xl font-bold text-neutral-900"
+                className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -430,10 +431,10 @@ export default function Triagem() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-blue-50 leading-relaxed">
+            <p className="text-sm text-white/90 leading-relaxed">
               Antes de se dirigir à sala de triagem, é necessário passar pela
               recepção da unidade para realização da ficha de atendimento. Esta
               medida é essencial para agilizar o processo de atendimento e
@@ -442,6 +443,9 @@ export default function Triagem() {
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="triagem" />
     </PageContainer>
   );
 }

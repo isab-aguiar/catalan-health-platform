@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import PageContainer from "../components/layout/PageContainer";
 import BackButton from "../components/common/BackButton";
+import RecommendedReadingCarousel from "../components/common/RecommendedReadingCarousel";
 import "./Educacao.css";
 
 export default function Educacao() {
@@ -253,6 +254,9 @@ export default function Educacao() {
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="educacao" />
     </PageContainer>
   );
 }

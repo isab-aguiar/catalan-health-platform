@@ -1,5 +1,6 @@
 import { Calendar, Clock, AlertCircle, Users } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -305,10 +306,10 @@ export default function Tabagismo() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-blue-50 leading-relaxed">
+            <p className="text-sm text-white/90 leading-relaxed">
               O processo de cessação do tabagismo pode apresentar desafios e
               sintomas de abstinência. É fundamental manter a participação nos
               encontros do grupo e seguir as orientações da equipe de saúde. Em
@@ -318,6 +319,9 @@ export default function Tabagismo() {
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="tabagismo" />
     </PageContainer>
   );
 }

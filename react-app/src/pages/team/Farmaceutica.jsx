@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
+import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -67,7 +68,7 @@ export default function Farmaceutica() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900"
+                className="text-3xl font-bold text-neutral-900 whitespace-nowrap"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}
@@ -342,12 +343,12 @@ export default function Farmaceutica() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-blue-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div className="flex items-start gap-3">
             <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
             <div>
               <p className="font-semibold mb-1">Orientação Importante</p>
-              <p className="text-sm text-blue-50">
+              <p className="text-sm text-white/90">
                 Antes de se dirigir à sala de consulta da farmacêutica
                 responsável, é necessário passar pela recepção da unidade para
                 realização da ficha de atendimento. Esta medida é essencial para
@@ -358,6 +359,9 @@ export default function Farmaceutica() {
           </div>
         </div>
       </div>
+
+      {/* Leitura Recomendada - Aparece após scroll */}
+      <RecommendedReadingCarousel pageId="farmaceutica" />
     </PageContainer>
   );
 }
