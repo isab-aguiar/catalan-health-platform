@@ -341,7 +341,9 @@ export default function Sala9() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="sala-9" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="sala-9" />
+      </div>
     </PageContainer>
   );
 }

@@ -322,7 +322,9 @@ export default function REMSA() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="remsa" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="remsa" />
+      </div>
     </PageContainer>
   );
 }

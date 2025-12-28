@@ -298,7 +298,9 @@ export default function ACSPage() {
       {}
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="acs" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="acs" />
+      </div>
 
       {selectedACS && (
         <ACSModal acs={selectedACS} onClose={() => setSelectedACS(null)} />

@@ -76,6 +76,7 @@ export const criarCampanha = async (
           : []),
       imagemURL: imagemURL || null,
       imagemCaminho: campanhaData.imagemCaminho || null,
+      imageCredit: campanhaData.imageCredit || null,
       pdfURL: pdfURL || null,
       pdfNome: campanhaData.pdfNome || null,
       pdfCaminho: campanhaData.pdfCaminho || null,

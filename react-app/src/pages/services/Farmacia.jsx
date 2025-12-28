@@ -326,7 +326,9 @@ export default function Farmacia() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="farmacia" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="farmacia" />
+      </div>
     </PageContainer>
   );
 }

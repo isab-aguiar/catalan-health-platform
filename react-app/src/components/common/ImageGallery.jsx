@@ -6,14 +6,19 @@ export default function ImageGallery({ images = [] }) {
 
   const normalizedImages = images.map((img) => {
     if (typeof img === 'string') {
-      return { src: img, caption: '' };
+      return { src: img, caption: '', credit: '' };
     }
-    return img;
+    return {
+      src: img.src,
+      caption: img.caption || '',
+      credit: img.credit || ''
+    };
   });
 
   const currentImage = normalizedImages[currentIndex] || {
     src: '',
     caption: '',
+    credit: '',
   };
 
   const nextSlide = () => {
@@ -51,6 +56,14 @@ export default function ImageGallery({ images = [] }) {
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white">
               <p className="text-sm sm:text-base font-medium drop-shadow-md leading-relaxed line-clamp-2">
                 {currentImage.caption}
+              </p>
+            </div>
+          )}
+
+          {currentImage.credit && (
+            <div className="absolute bottom-0 right-0 p-2 sm:p-3 bg-black/40 backdrop-blur-sm rounded-tl-lg">
+              <p className="text-xs text-white/90 italic">
+                {currentImage.credit}
               </p>
             </div>
           )}

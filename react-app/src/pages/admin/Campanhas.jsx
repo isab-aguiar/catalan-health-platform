@@ -68,6 +68,7 @@ export default function Campanhas() {
     dataInicio: "",
     dataFim: "",
     imagemURL: null,
+    imageCredit: "",
   });
   const [createImageFile, setCreateImageFile] = useState(null);
   const [createImagePreview, setCreateImagePreview] = useState(null);
@@ -213,6 +214,7 @@ export default function Campanhas() {
         ? campanha.dataFim.toISOString().split("T")[0]
         : "",
       imagemURL: campanha.imagemURL || null,
+      imageCredit: campanha.imageCredit || "",
     });
   };
   // Cancelar edição
@@ -344,6 +346,7 @@ export default function Campanhas() {
       dataInicio: "",
       dataFim: "",
       imagemURL: null,
+      imageCredit: "",
     });
     setCreateImageFile(null);
     setCreateImagePreview(null);
@@ -739,6 +742,26 @@ export default function Campanhas() {
                                   </p>
                                 </div>
                               </div>
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-neutral-700 mb-1">
+                                Crédito da Imagem
+                              </label>
+                              <input
+                                type="text"
+                                value={editForm.imageCredit || ""}
+                                onChange={(e) =>
+                                  setEditForm({
+                                    ...editForm,
+                                    imageCredit: e.target.value,
+                                  })
+                                }
+                                placeholder="Ex: Fonte: Ministério da Saúde"
+                                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                              />
+                              <p className="text-xs text-neutral-500 mt-1">
+                                Crédito exibido abaixo da imagem (opcional)
+                              </p>
                             </div>
                             <div>
                               <label className="block text-sm font-medium text-neutral-700 mb-1">
@@ -1281,6 +1304,24 @@ export default function Campanhas() {
                     </p>
                   </div>
                 </div>
+              </div>
+              {/* Crédito da Imagem */}
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 mb-1">
+                  Crédito da Imagem
+                </label>
+                <input
+                  type="text"
+                  value={createForm.imageCredit || ""}
+                  onChange={(e) =>
+                    setCreateForm({ ...createForm, imageCredit: e.target.value })
+                  }
+                  placeholder="Ex: Fonte: Ministério da Saúde"
+                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+                <p className="text-xs text-neutral-500 mt-1">
+                  Crédito exibido abaixo da imagem (opcional)
+                </p>
               </div>
               {/* Formulário */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

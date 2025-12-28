@@ -321,7 +321,9 @@ export default function Tabagismo() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="tabagismo" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="tabagismo" />
+      </div>
     </PageContainer>
   );
 }

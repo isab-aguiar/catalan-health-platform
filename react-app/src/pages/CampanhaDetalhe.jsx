@@ -76,12 +76,19 @@ export default function CampanhaDetalhe() {
 
         {/* Campaign Image */}
         {campanha.imagemURL && (
-          <div className="mb-8 rounded-xl overflow-hidden shadow-medium">
+          <div className="relative mb-8 rounded-xl overflow-hidden shadow-medium">
             <img
               src={campanha.imagemURL}
               alt={campanha.titulo}
               className="w-full max-h-96 object-cover"
             />
+            {campanha.imageCredit && (
+              <div className="absolute bottom-0 right-0 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-tl-lg">
+                <p className="text-xs text-white/95 italic">
+                  {campanha.imageCredit}
+                </p>
+              </div>
+            )}
           </div>
         )}
 

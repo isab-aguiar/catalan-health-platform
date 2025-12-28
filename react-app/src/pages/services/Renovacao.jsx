@@ -336,7 +336,9 @@ export default function Renovacao() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="renovacao" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="renovacao" />
+      </div>
     </PageContainer>
   );
 }

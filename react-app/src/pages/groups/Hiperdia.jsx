@@ -275,7 +275,9 @@ export default function Hiperdia() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="hiperdia" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="hiperdia" />
+      </div>
     </PageContainer>
   );
 }

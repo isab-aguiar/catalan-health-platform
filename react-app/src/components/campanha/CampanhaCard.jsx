@@ -110,11 +110,20 @@ const TemplateVacinacao = ({ campanha, estilo, onClick }) => {
       </div>
       {}
       {campanha.imagemURL && (
-        <img
-          src={campanha.imagemURL}
-          alt={campanha.titulo}
-          className={estilo.imagem}
-        />
+        <div className="relative">
+          <img
+            src={campanha.imagemURL}
+            alt={campanha.titulo}
+            className={estilo.imagem}
+          />
+          {campanha.imageCredit && (
+            <div className="absolute bottom-0 right-0 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-tl-md">
+              <p className="text-[10px] sm:text-xs text-white/95 italic font-light">
+                {campanha.imageCredit}
+              </p>
+            </div>
+          )}
+        </div>
       )}
       {}
       {campanha.pdfURL && (
@@ -237,6 +246,13 @@ const TemplateEducacao = ({ campanha, estilo, onClick }) => {
               className={estilo.imagem}
             />
             <div className={estilo.overlay}></div>
+            {campanha.imageCredit && (
+              <div className="absolute bottom-0 right-0 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-tl-md z-10">
+                <p className="text-[10px] sm:text-xs text-white/95 italic font-light">
+                  {campanha.imageCredit}
+                </p>
+              </div>
+            )}
             <span className={estilo.badge}>
               <Activity className="w-4 h-4 inline mr-1" />
               Educação em Saúde
@@ -297,11 +313,20 @@ const TemplateEvento = ({ campanha, estilo, onClick }) => {
     <div className={estilo.container}>
       {}
       {campanha.imagemURL && (
-        <img
-          src={campanha.imagemURL}
-          alt={campanha.titulo}
-          className={estilo.imagem}
-        />
+        <div className="relative">
+          <img
+            src={campanha.imagemURL}
+            alt={campanha.titulo}
+            className={estilo.imagem}
+          />
+          {campanha.imageCredit && (
+            <div className="absolute bottom-0 right-0 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-tl-md">
+              <p className="text-[10px] sm:text-xs text-white/95 italic font-light">
+                {campanha.imageCredit}
+              </p>
+            </div>
+          )}
+        </div>
       )}
       {}
       <div className={estilo.header}>
@@ -421,11 +446,20 @@ const TemplateInformativo = ({ campanha, estilo, onClick }) => {
   return (
     <div className={estilo.container}>
       {campanha.imagemURL && (
-        <img
-          src={campanha.imagemURL}
-          alt={campanha.titulo}
-          className={estilo.imagem}
-        />
+        <div className="relative">
+          <img
+            src={campanha.imagemURL}
+            alt={campanha.titulo}
+            className={estilo.imagem}
+          />
+          {campanha.imageCredit && (
+            <div className="absolute bottom-0 right-0 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-tl-md">
+              <p className="text-[10px] sm:text-xs text-white/95 italic font-light">
+                {campanha.imageCredit}
+              </p>
+            </div>
+          )}
+        </div>
       )}
       <div className={estilo.corpo}>
         <h2 className={estilo.titulo}>{campanha.titulo}</h2>

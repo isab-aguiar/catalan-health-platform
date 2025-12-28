@@ -620,7 +620,9 @@ export default function Vacinas() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="vacinas" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="vacinas" />
+      </div>
     </PageContainer>
   );
 }

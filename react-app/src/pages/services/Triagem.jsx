@@ -445,7 +445,9 @@ export default function Triagem() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="triagem" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="triagem" />
+      </div>
     </PageContainer>
   );
 }

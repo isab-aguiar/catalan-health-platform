@@ -296,7 +296,9 @@ export default function DoresCronicas() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="dores-cronicas" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="dores-cronicas" />
+      </div>
     </PageContainer>
   );
 }

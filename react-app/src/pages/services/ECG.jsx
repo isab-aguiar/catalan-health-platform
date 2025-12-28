@@ -298,7 +298,9 @@ export default function ECG() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="ecg" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="ecg" />
+      </div>
     </PageContainer>
   );
 }

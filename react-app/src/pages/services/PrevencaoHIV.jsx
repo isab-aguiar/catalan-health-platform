@@ -252,7 +252,9 @@ const PrevencaoHIV = () => {
       </div>
 
       {/* Leitura Recomendada */}
-      <RecommendedReadingCarousel pageId="prevencao-hiv" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="prevencao-hiv" />
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { AlertCircle, Phone, Clock, Youtube, Baby, Smile, ExternalLink } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
+import ImageWithCredit from "../../components/common/ImageWithCredit";
 import preNatalImg from "../../assets/saude-bocal/pre-natal.png";
 import ordontoPediatraImg from "../../assets/saude-bocal/ordonto-pediatra.png";
 function PageContainer({ children }) {
@@ -215,10 +216,12 @@ export default function Dentistas() {
           <div className="p-4 sm:p-6">
             {/* Imagem */}
             <div className="mb-6 flex justify-center">
-              <img
+              <ImageWithCredit
                 src={preNatalImg}
                 alt="Pré-natal Odontológico - Cuidados odontológicos durante a gestação"
-                className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm"
+                credit="Fonte: Ministério da Saúde"
+                creditPosition="below"
+                className="w-full max-w-md sm:max-w-lg md:max-w-xl"
               />
             </div>
 
@@ -277,10 +280,12 @@ export default function Dentistas() {
           <div className="p-4 sm:p-6">
             {/* Imagem */}
             <div className="mb-6 flex justify-center">
-              <img
+              <ImageWithCredit
                 src={ordontoPediatraImg}
                 alt="Saúde Bucal da Criança e do Adolescente - Odontopediatria"
-                className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm"
+                credit="Fonte: Ministério da Saúde"
+                creditPosition="below"
+                className="w-full max-w-md sm:max-w-lg md:max-w-xl"
               />
             </div>
 
@@ -508,7 +513,9 @@ export default function Dentistas() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="dentistas" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="dentistas" />
+      </div>
     </PageContainer>
   );
 }

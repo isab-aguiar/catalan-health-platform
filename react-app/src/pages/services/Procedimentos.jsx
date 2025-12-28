@@ -4,6 +4,7 @@ import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
+import ImageWithCredit from "../../components/common/ImageWithCredit";
 import testePezinhoImg from "../../assets/teste-pezinho/teste-do-pezinho.svg";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
@@ -226,10 +227,12 @@ export default function Procedimentos() {
           <div className="p-4 sm:p-6">
             {/* Imagem */}
             <div className="mb-6 flex justify-center">
-              <img
+              <ImageWithCredit
                 src={testePezinhoImg}
                 alt="Teste do Pezinho - Triagem Neonatal"
-                className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm"
+                credit="Fonte: Ministério da Saúde"
+                creditPosition="below"
+                className="w-full max-w-md sm:max-w-lg md:max-w-xl"
               />
             </div>
 
@@ -715,7 +718,9 @@ export default function Procedimentos() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll até o final */}
-      <RecommendedReadingCarousel pageId="procedimentos" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="procedimentos" />
+      </div>
     </PageContainer>
   );
 }

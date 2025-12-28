@@ -104,46 +104,75 @@ export default function Curativos() {
             curativo, priorizando a segurança do paciente e a otimização do
             processo de cicatrização tecidual.
           </p>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Curativos Simples
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Indicado para o tratamento de feridas superficiais, escoriações
-                e lesões de baixa complexidade clínica.
-              </p>
+          <h3 className="font-semibold text-neutral-800 mb-4 text-base">
+            Serviços Oferecidos:
+          </h3>
+          <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div>
+                <strong className="text-neutral-800 text-sm">
+                  Curativos simples e complexos
+                </strong>
+                <p className="text-xs text-neutral-600 mt-0.5">
+                  Úlceras, feridas operatórias, queimaduras, lesões por pressão e demais condições que requerem acompanhamento clínico específico
+                </p>
+              </div>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Curativos Complexos
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Atendimento especializado para feridas cirúrgicas, úlceras,
-                lesões por pressão e demais condições que requerem
-                acompanhamento clínico específico.
-              </p>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div>
+                <strong className="text-neutral-800 text-sm">
+                  Retirada de pontos (suturas)
+                </strong>
+                <p className="text-xs text-neutral-600 mt-0.5">
+                  Procedimento realizado conforme prescrição médica e protocolos estabelecidos, aplicado em casos pós-cirúrgicos e pós-procedimentais
+                </p>
+              </div>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Retirada de Pontos
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Procedimento realizado conforme prescrição médica e protocolos
-                estabelecidos, aplicado em casos pós-cirúrgicos e
-                pós-procedimentais.
-              </p>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div>
+                <strong className="text-neutral-800 text-sm">
+                  Tratamento de pé diabético
+                </strong>
+                <p className="text-xs text-neutral-600 mt-0.5">
+                  Cuidados especializados para prevenção e tratamento de lesões nos pés de pacientes diabéticos, incluindo avaliação clínica e orientações preventivas
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div>
+                <strong className="text-neutral-800 text-sm">
+                  Cuidados com sondas em geral
+                </strong>
+                <p className="text-xs text-neutral-600 mt-0.5">
+                  Troca, manutenção e cuidados com sondas vesicais, nasogástricas e outras, conforme prescrição e protocolos estabelecidos
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div>
+                <strong className="text-neutral-800 text-sm">
+                  Orientações
+                </strong>
+                <p className="text-xs text-neutral-600 mt-0.5">
+                  Orientações sobre cuidados com feridas, prevenção de complicações e técnicas de curativo domiciliar quando apropriado
+                </p>
+              </div>
             </div>
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Dispensação de Material para Curativos">
+        <InfoBox title="Dispensação de Insumos para Curativo e Equipos de Sonda Enteral">
           <p className="text-neutral-700 leading-relaxed mb-4">
             A unidade disponibiliza materiais para realização de curativos
-            domiciliares, mediante apresentação de prescrição médica válida. O
+            domiciliares e equipos de sonda enteral, mediante apresentação de prescrição médica válida. O
             estoque disponível compreende gazes estéreis, fitas adesivas
             micropore, esparadrapo, luvas descartáveis, solução fisiológica,
-            ataduras e demais insumos necessários para o tratamento.
+            ataduras, equipos de sonda enteral e demais insumos necessários para o tratamento.
           </p>
           <div className="space-y-3">
             <Alert type="warning">
@@ -367,7 +396,9 @@ export default function Curativos() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="curativos" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="curativos" />
+      </div>
     </PageContainer>
   );
 }

@@ -665,7 +665,9 @@ export default function Recepcao() {
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}
-      <RecommendedReadingCarousel pageId="recepcao" />
+      <div className="pb-4">
+        <RecommendedReadingCarousel pageId="recepcao" />
+      </div>
     </PageContainer>
   );
 }

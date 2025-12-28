@@ -116,6 +116,7 @@ export default function Home() {
           caption: getCaptionFromFilename(
             Object.keys(galleryImagesModules)[index]
           ),
+          credit: "Fonte: ESF Catalão - Arquivo próprio",
         }));
         const fotoUnidade = imageEntries.find((img) =>
           img.src.includes("foto-unidade")
