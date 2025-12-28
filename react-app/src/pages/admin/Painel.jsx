@@ -244,7 +244,7 @@ export default function Painel() {
                   Calendário
                 </h3>
                 <p className="text-sm text-neutral-600">
-                  Gerenciar almoços, reuniões e lembretes
+                  Gerenciar reuniões, lembretes e agendamentos
                 </p>
               </div>
               <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />

@@ -4,6 +4,7 @@ import { Menu, X, Search } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import GlobalSearch from '../search/GlobalSearch';
 import { usePageSearch } from '../../hooks/usePageSearch';
+import NotificationBell from '../common/NotificationBell';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -190,6 +191,9 @@ export default function Header() {
               )}
             </div>
           </div>
+
+          {/* Sino de Notificações */}
+          <NotificationBell />
 
         </div>
       </header>

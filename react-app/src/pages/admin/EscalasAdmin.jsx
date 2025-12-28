@@ -14,6 +14,7 @@ import {
   DIAS_SEMANA,
 } from '../../services/escalasService';
 import { useAuth } from '../../contexts/AuthContext';
+import EscalaEditor from '../../components/admin/EscalaEditor';
 
 export default function EscalasAdmin() {
   const { currentUser } = useAuth();
@@ -24,6 +25,7 @@ export default function EscalasAdmin() {
   const [modoEdicao, setModoEdicao] = useState(false);
   const [escalaEditando, setEscalaEditando] = useState(null);
   const [filtroStatus, setFiltroStatus] = useState('todas');
+  const [showEditor, setShowEditor] = useState(false);
 
   const meses = [
     { num: 1, nome: 'Janeiro' },
@@ -86,11 +88,28 @@ export default function EscalasAdmin() {
     try {
       const escala = await buscarEscalaPorId(escalaId);
       setEscalaEditando(escala);
-      setModoEdicao(true);
-      setShowModal(true);
+      setShowEditor(true);
     } catch (error) {
       console.error('Erro ao carregar escala:', error);
       alert('Erro ao carregar escala para edição');
+    }
+  };
+
+  const handleSalvarEscalaEditor = async (escalaAtualizada) => {
+    try {
+      await atualizarEscala(escalaAtualizada.id, {
+        profissionais: escalaAtualizada.profissionais,
+      });
+      alert('Escala atualizada com sucesso!');
+      setShowEditor(false);
+      setEscalaEditando(null);
+      carregarEscalas();
+      if (escalaAtual?.id === escalaAtualizada.id) {
+        setEscalaAtual(escalaAtualizada);
+      }
+    } catch (error) {
+      console.error('Erro ao salvar escala:', error);
+      alert('Erro ao salvar escala: ' + error.message);
     }
   };
 
@@ -387,6 +406,7 @@ export default function EscalasAdmin() {
                     <tr className="border-b-2 border-neutral-200">
                       <th className="text-left py-3 px-2 font-semibold text-neutral-700">Dia</th>
                       <th className="text-left py-3 px-2 font-semibold text-neutral-700">Manhã</th>
+                      <th className="text-left py-3 px-2 font-semibold text-neutral-700">Almoço</th>
                       <th className="text-left py-3 px-2 font-semibold text-neutral-700">Tarde</th>
                       <th className="text-left py-3 px-2 font-semibold text-neutral-700">Observações</th>
                     </tr>
@@ -414,6 +434,22 @@ export default function EscalasAdmin() {
                                   <div
                                     key={idx}
                                     className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded"
+                                  >
+                                    {prof}
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <span className="text-neutral-400 text-xs">-</span>
+                            )}
+                          </td>
+                          <td className="py-3 px-2">
+                            {profissionaisDia.almoco?.length > 0 ? (
+                              <div className="space-y-1">
+                                {profissionaisDia.almoco.map((prof, idx) => (
+                                  <div
+                                    key={idx}
+                                    className="text-xs bg-orange-50 text-orange-700 px-2 py-1 rounded"
                                   >
                                     {prof}
                                   </div>
@@ -552,9 +588,8 @@ export default function EscalasAdmin() {
 
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-sm text-blue-900">
-                  <strong>Nota:</strong> Para preencher os profissionais de cada dia, clique em "Salvar"
-                  e depois edite a escala clicando no ícone de edição. O editor completo de escalas
-                  será implementado na próxima etapa.
+                  <strong>Nota:</strong> Após criar a escala, clique no ícone de edição para preencher
+                  os profissionais de cada dia usando o editor interativo.
                 </p>
               </div>
             </div>
@@ -578,6 +613,18 @@ export default function EscalasAdmin() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Editor de Escala */}
+      {showEditor && escalaEditando && (
+        <EscalaEditor
+          escala={escalaEditando}
+          onSave={handleSalvarEscalaEditor}
+          onClose={() => {
+            setShowEditor(false);
+            setEscalaEditando(null);
+          }}
+        />
       )}
     </div>
   );

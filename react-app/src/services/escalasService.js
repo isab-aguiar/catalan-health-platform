@@ -19,6 +19,7 @@ const COLLECTION_NAME = "escalas";
 // Tipos de turnos
 export const TURNOS = {
   MANHA: "manha",
+  ALMOCO: "almoco",
   TARDE: "tarde",
   INTEGRAL: "integral",
 };
@@ -70,11 +71,11 @@ export const criarEscala = async (escalaData, userId) => {
       titulo: escalaData.titulo || `Escala ${getMesNome(escalaData.mes)}/${escalaData.ano}`,
 
       // Profissionais alocados por dia
-      // Formato: { "2024-12-01": { manha: ["user1", "user2"], tarde: ["user3"], observacoes: "" } }
+      // Formato: { "2024-12-01": { manha: ["user1"], almoco: ["user2"], tarde: ["user3"], observacoes: "" } }
       profissionais: escalaData.profissionais || {},
 
       // Configurações da escala
-      turnosPorDia: escalaData.turnosPorDia || [TURNOS.MANHA, TURNOS.TARDE],
+      turnosPorDia: escalaData.turnosPorDia || [TURNOS.MANHA, TURNOS.ALMOCO, TURNOS.TARDE],
       diasFuncionamento: escalaData.diasFuncionamento || [
         DIAS_SEMANA.SEGUNDA,
         DIAS_SEMANA.TERCA,

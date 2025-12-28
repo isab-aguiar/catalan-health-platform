@@ -18,7 +18,6 @@ const COLLECTION_NAME = "calendario_eventos";
 
 // Tipos de eventos
 export const TIPOS_EVENTO = {
-  ALMOCO: "almoco",
   REUNIAO: "reuniao",
   LEMBRETE: "lembrete",
   AGENDAMENTO: "agendamento",
@@ -291,7 +290,6 @@ export const ativarEvento = async (eventoId) => {
 // Obter cor por tipo
 function getCor(tipo) {
   const cores = {
-    [TIPOS_EVENTO.ALMOCO]: "#f59e0b", // amber
     [TIPOS_EVENTO.REUNIAO]: "#3b82f6", // blue
     [TIPOS_EVENTO.LEMBRETE]: "#8b5cf6", // purple
     [TIPOS_EVENTO.AGENDAMENTO]: "#10b981", // green

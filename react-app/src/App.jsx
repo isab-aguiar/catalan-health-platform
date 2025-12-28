@@ -90,6 +90,7 @@ const EstoqueVacinas = lazyLoad(() => import("./pages/admin/EstoqueVacinas"));
 const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesPosConsulta"));
 const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
 const EscalasAdmin = lazyLoad(() => import("./pages/admin/EscalasAdmin"));
+const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
@@ -252,6 +253,14 @@ function App() {
                         element={
                           <ProtectedRoute>
                             <EscalasAdmin />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/notificacoes"
+                        element={
+                          <ProtectedRoute>
+                            <Notificacoes />
                           </ProtectedRoute>
                         }
                       />

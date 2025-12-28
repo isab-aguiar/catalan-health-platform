@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell } from 'lucide-react';
 import { buscarEventosPorMes, TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
+import EventoModal from '../../components/admin/EventoModal';
 
 export default function CalendarioAdmin() {
   const { currentUser } = useAuth();
@@ -11,6 +12,7 @@ export default function CalendarioAdmin() {
   const [filtroTipo, setFiltroTipo] = useState('todos');
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [eventoEditando, setEventoEditando] = useState(null);
 
   const meses = [
     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -106,7 +108,6 @@ export default function CalendarioAdmin() {
 
   const getCorEvento = (tipo) => {
     const cores = {
-      [TIPOS_EVENTO.ALMOCO]: 'bg-amber-500',
       [TIPOS_EVENTO.REUNIAO]: 'bg-blue-500',
       [TIPOS_EVENTO.LEMBRETE]: 'bg-purple-500',
       [TIPOS_EVENTO.AGENDAMENTO]: 'bg-green-500',
@@ -116,8 +117,6 @@ export default function CalendarioAdmin() {
 
   const getIconeEvento = (tipo) => {
     switch (tipo) {
-      case TIPOS_EVENTO.ALMOCO:
-        return <Clock className="w-3 h-3" />;
       case TIPOS_EVENTO.REUNIAO:
         return <Users className="w-3 h-3" />;
       case TIPOS_EVENTO.LEMBRETE:
@@ -143,7 +142,7 @@ export default function CalendarioAdmin() {
               Calendário Administrativo
             </h1>
             <p className="text-neutral-600 mt-1">
-              Gerencie almoços, reuniões, lembretes e agendamentos
+              Gerencie reuniões, lembretes e agendamentos
             </p>
           </div>
           <button
@@ -200,7 +199,6 @@ export default function CalendarioAdmin() {
               className="px-3 py-1.5 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-gov-blue"
             >
               <option value="todos">Todos os Eventos</option>
-              <option value={TIPOS_EVENTO.ALMOCO}>Almoços</option>
               <option value={TIPOS_EVENTO.REUNIAO}>Reuniões</option>
               <option value={TIPOS_EVENTO.LEMBRETE}>Lembretes</option>
               <option value={TIPOS_EVENTO.AGENDAMENTO}>Agendamentos</option>
@@ -210,10 +208,6 @@ export default function CalendarioAdmin() {
 
         {/* Legenda */}
         <div className="mt-4 pt-4 border-t border-neutral-200 flex flex-wrap gap-4 text-xs">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-            <span className="text-neutral-600">Almoço</span>
-          </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-blue-500"></div>
             <span className="text-neutral-600">Reunião</span>
@@ -312,34 +306,20 @@ export default function CalendarioAdmin() {
         )}
       </div>
 
-      {/* Modal de Evento (Placeholder) */}
-      {showEventModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-neutral-200 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-neutral-900">
-                {selectedDate
-                  ? `Novo Evento - ${selectedDate.toLocaleDateString('pt-BR')}`
-                  : 'Novo Evento'}
-              </h3>
-              <button
-                onClick={() => {
-                  setShowEventModal(false);
-                  setSelectedDate(null);
-                }}
-                className="text-neutral-500 hover:text-neutral-700"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="p-6">
-              <p className="text-neutral-600">
-                Formulário de criação de evento será implementado aqui.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Modal de Evento */}
+      <EventoModal
+        isOpen={showEventModal}
+        onClose={() => {
+          setShowEventModal(false);
+          setSelectedDate(null);
+          setEventoEditando(null);
+        }}
+        eventoEditando={eventoEditando}
+        dataInicial={selectedDate}
+        onEventoSalvo={() => {
+          carregarEventos();
+        }}
+      />
     </div>
   );
 }
