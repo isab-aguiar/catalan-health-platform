@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Users, Plus, Edit2, Trash2, Eye, CheckCircle, XCircle, Archive, Search } from 'lucide-react';
+import { Calendar, Users, Plus, Edit2, Trash2, Eye, CheckCircle, XCircle, Archive, Search, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import {
   buscarEscalas,
   buscarEscalaPorId,
@@ -18,6 +19,7 @@ import EscalaEditor from '../../components/admin/EscalaEditor';
 
 export default function EscalasAdmin() {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
   const [escalas, setEscalas] = useState([]);
   const [escalaAtual, setEscalaAtual] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -26,6 +28,25 @@ export default function EscalasAdmin() {
   const [escalaEditando, setEscalaEditando] = useState(null);
   const [filtroStatus, setFiltroStatus] = useState('todas');
   const [showEditor, setShowEditor] = useState(false);
+
+  // Bloquear scroll quando modal ou editor estiver aberto
+  useEffect(() => {
+    if (showModal || showEditor) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [showModal, showEditor]);
 
   const meses = [
     { num: 1, nome: 'Janeiro' },
@@ -234,18 +255,28 @@ export default function EscalasAdmin() {
       {/* Header */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
-              <Users className="w-7 h-7 text-gov-blue" />
-              Escalas de Trabalho
-            </h1>
-            <p className="text-neutral-600 mt-1">
-              Gerencie as escalas mensais da equipe
-            </p>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition-colors"
+              aria-label="Voltar"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span className="hidden sm:inline">Voltar</span>
+            </button>
+            <div>
+              <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
+                <Users className="w-7 h-7 text-gov-blue" />
+                Escalas de Trabalho
+              </h1>
+              <p className="text-neutral-600 mt-1">
+                Gerencie as escalas mensais da equipe
+              </p>
+            </div>
           </div>
           <button
             onClick={handleCriarNovaEscala}
-            className="bg-gov-blue text-white px-4 py-2.5 rounded-lg hover:bg-gov-blue-dark transition-colors flex items-center gap-2 font-medium shadow-sm"
+            className="bg-gov-blue text-gray-900 px-4 py-2.5 rounded-lg hover:bg-gov-blue-dark transition-colors flex items-center gap-2 font-medium shadow-sm"
           >
             <Plus className="w-5 h-5" />
             Nova Escala
@@ -503,7 +534,7 @@ export default function EscalasAdmin() {
       {/* Modal de Criação/Edição (Placeholder) */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-lg shadow-xl max-w-full sm:max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-neutral-200 flex items-center justify-between sticky top-0 bg-white">
               <h3 className="text-xl font-bold text-neutral-900">
                 {modoEdicao ? 'Editar Escala' : 'Nova Escala'}

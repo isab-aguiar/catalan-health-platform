@@ -58,7 +58,14 @@ const ECG = lazyLoad(() => import("./pages/services/ECG"));
 const Curativos = lazyLoad(() => import("./pages/services/Curativos"));
 const Renovacao = lazyLoad(() => import("./pages/services/Renovacao"));
 const Farmacia = lazyLoad(() => import("./pages/services/Farmacia"));
+const FarmaciaDispensacao = lazyLoad(() => import("./pages/services/FarmaciaDispensacao"));
 const PrevencaoHIV = lazyLoad(() => import("./pages/services/PrevencaoHIV"));
+const Consultas = lazyLoad(() => import("./pages/services/Consultas"));
+const BolsaFamilia = lazyLoad(() => import("./pages/services/BolsaFamilia"));
+const OuvidoriaIndex = lazyLoad(() => import("./pages/services/OuvidoriaIndex"));
+const Elogios = lazyLoad(() => import("./pages/services/Elogios"));
+const Sugestoes = lazyLoad(() => import("./pages/services/Sugestoes"));
+const Reclamacoes = lazyLoad(() => import("./pages/services/Reclamacoes"));
 const GroupsIndex = lazyLoad(() => import("./pages/groups/GroupsIndex"));
 const Hiperdia = lazyLoad(() => import("./pages/groups/Hiperdia"));
 const Tabagismo = lazyLoad(() => import("./pages/groups/Tabagismo"));
@@ -91,6 +98,7 @@ const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesP
 const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
 const EscalasAdmin = lazyLoad(() => import("./pages/admin/EscalasAdmin"));
 const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
+const Feedbacks = lazyLoad(() => import("./pages/admin/Feedbacks"));
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
@@ -140,9 +148,25 @@ function App() {
                       />
                       <Route path="/servicos/farmacia" element={<Farmacia />} />
                       <Route
+                        path="/servicos/farmacia-dispensacao"
+                        element={<FarmaciaDispensacao />}
+                      />
+                      <Route
                         path="/servicos/prevencao-hiv"
                         element={<PrevencaoHIV />}
                       />
+                      <Route
+                        path="/servicos/consultas"
+                        element={<Consultas />}
+                      />
+                      <Route
+                        path="/servicos/bolsa-familia"
+                        element={<BolsaFamilia />}
+                      />
+                      <Route path="/ouvidoria" element={<OuvidoriaIndex />} />
+                      <Route path="/ouvidoria/elogios" element={<Elogios />} />
+                      <Route path="/ouvidoria/sugestoes" element={<Sugestoes />} />
+                      <Route path="/ouvidoria/reclamacoes" element={<Reclamacoes />} />
                       {}
                       <Route path="/grupos" element={<GroupsIndex />} />
                       <Route path="/grupos/hiperdia" element={<Hiperdia />} />
@@ -261,6 +285,14 @@ function App() {
                         element={
                           <ProtectedRoute>
                             <Notificacoes />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/feedbacks"
+                        element={
+                          <ProtectedRoute>
+                            <Feedbacks />
                           </ProtectedRoute>
                         }
                       />

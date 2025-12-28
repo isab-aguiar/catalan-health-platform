@@ -27,8 +27,8 @@ export default function GroupsIndex() {
     <PageContainer>
       <div className="max-w-5xl mx-auto space-y-6">
         <BackButton />
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-600 mb-6 flex items-center gap-3">
-          <Users size={40} />
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-600 mb-6 flex items-center gap-3">
+          <Users size={32} className="sm:w-10 sm:h-10" />
           Grupos de Atividade Coletiva e Atividades Coletivas
         </h1>
         <Alert type="info">
@@ -100,7 +100,8 @@ export default function GroupsIndex() {
             icon={<Calendar size={24} />}
             highlight={true}
           >
-            <div className="overflow-x-auto">
+            {/* Versão Desktop */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-neutral-100">
@@ -129,6 +130,26 @@ export default function GroupsIndex() {
                   </tr>
                 </tbody>
               </table>
+            </div>
+
+            {/* Versão Mobile */}
+            <div className="md:hidden space-y-3">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+                <div className="space-y-2">
+                  <div>
+                    <span className="text-xs font-semibold text-neutral-500 uppercase">Dia</span>
+                    <p className="text-sm font-semibold text-neutral-900">Quartas-feiras</p>
+                  </div>
+                  <div>
+                    <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
+                    <p className="text-sm text-neutral-900">07:30</p>
+                  </div>
+                  <div>
+                    <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
+                    <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <p className="mt-4 text-neutral-600 italic text-sm">
               * Confirme os dias e horários na recepção, pois podem sofrer
@@ -210,7 +231,8 @@ export default function GroupsIndex() {
             icon={<Calendar size={24} />}
             highlight={true}
           >
-            <div className="overflow-x-auto">
+            {/* Versão Desktop */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-neutral-100">
@@ -240,6 +262,27 @@ export default function GroupsIndex() {
                 </tbody>
               </table>
             </div>
+
+            {/* Versão Mobile */}
+            <div className="md:hidden space-y-3">
+              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+                <div className="space-y-2">
+                  <div>
+                    <span className="text-xs font-semibold text-neutral-500 uppercase">Dia</span>
+                    <p className="text-sm font-semibold text-neutral-900">Quintas-feiras (quinzenal)</p>
+                  </div>
+                  <div>
+                    <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
+                    <p className="text-sm text-neutral-900">08:00</p>
+                  </div>
+                  <div>
+                    <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
+                    <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <p className="mt-4 text-neutral-600 italic text-sm">
               * Confirme os dias e horários na recepção, pois podem sofrer
               alterações.

@@ -60,14 +60,6 @@ export default function CampanhaCarousel({ campanhas = [], onCampanhaClick }) {
           />
           {}
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-opacity duration-300 pointer-events-none" />
-
-          {currentCampanha.imageCredit && (
-            <div className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 bg-black/60 backdrop-blur-sm px-2 sm:px-3 py-1 rounded-lg z-10">
-              <p className="text-[10px] sm:text-xs text-white/95 italic font-light">
-                {currentCampanha.imageCredit}
-              </p>
-            </div>
-          )}
         </div>
         {}
         {campanhasComImagem.length > 1 && (
@@ -97,6 +89,14 @@ export default function CampanhaCarousel({ campanhas = [], onCampanhaClick }) {
           </div>
         )}
       </div>
+
+      {/* Crédito da imagem - fora do slide */}
+      {currentCampanha.imageCredit && (
+        <p className="text-xs text-neutral-500 italic mt-2 text-right">
+          Fonte: {currentCampanha.imageCredit}
+        </p>
+      )}
+
       {}
       <div className="mt-4 space-y-2">
         <h3 className="text-lg sm:text-xl font-bold text-neutral-900 leading-tight">

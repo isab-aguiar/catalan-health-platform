@@ -18,6 +18,10 @@ import {
   AlertCircle,
   Megaphone,
   Package,
+  ClipboardList,
+  CalendarDays,
+  BellDot,
+  MessageSquareHeart,
 } from "lucide-react";
 const AvisoItem = memo(({ aviso, getCategoriaColor, formatarData }) => (
   <div className="flex items-start gap-4 p-4 bg-neutral-50 rounded-md hover:bg-neutral-100 transition-colors border border-neutral-200">
@@ -184,6 +188,120 @@ export default function Painel() {
               iconColor="text-teal-600"
             />
           )}
+        </div>
+        {}
+        <div className="bg-white rounded-md p-6 shadow-sm border border-neutral-300">
+          <h2 className="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
+            <ArrowRight className="w-5 h-5 text-info" />
+            Acesso Rápido
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {permissions.canViewAvisos() && (
+              <Link
+                to="/admin/avisos"
+                className="flex flex-col items-center gap-3 p-4 border-2 border-blue-200 rounded-md hover:border-blue-400 hover:bg-info/10 transition-all group"
+              >
+                <div className="w-12 h-12 bg-info/10 rounded-md flex items-center justify-center group-hover:bg-info-600 transition-colors border border-blue-200">
+                  <Bell className="w-6 h-6 text-primary-700 group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="font-bold text-neutral-900 text-sm text-center">
+                  Gerenciar Avisos
+                </h3>
+              </Link>
+            )}
+            {permissions.canViewAvisos() && (
+              <Link
+                to="/admin/campanhas"
+                className="flex flex-col items-center gap-3 p-4 border-2 border-green-200 rounded-md hover:border-green-400 hover:bg-success/10 transition-all group"
+              >
+                <div className="w-12 h-12 bg-success/10 rounded-md flex items-center justify-center group-hover:bg-green-600 transition-colors border border-green-200">
+                  <Megaphone className="w-6 h-6 text-green-700 group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="font-bold text-neutral-900 text-sm text-center">
+                  Gerenciar Campanhas
+                </h3>
+              </Link>
+            )}
+            {permissions.canManageUsers() && (
+              <Link
+                to="/admin/users"
+                className="flex flex-col items-center gap-3 p-4 border-2 border-amber-200 rounded-md hover:border-amber-400 hover:bg-warning/10 transition-all group"
+              >
+                <div className="w-12 h-12 bg-warning/10 rounded-md flex items-center justify-center group-hover:bg-amber-600 transition-colors border border-amber-200">
+                  <Users className="w-6 h-6 text-amber-700 group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="font-bold text-neutral-900 text-sm text-center">
+                  Gerenciar Usuários
+                </h3>
+              </Link>
+            )}
+            <Link
+              to="/admin/estoque-vacinas"
+              className="flex flex-col items-center gap-3 p-4 border-2 border-neutral-300 rounded-md hover:border-neutral-500 hover:bg-neutral-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-neutral-200 rounded-md flex items-center justify-center group-hover:bg-neutral-700 transition-colors border border-neutral-300">
+                <Package className="w-6 h-6 text-neutral-700 group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="font-bold text-neutral-900 text-sm text-center">
+                Estoque de Vacinas
+              </h3>
+            </Link>
+            <Link
+              to="/admin/orientacoes-pos-consulta"
+              className="flex flex-col items-center gap-3 p-4 border-2 border-purple-200 rounded-md hover:border-purple-400 hover:bg-purple-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-purple-100 rounded-md flex items-center justify-center group-hover:bg-purple-600 transition-colors border border-purple-200">
+                <ClipboardList className="w-6 h-6 text-purple-700 group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="font-bold text-neutral-900 text-sm text-center">
+                Orientações Pós-Consulta
+              </h3>
+            </Link>
+            <Link
+              to="/admin/calendario"
+              className="flex flex-col items-center gap-3 p-4 border-2 border-indigo-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-indigo-100 rounded-md flex items-center justify-center group-hover:bg-indigo-600 transition-colors border border-indigo-200">
+                <Calendar className="w-6 h-6 text-indigo-700 group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="font-bold text-neutral-900 text-sm text-center">
+                Calendário de Eventos
+              </h3>
+            </Link>
+            <Link
+              to="/admin/escalas"
+              className="flex flex-col items-center gap-3 p-4 border-2 border-teal-200 rounded-md hover:border-teal-400 hover:bg-teal-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-teal-100 rounded-md flex items-center justify-center group-hover:bg-teal-600 transition-colors border border-teal-200">
+                <CalendarDays className="w-6 h-6 text-teal-700 group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="font-bold text-neutral-900 text-sm text-center">
+                Escalas de Trabalho
+              </h3>
+            </Link>
+            <Link
+              to="/admin/notificacoes"
+              className="flex flex-col items-center gap-3 p-4 border-2 border-pink-200 rounded-md hover:border-pink-400 hover:bg-pink-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-pink-100 rounded-md flex items-center justify-center group-hover:bg-pink-600 transition-colors border border-pink-200">
+                <BellDot className="w-6 h-6 text-pink-700 group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="font-bold text-neutral-900 text-sm text-center">
+                Notificações
+              </h3>
+            </Link>
+            <Link
+              to="/admin/feedbacks"
+              className="flex flex-col items-center gap-3 p-4 border-2 border-rose-200 rounded-md hover:border-rose-400 hover:bg-rose-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-rose-100 rounded-md flex items-center justify-center group-hover:bg-rose-600 transition-colors border border-rose-200">
+                <MessageSquareHeart className="w-6 h-6 text-rose-700 group-hover:text-white transition-colors" />
+              </div>
+              <h3 className="font-bold text-neutral-900 text-sm text-center">
+                Feedbacks e Ouvidoria
+              </h3>
+            </Link>
+          </div>
         </div>
         {}
         <div className="bg-white rounded-md p-6 shadow-sm border border-neutral-300">

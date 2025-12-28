@@ -80,7 +80,7 @@ export default function CampanhaDetalhe() {
             <img
               src={campanha.imagemURL}
               alt={campanha.titulo}
-              className="w-full max-h-96 object-cover"
+              className="w-full max-h-64 sm:max-h-80 md:max-h-96 object-cover"
             />
             {campanha.imageCredit && (
               <div className="absolute bottom-0 right-0 bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-tl-lg">
@@ -93,7 +93,7 @@ export default function CampanhaDetalhe() {
         )}
 
         {/* Campaign Content */}
-        <div className="bg-white rounded-xl shadow-soft p-8 mb-8">
+        <div className="bg-white rounded-xl shadow-soft p-4 sm:p-6 md:p-8 mb-8">
           {/* Category Badge */}
           {campanha.categoria && (
             <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 ${
@@ -108,7 +108,7 @@ export default function CampanhaDetalhe() {
           )}
 
           {/* Title */}
-          <h1 className="text-3xl font-bold text-neutral-900 mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-4">
             {campanha.titulo}
           </h1>
 

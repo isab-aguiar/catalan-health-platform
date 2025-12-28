@@ -74,7 +74,7 @@ export default function Vacinas() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-xl md:text-3xl font-bold text-slate-900 whitespace-nowrap"
+                className="text-xl md:text-3xl font-bold text-slate-900 whitespace-normal md:whitespace-nowrap"
                 style={{
                   fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
                 }}

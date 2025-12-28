@@ -4,6 +4,7 @@ import { Menu, X, Search } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import GlobalSearch from '../search/GlobalSearch';
 import { usePageSearch } from '../../hooks/usePageSearch';
+import { useAuth } from '../../contexts/AuthContext';
 import NotificationBell from '../common/NotificationBell';
 
 export default function Header() {
@@ -14,6 +15,7 @@ export default function Header() {
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const { currentUser } = useAuth();
   const searchResults = usePageSearch(searchQuery);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -192,8 +194,8 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Sino de Notificações */}
-          <NotificationBell />
+          {/* Sino de Notificações - Apenas para usuários autenticados */}
+          {currentUser && <NotificationBell />}
 
         </div>
       </header>

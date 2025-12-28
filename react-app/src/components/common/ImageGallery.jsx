@@ -61,11 +61,13 @@ export default function ImageGallery({ images = [] }) {
           )}
 
           {currentImage.credit && (
-            <div className="absolute bottom-0 right-0 p-2 sm:p-3 bg-black/40 backdrop-blur-sm rounded-tl-lg">
-              <p className="text-xs text-white/90 italic">
-                {currentImage.credit}
-              </p>
-            </div>
+            <>
+              <div className="hidden sm:block absolute bottom-0 right-0 p-2 sm:p-3 bg-black/40 backdrop-blur-sm rounded-tl-lg">
+                <p className="text-xs text-white/90 italic">
+                  {currentImage.credit}
+                </p>
+              </div>
+            </>
           )}
         </div>
 
@@ -94,6 +96,16 @@ export default function ImageGallery({ images = [] }) {
           </div>
         )}
       </div>
+
+      {currentImage.credit && (
+        <div className="sm:hidden mt-3 mb-4 flex justify-end">
+          <div className="px-2 py-1 bg-black/20 backdrop-blur-sm rounded-sm">
+            <p className="text-[9px] text-black italic">
+              {currentImage.credit}
+            </p>
+          </div>
+        </div>
+      )}
 
       {normalizedImages.length > 1 && (
         <div className="mt-4 flex gap-3 justify-start sm:justify-center overflow-x-auto pb-2 px-1 scrollbar-hide">

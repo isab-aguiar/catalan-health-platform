@@ -4,7 +4,7 @@ export default function ImageWithCredit({
   credit,
   caption,
   className = "",
-  creditPosition = "bottom-right", // "bottom-right" ou "below"
+  creditPosition = "below", // "bottom-right" ou "below"
 }) {
   return (
     <div className="relative w-full">
@@ -30,8 +30,8 @@ export default function ImageWithCredit({
       </div>
 
       {credit && creditPosition === "below" && (
-        <p className="text-xs text-neutral-500 italic mt-1 text-right">
-          {credit}
+        <p className="text-xs text-neutral-500 italic mt-2 text-right">
+          Fonte: {credit}
         </p>
       )}
     </div>

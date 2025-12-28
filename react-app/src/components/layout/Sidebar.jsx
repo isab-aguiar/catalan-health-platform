@@ -32,12 +32,15 @@ export default function Sidebar({ isOpen, onClose }) {
   const navLinks = [
     { name: 'Início', path: '/' },
     { name: 'Serviços', path: '/servicos' },
+    { name: 'Sala de Agendamento', path: '/servicos/sala-4' },
+    { name: 'Consultas Médicas', path: '/servicos/consultas' },
     { name: 'Sala de Vacinação', path: '/servicos/vacinas' },
+    { name: 'Farmácia', path: '/servicos/farmacia' },
     { name: 'Grupos', path: '/grupos' },
-    { name: 'E-multi', path: '/equipe' },
-    { name: 'Remsa', path: '/remsa' },
-    { name: 'ACS', path: '/acs' },
-    { name: 'Educação', path: '/educacao' },
+    { name: 'Bolsa Família e Serviço Social', path: '/servicos/bolsa-familia' },
+    { name: 'REMSA', path: '/remsa' },
+    { name: 'Agentes Comunitários de Saúde', path: '/acs' },
+    { name: 'Educação em Saúde', path: '/educacao' },
   ];
 
   if (!isOpen) return null;

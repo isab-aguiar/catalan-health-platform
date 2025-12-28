@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell } from 'lucide-react';
+import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell, ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { buscarEventosPorMes, TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
 import EventoModal from '../../components/admin/EventoModal';
 
 export default function CalendarioAdmin() {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [eventos, setEventos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +22,25 @@ export default function CalendarioAdmin() {
   ];
 
   const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+  // Bloquear scroll quando modal de evento estiver aberto
+  useEffect(() => {
+    if (showEventModal) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [showEventModal]);
 
   useEffect(() => {
     carregarEventos();
@@ -136,14 +157,24 @@ export default function CalendarioAdmin() {
       {/* Header */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
-              <CalendarIcon className="w-7 h-7 text-gov-blue" />
-              Calendário Administrativo
-            </h1>
-            <p className="text-neutral-600 mt-1">
-              Gerencie reuniões, lembretes e agendamentos
-            </p>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition-colors"
+              aria-label="Voltar"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span className="hidden sm:inline">Voltar</span>
+            </button>
+            <div>
+              <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
+                <CalendarIcon className="w-7 h-7 text-gov-blue" />
+                Calendário Administrativo
+              </h1>
+              <p className="text-neutral-600 mt-1">
+                Gerencie reuniões, lembretes e agendamentos
+              </p>
+            </div>
           </div>
           <button
             onClick={() => setShowEventModal(true)}

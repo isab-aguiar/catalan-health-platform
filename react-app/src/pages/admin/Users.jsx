@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useUsers } from "../../hooks/useUsers";
@@ -45,6 +45,26 @@ export default function Users() {
   const [formError, setFormError] = useState("");
   const [formLoading, setFormLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(null);
+
+  // Bloquear scroll quando modal estiver aberto
+  useEffect(() => {
+    if (showFormModal) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [showFormModal]);
+
   // Função de logout
   const handleLogout = async () => {
     if (window.confirm("Tem certeza que deseja sair?")) {
@@ -298,46 +318,46 @@ export default function Users() {
     <div className="min-h-screen bg-neutral-50">
       {}
       <header className="bg-white shadow-sm border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16 gap-2">
             {}
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                <UsersIcon className="w-6 h-6 text-white" />
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <UsersIcon className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
-                <h1 className="text-lg font-bold text-neutral-900">
-                  Gerenciar Usuários
+              <div className="min-w-0">
+                <h1 className="text-sm sm:text-lg font-bold text-neutral-900 truncate">
+                  Usuários
                 </h1>
-                <p className="text-xs text-neutral-500">ESF Catalão</p>
+                <p className="text-xs text-neutral-500 hidden sm:block">ESF Catalão</p>
               </div>
             </div>
             {}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
               <a
                 href="/admin/painel"
-                className="text-sm text-neutral-600 hover:text-neutral-900 transition-colors"
+                className="text-xs sm:text-sm text-neutral-600 hover:text-neutral-900 transition-colors hidden sm:inline whitespace-nowrap"
               >
                 Voltar ao Painel
               </a>
-              <div className="hidden sm:flex items-center gap-2 text-sm">
+              <div className="hidden lg:flex items-center gap-2 text-sm">
                 <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-primary-600" />
                 </div>
-                <div>
-                  <p className="font-medium text-neutral-700">
+                <div className="min-w-0 max-w-[150px]">
+                  <p className="font-medium text-neutral-700 truncate">
                     {userData?.displayName || "Admin"}
                   </p>
-                  <p className="text-xs text-neutral-500">
+                  <p className="text-xs text-neutral-500 truncate">
                     {currentUser?.email}
                   </p>
                 </div>
               </div>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-sm font-medium"
+                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-xs sm:text-sm font-medium"
               >
-                <LogOut className="w-4 h-4" />
+                <LogOut className="w-3 h-3 sm:w-4 sm:h-4" />
                 <span className="hidden sm:inline">Sair</span>
               </button>
             </div>
@@ -409,30 +429,32 @@ export default function Users() {
                         <RoleIcon className="w-6 h-6" />
                       </div>
                       {}
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h3 className="text-lg font-bold text-neutral-900">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                          <h3 className="text-lg font-bold text-neutral-900 truncate">
                             {user.displayName || user.email}
                           </h3>
-                          <span
-                            className={`px-2 py-1 rounded-full text-xs font-semibold ${getRoleColor(
-                              user.role
-                            )}`}
-                          >
-                            {getRoleLabel(user.role)}
-                          </span>
-                          {!user.active && (
-                            <span className="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold">
-                              Inativo
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${getRoleColor(
+                                user.role
+                              )}`}
+                            >
+                              {getRoleLabel(user.role)}
                             </span>
-                          )}
-                          {isCurrentUser && (
-                            <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">
-                              Você
-                            </span>
-                          )}
+                            {!user.active && (
+                              <span className="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                                Inativo
+                              </span>
+                            )}
+                            {isCurrentUser && (
+                              <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                                Você
+                              </span>
+                            )}
+                          </div>
                         </div>
-                        <p className="text-sm text-neutral-600 mb-2">
+                        <p className="text-sm text-neutral-600 mb-2 truncate" title={user.email}>
                           {user.email}
                         </p>
                         <div className="flex items-center gap-4 text-xs text-neutral-500">

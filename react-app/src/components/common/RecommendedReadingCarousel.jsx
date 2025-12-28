@@ -50,6 +50,21 @@ export default function RecommendedReadingCarousel({ pageId }) {
     );
   };
 
+  const handleLinkClick = (e, path) => {
+    // Se o path contém uma âncora (#), precisamos garantir que o scroll aconteça
+    if (path.includes('#')) {
+      const [pathname, hash] = path.split('#');
+      // Se já estamos na página correta, apenas faça scroll
+      if (window.location.pathname === pathname) {
+        e.preventDefault();
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+  };
+
   return (
     <div className="bg-gradient-to-r from-neutral-50 to-neutral-100 border-t-2 border-neutral-200 py-8 px-4 animate-fade-in">
       <div className="max-w-5xl mx-auto">
@@ -83,6 +98,7 @@ export default function RecommendedReadingCarousel({ pageId }) {
           {/* Card Principal */}
           <Link
             to={currentRecommendation.path}
+            onClick={(e) => handleLinkClick(e, currentRecommendation.path)}
             className="flex-1 bg-white border-2 border-neutral-200 rounded-lg p-6 hover:border-primary-400 hover:shadow-lg transition-all duration-300 group"
           >
             <div className="flex items-center gap-6">
@@ -100,7 +116,7 @@ export default function RecommendedReadingCarousel({ pageId }) {
 
               {/* Conteúdo */}
               <div className="flex-1 min-w-0">
-                <h4 className="text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary-700 transition-colors">
+                <h4 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary-700 transition-colors line-clamp-2">
                   {currentRecommendation.title}
                 </h4>
                 <p className="text-sm text-neutral-600 mb-3 line-clamp-2">

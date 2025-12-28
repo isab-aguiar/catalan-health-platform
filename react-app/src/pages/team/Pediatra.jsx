@@ -508,6 +508,20 @@ export default function Pediatra() {
             O acompanhamento regular da criança é fundamental para garantir seu desenvolvimento saudável. Mantenha o calendário de consultas em dia!
           </p>
 
+          <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-3 mb-4 text-sm">
+            <p className="font-semibold text-neutral-800 mb-2">Legenda:</p>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-white border border-neutral-300 rounded"></div>
+                <span className="text-neutral-700">Consulta com Pediatra</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 bg-pink-50 border border-pink-200 rounded"></div>
+                <span className="text-neutral-700">Consulta com Enfermeira</span>
+              </div>
+            </div>
+          </div>
+
           {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto mb-4">
             <table className="w-full border-collapse border border-neutral-300">
@@ -538,19 +552,19 @@ export default function Pediatra() {
                     1 mês de vida
                   </td>
                 </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
+                <tr className="bg-pink-50">
+                  <td className="border border-pink-200 px-4 py-3">
                     <strong className="text-neutral-800">2 meses</strong>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                  <td className="border border-pink-200 px-4 py-3 text-neutral-700">
                     2 meses de vida
                   </td>
                 </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
+                <tr className="bg-pink-50">
+                  <td className="border border-pink-200 px-4 py-3">
                     <strong className="text-neutral-800">4 meses</strong>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                  <td className="border border-pink-200 px-4 py-3 text-neutral-700">
                     4 meses de vida
                   </td>
                 </tr>
@@ -562,11 +576,11 @@ export default function Pediatra() {
                     6 meses de vida
                   </td>
                 </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
+                <tr className="bg-pink-50">
+                  <td className="border border-pink-200 px-4 py-3">
                     <strong className="text-neutral-800">9 meses</strong>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                  <td className="border border-pink-200 px-4 py-3 text-neutral-700">
                     9 meses de vida
                   </td>
                 </tr>
@@ -578,11 +592,11 @@ export default function Pediatra() {
                     12 meses de vida
                   </td>
                 </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
+                <tr className="bg-pink-50">
+                  <td className="border border-pink-200 px-4 py-3">
                     <strong className="text-neutral-800">18 meses</strong>
                   </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                  <td className="border border-pink-200 px-4 py-3 text-neutral-700">
                     18 meses de vida
                   </td>
                 </tr>
@@ -616,11 +630,11 @@ export default function Pediatra() {
               <p className="text-sm font-semibold text-neutral-800 mb-2">1 mês</p>
               <p className="text-xs text-neutral-600">1 mês de vida</p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
               <p className="text-sm font-semibold text-neutral-800 mb-2">2 meses</p>
               <p className="text-xs text-neutral-600">2 meses de vida</p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
               <p className="text-sm font-semibold text-neutral-800 mb-2">4 meses</p>
               <p className="text-xs text-neutral-600">4 meses de vida</p>
             </div>
@@ -628,7 +642,7 @@ export default function Pediatra() {
               <p className="text-sm font-semibold text-neutral-800 mb-2">6 meses</p>
               <p className="text-xs text-neutral-600">6 meses de vida</p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
               <p className="text-sm font-semibold text-neutral-800 mb-2">9 meses</p>
               <p className="text-xs text-neutral-600">9 meses de vida</p>
             </div>
@@ -636,7 +650,7 @@ export default function Pediatra() {
               <p className="text-sm font-semibold text-neutral-800 mb-2">12 meses</p>
               <p className="text-xs text-neutral-600">12 meses de vida</p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
               <p className="text-sm font-semibold text-neutral-800 mb-2">18 meses</p>
               <p className="text-xs text-neutral-600">18 meses de vida</p>
             </div>

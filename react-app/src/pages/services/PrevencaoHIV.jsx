@@ -28,42 +28,58 @@ const PrevencaoHIV = () => {
 
       {/* PEP - Urgência */}
       <div className="mb-8">
-        <div className="bg-red-50 border-l-4 border-red-600 rounded-r-lg p-5 mb-4">
-          <div className="flex items-center gap-2 mb-3">
-            <AlertCircle size={24} className="text-red-600 flex-shrink-0" />
+        <div className="bg-gradient-to-br from-red-50 to-rose-50 border border-red-200 rounded-lg p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <AlertCircle size={28} className="text-red-600 flex-shrink-0" />
             <h2 className="text-xl font-bold text-red-900">
-              PEP – Profilaxia Pós-Exposição (Urgência)
+              PEP<br/>
+              <span className="text-sm font-normal text-red-700">Profilaxia Pós-Exposição (Urgência)</span>
             </h2>
           </div>
 
           <div className="space-y-4">
-            <div>
-              <h3 className="font-semibold text-red-900 mb-2">O que é?</h3>
-              <p className="text-neutral-700 leading-relaxed">
+            <div className="bg-white/60 rounded-lg p-4">
+              <h3 className="font-semibold text-red-900 mb-2 flex items-center gap-2">
+                <CheckCircle size={18} className="text-red-600" />
+                O que é?
+              </h3>
+              <p className="text-neutral-700 text-sm leading-relaxed mb-3">
                 Uso de medicamentos por <strong>28 dias</strong> para evitar a infecção após uma situação de risco, como:
               </p>
-              <ul className="list-disc list-inside mt-2 space-y-1 text-neutral-700 ml-4">
-                <li>Relação sexual sem preservativo</li>
-                <li>Falha ou rompimento do preservativo</li>
-                <li>Violência sexual</li>
-                <li>Acidente com material biológico</li>
+              <ul className="space-y-2 ml-2">
+                <li className="flex items-start gap-2 text-sm text-neutral-700">
+                  <span className="text-red-600 mt-0.5">•</span>
+                  <span>Relação sexual sem preservativo</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-neutral-700">
+                  <span className="text-red-600 mt-0.5">•</span>
+                  <span>Falha ou rompimento do preservativo</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-neutral-700">
+                  <span className="text-red-600 mt-0.5">•</span>
+                  <span>Violência sexual</span>
+                </li>
+                <li className="flex items-start gap-2 text-sm text-neutral-700">
+                  <span className="text-red-600 mt-0.5">•</span>
+                  <span>Acidente com material biológico</span>
+                </li>
               </ul>
             </div>
 
-            <div className="bg-red-100 border border-red-300 rounded-lg p-4">
-              <div className="flex items-start gap-2">
+            <div className="bg-white/60 rounded-lg p-4">
+              <div className="flex items-start gap-2 mb-3">
                 <Clock size={20} className="text-red-700 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h3 className="font-semibold text-red-900 mb-1">Prazo Crítico</h3>
-                  <p className="text-neutral-800 leading-relaxed">
-                    A PEP deve ser iniciada <strong className="text-red-700">o mais rápido possível</strong>,
-                    preferencialmente nas <strong>primeiras 2 horas</strong> e, no máximo,
-                    até <strong>72 horas (3 dias)</strong> após a exposição.
-                  </p>
-                  <p className="text-red-700 font-semibold mt-2 text-sm">
-                    ⚠️ Quanto mais rápido iniciar, maior a eficácia!
-                  </p>
-                </div>
+                <h3 className="font-semibold text-red-900">Prazo Crítico</h3>
+              </div>
+              <p className="text-neutral-700 text-sm leading-relaxed mb-3">
+                A PEP deve ser iniciada <strong className="text-red-700">o mais rápido possível</strong>,
+                preferencialmente nas <strong>primeiras 2 horas</strong> e, no máximo,
+                até <strong>72 horas (3 dias)</strong> após a exposição.
+              </p>
+              <div className="bg-red-100 border-l-4 border-red-500 rounded-r-md p-3">
+                <p className="text-red-700 font-semibold text-sm">
+                  ⚠️ Quanto mais rápido iniciar, maior a eficácia!
+                </p>
               </div>
             </div>
           </div>
@@ -72,41 +88,48 @@ const PrevencaoHIV = () => {
 
       {/* PrEP - Rotina */}
       <div className="mb-8">
-        <div className="bg-purple-50 border-l-4 border-purple-600 rounded-r-lg p-5 mb-4">
-          <div className="flex items-center gap-2 mb-3">
-            <Calendar size={24} className="text-purple-600 flex-shrink-0" />
+        <div className="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-lg p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <Calendar size={28} className="text-purple-600 flex-shrink-0" />
             <h2 className="text-xl font-bold text-purple-900">
-              PrEP – Profilaxia Pré-Exposição (Rotina)
+              PrEP<br/>
+              <span className="text-sm font-normal text-purple-700">Profilaxia Pré-Exposição (Rotina)</span>
             </h2>
           </div>
 
           <div className="space-y-4">
-            <div>
-              <h3 className="font-semibold text-purple-900 mb-2">O que é?</h3>
-              <p className="text-neutral-700 leading-relaxed">
+            <div className="bg-white/60 rounded-lg p-4">
+              <h3 className="font-semibold text-purple-900 mb-2 flex items-center gap-2">
+                <CheckCircle size={18} className="text-purple-600" />
+                O que é?
+              </h3>
+              <p className="text-neutral-700 text-sm leading-relaxed">
                 Uso <strong>programado e contínuo</strong> de medicamentos preventivos por pessoas que não vivem com HIV,
                 mas estão em contextos de maior vulnerabilidade ou risco frequente de exposição.
               </p>
             </div>
 
-            <div>
-              <h3 className="font-semibold text-purple-900 mb-2">Como funciona?</h3>
-              <div className="grid gap-3">
+            <div className="bg-white/60 rounded-lg p-4">
+              <h3 className="font-semibold text-purple-900 mb-3 flex items-center gap-2">
+                <CheckCircle size={18} className="text-purple-600" />
+                Como funciona?
+              </h3>
+              <div className="space-y-3">
                 <div className="flex items-start gap-2">
-                  <CheckCircle size={18} className="text-purple-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-neutral-700">Requer cadastro e acompanhamento médico regular</p>
+                  <CheckCircle size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                  <p className="text-neutral-700 text-sm">Requer cadastro e acompanhamento médico regular</p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle size={18} className="text-purple-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-neutral-700">Testagens periódicas de HIV e outras ISTs</p>
+                  <CheckCircle size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                  <p className="text-neutral-700 text-sm">Testagens periódicas de HIV e outras ISTs</p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle size={18} className="text-purple-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-neutral-700">Acompanhamento de saúde integral e preventivo</p>
+                  <CheckCircle size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                  <p className="text-neutral-700 text-sm">Acompanhamento de saúde integral e preventivo</p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle size={18} className="text-purple-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-neutral-700">Uso diário da medicação conforme orientação médica</p>
+                  <CheckCircle size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                  <p className="text-neutral-700 text-sm">Uso diário da medicação conforme orientação médica</p>
                 </div>
               </div>
             </div>

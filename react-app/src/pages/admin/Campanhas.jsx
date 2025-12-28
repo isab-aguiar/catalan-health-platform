@@ -75,6 +75,25 @@ export default function Campanhas() {
   const [creatingCampanha, setCreatingCampanha] = useState(false);
   const [createImageFiles, setCreateImageFiles] = useState([]);
   const [createImagePreviews, setCreateImagePreviews] = useState([]);
+  // Bloquear scroll quando modal de criação estiver aberto
+  useEffect(() => {
+    if (showCreateModal) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [showCreateModal]);
+
   useEffect(() => {
     // Aguarda autenticação estar pronta antes de carregar
     if (currentUser) {
@@ -1222,7 +1241,7 @@ export default function Campanhas() {
       {/* Modal de Criação Manual */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-          <div className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-xl shadow-2xl max-w-full sm:max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
               <h2 className="text-xl font-bold text-neutral-900">
                 Criar Nova Campanha Manualmente

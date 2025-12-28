@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import AdminLayout from "../../layouts/AdminLayout";
 import {
   ChevronDown,
@@ -12,6 +13,7 @@ import {
   Search,
   CheckCircle,
   Users,
+  ArrowLeft,
 } from "lucide-react";
 import { procedimentosMedicos, informacoesAdicionais } from "../../data/procedimentosMedicos";
 
@@ -76,6 +78,7 @@ function Badge({ type, children }) {
 }
 
 export default function OrientacoesPosConsulta() {
+  const navigate = useNavigate();
   const [procedimentoSelecionado, setProcedimentoSelecionado] = useState("");
   const [menuAberto, setMenuAberto] = useState(false);
   const [termoBusca, setTermoBusca] = useState("");
@@ -175,9 +178,21 @@ export default function OrientacoesPosConsulta() {
       <div className="max-w-5xl mx-auto space-y-6">
         {/* Header */}
         <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6">
-          <h1 className="text-2xl font-bold text-neutral-900 mb-2">
-            Orientações Pós-Consulta
-          </h1>
+          <div className="flex items-center gap-4 mb-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition-colors"
+              aria-label="Voltar"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span className="hidden sm:inline">Voltar</span>
+            </button>
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-neutral-900">
+                Orientações Pós-Consulta
+              </h1>
+            </div>
+          </div>
           <p className="text-neutral-600 text-sm">
             Consulte as orientações, documentos necessários e informações importantes
             para cada procedimento médico oferecido pela unidade.
@@ -238,11 +253,11 @@ export default function OrientacoesPosConsulta() {
                               : "text-neutral-700 hover:bg-neutral-100"
                           }`}
                         >
-                          <div className="flex items-center justify-between gap-2">
-                            <span>
+                          <div className="flex items-center justify-between gap-2 flex-wrap">
+                            <span className="flex-1 min-w-0">
                               {highlightMatch(proc.nome, termoBusca)}
                             </span>
-                            <span className={`text-xs px-2 py-0.5 rounded ${
+                            <span className={`text-xs px-2 py-0.5 rounded whitespace-nowrap flex-shrink-0 ${
                               procedimentoSelecionado === proc.key
                                 ? "bg-white/20 text-white"
                                 : "bg-neutral-200 text-neutral-600"

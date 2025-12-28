@@ -127,6 +127,87 @@ service cloud.firestore {
     }
 
     // =====================================================
+    // COLEÇÃO: calendario_eventos
+    // =====================================================
+    match /calendario_eventos/{eventoId} {
+      // Staff pode ler todos os eventos
+      allow read: if isStaff();
+
+      // Staff (admin + profissional) pode criar eventos
+      allow create: if isStaff();
+
+      // Staff pode atualizar eventos
+      allow update: if isStaff();
+
+      // Admins podem deletar qualquer evento
+      // Profissionais podem deletar eventos que criaram
+      allow delete: if isAdmin() ||
+                       (isProfissional() && resource.data.criadoPor == request.auth.uid);
+    }
+
+    // =====================================================
+    // COLEÇÃO: escalas
+    // =====================================================
+    match /escalas/{escalaId} {
+      // Staff pode ler todas as escalas
+      allow read: if isStaff();
+
+      // Staff pode criar escalas
+      allow create: if isStaff();
+
+      // Staff pode atualizar escalas
+      allow update: if isStaff();
+
+      // Apenas admins podem deletar escalas
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
+    // COLEÇÃO: notificacoes
+    // =====================================================
+    match /notificacoes/{notificacaoId} {
+      // Usuários podem ler suas próprias notificações
+      // Admins podem ler todas
+      allow read: if isAuthenticated() &&
+                     (resource.data.userId == request.auth.uid || isAdmin());
+
+      // Admins podem criar notificações
+      allow create: if isAdmin();
+
+      // Usuários podem atualizar suas notificações (marcar como lida)
+      // Mas não podem alterar dados críticos
+      allow update: if isAuthenticated() &&
+                       resource.data.userId == request.auth.uid;
+
+      // Usuários podem deletar suas notificações
+      // Admins podem deletar qualquer notificação
+      allow delete: if isAuthenticated() &&
+                       (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
+    // =====================================================
+    // COLEÇÃO: feedbacks
+    // =====================================================
+    match /feedbacks/{feedbackId} {
+      // Qualquer pessoa pode criar feedbacks (elogios, sugestões, reclamações)
+      // Validação básica dos campos obrigatórios
+      allow create: if request.resource.data.tipo is string &&
+                       request.resource.data.mensagem is string &&
+                       request.resource.data.status == 'pendente' &&
+                       request.resource.data.createdAt is timestamp &&
+                       request.resource.data.updatedAt is timestamp;
+
+      // Apenas staff pode ler feedbacks
+      allow read: if isStaff();
+
+      // Apenas staff pode atualizar feedbacks (responder, mudar status)
+      allow update: if isStaff();
+
+      // Apenas admins podem deletar feedbacks
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
     // PADRÃO: NEGAR TUDO
     // =====================================================
     // Qualquer coleção não explicitamente permitida acima é bloqueada

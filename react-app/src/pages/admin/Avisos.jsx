@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAvisos } from "../../hooks/useAvisos";
 import { usePermissions } from "../../hooks/usePermissions";
 import AdminLayout from "../../layouts/AdminLayout";
@@ -29,6 +29,26 @@ export default function Avisos() {
   const [formError, setFormError] = useState("");
   const [formLoading, setFormLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(null);
+
+  // Bloquear scroll quando modal estiver aberto
+  useEffect(() => {
+    if (showModal) {
+      const scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+
+      return () => {
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [showModal]);
+
   // Abrir modal para criar novo aviso
   const handleNovoAviso = () => {
     setEditingAviso(null);
@@ -300,7 +320,7 @@ export default function Avisos() {
       {}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-md max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-neutral-300">
+          <div className="bg-white rounded-md max-w-full sm:max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-neutral-300">
             {}
             <div className="sticky top-0 bg-neutral-50 border-b border-neutral-300 px-6 py-4 flex items-center justify-between">
               <h3 className="text-xl font-bold text-neutral-900">

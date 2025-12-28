@@ -10,6 +10,8 @@ import {
   FileText,
   PillBottle,
   Shield,
+  Users,
+  HandHeart,
 } from "lucide-react";
 export const serviceIcons = {
   Calendar,
@@ -23,6 +25,8 @@ export const serviceIcons = {
   FileText,
   PillBottle,
   Shield,
+  Users,
+  HandHeart,
 };
 export const allPages = [
   {
@@ -188,11 +192,52 @@ export const allPages = [
     hub: "Serviços",
     colorScheme: "primary",
   },
+  {
+    id: "consultas",
+    title: "Consultas e Atendimentos",
+    description: "Consultas médicas, psicológicas, odontológicas e especializadas",
+    keywords: [
+      "consulta",
+      "médico",
+      "pediatra",
+      "ginecologista",
+      "psicólogo",
+      "dentista",
+      "fisioterapeuta",
+      "atendimento",
+    ],
+    icon: Users,
+    path: "/servicos/consultas",
+    category: "services",
+    hub: "Serviços",
+    colorScheme: "secondary",
+  },
+  {
+    id: "bolsa-familia",
+    title: "Bolsa Família e Serviço Social",
+    description: "Orientações sobre benefícios sociais, CadÚnico e programas de assistência",
+    keywords: [
+      "bolsa família",
+      "cadastro único",
+      "cadunico",
+      "bpc",
+      "benefício",
+      "social",
+      "assistente social",
+      "serviço social",
+      "vulnerabilidade",
+    ],
+    icon: HandHeart,
+    path: "/servicos/bolsa-familia",
+    category: "services",
+    hub: "Serviços",
+    colorScheme: "accent",
+  },
 ];
 export const serviceCategories = [
   {
     name: "Atendimento",
-    services: ["sala-4", "sala-9", "triagem", "recepcao"],
+    services: ["sala-4", "sala-9", "triagem", "recepcao", "consultas"],
   },
   {
     name: "Procedimentos",
@@ -205,5 +250,9 @@ export const serviceCategories = [
   {
     name: "Prevenção",
     services: ["prevencao-hiv"],
+  },
+  {
+    name: "Assistência Social",
+    services: ["bolsa-familia"],
   },
 ];

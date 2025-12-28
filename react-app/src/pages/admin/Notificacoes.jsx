@@ -146,31 +146,33 @@ export default function Notificacoes() {
               </p>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={carregarNotificacoes}
-                className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors flex items-center gap-2"
+                className="px-3 sm:px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors flex items-center gap-2 text-sm"
               >
                 <RefreshCw className="w-4 h-4" />
-                Atualizar
+                <span className="hidden sm:inline">Atualizar</span>
               </button>
 
               {naoLidas > 0 && (
                 <button
                   onClick={handleMarcarTodasComoLidas}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+                  className="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 text-sm whitespace-nowrap"
                 >
                   <Check className="w-4 h-4" />
-                  Marcar todas como lidas
+                  <span className="hidden sm:inline">Marcar todas</span>
+                  <span className="sm:hidden">Marcar</span>
                 </button>
               )}
 
               <button
                 onClick={handleLimparLidas}
-                className="px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors flex items-center gap-2"
+                className="px-3 sm:px-4 py-2 border border-red-300 text-red-600 rounded-lg hover:bg-red-50 transition-colors flex items-center gap-2 text-sm whitespace-nowrap"
               >
                 <Trash2 className="w-4 h-4" />
-                Limpar lidas
+                <span className="hidden sm:inline">Limpar lidas</span>
+                <span className="sm:hidden">Limpar</span>
               </button>
             </div>
           </div>
@@ -248,14 +250,14 @@ export default function Notificacoes() {
                         </div>
 
                         {/* Ações */}
-                        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex-shrink-0">
                           {!notif.lida && (
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
                                 handleMarcarComoLida(notif.id);
                               }}
-                              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                              className="p-2 text-blue-600 hover:bg-blue-50 active:bg-blue-100 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                               title="Marcar como lida"
                             >
                               <Check className="w-4 h-4" />
@@ -267,7 +269,7 @@ export default function Notificacoes() {
                               e.stopPropagation();
                               handleDeletarNotificacao(notif.id);
                             }}
-                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            className="p-2 text-red-600 hover:bg-red-50 active:bg-red-100 rounded-lg transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                             title="Deletar"
                           >
                             <Trash2 className="w-4 h-4" />

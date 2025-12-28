@@ -7,6 +7,8 @@ import CampanhaCarousel from "../components/campanha/CampanhaCarousel";
 import CampanhaInfoCard from "../components/campaign/CampanhaInfoCard";
 import { useCampanhas } from "../hooks/useCampanhas";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import { useAuth } from "../contexts/AuthContext";
+import { usePermissions } from "../hooks/usePermissions";
 import {
   Phone,
   MapPin,
@@ -28,6 +30,17 @@ import {
   Syringe,
   Facebook,
   Youtube,
+  Calendar,
+  PillBottle,
+  HandHeart,
+  MessageSquareHeart,
+  LayoutDashboard,
+  Bell,
+  Megaphone,
+  Package,
+  ClipboardList,
+  CalendarDays,
+  BellDot,
 } from "lucide-react";
 import logoPrefeitura from "../assets/logo_mobile.png";
 import logoSemusa from "../assets/logo-semusa.png";
@@ -103,6 +116,9 @@ export default function Home() {
   const { campanhas, loading: loadingCampanhas } = useCampanhas();
   const [galleryImages, setGalleryImages] = useState([]);
   const [loadingImages, setLoadingImages] = useState(true);
+  const { currentUser, isActive } = useAuth();
+  const permissions = usePermissions();
+  const isAuthenticated = currentUser && isActive;
   useEffect(() => {
     const loadImages = async () => {
       try {
@@ -116,7 +132,7 @@ export default function Home() {
           caption: getCaptionFromFilename(
             Object.keys(galleryImagesModules)[index]
           ),
-          credit: "Fonte: ESF Catalão - Arquivo próprio",
+          credit: "Créditos: ESF Catalão - Arquivo próprio",
         }));
         const fotoUnidade = imageEntries.find((img) =>
           img.src.includes("foto-unidade")
@@ -499,151 +515,256 @@ export default function Home() {
             Navegue pelos diferentes serviços e profissionais disponíveis na
             unidade
           </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             <Link
               to="/servicos"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                <Hospital size={48} strokeWidth={2} />
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <Hospital className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-neutral-900">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
                 Serviços
               </h3>
-              <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
                 Todos os serviços e atendimentos disponíveis
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
                 />
               </div>
             </Link>
             <Link
               to="/grupos"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                <Users size={48} strokeWidth={2} />
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <Users className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-neutral-900">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
                 Atividades Coletivas
               </h3>
-              <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
                 Grupos de atividades coletivas e promoção de saúde
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
                 />
               </div>
             </Link>
             <Link
               to="/equipe"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                <BriefcaseMedical size={48} strokeWidth={2} />
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <BriefcaseMedical className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-neutral-900 whitespace-nowrap">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900 whitespace-nowrap">
                 E-multi
               </h3>
-              <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
                 Equipe Multiprofissional de Saúde
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
                 />
               </div>
             </Link>
             <Link
               to="/servicos/vacinas"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                <Syringe size={48} strokeWidth={2} />
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <Syringe className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-neutral-900">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
                 Sala de Vacinação
               </h3>
-              <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
                 Calendário Nacional de Vacinação e horários de atendimento
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
                 />
               </div>
             </Link>
             <Link
               to="/educacao"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                <BookOpen size={48} strokeWidth={2} />
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <BookOpen className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-neutral-900">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
                 Educação em Saúde
               </h3>
-              <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
                 Informações e orientações sobre saúde e prevenção
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
                 />
               </div>
             </Link>
             <Link
               to="/remsa"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                <GraduationCap size={48} strokeWidth={2} />
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <GraduationCap className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-neutral-900">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
                 REMSA
               </h3>
-              <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
                 Programa de Residência Multiprofissional em Saúde do Adolescente
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
+                />
+              </div>
+            </Link>
+            <Link
+              to="/servicos/sala-4"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+            >
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <Calendar className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
+              </div>
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
+                Sala de Agendamento
+              </h3>
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
+                Agende consultas, exames e procedimentos
+              </p>
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+                <span>Consultar</span>
+                <ArrowRight
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
+                />
+              </div>
+            </Link>
+            <Link
+              to="/servicos/consultas"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+            >
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <Users className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
+              </div>
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
+                Consultas Médicas
+              </h3>
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
+                Consultas médicas, psicológicas e especializadas
+              </p>
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+                <span>Consultar</span>
+                <ArrowRight
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
+                />
+              </div>
+            </Link>
+            <Link
+              to="/servicos/farmacia"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+            >
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <PillBottle className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
+              </div>
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
+                Farmácia
+              </h3>
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
+                Retirada de medicamentos e renovação de receitas
+              </p>
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+                <span>Consultar</span>
+                <ArrowRight
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
+                />
+              </div>
+            </Link>
+            <Link
+              to="/ouvidoria"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+            >
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <MessageSquareHeart className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
+              </div>
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
+                Ouvidoria
+              </h3>
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
+                Envie elogios, sugestões ou reclamações. Sua opinião é importante!
+              </p>
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+                <span>Enviar Feedback</span>
+                <ArrowRight
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
+                />
+              </div>
+            </Link>
+            <Link
+              to="/servicos/bolsa-familia"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+            >
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <HandHeart className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
+              </div>
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
+                Bolsa Família e Serviço Social
+              </h3>
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
+                Benefícios sociais, CadÚnico e assistência
+              </p>
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+                <span>Consultar</span>
+                <ArrowRight
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
                 />
               </div>
             </Link>
             <Link
               to="/acs"
-              className="relative overflow-hidden rounded-2xl p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
+              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
             >
-              <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                <HeartHandshake size={48} strokeWidth={2} />
+              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
+                <HeartHandshake className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-neutral-900">
+              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
                 Agente Comunitário de Saúde
               </h3>
-              <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
+              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
                 Encontre o ACS responsável pela sua área
               </p>
-              <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
+              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
                 <ArrowRight
-                  size={18}
-                  className="group-hover:translate-x-1 transition-transform"
+                  size={16}
+                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
                 />
               </div>
             </Link>
@@ -665,7 +786,7 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* ESF Catalão */}
             <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-primary-200 hover:shadow-xl transition-all">
-              <div className="flex justify-center items-center mb-6 md:h-28 md:overflow-hidden">
+              <div className="flex justify-center items-center mb-6">
                 <img
                   src={logoESF}
                   alt="ESF Catalão - Estratégia Saúde da Família"

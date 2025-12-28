@@ -191,7 +191,8 @@ export default function Hiperdia() {
         </InfoBox>
         {}
         <InfoBox title="Dias e Horários" variant="highlight">
-          <div className="overflow-x-auto">
+          {/* Versão Desktop */}
+          <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
                 <tr className="bg-neutral-100">
@@ -221,6 +222,27 @@ export default function Hiperdia() {
               </tbody>
             </table>
           </div>
+
+          {/* Versão Mobile */}
+          <div className="md:hidden space-y-3">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+              <div className="space-y-2">
+                <div>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">Dia da Semana</span>
+                  <p className="text-sm font-semibold text-neutral-900">Quartas-feiras</p>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
+                  <p className="text-sm text-neutral-900">07h30</p>
+                </div>
+                <div>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
+                  <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <p className="text-xs text-neutral-500 mt-3">
             * Confirme os dias e horários na recepção, pois podem sofrer
             alterações conforme a programação da unidade.

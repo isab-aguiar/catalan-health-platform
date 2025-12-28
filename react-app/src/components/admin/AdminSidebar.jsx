@@ -13,6 +13,10 @@ import {
   X,
   Package,
   ClipboardList,
+  Calendar,
+  CalendarDays,
+  BellDot,
+  MessageSquareHeart,
 } from "lucide-react";
 export default function AdminSidebar({
   currentPage,
@@ -71,6 +75,34 @@ export default function AdminSidebar({
       path: "/admin/orientacoes-pos-consulta",
       permission: null,
     },
+    {
+      id: "calendario",
+      label: "Calendário de Eventos",
+      icon: Calendar,
+      path: "/admin/calendario",
+      permission: null,
+    },
+    {
+      id: "escalas",
+      label: "Escalas de Trabalho",
+      icon: CalendarDays,
+      path: "/admin/escalas",
+      permission: null,
+    },
+    {
+      id: "notificacoes",
+      label: "Notificações",
+      icon: BellDot,
+      path: "/admin/notificacoes",
+      permission: null,
+    },
+    {
+      id: "feedbacks",
+      label: "Feedbacks e Ouvidoria",
+      icon: MessageSquareHeart,
+      path: "/admin/feedbacks",
+      permission: null,
+    },
   ];
   const visibleItems = menuItems.filter((item) => {
     if (!item.permission) return true;
@@ -87,7 +119,7 @@ export default function AdminSidebar({
         <div className="p-6 border-b border-neutral-300 bg-neutral-50 flex-shrink-0">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 bg-primary-700 rounded-md flex items-center justify-center shadow-sm">
+              <div className="w-11 h-11 bg-primary-700 flex items-center justify-center">
                 <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>

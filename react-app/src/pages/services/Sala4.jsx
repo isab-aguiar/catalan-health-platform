@@ -4,6 +4,7 @@ import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWra
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import DocumentacaoPorServico from "../../components/services/DocumentacaoPorServico";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
+import useScrollToHash from "../../hooks/useScrollToHash";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -73,6 +74,8 @@ function Alert({ type = "info", children }) {
   );
 }
 export default function Sala4() {
+  useScrollToHash();
+
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
@@ -115,7 +118,7 @@ export default function Sala4() {
             unidade e na rede de atenção à saúde.
           </p>
           <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+            <div id="puericultura" className="bg-neutral-50 border border-neutral-200 rounded p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Consultas
               </h3>

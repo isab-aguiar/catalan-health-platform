@@ -6,6 +6,7 @@ import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import testePezinhoImg from "../../assets/teste-pezinho/teste-do-pezinho.svg";
+import useScrollToHash from "../../hooks/useScrollToHash";
 function PageContainer({ children }) {
   return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
 }
@@ -61,6 +62,8 @@ function Alert({ type = "info", children }) {
   );
 }
 export default function Procedimentos() {
+  useScrollToHash();
+
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
@@ -226,7 +229,7 @@ export default function Procedimentos() {
 
           <div className="p-4 sm:p-6">
             {/* Imagem */}
-            <div className="mb-6 flex justify-center">
+            <div className="mb-6 flex justify-center px-4 md:px-8 lg:px-12">
               <ImageWithCredit
                 src={testePezinhoImg}
                 alt="Teste do Pezinho - Triagem Neonatal"
@@ -366,7 +369,7 @@ export default function Procedimentos() {
         </div>
 
         {/* Card Testes Rápidos */}
-        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+        <div id="testes-rapidos" className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-emerald-50 to-teal-50">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center flex-shrink-0">

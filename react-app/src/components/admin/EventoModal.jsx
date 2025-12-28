@@ -154,10 +154,10 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-white rounded-lg shadow-xl max-w-full sm:max-w-3xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="sticky top-0 bg-white p-6 border-b border-neutral-200 flex items-center justify-between z-10">
+        <div className="sticky top-0 bg-white px-4 sm:px-6 py-3 sm:py-4 border-b border-neutral-200 flex items-center justify-between z-10">
           <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
             <Calendar className="w-6 h-6 text-gov-blue" />
             {eventoEditando ? 'Editar Evento' : 'Novo Evento'}
@@ -171,7 +171,7 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6">
           {/* Tipo de Evento */}
           <div>
             <label className="block text-sm font-medium text-neutral-700 mb-2">
@@ -401,7 +401,7 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
         </form>
 
         {/* Footer */}
-        <div className="sticky bottom-0 bg-white p-6 border-t border-neutral-200 flex gap-3 justify-end">
+        <div className="sticky bottom-0 bg-white px-4 sm:px-6 py-3 sm:py-4 border-t border-neutral-200 flex gap-3 justify-end">
           <button
             type="button"
             onClick={handleClose}
