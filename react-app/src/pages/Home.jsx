@@ -26,7 +26,13 @@ import {
   Instagram,
   Droplet,
   Syringe,
+  Facebook,
+  Youtube,
 } from "lucide-react";
+import logoPrefeitura from "../assets/logo_mobile.png";
+import logoSemusa from "../assets/logo-semusa.png";
+import logoESF from "../assets/logo-esf.png";
+
 const galleryImagesModules = import.meta.glob(
   "../assets/images/galeria-photos/*.{png,jpg,jpeg}",
   { eager: false }
@@ -542,11 +548,11 @@ export default function Home() {
               <div className="mb-4 w-16 h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
                 <BriefcaseMedical size={48} strokeWidth={2} />
               </div>
-              <h3 className="text-2xl font-bold mb-2 text-neutral-900">
-                Equipe E-multi
+              <h3 className="text-2xl font-bold mb-2 text-neutral-900 whitespace-nowrap">
+                E-multi
               </h3>
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
-                Conheça nossa equipe multiprofissional
+                Equipe Multiprofissional de Saúde
               </p>
               <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
@@ -609,7 +615,7 @@ export default function Home() {
                 REMSA
               </h3>
               <p className="text-neutral-600 text-sm mb-4 leading-relaxed">
-                Residência Multiprofissional em Saúde
+                Programa de Residência Multiprofissional em Saúde do Adolescente
               </p>
               <div className="flex items-center gap-2 text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
@@ -640,6 +646,126 @@ export default function Home() {
                 />
               </div>
             </Link>
+          </div>
+        </div>
+      </section>
+      {/* Seção de Redes Sociais */}
+      <section className="py-12 px-4 bg-gradient-to-b from-white to-neutral-50">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-3">
+              Acompanhe Nossas Redes Sociais
+            </h2>
+            <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+              Fique por dentro das novidades, campanhas e informações importantes
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* ESF Catalão */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-primary-200 hover:shadow-xl transition-all">
+              <div className="flex justify-center items-center mb-6 md:h-28 md:overflow-hidden">
+                <img
+                  src={logoESF}
+                  alt="ESF Catalão - Estratégia Saúde da Família"
+                  className="w-full max-w-[280px] md:max-w-[500px] h-auto object-contain"
+                  style={{ filter: 'brightness(1.1) contrast(1.1) saturate(1.2)' }}
+                />
+              </div>
+              <div className="border-t border-neutral-200 pt-6">
+                <p className="text-center text-sm font-medium text-neutral-600 mb-4 uppercase tracking-wide">
+                  ESF Catalão
+                </p>
+                <div className="flex justify-center">
+                  <a
+                    href="https://instagram.com/esfcatalao"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    aria-label="Instagram ESF Catalão"
+                  >
+                    <Instagram size={20} />
+                    <span>Instagram</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Prefeitura de Divinópolis */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-neutral-200 hover:shadow-xl transition-all">
+              <div className="flex justify-center items-center mb-6 h-28">
+                <img
+                  src={logoPrefeitura}
+                  alt="Prefeitura de Divinópolis"
+                  className="h-20 w-auto object-contain"
+                />
+              </div>
+              <div className="border-t border-neutral-200 pt-6">
+                <p className="text-center text-sm font-medium text-neutral-600 mb-4 uppercase tracking-wide">
+                  Prefeitura de Divinópolis
+                </p>
+                <div className="flex flex-col gap-3">
+                  <a
+                    href="https://www.instagram.com/prefeituradivinopolis/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    aria-label="Instagram Prefeitura de Divinópolis"
+                  >
+                    <Instagram size={20} />
+                    <span>Instagram</span>
+                  </a>
+                  <a
+                    href="https://www.facebook.com/prefeituradedivinopolis/?locale=pt_BR"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    aria-label="Facebook Prefeitura de Divinópolis"
+                  >
+                    <Facebook size={20} />
+                    <span>Facebook</span>
+                  </a>
+                  <a
+                    href="https://www.youtube.com/channel/UCZBIy0f8g0QuAUBLngFnNdQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-red-600 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    aria-label="YouTube Prefeitura de Divinópolis"
+                  >
+                    <Youtube size={20} />
+                    <span>YouTube</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* SEMUSA */}
+            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-neutral-200 hover:shadow-xl transition-all">
+              <div className="flex justify-center items-center mb-6 h-28">
+                <img
+                  src={logoSemusa}
+                  alt="SEMUSA - Secretaria Municipal de Saúde"
+                  className="h-28 w-auto object-contain"
+                />
+              </div>
+              <div className="border-t border-neutral-200 pt-6">
+                <p className="text-center text-sm font-medium text-neutral-600 mb-4 uppercase tracking-wide">
+                  SEMUSA Divinópolis
+                </p>
+                <div className="flex justify-center">
+                  <a
+                    href="https://www.instagram.com/semusadivinopolis/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+                    aria-label="Instagram SEMUSA Divinópolis"
+                  >
+                    <Instagram size={20} />
+                    <span>Instagram</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

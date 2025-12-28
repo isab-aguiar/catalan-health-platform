@@ -12,17 +12,17 @@ export default function REMSA() {
         <BackButton />
 
         <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <h1 className="text-2xl font-semibold text-neutral-900 mb-2 pb-3 border-b border-neutral-200">
+          <h1 className="text-2xl font-semibold text-neutral-900 mb-2 pb-3 border-b border-neutral-200 whitespace-nowrap">
             REMSA
           </h1>
           <p className="text-base text-neutral-600 mt-3">
-            Residência Multiprofissional em Saúde
+            Programa de Residência Multiprofissional em Saúde do Adolescente
           </p>
         </div>
 
         <InfoBox title="Sobre o Programa" className="mb-6">
           <p className="text-neutral-700 leading-relaxed mb-4">
-            A <strong>Residência Multiprofissional em Saúde (REMSA)</strong> é um programa de
+            O <strong>Programa de Residência Multiprofissional em Saúde do Adolescente (REMSA)</strong> é um programa de
             pós-graduação que capacita profissionais de diversas áreas da saúde para atuar de
             forma integrada no Sistema Único de Saúde (SUS).
           </p>

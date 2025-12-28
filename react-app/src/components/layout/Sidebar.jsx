@@ -34,7 +34,7 @@ export default function Sidebar({ isOpen, onClose }) {
     { name: 'Serviços', path: '/servicos' },
     { name: 'Sala de Vacinação', path: '/servicos/vacinas' },
     { name: 'Grupos', path: '/grupos' },
-    { name: 'Equipe', path: '/equipe' },
+    { name: 'E-multi', path: '/equipe' },
     { name: 'Remsa', path: '/remsa' },
     { name: 'ACS', path: '/acs' },
     { name: 'Educação', path: '/educacao' },

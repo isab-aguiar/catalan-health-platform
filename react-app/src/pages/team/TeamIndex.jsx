@@ -8,11 +8,11 @@ export default function TeamIndex() {
       <div className="max-w-6xl mx-auto space-y-8">
         <BackButton />
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
-            Equipe Multiprofissional
+          <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4 pb-4 border-b border-neutral-200 whitespace-nowrap">
+            E-multi
           </h1>
           <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-            Conheça nossa equipe multiprofissional dedicada ao seu cuidado
+            Equipe Multiprofissional de Saúde
           </p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

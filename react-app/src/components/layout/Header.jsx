@@ -78,7 +78,7 @@ export default function Header() {
     { name: 'Serviços', path: '/servicos', handleClick: handleNavClick },
     { name: 'Sala de Vacinação', path: '/servicos/vacinas', handleClick: handleNavClick },
     { name: 'Grupos', path: '/grupos', handleClick: handleNavClick },
-    { name: 'Equipe', path: '/equipe', handleClick: handleNavClick },
+    { name: 'E-multi', path: '/equipe', handleClick: handleNavClick },
     { name: 'Equipe Remsa', path: '/remsa', handleClick: handleNavClick },
     { name: 'ACS', path: '/acs', handleClick: handleNavClick },
     { name: 'Educação', path: '/educacao', handleClick: handleNavClick },
