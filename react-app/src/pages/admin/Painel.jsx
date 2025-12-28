@@ -233,6 +233,40 @@ export default function Painel() {
               </Link>
             )}
             <Link
+              to="/admin/calendario"
+              className="flex items-center gap-4 p-4 border-2 border-purple-200 rounded-md hover:border-purple-400 hover:bg-purple-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-purple-100 rounded-md flex items-center justify-center group-hover:bg-purple-600 transition-colors border border-purple-200">
+                <Calendar className="w-6 h-6 text-purple-700 group-hover:text-white transition-colors" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-neutral-900 text-base">
+                  Calendário
+                </h3>
+                <p className="text-sm text-neutral-600">
+                  Gerenciar almoços, reuniões e lembretes
+                </p>
+              </div>
+              <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
+            </Link>
+            <Link
+              to="/admin/escalas"
+              className="flex items-center gap-4 p-4 border-2 border-teal-200 rounded-md hover:border-teal-400 hover:bg-teal-50 transition-all group"
+            >
+              <div className="w-12 h-12 bg-teal-100 rounded-md flex items-center justify-center group-hover:bg-teal-600 transition-colors border border-teal-200">
+                <Users className="w-6 h-6 text-teal-700 group-hover:text-white transition-colors" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-neutral-900 text-base">
+                  Escalas de Trabalho
+                </h3>
+                <p className="text-sm text-neutral-600">
+                  Visualizar e montar escalas mensais
+                </p>
+              </div>
+              <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
+            </Link>
+            <Link
               to="/admin/estoque-vacinas"
               className="flex items-center gap-4 p-4 border-2 border-neutral-300 rounded-md hover:border-neutral-500 hover:bg-neutral-50 transition-all group"
             >
