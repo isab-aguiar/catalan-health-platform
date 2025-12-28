@@ -149,24 +149,14 @@ export default function NotificationBell() {
       {isOpen && (
         <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-lg shadow-xl border border-neutral-200 z-50 max-h-[500px] flex flex-col">
           {/* Header do Dropdown */}
-          <div className="p-4 border-b border-neutral-200 flex items-center justify-between sticky top-0 bg-white rounded-t-lg">
-            <div>
-              <h3 className="font-semibold text-neutral-900">Notificações</h3>
-              {naoLidas > 0 && (
-                <p className="text-xs text-neutral-500">{naoLidas} não lida(s)</p>
-              )}
-            </div>
-            <div className="flex gap-2">
-              {naoLidas > 0 && (
-                <button
-                  onClick={handleMarcarTodasComoLidas}
-                  disabled={loading}
-                  className="text-xs text-blue-600 hover:text-blue-700 font-medium disabled:opacity-50"
-                  title="Marcar todas como lidas"
-                >
-                  <Check className="w-4 h-4" />
-                </button>
-              )}
+          <div className="p-4 border-b border-neutral-200 sticky top-0 bg-white rounded-t-lg">
+            <div className="flex items-center justify-between mb-3">
+              <div>
+                <h3 className="font-semibold text-neutral-900">Notificações</h3>
+                {naoLidas > 0 && (
+                  <p className="text-xs text-neutral-500">{naoLidas} não lida(s)</p>
+                )}
+              </div>
               <button
                 onClick={() => {
                   setIsOpen(false);
@@ -178,6 +168,30 @@ export default function NotificationBell() {
                 <ExternalLink className="w-4 h-4" />
               </button>
             </div>
+
+            {/* Botões de Ação */}
+            {naoLidas > 0 && (
+              <div className="flex gap-2">
+                <button
+                  onClick={handleMarcarTodasComoLidas}
+                  disabled={loading}
+                  className="flex-1 px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg font-medium text-xs disabled:opacity-50 transition-colors flex items-center justify-center gap-1.5"
+                  title="Marcar todas como lidas"
+                >
+                  <Check className="w-3.5 h-3.5" />
+                  Marcar como lidas
+                </button>
+                <button
+                  onClick={handleMarcarTodasComoLidas}
+                  disabled={loading}
+                  className="flex-1 px-3 py-1.5 bg-neutral-100 text-neutral-700 hover:bg-neutral-200 rounded-lg font-medium text-xs disabled:opacity-50 transition-colors flex items-center justify-center gap-1.5"
+                  title="Limpar notificações do dropdown"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                  Limpar
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Lista de Notificações */}
