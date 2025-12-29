@@ -8,6 +8,7 @@ import useScrollToHash from "../../hooks/useScrollToHash";
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 export default function Sala4() {
   useScrollToHash();
 
@@ -239,6 +240,13 @@ export default function Sala4() {
             * Agendamentos de consultas e exames são realizados exclusivamente de forma presencial.
           </p>
         </InfoBox>
+
+        <EscalaProfissionais
+          titulo="Profissionais Escalados na Sala de Agendamentos"
+          department="tecnicoEnfermagem"
+          workStation="Sala de Agendamento"
+        />
+
         {}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div>
