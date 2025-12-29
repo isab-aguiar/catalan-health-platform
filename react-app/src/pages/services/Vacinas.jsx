@@ -10,6 +10,34 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import { contactInfo, openingHours } from "../../config";
+
+const horariosVacinas = [
+  {
+    periodo: "Manhã",
+    horario: openingHours.vaccines.morning.display,
+    profissional: "Thaciane Souza",
+    funcao: "Técnica de Enfermagem",
+    bgColor: "bg-white",
+    badgeColor: "bg-blue-100 text-blue-700"
+  },
+  {
+    periodo: "Tarde",
+    horario: openingHours.vaccines.afternoon.display,
+    profissional: "Tatiane Aparecida",
+    funcao: "Técnica de Enfermagem",
+    bgColor: "bg-white",
+    badgeColor: "bg-blue-100 text-blue-700"
+  },
+  {
+    periodo: "Saúde na Hora",
+    horario: openingHours.vaccines.saudeNaHora.display,
+    profissional: "Alessandra Silva",
+    funcao: "Técnica de Enfermagem",
+    bgColor: "bg-blue-50",
+    badgeColor: "bg-blue-600 text-white"
+  }
+];
+
 export default function Vacinas() {
   return (
     <PageContainer>
@@ -42,63 +70,49 @@ export default function Vacinas() {
         </div>
         {}
         <InfoBox title="Horários de Atendimento">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-slate-300">
-              <thead className="bg-slate-100">
-                <tr>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
-                    Profissional Responsável
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Manhã</strong>
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    {openingHours.vaccines.morning.display}
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Profissional Responsável:<br/>
-                    Thaciane Souza<br/>
-                    Função: Técnica de Enfermagem
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Tarde</strong>
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    {openingHours.vaccines.afternoon.display}
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Profissional Responsável:<br/>
-                    Tatiane Aparecida<br/>
-                    Função: Técnica de Enfermagem
-                  </td>
-                </tr>
-                <tr className="bg-blue-50">
-                  <td className="border border-slate-300 px-4 py-3">
-                    <strong className="text-slate-800">Saúde na Hora</strong>
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    {openingHours.vaccines.saudeNaHora.display}
-                  </td>
-                  <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    Profissional Responsável:<br/>
-                    Alessandra Silva<br/>
-                    Função: Técnica de Enfermagem
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="space-y-4 md:space-y-0 md:overflow-x-auto">
+            <div className="hidden md:grid md:grid-cols-3 gap-0 border border-slate-300 rounded-t-lg overflow-hidden bg-slate-100">
+              <div className="border-r border-slate-300 px-4 py-3 font-semibold text-slate-700 text-sm">
+                Período
+              </div>
+              <div className="border-r border-slate-300 px-4 py-3 font-semibold text-slate-700 text-sm">
+                Horário
+              </div>
+              <div className="px-4 py-3 font-semibold text-slate-700 text-sm">
+                Profissional Responsável
+              </div>
+            </div>
+            {horariosVacinas.map((item, index) => (
+              <div
+                key={index}
+                className={`${item.bgColor} border border-slate-300 rounded-lg md:rounded-none ${index === 0 ? 'md:border-t-0' : 'md:border-t-0'} ${index === horariosVacinas.length - 1 ? 'md:rounded-b-lg' : ''}`}
+              >
+                <div className="flex flex-col md:grid md:grid-cols-3 gap-0">
+                  <div className="px-4 py-3 border-b md:border-b-0 md:border-r border-slate-300">
+                    <span className={`md:hidden inline-block ${item.badgeColor} text-sm font-semibold px-3 py-1 rounded mb-3`}>
+                      {item.periodo}
+                    </span>
+                    <strong className="text-slate-800 hidden md:inline">{item.periodo}</strong>
+                  </div>
+                  <div className="px-4 py-3 border-b md:border-b-0 md:border-r border-slate-300 text-slate-700">
+                    <p className="text-xs text-neutral-500 mb-2 md:hidden">Horário</p>
+                    <span className="text-sm font-semibold md:font-normal text-neutral-800 md:text-slate-700">{item.horario}</span>
+                  </div>
+                  <div className="px-4 py-3 text-slate-700">
+                    <p className="text-xs text-neutral-500 mb-2 md:hidden"><strong>Profissional Responsável</strong></p>
+                    <div className="md:hidden space-y-1">
+                      <p className="text-sm text-neutral-700">{item.profissional}</p>
+                      <p className="text-sm text-neutral-700"><strong>Função:</strong> {item.funcao}</p>
+                    </div>
+                    <div className="hidden md:block">
+                      Profissional Responsável:<br/>
+                      {item.profissional}<br/>
+                      Função: {item.funcao}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
           <div className="mt-4">
             <Alert type="info">
