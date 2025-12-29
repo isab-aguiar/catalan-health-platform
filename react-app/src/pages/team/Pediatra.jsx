@@ -198,6 +198,9 @@ export default function Pediatra() {
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Horário
                   </th>
+                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
+                    Profissional Responsável
+                  </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
@@ -211,6 +214,9 @@ export default function Pediatra() {
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     07h00 às 13h00
                   </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Dr. Antônio Fernando Bolina
+                  </td>
                 </tr>
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
@@ -221,6 +227,9 @@ export default function Pediatra() {
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     07h00 às 13h00
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Dr. Antônio Fernando Bolina
                   </td>
                 </tr>
               </tbody>
