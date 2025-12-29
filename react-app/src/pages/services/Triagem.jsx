@@ -6,6 +6,7 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 export default function Triagem() {
   return (
     <PageContainer>
@@ -234,6 +235,14 @@ export default function Triagem() {
             </div>
           </div>
         </InfoBox>
+
+        {/* Escalas de Profissionais - Carregado do Firestore */}
+        <EscalaProfissionais
+          titulo="Profissionais Escalados na Triagem"
+          department="tecnicoEnfermagem"
+          workStation="Triagem"
+        />
+
         {}
         <InfoBox title="Para quem é indicado">
           <div className="space-y-3">

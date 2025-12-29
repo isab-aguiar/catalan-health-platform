@@ -8,6 +8,7 @@ Este diretório contém todos os dados de configuração centralizados do projet
 - `schedule.js` - Horários de funcionamento e atendimento
 - `socialMedia.js` - Links de redes sociais
 - `vlibras.js` - Configuração do widget VLibras (acessibilidade em Libras)
+- `employees.js` - Dados de todos os funcionários organizados por departamento
 - `index.js` - Barrel export para facilitar imports
 
 ## Como Atualizar os Dados
@@ -85,6 +86,85 @@ esfCatalao: {
 }
 ```
 
+### Funcionários (`employees.js`)
+
+Para atualizar informações de funcionários:
+
+1. Abra o arquivo `src/config/employees.js`
+2. Localize o departamento correspondente (ex: `medicoGeneralistaPsf`, `enfermeiro`, `dentista`)
+3. Encontre o funcionário pelo ID único
+4. Atualize os campos desejados:
+   - `fullName` - Nome completo do funcionário
+   - `displayName` - Nome para exibição nas páginas
+   - `role` - Cargo completo
+   - `esf` - Equipe ESF (`'sao-jose'`, `'catalao'`, `'bela-vista'`, ou `null` para serviços centrais)
+   - `schedule` - Horários de atendimento
+   - `active` - Status ativo/inativo
+   - `contact` - Informações de contato (telefone, email)
+5. Salve o arquivo
+
+**Exemplo - Atualizar horário de um médico:**
+```javascript
+{
+  id: 'medico-joao-sousa',
+  fullName: 'João Alves de Sousa Junior',
+  displayName: 'Dr. João',
+  role: 'Médico Generalista - P.S.F.',
+  esf: 'sao-jose',
+  schedule: {
+    morning: { start: '08h00', end: '12h00', display: '08h00 às 12h00', enabled: true },
+    afternoon: { start: '14h00', end: '18h00', display: '14h00 às 18h00', enabled: true }
+  },
+  active: true
+}
+```
+
+**Adicionar um novo funcionário:**
+
+1. Localize o departamento correto
+2. Adicione um novo objeto ao array `employees` do departamento
+3. Gere um ID único seguindo o padrão: `{dept-code}-{firstname}-{lastname}` (kebab-case, lowercase, sem acentos)
+4. Preencha todos os campos obrigatórios
+
+**Exemplo - Adicionar novo enfermeiro:**
+```javascript
+{
+  id: 'enfermeiro-maria-santos',
+  fullName: 'Maria Santos Silva',
+  displayName: 'Maria',
+  role: 'Enfermeiro - P.S.F.',
+  roleBase: 'Enfermeiro',
+  isPsf: true,
+  department: 'enfermeiro',
+  esf: 'sao-jose',
+  schedule: {
+    morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
+    afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+  },
+  contact: { phone: null, email: null },
+  firebaseUid: null,
+  active: true,
+  metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+}
+```
+
+**Desativar um funcionário:**
+
+Não remova funcionários do arquivo. Em vez disso, marque como inativo:
+
+```javascript
+{
+  id: 'medico-joao-sousa',
+  // ... outros campos
+  active: false, // Marca como inativo
+  metadata: {
+    createdAt: '2025-12-29',
+    updatedAt: '2025-12-29',
+    inactivatedAt: '2025-12-30' // Data de inativação
+  }
+}
+```
+
 ## Como Usar nos Componentes
 
 ### Importar os dados
@@ -146,6 +226,47 @@ import { contactInfo } from '../config';
 </a>
 ```
 
+### Usar dados de funcionários
+
+```javascript
+import { employees, getEmployeesByEsf, getEmployeeById, getDepartmentEmployees } from '../config';
+
+// Buscar funcionários de uma ESF específica
+const saoJoseEmployees = getEmployeesByEsf('sao-jose');
+
+// Buscar funcionário por ID
+const drJoao = getEmployeeById('medico-joao-sousa');
+console.log(drJoao.displayName); // "Dr. João"
+
+// Listar todos os médicos de um departamento
+const medicos = getDepartmentEmployees('medicoGeneralistaPsf');
+
+// Filtrar funcionários ativos de uma ESF
+const activeDoctors = getEmployeesByEsf('catalao').filter(emp => emp.active);
+
+// Exibir nome e horário
+{drJoao.displayName} - {drJoao.schedule.morning.display}
+
+// Renderizar lista de médicos em uma tabela
+{medicos.map(medico => (
+  <tr key={medico.id}>
+    <td>{medico.displayName}</td>
+    <td>ESF {medico.esf === 'sao-jose' ? 'São José' :
+             medico.esf === 'catalao' ? 'Catalão' : 'Bela Vista'}</td>
+  </tr>
+))}
+```
+
+**Helper Functions Disponíveis:**
+
+- `getDepartmentEmployees(departmentCode)` - Retorna todos os funcionários de um departamento
+- `getEmployeeById(employeeId)` - Busca um funcionário específico pelo ID
+- `getEmployeesByEsf(esfCode)` - Retorna funcionários de uma ESF ('sao-jose', 'catalao', 'bela-vista')
+- `getEmployeesByRole(role)` - Retorna funcionários com um cargo específico
+- `getAllEmployees()` - Retorna todos os funcionários
+- `getActiveEmployees()` - Retorna apenas funcionários ativos
+- `departments` - Array com lista de todos os departamentos
+
 ## Dados Centralizados
 
 ### Telefones
@@ -183,6 +304,41 @@ import { contactInfo } from '../config';
 - REMSA: @remsasaojose
 - Prefeitura de Divinópolis: Instagram, Facebook, YouTube
 - SEMUSA: Instagram
+
+### Funcionários
+
+**Total:** 48 funcionários organizados em 14 departamentos
+
+**Departamentos:**
+1. Agente Comunitário de Saúde (6)
+2. Assistente Social (2)
+3. Atendente de Consultório Dentário - P.S.F. (2)
+4. Auxiliar de Enfermagem (2)
+5. Auxiliar de Serviços I (1)
+6. Auxiliar de Serviços II (2)
+7. Dentista (3)
+8. Enfermeiro (4)
+9. Farmacêutico (4)
+10. Fisioterapeuta (1)
+11. Médico Ginecologista (1)
+12. Médico Generalista - P.S.F. (4)
+13. Médico Pediatra (2)
+14. Psicólogo (1)
+15. Técnico de Enfermagem (15)
+16. Técnico de Higiene Dental (2)
+
+**Equipes ESF:**
+- ESF São José: Dr. João (Médico), Fabíola (Enfermeiro), 2 ACS, 4 Técnicos de Enfermagem
+- ESF Catalão: Dr. Frederico (Médico), Aline Macedo (Enfermeiro), 2 Dentistas PSF, 2 ACS, 3 Técnicos de Enfermagem, 2 THD
+- ESF Bela Vista: Dr. Gustavo (Médico), Naiara (Enfermeiro), 2 ACS, 3 Técnicos de Enfermagem
+
+**Serviços Centrais:**
+- Farmácia: 4 farmacêuticos (Horário: 07h30 às 16h00)
+- Psicologia: Sandra
+- Assistência Social: Luciana, Noelia
+- Pediatria: Dr. Antônio Fernando Bolina, Dra. Jéssica
+- Ginecologia: Dra. Luana
+- Fisioterapia: Luana
 
 ### Configuração do VLibras (`vlibras.js` e `index.html`)
 

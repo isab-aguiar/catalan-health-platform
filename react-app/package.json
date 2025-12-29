@@ -15,7 +15,8 @@
     "upload:vacinas:admin": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js",
     "upload:vacinas:admin:force": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js --force",
     "list:vacinas": "node --no-warnings --env-file=.env scripts/upload-vacinas-firestore.js --list",
-    "list:vacinas:admin": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js --list"
+    "list:vacinas:admin": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js --list",
+    "import:employees": "node scripts/importEmployees.js"
   },
   "dependencies": {
     "firebase": "^12.7.0",

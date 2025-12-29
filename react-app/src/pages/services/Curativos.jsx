@@ -8,6 +8,7 @@ import {
 import { PageContainer } from "../../components/layout";
 import { Alert, InfoBox, BackButton, RecommendedReadingCarousel } from "../../components/common";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 export default function Curativos() {
   return (
@@ -320,6 +321,14 @@ export default function Curativos() {
             estabelecidos pela unidade.
           </p>
         </InfoBox>
+
+        {/* Escalas de Profissionais - Carregado do Firestore */}
+        <EscalaProfissionais
+          titulo="Profissionais Escalados na Sala de Curativos"
+          department="tecnicoEnfermagem"
+          workStation="Sala de Curativos"
+        />
+
         {}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div className="flex items-start gap-3">

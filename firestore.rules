@@ -208,6 +208,20 @@ service cloud.firestore {
     }
 
     // =====================================================
+    // COLEÇÃO: employees
+    // =====================================================
+    match /employees/{employeeId} {
+      // LEITURA PÚBLICA: Qualquer pessoa pode ler funcionários ativos
+      // Isso permite exibir informações de equipe nas páginas públicas
+      allow read: if true;
+
+      // Apenas admins podem criar, atualizar e deletar funcionários
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
     // PADRÃO: NEGAR TUDO
     // =====================================================
     // Qualquer coleção não explicitamente permitida acima é bloqueada
