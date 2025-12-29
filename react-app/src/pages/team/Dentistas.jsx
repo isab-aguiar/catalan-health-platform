@@ -4,62 +4,11 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import preNatalImg from "../../assets/saude-bocal/pre-natal.png";
 import ordontoPediatraImg from "../../assets/saude-bocal/ordonto-pediatra.png";
-function PageContainer({ children }) {
-  return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
-}
-function InfoBox({ title, icon, children, variant = "default" }) {
-  const variants = {
-    default: "bg-white border-neutral-200",
-    highlight: "bg-info/10 border-info",
-  };
-  return (
-    <div
-      className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
-    >
-      <div className={`flex items-center gap-3 mb-5 pb-3 border-b ${variant === "highlight" ? "border-neutral-300" : "border-neutral-200"}`}>
-        {icon && <div className="text-primary-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
-      </div>
-      {children}
-    </div>
-  );
-}
-function Alert({ type = "info", children }) {
-  const types = {
-    info: {
-      bg: "bg-info/10",
-      border: "border-info",
-      text: "text-info",
-      icon: "text-info",
-    },
-    warning: {
-      bg: "bg-warning/10",
-      border: "border-warning",
-      text: "text-warning-dark",
-      icon: "text-warning-dark",
-    },
-    success: {
-      bg: "bg-success/10",
-      border: "border-success",
-      text: "text-success-dark",
-      icon: "text-success",
-    },
-  };
-  const style = types[type];
-  return (
-    <div
-      className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
-    >
-      <div className="flex gap-3">
-        <AlertCircle
-          size={20}
-          className={`flex-shrink-0 mt-0.5 ${style.icon}`}
-        />
-        <div className="text-sm leading-relaxed">{children}</div>
-      </div>
-    </div>
-  );
-}
+import PageContainer from "../../components/layout/PageContainer";
+import { Alert } from "../../components/common/Alert";
+import InfoBox from "../../components/common/InfoBox";
+import { contactInfo } from "../../config";
+
 export default function Dentistas() {
   return (
     <PageContainer>
@@ -69,7 +18,7 @@ export default function Dentistas() {
         <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
-              <h1 className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap">
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 break-words">
                 Consultório Odontológico
               </h1>
               <p className="text-neutral-500 text-xs mt-1">
@@ -365,11 +314,11 @@ export default function Dentistas() {
                       Para esclarecimento de dúvidas, você pode entrar em contato por telefone. <strong>Importante:</strong> o agendamento é realizado apenas presencialmente.
                     </p>
                     <a
-                      href="tel:+553732296080"
+                      href={`tel:${contactInfo.phones.reception.tel}`}
                       className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md transition-colors text-sm"
                     >
                       <Phone size={16} />
-                      (37) 3229-6080
+                      {contactInfo.phones.reception.display}
                     </a>
                   </div>
                 </div>

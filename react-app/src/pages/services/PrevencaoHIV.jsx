@@ -1,6 +1,7 @@
 import React from "react";
 import { Shield, Clock, Calendar, MapPin, Phone, AlertCircle, Heart, CheckCircle } from "lucide-react";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
+import { contactInfo } from "../../config";
 
 const PrevencaoHIV = () => {
   return (
@@ -183,10 +184,10 @@ const PrevencaoHIV = () => {
                 </a>
                 <span className="text-neutral-400">/</span>
                 <a
-                  href="tel:+553732296890"
+                  href={`tel:${contactInfo.phones.referenceUnits.prevencaoHIV.tel}`}
                   className="text-neutral-700 hover:text-primary-600 transition-colors font-medium"
                 >
-                  (37) 3229-6890
+                  {contactInfo.phones.referenceUnits.prevencaoHIV.display}
                 </a>
               </div>
             </div>

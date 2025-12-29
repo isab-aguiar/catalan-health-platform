@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { Search, ArrowRight, Home } from "lucide-react";
 import Fuse from "fuse.js";
 import { allPagesData } from "../data/allPagesData";
-import Card from "../components/common/Card";
-import BackButton from "../components/common/BackButton";
+import { Card, BackButton } from "../components/common";
 export default function SearchResultsPage() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "";

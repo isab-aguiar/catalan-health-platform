@@ -84,7 +84,6 @@ export default function Header() {
     { name: 'E-multi', path: '/equipe', handleClick: handleNavClick },
     { name: 'Equipe Remsa', path: '/remsa', handleClick: handleNavClick },
     { name: 'ACS', path: '/acs', handleClick: handleNavClick },
-    { name: 'Educação', path: '/educacao', handleClick: handleNavClick },
     { name: 'Contato', path: '/#contato', isAnchor: true, onClick: handleContatoClick, handleClick: handleNavClick },
   ];
   return (

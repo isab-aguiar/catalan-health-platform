@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import PageContainer from "../../components/layout/PageContainer";
-import BackButton from "../../components/common/BackButton";
+import { PageContainer } from "../../components/layout";
+import { BackButton, LoadingSpinner } from "../../components/common";
 import { useFeedbacks } from "../../hooks/useFeedbacks";
 import { useModal } from "../../contexts/ModalContext";
 import { Smile, Send } from "lucide-react";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 export default function Elogios() {
   const navigate = useNavigate();
@@ -268,4 +267,5 @@ export default function Elogios() {
     </PageContainer>
   );
 }
+
 

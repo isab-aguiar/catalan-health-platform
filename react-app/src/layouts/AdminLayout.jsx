@@ -114,17 +114,21 @@ export default function AdminLayout({ children, currentPage = 'dashboard' }) {
         <main className="flex-1 pt-[64px] min-h-screen bg-neutral-50 py-8 px-4">
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center justify-between mb-6">
-              <button
-                onClick={() => navigate(-1)}
-                className="bg-white text-neutral-700 p-3 rounded-md shadow-sm hover:bg-neutral-50 transition-colors flex items-center gap-2 px-4 border border-neutral-300"
-                aria-label="Voltar"
-              >
-                <ArrowLeft className="w-5 h-5" />
-                <span className="font-semibold text-sm">Voltar</span>
-              </button>
+              {currentPage !== 'dashboard' && (
+                <button
+                  onClick={() => navigate(-1)}
+                  className="bg-white text-neutral-700 p-3 rounded-md shadow-sm hover:bg-neutral-50 transition-colors flex items-center gap-2 px-4 border border-neutral-300"
+                  aria-label="Voltar"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                  <span className="font-semibold text-sm">Voltar</span>
+                </button>
+              )}
               <button
                 onClick={() => setSidebarOpen(true)}
-                className="bg-primary-700 text-white p-3 rounded-md shadow-sm hover:bg-primary-800 transition-colors flex items-center gap-2 px-4"
+                className={`bg-primary-700 text-white p-3 rounded-md shadow-sm hover:bg-primary-800 transition-colors flex items-center gap-2 px-4 ${
+                  currentPage === 'dashboard' ? 'ml-auto' : ''
+                }`}
                 aria-label="Abrir menu"
               >
                 <Menu className="w-5 h-5" />

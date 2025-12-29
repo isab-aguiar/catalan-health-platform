@@ -176,16 +176,6 @@ export const readingRecommendations = {
         category: "Prevenção",
         icon: "TestTube2",
         color: "green"
-      },
-      {
-        id: "educacao",
-        title: "Educação em Saúde",
-        description: "Orientações e campanhas preventivas",
-        reason: "Aprenda mais sobre prevenção",
-        path: "/educacao",
-        category: "Aprenda Mais",
-        icon: "GraduationCap",
-        color: "secondary"
       }
     ]
   },
@@ -436,16 +426,6 @@ export const readingRecommendations = {
         category: "Apoio",
         icon: "UserCircle",
         color: "accent"
-      },
-      {
-        id: "educacao",
-        title: "Educação em Saúde",
-        description: "Palestras e orientações",
-        reason: "Aprenda sobre saúde mental",
-        path: "/educacao",
-        category: "Aprenda Mais",
-        icon: "GraduationCap",
-        color: "secondary"
       }
     ]
   },
@@ -658,16 +638,6 @@ export const readingRecommendations = {
         category: "Informações",
         icon: "Users",
         color: "accent"
-      },
-      {
-        id: "educacao",
-        title: "Educação em Saúde",
-        description: "Palestras e orientações",
-        reason: "Informações sobre direitos e saúde",
-        path: "/educacao",
-        category: "Aprenda Mais",
-        icon: "GraduationCap",
-        color: "secondary"
       }
     ]
   },
@@ -808,16 +778,6 @@ export const readingRecommendations = {
         category: "Equipe",
         icon: "Users",
         color: "accent"
-      },
-      {
-        id: "educacao",
-        title: "Educação em Saúde",
-        description: "Orientações e campanhas",
-        reason: "Informação é prevenção",
-        path: "/educacao",
-        category: "Aprenda Mais",
-        icon: "GraduationCap",
-        color: "secondary"
       }
     ]
   },
@@ -894,47 +854,9 @@ export const readingRecommendations = {
         color: "accent"
       }
     ]
-  },
-
-  "educacao": {
-    title: "Continue Explorando",
-    subtitle: "Serviços de saúde preventiva",
-    recommendations: [
-      {
-        id: "vacinas",
-        title: "Vacinação",
-        description: "Imunização para todas as idades",
-        reason: "Prevenção é o melhor remédio",
-        path: "/servicos/vacinas",
-        category: "Prevenção",
-        icon: "Syringe",
-        color: "primary"
-      },
-      {
-        id: "procedimentos",
-        title: "Testes Rápidos",
-        description: "HIV, Sífilis, Hepatites e Gravidez",
-        reason: "Conheça os testes disponíveis",
-        path: "/servicos/procedimentos#testes-rapidos",
-        category: "Testagem",
-        icon: "TestTube2",
-        color: "green"
-      },
-      {
-        id: "remsa",
-        title: "REMSA",
-        description: "Saúde do Adolescente",
-        reason: "Cuidados especializados para adolescentes",
-        path: "/remsa",
-        category: "Saúde do Adolescente",
-        icon: "Users",
-        color: "accent"
-      }
-    ]
   }
 };
 
-// Função helper para buscar recomendações
 export function getRecommendations(pageId) {
   return readingRecommendations[pageId] || null;
 }

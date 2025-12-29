@@ -75,7 +75,6 @@ export default function Campanhas() {
   const [creatingCampanha, setCreatingCampanha] = useState(false);
   const [createImageFiles, setCreateImageFiles] = useState([]);
   const [createImagePreviews, setCreateImagePreviews] = useState([]);
-  // Bloquear scroll quando modal de criação estiver aberto
   useEffect(() => {
     if (showCreateModal) {
       const scrollY = window.scrollY;
@@ -95,7 +94,6 @@ export default function Campanhas() {
   }, [showCreateModal]);
 
   useEffect(() => {
-    // Aguarda autenticação estar pronta antes de carregar
     if (currentUser) {
       loadCampanhas();
     }
@@ -107,29 +105,12 @@ export default function Campanhas() {
       setError(null);
       let data = [];
 
-      console.log("🔍 Carregando campanhas...", {
-        isAdmin,
-        isProfissional,
-        isDiretoria,
-        userRole: userData?.role,
-        userId: currentUser?.uid
-      });
-
       if (isAdmin) {
         data = await buscarCampanhas({});
-        console.log("👑 Admin - Carregando TODAS as campanhas:", data.length);
       } else if (isProfissional && currentUser?.uid) {
         data = await buscarCampanhasPorCriador(currentUser.uid);
-        console.log(
-          "👨‍⚕️ Profissional - Carregando campanhas próprias:",
-          data.length
-        );
       } else if (isDiretoria) {
         data = await buscarCampanhas({});
-        console.log(
-          "👁️ Diretoria - Carregando TODAS as campanhas (visualização):",
-          data.length
-        );
       }
       setCampanhas(data);
     } catch (err) {
@@ -140,10 +121,7 @@ export default function Campanhas() {
     }
   };
   const handleDelete = async (id) => {
-    // Encontrar a campanha para verificar permissão
     const campanha = campanhas.find(c => c.id === id);
-
-    // Verifica se é admin OU se é o criador da campanha
     const podeDeletear = permissions.isAdmin() ||
                         (isProfissional && campanha?.criadoPor === currentUser?.uid);
 
@@ -236,18 +214,15 @@ export default function Campanhas() {
       imageCredit: campanha.imageCredit || "",
     });
   };
-  // Cancelar edição
   const handleCancelEdit = () => {
     setEditingId(null);
     setEditForm({});
     setNewImageFile(null);
     setNewImagePreview(null);
   };
-  // Lidar com seleção de arquivo
   const handleFileSelect = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    // Validar tipo
     const allowedTypes = [
       "image/jpeg",
       "image/jpg",
@@ -345,7 +320,6 @@ export default function Campanhas() {
       setUploadingImage(false);
     }
   };
-  // Funções para criação manual
   const handleOpenCreateModal = () => {
     setShowCreateModal(true);
     setCreateForm({
@@ -511,7 +485,6 @@ export default function Campanhas() {
       searchTerm === "" ||
       campanha.titulo.toLowerCase().includes(searchTerm.toLowerCase()) ||
       campanha.descricao.toLowerCase().includes(searchTerm.toLowerCase());
-    // Filtro de categoria
     const matchCategoria =
       filterCategoria === "todas" || campanha.categoria === filterCategoria;
     const matchStatus =
@@ -521,7 +494,7 @@ export default function Campanhas() {
     return matchSearch && matchCategoria && matchStatus;
   });
   return (
-    <AdminLayout>
+    <AdminLayout currentPage="campanhas">
       <div className="min-h-screen bg-neutral-50">
         <div className="p-4 sm:p-6 lg:p-8">
           <div className="max-w-7xl mx-auto space-y-6">

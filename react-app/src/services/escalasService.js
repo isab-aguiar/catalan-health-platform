@@ -16,7 +16,6 @@ import { db } from "../config/firebase";
 
 const COLLECTION_NAME = "escalas";
 
-// Tipos de turnos
 export const TURNOS = {
   MANHA: "manha",
   ALMOCO: "almoco",
@@ -24,7 +23,6 @@ export const TURNOS = {
   INTEGRAL: "integral",
 };
 
-// Dias da semana
 export const DIAS_SEMANA = {
   SEGUNDA: "segunda",
   TERCA: "terca",
@@ -34,7 +32,6 @@ export const DIAS_SEMANA = {
   SABADO: "sabado",
 };
 
-// Sanitizar undefined para null
 function sanitizeUndefined(obj) {
   const sanitized = {};
   for (const key in obj) {
@@ -58,23 +55,18 @@ function sanitizeUndefined(obj) {
   return sanitized;
 }
 
-// Criar escala mensal
 export const criarEscala = async (escalaData, userId) => {
   try {
-    if (!escalaData.mes || !escalaData.ano || !escalaData.profissionais) {
-      throw new Error("Mês, ano e profissionais são obrigatórios");
+
+    if (!escalaData.mes || !escalaData.ano) {
+      throw new Error("Mês e ano são obrigatórios");
     }
 
     const escala = {
       mes: escalaData.mes, // 1-12
       ano: escalaData.ano,
       titulo: escalaData.titulo || `Escala ${getMesNome(escalaData.mes)}/${escalaData.ano}`,
-
-      // Profissionais alocados por dia
-      // Formato: { "2024-12-01": { manha: ["user1"], almoco: ["user2"], tarde: ["user3"], observacoes: "" } }
       profissionais: escalaData.profissionais || {},
-
-      // Configurações da escala
       turnosPorDia: escalaData.turnosPorDia || [TURNOS.MANHA, TURNOS.ALMOCO, TURNOS.TARDE],
       diasFuncionamento: escalaData.diasFuncionamento || [
         DIAS_SEMANA.SEGUNDA,
@@ -83,23 +75,21 @@ export const criarEscala = async (escalaData, userId) => {
         DIAS_SEMANA.QUINTA,
         DIAS_SEMANA.SEXTA,
       ],
-
-      // Metadados
       observacoes: escalaData.observacoes || null,
-      status: escalaData.status || "rascunho", // rascunho, publicada, arquivada
+      status: escalaData.status || "rascunho",
       publicada: escalaData.publicada || false,
       dataPublicacao: escalaData.dataPublicacao
         ? Timestamp.fromDate(new Date(escalaData.dataPublicacao))
         : null,
-
-      // Auditoria
       criadoPor: userId,
       criadoEm: serverTimestamp(),
       atualizadoEm: serverTimestamp(),
     };
 
     const escalaSanitizada = sanitizeUndefined(escala);
+
     const escalasRef = collection(db, COLLECTION_NAME);
+
     const docRef = await addDoc(escalasRef, escalaSanitizada);
 
     return {
@@ -108,7 +98,8 @@ export const criarEscala = async (escalaData, userId) => {
       data: { id: docRef.id, ...escala },
     };
   } catch (error) {
-    console.error("Erro ao criar escala:", error);
+    console.error("❌ [escalasService] Erro ao criar escala:", error);
+    console.error("❌ [escalasService] Stack:", error.stack);
     throw new Error(`Falha ao criar escala: ${error.message}`);
   }
 };
@@ -117,26 +108,30 @@ export const criarEscala = async (escalaData, userId) => {
 export const buscarEscalas = async (filtros = {}) => {
   try {
     const escalasRef = collection(db, COLLECTION_NAME);
-    let q = query(escalasRef, orderBy("ano", "desc"), orderBy("mes", "desc"));
+
+    // Query simplificada - ordena apenas por criadoEm para evitar necessidade de índice composto
+    let q = query(escalasRef, orderBy("criadoEm", "desc"));
 
     if (filtros.status) {
-      q = query(q, where("status", "==", filtros.status));
+      q = query(escalasRef, where("status", "==", filtros.status), orderBy("criadoEm", "desc"));
     }
 
     if (filtros.publicada !== undefined) {
-      q = query(q, where("publicada", "==", filtros.publicada));
+      q = query(escalasRef, where("publicada", "==", filtros.publicada), orderBy("criadoEm", "desc"));
     }
 
     if (filtros.mes && filtros.ano) {
       q = query(
-        q,
+        escalasRef,
         where("mes", "==", filtros.mes),
-        where("ano", "==", filtros.ano)
+        where("ano", "==", filtros.ano),
+        orderBy("criadoEm", "desc")
       );
     }
 
     const snapshot = await getDocs(q);
-    const escalas = snapshot.docs.map((doc) => {
+
+    let escalas = snapshot.docs.map((doc) => {
       const data = doc.data();
       return {
         id: doc.id,
@@ -157,6 +152,11 @@ export const buscarEscalas = async (filtros = {}) => {
       };
     });
 
+    escalas.sort((a, b) => {
+      if (a.ano !== b.ano) return b.ano - a.ano;
+      return b.mes - a.mes;
+    });
+
     return escalas;
   } catch (error) {
     console.error("Erro ao buscar escalas:", error);
@@ -164,7 +164,6 @@ export const buscarEscalas = async (filtros = {}) => {
   }
 };
 
-// Buscar escala do mês atual
 export const buscarEscalaMesAtual = async () => {
   const hoje = new Date();
   const mes = hoje.getMonth() + 1;
@@ -179,7 +178,6 @@ export const buscarEscalaMesAtual = async () => {
   }
 };
 
-// Buscar escala por ID
 export const buscarEscalaPorId = async (escalaId) => {
   try {
     const escalaRef = doc(db, COLLECTION_NAME, escalaId);
@@ -213,7 +211,6 @@ export const buscarEscalaPorId = async (escalaId) => {
   }
 };
 
-// Atualizar escala
 export const atualizarEscala = async (escalaId, dadosAtualizados) => {
   try {
     const escalaRef = doc(db, COLLECTION_NAME, escalaId);
@@ -240,7 +237,6 @@ export const atualizarEscala = async (escalaId, dadosAtualizados) => {
   }
 };
 
-// Publicar escala
 export const publicarEscala = async (escalaId) => {
   return atualizarEscala(escalaId, {
     status: "publicada",
@@ -249,7 +245,6 @@ export const publicarEscala = async (escalaId) => {
   });
 };
 
-// Despublicar escala
 export const despublicarEscala = async (escalaId) => {
   return atualizarEscala(escalaId, {
     status: "rascunho",
@@ -258,14 +253,12 @@ export const despublicarEscala = async (escalaId) => {
   });
 };
 
-// Arquivar escala
 export const arquivarEscala = async (escalaId) => {
   return atualizarEscala(escalaId, {
     status: "arquivada",
   });
 };
 
-// Deletar escala
 export const deletarEscala = async (escalaId) => {
   try {
     if (!db) {
@@ -275,7 +268,6 @@ export const deletarEscala = async (escalaId) => {
     const escalaRef = doc(db, COLLECTION_NAME, escalaId);
     await deleteDoc(escalaRef);
 
-    console.log("✅ Escala deletada com sucesso:", escalaId);
     return {
       success: true,
       message: "Escala deletada com sucesso",
@@ -290,7 +282,6 @@ export const deletarEscala = async (escalaId) => {
   }
 };
 
-// Atualizar profissionais de um dia específico
 export const atualizarProfissionaisDia = async (
   escalaId,
   data,
@@ -308,7 +299,6 @@ export const atualizarProfissionaisDia = async (
   }
 };
 
-// Helper: Obter nome do mês
 function getMesNome(mes) {
   const meses = [
     "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",

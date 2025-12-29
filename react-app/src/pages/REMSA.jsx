@@ -1,10 +1,8 @@
-import PageContainer from "../components/layout/PageContainer";
-import InfoBox from "../components/common/InfoBox";
-import Alert from "../components/common/Alert";
-import BackButton from "../components/common/BackButton";
-import RecommendedReadingCarousel from "../components/common/RecommendedReadingCarousel";
+import { PageContainer } from "../components/layout";
+import { InfoBox, Alert, BackButton, RecommendedReadingCarousel } from "../components/common";
 import { MessageCircle, Instagram } from "lucide-react";
 import remsaImage from "../assets/remsa/remsa.jpeg";
+import { contactInfo, openingHours, socialMedia } from "../config";
 
 export default function REMSA() {
   return (
@@ -130,7 +128,7 @@ export default function REMSA() {
                   </span>
                 </div>
                 <div className="flex-1">
-                  <p className="text-neutral-900 font-semibold mb-1"><strong>Horário:</strong> 17h00 às 18h00</p>
+                  <p className="text-neutral-900 font-semibold mb-1"><strong>Horário:</strong> {openingHours.remsa.workshops.tuesday.display}</p>
                   <p className="text-neutral-600 text-sm">
                     <strong>Local:</strong>{" "}
                     <a
@@ -153,7 +151,7 @@ export default function REMSA() {
                   </span>
                 </div>
                 <div className="flex-1">
-                  <p className="text-neutral-900 font-semibold mb-1"><strong>Horário:</strong> 08h00 às 09h30</p>
+                  <p className="text-neutral-900 font-semibold mb-1"><strong>Horário:</strong> {openingHours.remsa.workshops.wednesday.display}</p>
                   <p className="text-neutral-600 text-sm">
                     <strong>Local:</strong>{" "}
                     <a
@@ -176,7 +174,7 @@ export default function REMSA() {
                   </span>
                 </div>
                 <div className="flex-1">
-                  <p className="text-neutral-900 font-semibold mb-1"><strong>Horário:</strong> 17h00 às 18h00</p>
+                  <p className="text-neutral-900 font-semibold mb-1"><strong>Horário:</strong> {openingHours.remsa.workshops.thursday.display}</p>
                   <p className="text-neutral-600 text-sm">
                     <strong>Local:</strong>{" "}
                     <a
@@ -201,7 +199,7 @@ export default function REMSA() {
           <p className="text-neutral-700 leading-relaxed mb-5">
             <strong>Atendimento:</strong> Por demanda ou agendamento pelo{" "}
             <a
-              href="https://wa.me/5537984158457"
+              href={`https://wa.me/${contactInfo.phones.whatsapp.remsa.wa}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-success hover:text-green-700 font-semibold underline pl-1"
@@ -215,36 +213,36 @@ export default function REMSA() {
             <div className="bg-blue-50 border border-blue-100 rounded-md p-4">
               <h4 className="font-semibold text-neutral-900 text-sm mb-2">UAPS São José</h4>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=R.+Júlio+Nogueira,+1320+-+Bela+Vista,+Divinópolis+-+MG,+35501-207"
+                href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.main.mapsQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 underline text-sm mb-1 block"
               >
-                R. Júlio Nogueira, 1320 - Bela Vista, Divinópolis - MG
+                {contactInfo.address.main.street} - {contactInfo.address.main.neighborhood}, {contactInfo.address.main.city} - {contactInfo.address.main.state}
               </a>
-              <p className="text-neutral-600 text-sm mb-2">CEP: 35501-207</p>
+              <p className="text-neutral-600 text-sm mb-2">CEP: {contactInfo.address.main.cep}</p>
               <div className="text-neutral-700 text-sm">
                 <p className="mb-1"><strong>Atendimento ao Público:</strong></p>
                 <p className="mb-0.5">Segunda a Sexta-feira</p>
-                <p><strong>Horário:</strong> 07h00 às 19h00</p>
+                <p><strong>Horário:</strong> {openingHours.remsa.uapsSaoJose.weekdays}</p>
               </div>
             </div>
 
             <div className="bg-blue-50 border border-blue-100 rounded-md p-4">
               <h4 className="font-semibold text-neutral-900 text-sm mb-2">UAPS Icaraí</h4>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Av.+Belo+Horizonte,+264+-+Icaraí,+Divinópolis+-+MG,+35502-260"
+                href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.uapsIcarai.mapsQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 underline text-sm mb-1 block"
               >
-                Av. Belo Horizonte, 264 - Icaraí, Divinópolis - MG
+                {contactInfo.address.referenceUnits.uapsIcarai.street} - {contactInfo.address.referenceUnits.uapsIcarai.neighborhood}, {contactInfo.address.referenceUnits.uapsIcarai.city} - {contactInfo.address.referenceUnits.uapsIcarai.state}
               </a>
-              <p className="text-neutral-600 text-sm mb-2">CEP: 35502-260</p>
+              <p className="text-neutral-600 text-sm mb-2">CEP: {contactInfo.address.referenceUnits.uapsIcarai.cep}</p>
               <div className="text-neutral-700 text-sm">
                 <p className="mb-1"><strong>Atendimento ao Público:</strong></p>
                 <p className="mb-0.5">Segunda a Sexta-feira</p>
-                <p><strong>Horário:</strong> 07h00 às 17h00</p>
+                <p><strong>Horário:</strong> {openingHours.remsa.uapsIcarai.weekdays}</p>
               </div>
             </div>
           </div>
@@ -270,7 +268,7 @@ export default function REMSA() {
 
             <div className="grid md:grid-cols-2 gap-4">
               <a
-                href="https://wa.me/5537984158457"
+                href={`https://wa.me/${contactInfo.phones.whatsapp.remsa.wa}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
@@ -286,7 +284,7 @@ export default function REMSA() {
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900">
                         <MessageCircle size={18} className="text-success flex-shrink-0" />
-                        <span>(37) 98415-8457</span>
+                        <span>{contactInfo.phones.whatsapp.remsa.display}</span>
                       </div>
                     </div>
                   </div>
@@ -294,7 +292,7 @@ export default function REMSA() {
               </a>
 
               <a
-                href="https://www.instagram.com/remsasaojose/"
+                href={socialMedia.remsa.instagram.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
@@ -310,7 +308,7 @@ export default function REMSA() {
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900">
                         <Instagram size={18} className="text-pink-600 flex-shrink-0" />
-                        <span>@remsasaojose</span>
+                        <span>{socialMedia.remsa.instagram.handle}</span>
                       </div>
                     </div>
                   </div>

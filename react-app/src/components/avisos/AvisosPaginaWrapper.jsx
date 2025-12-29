@@ -9,7 +9,6 @@ export default function AvisosPaginaWrapper({ pagina }) {
     <section className="mb-6">
       <h2
         className="text-lg font-semibold text-neutral-800 mb-3"
-        style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
       >
         Avisos Importantes
       </h2>

@@ -1,72 +1,9 @@
 import { Link } from "react-router-dom";
 import { AlertCircle, Users, FileText, Calendar, Phone } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
-
-function PageContainer({ children }) {
-  return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
-}
-
-function InfoBox({ title, icon, children, variant = "default" }) {
-  const variants = {
-    default: "bg-white border-neutral-200",
-    highlight: "bg-info/10 border-info",
-  };
-
-  return (
-    <div
-      className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
-    >
-      <div
-        className={`flex items-center gap-3 mb-5 pb-3 border-b ${
-          variant === "highlight" ? "border-neutral-300" : "border-neutral-200"
-        }`}
-      >
-        {icon && <div className="text-primary-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function Alert({ type = "info", children }) {
-  const types = {
-    info: {
-      bg: "bg-info/10",
-      border: "border-info",
-      text: "text-info",
-      icon: "text-info",
-    },
-    warning: {
-      bg: "bg-warning/10",
-      border: "border-warning",
-      text: "text-warning-dark",
-      icon: "text-warning-dark",
-    },
-    success: {
-      bg: "bg-success/10",
-      border: "border-success",
-      text: "text-success-dark",
-      icon: "text-success",
-    },
-  };
-
-  const style = types[type];
-
-  return (
-    <div
-      className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
-    >
-      <div className="flex gap-3">
-        <AlertCircle
-          size={20}
-          className={`flex-shrink-0 mt-0.5 ${style.icon}`}
-        />
-        <div className="text-sm leading-relaxed">{children}</div>
-      </div>
-    </div>
-  );
-}
+import PageContainer from "../../components/layout/PageContainer";
+import { Alert } from "../../components/common/Alert";
+import InfoBox from "../../components/common/InfoBox";
 
 export default function BolsaFamilia() {
   return (
@@ -79,17 +16,11 @@ export default function BolsaFamilia() {
             <div>
               <h1
                 className="text-2xl sm:text-3xl font-bold text-neutral-900"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Bolsa Família e Serviço Social
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
@@ -214,7 +145,7 @@ export default function BolsaFamilia() {
         <InfoBox
           title="Documentação Necessária"
           icon={<FileText size={24} />}
-          variant="highlight"
+          highlight={true}
         >
           <div className="space-y-2">
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">

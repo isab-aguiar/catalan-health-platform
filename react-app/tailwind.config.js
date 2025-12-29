@@ -92,6 +92,14 @@ export default {
         },
         // Border color
         border: "#DCDFE3", // Gray 10
+        // Additional Education Page Colors
+        educationAlert: "#C90000", // Education alerts and emphasis
+        educationSecondary: "#F77829", // Orange for secondary elements
+        educationOrangeDark: "#E85900", // Dark orange for borders
+        educationOrangeLight: "#FFEDDF", // Light orange background
+        educationCreamBg: "#FFFAF6", // Cream background
+        educationDarkBlue: "#09316F", // Very dark blue for backgrounds
+        educationGrayText: "#666666", // Gray text
       },
       fontFamily: {
         sans: [

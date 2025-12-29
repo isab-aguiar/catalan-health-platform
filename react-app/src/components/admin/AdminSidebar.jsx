@@ -125,19 +125,11 @@ export default function AdminSidebar({
               <div>
                 <h1
                   className="text-base font-bold text-neutral-900 leading-tight"
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
                 >
                   Sistema Administrativo
                 </h1>
                 <p
                   className="text-xs text-neutral-600 leading-tight"
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
                 >
                   ESF Catalão
                 </p>
@@ -170,9 +162,6 @@ export default function AdminSidebar({
                     ? "bg-primary-700 text-white shadow-sm"
                     : "text-neutral-700 hover:bg-neutral-100"
                 }`}
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 <Icon
                   className={`w-5 h-5 ${isActive ? "text-white" : "text-neutral-500"}`}
@@ -193,17 +182,11 @@ export default function AdminSidebar({
             <div className="flex-1 min-w-0">
               <p
                 className="text-sm font-semibold text-neutral-900 truncate"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 {userData?.displayName || "Administrador"}
               </p>
               <p
                 className="text-xs text-neutral-600 truncate"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 {permissions.getRoleLabel()}
               </p>
@@ -214,9 +197,6 @@ export default function AdminSidebar({
             <a
               href="/"
               className="flex items-center gap-2 px-4 py-2 text-sm text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 rounded-md transition-colors w-full border border-neutral-200"
-              style={{
-                fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-              }}
             >
               <Home className="w-4 h-4" />
               <span>Site Público</span>
@@ -224,9 +204,6 @@ export default function AdminSidebar({
             <button
               onClick={onLogout}
               className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-primary-700 hover:bg-primary-800 rounded-md transition-colors w-full shadow-sm"
-              style={{
-                fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-              }}
             >
               <LogOut className="w-4 h-4" />
               <span>Encerrar Sessão</span>

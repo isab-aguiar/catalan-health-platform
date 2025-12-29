@@ -196,9 +196,6 @@ export const buscarCampanhasPorCriador = async (userId) => {
       const dateB = b.criadoEm || new Date(0);
       return dateB - dateA;
     });
-    console.log(
-      `✅ Carregadas ${campanhas.length} campanha(s) do usuário ${userId}`
-    );
     return campanhas;
   } catch (error) {
     console.error("Erro ao buscar campanhas do criador:", error);
@@ -323,7 +320,6 @@ export const deletarCampanha = async (campanhaId) => {
     }
     const campanhaRef = doc(db, COLLECTION_NAME, campanhaId);
     await deleteDoc(campanhaRef);
-    console.log("✅ Campanha deletada com sucesso:", campanhaId);
     return {
       success: true,
       message: "Campanha deletada com sucesso",

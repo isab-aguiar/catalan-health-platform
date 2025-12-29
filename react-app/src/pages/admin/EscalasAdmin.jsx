@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Calendar, Users, Plus, Edit2, Trash2, Eye, CheckCircle, XCircle, Archive, Search, ArrowLeft } from 'lucide-react';
+import { Calendar, Users, Plus, Edit2, Trash2, Eye, CheckCircle, XCircle, Archive, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {
   buscarEscalas,
@@ -15,23 +15,25 @@ import {
   DIAS_SEMANA,
 } from '../../services/escalasService';
 import { useAuth } from '../../contexts/AuthContext';
+import { useModal } from '../../contexts/ModalContext';
+import AdminLayout from '../../layouts/AdminLayout';
 import EscalaEditor from '../../components/admin/EscalaEditor';
 
 export default function EscalasAdmin() {
   const { currentUser } = useAuth();
+  const { showModal } = useModal();
   const navigate = useNavigate();
   const [escalas, setEscalas] = useState([]);
   const [escalaAtual, setEscalaAtual] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  const [showFormModal, setShowFormModal] = useState(false);
   const [modoEdicao, setModoEdicao] = useState(false);
   const [escalaEditando, setEscalaEditando] = useState(null);
   const [filtroStatus, setFiltroStatus] = useState('todas');
   const [showEditor, setShowEditor] = useState(false);
 
-  // Bloquear scroll quando modal ou editor estiver aberto
   useEffect(() => {
-    if (showModal || showEditor) {
+    if (showFormModal || showEditor) {
       const scrollY = window.scrollY;
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
@@ -46,7 +48,7 @@ export default function EscalasAdmin() {
         window.scrollTo(0, scrollY);
       };
     }
-  }, [showModal, showEditor]);
+  }, [showFormModal, showEditor]);
 
   const meses = [
     { num: 1, nome: 'Janeiro' },
@@ -77,7 +79,7 @@ export default function EscalasAdmin() {
       const escalasData = await buscarEscalas(filtros);
       setEscalas(escalasData);
     } catch (error) {
-      console.error('Erro ao carregar escalas:', error);
+      console.error('❌ Erro ao carregar escalas:', error);
     } finally {
       setLoading(false);
     }
@@ -102,7 +104,7 @@ export default function EscalasAdmin() {
       status: 'rascunho',
     });
     setModoEdicao(false);
-    setShowModal(true);
+    setShowFormModal(true);
   };
 
   const handleEditarEscala = async (escalaId) => {
@@ -112,7 +114,12 @@ export default function EscalasAdmin() {
       setShowEditor(true);
     } catch (error) {
       console.error('Erro ao carregar escala:', error);
-      alert('Erro ao carregar escala para edição');
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Carregar',
+        message: 'Não foi possível carregar a escala para edição. Tente novamente.',
+        confirmText: 'OK'
+      });
     }
   };
 
@@ -121,7 +128,12 @@ export default function EscalasAdmin() {
       await atualizarEscala(escalaAtualizada.id, {
         profissionais: escalaAtualizada.profissionais,
       });
-      alert('Escala atualizada com sucesso!');
+      await showModal({
+        type: 'success',
+        title: 'Sucesso',
+        message: 'Escala atualizada com sucesso!',
+        confirmText: 'OK'
+      });
       setShowEditor(false);
       setEscalaEditando(null);
       carregarEscalas();
@@ -130,7 +142,12 @@ export default function EscalasAdmin() {
       }
     } catch (error) {
       console.error('Erro ao salvar escala:', error);
-      alert('Erro ao salvar escala: ' + error.message);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Salvar',
+        message: `Não foi possível salvar a escala: ${error.message}`,
+        confirmText: 'OK'
+      });
     }
   };
 
@@ -146,73 +163,142 @@ export default function EscalasAdmin() {
   const handleSalvarEscala = async () => {
     try {
       if (!escalaEditando.mes || !escalaEditando.ano) {
-        alert('Mês e ano são obrigatórios');
+        await showModal({
+          type: 'warning',
+          title: 'Campos Obrigatórios',
+          message: 'Por favor, preencha o mês e o ano da escala.',
+          confirmText: 'OK'
+        });
         return;
       }
 
       if (modoEdicao && escalaEditando.id) {
         await atualizarEscala(escalaEditando.id, escalaEditando);
-        alert('Escala atualizada com sucesso!');
+        await showModal({
+          type: 'success',
+          title: 'Escala Salva',
+          message: 'Escala atualizada com sucesso!',
+          confirmText: 'OK'
+        });
       } else {
         await criarEscala(escalaEditando, currentUser.uid);
-        alert('Escala criada com sucesso!');
+        await showModal({
+          type: 'success',
+          title: 'Escala Salva',
+          message: 'Escala criada com sucesso!',
+          confirmText: 'OK'
+        });
       }
 
-      setShowModal(false);
+      setShowFormModal(false);
       setEscalaEditando(null);
-      carregarEscalas();
+      await carregarEscalas();
     } catch (error) {
-      console.error('Erro ao salvar escala:', error);
-      alert('Erro ao salvar escala: ' + error.message);
+      console.error('❌ Erro ao salvar escala:', error);
+      console.error('❌ Stack:', error.stack);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Salvar',
+        message: `Não foi possível salvar a escala: ${error.message}`,
+        confirmText: 'OK'
+      });
     }
   };
 
   const handleDeletarEscala = async (escalaId) => {
-    if (!confirm('Tem certeza que deseja deletar esta escala?')) return;
+    const confirmed = await showModal({
+      type: 'warning',
+      title: 'Confirmar Exclusão',
+      message: 'Tem certeza que deseja deletar esta escala? Esta ação não pode ser desfeita.',
+      confirmText: 'Deletar',
+      cancelText: 'Cancelar'
+    });
+
+    if (!confirmed) return;
 
     try {
       await deletarEscala(escalaId);
-      alert('Escala deletada com sucesso!');
+      await showModal({
+        type: 'success',
+        title: 'Escala Deletada',
+        message: 'Escala deletada com sucesso!',
+        confirmText: 'OK'
+      });
       carregarEscalas();
       if (escalaAtual?.id === escalaId) {
         setEscalaAtual(null);
       }
     } catch (error) {
       console.error('Erro ao deletar escala:', error);
-      alert('Erro ao deletar escala: ' + error.message);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Deletar',
+        message: `Não foi possível deletar a escala: ${error.message}`,
+        confirmText: 'OK'
+      });
     }
   };
 
   const handlePublicarEscala = async (escalaId) => {
     try {
       await publicarEscala(escalaId);
-      alert('Escala publicada com sucesso!');
+      await showModal({
+        type: 'success',
+        title: 'Escala Publicada',
+        message: 'Escala publicada com sucesso!',
+        confirmText: 'OK'
+      });
       carregarEscalas();
     } catch (error) {
       console.error('Erro ao publicar escala:', error);
-      alert('Erro ao publicar escala: ' + error.message);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Publicar',
+        message: `Não foi possível publicar a escala: ${error.message}`,
+        confirmText: 'OK'
+      });
     }
   };
 
   const handleDespublicarEscala = async (escalaId) => {
     try {
       await despublicarEscala(escalaId);
-      alert('Escala despublicada com sucesso!');
+      await showModal({
+        type: 'success',
+        title: 'Escala Despublicada',
+        message: 'Escala despublicada com sucesso!',
+        confirmText: 'OK'
+      });
       carregarEscalas();
     } catch (error) {
       console.error('Erro ao despublicar escala:', error);
-      alert('Erro ao despublicar escala: ' + error.message);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Despublicar',
+        message: `Não foi possível despublicar a escala: ${error.message}`,
+        confirmText: 'OK'
+      });
     }
   };
 
   const handleArquivarEscala = async (escalaId) => {
     try {
       await arquivarEscala(escalaId);
-      alert('Escala arquivada com sucesso!');
+      await showModal({
+        type: 'success',
+        title: 'Escala Arquivada',
+        message: 'Escala arquivada com sucesso!',
+        confirmText: 'OK'
+      });
       carregarEscalas();
     } catch (error) {
       console.error('Erro ao arquivar escala:', error);
-      alert('Erro ao arquivar escala: ' + error.message);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Arquivar',
+        message: `Não foi possível arquivar a escala: ${error.message}`,
+        confirmText: 'OK'
+      });
     }
   };
 
@@ -251,32 +337,23 @@ export default function EscalasAdmin() {
   };
 
   return (
+    <AdminLayout currentPage="escalas">
     <div className="space-y-6">
       {/* Header */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition-colors"
-              aria-label="Voltar"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="hidden sm:inline">Voltar</span>
-            </button>
-            <div>
-              <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
-                <Users className="w-7 h-7 text-gov-blue" />
-                Escalas de Trabalho
-              </h1>
-              <p className="text-neutral-600 mt-1">
-                Gerencie as escalas mensais da equipe
-              </p>
-            </div>
+          <div>
+            <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
+              <Users className="w-7 h-7 text-gov-blue" />
+              Escalas de Trabalho
+            </h1>
+            <p className="text-neutral-600 mt-1">
+              Gerencie as escalas mensais da equipe
+            </p>
           </div>
           <button
             onClick={handleCriarNovaEscala}
-            className="bg-gov-blue text-gray-900 px-4 py-2.5 rounded-lg hover:bg-gov-blue-dark transition-colors flex items-center gap-2 font-medium shadow-sm"
+            className="bg-primary-600 text-white px-4 py-2.5 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-colors flex items-center gap-2 font-medium shadow-sm"
           >
             <Plus className="w-5 h-5" />
             Nova Escala
@@ -303,9 +380,7 @@ export default function EscalasAdmin() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Lista de Escalas */}
-        <div className="lg:col-span-1 space-y-3">
-          <h2 className="text-lg font-semibold text-neutral-900">Escalas Cadastradas</h2>
-
+        <div className="lg:col-span-1 space-y-3 pb-6">
           {loading ? (
             <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-8 flex items-center justify-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gov-blue"></div>
@@ -532,7 +607,7 @@ export default function EscalasAdmin() {
       </div>
 
       {/* Modal de Criação/Edição (Placeholder) */}
-      {showModal && (
+      {showFormModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg shadow-xl max-w-full sm:max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6 border-b border-neutral-200 flex items-center justify-between sticky top-0 bg-white">
@@ -541,7 +616,7 @@ export default function EscalasAdmin() {
               </h3>
               <button
                 onClick={() => {
-                  setShowModal(false);
+                  setShowFormModal(false);
                   setEscalaEditando(null);
                 }}
                 className="text-neutral-500 hover:text-neutral-700"
@@ -628,7 +703,7 @@ export default function EscalasAdmin() {
             <div className="p-6 border-t border-neutral-200 flex gap-3 justify-end sticky bottom-0 bg-white">
               <button
                 onClick={() => {
-                  setShowModal(false);
+                  setShowFormModal(false);
                   setEscalaEditando(null);
                 }}
                 className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors"
@@ -637,7 +712,7 @@ export default function EscalasAdmin() {
               </button>
               <button
                 onClick={handleSalvarEscala}
-                className="px-4 py-2 bg-gov-blue text-white rounded-lg hover:bg-gov-blue-dark transition-colors"
+                className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-colors font-medium"
               >
                 {modoEdicao ? 'Atualizar' : 'Criar'} Escala
               </button>
@@ -658,5 +733,6 @@ export default function EscalasAdmin() {
         />
       )}
     </div>
+    </AdminLayout>
   );
 }

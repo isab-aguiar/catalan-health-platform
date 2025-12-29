@@ -12,9 +12,6 @@ export default function AdminHeader({ onMenuClick, onLogout }) {
           <Building2 className="w-5 h-5 text-neutral-700" />
           <h1
             className="text-base font-bold text-neutral-900"
-            style={{
-              fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-            }}
           >
             ESF Catalão
           </h1>
@@ -31,17 +28,11 @@ export default function AdminHeader({ onMenuClick, onLogout }) {
           <div>
             <p
               className="text-sm font-semibold text-neutral-900"
-              style={{
-                fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-              }}
             >
               {userData?.displayName || "Administrador"}
             </p>
             <p
               className="text-xs text-neutral-600"
-              style={{
-                fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-              }}
             >
               {currentUser?.email}
             </p>

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Phone, Clock, MapPin, ClipboardPlus, Lock, User } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
+import { contactInfo, openingHours } from '../../config';
 
 export default function MobileMenu({ isOpen, onClose, navLinks }) {
   const { currentUser } = useAuth();
@@ -84,25 +85,25 @@ export default function MobileMenu({ isOpen, onClose, navLinks }) {
             <div className="space-y-2 text-sm text-neutral-700">
               <div className="flex items-center gap-2">
                 <Phone size={16} className="text-primary-600 flex-shrink-0" />
-                <p>(37) 3229-6080</p>
+                <p>{contactInfo.phones.reception.display}</p>
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={16} className="text-primary-600 flex-shrink-0" />
-                <p>07:00 - 17:00 (Seg-Sex)</p>
+                <p>{openingHours.reception.weekdays} (Seg-Sex)</p>
               </div>
               <div className="flex items-center gap-2">
                 <ClipboardPlus
                   size={16}
                   className="text-primary-600 flex-shrink-0"
                 />
-                <p>Saúde na Hora: 17:00 - 22:00</p>
+                <p>Saúde na Hora: {openingHours.reception.saudeNaHora}</p>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={16} className="text-primary-600 flex-shrink-0" />
                 <p>
-                  Rua Júlio Nogueira, 1320
+                  {contactInfo.address.main.street}
                   <br />
-                  São José, Divinópolis - MG
+                  {contactInfo.address.main.neighborhood}, {contactInfo.address.main.city} - {contactInfo.address.main.state}
                 </p>
               </div>
             </div>

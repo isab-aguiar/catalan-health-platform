@@ -40,7 +40,6 @@ export default function Sidebar({ isOpen, onClose }) {
     { name: 'Bolsa Família e Serviço Social', path: '/servicos/bolsa-familia' },
     { name: 'REMSA', path: '/remsa' },
     { name: 'Agentes Comunitários de Saúde', path: '/acs' },
-    { name: 'Educação em Saúde', path: '/educacao' },
   ];
 
   if (!isOpen) return null;

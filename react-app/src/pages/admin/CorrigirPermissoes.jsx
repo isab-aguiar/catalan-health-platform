@@ -19,7 +19,6 @@ export default function CorrigirPermissoes() {
     setLoading(true);
     setResult(null);
     try {
-      console.log("🔧 Corrigindo permissões para:", currentUser.uid);
       const result = await setUserData(currentUser.uid, {
         email: currentUser.email || userData?.email || "",
         displayName:
@@ -28,7 +27,6 @@ export default function CorrigirPermissoes() {
         active: true,
       });
       if (result.success) {
-        console.log("✅ Permissões corrigidas:", result.data);
         setResult({
           success: true,
           message:

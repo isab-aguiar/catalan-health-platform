@@ -16,9 +16,6 @@ export default function AvisosList() {
       <div className="py-8 px-4">
         <div
           className="bg-error/10 border border-red-300 text-error rounded-md p-4 text-center"
-          style={{
-            fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-          }}
         >
           <p className="text-sm">
             Erro ao carregar avisos. Tente novamente mais tarde.
@@ -39,18 +36,12 @@ export default function AvisosList() {
             <Bell className="w-5 h-5 text-neutral-700" />
             <h2
               className="text-xl md:text-2xl font-semibold text-neutral-900"
-              style={{
-                fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-              }}
             >
               Avisos Importantes
             </h2>
           </div>
           <p
             className="text-neutral-600 text-sm"
-            style={{
-              fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-            }}
           >
             Fique por dentro das informações e atualizações da unidade
           </p>

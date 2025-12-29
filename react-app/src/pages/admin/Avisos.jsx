@@ -4,7 +4,7 @@ import { usePermissions } from "../../hooks/usePermissions";
 import AdminLayout from "../../layouts/AdminLayout";
 import AvisosTable from "../../components/admin/AvisosTable";
 import PermissionGate from "../../components/auth/PermissionGate";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
+import { LoadingSpinner } from "../../components/common";
 import {
   Plus,
   X,
@@ -49,7 +49,6 @@ export default function Avisos() {
     }
   }, [showModal]);
 
-  // Abrir modal para criar novo aviso
   const handleNovoAviso = () => {
     setEditingAviso(null);
     setFormData({

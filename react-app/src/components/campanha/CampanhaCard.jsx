@@ -52,14 +52,6 @@ const CampanhaCard = memo(({ campanha, onClick }) => {
           onClick={handleClick}
         />
       );
-    case "educacao":
-      return (
-        <TemplateEducacao
-          campanha={campanha}
-          estilo={estilo}
-          onClick={handleClick}
-        />
-      );
     case "evento":
       return (
         <TemplateEvento
@@ -228,81 +220,6 @@ const TemplateMaterial = ({ campanha, estilo, onClick }) => {
             <Calendar className="w-4 h-4 inline mr-1" />
             Atualizado em {formatarData(campanha.atualizadoEm || new Date())}
           </div>
-        )}
-      </div>
-    </div>
-  );
-};
-const TemplateEducacao = ({ campanha, estilo, onClick }) => {
-  return (
-    <div className={estilo.container}>
-      {}
-      <div className={estilo.header + " relative"}>
-        {campanha.imagemURL && (
-          <>
-            <img
-              src={campanha.imagemURL}
-              alt={campanha.titulo}
-              className={estilo.imagem}
-            />
-            <div className={estilo.overlay}></div>
-            {campanha.imageCredit && (
-              <div className="absolute bottom-0 right-0 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-tl-md z-10">
-                <p className="text-[10px] sm:text-xs text-white/95 italic font-light">
-                  {campanha.imageCredit}
-                </p>
-              </div>
-            )}
-            <span className={estilo.badge}>
-              <Activity className="w-4 h-4 inline mr-1" />
-              Educação em Saúde
-            </span>
-            <h2 className={estilo.titulo}>{campanha.titulo}</h2>
-          </>
-        )}
-        {!campanha.imagemURL && (
-          <div className="bg-green-600 text-white p-6">
-            <span className="bg-success/100 text-white px-4 py-2 rounded-full text-sm font-semibold inline-block mb-3">
-              <Activity className="w-4 h-4 inline mr-1" />
-              Educação em Saúde
-            </span>
-            <h2 className="text-3xl font-bold text-white">{campanha.titulo}</h2>
-          </div>
-        )}
-      </div>
-      {}
-      <div className={estilo.corpo}>
-        {campanha.subtitulo && (
-          <h3 className={estilo.subtitulo}>{campanha.subtitulo}</h3>
-        )}
-        <p className={estilo.descricao}>{campanha.descricao}</p>
-        {}
-        {campanha.pdfURL && (
-          <div className="mt-4">
-            <PDFViewer
-              pdfURL={campanha.pdfURL}
-              pdfNome={campanha.pdfNome}
-              height={500}
-            />
-          </div>
-        )}
-        {}
-        {campanha.topicos && campanha.topicos.length > 0 && (
-          <div className={estilo.listaTopicos}>
-            {campanha.topicos.map((topico, index) => (
-              <div key={index} className={estilo.topicoItem}>
-                <CheckCircle className={estilo.topicoIcone} />
-                <span>{topico}</span>
-              </div>
-            ))}
-          </div>
-        )}
-        {}
-        {onClick && (
-          <button onClick={onClick} className={estilo.cta + " w-full"}>
-            {campanha.cta || "Saiba Mais"}
-            <ChevronRight className="w-5 h-5 inline ml-2" />
-          </button>
         )}
       </div>
     </div>

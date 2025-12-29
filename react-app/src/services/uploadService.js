@@ -123,9 +123,6 @@ const comprimirImagem = async (file, maxWidth = 1024, quality = 0.7) => {
         canvas.toBlob(
           (blob) => {
             if (blob) {
-              console.log(
-                `✅ Imagem comprimida: ${(file.size / 1024).toFixed(0)}KB → ${(blob.size / 1024).toFixed(0)}KB`
-              );
               resolve(blob);
             } else {
               reject(new Error("Falha na compressão"));
@@ -147,11 +144,9 @@ export const arquivoParaBase64 = async (file) => {
   if (TIPOS_PERMITIDOS.imagens.includes(file.type)) {
     try {
       if (file.size > 300000) {
-        console.log("🔄 Otimizando imagem para processamento instantâneo...");
         arquivoFinal = await comprimirImagem(file, 1024, 0.7);
       }
     } catch (error) {
-      console.warn("⚠️ Falha na compressão, usando original:", error);
       arquivoFinal = file;
     }
   }
@@ -180,7 +175,6 @@ export const prepararParaIA = async (file) => {
       };
     }
     if (tipo === "pdf") {
-      console.log("📄 Processando PDF com Gemini 2.5 Flash...");
       const base64 = await arquivoParaBase64(file);
       return {
         tipo: "pdf",

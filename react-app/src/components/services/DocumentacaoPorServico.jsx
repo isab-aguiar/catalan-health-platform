@@ -73,7 +73,6 @@ export default function DocumentacaoPorServico() {
   const [menuAberto, setMenuAberto] = useState(false);
   const menuRef = useRef(null);
 
-  // Mapeia os procedimentos do arquivo de dados
   const servicosDocumentacao = useMemo(() => mapearProcedimentos(procedimentosMedicos), []);
 
   const servicoAtual = servicoSelecionado

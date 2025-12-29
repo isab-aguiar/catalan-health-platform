@@ -3,77 +3,9 @@ import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
-function PageContainer({ children }) {
-  return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
-}
-function InfoBox({ title, icon, children, variant = "default" }) {
-  const variants = {
-    default: "bg-white border-neutral-200",
-    highlight: "bg-info/10 border-info",
-  };
-  return (
-    <div
-      className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
-    >
-      <div className={`flex items-center gap-3 mb-5 pb-3 border-b ${variant === "highlight" ? "border-neutral-300" : "border-neutral-200"}`}>
-        {icon && <div className="text-primary-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
-      </div>
-      {children}
-    </div>
-  );
-}
-function Alert({ type = "info", children }) {
-  const types = {
-    info: {
-      bg: "bg-info/10",
-      border: "border-info",
-      text: "text-info",
-      icon: "text-info",
-    },
-    warning: {
-      bg: "bg-warning/10",
-      border: "border-warning",
-      text: "text-neutral-900",
-      icon: "text-warning-dark",
-    },
-    success: {
-      bg: "bg-success/10",
-      border: "border-success",
-      text: "text-success-dark",
-      icon: "text-success",
-    },
-  };
-  const childrenText = typeof children === 'string' ? children : children?.props?.children || '';
-  const hasImportante = String(childrenText).toLowerCase().includes('importante:');
-  const hasNormativa = String(childrenText).toLowerCase().includes('normativa:');
-  
-  let style = types[type] || types.info;
-  if (hasNormativa && type === 'warning') {
-    style = {
-      bg: "bg-warning/10",
-      border: "border-warning",
-      text: "text-neutral-900",
-      icon: "text-warning-dark",
-    };
-  }
-  
-  const textColor = hasImportante ? 'text-info' : (type === 'warning' ? 'text-warning-dark' : 'text-info');
-  const strongColor = hasImportante ? '[&_strong]:text-info' : (type === 'warning' ? '[&_strong]:text-warning-dark' : type === 'info' ? '[&_strong]:text-info' : '');
-  return (
-    <div
-      className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
-    >
-      <div className="flex gap-3">
-        <AlertCircle
-          size={20}
-          className={`flex-shrink-0 mt-0.5 ${style.icon}`}
-        />
-        <div className={`text-sm leading-relaxed ${textColor} [&_strong]:font-bold ${strongColor}`}>{children}</div>
-      </div>
-    </div>
-  );
-}
+import PageContainer from "../../components/layout/PageContainer";
+import { Alert } from "../../components/common/Alert";
+import InfoBox from "../../components/common/InfoBox";
 export default function Sala9() {
   return (
     <PageContainer>
@@ -85,17 +17,11 @@ export default function Sala9() {
             <div>
               <h1
                 className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Sala de Atendimento Administrativo
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
@@ -173,7 +99,7 @@ export default function Sala9() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Documentos Necessários" variant="highlight">
+        <InfoBox title="Documentos Necessários" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">
             Para atendimento neste setor, é obrigatória a apresentação da
             seguinte documentação:

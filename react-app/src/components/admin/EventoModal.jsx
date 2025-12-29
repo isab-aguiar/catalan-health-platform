@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { X, Upload, Trash2, Calendar, Clock, Users, MapPin, FileText, Bell } from 'lucide-react';
 import { criarEvento, atualizarEvento, TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
+import { useModal } from '../../contexts/ModalContext';
 
 export default function EventoModal({ isOpen, onClose, eventoEditando = null, dataInicial = null, onEventoSalvo }) {
   const { currentUser } = useAuth();
+  const { showModal } = useModal();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     titulo: '',
@@ -26,7 +28,6 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
 
   useEffect(() => {
     if (eventoEditando) {
-      // Edição de evento existente
       setFormData({
         titulo: eventoEditando.titulo || '',
         descricao: eventoEditando.descricao || '',
@@ -46,7 +47,6 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
         lembreteMinutos: eventoEditando.lembreteMinutos || 30,
       });
     } else if (dataInicial) {
-      // Novo evento com data pré-selecionada
       setFormData({
         ...formData,
         dataInicio: dataInicial.toISOString().split('T')[0],
@@ -59,7 +59,12 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
     e.preventDefault();
 
     if (!formData.titulo || !formData.dataInicio) {
-      alert('Título e data de início são obrigatórios');
+      await showModal({
+        type: 'warning',
+        title: 'Campos Obrigatórios',
+        message: 'Por favor, preencha o título e a data de início do evento.',
+        confirmText: 'OK'
+      });
       return;
     }
 
@@ -73,10 +78,20 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
 
       if (eventoEditando?.id) {
         await atualizarEvento(eventoEditando.id, eventoData);
-        alert('Evento atualizado com sucesso!');
+        await showModal({
+          type: 'success',
+          title: 'Evento Atualizado',
+          message: 'Evento atualizado com sucesso!',
+          confirmText: 'OK'
+        });
       } else {
         await criarEvento(eventoData, currentUser.uid);
-        alert('Evento criado com sucesso!');
+        await showModal({
+          type: 'success',
+          title: 'Evento Criado',
+          message: 'Evento criado com sucesso!',
+          confirmText: 'OK'
+        });
       }
 
       if (onEventoSalvo) {
@@ -86,7 +101,12 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
       handleClose();
     } catch (error) {
       console.error('Erro ao salvar evento:', error);
-      alert('Erro ao salvar evento: ' + error.message);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Salvar',
+        message: `Não foi possível salvar o evento: ${error.message}`,
+        confirmText: 'OK'
+      });
     } finally {
       setLoading(false);
     }
@@ -413,7 +433,7 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="px-4 py-2 bg-gov-blue text-white rounded-lg hover:bg-gov-blue-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
             {loading ? (
               <>

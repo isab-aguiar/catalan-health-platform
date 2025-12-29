@@ -12,6 +12,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logoPrefeitura from '../../assets/logo_mobile.png';
 import logoSemusa from '../../assets/logo-semusa.png';
 import logoESF from '../../assets/logo-esf.png';
+import { contactInfo, openingHours } from '../../config';
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -89,16 +90,16 @@ export default function Footer() {
                   </p>
                 </div>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Rua+Júlio+Nogueira+1320+São+José+Divinópolis+MG"
+                  href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.main.mapsQuery}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors leading-relaxed"
                 >
-                  <p>Rua Júlio Nogueira, nº 1320</p>
-                  <p>Bairro São José</p>
-                  <p>Divinópolis - MG</p>
+                  <p>{contactInfo.address.main.street}</p>
+                  <p>{contactInfo.address.main.neighborhood}</p>
+                  <p>{contactInfo.address.main.city} - {contactInfo.address.main.state}</p>
                   <p className="text-xs text-neutral-600 mt-1">
-                    CEP: 35501-170
+                    CEP: {contactInfo.address.main.cep}
                   </p>
                 </a>
               </div>
@@ -112,9 +113,9 @@ export default function Footer() {
                 </div>
                 <div className="pl-7 text-sm text-neutral-700 leading-relaxed">
                   <p>Segunda a Sexta-feira</p>
-                  <p>07h00 às 17h00</p>
+                  <p>{openingHours.reception.weekdays}</p>
                   <p className="mt-2 text-neutral-900 font-medium">
-                    Saúde na Hora: 17h00 às 22h00
+                    Saúde na Hora: {openingHours.reception.saudeNaHora}
                   </p>
                 </div>
               </div>
@@ -127,10 +128,10 @@ export default function Footer() {
                   </p>
                 </div>
                 <a
-                  href="tel:+553732296080"
+                  href={`tel:${contactInfo.phones.reception.tel}`}
                   className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors font-medium"
                 >
-                  (37) 3229-6080
+                  {contactInfo.phones.reception.display}
                 </a>
               </div>
 
@@ -142,10 +143,10 @@ export default function Footer() {
                   </p>
                 </div>
                 <a
-                  href="mailto:staff.sj21@gmail.com"
+                  href={`mailto:${contactInfo.emails.general}`}
                   className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors break-all"
                 >
-                  staff.sj21@gmail.com
+                  {contactInfo.emails.general}
                 </a>
               </div>
             </div>

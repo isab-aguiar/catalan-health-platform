@@ -99,15 +99,15 @@ export default function CampanhaCarousel({ campanhas = [], onCampanhaClick }) {
 
       {}
       <div className="mt-4 space-y-2">
-        <h3 className="text-lg sm:text-xl font-bold text-neutral-900 leading-tight">
+        <h3 className="text-base sm:text-lg md:text-xl font-bold text-neutral-900 leading-tight">
           {currentCampanha.titulo}
         </h3>
         {currentCampanha.subtitulo && (
-          <p className="text-sm text-neutral-600 italic">
+          <p className="text-xs sm:text-sm text-neutral-600 italic">
             {currentCampanha.subtitulo}
           </p>
         )}
-        <p className="text-sm text-neutral-700 leading-relaxed line-clamp-2">
+        <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed line-clamp-2">
           {currentCampanha.descricao}
         </p>
       </div>

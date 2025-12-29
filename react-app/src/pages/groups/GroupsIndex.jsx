@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import PageContainer from "../../components/layout/PageContainer";
-import InfoBox from "../../components/common/InfoBox";
-import Alert from "../../components/common/Alert";
+import { PageContainer } from "../../components/layout";
+import { InfoBox, Alert, BackButton } from "../../components/common";
 import {
   Users,
   Stethoscope,
@@ -21,7 +20,6 @@ import {
   UserPlus,
   Sparkles,
 } from "lucide-react";
-import BackButton from "../../components/common/BackButton";
 export default function GroupsIndex() {
   return (
     <PageContainer>

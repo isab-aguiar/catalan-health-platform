@@ -83,7 +83,6 @@ const AssistenteSocial = lazyLoad(
 const Dentistas = lazyLoad(() => import("./pages/team/Dentistas"));
 const Pediatra = lazyLoad(() => import("./pages/team/Pediatra"));
 const REMSA = lazyLoad(() => import("./pages/REMSA"));
-const Educacao = lazyLoad(() => import("./pages/Educacao"));
 const CampanhaDetalhe = lazyLoad(() => import("./pages/CampanhaDetalhe"));
 const Login = lazyLoad(() => import("./pages/admin/Login"));
 const Painel = lazyLoad(() => import("./pages/admin/Painel"));
@@ -204,7 +203,6 @@ function App() {
                       {}
                       <Route path="/acs" element={<ACSPage />} />
                       <Route path="/remsa" element={<REMSA />} />
-                      <Route path="/educacao" element={<Educacao />} />
                       <Route path="/campanhas/:id" element={<CampanhaDetalhe />} />
                       {}
                       <Route path="/admin/login" element={<Login />} />

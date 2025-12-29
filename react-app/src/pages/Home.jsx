@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SearchSection from "../components/search/SearchSection";
-import ImageGallery from "../components/common/ImageGallery";
+import { ImageGallery, LoadingSpinner } from "../components/common";
 import AvisosList from "../components/avisos/AvisosList";
 import CampanhaCarousel from "../components/campanha/CampanhaCarousel";
 import CampanhaInfoCard from "../components/campaign/CampanhaInfoCard";
 import { useCampanhas } from "../hooks/useCampanhas";
-import LoadingSpinner from "../components/common/LoadingSpinner";
 import { useAuth } from "../contexts/AuthContext";
 import { usePermissions } from "../hooks/usePermissions";
+import { contactInfo, openingHours, socialMedia } from "../config";
 import {
   Phone,
   MapPin,
@@ -17,7 +17,6 @@ import {
   Hospital,
   Users,
   BriefcaseMedical,
-  BookOpen,
   GraduationCap,
   HeartHandshake,
   Building2,
@@ -57,7 +56,7 @@ const getCaptionFromFilename = (imagePath) => {
     {
       pattern: "foto-unidade",
       caption:
-        "Fachada da Unidade de Saúde ESF Catalão - Rua Júlio Nogueira, 1320, São José",
+        `Fachada da Unidade de Saúde ESF Catalão - ${contactInfo.address.main.street}, ${contactInfo.address.main.neighborhood}`,
     },
     {
       pattern: "equipe-esf-catalao-belavista-saojose",
@@ -163,7 +162,7 @@ export default function Home() {
               <p className="text-base md:text-lg font-medium text-neutral-500 uppercase tracking-wider mb-2">
                 Estratégia Saúde da Família
               </p>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-2">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 mb-2">
                 <span className="text-primary-600 font-display font-bold tracking-wide uppercase">
                   ESF CATALÃO
                 </span>
@@ -228,10 +227,10 @@ export default function Home() {
                             Telefone
                           </p>
                           <a
-                            href="tel:+553732296080"
+                            href={`tel:${contactInfo.phones.reception.tel}`}
                             className="text-lg sm:text-xl font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
                           >
-                            (37) 3229-6080
+                            {contactInfo.phones.reception.display}
                           </a>
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
@@ -239,8 +238,8 @@ export default function Home() {
                             Horário de Funcionamento
                           </p>
                           <div className="space-y-1 text-sm sm:text-base text-neutral-700">
-                            <p>Segunda a Sexta: 07:00 - 17:00</p>
-                            <p>Saúde na Hora: 17:00 - 22:00</p>
+                            <p>Segunda a Sexta: {openingHours.reception.weekdays}</p>
+                            <p>Saúde na Hora: {openingHours.reception.saudeNaHora}</p>
                           </div>
                         </div>
                       </div>
@@ -264,7 +263,7 @@ export default function Home() {
                           </p>
                           <div className="space-y-2">
                             <a
-                              href="https://wa.me/5537991770200"
+                              href={`https://wa.me/${contactInfo.phones.whatsapp.admin1.wa}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-success transition-colors"
@@ -273,10 +272,10 @@ export default function Home() {
                                 size={18}
                                 className="text-success flex-shrink-0"
                               />
-                              <span>(37) 99177-0200</span>
+                              <span>{contactInfo.phones.whatsapp.admin1.display}</span>
                             </a>
                             <a
-                              href="https://wa.me/5537991520024"
+                              href={`https://wa.me/${contactInfo.phones.whatsapp.admin2.wa}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-success transition-colors"
@@ -285,7 +284,7 @@ export default function Home() {
                                 size={18}
                                 className="text-success flex-shrink-0"
                               />
-                              <span>(37) 99152-0024</span>
+                              <span>{contactInfo.phones.whatsapp.admin2.display}</span>
                             </a>
                           </div>
                         </div>
@@ -294,7 +293,7 @@ export default function Home() {
                             Horário de Atendimento ao Público
                           </p>
                           <p className="text-sm sm:text-base text-neutral-700">
-                            07:00 às 12:00 | 13:00 às 16:30
+                            {openingHours.administrative.full}
                           </p>
                         </div>
                       </div>
@@ -317,10 +316,10 @@ export default function Home() {
                             Telefone
                           </p>
                           <a
-                            href="tel:+553732296082"
+                            href={`tel:${contactInfo.phones.dental.tel}`}
                             className="text-lg sm:text-xl font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
                           >
-                            (37) 3229-6082
+                            {contactInfo.phones.dental.display}
                           </a>
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
@@ -328,7 +327,7 @@ export default function Home() {
                             Horário de Atendimento ao Público
                           </p>
                           <p className="text-sm sm:text-base text-neutral-700">
-                            07:00 às 12:00 | 13:00 às 17:00
+                            {openingHours.dental.full}
                           </p>
                         </div>
                       </div>
@@ -351,10 +350,10 @@ export default function Home() {
                             Telefone
                           </p>
                           <a
-                            href="tel:+553732296081"
+                            href={`tel:${contactInfo.phones.pharmacy.tel}`}
                             className="text-lg sm:text-xl font-semibold text-neutral-900 hover:text-primary-600 transition-colors"
                           >
-                            (37) 3229-6081
+                            {contactInfo.phones.pharmacy.display}
                           </a>
                         </div>
                         <div className="pt-2 border-t border-neutral-200">
@@ -362,7 +361,7 @@ export default function Home() {
                             Horário de Atendimento ao Público
                           </p>
                           <p className="text-sm sm:text-base text-neutral-700">
-                            07:30 às 16:00
+                            {openingHours.pharmacy.full}
                           </p>
                         </div>
                       </div>
@@ -385,10 +384,10 @@ export default function Home() {
                             Horário de Atendimento ao Público
                           </p>
                           <p className="text-sm sm:text-base text-neutral-700 mb-1">
-                            07:00 às 08:00
+                            {openingHours.bloodCollection.time}
                           </p>
                           <p className="text-sm text-neutral-500 italic">
-                            Mediante horário agendado
+                            {openingHours.bloodCollection.note}
                           </p>
                         </div>
                       </div>
@@ -410,16 +409,16 @@ export default function Home() {
                           Localização
                         </p>
                         <a
-                          href="https://www.google.com/maps/search/?api=1&query=Rua+Júlio+Nogueira+1320+São+José+Divinópolis+MG"
+                          href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.main.mapsQuery}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sm sm:text-base text-neutral-700 hover:text-primary-600 transition-colors block leading-relaxed"
                         >
-                          Rua Júlio Nogueira, 1320
+                          {contactInfo.address.main.street}
                           <br />
-                          Bairro São José
+                          {contactInfo.address.main.neighborhood}
                           <br />
-                          Divinópolis - MG
+                          {contactInfo.address.main.city} - {contactInfo.address.main.state}
                         </a>
                       </div>
                     </div>
@@ -430,39 +429,39 @@ export default function Home() {
               <div className="bg-neutral-50 rounded-lg p-4 sm:p-5 border border-neutral-200">
                 <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm sm:text-base text-neutral-700">
                   <a
-                    href="mailto:staff.sj21@gmail.com"
+                    href={`mailto:${contactInfo.emails.general}`}
                     className="flex items-center gap-2 hover:text-primary-600 hover:underline transition-colors"
                   >
                     <Mail size={16} className="text-neutral-600" />
-                    <span>staff.sj21@gmail.com</span>
+                    <span>{contactInfo.emails.general}</span>
                   </a>
                   <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
                   <a
-                    href="https://instagram.com/esfcatalao"
+                    href={socialMedia.esfCatalao.instagram.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-pink-600 hover:underline transition-colors"
                   >
                     <Instagram size={16} className="text-neutral-600" />
-                    <span>@esfcatalao</span>
+                    <span>{socialMedia.esfCatalao.instagram.handle}</span>
                   </a>
                   <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
                   <a
-                    href="tel:192"
+                    href={`tel:${contactInfo.emergency.samu.tel}`}
                     className="flex items-center gap-2 hover:text-error hover:underline transition-colors"
                   >
                     <Phone size={16} className="text-neutral-600" />
-                    <span>Emergência SAMU: 192</span>
+                    <span>Emergência SAMU: {contactInfo.emergency.samu.display}</span>
                   </a>
                   <div className="hidden md:block w-px h-4 bg-neutral-300"></div>
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=UPA+Padre+Roberto+Divinópolis+MG"
+                    href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.emergency.upa.mapsQuery}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 hover:text-primary-600 hover:underline transition-colors"
                   >
                     <Hospital size={16} className="text-neutral-600" />
-                    <span>Plantão 24h: UPA Padre Roberto</span>
+                    <span>Plantão 24h: {contactInfo.emergency.upa.name}</span>
                   </a>
                 </div>
               </div>
@@ -591,27 +590,6 @@ export default function Home() {
               </h3>
               <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
                 Calendário Nacional de Vacinação e horários de atendimento
-              </p>
-              <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
-                <span>Consultar</span>
-                <ArrowRight
-                  size={16}
-                  className="md:w-[18px] md:h-[18px] group-hover:translate-x-1 transition-transform"
-                />
-              </div>
-            </Link>
-            <Link
-              to="/educacao"
-              className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
-            >
-              <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                <BookOpen className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
-              </div>
-              <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900">
-                Educação em Saúde
-              </h3>
-              <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">
-                Informações e orientações sobre saúde e prevenção
               </p>
               <div className="flex items-center gap-2 text-xs md:text-sm font-semibold text-primary-600 group-hover:text-primary-700">
                 <span>Consultar</span>
@@ -800,7 +778,7 @@ export default function Home() {
                 </p>
                 <div className="flex justify-center">
                   <a
-                    href="https://instagram.com/esfcatalao"
+                    href={socialMedia.esfCatalao.instagram.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
@@ -828,7 +806,7 @@ export default function Home() {
                 </p>
                 <div className="flex flex-col gap-3">
                   <a
-                    href="https://www.instagram.com/prefeituradivinopolis/"
+                    href={socialMedia.prefeitura.instagram.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
@@ -838,7 +816,7 @@ export default function Home() {
                     <span>Instagram</span>
                   </a>
                   <a
-                    href="https://www.facebook.com/prefeituradedivinopolis/?locale=pt_BR"
+                    href={socialMedia.prefeitura.facebook.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
@@ -848,7 +826,7 @@ export default function Home() {
                     <span>Facebook</span>
                   </a>
                   <a
-                    href="https://www.youtube.com/channel/UCZBIy0f8g0QuAUBLngFnNdQ"
+                    href={socialMedia.prefeitura.youtube.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-3 px-6 py-3 bg-red-600 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
@@ -876,7 +854,7 @@ export default function Home() {
                 </p>
                 <div className="flex justify-center">
                   <a
-                    href="https://www.instagram.com/semusadivinopolis/"
+                    href={socialMedia.semusa.instagram.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-tr from-purple-600 via-pink-600 to-orange-500 text-white rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
@@ -905,19 +883,8 @@ export default function Home() {
           <p className="text-neutral-700 mb-3 text-center text-base">
             Em situações de emergência médica, acione imediatamente o Serviço de
             Atendimento Móvel de Urgência (SAMU) pelo telefone{" "}
-            <span className="font-bold text-error">192</span>
+            <span className="font-bold text-error">{contactInfo.emergency.samu.display}</span>
           </p>
-          <div className="text-center">
-            <Link
-              to="/educacao"
-              className="inline-flex items-center gap-2 text-sm text-neutral-700 hover:text-neutral-900 underline transition-colors font-medium"
-            >
-              <span>
-                Orientações para identificação de emergências clínicas
-              </span>
-              <ArrowRight size={16} />
-            </Link>
-          </div>
         </div>
       </section>
     </div>

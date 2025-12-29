@@ -13,12 +13,9 @@ export default function RecommendedReadingCarousel({ pageId }) {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercentage = (scrollTop / scrollHeight) * 100;
-
-      // Mostra quando o usuário rolar 60% da página
       setIsVisible(scrollPercentage >= 60);
     };
 
-    // Adiciona um pequeno delay para garantir que o DOM está carregado
     const timeoutId = setTimeout(() => {
       handleScroll();
     }, 100);
@@ -51,10 +48,8 @@ export default function RecommendedReadingCarousel({ pageId }) {
   };
 
   const handleLinkClick = (e, path) => {
-    // Se o path contém uma âncora (#), precisamos garantir que o scroll aconteça
     if (path.includes('#')) {
       const [pathname, hash] = path.split('#');
-      // Se já estamos na página correta, apenas faça scroll
       if (window.location.pathname === pathname) {
         e.preventDefault();
         const element = document.getElementById(hash);

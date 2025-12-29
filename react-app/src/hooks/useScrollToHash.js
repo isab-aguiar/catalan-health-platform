@@ -9,16 +9,11 @@ export default function useScrollToHash() {
   const location = useLocation();
 
   useEffect(() => {
-    // Se a URL tem um hash (ex: /servicos/procedimentos#testes-rapidos)
     if (location.hash) {
-      // Remove o # do início
       const elementId = location.hash.substring(1);
-
-      // Tenta encontrar o elemento com o ID
       const element = document.getElementById(elementId);
 
       if (element) {
-        // Pequeno delay para garantir que a página foi renderizada
         setTimeout(() => {
           element.scrollIntoView({
             behavior: 'smooth',
@@ -27,7 +22,6 @@ export default function useScrollToHash() {
         }, 100);
       }
     } else {
-      // Se não há hash, volta para o topo da página
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location.pathname, location.hash]);

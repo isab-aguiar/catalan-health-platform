@@ -1,6 +1,5 @@
-import PageContainer from "../../components/layout/PageContainer";
-import Card from "../../components/common/Card";
-import BackButton from "../../components/common/BackButton";
+import { PageContainer } from "../../components/layout";
+import { Card, BackButton } from "../../components/common";
 import { professionalsData } from "../../data/professionals";
 export default function TeamIndex() {
   return (

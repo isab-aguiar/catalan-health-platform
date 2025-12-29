@@ -6,64 +6,10 @@ import VacinasDisponiveis from "../../components/vacinas/VacinasDisponiveis";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
-function PageContainer({ children }) {
-  return <div className="min-h-screen bg-slate-50 py-8 px-4">{children}</div>;
-}
-function InfoBox({ title, icon, children, variant = "default" }) {
-  const variants = {
-    default: "bg-white border-slate-200",
-    highlight: "bg-blue-50 border-primary-700",
-  };
-  return (
-    <div
-      className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
-    >
-      {title && (
-      <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
-        {icon && <div className="text-blue-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-slate-800">{title}</h2>
-      </div>
-      )}
-      {children}
-    </div>
-  );
-}
-function Alert({ type = "info", children }) {
-  const types = {
-    info: {
-      bg: "bg-blue-50",
-      border: "border-blue-300",
-      text: "text-blue-900",
-      icon: "text-blue-600",
-    },
-    warning: {
-      bg: "bg-amber-50",
-      border: "border-amber-300",
-      text: "text-amber-900",
-      icon: "text-amber-600",
-    },
-    success: {
-      bg: "bg-green-50",
-      border: "border-green-300",
-      text: "text-green-900",
-      icon: "text-green-600",
-    },
-  };
-  const style = types[type] || types.info;
-  return (
-    <div
-      className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
-    >
-      <div className="flex gap-3">
-        <AlertCircle
-          size={20}
-          className={`flex-shrink-0 mt-0.5 ${style.icon}`}
-        />
-        <div className="text-sm leading-relaxed">{children}</div>
-      </div>
-    </div>
-  );
-}
+import PageContainer from "../../components/layout/PageContainer";
+import { Alert } from "../../components/common/Alert";
+import InfoBox from "../../components/common/InfoBox";
+import { contactInfo, openingHours } from "../../config";
 export default function Vacinas() {
   return (
     <PageContainer>
@@ -75,17 +21,11 @@ export default function Vacinas() {
             <div>
               <h1
                 className="text-xl md:text-3xl font-bold text-slate-900 whitespace-normal md:whitespace-nowrap"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Sala de Vacinação
               </h1>
               <p
                 className="text-slate-500 text-xs mt-1"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
@@ -102,11 +42,10 @@ export default function Vacinas() {
         </div>
         {}
         <InfoBox title="Horários de Atendimento">
-          {/* Versão Desktop */}
-          <div className="hidden md:block overflow-x-auto">
+          <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-slate-300">
-              <thead>
-                <tr className="bg-slate-100">
+              <thead className="bg-slate-100">
+                <tr>
                   <th className="border border-slate-300 px-4 py-3 text-left font-semibold text-slate-700 text-sm">
                     Período
                   </th>
@@ -124,7 +63,7 @@ export default function Vacinas() {
                     <strong className="text-slate-800">Manhã</strong>
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    07h00 às 11h00
+                    {openingHours.vaccines.morning.display}
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
                     Profissional Responsável:<br/>
@@ -137,7 +76,7 @@ export default function Vacinas() {
                     <strong className="text-slate-800">Tarde</strong>
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    13h00 às 17h00
+                    {openingHours.vaccines.afternoon.display}
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
                     Profissional Responsável:<br/>
@@ -150,7 +89,7 @@ export default function Vacinas() {
                     <strong className="text-slate-800">Saúde na Hora</strong>
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
-                    17h00 às 22h00
+                    {openingHours.vaccines.saudeNaHora.display}
                   </td>
                   <td className="border border-slate-300 px-4 py-3 text-slate-700">
                     Profissional Responsável:<br/>
@@ -160,72 +99,6 @@ export default function Vacinas() {
                 </tr>
               </tbody>
             </table>
-          </div>
-
-          {/* Versão Mobile */}
-          <div className="md:hidden space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Manhã
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Thaciane Souza</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Tarde
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">13h00 às 17h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Tatiane Aparecida</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-600 text-white text-sm font-semibold px-3 py-1 rounded">
-                  Saúde na Hora
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">17h00 às 22h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Alessandra Silva</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
-                </div>
-              </div>
-            </div>
           </div>
           <div className="mt-4">
             <Alert type="info">
@@ -249,7 +122,7 @@ export default function Vacinas() {
           </div>
         </InfoBox>
         {}
-        <InfoBox variant="highlight">
+        <InfoBox highlight={true}>
           {}
           <div className="mb-6">
             <VacinasDisponiveis />
@@ -426,33 +299,33 @@ export default function Vacinas() {
                     <div className="flex items-start gap-2">
                       <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <a
-                        href="https://www.google.com/maps/search/?api=1&query=Rua+Olimpio+Moreira,+369,+Interlagos,+Divinópolis,+MG"
+                        href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.centralImunizacao.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        Rua Olimpio Moreira, 369 – Bairro Interlagos
+                        {contactInfo.address.referenceUnits.centralImunizacao.street} – {contactInfo.address.referenceUnits.centralImunizacao.neighborhood}
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
                       <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <div className="flex flex-wrap gap-2">
-                        <a href="tel:+553732296831" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          (37) 3229-6831
+                        <a href={`tel:${contactInfo.phones.referenceUnits.centralImunizacao.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          {contactInfo.phones.referenceUnits.centralImunizacao.display}
                         </a>
-                        <span className="text-neutral-400">/</span>
-                        <a href="tel:+553732296832" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          6832
-                        </a>
-                        <span className="text-neutral-400">/</span>
-                        <a href="tel:+553732296833" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          6833
-                        </a>
+                        {contactInfo.phones.referenceUnits.centralImunizacao.extensions.map((ext, idx) => (
+                          <span key={idx}>
+                            <span className="text-neutral-400">/</span>
+                            <a href={`tel:+55373229${ext}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                              {ext}
+                            </a>
+                          </span>
+                        ))}
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
                       <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00</p>
+                      <p className="text-neutral-700">{openingHours.referenceUnits.centralImunizacao.full}</p>
                     </div>
                   </div>
                 </div>
@@ -466,29 +339,33 @@ export default function Vacinas() {
                     <div className="flex items-start gap-2">
                       <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <a
-                        href="https://www.google.com/maps/search/?api=1&query=Rua+Nova+Serrana,+68,+Afonso+Pena,+Divinópolis,+MG"
+                        href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.esfAfonsoPena.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        Rua Nova Serrana, 68 – Bairro Afonso Pena
+                        {contactInfo.address.referenceUnits.esfAfonsoPena.street} – {contactInfo.address.referenceUnits.esfAfonsoPena.neighborhood}
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
                       <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <div className="flex flex-wrap gap-2">
-                        <a href="tel:+553732296880" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          (37) 3229-6880
+                        <a href={`tel:${contactInfo.phones.referenceUnits.esfAfonsoPena.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          {contactInfo.phones.referenceUnits.esfAfonsoPena.display}
                         </a>
-                        <span className="text-neutral-400">/</span>
-                        <a href="tel:+553732296879" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          6879
-                        </a>
+                        {contactInfo.phones.referenceUnits.esfAfonsoPena.extensions.map((ext, idx) => (
+                          <span key={idx}>
+                            <span className="text-neutral-400">/</span>
+                            <a href={`tel:+55373229${ext}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                              {ext}
+                            </a>
+                          </span>
+                        ))}
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
                       <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00 e das 18:00 às 21:00</p>
+                      <p className="text-neutral-700">{openingHours.referenceUnits.esfAfonsoPena.full}</p>
                     </div>
                   </div>
                 </div>
@@ -502,29 +379,33 @@ export default function Vacinas() {
                     <div className="flex items-start gap-2">
                       <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <a
-                        href="https://www.google.com/maps/search/?api=1&query=Rua+Esmeralda,+160,+Niterói,+Divinópolis,+MG"
+                        href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.esfNiteroi.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        Rua Esmeralda, 160 – Bairro Niterói
+                        {contactInfo.address.referenceUnits.esfNiteroi.street} – {contactInfo.address.referenceUnits.esfNiteroi.neighborhood}
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
                       <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <div className="flex flex-wrap gap-2">
-                        <a href="tel:+553732296010" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          (37) 3229-6010
+                        <a href={`tel:${contactInfo.phones.referenceUnits.esfNiteroi.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          {contactInfo.phones.referenceUnits.esfNiteroi.display}
                         </a>
-                        <span className="text-neutral-400">/</span>
-                        <a href="tel:+553732296012" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          6012
-                        </a>
+                        {contactInfo.phones.referenceUnits.esfNiteroi.extensions.map((ext, idx) => (
+                          <span key={idx}>
+                            <span className="text-neutral-400">/</span>
+                            <a href={`tel:+55373229${ext}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                              {ext}
+                            </a>
+                          </span>
+                        ))}
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
                       <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00 e das 18:00 às 21:00</p>
+                      <p className="text-neutral-700">{openingHours.referenceUnits.esfNiteroi.full}</p>
                     </div>
                   </div>
                 </div>
@@ -538,33 +419,33 @@ export default function Vacinas() {
                     <div className="flex items-start gap-2">
                       <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <a
-                        href="https://www.google.com/maps/search/?api=1&query=Rua+Itambé,+5,+Planalto,+Divinópolis,+MG"
+                        href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.esfPlanalto.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        Rua Itambé, 5 – Bairro Planalto
+                        {contactInfo.address.referenceUnits.esfPlanalto.street} – {contactInfo.address.referenceUnits.esfPlanalto.neighborhood}
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
                       <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <div className="flex flex-wrap gap-2">
-                        <a href="tel:+553732296031" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          (37) 3229-6031
+                        <a href={`tel:${contactInfo.phones.referenceUnits.esfPlanalto.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                          {contactInfo.phones.referenceUnits.esfPlanalto.display}
                         </a>
-                        <span className="text-neutral-400">/</span>
-                        <a href="tel:+553732296032" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          6032
-                        </a>
-                        <span className="text-neutral-400">/</span>
-                        <a href="tel:+553732296033" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          6033
-                        </a>
+                        {contactInfo.phones.referenceUnits.esfPlanalto.extensions.map((ext, idx) => (
+                          <span key={idx}>
+                            <span className="text-neutral-400">/</span>
+                            <a href={`tel:+55373229${ext}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                              {ext}
+                            </a>
+                          </span>
+                        ))}
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
                       <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00 e das 18:00 às 21:00</p>
+                      <p className="text-neutral-700">{openingHours.referenceUnits.esfPlanalto.full}</p>
                     </div>
                   </div>
                 </div>
@@ -578,23 +459,23 @@ export default function Vacinas() {
                     <div className="flex items-start gap-2">
                       <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
                       <a
-                        href="https://www.google.com/maps/search/?api=1&query=Rua+Castro+Alves,+2085,+São+José,+Divinópolis,+MG"
+                        href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.esfMoradaNova.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        Rua Castro Alves, 2085 – Bairro São José
+                        {contactInfo.address.referenceUnits.esfMoradaNova.street} – {contactInfo.address.referenceUnits.esfMoradaNova.neighborhood}
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
                       <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <a href="tel:+553732296086" className="text-neutral-700 hover:text-primary-600 transition-colors">
-                        (37) 3229-6086
+                      <a href={`tel:${contactInfo.phones.referenceUnits.esfMoradaNova.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                        {contactInfo.phones.referenceUnits.esfMoradaNova.display}
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
                       <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">Segunda a sexta-feira, das 08:00 às 16:00</p>
+                      <p className="text-neutral-700">{openingHours.referenceUnits.esfMoradaNova.full}</p>
                     </div>
                   </div>
                 </div>

@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 import { procedimentosMedicos, informacoesAdicionais } from "../../data/procedimentosMedicos";
 
-// Componente Alert reutilizado
 function Alert({ type = "info", children }) {
   const types = {
     info: {
@@ -61,7 +60,6 @@ function Alert({ type = "info", children }) {
   );
 }
 
-// Componente Badge
 function Badge({ type, children }) {
   const types = {
     filaUnica: "bg-info text-white",
@@ -88,7 +86,6 @@ export default function OrientacoesPosConsulta() {
     ? procedimentosMedicos[procedimentoSelecionado]
     : null;
 
-  // Agrupar procedimentos por categoria
   const procedimentosPorCategoria = useMemo(() => {
     const grupos = {};
     Object.entries(procedimentosMedicos).forEach(([key, proc]) => {
@@ -98,7 +95,6 @@ export default function OrientacoesPosConsulta() {
       grupos[proc.categoria].push({ key, ...proc });
     });
 
-    // Ordenar alfabeticamente dentro de cada categoria
     Object.keys(grupos).forEach((categoria) => {
       grupos[categoria].sort((a, b) => a.nome.localeCompare(b.nome));
     });
@@ -106,12 +102,10 @@ export default function OrientacoesPosConsulta() {
     return grupos;
   }, []);
 
-  // Ordenar categorias alfabeticamente
   const categoriasOrdenadas = useMemo(() => {
     return Object.keys(procedimentosPorCategoria).sort();
   }, [procedimentosPorCategoria]);
 
-  // Filtrar procedimentos com base na busca
   const procedimentosFiltrados = useMemo(() => {
     if (!termoBusca.trim()) return null;
 
@@ -131,7 +125,6 @@ export default function OrientacoesPosConsulta() {
     return filtrados.sort((a, b) => a.nome.localeCompare(b.nome));
   }, [termoBusca]);
 
-  // Click outside detection
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -158,7 +151,6 @@ export default function OrientacoesPosConsulta() {
     ? procedimentosMedicos[procedimentoSelecionado].nome
     : "Selecione o procedimento médico";
 
-  // Highlight match na busca
   const highlightMatch = (text, search) => {
     if (!search.trim()) return text;
     const parts = text.split(new RegExp(`(${search})`, "gi"));

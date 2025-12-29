@@ -36,7 +36,6 @@ function formatarData(timestamp) {
   } else {
     date = new Date(timestamp);
   }
-  // Formatar para DD/MM/YYYY
   const dia = date.getDate().toString().padStart(2, "0");
   const mes = (date.getMonth() + 1).toString().padStart(2, "0");
   const ano = date.getFullYear();
@@ -53,7 +52,6 @@ export default function AvisoCard({ aviso }) {
         border rounded-md p-4 shadow-sm
         hover:shadow transition-shadow
       `}
-      style={{ fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif' }}
     >
       {}
       <div className="flex items-start justify-between mb-3">

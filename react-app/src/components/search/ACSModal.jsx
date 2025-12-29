@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MapPin, Phone, Stethoscope, UserCircle2, Users, X } from 'lucide-react';
+import { contactInfo } from '../../config';
 
 function getGenderFromName(nome) {
   if (!nome) return 'feminino';
@@ -205,11 +206,10 @@ export default function ACSModal({ acs, onClose }) {
                   </p>
                   <div className="bg-white rounded-lg p-4 space-y-2">
                     <p className="font-semibold text-neutral-900">
-                      <strong>Endereço:</strong> R. Castro Alves, 2085 - São
-                      José
+                      <strong>Endereço:</strong> {contactInfo.address.referenceUnits.esfMoradaNova.street} - {contactInfo.address.referenceUnits.esfMoradaNova.neighborhood}
                     </p>
                     <p className="font-semibold text-neutral-900">
-                      <strong>Telefone:</strong> 3229-6086
+                      <strong>Telefone:</strong> {contactInfo.phones.referenceUnits.esfMoradaNova.display.replace('(37) ', '')}
                     </p>
                   </div>
                 </div>

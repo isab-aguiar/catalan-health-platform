@@ -3,6 +3,8 @@
 // Dados dos procedimentos médicos e orientações pós-consulta
 // ============================================
 
+import { contactInfo } from '../config';
+
 export const procedimentosMedicos = {
   "aih": {
     nome: "AIH - Autorização de Internação Hospitalar",
@@ -182,7 +184,7 @@ export const procedimentosMedicos = {
       "Preferencial comparecer no período da tarde"
     ],
     documentosNecessarios: ["Encaminhamento clínico"],
-    observacoes: ["Contato: (32) 3229-6890"],
+    observacoes: ["Contato: (37) 3229-6890"],
     filaUnica: false,
     horarioEspecifico: "Seg-Sex: 07:00-11:00 / 13:00-16:00"
   },
@@ -646,7 +648,7 @@ export const informacoesAdicionais = {
     orientacoes: [
       "Agendamento exclusivamente presencial nos Consultórios Odontológicos 18 e 19, 2º andar",
       "Horário para agendamentos e informações: 10h às 16h",
-      "Para esclarecimento de dúvidas, contato telefônico disponível: (37) 3229-6080",
+      `Para esclarecimento de dúvidas, contato telefônico disponível: ${contactInfo.phones.reception.display}`,
       "Atendimento de urgência odontológica diariamente às 07h00"
     ],
     documentosNecessarios: ["Documento de identificação com foto do titular (RG, CNH ou Carteira de Trabalho)"],

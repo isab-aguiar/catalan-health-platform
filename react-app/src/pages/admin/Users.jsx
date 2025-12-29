@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { useUsers } from "../../hooks/useUsers";
 import { useModal } from "../../contexts/ModalContext";
+import AdminLayout from "../../layouts/AdminLayout";
 import {
-  LogOut,
   User,
   Home,
   Users as UsersIcon,
@@ -22,8 +21,7 @@ import {
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Alert from "../../components/common/Alert";
 export default function Users() {
-  const { currentUser, logout, userData } = useAuth();
-  const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const { showModal } = useModal();
   const {
     users,
@@ -65,17 +63,6 @@ export default function Users() {
     }
   }, [showFormModal]);
 
-  // Função de logout
-  const handleLogout = async () => {
-    if (window.confirm("Tem certeza que deseja sair?")) {
-      const result = await logout();
-      if (result.success) {
-        navigate("/admin/login", { replace: true });
-      } else {
-        alert("Erro ao fazer logout. Tente novamente.");
-      }
-    }
-  };
   const handleNovoUsuario = () => {
     setEditingUser(null);
     setFormData({
@@ -267,7 +254,6 @@ export default function Users() {
         });
       }
     } catch (err) {
-      console.error("Erro ao deletar:", err);
       await showModal({
         type: 'error',
         title: 'Erro Inesperado',
@@ -315,64 +301,13 @@ export default function Users() {
     );
   }
   return (
-    <div className="min-h-screen bg-neutral-50">
-      {}
-      <header className="bg-white shadow-sm border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-14 sm:h-16 gap-2">
-            {}
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <UsersIcon className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-              </div>
-              <div className="min-w-0">
-                <h1 className="text-sm sm:text-lg font-bold text-neutral-900 truncate">
-                  Usuários
-                </h1>
-                <p className="text-xs text-neutral-500 hidden sm:block">ESF Catalão</p>
-              </div>
-            </div>
-            {}
-            <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
-              <a
-                href="/admin/painel"
-                className="text-xs sm:text-sm text-neutral-600 hover:text-neutral-900 transition-colors hidden sm:inline whitespace-nowrap"
-              >
-                Voltar ao Painel
-              </a>
-              <div className="hidden lg:flex items-center gap-2 text-sm">
-                <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-primary-600" />
-                </div>
-                <div className="min-w-0 max-w-[150px]">
-                  <p className="font-medium text-neutral-700 truncate">
-                    {userData?.displayName || "Admin"}
-                  </p>
-                  <p className="text-xs text-neutral-500 truncate">
-                    {currentUser?.email}
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors text-xs sm:text-sm font-medium"
-              >
-                <LogOut className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">Sair</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
-      {}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {}
+    <AdminLayout currentPage="users">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {error && (
           <div className="mb-6">
             <Alert type="error">{error}</Alert>
           </div>
         )}
-        {}
         <div className="mb-6 flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold text-neutral-900">Usuários</h2>
@@ -388,7 +323,6 @@ export default function Users() {
             Novo Usuário
           </button>
         </div>
-        {}
         {users.length === 0 ? (
           <div className="bg-white rounded-xl p-12 text-center border border-neutral-200">
             <UsersIcon className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
@@ -422,13 +356,11 @@ export default function Users() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-4 flex-1">
-                      {}
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${getRoleColor(user.role)}`}
                       >
                         <RoleIcon className="w-6 h-6" />
                       </div>
-                      {}
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                           <h3 className="text-lg font-bold text-neutral-900 truncate">
@@ -473,7 +405,6 @@ export default function Users() {
                         </div>
                       </div>
                     </div>
-                    {}
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleEditarRole(user)}
@@ -518,7 +449,6 @@ export default function Users() {
             })}
           </div>
         )}
-        {}
         <div className="mt-8 text-center">
           <a
             href="/"
@@ -528,12 +458,9 @@ export default function Users() {
             Voltar para o site público
           </a>
         </div>
-      </main>
-      {}
-      {showFormModal && (
+        {showFormModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-            {}
             <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
               <h3 className="text-xl font-bold text-neutral-900">
                 {editingUser ? "Editar Role do Usuário" : "Novo Usuário"}
@@ -545,7 +472,6 @@ export default function Users() {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            {}
             <div className="p-6 space-y-4">
               {formError && <Alert type="error">{formError}</Alert>}
               {editingUser && (
@@ -554,7 +480,6 @@ export default function Users() {
                   <strong>{editingUser.displayName}</strong>
                 </Alert>
               )}
-              {}
               <div>
                 <label className="block text-sm font-medium text-neutral-700 mb-2">
                   Email <span className="text-red-500">*</span>
@@ -570,7 +495,6 @@ export default function Users() {
                   placeholder="usuario@exemplo.com"
                 />
               </div>
-              {}
               <div>
                 <label className="block text-sm font-medium text-neutral-700 mb-2">
                   Nome Completo <span className="text-red-500">*</span>
@@ -586,7 +510,6 @@ export default function Users() {
                   placeholder="Nome do usuário"
                 />
               </div>
-              {}
               {!editingUser && (
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-2">
@@ -604,7 +527,6 @@ export default function Users() {
                   />
                 </div>
               )}
-              {}
               <div>
                 <label className="block text-sm font-medium text-neutral-700 mb-2">
                   Nível de Acesso <span className="text-red-500">*</span>
@@ -634,7 +556,6 @@ export default function Users() {
                 </p>
               </div>
             </div>
-            {}
             <div className="sticky bottom-0 bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-end gap-3">
               <button
                 onClick={handleFecharModal}
@@ -663,6 +584,7 @@ export default function Users() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </AdminLayout>
   );
 }

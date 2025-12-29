@@ -3,6 +3,8 @@ import renataPhoto from "../assets/images/acs-renata.png";
 import wasleyPhoto from "../assets/images/acs-waslei.png";
 import danielPhoto from "../assets/images/acs-daniel.png";
 import daviPhoto from "../assets/images/acs-davi.png";
+import { contactInfo } from '../config';
+
 export const microareasData = {
   "ESF CATALÃO": {
     medico: "Dr. Frederico",
@@ -451,7 +453,7 @@ export const microareasData = {
     dentista: "Dra. Helena",
     asb: "Maycon",
     observacao:
-      "Pertence UBS Morada Nova - Endereço: Castro Alves, 2085 - Tel: 3229-6086",
+      `Pertence UBS Morada Nova - Endereço: ${contactInfo.address.referenceUnits.esfMoradaNova.street} - Tel: ${contactInfo.phones.referenceUnits.esfMoradaNova.display.replace('(37) ', '')}`,
     microareas: [
       {
         numero: "01",

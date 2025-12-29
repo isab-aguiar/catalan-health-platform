@@ -23,7 +23,6 @@ export default function NotificationBell() {
   useEffect(() => {
     if (currentUser) {
       carregarNotificacoes();
-      // Atualizar a cada 30 segundos
       const interval = setInterval(carregarNotificacoes, 30000);
       return () => clearInterval(interval);
     }
@@ -40,7 +39,6 @@ export default function NotificationBell() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Bloquear scroll quando dropdown estiver aberto
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -92,7 +90,6 @@ export default function NotificationBell() {
   const handleLimparNotificacoes = async () => {
     try {
       setLoading(true);
-      // Deletar todas as notificações do usuário
       const promises = notificacoes.map(notif => deletarNotificacao(notif.id));
       await Promise.all(promises);
       carregarNotificacoes();
@@ -113,12 +110,10 @@ export default function NotificationBell() {
   };
 
   const handleClickNotificacao = async (notif) => {
-    // Marcar como lida
     if (!notif.lida) {
       await handleMarcarComoLida(notif.id);
     }
 
-    // Navegar se tiver link
     if (notif.link) {
       setIsOpen(false);
       navigate(notif.link);

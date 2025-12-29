@@ -16,7 +16,7 @@ export default function ServicesIndex() {
     );
   }
   const services = allPages.filter(
-    (page) => page && page.category === "services"
+    (page) => page && page.category === "services" && !['consultas', 'bolsa-familia'].includes(page.id)
   );
   if (!services || services.length === 0) {
     return (

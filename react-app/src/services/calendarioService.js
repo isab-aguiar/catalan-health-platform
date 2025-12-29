@@ -16,14 +16,12 @@ import { db } from "../config/firebase";
 
 const COLLECTION_NAME = "calendario_eventos";
 
-// Tipos de eventos
 export const TIPOS_EVENTO = {
   REUNIAO: "reuniao",
   LEMBRETE: "lembrete",
   AGENDAMENTO: "agendamento",
 };
 
-// Sanitizar undefined para null
 function sanitizeUndefined(obj) {
   const sanitized = {};
   for (const key in obj) {
@@ -47,7 +45,6 @@ function sanitizeUndefined(obj) {
   return sanitized;
 }
 
-// Criar evento
 export const criarEvento = async (eventoData, userId) => {
   try {
     if (!eventoData.titulo || !eventoData.tipo || !eventoData.dataInicio) {
@@ -67,7 +64,6 @@ export const criarEvento = async (eventoData, userId) => {
       horaInicio: eventoData.horaInicio || null,
       horaFim: eventoData.horaFim || null,
 
-      // Campos específicos por tipo
       participantes: Array.isArray(eventoData.participantes)
         ? eventoData.participantes
         : [],
@@ -77,17 +73,14 @@ export const criarEvento = async (eventoData, userId) => {
       ataPDFNome: eventoData.ataPDFNome || null,
       ataPDFCaminho: eventoData.ataPDFCaminho || null,
 
-      // Lembretes
       lembrete: eventoData.lembrete || false,
       lembreteMinutos: eventoData.lembreteMinutos || null,
       lembreteEnviado: false,
 
-      // Controle
       cor: eventoData.cor || getCor(eventoData.tipo),
       ativo: true,
       concluido: false,
 
-      // Auditoria
       criadoPor: userId,
       criadoEm: serverTimestamp(),
       atualizadoEm: serverTimestamp(),
@@ -108,7 +101,6 @@ export const criarEvento = async (eventoData, userId) => {
   }
 };
 
-// Buscar eventos
 export const buscarEventos = async (filtros = {}) => {
   try {
     const eventosRef = collection(db, COLLECTION_NAME);
@@ -162,7 +154,6 @@ export const buscarEventos = async (filtros = {}) => {
   }
 };
 
-// Buscar eventos por mês
 export const buscarEventosPorMes = async (ano, mes) => {
   try {
     const primeiroDia = new Date(ano, mes - 1, 1);
@@ -179,7 +170,6 @@ export const buscarEventosPorMes = async (ano, mes) => {
   }
 };
 
-// Buscar evento por ID
 export const buscarEventoPorId = async (eventoId) => {
   try {
     const eventoRef = doc(db, COLLECTION_NAME, eventoId);
@@ -216,7 +206,6 @@ export const buscarEventoPorId = async (eventoId) => {
   }
 };
 
-// Atualizar evento
 export const atualizarEvento = async (eventoId, dadosAtualizados) => {
   try {
     const eventoRef = doc(db, COLLECTION_NAME, eventoId);
@@ -247,7 +236,6 @@ export const atualizarEvento = async (eventoId, dadosAtualizados) => {
   }
 };
 
-// Deletar evento
 export const deletarEvento = async (eventoId) => {
   try {
     if (!db) {
@@ -257,7 +245,6 @@ export const deletarEvento = async (eventoId) => {
     const eventoRef = doc(db, COLLECTION_NAME, eventoId);
     await deleteDoc(eventoRef);
 
-    console.log("✅ Evento deletado com sucesso:", eventoId);
     return {
       success: true,
       message: "Evento deletado com sucesso",
@@ -272,29 +259,25 @@ export const deletarEvento = async (eventoId) => {
   }
 };
 
-// Marcar como concluído
 export const marcarComoConcluido = async (eventoId, concluido = true) => {
   return atualizarEvento(eventoId, { concluido });
 };
 
-// Desativar evento
 export const desativarEvento = async (eventoId) => {
   return atualizarEvento(eventoId, { ativo: false });
 };
 
-// Ativar evento
 export const ativarEvento = async (eventoId) => {
   return atualizarEvento(eventoId, { ativo: true });
 };
 
-// Obter cor por tipo
 function getCor(tipo) {
   const cores = {
-    [TIPOS_EVENTO.REUNIAO]: "#3b82f6", // blue
-    [TIPOS_EVENTO.LEMBRETE]: "#8b5cf6", // purple
-    [TIPOS_EVENTO.AGENDAMENTO]: "#10b981", // green
+    [TIPOS_EVENTO.REUNIAO]: "rgb(59 130 246 / 1)", // blue-500
+    [TIPOS_EVENTO.LEMBRETE]: "rgb(139 92 246 / 1)", // purple-500
+    [TIPOS_EVENTO.AGENDAMENTO]: "rgb(16 185 129 / 1)", // green-500
   };
-  return cores[tipo] || "#6b7280"; // gray default
+  return cores[tipo] || "rgb(107 114 128 / 1)"; // gray-500 default
 }
 
 export default {

@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import CampanhaInfoCard from '../components/campaign/CampanhaInfoCard';
-import LoadingSpinner from '../components/common/LoadingSpinner';
+import { LoadingSpinner } from '../components/common';
 import { buscarCampanhaPorId } from '../services/campanhasService';
 
 export default function CampanhaDetalhe() {

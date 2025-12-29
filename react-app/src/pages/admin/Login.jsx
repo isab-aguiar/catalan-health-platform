@@ -48,19 +48,11 @@ export default function Login() {
               <div>
                 <h1
                   className="text-lg font-semibold text-neutral-900"
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
                 >
                   ESF CATALÃO
                 </h1>
                 <p
                   className="text-xs text-neutral-500"
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
                 >
                   Sistema Interno
                 </p>
@@ -69,9 +61,6 @@ export default function Login() {
             <div className="h-px bg-neutral-200 my-4"></div>
             <h2
               className="text-sm font-semibold text-neutral-700 uppercase tracking-wide"
-              style={{
-                fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-              }}
             >
               Acesso Restrito
             </h2>
@@ -82,9 +71,6 @@ export default function Login() {
               <AlertCircle className="w-4 h-4 text-error flex-shrink-0" />
               <p
                 className="text-sm text-red-700"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 {error}
               </p>
@@ -97,9 +83,6 @@ export default function Login() {
               <label
                 htmlFor="email"
                 className="block text-xs font-semibold text-neutral-700 mb-1.5 uppercase tracking-wide"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Email
               </label>
@@ -113,10 +96,6 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="block w-full pl-9 pr-3 py-2.5 border border-neutral-300 rounded-md focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 transition-colors text-sm"
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
                   placeholder="usuario@exemplo.com"
                   disabled={loading}
                 />
@@ -127,9 +106,6 @@ export default function Login() {
               <label
                 htmlFor="password"
                 className="block text-xs font-semibold text-neutral-700 mb-1.5 uppercase tracking-wide"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Senha
               </label>
@@ -143,10 +119,6 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="block w-full pl-9 pr-10 py-2.5 border border-neutral-300 rounded-md focus:ring-2 focus:ring-neutral-500 focus:border-neutral-500 transition-colors text-sm"
-                  style={{
-                    fontFamily:
-                      'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                  }}
                   placeholder="••••••••"
                   disabled={loading}
                 />
@@ -169,9 +141,6 @@ export default function Login() {
               type="submit"
               disabled={loading}
               className="w-full bg-primary-700 hover:bg-primary-800 text-white font-semibold py-2.5 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
-              style={{
-                fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-              }}
             >
               {loading ? (
                 <>
@@ -188,9 +157,6 @@ export default function Login() {
             <a
               href="/"
               className="text-xs text-neutral-600 hover:text-neutral-800 transition-colors"
-              style={{
-                fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-              }}
             >
               ← Voltar
             </a>
@@ -199,9 +165,6 @@ export default function Login() {
         {}
         <div
           className="mt-4 text-center text-xs text-neutral-600"
-          style={{
-            fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-          }}
         >
           <p>
             Área destinada a profissionais da unidade. Sem acesso? Contate o

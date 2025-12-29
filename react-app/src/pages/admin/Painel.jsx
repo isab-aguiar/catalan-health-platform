@@ -66,12 +66,6 @@ export default function Painel() {
     const totalUsers = users.length;
     const totalCampanhas = campanhas.length;
     const campanhasAtivas = campanhas.filter((c) => c.ativo).length;
-    console.log("📊 ESTATÍSTICAS DO PAINEL:");
-    console.log("  - Total Avisos:", totalAvisos);
-    console.log("  - Avisos Públicos:", avisosPublicos);
-    console.log("  - Total Usuários:", totalUsers);
-    console.log("  - Total Campanhas:", totalCampanhas, "de", campanhas);
-    console.log("  - Campanhas Ativas:", campanhasAtivas);
     return {
       totalAvisos,
       avisosPublicos,

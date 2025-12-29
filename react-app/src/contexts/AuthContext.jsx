@@ -102,15 +102,6 @@ export function AuthProvider({ children }) {
   const isProfissional = userRole === "profissional";
   const isDiretoria = userRole === "diretoria";
   const isActive = userData?.active !== false;
-  if (currentUser && userData && isAdmin) {
-    console.log("🔐 Admin autenticado:", {
-      uid: currentUser.uid,
-      email: currentUser.email,
-      role: userRole,
-      isAdmin,
-      isActive,
-    });
-  }
   const value = {
     currentUser,
     userData,

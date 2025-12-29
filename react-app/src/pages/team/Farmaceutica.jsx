@@ -1,63 +1,8 @@
 import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
-import BackButton from "../../components/common/BackButton";
-import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
-function PageContainer({ children }) {
-  return <div className="min-h-screen bg-neutral-50 py-8 px-4">{children}</div>;
-}
-function InfoBox({ title, icon, children, variant = "default" }) {
-  const variants = {
-    default: "bg-white border-neutral-200",
-    highlight: "bg-info/10 border-info",
-  };
-  return (
-    <div
-      className={`border rounded-md shadow-sm p-6 mb-6 ${variants[variant]}`}
-    >
-      <div className={`flex items-center gap-3 mb-5 pb-3 border-b ${variant === "highlight" ? "border-neutral-300" : "border-neutral-200"}`}>
-        {icon && <div className="text-primary-700">{icon}</div>}
-        <h2 className="text-xl font-semibold text-neutral-800">{title}</h2>
-      </div>
-      {children}
-    </div>
-  );
-}
-function Alert({ type = "info", children }) {
-  const types = {
-    info: {
-      bg: "bg-info/10",
-      border: "border-info",
-      text: "text-info",
-      icon: "text-info",
-    },
-    warning: {
-      bg: "bg-warning/10",
-      border: "border-warning",
-      text: "text-warning-dark",
-      icon: "text-warning-dark",
-    },
-    success: {
-      bg: "bg-success/10",
-      border: "border-success",
-      text: "text-success-dark",
-      icon: "text-success",
-    },
-  };
-  const style = types[type];
-  return (
-    <div
-      className={`${style.bg} ${style.border} border-l-4 p-4 rounded-r ${style.text}`}
-    >
-      <div className="flex gap-3">
-        <AlertCircle
-          size={20}
-          className={`flex-shrink-0 mt-0.5 ${style.icon}`}
-        />
-        <div className="text-sm leading-relaxed">{children}</div>
-      </div>
-    </div>
-  );
-}
+import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import { PageContainer } from "../../components/layout";
+
 export default function Farmaceutica() {
   return (
     <PageContainer>
@@ -68,18 +13,12 @@ export default function Farmaceutica() {
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
-                className="text-3xl font-bold text-neutral-900 whitespace-nowrap"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
+                className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 break-words"
               >
                 Consultório Farmacêutico
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
-                style={{
-                  fontFamily: 'Arial, "Helvetica Neue", Helvetica, sans-serif',
-                }}
               >
                 Estratégia Saúde da Família Bela Vista - Catalão - São José
               </p>
@@ -396,7 +335,7 @@ export default function Farmaceutica() {
           </Alert>
         </div>
         {}
-        <InfoBox title="Documentação Necessária" variant="highlight">
+        <InfoBox title="Documentação Necessária" highlight={true}>
           <div className="space-y-2">
             <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
