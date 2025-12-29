@@ -11,6 +11,7 @@ import {
   MessageSquareHeart,
   HandHeart,
   HeartHandshake,
+  Shield,
 } from "lucide-react";
 
 /**
@@ -68,11 +69,16 @@ export default function HomeServices() {
       description: "Retirada de medicamentos e renovação de receitas",
     },
     {
-      to: "/ouvidoria",
-      icon: MessageSquareHeart,
-      title: "Ouvidoria",
-      description: "Envie elogios, sugestões ou reclamações. Sua opinião é importante!",
-      linkText: "Enviar Feedback",
+      to: "/servicos/prevencao-hiv",
+      icon: Shield,
+      title: "Prevenção Combinada ao HIV",
+      description: "PrEP e PEP - Estratégias de prevenção disponíveis no SUS",
+    },
+    {
+      to: "/acs",
+      icon: HeartHandshake,
+      title: "Agente Comunitário de Saúde",
+      description: "Encontre o ACS responsável pela sua área",
     },
     {
       to: "/servicos/bolsa-familia",
@@ -81,10 +87,11 @@ export default function HomeServices() {
       description: "Benefícios sociais, CadÚnico e assistência",
     },
     {
-      to: "/acs",
-      icon: HeartHandshake,
-      title: "Agente Comunitário de Saúde",
-      description: "Encontre o ACS responsável pela sua área",
+      to: "/ouvidoria",
+      icon: MessageSquareHeart,
+      title: "Ouvidoria",
+      description: "Envie elogios, sugestões ou reclamações. Sua opinião é importante!",
+      linkText: "Enviar Feedback",
     },
   ];
 
@@ -110,7 +117,7 @@ export default function HomeServices() {
                 <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
                   <IconComponent className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
                 </div>
-                <h3 className="text-lg md:text-2xl font-bold mb-2 text-neutral-900 whitespace-nowrap">
+                <h3 className="text-base md:text-lg font-bold mb-2 text-neutral-900 line-clamp-2">
                   {service.title}
                 </h3>
                 <p className="text-neutral-600 text-xs md:text-sm mb-3 md:mb-4 leading-relaxed">

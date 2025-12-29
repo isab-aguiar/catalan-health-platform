@@ -10,7 +10,6 @@
     />
     <title>ESF Catalão - Estratégia Saúde da Família</title>
 
-    <!-- Preconnect para melhorar performance de recursos externos -->
     <link rel="preconnect" href="https://firebase.googleapis.com" crossorigin />
     <link
       rel="preconnect"
@@ -29,8 +28,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- VLibras Widget - Acessibilidade em Libras -->
-    <!-- Avatares disponíveis: 'icaro', 'hosana', 'guga' -->
     <div vw class="enabled">
       <div vw-access-button class="active"></div>
       <div vw-plugin-wrapper>
@@ -39,50 +36,40 @@
     </div>
     <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
-      window.addEventListener('load', function() {
-        if (window.VLibras && window.VLibras.Widget) {
-          // Configuração do VLibras Widget
-          // Para alterar o avatar, modifique o valor 'avatar' abaixo:
-          // Opções: 'icaro', 'hosana', 'guga'
-          const vlibrasConfig = {
-            avatar: 'icaro', // Altere para 'hosana' ou 'guga' conforme necessário
-            opacity: 0.7,
-            position: 'right'
-          };
-          
-          const widget = new window.VLibras.Widget('https://vlibras.gov.br/app', vlibrasConfig);
-          
-          // Método alternativo para definir avatar após inicialização
-          // Se a configuração acima não funcionar, use:
-          // widget.setAvatar('icaro'); // ou 'hosana' ou 'guga'
-        }
-      });
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
     </script>
 
     <style>
-      /* Posicionar widget quando aberto */
-      [vw-plugin-wrapper] {
-        z-index: 999998 !important;
-      }
-
-      /* Customizar posição do botão VLibras - forçar fixed com opacidade */
       div[vw].enabled {
         position: fixed !important;
-        bottom: 16px !important;
-        right: 16px !important;
-        z-index: 999999 !important;
-        opacity: 0.7 !important;
-        transition: opacity 0.3s ease !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 9999 !important;
+        opacity: 0.9 !important;
+        pointer-events: none !important;
+        width: auto !important;
+        height: auto !important;
       }
 
-      div[vw].enabled:hover {
-        opacity: 1 !important;
+      [vw-access-button] {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        width: auto !important;
+        height: auto !important;
+      }
+
+      [vw-plugin-wrapper] {
+        pointer-events: auto !important;
+      }
+
+      [vw-plugin-wrapper] * {
+        pointer-events: auto !important;
       }
 
       @media (max-width: 768px) {
         div[vw].enabled {
-          bottom: 12px !important;
-          right: 12px !important;
+          bottom: 15px !important;
+          right: 15px !important;
         }
       }
     </style>

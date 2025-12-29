@@ -19,12 +19,11 @@ export default function Footer() {
   const location = useLocation();
 
   const quickLinks = [
-    { name: 'Início', path: '/' },
-    { name: 'Serviços', path: '/servicos' },
+    { name: 'Sala de Atendimento Administrativo', path: '/servicos/sala-9' },
     { name: 'Sala de Vacinação', path: '/servicos/vacinas' },
-    { name: 'Grupos', path: '/grupos' },
+    { name: 'Sala de Agendamentos', path: '/servicos/sala-4' },
     { name: 'E-multi', path: '/equipe' },
-    { name: 'ACS', path: '/acs' },
+    { name: 'Ouvidoria', path: '/ouvidoria' },
     { name: 'Contato', path: '/#contato', isAnchor: true },
   ];
 

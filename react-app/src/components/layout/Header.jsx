@@ -5,7 +5,6 @@ import MobileMenu from './MobileMenu';
 import GlobalSearch from '../search/GlobalSearch';
 import { usePageSearch } from '../../hooks/usePageSearch';
 import { useAuth } from '../../contexts/AuthContext';
-import NotificationBell from '../common/NotificationBell';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -77,8 +76,9 @@ export default function Header() {
     }
   };
   const navLinks = [
-    { name: 'Início', path: '/', handleClick: handleNavClick },
     { name: 'Serviços', path: '/servicos', handleClick: handleNavClick },
+    { name: 'Sala de Agendamentos', path: '/servicos/sala-4', handleClick: handleNavClick },
+    { name: 'Renovação de Receitas', path: '/servicos/renovacao', handleClick: handleNavClick },
     { name: 'Sala de Vacinação', path: '/servicos/vacinas', handleClick: handleNavClick },
     { name: 'Grupos', path: '/grupos', handleClick: handleNavClick },
     { name: 'E-multi', path: '/equipe', handleClick: handleNavClick },
@@ -192,10 +192,6 @@ export default function Header() {
               )}
             </div>
           </div>
-
-          {/* Sino de Notificações - Apenas para usuários autenticados */}
-          {currentUser && <NotificationBell />}
-
         </div>
       </header>
       {isSearchOpen && <GlobalSearch onClose={() => setIsSearchOpen(false)} />}

@@ -53,22 +53,13 @@ export default function ImageGallery({ images = [] }) {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent transition-opacity duration-300 pointer-events-none" />
           
           {currentImage.caption && (
-            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-white">
-              <p className="text-sm sm:text-base font-medium drop-shadow-md leading-relaxed line-clamp-2">
+            <div className="absolute bottom-0 left-0 right-0 px-2 py-1 sm:p-6 text-white">
+              <p className="text-[9px] sm:text-base font-medium drop-shadow-md leading-tight sm:leading-relaxed line-clamp-1 sm:line-clamp-2">
                 {currentImage.caption}
               </p>
             </div>
           )}
 
-          {currentImage.credit && (
-            <>
-              <div className="hidden sm:block absolute bottom-0 right-0 p-2 sm:p-3 bg-black/40 backdrop-blur-sm rounded-tl-lg">
-                <p className="text-xs text-white/90 italic">
-                  {currentImage.credit}
-                </p>
-              </div>
-            </>
-          )}
         </div>
 
         {normalizedImages.length > 1 && (
@@ -98,9 +89,9 @@ export default function ImageGallery({ images = [] }) {
       </div>
 
       {currentImage.credit && (
-        <div className="sm:hidden mt-3 mb-4 flex justify-end">
-          <div className="px-2 py-1 bg-black/20 backdrop-blur-sm rounded-sm">
-            <p className="text-[9px] text-black italic">
+        <div className="mt-3 mb-4 flex justify-end">
+          <div className="px-2 py-1 sm:px-3 sm:py-1.5 bg-black/20 backdrop-blur-sm rounded-sm">
+            <p className="text-[9px] sm:text-xs text-black italic">
               {currentImage.credit}
             </p>
           </div>

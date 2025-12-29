@@ -13,7 +13,7 @@ import { microareasData } from "../data/microareas";
 import ACSModal from "../components/search/ACSModal";
 import { useACSSearch } from "../hooks/useACSSearch";
 import { normalize } from "../utils/normalize";
-import { BackButton, RecommendedReadingCarousel } from "../components/common";
+import { BackButton } from "../components/common";
 export default function ACSPage() {
   const { query, setQuery, suggestions: acsSearchSuggestions } = useACSSearch();
   const [selectedESF, setSelectedESF] = useState("all");
@@ -294,12 +294,6 @@ export default function ACSPage() {
           )}
         </div>
       </section>
-      {}
-
-      {/* Leitura Recomendada - Aparece após scroll */}
-      <div className="pb-4">
-        <RecommendedReadingCarousel pageId="acs" />
-      </div>
 
       {selectedACS && (
         <ACSModal acs={selectedACS} onClose={() => setSelectedACS(null)} />

@@ -30,12 +30,12 @@ export default function Sidebar({ isOpen, onClose }) {
   }, [isOpen]);
 
   const navLinks = [
-    { name: 'Início', path: '/' },
     { name: 'Serviços', path: '/servicos' },
     { name: 'Sala de Agendamento', path: '/servicos/sala-4' },
     { name: 'Consultas Médicas', path: '/servicos/consultas' },
     { name: 'Sala de Vacinação', path: '/servicos/vacinas' },
     { name: 'Farmácia', path: '/servicos/farmacia' },
+    { name: 'Prevenção Combinada ao HIV', path: '/servicos/prevencao-hiv' },
     { name: 'Grupos', path: '/grupos' },
     { name: 'Bolsa Família e Serviço Social', path: '/servicos/bolsa-familia' },
     { name: 'REMSA', path: '/remsa' },

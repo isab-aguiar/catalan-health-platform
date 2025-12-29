@@ -56,7 +56,6 @@ try {
     auth = getAuth(app);
     db = getFirestore(app);
     storage = getStorage(app);
-    console.log("✅ Firebase inicializado com sucesso");
   } else {
     console.warn(
       "⚠️ Firebase não inicializado - variáveis de ambiente ausentes ou inválidas"

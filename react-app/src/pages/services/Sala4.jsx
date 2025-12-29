@@ -22,7 +22,7 @@ export default function Sala4() {
               <h1
                 className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap"
               >
-                Sala de Agendamento
+                Sala de Agendamentos
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
