@@ -198,7 +198,7 @@ export default function Pediatra() {
               <thead>
                 <tr className="bg-neutral-100">
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
+                    Dia da Semana
                   </th>
                   <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
                     Horário
@@ -211,10 +211,10 @@ export default function Pediatra() {
               <tbody className="text-sm">
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
+                    <strong className="text-neutral-800">Terça e Quarta-feira</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 11h00
+                    07h00 às 13h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     Dr. Antônio Fernando Bolina<br/>
@@ -223,10 +223,11 @@ export default function Pediatra() {
                 </tr>
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Tarde</strong>
+                    <strong className="text-neutral-800">Quinta-feira</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    13h00 às 16h00
+                    07h00 às 13h00<br/>
+                    <span className="text-neutral-600 text-xs italic">Horários agendados</span>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     Dr. Antônio Fernando Bolina<br/>
@@ -242,13 +243,13 @@ export default function Pediatra() {
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="mb-3">
                 <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Manhã
+                  Terça e Quarta-feira
                 </span>
               </div>
               <div className="space-y-3">
                 <div className="pb-3 border-b border-neutral-300">
                   <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 13h00</p>
                 </div>
                 <div className="pb-2 border-b border-neutral-300">
                   <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
@@ -263,13 +264,14 @@ export default function Pediatra() {
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="mb-3">
                 <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Tarde
+                  Quinta-feira
                 </span>
               </div>
               <div className="space-y-3">
                 <div className="pb-3 border-b border-neutral-300">
                   <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
+                  <p className="text-sm font-semibold text-neutral-800">07h00 às 13h00</p>
+                  <p className="text-xs text-neutral-600 italic mt-1">Horários agendados</p>
                 </div>
                 <div className="pb-2 border-b border-neutral-300">
                   <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
@@ -332,13 +334,13 @@ export default function Pediatra() {
               <tbody className="text-sm">
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Segunda, Terça e Quarta-feira</strong>
+                    <strong className="text-neutral-800">Terça e Quarta-feira</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     Atendimento mediante ordem de chegada
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07:00h às 08:00h
+                    -
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -361,17 +363,13 @@ export default function Pediatra() {
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="mb-3">
                 <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Segunda, Terça e Quarta-feira
+                  Terça e Quarta-feira
                 </span>
               </div>
               <div className="space-y-3">
                 <div className="pb-3 border-b border-neutral-300">
                   <p className="text-xs text-neutral-500 mb-2">Modalidade de Atendimento</p>
                   <p className="text-sm font-semibold text-neutral-800">Atendimento mediante ordem de chegada</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-xs text-neutral-500 mb-2">Horário de Triagem</p>
-                  <p className="text-sm text-neutral-700"><strong>07:00h às 08:00h</strong></p>
                 </div>
               </div>
             </div>
@@ -444,15 +442,21 @@ export default function Pediatra() {
         {}
         <InfoBox title="Calendário de Consultas de Puericultura">
           <p className="text-neutral-700 text-sm mb-4 leading-relaxed">
-            O acompanhamento regular da criança é fundamental para garantir seu desenvolvimento saudável. Mantenha o calendário de consultas em dia!
+            O acompanhamento regular da criança através da puericultura é fundamental para garantir seu desenvolvimento físico, motor, cognitivo e emocional saudável. Manter o calendário de consultas em dia permite a identificação precoce de possíveis alterações e a intervenção adequada, contribuindo para uma infância saudável e um futuro com melhor qualidade de vida.
           </p>
+          
+          <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4 mb-4">
+            <p className="text-neutral-700 text-sm leading-relaxed">
+              A seguir, apresentamos a tabela de acompanhamento da puericultura conforme as diretrizes do Ministério da Saúde. As consultas são realizadas por diferentes profissionais conforme a faixa etária: <strong>linhas com fundo branco</strong> indicam atendimento com médico pediatra, enquanto <strong>linhas com fundo rosa</strong> indicam atendimento realizado por enfermeira da equipe.
+            </p>
+          </div>
 
           <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-3 mb-4 text-sm">
             <p className="font-semibold text-neutral-800 mb-2">Legenda:</p>
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 bg-white border border-neutral-300 rounded"></div>
-                <span className="text-neutral-700">Consulta com Pediatra</span>
+                <span className="text-neutral-700">Consulta com Médico Pediatra</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 bg-pink-50 border border-pink-200 rounded"></div>
