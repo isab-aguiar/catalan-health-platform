@@ -10,6 +10,7 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import { contactInfo, openingHours } from "../../config";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 
 const horariosVacinas = [
   {
