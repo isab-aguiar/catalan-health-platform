@@ -284,7 +284,7 @@ export default function Pediatra() {
               </div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Agendamento na Central de Marcação
+                  Agendamento na Sala de Agendamentos
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
                   Dirija-se à{" "}

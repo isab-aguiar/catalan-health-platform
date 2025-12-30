@@ -10,6 +10,7 @@ import useScrollToHash from "../../hooks/useScrollToHash";
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 export default function Procedimentos() {
   useScrollToHash();
 
@@ -601,6 +602,13 @@ export default function Procedimentos() {
             </div>
           </div>
         </InfoBox>
+
+        <EscalaProfissionais
+          titulo="Profissionais Escalados na Sala de Procedimentos"
+          department="tecnicoEnfermagem"
+          workStation="Sala de Medicação"
+        />
+
         {}
         <InfoBox title="Documentação Necessária" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">

@@ -136,6 +136,14 @@ export default function Vacinas() {
             </Alert>
           </div>
         </InfoBox>
+
+        {/* Escalas de Profissionais - Carregado do Firestore */}
+        <EscalaProfissionais
+          titulo="Profissionais Escalados na Sala de Vacinação"
+          department="tecnicoEnfermagem"
+          workStation="Sala de Vacinação"
+        />
+
         {}
         <InfoBox highlight={true}>
           {}

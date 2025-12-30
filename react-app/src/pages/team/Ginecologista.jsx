@@ -15,7 +15,7 @@ export default function Ginecologista() {
               <h1
                 className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 break-words"
               >
-                Consultório Ginecológico
+                Ginecologia e Obstetrícia
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
@@ -28,30 +28,52 @@ export default function Ginecologista() {
         {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-neutral-700 leading-relaxed mb-5">
-            O atendimento de Saúde da Mulher na ESF Catalão oferece cuidado
-            integral à saúde feminina em todas as fases da vida. Realizamos
-            consultas ginecológicas, pré-natal, preventivo de câncer de colo
-            uterino (Papanicolau), planejamento familiar e acompanhamento de
-            doenças ginecológicas.
+            O atendimento de ginecologia e obstetrícia oferece cuidado integral à
+            saúde feminina em todas as fases da vida. Realizamos consultas
+            ginecológicas, acompanhamento pré-natal intercalado com enfermagem,
+            preventivo de câncer de colo uterino (Papanicolau), inserção e
+            retirada de DIU de cobre, e planejamento familiar.
           </p>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Consultas ginecológicas
+                  Consultas Ginecológicas
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Avaliação da saúde íntima feminina
+                  Avaliação e acompanhamento da saúde íntima feminina
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-neutral-800 text-sm">Pré-natal</strong>
+                <strong className="text-neutral-800 text-sm">
+                  Inserção e Retirada de DIU de Cobre
+                </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Acompanhamento completo da gestante, com consultas periódicas, solicitação de exames, avaliação obstétrica e orientações sobre gestação, parto e puerpério. Primeira consulta até a 12ª semana de gestação. Consultas intercaladas entre médico e enfermeiro conforme cronograma estabelecido
+                  Procedimento de planejamento familiar. Consulte a documentação
+                  necessária na{" "}
+                  <Link
+                    to="/servicos/sala-4"
+                    className="text-info hover:text-primary-700 underline font-semibold"
+                  >
+                    Sala de Agendamentos
+                  </Link>
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div>
+                <strong className="text-neutral-800 text-sm">
+                  Pré-natal Intercalado
+                </strong>
+                <p className="text-xs text-neutral-600 mt-0.5">
+                  Acompanhamento da gestante em consultas intercaladas entre
+                  ginecologista e enfermagem, conforme cronograma estabelecido
+                  pelo Ministério da Saúde
                 </p>
               </div>
             </div>
@@ -62,7 +84,8 @@ export default function Ginecologista() {
                   Preventivo (Papanicolau)
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Prevenção do câncer de colo de útero
+                  Prevenção do câncer de colo de útero, realizado pela equipe de
+                  enfermagem
                 </p>
               </div>
             </div>
@@ -70,32 +93,111 @@ export default function Ginecologista() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Planejamento familiar
+                  Planejamento Familiar
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Orientação sobre métodos contraceptivos, inserção e retirada de DIU
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  Climatério e menopausa
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Acompanhamento nessa fase da vida
+                  Orientação sobre métodos contraceptivos e saúde reprodutiva
                 </p>
               </div>
             </div>
           </div>
         </InfoBox>
+
+        <InfoBox title="Cronograma de Pré-natal">
+          <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
+            O acompanhamento pré-natal segue protocolo estabelecido pelo
+            Ministério da Saúde, com consultas intercaladas entre ginecologista
+            e enfermagem para garantir o cuidado integral da gestante.
+          </p>
+
+          <div className="mb-5">
+            <h3 className="font-semibold text-neutral-800 mb-3 text-sm">
+              Distribuição das Consultas
+            </h3>
+            <div className="space-y-2">
+              <div className="bg-green-50 border-l-4 border-green-600 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-green-900">1ª Consulta:</strong> Realizada com Enfermagem
+                </p>
+              </div>
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-blue-900">2ª Consulta:</strong> Realizada com Ginecologista
+                </p>
+              </div>
+              <div className="bg-green-50 border-l-4 border-green-600 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-green-900">3ª Consulta:</strong> Realizada com Enfermagem
+                </p>
+              </div>
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-blue-900">4ª Consulta:</strong> Realizada com Ginecologista
+                </p>
+              </div>
+              <div className="bg-green-50 border-l-4 border-green-600 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-green-900">5ª Consulta:</strong> Realizada com Enfermagem
+                </p>
+              </div>
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-blue-900">6ª Consulta:</strong> Realizada com Ginecologista
+                </p>
+              </div>
+              <div className="bg-green-50 border-l-4 border-green-600 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-green-900">7ª Consulta:</strong> Realizada com Enfermagem
+                </p>
+              </div>
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-blue-900">8ª Consulta:</strong> Realizada com Ginecologista
+                </p>
+              </div>
+              <div className="bg-neutral-50 border-l-4 border-neutral-400 rounded-r p-3">
+                <p className="text-sm text-neutral-700">
+                  <strong className="text-neutral-900">Demais consultas:</strong> Continuam intercaladas entre
+                  Ginecologista e Enfermagem conforme demanda e necessidade clínica
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+            <h3 className="font-semibold text-neutral-800 mb-2 text-sm flex items-center gap-2">
+              <AlertCircle size={16} className="text-amber-600" />
+              Avaliação de Risco Gestacional
+            </h3>
+            <div className="space-y-2 text-sm text-neutral-700">
+              <p>
+                <strong className="text-amber-900">Gestação de Risco Habitual (baixo risco):</strong>{" "}
+                Acompanhamento realizado integralmente na ESF (Estratégia Saúde da Família),
+                com consultas intercaladas entre ginecologista e enfermagem.
+              </p>
+              <p>
+                <strong className="text-amber-900">Gestação de Alto Risco:</strong>{" "}
+                Gestante é encaminhada para acompanhamento especializado no PNAR
+                (Pré-Natal de Alto Risco), mas <strong>continua sendo acompanhada
+                também na ESF</strong> para cuidado integral e coordenado.
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-info/10 border border-blue-200 rounded p-4">
+            <p className="text-sm text-neutral-700">
+              <strong className="text-blue-900">Importante:</strong> O padrão de intercalação é:
+              1ª consulta com Enfermagem, 2ª com Ginecologista, e assim sucessivamente,
+              garantindo o acompanhamento completo e contínuo durante toda a gestação.
+            </p>
+          </div>
+        </InfoBox>
         {}
         <InfoBox title="Atendimento">
           <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
-            O atendimento ginecológico é realizado pelos médicos da equipe
-            conforme escala, com possibilidade de encaminhamento para
-            especialista quando necessário.
+            O atendimento de ginecologia e obstetrícia é realizado pela
+            médica ginecologista/obstetra da equipe, com possibilidade de
+            encaminhamento para especialista quando necessário.
           </p>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
@@ -130,16 +232,33 @@ export default function Ginecologista() {
                 </tr>
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Pré-natal</strong>
+                    <strong className="text-neutral-800">
+                      Inserção/Retirada de DIU de Cobre
+                    </strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Primeiro é agendado com enfermeira, que faz o encaminhamento
-                    necessário
+                    Agendamento na{" "}
+                    <Link
+                      to="/servicos/sala-4"
+                      className="text-info hover:text-primary-700 underline font-semibold"
+                    >
+                      Sala de Agendamentos
+                    </Link>
+                    . Verifique a documentação necessária para este serviço
                   </td>
                 </tr>
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Preventivo</strong>
+                    <strong className="text-neutral-800">Pré-natal</strong>
+                  </td>
+                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                    Primeiro é agendado com enfermeira, que faz o encaminhamento
+                    necessário. Consultas intercaladas conforme cronograma
+                  </td>
+                </tr>
+                <tr className="bg-white">
+                  <td className="border border-neutral-300 px-4 py-3">
+                    <strong className="text-neutral-800">Preventivo (Papanicolau)</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     Com enfermeira (sem necessidade de encaminhamento)
@@ -176,8 +295,8 @@ export default function Ginecologista() {
                     07h00 às 11h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Médicos da equipe (conforme escala)<br/>
-                    <span className="text-neutral-600 text-xs">Função: Médicos de Família/Ginecologistas</span>
+                    Dra. Luana Nogueira Godoi<br/>
+                    <span className="text-neutral-600 text-xs">Função: Médica Ginecologista/Obstetra</span>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -188,8 +307,8 @@ export default function Ginecologista() {
                     13h00 às 16h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Médicos da equipe (conforme escala)<br/>
-                    <span className="text-neutral-600 text-xs">Função: Médicos de Família/Ginecologistas</span>
+                    Dra. Luana Nogueira Godoi<br/>
+                    <span className="text-neutral-600 text-xs">Função: Médica Ginecologista/Obstetra</span>
                   </td>
                 </tr>
               </tbody>
@@ -210,11 +329,11 @@ export default function Ginecologista() {
                   <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
                 </div>
                 <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais Responsáveis</strong></p>
-                  <p className="text-sm text-neutral-700">Médicos da equipe (conforme escala)</p>
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Dra. Luana Nogueira Godoi</p>
                 </div>
                 <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Médicos de Família/Ginecologistas</p>
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Médica Ginecologista/Obstetra</p>
                 </div>
               </div>
             </div>
@@ -231,11 +350,11 @@ export default function Ginecologista() {
                   <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
                 </div>
                 <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais Responsáveis</strong></p>
-                  <p className="text-sm text-neutral-700">Médicos da equipe (conforme escala)</p>
+                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-sm text-neutral-700">Dra. Luana Nogueira Godoi</p>
                 </div>
                 <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Médicos de Família/Ginecologistas</p>
+                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Médica Ginecologista/Obstetra</p>
                 </div>
               </div>
             </div>

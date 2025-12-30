@@ -6,6 +6,7 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 export default function Recepcao() {
   return (
     <PageContainer>
@@ -379,6 +380,12 @@ export default function Recepcao() {
             </div>
           </div>
         </InfoBox>
+
+        <EscalaProfissionais
+          titulo="Profissionais Escalados na Recepção"
+          workStation="Recepção"
+        />
+
         {}
         <InfoBox title="Preciso passar na recepção antes?" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">

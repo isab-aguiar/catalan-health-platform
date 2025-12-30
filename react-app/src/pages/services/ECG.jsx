@@ -3,6 +3,7 @@ import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../co
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import { PageContainer } from "../../components/layout";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 export default function ECG() {
   return (
     <PageContainer>
@@ -174,6 +175,13 @@ export default function ECG() {
             titular.
           </p>
         </InfoBox>
+
+        <EscalaProfissionais
+          titulo="Profissionais Escalados para ECG"
+          department="tecnicoEnfermagem"
+          workStation="ECG"
+        />
+
         {}
         <InfoBox title="Documentação Necessária" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">

@@ -95,7 +95,6 @@ const CorrigirPermissoes = lazyLoad(
 const EstoqueVacinas = lazyLoad(() => import("./pages/admin/EstoqueVacinas"));
 const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesPosConsulta"));
 const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
-const EscalasAdmin = lazyLoad(() => import("./pages/admin/EscalasAdmin"));
 const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
 const Feedbacks = lazyLoad(() => import("./pages/admin/Feedbacks"));
 function App() {
@@ -267,14 +266,6 @@ function App() {
                         element={
                           <ProtectedRoute>
                             <CalendarioAdmin />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/admin/escalas"
-                        element={
-                          <ProtectedRoute>
-                            <EscalasAdmin />
                           </ProtectedRoute>
                         }
                       />
