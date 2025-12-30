@@ -61,11 +61,8 @@ const Farmacia = lazyLoad(() => import("./pages/services/Farmacia"));
 const FarmaciaDispensacao = lazyLoad(() => import("./pages/services/FarmaciaDispensacao"));
 const PrevencaoHIV = lazyLoad(() => import("./pages/services/PrevencaoHIV"));
 const Consultas = lazyLoad(() => import("./pages/services/Consultas"));
+const ConsultasEnfermagem = lazyLoad(() => import("./pages/services/ConsultasEnfermagem"));
 const BolsaFamilia = lazyLoad(() => import("./pages/services/BolsaFamilia"));
-const OuvidoriaIndex = lazyLoad(() => import("./pages/services/OuvidoriaIndex"));
-const Elogios = lazyLoad(() => import("./pages/services/Elogios"));
-const Sugestoes = lazyLoad(() => import("./pages/services/Sugestoes"));
-const Reclamacoes = lazyLoad(() => import("./pages/services/Reclamacoes"));
 const GroupsIndex = lazyLoad(() => import("./pages/groups/GroupsIndex"));
 const Hiperdia = lazyLoad(() => import("./pages/groups/Hiperdia"));
 const Tabagismo = lazyLoad(() => import("./pages/groups/Tabagismo"));
@@ -95,9 +92,8 @@ const CorrigirPermissoes = lazyLoad(
 const EstoqueVacinas = lazyLoad(() => import("./pages/admin/EstoqueVacinas"));
 const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesPosConsulta"));
 const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
-const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
-const Feedbacks = lazyLoad(() => import("./pages/admin/Feedbacks"));
 const EscalasTrabalho = lazyLoad(() => import("./pages/admin/EscalasTrabalho"));
+const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
@@ -159,13 +155,13 @@ function App() {
                         element={<Consultas />}
                       />
                       <Route
+                        path="/servicos/consultas-enfermagem"
+                        element={<ConsultasEnfermagem />}
+                      />
+                      <Route
                         path="/servicos/bolsa-familia"
                         element={<BolsaFamilia />}
                       />
-                      <Route path="/ouvidoria" element={<OuvidoriaIndex />} />
-                      <Route path="/ouvidoria/elogios" element={<Elogios />} />
-                      <Route path="/ouvidoria/sugestoes" element={<Sugestoes />} />
-                      <Route path="/ouvidoria/reclamacoes" element={<Reclamacoes />} />
                       {}
                       <Route path="/grupos" element={<GroupsIndex />} />
                       <Route path="/grupos/hiperdia" element={<Hiperdia />} />
@@ -271,26 +267,18 @@ function App() {
                         }
                       />
                       <Route
-                        path="/admin/notificacoes"
-                        element={
-                          <ProtectedRoute>
-                            <Notificacoes />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/admin/feedbacks"
-                        element={
-                          <ProtectedRoute>
-                            <Feedbacks />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
                         path="/admin/escalas"
                         element={
                           <ProtectedRoute>
                             <EscalasTrabalho />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/notificacoes"
+                        element={
+                          <ProtectedRoute>
+                            <Notificacoes />
                           </ProtectedRoute>
                         }
                       />

@@ -35,6 +35,18 @@ export default function Pediatra() {
             desenvolvimento infantil), atendimentos de urgências pediátricas e
             orientações aos pais sobre saúde e desenvolvimento dos filhos.
           </p>
+          <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4 mb-5">
+            <p className="text-neutral-700 text-sm leading-relaxed">
+              Para informações sobre a documentação necessária para acesso aos serviços oferecidos, favor consultar a{" "}
+              <Link
+                to="/servicos/sala-4#documentacao-necessaria"
+                className="text-blue-700 hover:text-blue-900 underline font-semibold"
+              >
+                Sala de Agendamentos
+              </Link>
+              .
+            </p>
+          </div>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -110,7 +122,7 @@ export default function Pediatra() {
 
           <div className="p-4 sm:p-6">
             {/* Imagem */}
-            <div className="mb-6 flex justify-center">
+            <div className="mb-6 flex justify-center px-4 md:px-8 lg:px-12">
               <img
                 src={pediatriaImg}
                 alt="Acompanhamento da Saúde Infantil - Pediatria"
@@ -492,51 +504,6 @@ export default function Pediatra() {
           <Alert type="warning">
             <strong>Importante:</strong> SEMPRE traga a carteira de vacinação da criança. É através dela que acompanhamos o desenvolvimento e verificamos se as vacinas estão em dia.
           </Alert>
-        </InfoBox>
-        {}
-        <InfoBox title="Documentação Necessária" highlight={true}>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Certidão de Nascimento ou RG da criança
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Original e cópia
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Carteira de Vacinação
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Indispensável em todas as consultas
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documento de Identificação com Foto do Responsável
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">RG ou CNH</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Comprovante de Residência
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">Atualizado</p>
-              </div>
-            </div>
-          </div>
         </InfoBox>
         {}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">

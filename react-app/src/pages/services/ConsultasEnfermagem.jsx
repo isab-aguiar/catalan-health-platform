@@ -1,22 +1,22 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Heart, ExternalLink } from "lucide-react";
+import { AlertCircle, Heart } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import ImageWithCredit from "../../components/common/ImageWithCredit";
 import enfermeiraImg from "../../assets/enfermeiras/enfermeira-examinando-um-paciente.avif";
 import { PageContainer } from "../../components/layout";
 
-export default function Enfermeiras() {
+export default function ConsultasEnfermagem() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
         <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
           <div className="flex items-center gap-4 mb-2">
             <div>
               <h1
                 className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 break-words"
               >
-                Consultório de Enfermagem
+                Consultas de Enfermagem
               </h1>
               <p
                 className="text-neutral-500 text-xs mt-1"
@@ -26,7 +26,6 @@ export default function Enfermeiras() {
             </div>
           </div>
         </div>
-        {}
         <InfoBox title="Sobre o Serviço">
           <p className="text-neutral-700 leading-relaxed mb-5">
             A consulta de enfermagem é uma atividade privativa do enfermeiro,
@@ -202,8 +201,6 @@ export default function Enfermeiras() {
             </div>
           </div>
         </InfoBox>
-        {}
-        {/* Card Assistência de Enfermagem */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
             <div className="flex items-center gap-3">
@@ -220,16 +217,17 @@ export default function Enfermeiras() {
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Imagem */}
-            <div className="mb-6 flex justify-center">
-              <img
-                src={enfermeiraImg}
-                alt="Enfermeira realizando atendimento ao paciente"
-                className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm"
-              />
+            <div className="mb-6 w-full flex justify-center">
+              <div className="w-full max-w-md sm:max-w-lg md:max-w-xl">
+                <ImageWithCredit
+                  src={enfermeiraImg}
+                  alt="Enfermeira realizando atendimento ao paciente"
+                  credit="Fonte: Ministério da Saúde"
+                  creditPosition="below"
+                />
+              </div>
             </div>
 
-            {/* Descrição */}
             <p className="text-neutral-700 leading-relaxed mb-5">
               A assistência de enfermagem na Atenção Primária à Saúde constitui-se
               como um componente essencial do Sistema Único de Saúde (SUS),
@@ -245,7 +243,6 @@ export default function Enfermeiras() {
             </p>
           </div>
         </div>
-        {}
         <InfoBox title="Profissionais Responsáveis">
           <p className="text-neutral-700 mb-4 text-sm">
             As enfermeiras atuam integradas às Equipes de Saúde da Família
@@ -305,9 +302,7 @@ export default function Enfermeiras() {
             .
           </p>
         </InfoBox>
-        {}
         <InfoBox title="Profissionais e Horários de Atendimento">
-          {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
@@ -356,7 +351,6 @@ export default function Enfermeiras() {
             </table>
           </div>
 
-          {/* Versão Mobile */}
           <div className="md:hidden space-y-4">
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="mb-3">
@@ -405,7 +399,6 @@ export default function Enfermeiras() {
             </div>
           </div>
         </InfoBox>
-        {}
         <InfoBox title="Calendário de Consultas de Puericultura">
           <p className="text-neutral-700 text-sm mb-4 leading-relaxed">
             O acompanhamento regular da criança através da puericultura é
@@ -441,7 +434,6 @@ export default function Enfermeiras() {
             </div>
           </div>
 
-          {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto mb-4">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
@@ -572,7 +564,6 @@ export default function Enfermeiras() {
             </table>
           </div>
 
-          {/* Versão Mobile */}
           <div className="md:hidden space-y-3 mb-4">
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <p className="text-sm font-semibold text-neutral-800 mb-2">Recém-nascido</p>
@@ -620,7 +611,6 @@ export default function Enfermeiras() {
             <strong>Importante:</strong> SEMPRE traga a carteira de vacinação da criança. É através dela que acompanhamos o desenvolvimento e verificamos se as vacinas estão em dia.
           </Alert>
         </InfoBox>
-        {}
         <InfoBox title="Público-alvo">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -688,7 +678,6 @@ export default function Enfermeiras() {
             </div>
           </div>
         </InfoBox>
-        {}
         <InfoBox title="Acesso ao Serviço">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -751,7 +740,6 @@ export default function Enfermeiras() {
             </div>
           </div>
         </InfoBox>
-        {}
         <div className="mb-6">
           <Alert type="info">
             <div>
@@ -779,7 +767,6 @@ export default function Enfermeiras() {
             </div>
           </Alert>
         </div>
-        {}
         <InfoBox
           id="documentacao-necessaria"
           title="Documentação Necessária"
@@ -832,7 +819,6 @@ export default function Enfermeiras() {
             </div>
           </div>
         </InfoBox>
-        {}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div className="flex items-start gap-3">
             <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
@@ -850,10 +836,10 @@ export default function Enfermeiras() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
-        <RecommendedReadingCarousel pageId="enfermeiras" />
+        <RecommendedReadingCarousel pageId="consultas-enfermagem" />
       </div>
     </PageContainer>
   );
 }
+

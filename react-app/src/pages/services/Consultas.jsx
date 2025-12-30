@@ -14,6 +14,15 @@ import {
 export default function Consultas() {
   const consultaTypes = [
     {
+      id: "enfermagem",
+      title: "Consultas de Enfermagem",
+      description:
+        "Pré-natal, puericultura, HiperDia e procedimentos de enfermagem",
+      icon: HeartPulse,
+      path: "/servicos/consultas-enfermagem",
+      colorScheme: "primary",
+    },
+    {
       id: "medicos",
       title: "Consultório Médico",
       description:

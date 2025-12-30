@@ -114,7 +114,7 @@ export default function BolsaFamilia() {
                   to="/servicos/sala-4"
                   className="text-primary-600 hover:text-primary-700 underline"
                 >
-                  Sala de Agendamento (Sala 4)
+                  Sala de Agendamentos
                 </Link>{" "}
                 para marcar seu atendimento ou compareça diretamente à unidade
                 nos horários de funcionamento.

@@ -194,11 +194,13 @@ export const allPages = [
   },
   {
     id: "consultas",
-    title: "Consultas e Atendimentos",
-    description: "Consultas médicas, psicológicas, odontológicas e especializadas",
+    title: "Consultas",
+    description: "Consultas médicas, de enfermagem e atendimentos especializados",
     keywords: [
       "consulta",
       "médico",
+      "enfermagem",
+      "enfermeira",
       "pediatra",
       "ginecologista",
       "psicólogo",

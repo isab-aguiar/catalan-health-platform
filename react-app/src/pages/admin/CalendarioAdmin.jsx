@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell, Edit2, Trash2, Eye } from 'lucide-react';
+import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell, Edit2, Trash2, Eye, X, MapPin, Stethoscope, Briefcase } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
@@ -8,6 +8,7 @@ import AdminLayout from '../../layouts/AdminLayout';
 import { useEventos } from '../../hooks/useEventos';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import EventoModal from '../../components/admin/EventoModal';
+import { escalasTrabalho } from '../../data/escalasTrabalho';
 
 export default function CalendarioAdmin() {
   const { currentUser } = useAuth();
@@ -20,13 +21,15 @@ export default function CalendarioAdmin() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [eventoEditando, setEventoEditando] = useState(null);
   const [eventoVisualizando, setEventoVisualizando] = useState(null);
+  const [showEscalasModal, setShowEscalasModal] = useState(false);
+  const [escalasDoDia, setEscalasDoDia] = useState([]);
 
   const { eventos, loading, deletar, recarregar } = useEventos(
     currentDate.getMonth() + 1,
     currentDate.getFullYear()
   );
 
-  useBodyScrollLock(showEventModal || showDetalhesModal);
+  useBodyScrollLock(showEventModal || showDetalhesModal || showEscalasModal);
 
   const meses = [
     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -85,6 +88,58 @@ export default function CalendarioAdmin() {
         (filtroTipo === 'todos' || evento.tipo === filtroTipo)
       );
     });
+  };
+
+  /**
+   * Pega as escalas (agendas) de um dia específico
+   */
+  const getEscalasNoDia = (data) => {
+    const diasSemanaMap = {
+      0: 'Domingo',
+      1: 'Segunda',
+      2: 'Terça',
+      3: 'Quarta',
+      4: 'Quinta',
+      5: 'Sexta',
+      6: 'Sábado'
+    };
+
+    const diaSemana = diasSemanaMap[data.getDay()];
+    const escalasComAgenda = [];
+
+    // Buscar agendas médicas e de enfermeiras
+    Object.entries(escalasTrabalho).forEach(([key, escala]) => {
+      // Só pegar escalas que NÃO são públicas (agendas médicas e enfermeiras)
+      if (!escala.exibirNoPublico && escala.observacoes && escala.observacoes.length > 0) {
+        // Verificar se tem agenda para esse dia da semana (procura por "Segunda:", "Terça:", etc.)
+        const agendaDoDia = escala.observacoes.find(obs =>
+          obs.startsWith(diaSemana + ':')
+        );
+
+        if (agendaDoDia) {
+          escalasComAgenda.push({
+            ...escala,
+            key,
+            diaSemana,
+            agendaDoDia
+          });
+        }
+      }
+    });
+
+    return escalasComAgenda;
+  };
+
+  /**
+   * Abre modal com as escalas do dia
+   */
+  const handleVerEscalasDoDia = (data, e) => {
+    if (e) e.stopPropagation();
+    const escalas = getEscalasNoDia(data);
+    if (escalas.length > 0) {
+      setEscalasDoDia(escalas);
+      setShowEscalasModal(true);
+    }
   };
 
   const mesAnterior = () => {
@@ -314,6 +369,7 @@ export default function CalendarioAdmin() {
               <div className="grid grid-cols-7">
                 {diasDoMes.map((diaInfo, index) => {
                   const eventosNoDia = getEventosNoDia(diaInfo.data);
+                  const escalasNoDia = getEscalasNoDia(diaInfo.data);
                   const isHoje =
                     diaInfo.data.getDate() === dataHoje.getDate() &&
                     diaInfo.data.getMonth() === dataHoje.getMonth() &&
@@ -331,16 +387,30 @@ export default function CalendarioAdmin() {
                       } transition-colors cursor-pointer`}
                       onClick={() => handleCriarEventoNoDia(diaInfo.data)}
                     >
-                      <div
-                        className={`text-sm font-medium mb-1 ${
-                          diaInfo.mes !== 'atual'
-                            ? 'text-neutral-400'
-                            : isHoje
-                            ? 'text-white bg-primary-600 rounded-full w-7 h-7 flex items-center justify-center'
-                            : 'text-neutral-700'
-                        }`}
-                      >
-                        {diaInfo.dia}
+                      <div className="flex items-center justify-between mb-1">
+                        <div
+                          className={`text-sm font-medium ${
+                            diaInfo.mes !== 'atual'
+                              ? 'text-neutral-400'
+                              : isHoje
+                              ? 'text-white bg-primary-600 rounded-full w-7 h-7 flex items-center justify-center'
+                              : 'text-neutral-700'
+                          }`}
+                        >
+                          {diaInfo.dia}
+                        </div>
+
+                        {/* Indicador de Escalas */}
+                        {escalasNoDia.length > 0 && diaInfo.mes === 'atual' && (
+                          <button
+                            onClick={(e) => handleVerEscalasDoDia(diaInfo.data, e)}
+                            className="flex items-center gap-1 bg-teal-100 text-teal-700 hover:bg-teal-200 px-1.5 py-0.5 rounded text-xs font-medium transition-colors"
+                            title={`${escalasNoDia.length} agenda(s) médica(s)`}
+                          >
+                            <Stethoscope className="w-3 h-3" />
+                            <span>{escalasNoDia.length}</span>
+                          </button>
+                        )}
                       </div>
 
                       {/* Eventos do Dia */}
@@ -400,6 +470,123 @@ export default function CalendarioAdmin() {
         dataInicial={selectedDate}
         onEventoSalvo={handleEventoSalvo}
       />
+
+      {/* Modal de Escalas/Agendas do Dia */}
+      {showEscalasModal && escalasDoDia.length > 0 && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            {/* Header */}
+            <div className="sticky top-0 bg-white px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
+              <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
+                <Stethoscope className="w-6 h-6 text-teal-600" />
+                Agendas Médicas e de Enfermagem
+              </h3>
+              <button
+                onClick={() => {
+                  setShowEscalasModal(false);
+                  setEscalasDoDia([]);
+                }}
+                className="text-neutral-500 hover:text-neutral-700 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Corpo */}
+            <div className="p-6 space-y-6">
+              {escalasDoDia.map((escala, idx) => (
+                <div key={idx} className="bg-neutral-50 rounded-lg p-5 border border-neutral-200">
+                  {/* Cabeçalho da Escala */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h4 className="text-lg font-semibold text-neutral-900 flex items-center gap-2">
+                        {escala.categoria === 'Médico' ? (
+                          <Stethoscope className="w-5 h-5 text-teal-600" />
+                        ) : (
+                          <Briefcase className="w-5 h-5 text-blue-600" />
+                        )}
+                        {escala.nome}
+                      </h4>
+                      <p className="text-sm text-neutral-600 mt-1">{escala.descricao}</p>
+                    </div>
+                    <span className="px-3 py-1 bg-teal-100 text-teal-700 rounded-full text-xs font-medium">
+                      {escala.categoria}
+                    </span>
+                  </div>
+
+                  {/* Profissionais */}
+                  {escala.profissionais && escala.profissionais.length > 0 && (
+                    <div className="mb-4">
+                      <label className="text-sm font-medium text-neutral-700 mb-2 block">
+                        Profissional(is):
+                      </label>
+                      <div className="space-y-2">
+                        {escala.profissionais.map((prof, profIdx) => (
+                          <div key={profIdx} className="flex items-center gap-2 text-sm">
+                            <Users className="w-4 h-4 text-neutral-500" />
+                            <span className="font-medium text-neutral-900">{prof.nome}</span>
+                            <span className="text-neutral-600">- {prof.funcao}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Horários */}
+                  <div className="mb-4">
+                    <label className="text-sm font-medium text-neutral-700 mb-2 block">
+                      Horários:
+                    </label>
+                    <div className="flex flex-wrap gap-3">
+                      {escala.horarios?.manha?.ativo && (
+                        <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-3 py-1.5 rounded text-sm">
+                          <Clock className="w-4 h-4" />
+                          <span className="font-medium">Manhã:</span>
+                          <span>{escala.horarios.manha.display}</span>
+                        </div>
+                      )}
+                      {escala.horarios?.tarde?.ativo && (
+                        <div className="flex items-center gap-2 bg-amber-50 text-amber-700 px-3 py-1.5 rounded text-sm">
+                          <Clock className="w-4 h-4" />
+                          <span className="font-medium">Tarde:</span>
+                          <span>{escala.horarios.tarde.display}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Agenda do Dia */}
+                  {escala.agendaDoDia && (
+                    <div className="border-t border-neutral-300 pt-4">
+                      <label className="text-sm font-medium text-neutral-700 mb-2 block">
+                        Atividade do Dia ({escala.diaSemana}):
+                      </label>
+                      <div className="bg-teal-50 border border-teal-200 rounded p-3">
+                        <div className="text-sm text-neutral-800 font-medium">
+                          {escala.agendaDoDia}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Footer */}
+            <div className="sticky bottom-0 bg-white px-6 py-4 border-t border-neutral-200 flex justify-end">
+              <button
+                onClick={() => {
+                  setShowEscalasModal(false);
+                  setEscalasDoDia([]);
+                }}
+                className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Modal de Detalhes do Evento */}
       {showDetalhesModal && eventoVisualizando && (

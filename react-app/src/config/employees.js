@@ -484,8 +484,8 @@ export const employees = {
         department: 'enfermeiro',
         esf: null,
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '17h00', end: '22h00', display: '17h00 às 22h00', enabled: true },
+          afternoon: { start: '17h00', end: '22h00', display: '17h00 às 22h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,

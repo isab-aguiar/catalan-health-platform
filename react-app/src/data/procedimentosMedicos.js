@@ -158,11 +158,11 @@ export const procedimentosMedicos = {
   "diu-planejamento-familiar": {
     nome: "DIU - Planejamento Familiar",
     categoria: "Saúde da Mulher",
-    local: "Agendar na Sala 4",
+    local: "Agendar na Sala de Agendamentos",
     orientacoes: [
       "Necessário preventivo recente",
       "Exame B-HCG com prazo máximo de 48 horas",
-      "Agendar atendimento na Sala 4",
+      "Agendar atendimento na Sala de Agendamentos",
       "Lançar no sistema VIVER"
     ],
     documentosNecessarios: [
@@ -224,9 +224,9 @@ export const procedimentosMedicos = {
   "ginecologia": {
     nome: "Ginecologia",
     categoria: "Especialidades Médicas",
-    local: "Sala 4",
+    local: "Sala de Agendamentos",
     orientacoes: [
-      "Agendar atendimento na Sala 4"
+      "Agendar atendimento na Sala de Agendamentos"
     ],
     documentosNecessarios: ["Encaminhamento médico"],
     observacoes: [],
@@ -375,7 +375,7 @@ export const procedimentosMedicos = {
   "consulta-ginecologica-detalhada": {
     nome: "Consulta Ginecológica",
     categoria: "Consultas",
-    local: "Sala 4",
+    local: "Sala de Agendamentos",
     orientacoes: [
       "Atendimento destinado a pré-natal mediante indicação de seu médico ou primeira consulta",
       "Retorno de consulta e acompanhamento",
@@ -493,7 +493,7 @@ export const procedimentosMedicos = {
   "primeira-consulta-pre-natal": {
     nome: "Primeira Consulta de Pré-Natal",
     categoria: "Pré-Natal",
-    local: "Sala 4",
+    local: "Sala de Agendamentos",
     orientacoes: [
       "Realizar primeira consulta até a 12ª semana de gestação",
       "Apresentar cartão de vacinas",
@@ -512,7 +512,7 @@ export const procedimentosMedicos = {
   "cronograma-pre-natal": {
     nome: "Cronograma de Consultas do Pré-Natal",
     categoria: "Pré-Natal",
-    local: "Sala 4",
+    local: "Sala de Agendamentos",
     orientacoes: [
       "1ª consulta: até a 12ª semana com médico",
       "2ª consulta: 20ª semana com enfermeiro",

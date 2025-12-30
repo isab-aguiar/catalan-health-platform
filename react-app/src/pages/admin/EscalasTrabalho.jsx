@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   getAllEscalas,
   saveEscala,
   deleteEscala,
   bulkImportEscalas
 } from "../../services/escalasService";
+import { getAllEmployees } from "../../services/employeesService";
 import { escalasTrabalho } from "../../data/escalasTrabalho";
-import { Plus, Edit2, Trash2, Eye, EyeOff, Upload, Save, X } from "lucide-react";
+import { useModal } from "../../contexts/ModalContext";
+import { Plus, Edit2, Trash2, Eye, EyeOff, Upload, Save, X, Search } from "lucide-react";
 
 export default function EscalasTrabalho() {
+  const { showModal } = useModal();
   const [escalas, setEscalas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
@@ -17,10 +20,25 @@ export default function EscalasTrabalho() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState(null);
   const [filter, setFilter] = useState("all");
+  const [employees, setEmployees] = useState([]);
+  const [autocompleteStates, setAutocompleteStates] = useState({});
+  const autocompleteRefs = useRef({});
 
   useEffect(() => {
     loadEscalas();
+    loadEmployees();
   }, []);
+
+  const loadEmployees = async () => {
+    try {
+      const result = await getAllEmployees();
+      if (result.success && result.data) {
+        setEmployees(result.data);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar funcionários:", error);
+    }
+  };
 
   const loadEscalas = async () => {
     setLoading(true);
@@ -32,23 +50,36 @@ export default function EscalasTrabalho() {
   };
 
   const handleImportData = async () => {
-    if (!window.confirm("Importar dados do arquivo escalasTrabalho.js? Isso irá sobrescrever escalas existentes.")) {
-      return;
-    }
+    showModal({
+      type: "confirmation",
+      title: "Importar Dados",
+      message: "Importar dados do arquivo escalasTrabalho.js? Isso irá sobrescrever escalas existentes.",
+      onConfirm: async () => {
+        setSaving(true);
+        setMessage(null);
 
-    setSaving(true);
-    setMessage(null);
+        const result = await bulkImportEscalas(escalasTrabalho);
 
-    const result = await bulkImportEscalas(escalasTrabalho);
+        if (result.success) {
+          setMessage({ type: "success", text: result.message });
+          await loadEscalas();
+          showModal({
+            type: "success",
+            title: "Sucesso",
+            message: result.message,
+          });
+        } else {
+          setMessage({ type: "error", text: "Erro ao importar: " + result.error });
+          showModal({
+            type: "error",
+            title: "Erro",
+            message: "Erro ao importar: " + result.error,
+          });
+        }
 
-    if (result.success) {
-      setMessage({ type: "success", text: result.message });
-      await loadEscalas();
-    } else {
-      setMessage({ type: "error", text: "Erro ao importar: " + result.error });
-    }
-
-    setSaving(false);
+        setSaving(false);
+      },
+    });
   };
 
   const handleCreate = () => {
@@ -82,7 +113,23 @@ export default function EscalasTrabalho() {
   const handleEdit = (escala) => {
     setEditingId(escala.id);
     setCreating(false);
-    setEditData({ ...escala });
+    setEditData({
+      ...escala,
+      horarios: {
+        manha: {
+          ...escala.horarios?.manha,
+          ativo: escala.horarios?.manha?.ativo ?? false,
+          display: escala.horarios?.manha?.display || "",
+        },
+        tarde: {
+          ...escala.horarios?.tarde,
+          ativo: escala.horarios?.tarde?.ativo ?? false,
+          display: escala.horarios?.tarde?.display || "",
+        },
+      },
+      profissionais: escala.profissionais || [],
+      exibirNoPublico: escala.exibirNoPublico ?? true,
+    });
   };
 
   const handleCancel = () => {
@@ -114,23 +161,36 @@ export default function EscalasTrabalho() {
   };
 
   const handleDelete = async (escalaId) => {
-    if (!window.confirm("Tem certeza que deseja deletar esta escala?")) {
-      return;
-    }
+    showModal({
+      type: "confirmation",
+      title: "Deletar Escala",
+      message: "Tem certeza que deseja deletar esta escala?",
+      onConfirm: async () => {
+        setSaving(true);
+        setMessage(null);
 
-    setSaving(true);
-    setMessage(null);
+        const result = await deleteEscala(escalaId);
 
-    const result = await deleteEscala(escalaId);
+        if (result.success) {
+          setMessage({ type: "success", text: "Escala deletada com sucesso!" });
+          await loadEscalas();
+          showModal({
+            type: "success",
+            title: "Sucesso",
+            message: "Escala deletada com sucesso!",
+          });
+        } else {
+          setMessage({ type: "error", text: "Erro ao deletar: " + result.error });
+          showModal({
+            type: "error",
+            title: "Erro",
+            message: "Erro ao deletar: " + result.error,
+          });
+        }
 
-    if (result.success) {
-      setMessage({ type: "success", text: "Escala deletada com sucesso!" });
-      await loadEscalas();
-    } else {
-      setMessage({ type: "error", text: "Erro ao deletar: " + result.error });
-    }
-
-    setSaving(false);
+        setSaving(false);
+      },
+    });
   };
 
   const handleFieldChange = (field, value) => {
@@ -350,6 +410,226 @@ export default function EscalasTrabalho() {
             </div>
           </div>
 
+          <div className="border-t pt-4 mb-4">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-semibold">Profissionais da Escala</h3>
+              <button
+                type="button"
+                onClick={() => {
+                  const novosProfissionais = [...(editData.profissionais || []), { nome: "", funcao: "", turno: "manha" }];
+                  setEditData(prev => ({ ...prev, profissionais: novosProfissionais }));
+                }}
+                className="flex items-center gap-1 px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                <Plus size={16} />
+                Adicionar Profissional
+              </button>
+            </div>
+            <div className="space-y-3">
+              {(editData.profissionais || []).map((prof, index) => {
+                const autocompleteKey = `prof-${index}`;
+                const currentState = autocompleteStates[autocompleteKey];
+                const autocompleteState = currentState || {
+                  showSuggestions: false,
+                  suggestions: [],
+                  inputValue: prof.nome || ""
+                };
+
+                const handleNameInputChange = (value) => {
+                  const novosProfissionais = [...(editData.profissionais || [])];
+                  novosProfissionais[index] = { ...prof, nome: value };
+                  setEditData(prev => ({ ...prev, profissionais: novosProfissionais }));
+
+                  if (value.length >= 2 && employees.length > 0) {
+                    const filtered = employees.filter(emp => {
+                      const fullName = (emp.fullName || emp.displayName || "").toLowerCase();
+                      const searchTerm = value.toLowerCase().trim();
+                      return fullName.includes(searchTerm);
+                    }).slice(0, 5);
+
+                    setAutocompleteStates(prev => ({
+                      ...prev,
+                      [autocompleteKey]: {
+                        showSuggestions: filtered.length > 0,
+                        suggestions: filtered,
+                        inputValue: value
+                      }
+                    }));
+                  } else {
+                    setAutocompleteStates(prev => ({
+                      ...prev,
+                      [autocompleteKey]: {
+                        showSuggestions: false,
+                        suggestions: [],
+                        inputValue: value
+                      }
+                    }));
+                  }
+                };
+
+                const handleSelectEmployee = (employee) => {
+                  const novosProfissionais = [...(editData.profissionais || [])];
+                  novosProfissionais[index] = {
+                    ...prof,
+                    nome: employee.fullName || employee.displayName || "",
+                    funcao: employee.roleBase || employee.role || prof.funcao || ""
+                  };
+                  setEditData(prev => ({ ...prev, profissionais: novosProfissionais }));
+
+                  setAutocompleteStates(prev => ({
+                    ...prev,
+                    [autocompleteKey]: {
+                      showSuggestions: false,
+                      suggestions: [],
+                      inputValue: employee.fullName || employee.displayName || ""
+                    }
+                  }));
+                };
+
+                return (
+                  <div key={index} className="border rounded p-3 bg-neutral-50 relative">
+                    <div className="grid md:grid-cols-3 gap-3 mb-2">
+                      <div className="relative">
+                        <label className="block text-xs font-medium text-neutral-700 mb-1">
+                          Nome Completo (Nome e Sobrenome) *
+                        </label>
+                        <div className="relative">
+                          <input
+                            type="text"
+                            value={prof.nome || ""}
+                            onChange={(e) => handleNameInputChange(e.target.value)}
+                            onFocus={() => {
+                              const currentValue = prof.nome || "";
+                              if (currentValue.length >= 2 && employees.length > 0) {
+                                const filtered = employees.filter(emp => {
+                                  const fullName = (emp.fullName || emp.displayName || "").toLowerCase();
+                                  return fullName.includes(currentValue.toLowerCase().trim());
+                                }).slice(0, 5);
+                                setAutocompleteStates(prev => ({
+                                  ...prev,
+                                  [autocompleteKey]: {
+                                    showSuggestions: filtered.length > 0,
+                                    suggestions: filtered,
+                                    inputValue: currentValue
+                                  }
+                                }));
+                              } else if (employees.length > 0) {
+                                setAutocompleteStates(prev => ({
+                                  ...prev,
+                                  [autocompleteKey]: {
+                                    showSuggestions: false,
+                                    suggestions: [],
+                                    inputValue: currentValue
+                                  }
+                                }));
+                              }
+                            }}
+                            onBlur={() => {
+                              setTimeout(() => {
+                                setAutocompleteStates(prev => ({
+                                  ...prev,
+                                  [autocompleteKey]: {
+                                    ...prev[autocompleteKey],
+                                    showSuggestions: false
+                                  }
+                                }));
+                              }, 200);
+                            }}
+                            className="w-full px-2 py-1 pr-8 border border-neutral-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            placeholder={employees.length > 0 ? "Digite para buscar..." : "Carregando funcionários..."}
+                            disabled={employees.length === 0}
+                          />
+                          <Search size={16} className="absolute right-2 top-1/2 transform -translate-y-1/2 text-neutral-400 pointer-events-none" />
+                        </div>
+                        {autocompleteState && autocompleteState.showSuggestions && autocompleteState.suggestions && autocompleteState.suggestions.length > 0 && (
+                          <div className="absolute z-[9999] w-full mt-1 bg-white border border-neutral-300 rounded-md shadow-xl max-h-60 overflow-y-auto">
+                            {autocompleteState.suggestions.map((employee, idx) => (
+                              <button
+                                key={employee.id || `emp-${idx}`}
+                                type="button"
+                                onMouseDown={(e) => {
+                                  e.preventDefault();
+                                  handleSelectEmployee(employee);
+                                }}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  handleSelectEmployee(employee);
+                                }}
+                                className="w-full text-left px-3 py-2 hover:bg-blue-50 border-b border-neutral-100 last:border-b-0 transition-colors cursor-pointer"
+                              >
+                                <div className="font-medium text-sm text-neutral-900">
+                                  {employee.fullName || employee.displayName || 'Nome não disponível'}
+                                </div>
+                                <div className="text-xs text-neutral-600 mt-0.5">
+                                  {employee.roleBase || employee.role || employee.departmentName || 'Profissional'}
+                                </div>
+                                {employee.departmentName && (
+                                  <div className="text-xs text-neutral-400 mt-0.5">
+                                    {employee.departmentName}
+                                  </div>
+                                )}
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    <div>
+                      <label className="block text-xs font-medium text-neutral-700 mb-1">
+                        Função *
+                      </label>
+                      <input
+                        type="text"
+                        value={prof.funcao || ""}
+                        onChange={(e) => {
+                          const novosProfissionais = [...(editData.profissionais || [])];
+                          novosProfissionais[index] = { ...prof, funcao: e.target.value };
+                          setEditData(prev => ({ ...prev, profissionais: novosProfissionais }));
+                        }}
+                        className="w-full px-2 py-1 border border-neutral-300 rounded text-sm"
+                        placeholder="Ex: Técnica de Enfermagem"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-neutral-700 mb-1">
+                        Turno *
+                      </label>
+                      <select
+                        value={prof.turno || "manha"}
+                        onChange={(e) => {
+                          const novosProfissionais = [...(editData.profissionais || [])];
+                          novosProfissionais[index] = { ...prof, turno: e.target.value };
+                          setEditData(prev => ({ ...prev, profissionais: novosProfissionais }));
+                        }}
+                        className="w-full px-2 py-1 border border-neutral-300 rounded text-sm"
+                      >
+                        <option value="manha">Manhã</option>
+                        <option value="tarde">Tarde</option>
+                        <option value="both">Manhã e Tarde</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const novosProfissionais = (editData.profissionais || []).filter((_, i) => i !== index);
+                      setEditData(prev => ({ ...prev, profissionais: novosProfissionais }));
+                    }}
+                    className="flex items-center gap-1 px-2 py-1 text-xs text-red-600 hover:bg-red-50 rounded"
+                  >
+                    <Trash2 size={14} />
+                    Remover
+                  </button>
+                </div>
+                );
+              })}
+              {(!editData.profissionais || editData.profissionais.length === 0) && (
+                <p className="text-sm text-neutral-500 italic text-center py-2">
+                  Nenhum profissional adicionado. Clique em "Adicionar Profissional" para incluir.
+                </p>
+              )}
+            </div>
+          </div>
+
           <div className="flex gap-2 justify-end">
             <button
               onClick={handleCancel}
@@ -377,13 +657,16 @@ export default function EscalasTrabalho() {
             <thead className="bg-neutral-100 border-b border-neutral-200">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-neutral-700">
+                  Horário de Atendimento
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold text-neutral-700">
                   Nome
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-neutral-700">
                   Categoria
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold text-neutral-700">
-                  Horários
+                  Profissionais
                 </th>
                 <th className="px-4 py-3 text-center text-sm font-semibold text-neutral-700">
                   Público
@@ -396,6 +679,20 @@ export default function EscalasTrabalho() {
             <tbody className="divide-y divide-neutral-200">
               {filteredEscalas.map(escala => (
                 <tr key={escala.id} className="hover:bg-neutral-50">
+                  <td className="px-4 py-3 text-sm text-neutral-600">
+                    {escala.horarios?.manha?.ativo && (
+                      <div className="flex items-center gap-1">
+                        <span className="text-blue-600 font-medium">M:</span>
+                        <span>{escala.horarios.manha.display}</span>
+                      </div>
+                    )}
+                    {escala.horarios?.tarde?.ativo && (
+                      <div className="flex items-center gap-1">
+                        <span className="text-amber-600 font-medium">T:</span>
+                        <span>{escala.horarios.tarde.display}</span>
+                      </div>
+                    )}
+                  </td>
                   <td className="px-4 py-3">
                     <div className="font-medium text-neutral-900">{escala.nome}</div>
                     <div className="text-xs text-neutral-500">{escala.descricao}</div>
@@ -405,12 +702,33 @@ export default function EscalasTrabalho() {
                       {escala.categoria}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm text-neutral-600">
-                    {escala.horarios?.manha?.ativo && (
-                      <div>☀️ {escala.horarios.manha.display}</div>
-                    )}
-                    {escala.horarios?.tarde?.ativo && (
-                      <div>🌙 {escala.horarios.tarde.display}</div>
+                  <td className="px-4 py-3 text-sm">
+                    {escala.profissionais && escala.profissionais.length > 0 ? (
+                      <div className="space-y-2">
+                        {escala.profissionais.map((prof, idx) => (
+                          <div key={idx} className="bg-neutral-50 border border-neutral-200 rounded p-2">
+                            <div className="font-semibold text-neutral-900 text-sm break-words" title={prof.nome || 'Sem nome'}>
+                              {prof.nome || 'Sem nome'}
+                            </div>
+                            {prof.funcao && (
+                              <div className="text-xs text-neutral-600 mt-0.5">{prof.funcao}</div>
+                            )}
+                            {prof.turno && (
+                              <div className="text-xs mt-1">
+                                <span className={`px-2 py-0.5 rounded ${
+                                  prof.turno === 'manha' ? 'bg-blue-100 text-blue-700' :
+                                  prof.turno === 'tarde' ? 'bg-amber-100 text-amber-700' :
+                                  'bg-green-100 text-green-700'
+                                }`}>
+                                  {prof.turno === 'manha' ? 'Manhã' : prof.turno === 'tarde' ? 'Tarde' : 'Manhã e Tarde'}
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <span className="text-neutral-400 text-xs italic">Nenhum profissional cadastrado</span>
                     )}
                   </td>
                   <td className="px-4 py-3 text-center">

@@ -10,7 +10,7 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import { contactInfo, openingHours } from "../../config";
-import EscalaProfissionais from "../../components/services/EscalaProfissionais";
+import EscalaPorSala from "../../components/services/EscalaPorSala";
 
 const horariosVacinas = [
   {
@@ -69,79 +69,11 @@ export default function Vacinas() {
         <div className="mb-6">
           <CalendarioVacinal />
         </div>
-        {}
-        <InfoBox title="Horários de Atendimento">
-          <div className="space-y-4 md:space-y-0 md:overflow-x-auto">
-            <div className="hidden md:grid md:grid-cols-3 gap-0 border border-slate-300 rounded-t-lg overflow-hidden bg-slate-100">
-              <div className="border-r border-slate-300 px-4 py-3 font-semibold text-slate-700 text-sm">
-                Período
-              </div>
-              <div className="border-r border-slate-300 px-4 py-3 font-semibold text-slate-700 text-sm">
-                Horário
-              </div>
-              <div className="px-4 py-3 font-semibold text-slate-700 text-sm">
-                Profissional Responsável
-              </div>
-            </div>
-            {horariosVacinas.map((item, index) => (
-              <div
-                key={index}
-                className={`${item.bgColor} border border-slate-300 rounded-lg md:rounded-none ${index === 0 ? 'md:border-t-0' : 'md:border-t-0'} ${index === horariosVacinas.length - 1 ? 'md:rounded-b-lg' : ''}`}
-              >
-                <div className="flex flex-col md:grid md:grid-cols-3 gap-0">
-                  <div className="px-4 py-3 border-b md:border-b-0 md:border-r border-slate-300">
-                    <span className={`md:hidden inline-block ${item.badgeColor} text-sm font-semibold px-3 py-1 rounded mb-3`}>
-                      {item.periodo}
-                    </span>
-                    <strong className="text-slate-800 hidden md:inline">{item.periodo}</strong>
-                  </div>
-                  <div className="px-4 py-3 border-b md:border-b-0 md:border-r border-slate-300 text-slate-700">
-                    <p className="text-xs text-neutral-500 mb-2 md:hidden">Horário</p>
-                    <span className="text-sm font-semibold md:font-normal text-neutral-800 md:text-slate-700">{item.horario}</span>
-                  </div>
-                  <div className="px-4 py-3 text-slate-700">
-                    <p className="text-xs text-neutral-500 mb-2 md:hidden"><strong>Profissional Responsável</strong></p>
-                    <div className="md:hidden space-y-1">
-                      <p className="text-sm text-neutral-700">{item.profissional}</p>
-                      <p className="text-sm text-neutral-700"><strong>Função:</strong> {item.funcao}</p>
-                    </div>
-                    <div className="hidden md:block">
-                      Profissional Responsável:<br/>
-                      {item.profissional}<br/>
-                      Função: {item.funcao}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4">
-            <Alert type="info">
-              <p className="text-slate-800 text-xs md:text-sm font-normal leading-relaxed">
-                <strong>Observações Importantes:</strong> O atendimento na Sala
-                de Vacinas é realizado de forma livre, por ordem de chegada.
-                Antes de se dirigir à sala de vacinas, é obrigatório realizar o
-                cadastro na recepção da unidade para abertura da ficha de
-                atendimento. <strong>Exceção:</strong> A aplicação da vacina BCG
-                em recém-nascidos requer agendamento prévio, que deve ser
-                realizado na{" "}
-                <Link
-                  to="/services/sala4"
-                  className="text-blue-700 font-semibold hover:text-blue-800 underline"
-                >
-                  Sala de Agendamentos
-                </Link>
-                .
-              </p>
-            </Alert>
-          </div>
-        </InfoBox>
 
-        {/* Escalas de Profissionais - Carregado do Firestore */}
-        <EscalaProfissionais
+        {/* Escalas de Profissionais */}
+        <EscalaPorSala
           titulo="Profissionais Escalados na Sala de Vacinação"
-          department="tecnicoEnfermagem"
-          workStation="Sala de Vacinação"
+          escalaKey="sala-vacinacao"
         />
 
         {}

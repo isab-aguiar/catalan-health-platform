@@ -6,7 +6,7 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
-import EscalaProfissionais from "../../components/services/EscalaProfissionais";
+import EscalaPorSala from "../../components/services/EscalaPorSala";
 export default function Renovacao() {
   return (
     <PageContainer>
@@ -124,98 +124,6 @@ export default function Renovacao() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Horários de Atendimento">
-          {/* Versão Desktop */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissional Responsável
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    09h00 às 12h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Tatiana Costa<br/>
-                    Função: Técnica de Enfermagem
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Tarde</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    13h00 às 16h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Cristiane Aparecida<br/>
-                    Função: Técnica de Enfermagem
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          {/* Versão Mobile */}
-          <div className="md:hidden space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Manhã
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">09h00 às 12h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Tatiana Costa</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Tarde
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Cristiane Aparecida</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Técnica de Enfermagem</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </InfoBox>
-        {}
         <InfoBox title="Documentos Necessários" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">
             Para solicitar a renovação de receitas, é obrigatória a apresentação
@@ -264,10 +172,9 @@ export default function Renovacao() {
           </div>
         </InfoBox>
 
-        <EscalaProfissionais
+        <EscalaPorSala
           titulo="Profissionais Escalados para Renovação de Receitas"
-          department="tecnicoEnfermagem"
-          workStation="Renovação de Receitas"
+          escalaKey="sala-medicacao"
         />
 
         {}

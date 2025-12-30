@@ -8,7 +8,7 @@ import {
 import { PageContainer } from "../../components/layout";
 import { Alert, InfoBox, BackButton, RecommendedReadingCarousel } from "../../components/common";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
-import EscalaProfissionais from "../../components/services/EscalaProfissionais";
+import EscalaPorSala from "../../components/services/EscalaPorSala";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 export default function Curativos() {
   return (
@@ -216,117 +216,11 @@ export default function Curativos() {
             </p>
           </div>
         </InfoBox>
-        {}
-        <InfoBox title="Horários de Atendimento" icon={<Clock size={24} />}>
-          {/* Versão Desktop */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissional Responsável
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Observações
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 11h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Cristiane Aparecida
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento livre
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Tarde</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    13h00 às 17h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Valéria Costa
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-600">
-                    Atendimento livre
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
-          {/* Versão Mobile */}
-          <div className="md:hidden space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Manhã
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Cristiane Aparecida</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Observação:</strong> Atendimento livre</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Tarde
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">13h00 às 17h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Valéria Costa</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Observação:</strong> Atendimento livre</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <p className="text-xs text-neutral-500 mt-4">
-            * O atendimento é realizado mediante horários agendados e casos de
-            demanda , conforme disponibilidade da equipe e protocolos
-            estabelecidos pela unidade.
-          </p>
-        </InfoBox>
-
-        {/* Escalas de Profissionais - Carregado do Firestore */}
-        <EscalaProfissionais
+        {/* Escalas de Profissionais */}
+        <EscalaPorSala
           titulo="Profissionais Escalados na Sala de Curativos"
-          department="tecnicoEnfermagem"
-          workStation="Sala de Curativos"
+          escalaKey="sala-curativos"
         />
 
         {}

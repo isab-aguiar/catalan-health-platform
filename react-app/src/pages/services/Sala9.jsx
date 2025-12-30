@@ -6,18 +6,18 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
-import EscalaProfissionais from "../../components/services/EscalaProfissionais";
+import EscalaPorSala from "../../components/services/EscalaPorSala";
 export default function Sala9() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
         {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
+        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-4 md:p-6 mb-6">
+          <div className="flex items-center gap-2 md:gap-4">
+            <div className="w-full min-w-0">
               <h1
-                className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-neutral-900 leading-tight"
               >
                 Sala de Atendimento Administrativo
               </h1>
@@ -99,6 +99,45 @@ export default function Sala9() {
             </div>
           </div>
         </InfoBox>
+
+        {/* Horários de Atendimento ao Público */}
+        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg p-6 shadow-md mb-6">
+          <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Horários de Atendimento ao Público
+          </h3>
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4">
+            <p className="text-sm text-white/90 mb-3">
+              O atendimento ao público é realizado nos seguintes dias e horários:
+            </p>
+            <div className="space-y-3">
+              <div className="bg-white/20 rounded-lg p-3">
+                <div className="font-semibold mb-2">Dias de Atendimento:</div>
+                <div className="flex flex-wrap gap-2">
+                  <span className="bg-white text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Segunda-feira</span>
+                  <span className="bg-white text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Quarta-feira</span>
+                  <span className="bg-white text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Sexta-feira</span>
+                </div>
+              </div>
+              <div className="grid md:grid-cols-2 gap-3">
+                <div className="bg-white/20 rounded-lg p-3">
+                  <div className="text-xs text-white/80 mb-1">Turno da Manhã</div>
+                  <div className="text-xl font-bold">07:00 às 12:00</div>
+                </div>
+                <div className="bg-white/20 rounded-lg p-3">
+                  <div className="text-xs text-white/80 mb-1">Turno da Tarde</div>
+                  <div className="text-xl font-bold">13:00 às 16:30</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="text-xs text-white/80 italic">
+            * Horários sujeitos a alterações. Em caso de dúvidas, entre em contato com a unidade.
+          </div>
+        </div>
+
         {}
         <InfoBox title="Documentos Necessários" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">
@@ -147,118 +186,10 @@ export default function Sala9() {
             </Alert>
           </div>
         </InfoBox>
-        {}
-        <InfoBox title="Horário de Atendimento">
-          {/* Versão Desktop */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissional
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    08h00 às 11h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    <div className="pb-2 border-b border-neutral-200">Priscila</div>
-                    <div className="pt-2">Rosana</div>
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
-                    <strong className="text-neutral-800">Tarde</strong>
-                  </td>
-                  <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-600">
-                    13h00 às 16h30
-                  </td>
-                  <td className="border border-neutral-300 border-b-red-700 px-4 py-3 text-neutral-700">
-                    <div className="pb-2 border-b border-neutral-200">Priscila</div>
-                    <div className="pt-2">Rosana</div>
-                  </td>
-                </tr>
-                <tr className="bg-red-100">
-                  <td
-                    colSpan="3"
-                    className="border border-red-700 px-4 py-3 text-center"
-                  >
-                    <strong className="text-red-600">Atenção:</strong>{" "}
-                    Atendimento apenas às{" "}
-                    <strong>Segundas, Quartas e Sextas-feiras</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
-          {/* Versão Mobile */}
-          <div className="md:hidden space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Manhã
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">08h00 às 11h00</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
-                  <div className="text-sm text-neutral-700">
-                    <div className="pb-2 border-b border-neutral-200">Priscila</div>
-                    <div className="pt-2">Rosana</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Tarde
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h30</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissionais</strong></p>
-                  <div className="text-sm text-neutral-700">
-                    <div className="pb-2 border-b border-neutral-200">Priscila</div>
-                    <div className="pt-2">Rosana</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-red-100 border border-red-700 rounded-lg p-4">
-              <p className="text-center text-sm text-red-900">
-                <strong className="text-red-600">Atenção:</strong> Atendimento apenas às <strong>Segundas, Quartas e Sextas-feiras</strong>
-              </p>
-            </div>
-          </div>
-        </InfoBox>
-
-        <EscalaProfissionais
+        <EscalaPorSala
           titulo="Profissionais Escalados na Sala de Atendimento Administrativo"
-          workStation="Sala de Atendimento Administrativo"
+          escalaKey="administrativo"
         />
 
         {}

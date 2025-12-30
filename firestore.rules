@@ -186,42 +186,6 @@ service cloud.firestore {
     }
 
     // =====================================================
-    // COLEÇÃO: feedbacks
-    // =====================================================
-    match /feedbacks/{feedbackId} {
-      // Qualquer pessoa pode criar feedbacks (elogios, sugestões, reclamações)
-      // Validação básica dos campos obrigatórios
-      allow create: if request.resource.data.tipo is string &&
-                       request.resource.data.mensagem is string &&
-                       request.resource.data.status == 'pendente' &&
-                       request.resource.data.createdAt is timestamp &&
-                       request.resource.data.updatedAt is timestamp;
-
-      // Apenas staff pode ler feedbacks
-      allow read: if isStaff();
-
-      // Apenas staff pode atualizar feedbacks (responder, mudar status)
-      allow update: if isStaff();
-
-      // Apenas admins podem deletar feedbacks
-      allow delete: if isAdmin();
-    }
-
-    // =====================================================
-    // COLEÇÃO: employees
-    // =====================================================
-    match /employees/{employeeId} {
-      // LEITURA PÚBLICA: Qualquer pessoa pode ler funcionários ativos
-      // Isso permite exibir informações de equipe nas páginas públicas
-      allow read: if true;
-
-      // Apenas admins podem criar, atualizar e deletar funcionários
-      allow create: if isAdmin();
-      allow update: if isAdmin();
-      allow delete: if isAdmin();
-    }
-
-    // =====================================================
     // PADRÃO: NEGAR TUDO
     // =====================================================
     // Qualquer coleção não explicitamente permitida acima é bloqueada

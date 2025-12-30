@@ -163,25 +163,6 @@ export default function EscalaProfissionais({
                         <span className="text-xs">Tarde: {emp.schedule.afternoon.display}</span>
                       </div>
                     )}
-                    {emp.workStation && (
-                      <div className="mt-2 pt-2 border-t border-neutral-200">
-                        {emp.workStation.location && (
-                          <div className="text-xs text-neutral-600">
-                            📍 {emp.workStation.location} - {emp.workStation.shift}
-                          </div>
-                        )}
-                        {emp.workStation.morning?.location && (
-                          <div className="text-xs text-neutral-600">
-                            ☀️ Manhã: {emp.workStation.morning.location}
-                          </div>
-                        )}
-                        {emp.workStation.afternoon?.location && (
-                          <div className="text-xs text-neutral-600">
-                            🌙 Tarde: {emp.workStation.afternoon.location}
-                          </div>
-                        )}
-                      </div>
-                    )}
                   </div>
                 </td>
                 {showWeeklySchedule && emp.weeklySchedule && (
@@ -191,8 +172,8 @@ export default function EscalaProfissionais({
                         <div key={dia} className="flex gap-2">
                           <strong className="text-neutral-800 w-16 capitalize">{dia}:</strong>
                           <div>
-                            {atividades.morning && <div>☀️ {atividades.morning}</div>}
-                            {atividades.afternoon && <div>🌙 {atividades.afternoon}</div>}
+                            {atividades.morning && <div>Manhã: {atividades.morning}</div>}
+                            {atividades.afternoon && <div>Tarde: {atividades.afternoon}</div>}
                           </div>
                         </div>
                       ))}
@@ -240,27 +221,6 @@ export default function EscalaProfissionais({
                 </div>
               </div>
 
-              {emp.workStation && (
-                <div className="pt-2 border-t border-neutral-200">
-                  <p className="text-xs text-neutral-500 mb-1 font-medium">Estação:</p>
-                  {emp.workStation.location && (
-                    <div className="text-xs text-neutral-600">
-                      📍 {emp.workStation.location} - {emp.workStation.shift}
-                    </div>
-                  )}
-                  {emp.workStation.morning?.location && (
-                    <div className="text-xs text-neutral-600">
-                      ☀️ Manhã: {emp.workStation.morning.location}
-                    </div>
-                  )}
-                  {emp.workStation.afternoon?.location && (
-                    <div className="text-xs text-neutral-600">
-                      🌙 Tarde: {emp.workStation.afternoon.location}
-                    </div>
-                  )}
-                </div>
-              )}
-
               {showWeeklySchedule && emp.weeklySchedule && (
                 <div className="pt-2 border-t border-neutral-200">
                   <p className="text-xs text-neutral-500 mb-2 font-medium">Agenda Semanal:</p>
@@ -268,8 +228,8 @@ export default function EscalaProfissionais({
                     {Object.entries(emp.weeklySchedule).map(([dia, atividades]) => (
                       <div key={dia}>
                         <strong className="text-neutral-800 capitalize">{dia}:</strong>
-                        {atividades.morning && <div className="ml-4">☀️ {atividades.morning}</div>}
-                        {atividades.afternoon && <div className="ml-4">🌙 {atividades.afternoon}</div>}
+                        {atividades.morning && <div className="ml-4">Manhã: {atividades.morning}</div>}
+                        {atividades.afternoon && <div className="ml-4">Tarde: {atividades.afternoon}</div>}
                       </div>
                     ))}
                   </div>
