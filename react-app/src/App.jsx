@@ -97,6 +97,7 @@ const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesP
 const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
 const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
 const Feedbacks = lazyLoad(() => import("./pages/admin/Feedbacks"));
+const EscalasTrabalho = lazyLoad(() => import("./pages/admin/EscalasTrabalho"));
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
@@ -282,6 +283,14 @@ function App() {
                         element={
                           <ProtectedRoute>
                             <Feedbacks />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/escalas"
+                        element={
+                          <ProtectedRoute>
+                            <EscalasTrabalho />
                           </ProtectedRoute>
                         }
                       />

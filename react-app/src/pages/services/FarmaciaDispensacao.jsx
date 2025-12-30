@@ -8,6 +8,7 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import { contactInfo } from "../../config";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 
 export default function FarmaciaDispensacao() {
   return (
@@ -221,6 +222,12 @@ export default function FarmaciaDispensacao() {
             </Alert>
           </div>
         </InfoBox>
+
+        <EscalaProfissionais
+          titulo="Profissionais Escalados na Farmácia"
+          department="farmaceutico"
+          workStation="Farmácia"
+        />
 
         <InfoBox title="Documentação Necessária" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">

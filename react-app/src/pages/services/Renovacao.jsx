@@ -6,6 +6,7 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 export default function Renovacao() {
   return (
     <PageContainer>
@@ -262,6 +263,13 @@ export default function Renovacao() {
             </Alert>
           </div>
         </InfoBox>
+
+        <EscalaProfissionais
+          titulo="Profissionais Escalados para Renovação de Receitas"
+          department="tecnicoEnfermagem"
+          workStation="Renovação de Receitas"
+        />
+
         {}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div>

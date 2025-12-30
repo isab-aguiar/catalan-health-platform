@@ -6,6 +6,7 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
+import EscalaProfissionais from "../../components/services/EscalaProfissionais";
 export default function Sala9() {
   return (
     <PageContainer>
@@ -254,6 +255,12 @@ export default function Sala9() {
             </div>
           </div>
         </InfoBox>
+
+        <EscalaProfissionais
+          titulo="Profissionais Escalados na Sala de Atendimento Administrativo"
+          workStation="Sala de Atendimento Administrativo"
+        />
+
         {}
           <div className="mt-4">
             <Alert type="warning">
