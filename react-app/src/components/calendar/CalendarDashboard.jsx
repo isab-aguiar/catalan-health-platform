@@ -107,9 +107,9 @@ export default function CalendarDashboard({
   };
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 md:space-y-6 animate-fade-in">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 md:gap-4">
         <StatsCard
           icon={Calendar}
           title="Eventos Hoje"
@@ -143,22 +143,22 @@ export default function CalendarDashboard({
       </div>
 
       {/* Two-column layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         {/* Agenda de Hoje */}
         <div className="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
-          <div className="p-6 border-b border-neutral-200 bg-gradient-to-r from-blue-50 to-indigo-50">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-neutral-900 flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-primary-600" />
-                Agenda de Hoje
+          <div className="p-3 md:p-6 border-b border-neutral-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+              <h3 className="text-base md:text-lg font-semibold text-neutral-900 flex items-center gap-2">
+                <Calendar className="w-4 h-4 md:w-5 md:h-5 text-primary-600 flex-shrink-0" />
+                <span className="truncate">Agenda de Hoje</span>
               </h3>
-              <span className="text-sm text-neutral-600">
+              <span className="text-xs md:text-sm text-neutral-600">
                 {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })}
               </span>
             </div>
           </div>
 
-          <div className="p-6">
+          <div className="p-3 md:p-6">
             {stats.eventosHoje.length === 0 ? (
               <EmptyState
                 icon={CalendarCheck}
@@ -167,10 +167,11 @@ export default function CalendarDashboard({
                 action={
                   <button
                     onClick={onCreateEvent}
-                    className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md"
+                    className="px-3 md:px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md text-sm"
                   >
                     <Plus className="w-4 h-4" />
-                    Criar Evento
+                    <span className="hidden sm:inline">Criar Evento</span>
+                    <span className="sm:hidden">Criar</span>
                   </button>
                 }
               />

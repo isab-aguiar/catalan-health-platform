@@ -119,24 +119,24 @@ export default function CalendarListView({
   const totalEventos = Object.values(groupedEvents).flat().length;
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div className="space-y-4 md:space-y-6 animate-fade-in">
       {/* Search and Sort */}
-      <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 rounded-xl shadow-lg border border-neutral-200/50 p-6">
-        <div className="flex flex-col sm:flex-row gap-4">
+      <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 rounded-xl shadow-lg border border-neutral-200/50 p-3 md:p-6">
+        <div className="flex flex-col gap-3 md:gap-4">
           {/* Search */}
           <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
+            <Search className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-neutral-400 pointer-events-none" />
             <input
               type="text"
-              placeholder="Buscar eventos por título, descrição ou local..."
+              placeholder="Buscar eventos..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-10 py-3 border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/80 backdrop-blur-sm text-sm font-medium"
+              className="w-full pl-10 md:pl-12 pr-10 py-2.5 md:py-3 border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/80 backdrop-blur-sm text-sm font-medium"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-neutral-100 rounded-lg transition-colors"
+                className="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-neutral-100 rounded-lg transition-colors"
                 title="Limpar busca"
               >
                 <X className="w-4 h-4 text-neutral-500" />
@@ -150,7 +150,7 @@ export default function CalendarListView({
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-3 border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/80 backdrop-blur-sm text-sm font-semibold min-w-[160px] cursor-pointer"
+              className="flex-1 sm:flex-none px-3 md:px-4 py-2.5 md:py-3 border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/80 backdrop-blur-sm text-sm font-semibold min-w-0 sm:min-w-[160px] cursor-pointer"
             >
               <option value="date">📅 Por Data</option>
               <option value="tipo">🏷️ Por Tipo</option>
@@ -160,11 +160,11 @@ export default function CalendarListView({
         </div>
 
         {/* Results count and stats */}
-        <div className="mt-4 pt-4 border-t border-neutral-200/50 flex flex-wrap items-center justify-between gap-3">
+        <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-neutral-200/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="text-sm font-semibold text-neutral-700">
             <span className="text-blue-600 text-base">{totalEventos}</span> {totalEventos === 1 ? 'evento encontrado' : 'eventos encontrados'}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 w-full sm:w-auto">
             {Object.entries(groupedEvents).map(([grupo, eventosGrupo]) => {
               if (eventosGrupo.length === 0) return null;
               return (
@@ -179,24 +179,24 @@ export default function CalendarListView({
       </div>
 
       {/* Grouped Events */}
-      {totalEventos === 0 ? (
+      {totalEventos === 0 && (!agendas || agendas.length === 0) ? (
         <EmptyState
           icon={Search}
-          title="Nenhum evento encontrado"
-          message={searchTerm ? `Nenhum evento corresponde à busca "${searchTerm}"` : 'Não há eventos para exibir'}
+          title="Nenhum evento ou agenda encontrado"
+          message={searchTerm ? `Nenhum evento corresponde à busca "${searchTerm}"` : 'Não há eventos ou agendas para exibir'}
         />
       ) : (
         Object.entries(groupedEvents).map(([grupo, eventosGrupo]) => {
           if (eventosGrupo.length === 0) return null;
 
           return (
-            <div key={grupo} className="space-y-4">
+            <div key={grupo} className="space-y-3 md:space-y-4">
               {/* Group header */}
-              <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 rounded-xl shadow-md z-10 backdrop-blur-sm">
-                <h3 className="text-sm font-bold text-white flex items-center gap-3">
-                  <Calendar className="w-5 h-5" />
-                  {grupo}
-                  <span className="ml-auto px-2.5 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-xs">
+              <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-indigo-600 px-4 md:px-5 py-2.5 md:py-3 rounded-xl shadow-md z-10 backdrop-blur-sm">
+                <h3 className="text-sm font-bold text-white flex items-center gap-2 md:gap-3">
+                  <Calendar className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                  <span className="truncate">{grupo}</span>
+                  <span className="ml-auto px-2 md:px-2.5 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-xs flex-shrink-0">
                     {eventosGrupo.length}
                   </span>
                 </h3>
@@ -353,20 +353,20 @@ export default function CalendarListView({
 
       {/* Agendas Semanais */}
       {showAgendas && agendas && agendas.length > 0 && (
-        <div className="bg-gradient-to-br from-indigo-50 via-purple-50/30 to-blue-50/30 rounded-xl shadow-lg border border-indigo-200/50 p-6 animate-fade-in">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-indigo-600 rounded-lg shadow-md">
-                <Stethoscope className="w-6 h-6 text-white" />
+        <div className="bg-gradient-to-br from-indigo-50 via-purple-50/30 to-blue-50/30 rounded-xl shadow-lg border border-indigo-200/50 p-3 md:p-6 animate-fade-in">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 md:mb-6">
+            <div className="flex items-center gap-2 md:gap-3">
+              <div className="p-2 md:p-2.5 bg-indigo-600 rounded-lg shadow-md flex-shrink-0">
+                <Stethoscope className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-indigo-900">Agendas Semanais</h3>
-                <p className="text-sm text-indigo-600">{agendas.length} profissionais</p>
+                <h3 className="text-base md:text-lg font-bold text-indigo-900">Agendas Semanais</h3>
+                <p className="text-xs md:text-sm text-indigo-600">{agendas.length} profissionais</p>
               </div>
             </div>
             <button
               onClick={() => setShowAgendas(!showAgendas)}
-              className="px-4 py-2 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors border border-indigo-200"
+              className="w-full sm:w-auto px-3 md:px-4 py-2 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors border border-indigo-200 text-sm"
             >
               {showAgendas ? 'Ocultar' : 'Mostrar'}
             </button>
@@ -378,42 +378,46 @@ export default function CalendarListView({
                 key={agenda.id}
                 className="group relative bg-white/90 backdrop-blur-sm rounded-xl border-2 border-indigo-200 p-4 hover:shadow-xl hover:border-indigo-300 transition-all duration-300"
               >
-                {/* Header da Agenda */}
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex-1">
-                    <h4 className="font-bold text-indigo-900 text-base">{agenda.nome}</h4>
-                    <span className="inline-block px-2.5 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold mt-1">
-                      {agenda.categoria}
-                    </span>
+                {/* Header da Agenda - Mobile friendly sem sobreposição */}
+                <div className="flex flex-col gap-2 mb-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-indigo-900 text-sm md:text-base break-words leading-tight">{agenda.nome}</h4>
+                    </div>
+                    
+                    {/* Ações - Sempre visíveis em mobile */}
+                    <div className="flex items-center gap-1 flex-shrink-0">
+                      {onAgendaEdit && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onAgendaEdit(agenda);
+                          }}
+                          className="p-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                          title="Editar agenda"
+                        >
+                          <Edit2 className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                      {onAgendaDelete && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onAgendaDelete(agenda);
+                          }}
+                          className="p-1.5 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                          title="Excluir agenda"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                   
-                  {/* Ações */}
-                  <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
-                    {onAgendaEdit && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onAgendaEdit(agenda);
-                        }}
-                        className="p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
-                        title="Editar agenda"
-                      >
-                        <Edit2 className="w-4 h-4" />
-                      </button>
-                    )}
-                    {onAgendaDelete && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onAgendaDelete(agenda);
-                        }}
-                        className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
-                        title="Excluir agenda"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
+                  {/* Badge da categoria */}
+                  <span className="inline-block px-2.5 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold w-fit">
+                    {agenda.categoria}
+                  </span>
                 </div>
 
                 {/* Atividades */}

@@ -432,103 +432,125 @@ export default function CalendarioAdmin() {
       <NotificationBanner />
 
       {/* Header */}
-      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 md:p-6">
         <div className="flex flex-col gap-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
-                <CalendarIcon className="w-7 h-7 text-primary-600" />
-                Calendário Administrativo
+              <h1 className="text-xl md:text-2xl font-bold text-neutral-900 flex items-center gap-2">
+                <CalendarIcon className="w-6 h-6 md:w-7 md:h-7 text-primary-600" />
+                <span className="truncate">Calendário Administrativo</span>
               </h1>
-              <p className="text-neutral-600 mt-1">
+              <p className="text-sm md:text-base text-neutral-600 mt-1">
                 Gerencie reuniões, lembretes e agendamentos
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
               {/* Botão Adicionar Agenda */}
               <button
                 onClick={() => {
                   setAgendaEditando(null);
                   setShowAgendaModal(true);
                 }}
-                className="bg-indigo-600 text-white px-4 py-2.5 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-800 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md"
+                className="bg-indigo-600 text-white px-3 md:px-4 py-2.5 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-800 transition-all duration-200 flex items-center justify-center gap-2 font-medium shadow-sm hover:shadow-md text-sm md:text-base"
               >
-                <Users className="w-5 h-5" />
-                Nova Agenda
+                <Users className="w-4 h-4 md:w-5 md:h-5" />
+                <span className="hidden sm:inline">Nova Agenda</span>
+                <span className="sm:hidden">Agenda</span>
               </button>
               {/* Botão Adicionar Evento */}
               <button
                 onClick={() => setShowEventModal(true)}
-                className="bg-primary-600 text-white px-4 py-2.5 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md"
+                className="bg-primary-600 text-white px-3 md:px-4 py-2.5 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-all duration-200 flex items-center justify-center gap-2 font-medium shadow-sm hover:shadow-md text-sm md:text-base"
               >
-                <Plus className="w-5 h-5" />
-                Adicionar Evento
+                <Plus className="w-4 h-4 md:w-5 md:h-5" />
+                <span className="hidden sm:inline">Adicionar Evento</span>
+                <span className="sm:hidden">Evento</span>
               </button>
             </div>
           </div>
 
           {/* Toggle de Visualização */}
-          <div className="flex flex-wrap items-center gap-2 border-t border-neutral-200 pt-4">
-            <span className="text-sm font-medium text-neutral-700 mr-2">Visualização:</span>
-            <button
-              onClick={() => setViewMode('dashboard')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                viewMode === 'dashboard'
-                  ? 'bg-primary-600 text-white shadow-sm'
-                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
-              }`}
-            >
-              <BarChart3 className="w-4 h-4" />
-              Dashboard
-            </button>
-            <button
-              onClick={() => setViewMode('list')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                viewMode === 'list'
-                  ? 'bg-primary-600 text-white shadow-sm'
-                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
-              }`}
-            >
-              <List className="w-4 h-4" />
-              Lista
-            </button>
-            <button
-              onClick={() => setViewMode('agenda')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                viewMode === 'agenda'
-                  ? 'bg-primary-600 text-white shadow-sm'
-                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
-              }`}
-            >
-              <Clock className="w-4 h-4" />
-              Agenda
-            </button>
-            <button
-              onClick={() => setViewMode('month')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                viewMode === 'month'
-                  ? 'bg-primary-600 text-white shadow-sm'
-                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
-              }`}
-            >
-              <LayoutGrid className="w-4 h-4" />
-              Calendário
-            </button>
+          <div className="flex flex-col gap-3 border-t border-neutral-200 pt-4">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-xs md:text-sm font-semibold text-neutral-700 hidden sm:block">Visualização:</span>
+              
+              {/* Botão Filtros Mobile - Movido para o topo */}
+              {(viewMode === 'month' || viewMode === 'list' || viewMode === 'agenda') && (
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`sm:hidden flex-1 px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center justify-center gap-2 ${
+                    showFilters
+                      ? 'bg-primary-600 text-white shadow-md'
+                      : 'bg-neutral-100 text-neutral-700 active:bg-neutral-200'
+                  }`}
+                >
+                  <Filter className="w-4 h-4" />
+                  {showFilters ? 'Ocultar Filtros' : 'Mostrar Filtros'}
+                </button>
+              )}
+            </div>
 
-            {/* Botão Filtros */}
-            {(viewMode === 'month' || viewMode === 'list' || viewMode === 'agenda') && (
+            <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2">
               <button
-                onClick={() => setShowFilters(!showFilters)}
-                className={`ml-auto px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                  showFilters
-                    ? 'bg-primary-100 text-primary-700 border border-primary-300'
-                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                onClick={() => setViewMode('dashboard')}
+                className={`px-2 md:px-3 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                  viewMode === 'dashboard'
+                    ? 'bg-primary-600 text-white shadow-md scale-105'
+                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 active:scale-95'
                 }`}
               >
-                <Filter className="w-4 h-4" />
-                Filtros
+                <BarChart3 className="w-4 h-4 flex-shrink-0" />
+                <span className="truncate">Dashboard</span>
               </button>
-            )}
+              <button
+                onClick={() => setViewMode('list')}
+                className={`px-2 md:px-3 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                  viewMode === 'list'
+                    ? 'bg-primary-600 text-white shadow-md scale-105'
+                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 active:scale-95'
+                }`}
+              >
+                <List className="w-4 h-4 flex-shrink-0" />
+                <span className="truncate">Lista</span>
+              </button>
+              <button
+                onClick={() => setViewMode('agenda')}
+                className={`px-2 md:px-3 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                  viewMode === 'agenda'
+                    ? 'bg-primary-600 text-white shadow-md scale-105'
+                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 active:scale-95'
+                }`}
+              >
+                <Clock className="w-4 h-4 flex-shrink-0" />
+                <span className="truncate">Agenda</span>
+              </button>
+              <button
+                onClick={() => setViewMode('month')}
+                className={`px-2 md:px-3 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-1.5 ${
+                  viewMode === 'month'
+                    ? 'bg-primary-600 text-white shadow-md scale-105'
+                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 active:scale-95'
+                }`}
+              >
+                <LayoutGrid className="w-4 h-4 flex-shrink-0" />
+                <span className="truncate">Calendário</span>
+              </button>
+
+              {/* Botão Filtros Desktop */}
+              {(viewMode === 'month' || viewMode === 'list' || viewMode === 'agenda') && (
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className={`hidden sm:flex px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 items-center gap-2 ${
+                    showFilters
+                      ? 'bg-primary-100 text-primary-700 border-2 border-primary-300'
+                      : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                  }`}
+                >
+                  <Filter className="w-4 h-4" />
+                  Filtros
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
