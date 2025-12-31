@@ -13,19 +13,12 @@ export default function ECG() {
 
         {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-              <Activity size={28} className="text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white">
-                Eletrocardiograma
-              </h1>
-              <p className="text-primary-100 text-sm mt-1">
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Eletrocardiograma
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
 
         <CampanhasPaginaWrapper pagina="ecg" />
@@ -33,7 +26,7 @@ export default function ECG() {
         <AvisosPaginaWrapper pagina="ecg" />
 
         {/* Sobre o Serviço */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
             <Activity size={24} className="text-blue-600" />
             Sobre o Exame
@@ -80,18 +73,18 @@ export default function ECG() {
         </div>
 
         {/* Preparo para o Exame */}
-        <div className="bg-gradient-to-br from-purple-50 to-violet-50 rounded-lg p-6 shadow-sm border border-purple-200 mb-6">
-          <h2 className="text-xl font-bold text-purple-900 mb-4 flex items-center gap-2">
-            <AlertCircle size={24} className="text-purple-600" />
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-sm border border-green-200 mb-6">
+          <h2 className="text-xl font-bold text-green-900 mb-4 flex items-center gap-2">
+            <AlertCircle size={24} className="text-green-600" />
             Preparo para o Exame
           </h2>
 
           <div className="space-y-4">
-            <div className="bg-white/70 rounded-lg p-5 border border-purple-100">
+            <div className="bg-white/70 rounded-lg p-5 border border-green-100">
               <div className="flex items-start gap-3">
-                <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong className="text-purple-900 block mb-1 text-sm">
+                  <strong className="text-green-900 block mb-1 text-sm">
                     Não utilizar creme ou óleo corporal no dia do exame
                   </strong>
                   <p className="text-neutral-700 text-xs">
@@ -103,11 +96,11 @@ export default function ECG() {
               </div>
             </div>
 
-            <div className="bg-white/70 rounded-lg p-5 border border-purple-100">
+            <div className="bg-white/70 rounded-lg p-5 border border-green-100">
               <div className="flex items-start gap-3">
-                <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong className="text-purple-900 block mb-1 text-sm">
+                  <strong className="text-green-900 block mb-1 text-sm">
                     Evitar o uso excessivo de bijuterias e acessórios de metal
                   </strong>
                   <p className="text-neutral-700 text-xs">
@@ -120,11 +113,11 @@ export default function ECG() {
               </div>
             </div>
 
-            <div className="bg-white/70 rounded-lg p-5 border border-purple-100">
+            <div className="bg-white/70 rounded-lg p-5 border border-green-100">
               <div className="flex items-start gap-3">
-                <div className="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <strong className="text-purple-900 block mb-1 text-sm">
+                  <strong className="text-green-900 block mb-1 text-sm">
                     Mulheres: Se possível, evitar sutiã com aro metálico
                   </strong>
                   <p className="text-neutral-700 text-xs">

@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { AlertCircle, Users, FileText, Calendar, Phone, Heart, Stethoscope, Baby, UserCheck, CheckCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import PageContainer from "../../components/layout/PageContainer";
-import { Alert } from "../../components/common/Alert";
-import InfoBox from "../../components/common/InfoBox";
 import logoBolsaFamilia from "../../assets/bolsa-familia/Logo_Bolsa_Familia.png";
 
 export default function BolsaFamilia() {
@@ -12,24 +10,21 @@ export default function BolsaFamilia() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-2xl sm:text-3xl font-bold text-neutral-900"
-              >
-                Bolsa Família e Serviço Social
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Bolsa Família e Serviço Social
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
 
-        <InfoBox title="Sobre o Serviço" icon={<Users size={24} />}>
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
             O Serviço Social da ESF Catalão oferece orientação, suporte e
             acompanhamento para famílias em situação de vulnerabilidade social.
@@ -38,8 +33,11 @@ export default function BolsaFamilia() {
             questões relacionadas a direitos sociais e cidadania.
           </p>
 
+          <h3 className="font-bold text-blue-900 mb-4 text-base">
+            Serviços Oferecidos:
+          </h3>
           <div className="space-y-3">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-neutral-800 text-sm block mb-1">
@@ -52,7 +50,7 @@ export default function BolsaFamilia() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-neutral-800 text-sm block mb-1">
@@ -65,7 +63,7 @@ export default function BolsaFamilia() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-neutral-800 text-sm block mb-1">
@@ -78,7 +76,7 @@ export default function BolsaFamilia() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-neutral-800 text-sm block mb-1">
@@ -91,10 +89,10 @@ export default function BolsaFamilia() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
 
         {/* Seção Acompanhamento de Saúde - Bolsa Família */}
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl shadow-lg overflow-hidden mb-6">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200 rounded-xl shadow-lg overflow-hidden mb-6">
           {/* Header com Logo */}
           <div className="bg-gradient-to-r from-green-600 to-green-700 px-6 py-8">
             <div className="flex flex-col md:flex-row items-center gap-6">
@@ -353,7 +351,7 @@ export default function BolsaFamilia() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 shadow-sm">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-sm">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
               <CheckCircle size={24} className="text-white" />

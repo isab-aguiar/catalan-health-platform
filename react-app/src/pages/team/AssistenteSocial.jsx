@@ -10,25 +10,22 @@ export default function AssistenteSocial() {
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 break-words"
-              >
-                Bolsa Família e Serviço Social
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Bolsa Família e Serviço Social
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
-        <InfoBox title="Sobre o Serviço">
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
             O Serviço Social na ESF Catalão atua na garantia dos direitos
             sociais dos usuários, oferecendo informações e orientações sobre Bolsa Família, Serviço Social e outros programas sociais. Trabalhamos com encaminhamentos e
@@ -36,8 +33,11 @@ export default function AssistenteSocial() {
             integrada com a equipe de saúde para promover o bem-estar e a
             qualidade de vida da comunidade.
           </p>
+          <h3 className="font-bold text-blue-900 mb-4 text-base">
+            Serviços Oferecidos:
+          </h3>
           <div className="space-y-3">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -48,7 +48,7 @@ export default function AssistenteSocial() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -59,7 +59,7 @@ export default function AssistenteSocial() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">Acolhimento</strong>
@@ -68,7 +68,7 @@ export default function AssistenteSocial() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">Articulação</strong>
@@ -77,7 +77,7 @@ export default function AssistenteSocial() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -89,7 +89,7 @@ export default function AssistenteSocial() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
         {}
         <InfoBox title="Quem é a profissional?">
           <div className="overflow-x-auto">

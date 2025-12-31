@@ -29,7 +29,7 @@ export default function Recepcao() {
         <AvisosPaginaWrapper pagina="recepcao" />
 
         {/* Sobre o Serviço */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
           </h2>
@@ -47,7 +47,7 @@ export default function Recepcao() {
         />
 
         {/* Preciso passar na recepção antes? */}
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 shadow-sm border border-green-200 mb-6">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-sm border border-green-200 mb-6">
           <h2 className="text-xl font-bold text-green-900 mb-4">
             Preciso passar na recepção antes?
           </h2>

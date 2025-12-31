@@ -1,5 +1,5 @@
 import React from "react";
-import { Shield, Clock, Calendar, MapPin, Phone, AlertCircle, Heart, CheckCircle, AlertTriangle } from "lucide-react";
+import { Clock, Calendar, MapPin, Phone, AlertCircle, Heart, CheckCircle, AlertTriangle } from "lucide-react";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 import BackButton from "../../components/common/BackButton";
 import { contactInfo } from "../../config";
@@ -9,21 +9,18 @@ const PrevencaoHIV = () => {
     <div className="max-w-4xl mx-auto px-4 py-6">
       <BackButton />
 
-      {/* Header */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 mb-6 shadow-md">
-        <div className="flex items-center gap-3 mb-3">
-          <Shield size={32} className="flex-shrink-0" />
-          <div>
-            <h1 className="text-2xl font-bold text-white">Prevenção Combinada ao HIV</h1>
-            <p className="text-primary-100 text-sm mt-1">
-              PrEP e PEP: Estratégias eficazes de prevenção disponíveis no SUS
-            </p>
-          </div>
-        </div>
+      {/* Header com gradiente */}
+      <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-white">
+          Prevenção Combinada ao HIV
+        </h1>
+        <p className="text-primary-100 text-sm mt-1">
+          PrEP e PEP: Estratégias eficazes de prevenção disponíveis no SUS
+        </p>
       </div>
 
       {/* Introdução */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 mb-6 shadow-sm">
+      <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 mb-6 shadow-sm">
         <h2 className="text-lg font-bold text-blue-900 mb-3">Estratégias de Prevenção ao HIV no SUS</h2>
         <p className="text-neutral-700 leading-relaxed text-sm">
           O Sistema Único de Saúde disponibiliza <strong className="text-blue-700">estratégias medicamentosas eficazes e gratuitas</strong> para prevenir a infecção pelo HIV.
@@ -33,18 +30,18 @@ const PrevencaoHIV = () => {
 
       {/* PEP - Urgência */}
       <div className="mb-8">
-        <div className="bg-gradient-to-br from-red-50 to-rose-50 border border-red-200 rounded-lg p-6">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6">
           <div className="mb-4">
-            <h2 className="text-xl font-bold text-red-900">
+            <h2 className="text-xl font-bold text-green-900">
               PEP<br/>
-              <span className="text-sm font-normal text-red-700">Profilaxia Pós-Exposição (Urgência)</span>
+              <span className="text-sm font-normal text-green-700">Profilaxia Pós-Exposição (Urgência)</span>
             </h2>
           </div>
 
           <div className="space-y-4">
             <div className="bg-white/60 rounded-lg p-4">
-              <h3 className="font-semibold text-red-900 mb-2 flex items-center gap-2">
-                <CheckCircle size={18} className="text-red-600" />
+              <h3 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
+                <CheckCircle size={18} className="text-green-600" />
                 O que é?
               </h3>
               <p className="text-neutral-700 text-sm leading-relaxed mb-3">
@@ -52,19 +49,19 @@ const PrevencaoHIV = () => {
               </p>
               <ul className="space-y-2 ml-2">
                 <li className="flex items-start gap-2 text-sm text-neutral-700">
-                  <span className="text-red-600 mt-0.5">•</span>
+                  <span className="text-green-600 mt-0.5">•</span>
                   <span>Relação sexual sem preservativo</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-neutral-700">
-                  <span className="text-red-600 mt-0.5">•</span>
+                  <span className="text-green-600 mt-0.5">•</span>
                   <span>Falha ou rompimento do preservativo</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-neutral-700">
-                  <span className="text-red-600 mt-0.5">•</span>
+                  <span className="text-green-600 mt-0.5">•</span>
                   <span>Violência sexual</span>
                 </li>
                 <li className="flex items-start gap-2 text-sm text-neutral-700">
-                  <span className="text-red-600 mt-0.5">•</span>
+                  <span className="text-green-600 mt-0.5">•</span>
                   <span>Acidente com material biológico</span>
                 </li>
               </ul>
@@ -72,22 +69,22 @@ const PrevencaoHIV = () => {
 
             <div className="bg-white/60 rounded-lg p-4">
               <div className="flex items-start gap-2 mb-3">
-                <Clock size={20} className="text-red-700 mt-0.5 flex-shrink-0" />
-                <h3 className="font-semibold text-red-900">Prazo Crítico</h3>
+                <Clock size={20} className="text-green-700 mt-0.5 flex-shrink-0" />
+                <h3 className="font-semibold text-green-900">Prazo Crítico</h3>
               </div>
               <p className="text-neutral-700 text-sm leading-relaxed mb-3">
-                A PEP deve ser iniciada <strong className="text-red-700">o mais rápido possível</strong>,
+                A PEP deve ser iniciada <strong className="text-green-700">o mais rápido possível</strong>,
                 preferencialmente nas <strong>primeiras 2 horas</strong> e, no máximo,
                 até <strong>72 horas (3 dias)</strong> após a exposição.
               </p>
-              <div className="bg-gradient-to-r from-red-100 to-rose-100 rounded-lg p-4 shadow-sm">
+              <div className="bg-gradient-to-r from-green-100 to-green-200 rounded-lg p-4 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <AlertTriangle size={20} className="text-white" />
                   </div>
                   <div>
-                    <p className="text-red-900 font-bold text-sm mb-1">Atenção: Urgência Médica</p>
-                    <p className="text-red-700 text-sm">Quanto mais rápido iniciar o tratamento, maior a eficácia na prevenção!</p>
+                    <p className="text-green-900 font-bold text-sm mb-1">Atenção: Urgência Médica</p>
+                    <p className="text-green-700 text-sm">Quanto mais rápido iniciar o tratamento, maior a eficácia na prevenção!</p>
                   </div>
                 </div>
               </div>
@@ -98,18 +95,18 @@ const PrevencaoHIV = () => {
 
       {/* PrEP - Rotina */}
       <div className="mb-8">
-        <div className="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-lg p-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6">
           <div className="mb-4">
-            <h2 className="text-xl font-bold text-purple-900">
+            <h2 className="text-xl font-bold text-blue-900">
               PrEP<br/>
-              <span className="text-sm font-normal text-purple-700">Profilaxia Pré-Exposição (Rotina)</span>
+              <span className="text-sm font-normal text-blue-700">Profilaxia Pré-Exposição (Rotina)</span>
             </h2>
           </div>
 
           <div className="space-y-4">
             <div className="bg-white/60 rounded-lg p-4">
-              <h3 className="font-semibold text-purple-900 mb-2 flex items-center gap-2">
-                <CheckCircle size={18} className="text-purple-600" />
+              <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                <CheckCircle size={18} className="text-blue-600" />
                 O que é?
               </h3>
               <p className="text-neutral-700 text-sm leading-relaxed">
@@ -119,25 +116,25 @@ const PrevencaoHIV = () => {
             </div>
 
             <div className="bg-white/60 rounded-lg p-4">
-              <h3 className="font-semibold text-purple-900 mb-3 flex items-center gap-2">
-                <CheckCircle size={18} className="text-purple-600" />
+              <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+                <CheckCircle size={18} className="text-blue-600" />
                 Como funciona?
               </h3>
               <div className="space-y-3">
                 <div className="flex items-start gap-2">
-                  <CheckCircle size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
                   <p className="text-neutral-700 text-sm">Requer cadastro e acompanhamento médico regular</p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
                   <p className="text-neutral-700 text-sm">Testagens periódicas de HIV e outras ISTs</p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
                   <p className="text-neutral-700 text-sm">Acompanhamento de saúde integral e preventivo</p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle size={16} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
                   <p className="text-neutral-700 text-sm">Uso diário da medicação conforme orientação médica</p>
                 </div>
               </div>
@@ -209,34 +206,34 @@ const PrevencaoHIV = () => {
         </div>
 
         {/* Plantão de Urgência */}
-        <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-5 shadow-sm">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
               <Clock size={24} className="text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-amber-900 text-base mb-2">Atendimento de Urgência Fora do Horário Comercial</h3>
+              <h3 className="font-bold text-green-900 text-base mb-2">Atendimento de Urgência Fora do Horário Comercial</h3>
               <p className="text-neutral-700 leading-relaxed text-sm mb-3">
-                A PEP é considerada uma <strong className="text-amber-800">urgência médica</strong>. Se a exposição de risco ocorrer durante:
+                A PEP é considerada uma <strong className="text-green-800">urgência médica</strong>. Se a exposição de risco ocorrer durante:
               </p>
               <div className="bg-white/60 rounded-md p-3 mb-3">
                 <ul className="space-y-1.5 text-sm text-neutral-700">
                   <li className="flex items-start gap-2">
-                    <span className="text-amber-600 font-bold mt-0.5">•</span>
+                    <span className="text-green-600 font-bold mt-0.5">•</span>
                     <span>Período noturno (após as 17h)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-amber-600 font-bold mt-0.5">•</span>
+                    <span className="text-green-600 font-bold mt-0.5">•</span>
                     <span>Finais de semana (sábados e domingos)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-amber-600 font-bold mt-0.5">•</span>
+                    <span className="text-green-600 font-bold mt-0.5">•</span>
                     <span>Feriados</span>
                   </li>
                 </ul>
               </div>
-              <div className="bg-amber-100 rounded-md p-3">
-                <p className="text-amber-900 text-sm font-semibold flex items-start gap-2">
+              <div className="bg-green-100 rounded-md p-3">
+                <p className="text-green-900 text-sm font-semibold flex items-start gap-2">
                   <MapPin size={18} className="flex-shrink-0 mt-0.5" />
                   <span>Dirija-se imediatamente à <strong>UPA (Unidade de Pronto Atendimento)</strong> mais próxima.
                   O atendimento deve ocorrer nas primeiras 72 horas após a exposição.</span>
@@ -249,7 +246,7 @@ const PrevencaoHIV = () => {
 
       {/* Acolhimento e Sigilo */}
       <div className="mb-8">
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 border border-green-200 rounded-lg p-6">
           <div className="mb-4">
             <h2 className="text-xl font-bold text-green-900">
               Seu Bem-estar é Nossa Prioridade

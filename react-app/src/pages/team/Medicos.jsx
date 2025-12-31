@@ -23,7 +23,7 @@ export default function Medicos() {
         </div>
 
         {/* Sobre o Serviço */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
           </h2>
@@ -168,8 +168,8 @@ export default function Medicos() {
         {}
         <InfoBox title="Modalidades de Atendimento">
           <div className="space-y-4">
-            <div className="bg-neutral-50 border-l-4 border-info p-4 rounded">
-              <h4 className="text-primary-700 font-bold mb-2 text-sm">
+            <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
+              <h4 className="text-blue-900 font-bold mb-2 text-sm">
                 Atendimento Agendado
               </h4>
               <p className="text-neutral-700 leading-relaxed mb-2 text-sm">
@@ -181,22 +181,22 @@ export default function Medicos() {
                 <strong>Como acessar:</strong> Dirija-se à{" "}
                 <Link
                   to="/servicos/sala-4"
-                  className="text-info hover:text-primary-700 underline font-semibold"
+                  className="text-blue-600 hover:text-blue-800 underline font-semibold"
                 >
                   Sala de Agendamentos
                 </Link>
                 . Veja a{" "}
                 <Link
                   to="/servicos/sala-4#documentacao-necessaria"
-                  className="text-info hover:text-primary-700 underline font-semibold"
+                  className="text-blue-600 hover:text-blue-800 underline font-semibold"
                 >
                   documentação necessária para agendar
                 </Link>
                 .
               </p>
             </div>
-            <div className="bg-neutral-50 border-l-4 border-amber-600 p-4 rounded">
-              <h4 className="text-amber-700 font-bold mb-2 text-sm">
+            <div className="bg-green-50 border-l-4 border-green-600 p-4 rounded">
+              <h4 className="text-green-900 font-bold mb-2 text-sm">
                 Atendimento Espontâneo (Triagem)
               </h4>
               <p className="text-neutral-700 leading-relaxed mb-2 text-sm">
@@ -208,8 +208,8 @@ export default function Medicos() {
                 <strong>Horário:</strong> 07h00 às 08h00 (Triagem)
               </p>
             </div>
-            <div className="bg-neutral-50 border-l-4 border-neutral-600 p-4 rounded">
-              <h4 className="text-neutral-700 font-bold mb-2 text-sm">
+            <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded">
+              <h4 className="text-blue-900 font-bold mb-2 text-sm">
                 Saúde na Hora (Plantão Noturno)
               </h4>
               <p className="text-neutral-700 leading-relaxed mb-2 text-sm">
@@ -258,11 +258,11 @@ export default function Medicos() {
               </div>
             </div>
 
-            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            <div className="relative pl-12 pb-8 border-l-2 border-green-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Identificação da Equipe de Referência
                 </strong>
@@ -291,10 +291,10 @@ export default function Medicos() {
             </div>
 
             <div className="relative pl-12">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 4
               </div>
-              <div className="bg-gradient-to-r from-orange-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Comparecimento à Consulta
                 </strong>

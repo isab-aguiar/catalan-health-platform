@@ -27,7 +27,7 @@ export default function Dentistas() {
         </div>
 
         {/* Sobre o Serviço */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
           </h2>
@@ -357,13 +357,18 @@ export default function Dentistas() {
           escalaKey="sala-atendimento-odontologico"
           titulo="Profissionais e Horários de Atendimento"
         />
-        {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
-          <div>
-            <p className="font-semibold mb-2">Orientações Importantes</p>
-            <p className="text-sm text-white/90 leading-relaxed">
-              <strong>Saúde Bucal Preventiva:</strong> Mantenha uma rotina de higiene bucal adequada! Escove os dentes pelo menos três vezes ao dia, utilize fio dental diariamente e realize visitas regulares ao dentista. A prevenção é a melhor estratégia para manter sua saúde bucal em dia.
-            </p>
+        {/* Orientação Importante */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
+            <div>
+              <p className="font-bold mb-2 text-lg">Orientações Importantes</p>
+              <p className="text-sm text-white/95 leading-relaxed">
+                <strong>Saúde Bucal Preventiva:</strong> Mantenha uma rotina de higiene bucal adequada! Escove os dentes pelo menos três vezes ao dia, utilize fio dental diariamente e realize visitas regulares ao dentista. A prevenção é a melhor estratégia para manter sua saúde bucal em dia.
+              </p>
+            </div>
           </div>
         </div>
       </div>

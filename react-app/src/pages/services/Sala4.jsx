@@ -33,7 +33,7 @@ export default function Sala4() {
         <AvisosPaginaWrapper pagina="sala-4" />
 
         {/* Sobre o Serviço */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
             <Calendar size={24} className="text-blue-600" />
             Sobre o Serviço

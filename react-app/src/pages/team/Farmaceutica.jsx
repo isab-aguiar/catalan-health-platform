@@ -10,25 +10,22 @@ export default function Farmaceutica() {
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 break-words"
-              >
-                Consultório Farmacêutico
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Consultório Farmacêutico
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
-        <InfoBox title="Sobre o Serviço">
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
             O Consultório Farmacêutico é um serviço especializado onde o
             farmacêutico realiza atendimento individual para orientação sobre o
@@ -36,8 +33,11 @@ export default function Farmaceutica() {
             farmacoterapêutico. É um espaço para esclarecer dúvidas e garantir
             que você está utilizando seus medicamentos da melhor forma possível.
           </p>
+          <h3 className="font-bold text-blue-900 mb-4 text-base">
+            Serviços Oferecidos:
+          </h3>
           <div className="space-y-3">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -48,7 +48,7 @@ export default function Farmaceutica() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -59,7 +59,7 @@ export default function Farmaceutica() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -70,7 +70,7 @@ export default function Farmaceutica() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -81,7 +81,7 @@ export default function Farmaceutica() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -93,7 +93,7 @@ export default function Farmaceutica() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
         {}
         {/* Card Consultório Farmacêutico */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
@@ -284,11 +284,11 @@ export default function Farmaceutica() {
               </div>
             </div>
 
-            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            <div className="relative pl-12 pb-8 border-l-2 border-green-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Identificação da Profissional
                 </strong>
@@ -324,7 +324,7 @@ export default function Farmaceutica() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h3 className="font-bold text-blue-900 mb-4 text-lg flex items-center gap-2">
             <AlertCircle size={20} className="text-blue-600" />
             Dicas Importantes

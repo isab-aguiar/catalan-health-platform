@@ -10,25 +10,22 @@ export default function Enfermeiras() {
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 break-words"
-              >
-                Consultório de Enfermagem
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Consultório de Enfermagem
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
-        <InfoBox title="Sobre o Serviço">
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
             A consulta de enfermagem é uma atividade privativa do enfermeiro,
             fundamentada na Sistematização da Assistência de Enfermagem (SAE),
@@ -41,11 +38,11 @@ export default function Enfermeiras() {
             adulto e idoso, até o acompanhamento de condições crônicas e
             agudas, garantindo um cuidado integral e humanizado.
           </p>
-          <h3 className="font-semibold text-neutral-800 mb-3 text-sm">
+          <h3 className="font-bold text-blue-900 mb-4 text-base">
             Serviços Oferecidos:
           </h3>
           <div className="space-y-3">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -60,7 +57,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -74,7 +71,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -89,7 +86,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -104,7 +101,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -117,7 +114,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -131,7 +128,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -145,7 +142,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -159,7 +156,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -173,7 +170,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -187,7 +184,7 @@ export default function Enfermeiras() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -202,7 +199,7 @@ export default function Enfermeiras() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
         {}
         {/* Card Assistência de Enfermagem */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
@@ -253,8 +250,8 @@ export default function Enfermeiras() {
           titulo="Profissionais Escalados no Atendimento de Enfermagem"
         />
         {}
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-6 shadow-sm mb-6 border border-purple-200">
-          <h2 className="text-xl font-bold text-purple-900 mb-4">Calendário de Consultas de Puericultura</h2>
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-sm mb-6 border border-green-200">
+          <h2 className="text-xl font-bold text-green-900 mb-4">Calendário de Consultas de Puericultura</h2>
 
           <p className="text-neutral-700 text-sm mb-5 leading-relaxed">
             O acompanhamento regular da criança através da puericultura é
@@ -270,21 +267,21 @@ export default function Enfermeiras() {
               A seguir, apresentamos a tabela de acompanhamento da puericultura
               conforme as diretrizes do Ministério da Saúde. As consultas são
               realizadas por diferentes profissionais conforme a faixa etária:{" "}
-              <strong className="text-purple-900">linhas com fundo branco</strong> indicam atendimento com
-              médico pediatra, enquanto <strong className="text-pink-700">linhas com fundo rosa</strong>{" "}
+              <strong className="text-green-900">linhas com fundo branco</strong> indicam atendimento com
+              médico pediatra, enquanto <strong className="text-blue-700">linhas com fundo azul</strong>{" "}
               indicam atendimento realizado por enfermeira da equipe.
             </p>
           </div>
 
-          <div className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg p-4 mb-5 shadow-sm">
-            <p className="font-bold text-purple-900 mb-3 text-sm">Legenda:</p>
+          <div className="bg-gradient-to-r from-green-100 to-blue-100 rounded-lg p-4 mb-5 shadow-sm">
+            <p className="font-bold text-green-900 mb-3 text-sm">Legenda:</p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
               <div className="flex items-center gap-2">
                 <div className="w-5 h-5 bg-white border-2 border-neutral-400 rounded shadow-sm"></div>
                 <span className="text-neutral-800 font-medium text-sm">Consulta com Médico Pediatra</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-pink-100 border-2 border-pink-300 rounded shadow-sm"></div>
+                <div className="w-5 h-5 bg-blue-100 border-2 border-blue-300 rounded shadow-sm"></div>
                 <span className="text-neutral-800 font-medium text-sm">Consulta com Enfermeira</span>
               </div>
             </div>
@@ -292,107 +289,107 @@ export default function Enfermeiras() {
 
           {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto mb-4">
-            <div className="overflow-hidden rounded-lg shadow-sm border border-purple-200">
+            <div className="overflow-hidden rounded-lg shadow-sm border border-green-200">
               <table className="w-full border-collapse">
                 <thead>
-                  <tr className="bg-gradient-to-r from-purple-600 to-pink-600">
-                    <th className="border-b border-purple-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                  <tr className="bg-gradient-to-r from-green-600 to-green-700">
+                    <th className="border-b border-green-300 px-4 py-3 text-left font-semibold text-white text-sm">
                       Idade da Criança
                     </th>
-                    <th className="border-b border-purple-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                    <th className="border-b border-green-300 px-4 py-3 text-left font-semibold text-white text-sm">
                       Período de Consulta
                     </th>
-                    <th className="border-b border-purple-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                    <th className="border-b border-green-300 px-4 py-3 text-left font-semibold text-white text-sm">
                       Profissional Responsável
                     </th>
                   </tr>
                 </thead>
                 <tbody className="text-sm bg-white">
-                  <tr className="hover:bg-purple-50/50 transition-colors">
-                    <td className="border-b border-purple-100 px-4 py-3">
-                      <strong className="text-purple-900">Recém-nascido</strong>
+                  <tr className="hover:bg-green-50/50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3">
+                      <strong className="text-green-900">Recém-nascido</strong>
                     </td>
-                    <td className="border-b border-purple-100 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-700">
                       1ª semana
                     </td>
-                    <td className="border-b border-purple-100 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-700">
                       Médico Pediatra
                     </td>
                   </tr>
-                  <tr className="hover:bg-purple-50/50 transition-colors">
-                    <td className="border-b border-purple-100 px-4 py-3">
-                      <strong className="text-purple-900">1 mês</strong>
+                  <tr className="hover:bg-green-50/50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3">
+                      <strong className="text-green-900">1 mês</strong>
                     </td>
-                    <td className="border-b border-purple-100 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-700">
                       1 mês de vida
                     </td>
-                    <td className="border-b border-purple-100 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-700">
                       Médico Pediatra
                     </td>
                   </tr>
-                  <tr className="bg-pink-50/50 hover:bg-pink-100/50 transition-colors">
-                    <td className="border-b border-pink-200 px-4 py-3">
-                      <strong className="text-pink-900">2 meses</strong>
+                  <tr className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                    <td className="border-b border-blue-200 px-4 py-3">
+                      <strong className="text-blue-900">2 meses</strong>
                     </td>
-                    <td className="border-b border-pink-200 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-700">
                       2 meses de vida
                     </td>
-                    <td className="border-b border-pink-200 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-700">
                       Enfermeira
                     </td>
                   </tr>
-                  <tr className="bg-pink-50/50 hover:bg-pink-100/50 transition-colors">
-                    <td className="border-b border-pink-200 px-4 py-3">
-                      <strong className="text-pink-900">4 meses</strong>
+                  <tr className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                    <td className="border-b border-blue-200 px-4 py-3">
+                      <strong className="text-blue-900">4 meses</strong>
                     </td>
-                    <td className="border-b border-pink-200 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-700">
                       4 meses de vida
                     </td>
-                    <td className="border-b border-pink-200 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-700">
                       Enfermeira
                     </td>
                   </tr>
-                  <tr className="hover:bg-purple-50/50 transition-colors">
-                    <td className="border-b border-purple-100 px-4 py-3">
-                      <strong className="text-purple-900">6 meses</strong>
+                  <tr className="hover:bg-green-50/50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3">
+                      <strong className="text-green-900">6 meses</strong>
                     </td>
-                    <td className="border-b border-purple-100 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-700">
                       6 meses de vida
                     </td>
-                    <td className="border-b border-purple-100 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-700">
                       Médico Pediatra
                     </td>
                   </tr>
-                  <tr className="bg-pink-50/50 hover:bg-pink-100/50 transition-colors">
-                    <td className="border-b border-pink-200 px-4 py-3">
-                      <strong className="text-pink-900">9 meses</strong>
+                  <tr className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                    <td className="border-b border-blue-200 px-4 py-3">
+                      <strong className="text-blue-900">9 meses</strong>
                     </td>
-                    <td className="border-b border-pink-200 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-700">
                       9 meses de vida
                     </td>
-                    <td className="border-b border-pink-200 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-700">
                       Enfermeira
                     </td>
                   </tr>
-                  <tr className="hover:bg-purple-50/50 transition-colors">
-                    <td className="border-b border-purple-100 px-4 py-3">
-                      <strong className="text-purple-900">12 meses</strong>
+                  <tr className="hover:bg-green-50/50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3">
+                      <strong className="text-green-900">12 meses</strong>
                     </td>
-                    <td className="border-b border-purple-100 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-700">
                       12 meses de vida
                     </td>
-                    <td className="border-b border-purple-100 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-700">
                       Médico Pediatra
                     </td>
                   </tr>
-                  <tr className="bg-pink-50/50 hover:bg-pink-100/50 transition-colors">
-                    <td className="border-b border-pink-200 px-4 py-3">
-                      <strong className="text-pink-900">18 meses</strong>
+                  <tr className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                    <td className="border-b border-blue-200 px-4 py-3">
+                      <strong className="text-blue-900">18 meses</strong>
                     </td>
-                    <td className="border-b border-pink-200 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-700">
                       18 meses de vida
                     </td>
-                    <td className="border-b border-pink-200 px-4 py-3 text-neutral-700">
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-700">
                       Enfermeira
                     </td>
                   </tr>
@@ -407,9 +404,9 @@ export default function Enfermeiras() {
                       Médico Pediatra
                     </td>
                   </tr>
-                  <tr className="bg-purple-100/50 hover:bg-purple-200/50 transition-colors">
+                  <tr className="bg-green-100/50 hover:bg-green-200/50 transition-colors">
                     <td className="px-4 py-3">
-                      <strong className="text-purple-900">Após 24 meses</strong>
+                      <strong className="text-green-900">Após 24 meses</strong>
                     </td>
                     <td className="px-4 py-3 text-neutral-700">
                       Consultas anuais
@@ -425,44 +422,44 @@ export default function Enfermeiras() {
 
           {/* Versão Mobile */}
           <div className="md:hidden space-y-3 mb-4">
-            <div className="bg-white/70 border border-purple-200 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-purple-900 mb-2">Recém-nascido</p>
+            <div className="bg-white/70 border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-green-900 mb-2">Recém-nascido</p>
               <p className="text-xs text-neutral-600">1ª semana - Médico Pediatra</p>
             </div>
-            <div className="bg-white/70 border border-purple-200 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-purple-900 mb-2">1 mês</p>
+            <div className="bg-white/70 border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-green-900 mb-2">1 mês</p>
               <p className="text-xs text-neutral-600">1 mês de vida - Médico Pediatra</p>
             </div>
-            <div className="bg-pink-50/70 border border-pink-300 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-pink-900 mb-2">2 meses</p>
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-blue-900 mb-2">2 meses</p>
               <p className="text-xs text-neutral-600">2 meses de vida - Enfermeira</p>
             </div>
-            <div className="bg-pink-50/70 border border-pink-300 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-pink-900 mb-2">4 meses</p>
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-blue-900 mb-2">4 meses</p>
               <p className="text-xs text-neutral-600">4 meses de vida - Enfermeira</p>
             </div>
-            <div className="bg-white/70 border border-purple-200 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-purple-900 mb-2">6 meses</p>
+            <div className="bg-white/70 border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-green-900 mb-2">6 meses</p>
               <p className="text-xs text-neutral-600">6 meses de vida - Médico Pediatra</p>
             </div>
-            <div className="bg-pink-50/70 border border-pink-300 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-pink-900 mb-2">9 meses</p>
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-blue-900 mb-2">9 meses</p>
               <p className="text-xs text-neutral-600">9 meses de vida - Enfermeira</p>
             </div>
-            <div className="bg-white/70 border border-purple-200 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-purple-900 mb-2">12 meses</p>
+            <div className="bg-white/70 border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-green-900 mb-2">12 meses</p>
               <p className="text-xs text-neutral-600">12 meses de vida - Médico Pediatra</p>
             </div>
-            <div className="bg-pink-50/70 border border-pink-300 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-pink-900 mb-2">18 meses</p>
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-blue-900 mb-2">18 meses</p>
               <p className="text-xs text-neutral-600">18 meses de vida - Enfermeira</p>
             </div>
-            <div className="bg-white/70 border border-purple-200 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-purple-900 mb-2">24 meses</p>
+            <div className="bg-white/70 border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-green-900 mb-2">24 meses</p>
               <p className="text-xs text-neutral-600">24 meses (2 anos) de vida - Médico Pediatra</p>
             </div>
-            <div className="bg-gradient-to-r from-purple-100 to-pink-100 border border-purple-300 rounded-lg p-4 shadow-sm">
-              <p className="text-sm font-semibold text-purple-900 mb-2">Após 24 meses</p>
+            <div className="bg-gradient-to-r from-green-100 to-blue-100 border border-green-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-green-900 mb-2">Após 24 meses</p>
               <p className="text-xs text-neutral-600">Consultas anuais - Conforme necessidade</p>
             </div>
           </div>
@@ -571,11 +568,11 @@ export default function Enfermeiras() {
               </div>
             </div>
 
-            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            <div className="relative pl-12 pb-8 border-l-2 border-green-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Identificação da Equipe de Referência
                 </strong>
@@ -604,13 +601,15 @@ export default function Enfermeiras() {
             </div>
           </div>
         </InfoBox>
-        {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
-          <div className="flex items-start gap-3">
-            <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
+        {/* Orientação Importante */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
             <div>
-              <p className="font-semibold mb-1">Orientação Importante</p>
-              <p className="text-sm text-white/90">
+              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
+              <p className="text-sm text-white/95 leading-relaxed">
                 Antes de se dirigir à sala de consulta da enfermeira
                 responsável, é necessário passar pela recepção da unidade para
                 realização da ficha de atendimento. Esta medida é essencial para

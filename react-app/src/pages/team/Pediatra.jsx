@@ -10,25 +10,22 @@ export default function Pediatra() {
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-xl md:text-2xl lg:text-3xl font-bold text-neutral-900 break-words"
-              >
-                Consultório Pediátrico
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Consultório Pediátrico
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
-        <InfoBox title="Sobre o Serviço">
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
             O atendimento pediátrico na ESF Catalão oferece cuidado
             especializado para crianças desde o nascimento até a adolescência.
@@ -36,7 +33,7 @@ export default function Pediatra() {
             desenvolvimento infantil), atendimentos de urgências pediátricas e
             orientações aos pais sobre saúde e desenvolvimento dos filhos.
           </p>
-          <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4 mb-5">
+          <div className="bg-blue-100/50 border border-blue-300 rounded-lg p-4 mb-5">
             <p className="text-neutral-700 text-sm leading-relaxed">
               Para informações sobre a documentação necessária para acesso aos serviços oferecidos, favor consultar a{" "}
               <Link
@@ -48,8 +45,11 @@ export default function Pediatra() {
               .
             </p>
           </div>
+          <h3 className="font-bold text-blue-900 mb-4 text-base">
+            Serviços Oferecidos:
+          </h3>
           <div className="space-y-3">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">Puericultura</strong>
@@ -58,7 +58,7 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -69,7 +69,7 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -80,7 +80,7 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -91,7 +91,7 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -103,7 +103,7 @@ export default function Pediatra() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
         {}
         {/* Card Acompanhamento da Saúde Infantil */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
@@ -232,10 +232,10 @@ export default function Pediatra() {
             </div>
 
             <div className="relative pl-12">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Comparecimento à Consulta
                 </strong>
@@ -255,7 +255,7 @@ export default function Pediatra() {
           
           <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4 mb-4">
             <p className="text-neutral-700 text-sm leading-relaxed">
-              A seguir, apresentamos a tabela de acompanhamento da puericultura conforme as diretrizes do Ministério da Saúde. As consultas são realizadas por diferentes profissionais conforme a faixa etária: <strong>linhas com fundo branco</strong> indicam atendimento com médico pediatra, enquanto <strong>linhas com fundo rosa</strong> indicam atendimento realizado por enfermeira da equipe.
+              A seguir, apresentamos a tabela de acompanhamento da puericultura conforme as diretrizes do Ministério da Saúde. As consultas são realizadas por diferentes profissionais conforme a faixa etária: <strong>linhas com fundo branco</strong> indicam atendimento com médico pediatra, enquanto <strong>linhas com fundo azul</strong> indicam atendimento realizado por enfermeira da equipe.
             </p>
           </div>
 
@@ -420,12 +420,15 @@ export default function Pediatra() {
           </Alert>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
-          <div className="flex items-start gap-3">
-            <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
+        {/* Orientação Importante */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
             <div>
-              <p className="font-semibold mb-1">Orientação Importante</p>
-              <p className="text-sm text-white/90">
+              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
+              <p className="text-sm text-white/95 leading-relaxed">
                 Antes de se dirigir à sala de consulta do pediatra responsável,
                 é necessário passar pela recepção da unidade para realização da
                 ficha de atendimento. Esta medida é essencial para agilizar o

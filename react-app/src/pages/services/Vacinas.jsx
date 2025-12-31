@@ -69,7 +69,7 @@ export default function Vacinas() {
         />
 
         {/* Vacinas Disponíveis e Documentação */}
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <div className="mb-6">
             <VacinasDisponiveis />
           </div>
