@@ -710,29 +710,9 @@ export default function Feedbacks() {
               )}
 
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="block text-sm font-semibold text-neutral-900">
-                    Resposta
-                  </label>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => handleUpdateStatus("em_analise")}
-                      disabled={updating || selectedFeedback.status === "em_analise" || deleteLoading === selectedFeedback.id}
-                      className="px-2 py-1 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
-                    >
-                      <Clock size={12} />
-                      Em Análise
-                    </button>
-                    <button
-                      onClick={() => handleUpdateStatus("arquivado")}
-                      disabled={updating || selectedFeedback.status === "arquivado" || deleteLoading === selectedFeedback.id}
-                      className="px-2 py-1 text-xs bg-neutral-600 hover:bg-neutral-700 text-white rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
-                    >
-                      <Archive size={12} />
-                      Arquivar
-                    </button>
-                  </div>
-                </div>
+                <label className="block text-sm font-semibold text-neutral-900 mb-2">
+                  Resposta
+                </label>
                 <textarea
                   value={resposta}
                   onChange={(e) => setResposta(e.target.value)}
@@ -741,13 +721,32 @@ export default function Feedbacks() {
                   placeholder="Digite sua resposta aqui..."
                 />
               </div>
+
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-neutral-200">
+                <button
+                  onClick={() => handleUpdateStatus("em_analise")}
+                  disabled={updating || selectedFeedback.status === "em_analise" || deleteLoading === selectedFeedback.id}
+                  className="flex-1 min-w-[120px] px-3 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <Clock size={14} />
+                  Em Análise
+                </button>
+                <button
+                  onClick={() => handleUpdateStatus("arquivado")}
+                  disabled={updating || selectedFeedback.status === "arquivado" || deleteLoading === selectedFeedback.id}
+                  className="flex-1 min-w-[120px] px-3 py-2 text-sm bg-neutral-600 hover:bg-neutral-700 text-white rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <Archive size={14} />
+                  Arquivar
+                </button>
+              </div>
             </div>
 
             <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-6 py-4 flex justify-center">
               <button
                 onClick={() => handleDelete(selectedFeedback.id, getTipoLabel(selectedFeedback.tipo).toLowerCase())}
                 disabled={updating || deleteLoading === selectedFeedback.id}
-                className="px-4 py-2 bg-error hover:bg-error-dark text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-2.5 bg-error hover:bg-error-dark text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {deleteLoading === selectedFeedback.id ? (
                   <>
