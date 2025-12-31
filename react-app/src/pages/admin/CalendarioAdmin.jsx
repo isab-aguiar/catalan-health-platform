@@ -62,8 +62,8 @@ export default function CalendarioAdmin() {
 
   // Debug: Log de agendas carregadas
   useEffect(() => {
-    console.log('📋 [CalendarioAdmin] Agendas do Firestore:', agendasFirestore?.length || 0, agendasFirestore);
-    console.log('📋 [CalendarioAdmin] Loading agendas:', loadingAgendas);
+    console.log('[CalendarioAdmin] Agendas do Firestore:', agendasFirestore?.length || 0, agendasFirestore);
+    console.log('[CalendarioAdmin] Loading agendas:', loadingAgendas);
   }, [agendasFirestore, loadingAgendas]);
 
   // Inicializar sistema de notificações

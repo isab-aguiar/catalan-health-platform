@@ -42,7 +42,7 @@ export default function CalendarAgendaView({
 
   // Log para debug
   useEffect(() => {
-    console.log('📅 [CalendarAgendaView] Eventos recebidos:', eventos?.length || 0, eventos);
+    console.log('[CalendarAgendaView] Eventos recebidos:', eventos?.length || 0, eventos);
     console.log('📋 [CalendarAgendaView] Agendas recebidas:', agendas?.length || 0, agendas);
   }, [eventos, agendas]);
 

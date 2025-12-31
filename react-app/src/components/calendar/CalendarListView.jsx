@@ -16,7 +16,10 @@ import {
   X,
   CheckCircle2,
   AlertCircle,
-  Stethoscope
+  Stethoscope,
+  CalendarDays,
+  Tag,
+  Type
 } from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { getEventColors } from '../../constants/calendarDesign';
@@ -152,9 +155,9 @@ export default function CalendarListView({
               onChange={(e) => setSortBy(e.target.value)}
               className="flex-1 sm:flex-none px-3 md:px-4 py-2.5 md:py-3 border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/80 backdrop-blur-sm text-sm font-semibold min-w-0 sm:min-w-[160px] cursor-pointer"
             >
-              <option value="date">📅 Por Data</option>
-              <option value="tipo">🏷️ Por Tipo</option>
-              <option value="titulo">🔤 Por Título</option>
+              <option value="date">Por Data</option>
+              <option value="tipo">Por Tipo</option>
+              <option value="titulo">Por Título</option>
             </select>
           </div>
         </div>
