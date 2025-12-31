@@ -299,36 +299,36 @@ export default function CalendarListView({ eventos, onEventClick, onEventEdit, o
                         </div>
 
                         {/* Right: Actions */}
-                        <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex-shrink-0">
+                        <div className="flex flex-col gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-200 flex-shrink-0">
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               onEventClick(evento);
                             }}
-                            className="p-2 rounded-lg hover:bg-neutral-100 transition-colors"
+                            className="p-2.5 rounded-lg hover:bg-blue-50 transition-all duration-200 border border-transparent hover:border-blue-200 hover:shadow-md group/btn"
                             title="Visualizar"
                           >
-                            <Eye className="w-4 h-4 text-neutral-600" />
+                            <Eye className="w-5 h-5 text-blue-600 group-hover/btn:scale-110 transition-transform" />
                           </button>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               onEventEdit(evento);
                             }}
-                            className="p-2 rounded-lg hover:bg-neutral-100 transition-colors"
+                            className="p-2.5 rounded-lg hover:bg-amber-50 transition-all duration-200 border border-transparent hover:border-amber-200 hover:shadow-md group/btn"
                             title="Editar"
                           >
-                            <Edit2 className="w-4 h-4 text-neutral-600" />
+                            <Edit2 className="w-5 h-5 text-amber-600 group-hover/btn:scale-110 transition-transform" />
                           </button>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               onEventDelete(evento);
                             }}
-                            className="p-2 rounded-lg hover:bg-red-50 transition-colors"
+                            className="p-2.5 rounded-lg hover:bg-red-50 transition-all duration-200 border border-transparent hover:border-red-200 hover:shadow-md group/btn"
                             title="Deletar"
                           >
-                            <Trash2 className="w-4 h-4 text-red-600" />
+                            <Trash2 className="w-5 h-5 text-red-600 group-hover/btn:scale-110 transition-transform" />
                           </button>
                         </div>
                       </div>
