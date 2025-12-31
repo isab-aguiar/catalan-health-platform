@@ -736,13 +736,6 @@ export default function Feedbacks() {
               </button>
               <div className="flex flex-wrap items-center justify-end gap-3">
                 <button
-                  onClick={handleCloseModal}
-                  className="px-4 py-2 text-neutral-700 hover:bg-neutral-200 rounded-md transition-colors font-medium border border-neutral-300"
-                  disabled={updating || deleteLoading === selectedFeedback.id}
-                >
-                  Fechar
-                </button>
-                <button
                   onClick={() => handleUpdateStatus("em_analise")}
                   disabled={updating || selectedFeedback.status === "em_analise" || deleteLoading === selectedFeedback.id}
                   className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
