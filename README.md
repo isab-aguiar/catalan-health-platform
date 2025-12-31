@@ -1,73 +1,212 @@
-# 🏥 ESF Catalão - Sistema Web
+<div align="center">
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🎨 HEADER ANIMADO COM WAVE -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1351B4,50:2670E8,100:0BC5EA&height=200&section=header&text=ESF%20Catalão&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Sistema%20Web%20de%20Gestão%20de%20Saúde%20Pública&descAlignY=55&descSize=18"/>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🏷️ BADGES ANIMADOS -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
+<p>
+<a href="#"><img src="https://img.shields.io/badge/🚀_Status-Em_Produção-00C851?style=for-the-badge&labelColor=1a1a2e"/></a>
+<a href="#"><img src="https://img.shields.io/badge/📦_Version-2.0.0-1351B4?style=for-the-badge&labelColor=1a1a2e"/></a>
+<a href="#"><img src="https://img.shields.io/badge/⚛️_React-19.2.0-61DAFB?style=for-the-badge&labelColor=1a1a2e"/></a>
+<a href="#"><img src="https://img.shields.io/badge/🔥_Firebase-12.7.0-FFCA28?style=for-the-badge&labelColor=1a1a2e"/></a>
+<a href="#"><img src="https://img.shields.io/badge/🎨_Tailwind-3.4.19-06B6D4?style=for-the-badge&labelColor=1a1a2e"/></a>
+<a href="#"><img src="https://img.shields.io/badge/⚡_Vite-7.2.4-646CFF?style=for-the-badge&labelColor=1a1a2e"/></a>
+</p>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- ⌨️ EFEITO MÁQUINA DE ESCREVER -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
+<br/>
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=1351B4&center=true&vCenter=true&multiline=true&repeat=true&width=800&height=100&lines=🏥+UBS+São+José+-+Divinópolis%2C+MG;💻+Plataforma+Digital+de+Saúde+Pública;🚀+React+19+%2B+Firebase+%2B+Tailwind+CSS" alt="Typing SVG" />
+
+<br/>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 📊 CARDS DE ESTATÍSTICAS -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
+<table>
+<tr>
+<td align="center">
+<img src="https://img.shields.io/badge/📄-37-1351B4?style=for-the-badge&labelColor=0d1117"/>
+<br/><b>Rotas</b>
+</td>
+<td align="center">
+<img src="https://img.shields.io/badge/🧩-64+-00C851?style=for-the-badge&labelColor=0d1117"/>
+<br/><b>Componentes</b>
+</td>
+<td align="center">
+<img src="https://img.shields.io/badge/📱-45+-FF6B6B?style=for-the-badge&labelColor=0d1117"/>
+<br/><b>Páginas</b>
+</td>
+<td align="center">
+<img src="https://img.shields.io/badge/📍-713-9B59B6?style=for-the-badge&labelColor=0d1117"/>
+<br/><b>Microáreas</b>
+</td>
+<td align="center">
+<img src="https://img.shields.io/badge/👨‍⚕️-115+-E67E22?style=for-the-badge&labelColor=0d1117"/>
+<br/><b>Profissionais</b>
+</td>
+<td align="center">
+<img src="https://img.shields.io/badge/🪝-18-1ABC9C?style=for-the-badge&labelColor=0d1117"/>
+<br/><b>Hooks</b>
+</td>
+</tr>
+</table>
+
+<br/>
+
+**Ecossistema completo para gestão da Estratégia de Saúde da Família**
+
+<p>
+<a href="https://esf-catalao.vercel.app">🌐 Demo ao Vivo</a> •
+<a href="#-instalação">📖 Documentação</a> •
+<a href="https://github.com/Isaguiar-Dev/psf-saojose-web/issues">🐛 Reportar Bug</a> •
+<a href="#-contribuindo">🤝 Contribuir</a>
+</p>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🖥️ SIMULADOR DE IDE - VISUAL STUDIO CODE -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
+<br/>
 
 <div align="center">
 
-![Status](https://img.shields.io/badge/status-em%20produ%C3%A7%C3%A3o-success?style=for-the-badge)
-![Version](https://img.shields.io/badge/version-2.0.0-1351B4?style=for-the-badge)
-![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=for-the-badge&logo=react)
-![Firebase](https://img.shields.io/badge/Firebase-12.7.0-FFCA28?style=for-the-badge&logo=firebase)
-![Tailwind](https://img.shields.io/badge/Tailwind-3.4.19-38B2AC?style=for-the-badge&logo=tailwind-css)
+## 💻 Code Preview - IDE Simulator
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&pause=1000&color=1351B4&center=true&vCenter=true&width=800&lines=Plataforma+de+Gest%C3%A3o+Digital+de+Sa%C3%BAde;ESF+Catal%C3%A3o+%7C+Divin%C3%B3polis%2C+MG;Conectando+Pacientes%2C+ACS+e+Profissionais" alt="Typing SVG" />
+<table>
+<tr>
+<td>
 
-**Ecossistema moderno para Unidade Básica de Saúde**
+```javascript
+// ╔══════════════════════════════════════════════════════════════════════╗
+// ║  🔴 🟡 🟢    ESF Catalão - Visual Studio Code               ─ □ ✕   ║
+// ╠══════════════════════════════════════════════════════════════════════╣
+// ║  📁 EXPLORER          │  App.jsx                                    ║
+// ║  ─────────────────────│──────────────────────────────────────────── ║
+// ║  ▼ 📦 psf-saojose-web │                                             ║
+// ║    ▼ 📂 react-app     │  1  import React from 'react';              ║
+// ║      ▼ 📂 src         │  2  import { BrowserRouter } from '...';    ║
+// ║        📂 components  │  3  import { AuthProvider } from '...';     ║
+// ║        📂 pages       │  4                                          ║
+// ║        📂 services    │  5  export default function App() {         ║
+// ║        📂 hooks       │  6    return (                              ║
+// ║        📂 contexts    │  7      <AuthProvider>                      ║
+// ║        📄 App.jsx  ◀──│  8        <BrowserRouter>                   ║
+// ║        📄 main.jsx    │  9          <Routes />                      ║
+// ║      📄 package.json  │ 10        </BrowserRouter>                  ║
+// ║    📄 firebase.json   │ 11      </AuthProvider>                     ║
+// ║    📄 firestore.rules │ 12    );                                    ║
+// ║                       │ 13  }                                       ║
+// ╚══════════════════════════════════════════════════════════════════════╝
+```
 
-[🚀 Demo ao Vivo](#) • [📖 Documentação](#-instalação) • [🐛 Reportar Bug](https://github.com/seu-usuario/psf-saojose-web/issues)
+</td>
+</tr>
+</table>
 
-<!-- Placeholder para GIF demonstrativo -->
-<!-- <img src="screenshots/demo.gif" width="800px" alt="Demo do Sistema"/> -->
-<!-- Veja ASSETS-GUIDE.md para instruções de como criar os GIFs -->
+<!-- Código sendo digitado em tempo real -->
+<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=400&size=13&duration=25&pause=3000&color=9CDCFE&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=250&lines=const+ESFCatalao+%3D+{;++nome%3A+'UBS+São+José'%2C;++cidade%3A+'Divinópolis'%2C;++estado%3A+'MG'%2C;++servicos%3A+13%2C;++profissionais%3A+115%2C;++microareas%3A+713%2C;++tecnologias%3A+['React'%2C+'Firebase'%2C+'Tailwind']%2C;++status%3A+'🟢+Em+Produção';};;" alt="Code Typing Animation" />
 
 </div>
 
 ---
 
-## 📑 Índice
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 📑 ÍNDICE COM LINKS RÁPIDOS -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
-- [✨ Sobre o Projeto](#-sobre-o-projeto)
-- [🎯 Funcionalidades](#-funcionalidades)
-- [🛠️ Tecnologias](#️-tecnologias)
-- [📋 Pré-requisitos](#-pré-requisitos)
-- [🚀 Instalação](#-instalação)
-- [⚙️ Configuração](#️-configuração)
-- [💻 Como Usar](#-como-usar)
-- [📸 Screenshots](#-screenshots)
-- [🏗️ Arquitetura](#️-arquitetura)
-- [🔒 Segurança](#-segurança)
-- [🚢 Deploy](#-deploy)
-- [🤝 Contribuindo](#-contribuindo)
-- [📝 Licença](#-licença)
+## 📑 Navegação Rápida
+
+<div align="center">
+
+[![Sobre](https://img.shields.io/badge/✨-Sobre-1351B4?style=flat-square)](#-sobre-o-projeto)
+[![Features](https://img.shields.io/badge/🎯-Features-00C851?style=flat-square)](#-funcionalidades)
+[![Stack](https://img.shields.io/badge/🛠️-Stack-FF6B6B?style=flat-square)](#️-stack-tecnológica)
+[![Instalação](https://img.shields.io/badge/🚀-Instalação-9B59B6?style=flat-square)](#-instalação)
+[![Config](https://img.shields.io/badge/⚙️-Config-E67E22?style=flat-square)](#️-configuração)
+[![Estrutura](https://img.shields.io/badge/📂-Estrutura-1ABC9C?style=flat-square)](#-estrutura-do-projeto)
+[![Segurança](https://img.shields.io/badge/🔒-Segurança-E74C3C?style=flat-square)](#-segurança)
+[![Deploy](https://img.shields.io/badge/🚢-Deploy-3498DB?style=flat-square)](#-deploy)
+
+</div>
 
 ---
 
 ## ✨ Sobre o Projeto
 
-> 🎯 Plataforma digital completa para gestão e atendimento da Estratégia de Saúde da Família Catalão, desenvolvida com foco em usabilidade, performance e conformidade com padrões governamentais.
+<div align="center">
 
-O **ESF Catalão Web** é a evolução digital da Unidade Básica de Saúde São José em Divinópolis, MG. Desenvolvido para substituir processos manuais e páginas estáticas, o sistema oferece uma experiência SPA (Single Page Application) fluida e moderna.
+> 🎯 **Plataforma SPA completa** para digitalização dos serviços da UBS São José em Divinópolis/MG, conectando cidadãos, profissionais de saúde e administradores.
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=16&duration=4000&pause=1000&color=6C757D&center=true&vCenter=true&width=600&lines=Substituindo+processos+manuais+por+tecnologia;Conectando+pacientes+e+profissionais;Modernizando+a+saúde+pública+brasileira" alt="Description Typing" />
+
+</div>
+
+### 🎯 Público-Alvo
+
+<table>
+<tr>
+<td align="center" width="25%">
+<img src="https://img.shields.io/badge/👥-Cidadãos-1351B4?style=for-the-badge"/>
+<br/><br/>
+<b>Informações de serviços</b><br/>
+Busca de ACS<br/>
+Sistema de ouvidoria<br/>
+Campanhas e avisos
+</td>
+<td align="center" width="25%">
+<img src="https://img.shields.io/badge/🩺-Profissionais-00C851?style=for-the-badge"/>
+<br/><br/>
+<b>Criar avisos</b><br/>
+Gerenciar campanhas<br/>
+Agendas semanais<br/>
+Calendário admin
+</td>
+<td align="center" width="25%">
+<img src="https://img.shields.io/badge/👨‍💼-Administradores-FF6B6B?style=for-the-badge"/>
+<br/><br/>
+<b>Gestão completa</b><br/>
+CRUD de usuários<br/>
+Estoque de vacinas<br/>
+Escalas de trabalho
+</td>
+<td align="center" width="25%">
+<img src="https://img.shields.io/badge/🏥-ACS-9B59B6?style=for-the-badge"/>
+<br/><br/>
+<b>Busca territorial</b><br/>
+713 microáreas<br/>
+Equipes mapeadas<br/>
+Informações rápidas
+</td>
+</tr>
+</table>
 
 ### 🌟 Diferenciais
 
 ```diff
-+ Interface intuitiva seguindo padrões Gov.br
-+ Busca inteligente de ACS por endereço (713 microáreas mapeadas)
-+ Sistema completo de gerenciamento de avisos e campanhas
-+ Sistema de Ouvidoria (Elogios, Reclamações, Sugestões) com envio anônimo
-+ 13 serviços de saúde + 9 profissionais + 3 grupos operativos + sistema de feedback
-+ Sistema robusto de permissões (Admin, Profissional, Diretoria)
-+ Gestão de estoque de vacinas com calendário nacional
-+ Gestão de escalas de trabalho por profissional e sala
-+ Upload de imagens e PDFs com Firebase Storage
-+ Responsivo e acessível (WCAG 2.1 Level AA)
-+ Zero emojis no código (Lucide React icons)
++ ✅ Interface Gov.br Design System - Padrões governamentais
++ ✅ 713 microáreas mapeadas - Busca inteligente de ACS
++ ✅ Sistema RBAC completo - Admin, Profissional, Diretoria
++ ✅ Upload até 10MB - Imagens e PDFs no Firebase Storage
++ ✅ Calendário administrativo - Eventos, reuniões, lembretes
++ ✅ Agendas semanais - Atividades dos profissionais
++ ✅ Estoque de vacinas - Calendário nacional 2025
++ ✅ Sistema de ouvidoria - Elogios, reclamações, sugestões
++ ✅ Responsivo e acessível - WCAG 2.1 Level AA
++ ✅ Deploy automático - CI/CD na Vercel
 ```
-
-### 🎯 Público-Alvo
-
-- **Cidadãos**: Acesso a informações sobre serviços, equipes, horários e campanhas
-- **Agentes Comunitários**: Busca territorial facilitada
-- **Profissionais de Saúde**: Criação de avisos e campanhas com assistência de IA
-- **Administradores**: Gestão centralizada de conteúdo, usuários e estoque
 
 ---
 
