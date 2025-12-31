@@ -96,6 +96,89 @@ export const agendasSemanais = {
       }
     }
   ],
+  ginecologista: [
+    {
+      id: "ginecologista",
+      nome: "Ginecologista",
+      horarioAtendimento: {
+        manha: { inicio: "07:00", fim: "13:00", display: "07:00 às 13:00" }
+      },
+      agendaSemanal: {
+        "Segunda-feira": [
+          { horario: "07:00 às 13:00", atividade: "Atendimento" }
+        ],
+        "Quarta-feira": [
+          { horario: "07:00 às 13:00", atividade: "Atendimento" }
+        ]
+      }
+    }
+  ],
+  pediatra: [
+    {
+      id: "pediatra",
+      nome: "Pediatra",
+      horarioAtendimento: {
+        manha: { inicio: "07:00", fim: "13:00", display: "07:00 às 13:00" },
+        tarde: { inicio: "13:00", fim: "17:00", display: "13:00 às 17:00" }
+      },
+      agendaSemanal: {
+        "Terça-feira": [
+          { horario: "07:00 às 13:00", atividade: "Atendimento" }
+        ],
+        "Quarta-feira": [
+          { horario: "07:00 às 13:00", atividade: "Atendimento" }
+        ],
+        "Quinta-feira": [
+          { horario: "13:00 às 17:00", atividade: "Consultas de Puericultura agendadas previamente" }
+        ]
+      }
+    }
+  ],
+  fisioterapeuta: [
+    {
+      id: "fisioterapeuta",
+      nome: "Fisioterapeuta",
+      horarioAtendimento: {
+        manha: { inicio: "07:00", fim: "11:00", display: "07:00 às 11:00" }
+      },
+      agendaSemanal: {
+        "Terça-feira": [
+          { horario: "07:00 às 11:00", atividade: "Atendimento" }
+        ],
+        "Quinta-feira": [
+          { horario: "07:00 às 11:00", atividade: "Atendimento" }
+        ]
+      }
+    }
+  ],
+  psicologa: [
+    {
+      id: "psicologa",
+      nome: "Psicóloga",
+      horarioAtendimento: {
+        manha: { inicio: "07:00", fim: "13:00", display: "07:00 às 13:00" }
+      },
+      agendaSemanal: {
+        "Quarta-feira": [
+          { horario: "07:00 às 13:00", atividade: "Atendimento" }
+        ]
+      }
+    }
+  ],
+  assistenteSocial: [
+    {
+      id: "assistente-social",
+      nome: "Assistente Social",
+      horarioAtendimento: {
+        manha: { inicio: "07:00", fim: "11:00", display: "07:00 às 11:00" }
+      },
+      agendaSemanal: {
+        "Terça-feira": [
+          { horario: "07:00 às 11:00", atividade: "Atendimento" }
+        ]
+      }
+    }
+  ],
   enfermeiras: [
     {
       id: "enf-aline-macedo",

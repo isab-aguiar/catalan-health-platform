@@ -24,13 +24,15 @@ export default function CalendarioAdmin() {
   const [eventoVisualizando, setEventoVisualizando] = useState(null);
   const [showEscalasModal, setShowEscalasModal] = useState(false);
   const [escalasDoDia, setEscalasDoDia] = useState([]);
+  const [showModalDia, setShowModalDia] = useState(false);
+  const [dataModalDia, setDataModalDia] = useState(null);
 
   const { eventos, loading, deletar, recarregar } = useEventos(
     currentDate.getMonth() + 1,
     currentDate.getFullYear()
   );
 
-  useBodyScrollLock(showEventModal || showDetalhesModal || showEscalasModal);
+  useBodyScrollLock(showEventModal || showDetalhesModal || showEscalasModal || showModalDia);
 
   const meses = [
     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -132,6 +134,55 @@ export default function CalendarioAdmin() {
   };
 
   /**
+   * Pega as agendas semanais de um dia específico
+   */
+  const getAgendasSemanaisNoDia = (data) => {
+    const diasSemanaMap = {
+      0: 'Domingo',
+      1: 'Segunda-feira',
+      2: 'Terça-feira',
+      3: 'Quarta-feira',
+      4: 'Quinta-feira',
+      5: 'Sexta-feira',
+      6: 'Sábado'
+    };
+
+    const diaSemana = diasSemanaMap[data.getDay()];
+    const agendasDoDia = [];
+
+    // Buscar agendas de todas as categorias
+    Object.entries(agendasSemanais).forEach(([categoria, profissionais]) => {
+      if (Array.isArray(profissionais)) {
+        profissionais.forEach((profissional) => {
+          if (profissional.agendaSemanal && profissional.agendaSemanal[diaSemana]) {
+            const atividades = profissional.agendaSemanal[diaSemana];
+            if (atividades && atividades.length > 0) {
+              agendasDoDia.push({
+                categoria,
+                profissional: profissional.nome,
+                atividades
+              });
+            }
+          }
+        });
+      }
+    });
+
+    return agendasDoDia;
+  };
+
+  /**
+   * Conta o total de itens (eventos + agendas) de um dia
+   */
+  const getTotalItensNoDia = (data) => {
+    const eventosNoDia = getEventosNoDia(data);
+    const escalasNoDia = getEscalasNoDia(data);
+    const agendasSemanaisNoDia = getAgendasSemanaisNoDia(data);
+    
+    return eventosNoDia.length + escalasNoDia.length + agendasSemanaisNoDia.length;
+  };
+
+  /**
    * Abre modal com as escalas do dia
    */
   const handleVerEscalasDoDia = (data, e) => {
@@ -141,6 +192,15 @@ export default function CalendarioAdmin() {
       setEscalasDoDia(escalas);
       setShowEscalasModal(true);
     }
+  };
+
+  /**
+   * Abre modal com todos os eventos e agendas do dia
+   */
+  const handleVerDiaCompleto = (data, e) => {
+    if (e) e.stopPropagation();
+    setDataModalDia(data);
+    setShowModalDia(true);
   };
 
   const mesAnterior = () => {
@@ -257,7 +317,7 @@ export default function CalendarioAdmin() {
 
   return (
     <AdminLayout currentPage="calendario">
-    <div className="space-y-6">
+      <div className="space-y-6">
       {/* Header */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -306,186 +366,575 @@ export default function CalendarioAdmin() {
       </div>
 
       {/* Controles do Calendário */}
-      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          {/* Navegação de Meses */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={mesAnterior}
-              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
-              aria-label="Mês anterior"
-            >
-              <ChevronLeft className="w-5 h-5 text-neutral-700" />
-            </button>
+      {viewMode === 'month' && (
+        <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+          <div className="flex flex-col gap-4">
+            {/* Navegação de Meses */}
+            <div className="flex items-center justify-between gap-2 flex-wrap">
+              <div className="flex items-center gap-2 flex-1 min-w-0">
+                <button
+                  onClick={mesAnterior}
+                  className="p-2 hover:bg-neutral-100 rounded-lg transition-colors flex-shrink-0"
+                  aria-label="Mês anterior"
+                >
+                  <ChevronLeft className="w-5 h-5 text-neutral-700" />
+                </button>
 
-            <div className="text-center min-w-[200px]">
-              <h2 className="text-lg font-semibold text-neutral-900">
-                {meses[currentDate.getMonth()]} {currentDate.getFullYear()}
-              </h2>
+                <div className="text-center flex-1 min-w-0">
+                  <h2 className="text-base sm:text-lg font-semibold text-neutral-900 truncate">
+                    {meses[currentDate.getMonth()]} {currentDate.getFullYear()}
+                  </h2>
+                </div>
+
+                <button
+                  onClick={proximoMes}
+                  className="p-2 hover:bg-neutral-100 rounded-lg transition-colors flex-shrink-0"
+                  aria-label="Próximo mês"
+                >
+                  <ChevronRight className="w-5 h-5 text-neutral-700" />
+                </button>
+
+                <button
+                  onClick={hoje}
+                  className="px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium text-primary-600 hover:bg-blue-50 rounded-lg transition-colors whitespace-nowrap flex-shrink-0"
+                >
+                  Hoje
+                </button>
+              </div>
+
+              {/* Filtros */}
+              <div className="flex items-center gap-2">
+                <Filter className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+                <select
+                  value={filtroTipo}
+                  onChange={(e) => setFiltroTipo(e.target.value)}
+                  className="px-2 sm:px-3 py-1.5 border border-neutral-300 rounded-lg text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 flex-1 min-w-0"
+                >
+                  <option value="todos">Todos os Eventos</option>
+                  <option value={TIPOS_EVENTO.REUNIAO}>Reuniões</option>
+                  <option value={TIPOS_EVENTO.LEMBRETE}>Lembretes</option>
+                  <option value={TIPOS_EVENTO.AGENDAMENTO}>Agendamentos</option>
+                </select>
+              </div>
             </div>
 
-            <button
-              onClick={proximoMes}
-              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
-              aria-label="Próximo mês"
-            >
-              <ChevronRight className="w-5 h-5 text-neutral-700" />
-            </button>
-
-            <button
-              onClick={hoje}
-              className="px-3 py-1.5 text-sm font-medium text-primary-600 hover:bg-blue-50 rounded-lg transition-colors"
-            >
-              Hoje
-            </button>
-          </div>
-
-          {/* Filtros */}
-          <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-neutral-500" />
-            <select
-              value={filtroTipo}
-              onChange={(e) => setFiltroTipo(e.target.value)}
-              className="px-3 py-1.5 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-            >
-              <option value="todos">Todos os Eventos</option>
-              <option value={TIPOS_EVENTO.REUNIAO}>Reuniões</option>
-              <option value={TIPOS_EVENTO.LEMBRETE}>Lembretes</option>
-              <option value={TIPOS_EVENTO.AGENDAMENTO}>Agendamentos</option>
-            </select>
+            {/* Legenda */}
+            <div className="mt-4 pt-4 border-t border-neutral-200 flex flex-wrap gap-3 sm:gap-4 text-xs">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-blue-500 flex-shrink-0"></div>
+                <span className="text-neutral-600">Reunião</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0"></div>
+                <span className="text-neutral-600">Lembrete</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-green-500 flex-shrink-0"></div>
+                <span className="text-neutral-600">Agendamento</span>
+              </div>
+            </div>
           </div>
         </div>
-
-        {/* Legenda */}
-        <div className="mt-4 pt-4 border-t border-neutral-200 flex flex-wrap gap-4 text-xs">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-blue-500"></div>
-            <span className="text-neutral-600">Reunião</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-            <span className="text-neutral-600">Lembrete</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-            <span className="text-neutral-600">Agendamento</span>
-          </div>
-        </div>
-      </div>
+      )}
 
       {/* Grid do Calendário */}
-      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
-        {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+      {viewMode === 'month' && (
+        <div className="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+          {loading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              {/* Versão Desktop */}
+              <div className="hidden md:block">
+                <div className="min-w-full">
+                  {/* Cabeçalho dos Dias da Semana */}
+                  <div className="grid grid-cols-7 bg-gradient-to-r from-neutral-50 to-neutral-100 border-b border-neutral-200">
+                    {diasSemana.map((dia, index) => (
+                      <div
+                        key={index}
+                        className="py-3 text-center text-sm font-semibold text-neutral-700 border-r border-neutral-200 last:border-r-0"
+                      >
+                        {dia}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Grid de Dias */}
+                  <div className="grid grid-cols-7">
+                    {diasDoMes.map((diaInfo, index) => {
+                      const totalItens = getTotalItensNoDia(diaInfo.data);
+                      const isHoje =
+                        diaInfo.data.getDate() === dataHoje.getDate() &&
+                        diaInfo.data.getMonth() === dataHoje.getMonth() &&
+                        diaInfo.data.getFullYear() === dataHoje.getFullYear();
+
+                      return (
+                        <div
+                          key={index}
+                          className={`min-h-[100px] border-r border-b border-neutral-200 last:border-r-0 p-2 flex flex-col ${
+                            diaInfo.mes !== 'atual'
+                              ? 'bg-neutral-50'
+                              : isHoje
+                                ? 'bg-blue-50'
+                                : 'bg-white hover:bg-neutral-50'
+                          } transition-colors cursor-pointer relative`}
+                          onClick={(e) => {
+                            if (totalItens > 0) {
+                              handleVerDiaCompleto(diaInfo.data, e);
+                            } else {
+                              handleCriarEventoNoDia(diaInfo.data);
+                            }
+                          }}
+                        >
+                          <div
+                            className={`text-sm font-semibold ${
+                              diaInfo.mes !== 'atual'
+                                ? 'text-neutral-400'
+                                : isHoje
+                                ? 'text-white bg-primary-600 rounded-full w-7 h-7 flex items-center justify-center'
+                                : 'text-neutral-900'
+                            }`}
+                          >
+                            {diaInfo.dia}
+                          </div>
+
+                          {/* Indicador com total de itens no footer */}
+                          <div className="mt-auto flex justify-end pt-1">
+                            {totalItens > 0 && diaInfo.mes === 'atual' && (
+                              <div className="bg-green-400 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shadow-sm">
+                                {totalItens}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Versão Mobile */}
+              <div className="md:hidden">
+                <div className="p-4 space-y-4">
+                  {/* Cabeçalho do mês */}
+                  <div className="text-center mb-4">
+                    <h3 className="text-lg font-semibold text-neutral-900">
+                      {meses[currentDate.getMonth()]} {currentDate.getFullYear()}
+                    </h3>
+                  </div>
+
+                  {/* Botão para adicionar evento */}
+                  <div className="mb-4">
+                    <button
+                      onClick={() => setShowEventModal(true)}
+                      className="w-full bg-primary-600 text-white px-4 py-3 rounded-lg hover:bg-primary-700 transition-colors flex items-center justify-center gap-2 font-medium shadow-sm"
+                    >
+                      <Plus className="w-5 h-5" />
+                      Adicionar Evento
+                    </button>
+                  </div>
+
+                  {/* Cards dos dias com eventos/agendas */}
+                  {diasDoMes
+                    .filter((diaInfo) => {
+                      const totalItens = getTotalItensNoDia(diaInfo.data);
+                      return diaInfo.mes === 'atual' && totalItens > 0;
+                    })
+                    .map((diaInfo, index) => {
+                      const totalItens = getTotalItensNoDia(diaInfo.data);
+                      const isHoje =
+                        diaInfo.data.getDate() === dataHoje.getDate() &&
+                        diaInfo.data.getMonth() === dataHoje.getMonth() &&
+                        diaInfo.data.getFullYear() === dataHoje.getFullYear();
+
+                      return (
+                        <div
+                          key={index}
+                          className={`border rounded-lg p-4 flex flex-col ${
+                            isHoje ? 'border-primary-600 bg-blue-50' : 'border-neutral-200 bg-white'
+                          }`}
+                          onClick={() => handleVerDiaCompleto(diaInfo.data, { stopPropagation: () => {} })}
+                        >
+                          <div className="flex items-center gap-3 mb-2">
+                            <div
+                              className={`text-lg font-bold ${
+                                isHoje ? 'text-primary-600' : 'text-neutral-900'
+                              }`}
+                            >
+                              {diaInfo.dia}
+                            </div>
+                            <div className="text-sm text-neutral-600">
+                              {diasSemana[diaInfo.data.getDay()]}
+                            </div>
+                          </div>
+                          <div className="mt-auto flex justify-end pt-2">
+                            <div className="bg-green-400 text-white rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold shadow-sm">
+                              {totalItens}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+
+                  {diasDoMes.filter((diaInfo) => {
+                    const totalItens = getTotalItensNoDia(diaInfo.data);
+                    return diaInfo.mes === 'atual' && totalItens > 0;
+                  }).length === 0 && (
+                    <div className="text-center py-12 text-neutral-500">
+                      <CalendarIcon className="w-12 h-12 mx-auto mb-3 text-neutral-400" />
+                      <p className="text-sm">Nenhum evento ou agenda neste mês</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Seção de Agendas Semanais */}
+      {viewMode === 'agendas' && (
+        <div className="space-y-6">
+          {/* Agendas dos Médicos */}
+          <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+            <h2 className="text-xl font-bold text-neutral-900 mb-6">
+              Agendas dos Médicos
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {agendasSemanais.medicos.map((medico) => (
+                <div
+                  key={medico.id}
+                  className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-blue-50 to-white hover:shadow-md transition-shadow"
+                >
+                  <h3 className="text-lg font-bold text-neutral-900 mb-3">{medico.nome}</h3>
+                  <div className="mb-4 space-y-2">
+                    <div className="flex items-center gap-2 text-sm text-neutral-700">
+                      <Clock className="w-4 h-4 text-blue-600" />
+                      <span className="font-medium">Manhã:</span>
+                      <span>{medico.horarioAtendimento.manha.display}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-neutral-700">
+                      <Clock className="w-4 h-4 text-amber-600" />
+                      <span className="font-medium">Tarde:</span>
+                      <span>{medico.horarioAtendimento.tarde.display}</span>
+                    </div>
+                  </div>
+                  <div className="border-t border-neutral-200 pt-4 space-y-3">
+                    {diasSemanaCompletos.map((dia) => {
+                      const atividades = medico.agendaSemanal[dia] || [];
+                      return (
+                        <div key={dia} className="text-sm">
+                          <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
+                          {atividades.map((item, idx) => (
+                            <div key={idx} className="text-neutral-700 ml-2 text-xs">
+                              {item.horario} – {item.atividade}
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <div className="min-w-[700px]">
-              {/* Cabeçalho dos Dias da Semana */}
-              <div className="grid grid-cols-7 bg-neutral-50 border-b border-neutral-200">
-                {diasSemana.map((dia, index) => (
+
+          {/* Agendas das Enfermeiras */}
+          <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+            <h2 className="text-xl font-bold text-neutral-900 mb-6">
+              Agendas das Enfermeiras
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {agendasSemanais.enfermeiras.map((enfermeira) => (
+                <div
+                  key={enfermeira.id}
+                  className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition-shadow"
+                >
+                  <h3 className="text-lg font-bold text-neutral-900 mb-3">{enfermeira.nome}</h3>
+                  <div className="mb-4 space-y-2">
+                    <div className="flex items-center gap-2 text-sm text-neutral-700">
+                      <Clock className="w-4 h-4 text-blue-600" />
+                      <span className="font-medium">Manhã:</span>
+                      <span>{enfermeira.horarioAtendimento.manha.display}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-neutral-700">
+                      <Clock className="w-4 h-4 text-amber-600" />
+                      <span className="font-medium">Tarde:</span>
+                      <span>{enfermeira.horarioAtendimento.tarde.display}</span>
+                    </div>
+                  </div>
+                  <div className="border-t border-neutral-200 pt-4 space-y-3">
+                    {diasSemanaCompletos.map((dia) => {
+                      const atividades = enfermeira.agendaSemanal[dia] || [];
+                      return (
+                        <div key={dia} className="text-sm">
+                          <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
+                          {atividades.map((item, idx) => (
+                            <div key={idx} className="text-neutral-700 ml-2 text-xs">
+                              {item.horario} – {item.atividade}
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Agendas - Ginecologista */}
+          {agendasSemanais.ginecologista && agendasSemanais.ginecologista.length > 0 && (
+            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+              <h2 className="text-xl font-bold text-neutral-900 mb-6">
+                Agendas - Ginecologista
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {agendasSemanais.ginecologista.map((profissional) => (
                   <div
-                    key={index}
-                    className="py-3 text-center text-sm font-semibold text-neutral-700 border-r border-neutral-200 last:border-r-0"
+                    key={profissional.id}
+                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-blue-50 to-white hover:shadow-md transition-shadow"
                   >
-                    {dia}
+                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
+                    <div className="mb-4 space-y-2">
+                      {profissional.horarioAtendimento.manha && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-blue-600" />
+                          <span className="font-medium">Manhã:</span>
+                          <span>{profissional.horarioAtendimento.manha.display}</span>
+                        </div>
+                      )}
+                      {profissional.horarioAtendimento.tarde && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-amber-600" />
+                          <span className="font-medium">Tarde:</span>
+                          <span>{profissional.horarioAtendimento.tarde.display}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="border-t border-neutral-200 pt-4 space-y-3">
+                      {diasSemanaCompletos.map((dia) => {
+                        const atividades = profissional.agendaSemanal[dia] || [];
+                        return (
+                          <div key={dia} className="text-sm">
+                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
+                            {atividades.map((item, idx) => (
+                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
+                                {item.horario} – {item.atividade}
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 ))}
               </div>
+            </div>
+          )}
 
-              {/* Grid de Dias */}
-              <div className="grid grid-cols-7">
-                {diasDoMes.map((diaInfo, index) => {
-                  const eventosNoDia = getEventosNoDia(diaInfo.data);
-                  const escalasNoDia = getEscalasNoDia(diaInfo.data);
-                  const isHoje =
-                    diaInfo.data.getDate() === dataHoje.getDate() &&
-                    diaInfo.data.getMonth() === dataHoje.getMonth() &&
-                    diaInfo.data.getFullYear() === dataHoje.getFullYear();
-
-                  return (
-                    <div
-                      key={index}
-                      className={`min-h-[120px] border-r border-b border-neutral-200 last:border-r-0 p-2 ${
-                        diaInfo.mes !== 'atual'
-                          ? 'bg-neutral-50'
-                          : isHoje
-                            ? 'bg-blue-50'
-                            : 'bg-white hover:bg-neutral-50'
-                      } transition-colors cursor-pointer`}
-                      onClick={() => handleCriarEventoNoDia(diaInfo.data)}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <div
-                          className={`text-sm font-medium ${
-                            diaInfo.mes !== 'atual'
-                              ? 'text-neutral-400'
-                              : isHoje
-                              ? 'text-white bg-primary-600 rounded-full w-7 h-7 flex items-center justify-center'
-                              : 'text-neutral-700'
-                          }`}
-                        >
-                          {diaInfo.dia}
+          {/* Agendas - Pediatra */}
+          {agendasSemanais.pediatra && agendasSemanais.pediatra.length > 0 && (
+            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+              <h2 className="text-xl font-bold text-neutral-900 mb-6">
+                Agendas - Pediatra
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {agendasSemanais.pediatra.map((profissional) => (
+                  <div
+                    key={profissional.id}
+                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-blue-50 to-white hover:shadow-md transition-shadow"
+                  >
+                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
+                    <div className="mb-4 space-y-2">
+                      {profissional.horarioAtendimento.manha && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-blue-600" />
+                          <span className="font-medium">Manhã:</span>
+                          <span>{profissional.horarioAtendimento.manha.display}</span>
                         </div>
-
-                        {/* Indicador de Escalas */}
-                        {escalasNoDia.length > 0 && diaInfo.mes === 'atual' && (
-                          <button
-                            onClick={(e) => handleVerEscalasDoDia(diaInfo.data, e)}
-                            className="flex items-center gap-1 bg-teal-100 text-teal-700 hover:bg-teal-200 px-1.5 py-0.5 rounded text-xs font-medium transition-colors"
-                            title={`${escalasNoDia.length} agenda(s) médica(s)`}
-                          >
-                            <Stethoscope className="w-3 h-3" />
-                            <span>{escalasNoDia.length}</span>
-                          </button>
-                        )}
-                      </div>
-
-                      {/* Eventos do Dia */}
-                      <div className="space-y-1">
-                        {eventosNoDia.slice(0, 3).map((evento) => (
-                          <div
-                            key={evento.id}
-                            className={`${getCorEvento(evento.tipo)} text-white text-xs px-2 py-1 rounded flex items-center justify-between gap-1 group`}
-                            onClick={(e) => handleVisualizarEvento(evento, e)}
-                          >
-                            <div className="flex items-center gap-1 truncate min-w-0">
-                              {getIconeEvento(evento.tipo)}
-                              <span className="truncate">{evento.titulo}</span>
-                            </div>
-                            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                              <button
-                                onClick={(e) => handleEditarEvento(evento, e)}
-                                className="hover:bg-white/20 rounded p-0.5"
-                                title="Editar evento"
-                              >
-                                <Edit2 className="w-3 h-3" />
-                              </button>
-                              <button
-                                onClick={(e) => handleDeletarEvento(evento, e)}
-                                className="hover:bg-white/20 rounded p-0.5"
-                                title="Deletar evento"
-                              >
-                                <Trash2 className="w-3 h-3" />
-                              </button>
-                            </div>
-                          </div>
-                        ))}
-                        {eventosNoDia.length > 3 && (
-                          <div className="text-xs text-neutral-500 pl-2">
-                            +{eventosNoDia.length - 3} mais
-                          </div>
-                        )}
-                      </div>
+                      )}
+                      {profissional.horarioAtendimento.tarde && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-amber-600" />
+                          <span className="font-medium">Tarde:</span>
+                          <span>{profissional.horarioAtendimento.tarde.display}</span>
+                        </div>
+                      )}
                     </div>
-                  );
-                })}
+                    <div className="border-t border-neutral-200 pt-4 space-y-3">
+                      {diasSemanaCompletos.map((dia) => {
+                        const atividades = profissional.agendaSemanal[dia] || [];
+                        return (
+                          <div key={dia} className="text-sm">
+                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
+                            {atividades.map((item, idx) => (
+                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
+                                {item.horario} – {item.atividade}
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+
+          {/* Agendas - Fisioterapeuta */}
+          {agendasSemanais.fisioterapeuta && agendasSemanais.fisioterapeuta.length > 0 && (
+            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+              <h2 className="text-xl font-bold text-neutral-900 mb-6">
+                Agendas - Fisioterapeuta
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {agendasSemanais.fisioterapeuta.map((profissional) => (
+                  <div
+                    key={profissional.id}
+                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition-shadow"
+                  >
+                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
+                    <div className="mb-4 space-y-2">
+                      {profissional.horarioAtendimento.manha && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-blue-600" />
+                          <span className="font-medium">Manhã:</span>
+                          <span>{profissional.horarioAtendimento.manha.display}</span>
+                        </div>
+                      )}
+                      {profissional.horarioAtendimento.tarde && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-amber-600" />
+                          <span className="font-medium">Tarde:</span>
+                          <span>{profissional.horarioAtendimento.tarde.display}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="border-t border-neutral-200 pt-4 space-y-3">
+                      {diasSemanaCompletos.map((dia) => {
+                        const atividades = profissional.agendaSemanal[dia] || [];
+                        return (
+                          <div key={dia} className="text-sm">
+                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
+                            {atividades.map((item, idx) => (
+                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
+                                {item.horario} – {item.atividade}
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Agendas - Psicóloga */}
+          {agendasSemanais.psicologa && agendasSemanais.psicologa.length > 0 && (
+            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+              <h2 className="text-xl font-bold text-neutral-900 mb-6">
+                Agendas - Psicóloga
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {agendasSemanais.psicologa.map((profissional) => (
+                  <div
+                    key={profissional.id}
+                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition-shadow"
+                  >
+                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
+                    <div className="mb-4 space-y-2">
+                      {profissional.horarioAtendimento.manha && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-blue-600" />
+                          <span className="font-medium">Manhã:</span>
+                          <span>{profissional.horarioAtendimento.manha.display}</span>
+                        </div>
+                      )}
+                      {profissional.horarioAtendimento.tarde && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-amber-600" />
+                          <span className="font-medium">Tarde:</span>
+                          <span>{profissional.horarioAtendimento.tarde.display}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="border-t border-neutral-200 pt-4 space-y-3">
+                      {diasSemanaCompletos.map((dia) => {
+                        const atividades = profissional.agendaSemanal[dia] || [];
+                        return (
+                          <div key={dia} className="text-sm">
+                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
+                            {atividades.map((item, idx) => (
+                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
+                                {item.horario} – {item.atividade}
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Agendas - Assistente Social */}
+          {agendasSemanais.assistenteSocial && agendasSemanais.assistenteSocial.length > 0 && (
+            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
+              <h2 className="text-xl font-bold text-neutral-900 mb-6">
+                Agendas - Assistente Social
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+                {agendasSemanais.assistenteSocial.map((profissional) => (
+                  <div
+                    key={profissional.id}
+                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition-shadow"
+                  >
+                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
+                    <div className="mb-4 space-y-2">
+                      {profissional.horarioAtendimento.manha && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-blue-600" />
+                          <span className="font-medium">Manhã:</span>
+                          <span>{profissional.horarioAtendimento.manha.display}</span>
+                        </div>
+                      )}
+                      {profissional.horarioAtendimento.tarde && (
+                        <div className="flex items-center gap-2 text-sm text-neutral-700">
+                          <Clock className="w-4 h-4 text-amber-600" />
+                          <span className="font-medium">Tarde:</span>
+                          <span>{profissional.horarioAtendimento.tarde.display}</span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="border-t border-neutral-200 pt-4 space-y-3">
+                      {diasSemanaCompletos.map((dia) => {
+                        const atividades = profissional.agendaSemanal[dia] || [];
+                        return (
+                          <div key={dia} className="text-sm">
+                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
+                            {atividades.map((item, idx) => (
+                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
+                                {item.horario} – {item.atividade}
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Modal de Evento (Criar/Editar) */}
@@ -503,8 +952,11 @@ export default function CalendarioAdmin() {
 
       {/* Modal de Escalas/Agendas do Dia */}
       {showEscalasModal && escalasDoDia.length > 0 && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4" onClick={() => {
+          setShowEscalasModal(false);
+          setEscalasDoDia([]);
+        }}>
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             {/* Header */}
             <div className="sticky top-0 bg-white px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
               <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
@@ -618,10 +1070,176 @@ export default function CalendarioAdmin() {
         </div>
       )}
 
+      {/* Modal de Eventos e Agendas do Dia */}
+      {showModalDia && dataModalDia && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4" onClick={() => {
+          setShowModalDia(false);
+          setDataModalDia(null);
+        }}>
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            {/* Header */}
+            <div className="sticky top-0 bg-white px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
+              <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
+                <CalendarIcon className="w-6 h-6 text-primary-600" />
+                {dataModalDia.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+              </h3>
+              <button
+                onClick={() => {
+                  setShowModalDia(false);
+                  setDataModalDia(null);
+                }}
+                className="text-neutral-500 hover:text-neutral-700 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Corpo */}
+            <div className="p-6 space-y-6">
+              {/* Eventos do Dia */}
+              {getEventosNoDia(dataModalDia).length > 0 && (
+                <div>
+                  <h4 className="text-lg font-semibold text-neutral-900 mb-4">Eventos</h4>
+                  <div className="space-y-3">
+                    {getEventosNoDia(dataModalDia).map((evento) => (
+                      <div
+                        key={evento.id}
+                        className={`${getCorEvento(evento.tipo)} text-white rounded-lg p-4 cursor-pointer hover:opacity-90 transition-opacity`}
+                        onClick={() => {
+                          setShowModalDia(false);
+                          handleVisualizarEvento(evento, { stopPropagation: () => {} });
+                        }}
+                      >
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-start gap-3 flex-1">
+                            <div className="mt-0.5">
+                              {getIconeEvento(evento.tipo)}
+                            </div>
+                            <div className="flex-1">
+                              <h5 className="font-semibold mb-1">{evento.titulo}</h5>
+                              {evento.descricao && (
+                                <p className="text-sm text-white/90 line-clamp-2">{evento.descricao}</p>
+                              )}
+                              {(evento.horaInicio || evento.local) && (
+                                <div className="flex items-center gap-4 mt-2 text-xs text-white/80">
+                                  {evento.horaInicio && (
+                                    <span className="flex items-center gap-1">
+                                      <Clock className="w-3 h-3" />
+                                      {evento.horaInicio}
+                                    </span>
+                                  )}
+                                  {evento.local && (
+                                    <span className="flex items-center gap-1">
+                                      <MapPin className="w-3 h-3" />
+                                      {evento.local}
+                                    </span>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                          <ChevronRight className="w-5 h-5 flex-shrink-0" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Escalas do Dia */}
+              {getEscalasNoDia(dataModalDia).length > 0 && (
+                <div>
+                  <h4 className="text-lg font-semibold text-neutral-900 mb-4 flex items-center gap-2">
+                    <Stethoscope className="w-5 h-5 text-teal-600" />
+                    Escalas/Agendas Médicas
+                  </h4>
+                  <div className="space-y-4">
+                    {getEscalasNoDia(dataModalDia).map((escala, idx) => (
+                      <div key={idx} className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
+                        <div className="flex items-start justify-between mb-2">
+                          <h5 className="font-semibold text-neutral-900">{escala.nome}</h5>
+                          <span className="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">
+                            {escala.categoria}
+                          </span>
+                        </div>
+                        {escala.agendaDoDia && (
+                          <p className="text-sm text-neutral-700">{escala.agendaDoDia}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Agendas Semanais do Dia */}
+              {getAgendasSemanaisNoDia(dataModalDia).length > 0 && (
+                <div>
+                  <h4 className="text-lg font-semibold text-neutral-900 mb-4">Agendas Semanais</h4>
+                  <div className="space-y-4">
+                    {getAgendasSemanaisNoDia(dataModalDia).map((agenda, idx) => (
+                      <div key={idx} className="bg-gradient-to-br from-blue-50 to-white rounded-lg p-4 border border-blue-200">
+                        <h5 className="font-semibold text-neutral-900 mb-3">{agenda.profissional}</h5>
+                        <div className="space-y-2">
+                          {agenda.atividades.map((atividade, atvIdx) => (
+                            <div key={atvIdx} className="flex items-start gap-2 text-sm">
+                              <Clock className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                              <div>
+                                <span className="font-medium text-neutral-900">{atividade.horario}</span>
+                                <span className="text-neutral-700"> – {atividade.atividade}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Mensagem quando não há itens */}
+              {getEventosNoDia(dataModalDia).length === 0 && 
+               getEscalasNoDia(dataModalDia).length === 0 && 
+               getAgendasSemanaisNoDia(dataModalDia).length === 0 && (
+                <div className="text-center py-8 text-neutral-500">
+                  <CalendarIcon className="w-12 h-12 mx-auto mb-3 text-neutral-400" />
+                  <p className="text-sm">Nenhum evento ou agenda para este dia</p>
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="sticky bottom-0 bg-white px-6 py-4 border-t border-neutral-200 flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setShowModalDia(false);
+                  setDataModalDia(null);
+                }}
+                className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors"
+              >
+                Fechar
+              </button>
+              <button
+                onClick={() => {
+                  setShowModalDia(false);
+                  handleCriarEventoNoDia(dataModalDia);
+                }}
+                className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors flex items-center gap-2"
+              >
+                <Plus className="w-4 h-4" />
+                Adicionar Evento
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Modal de Detalhes do Evento */}
       {showDetalhesModal && eventoVisualizando && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4" onClick={() => {
+          setShowDetalhesModal(false);
+          setEventoVisualizando(null);
+        }}>
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             {/* Header */}
             <div className="sticky top-0 bg-white px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
               <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
@@ -800,7 +1418,7 @@ export default function CalendarioAdmin() {
           </div>
         </div>
       )}
-    </div>
+      </div>
     </AdminLayout>
   );
 }
