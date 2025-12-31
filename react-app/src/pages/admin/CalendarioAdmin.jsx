@@ -9,6 +9,7 @@ import { useEventos } from '../../hooks/useEventos';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import EventoModal from '../../components/admin/EventoModal';
 import { escalasTrabalho } from '../../data/escalasTrabalho';
+import { agendasSemanais } from '../../data/agendasSemanais';
 
 export default function CalendarioAdmin() {
   const { currentUser } = useAuth();
@@ -250,6 +251,9 @@ export default function CalendarioAdmin() {
 
   const diasDoMes = getDiasNoMes(currentDate);
   const dataHoje = new Date();
+  const [viewMode, setViewMode] = useState('month'); // 'month' ou 'agendas'
+
+  const diasSemanaCompletos = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira'];
 
   return (
     <AdminLayout currentPage="calendario">
@@ -266,13 +270,38 @@ export default function CalendarioAdmin() {
               Gerencie reuniões, lembretes e agendamentos
             </p>
           </div>
-          <button
-            onClick={() => setShowEventModal(true)}
-            className="bg-primary-600 text-white px-4 py-2.5 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-colors flex items-center gap-2 font-medium shadow-sm"
-          >
-            <Plus className="w-5 h-5" />
-            Adicionar Evento
-          </button>
+          <div className="flex items-center gap-3">
+            {/* Toggle de Visualização */}
+            <div className="flex items-center gap-2 bg-neutral-100 rounded-lg p-1">
+              <button
+                onClick={() => setViewMode('month')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  viewMode === 'month'
+                    ? 'bg-white text-primary-600 shadow-sm'
+                    : 'text-neutral-600 hover:text-neutral-900'
+                }`}
+              >
+                Calendário Mensal
+              </button>
+              <button
+                onClick={() => setViewMode('agendas')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  viewMode === 'agendas'
+                    ? 'bg-white text-primary-600 shadow-sm'
+                    : 'text-neutral-600 hover:text-neutral-900'
+                }`}
+              >
+                Agendas Semanais
+              </button>
+            </div>
+            <button
+              onClick={() => setShowEventModal(true)}
+              className="bg-primary-600 text-white px-4 py-2.5 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-colors flex items-center gap-2 font-medium shadow-sm"
+            >
+              <Plus className="w-5 h-5" />
+              Adicionar Evento
+            </button>
+          </div>
         </div>
       </div>
 
@@ -457,6 +486,7 @@ export default function CalendarioAdmin() {
           </div>
         )}
       </div>
+      )}
 
       {/* Modal de Evento (Criar/Editar) */}
       <EventoModal

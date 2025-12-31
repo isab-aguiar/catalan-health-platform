@@ -245,170 +245,214 @@ export default function Pediatra() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Calendário de Consultas de Puericultura">
-          <p className="text-neutral-700 text-sm mb-4 leading-relaxed">
-            O acompanhamento regular da criança através da puericultura é fundamental para garantir seu desenvolvimento físico, motor, cognitivo e emocional saudável. Manter o calendário de consultas em dia permite a identificação precoce de possíveis alterações e a intervenção adequada, contribuindo para uma infância saudável e um futuro com melhor qualidade de vida.
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-sm mb-6 border border-green-200">
+          <h2 className="text-xl font-bold text-green-900 mb-4">Calendário de Consultas de Puericultura</h2>
+
+          <p className="text-neutral-700 text-sm mb-5 leading-relaxed">
+            O acompanhamento regular da criança através da puericultura é
+            fundamental para garantir seu desenvolvimento físico, motor, cognitivo
+            e emocional saudável. Manter o calendário de consultas em dia permite a identificação precoce de possíveis alterações e a intervenção adequada, contribuindo para uma infância saudável e um futuro com melhor qualidade de vida.
           </p>
-          
-          <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4 mb-4">
-            <p className="text-neutral-700 text-sm leading-relaxed">
-              A seguir, apresentamos a tabela de acompanhamento da puericultura conforme as diretrizes do Ministério da Saúde. As consultas são realizadas por diferentes profissionais conforme a faixa etária: <strong>linhas com fundo branco</strong> indicam atendimento com médico pediatra, enquanto <strong>linhas com fundo azul</strong> indicam atendimento realizado por enfermeira da equipe.
+
+          <div className="bg-white rounded-lg p-4 mb-5 shadow-sm">
+            <p className="text-neutral-900 text-sm leading-relaxed">
+              A seguir, apresentamos a tabela de acompanhamento da puericultura
+              conforme as diretrizes do Ministério da Saúde. As consultas são
+              realizadas por diferentes profissionais conforme a faixa etária:{" "}
+              <strong className="text-neutral-900">linhas com fundo branco</strong> indicam atendimento com
+              médico pediatra, enquanto <strong className="text-neutral-900">linhas com fundo azul</strong>{" "}
+              indicam atendimento realizado por enfermeira da equipe.
             </p>
           </div>
 
-          <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-3 mb-4 text-sm">
-            <p className="font-semibold text-neutral-800 mb-2">Legenda:</p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+          <div className="bg-gradient-to-r from-green-100 to-blue-100 rounded-lg p-4 mb-5 shadow-sm">
+            <p className="font-bold text-green-900 mb-3 text-sm">Legenda:</p>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-white border border-neutral-300 rounded"></div>
-                <span className="text-neutral-700">Consulta com Médico Pediatra</span>
+                <div className="w-5 h-5 bg-white border-2 border-neutral-400 rounded shadow-sm"></div>
+                <span className="text-neutral-800 font-medium text-sm">Consulta com Médico Pediatra</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-pink-50 border border-pink-200 rounded"></div>
-                <span className="text-neutral-700">Consulta com Enfermeira</span>
+                <div className="w-5 h-5 bg-blue-100 border-2 border-blue-300 rounded shadow-sm"></div>
+                <span className="text-neutral-800 font-medium text-sm">Consulta com Enfermeira</span>
               </div>
             </div>
           </div>
 
           {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto mb-4">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Idade da Criança
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período de Consulta
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Recém-nascido</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    1ª semana
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">1 mês</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    1 mês de vida
-                  </td>
-                </tr>
-                <tr className="bg-pink-50">
-                  <td className="border border-pink-200 px-4 py-3">
-                    <strong className="text-neutral-800">2 meses</strong>
-                  </td>
-                  <td className="border border-pink-200 px-4 py-3 text-neutral-700">
-                    2 meses de vida
-                  </td>
-                </tr>
-                <tr className="bg-pink-50">
-                  <td className="border border-pink-200 px-4 py-3">
-                    <strong className="text-neutral-800">4 meses</strong>
-                  </td>
-                  <td className="border border-pink-200 px-4 py-3 text-neutral-700">
-                    4 meses de vida
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">6 meses</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    6 meses de vida
-                  </td>
-                </tr>
-                <tr className="bg-pink-50">
-                  <td className="border border-pink-200 px-4 py-3">
-                    <strong className="text-neutral-800">9 meses</strong>
-                  </td>
-                  <td className="border border-pink-200 px-4 py-3 text-neutral-700">
-                    9 meses de vida
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">12 meses</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    12 meses de vida
-                  </td>
-                </tr>
-                <tr className="bg-pink-50">
-                  <td className="border border-pink-200 px-4 py-3">
-                    <strong className="text-neutral-800">18 meses</strong>
-                  </td>
-                  <td className="border border-pink-200 px-4 py-3 text-neutral-700">
-                    18 meses de vida
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">24 meses</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    24 meses (2 anos) de vida
-                  </td>
-                </tr>
-                <tr className="bg-info/10">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Após 24 meses</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Consultas anuais
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="overflow-hidden rounded-lg shadow-sm border border-green-200">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gradient-to-r from-green-600 to-green-700">
+                    <th className="border-b border-green-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                      Idade da Criança
+                    </th>
+                    <th className="border-b border-green-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                      Período de Consulta
+                    </th>
+                    <th className="border-b border-green-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                      Profissional Responsável
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm bg-white">
+                  <tr className="hover:bg-neutral-50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3 bg-white">
+                      <strong className="text-neutral-900">Recém-nascido</strong>
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      1ª semana
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      Médico Pediatra
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3 bg-white">
+                      <strong className="text-neutral-900">1 mês</strong>
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      1 mês de vida
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      Médico Pediatra
+                    </td>
+                  </tr>
+                  <tr className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                    <td className="border-b border-blue-200 px-4 py-3">
+                      <strong className="text-neutral-900">2 meses</strong>
+                    </td>
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
+                      2 meses de vida
+                    </td>
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
+                      Enfermeira
+                    </td>
+                  </tr>
+                  <tr className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                    <td className="border-b border-blue-200 px-4 py-3">
+                      <strong className="text-neutral-900">4 meses</strong>
+                    </td>
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
+                      4 meses de vida
+                    </td>
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
+                      Enfermeira
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3 bg-white">
+                      <strong className="text-neutral-900">6 meses</strong>
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      6 meses de vida
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      Médico Pediatra
+                    </td>
+                  </tr>
+                  <tr className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                    <td className="border-b border-blue-200 px-4 py-3">
+                      <strong className="text-neutral-900">9 meses</strong>
+                    </td>
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
+                      9 meses de vida
+                    </td>
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
+                      Enfermeira
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3 bg-white">
+                      <strong className="text-neutral-900">12 meses</strong>
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      12 meses de vida
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      Médico Pediatra
+                    </td>
+                  </tr>
+                  <tr className="bg-blue-50 hover:bg-blue-100 transition-colors">
+                    <td className="border-b border-blue-200 px-4 py-3">
+                      <strong className="text-neutral-900">18 meses</strong>
+                    </td>
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
+                      18 meses de vida
+                    </td>
+                    <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
+                      Enfermeira
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-neutral-50 transition-colors">
+                    <td className="border-b border-green-100 px-4 py-3 bg-white">
+                      <strong className="text-neutral-900">24 meses</strong>
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      24 meses (2 anos) de vida
+                    </td>
+                    <td className="border-b border-green-100 px-4 py-3 text-neutral-900 bg-white">
+                      Médico Pediatra
+                    </td>
+                  </tr>
+                  <tr className="bg-green-100/50 hover:bg-green-200/50 transition-colors">
+                    <td className="px-4 py-3">
+                      <strong className="text-neutral-900">Após 24 meses</strong>
+                    </td>
+                    <td className="px-4 py-3 text-neutral-900">
+                      Consultas anuais
+                    </td>
+                    <td className="px-4 py-3 text-neutral-900">
+                      Conforme necessidade
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* Versão Mobile */}
           <div className="md:hidden space-y-3 mb-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">Recém-nascido</p>
-              <p className="text-xs text-neutral-600">1ª semana</p>
+            <div className="bg-white border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">Recém-nascido</p>
+              <p className="text-xs text-neutral-900">1ª semana - Médico Pediatra</p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">1 mês</p>
-              <p className="text-xs text-neutral-600">1 mês de vida</p>
+            <div className="bg-white border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">1 mês</p>
+              <p className="text-xs text-neutral-900">1 mês de vida - Médico Pediatra</p>
             </div>
-            <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">2 meses</p>
-              <p className="text-xs text-neutral-600">2 meses de vida</p>
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">2 meses</p>
+              <p className="text-xs text-neutral-900">2 meses de vida - Enfermeira</p>
             </div>
-            <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">4 meses</p>
-              <p className="text-xs text-neutral-600">4 meses de vida</p>
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">4 meses</p>
+              <p className="text-xs text-neutral-900">4 meses de vida - Enfermeira</p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">6 meses</p>
-              <p className="text-xs text-neutral-600">6 meses de vida</p>
+            <div className="bg-white border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">6 meses</p>
+              <p className="text-xs text-neutral-900">6 meses de vida - Médico Pediatra</p>
             </div>
-            <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">9 meses</p>
-              <p className="text-xs text-neutral-600">9 meses de vida</p>
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">9 meses</p>
+              <p className="text-xs text-neutral-900">9 meses de vida - Enfermeira</p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">12 meses</p>
-              <p className="text-xs text-neutral-600">12 meses de vida</p>
+            <div className="bg-white border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">12 meses</p>
+              <p className="text-xs text-neutral-900">12 meses de vida - Médico Pediatra</p>
             </div>
-            <div className="bg-pink-50 border border-pink-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">18 meses</p>
-              <p className="text-xs text-neutral-600">18 meses de vida</p>
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">18 meses</p>
+              <p className="text-xs text-neutral-900">18 meses de vida - Enfermeira</p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">24 meses</p>
-              <p className="text-xs text-neutral-600">24 meses (2 anos) de vida</p>
+            <div className="bg-white border border-green-200 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">24 meses</p>
+              <p className="text-xs text-neutral-900">24 meses (2 anos) de vida - Médico Pediatra</p>
             </div>
-            <div className="bg-info/10 border border-info rounded-lg p-4">
-              <p className="text-sm font-semibold text-neutral-800 mb-2">Após 24 meses</p>
-              <p className="text-xs text-neutral-600">Consultas anuais</p>
+            <div className="bg-gradient-to-r from-green-100 to-blue-100 border border-green-300 rounded-lg p-4 shadow-sm">
+              <p className="text-sm font-semibold text-neutral-900 mb-2">Após 24 meses</p>
+              <p className="text-xs text-neutral-900">Consultas anuais - Conforme necessidade</p>
             </div>
           </div>
 
@@ -425,7 +469,7 @@ export default function Pediatra() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
         {}
         {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">

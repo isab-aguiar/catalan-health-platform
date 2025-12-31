@@ -2,9 +2,7 @@ import {
   Clock,
   FileText,
   Package,
-  Calendar,
   AlertCircle,
-  Activity,
   CheckCircle,
 } from "lucide-react";
 import { PageContainer } from "../../components/layout";
@@ -35,8 +33,7 @@ export default function Curativos() {
 
         {/* Sobre o Serviço */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
-          <h2 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
-            <Activity size={24} className="text-blue-600" />
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
@@ -212,8 +209,7 @@ export default function Curativos() {
 
         {/* Como Agendar */}
         <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 shadow-sm border border-green-200 mb-6">
-          <h2 className="text-xl font-bold text-green-900 mb-4 flex items-center gap-2">
-            <Calendar size={24} className="text-green-600" />
+          <h2 className="text-xl font-bold text-green-900 mb-4">
             Como Agendar
           </h2>
 

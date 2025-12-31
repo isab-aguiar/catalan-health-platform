@@ -74,8 +74,7 @@ export default function ECG() {
 
         {/* Preparo para o Exame */}
         <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-sm border border-green-200 mb-6">
-          <h2 className="text-xl font-bold text-green-900 mb-4 flex items-center gap-2">
-            <AlertCircle size={24} className="text-green-600" />
+          <h2 className="text-xl font-bold text-green-900 mb-4">
             Preparo para o Exame
           </h2>
 

@@ -327,9 +327,9 @@ export default function Dentistas() {
                     </div>
                     <a
                       href={`tel:${contactInfo.phones.reception.tel}`}
-                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md transition-colors text-sm"
+                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-1.5 rounded-md transition-colors text-xs mt-4"
                     >
-                      <Phone size={16} />
+                      <Phone size={14} />
                       {contactInfo.phones.reception.display}
                     </a>
                   </div>
@@ -339,26 +339,28 @@ export default function Dentistas() {
           </div>
 
           {/* Atendimento de Urgência */}
-          <div className="bg-amber-50 border-l-4 border-amber-500 rounded-r-lg p-4 mb-5">
-            <div className="flex items-start gap-3">
-              <Clock size={20} className="text-amber-600 mt-0.5 flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-amber-900 text-sm mb-2">Atendimento de Urgência</h3>
-                <p className="text-xs text-neutral-700 leading-relaxed">
-                  <strong>Demandas de urgência odontológica</strong> (dor intensa, trauma, infecção) são atendidas <strong>diariamente às 07h00</strong>. Compareça no horário para avaliação prioritária.
-                </p>
-              </div>
-            </div>
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200 mb-5">
+            <h3 className="font-bold text-green-900 text-base mb-3">Atendimento de Urgência</h3>
+            <p className="text-neutral-800 text-sm leading-relaxed">
+              <strong>Demandas de urgência odontológica</strong> (dor intensa, trauma, infecção) são atendidas <strong>diariamente às 07h00</strong>. Compareça no horário para avaliação prioritária.
+            </p>
           </div>
 
           {/* Documentação */}
-          <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-            <h3 className="font-semibold text-neutral-800 text-sm mb-3">Documentação Necessária</h3>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <p className="text-xs text-neutral-700">
-                <strong>Documento de identificação com foto do titular</strong> (RG, CNH ou Carteira de Trabalho)
-              </p>
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
+            <h3 className="font-bold text-blue-900 text-base mb-4">Documentação Necessária</h3>
+            <div className="space-y-3">
+              <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <strong className="text-neutral-800 text-sm block mb-1">
+                    Documento de Identificação com Foto
+                  </strong>
+                  <p className="text-xs text-neutral-600">
+                    RG, CNH ou Carteira de Trabalho do titular
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </InfoBox>
