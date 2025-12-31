@@ -1247,28 +1247,60 @@ Divinópolis/MG
 
 ---
 
-## 📚 Recursos Adicionais
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 📚 RECURSOS -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
-- [React Documentation](https://react.dev/)
-- [Firebase Docs](https://firebase.google.com/docs)
-- [Tailwind CSS](https://tailwindcss.com/docs)
-- [Vite Guide](https://vitejs.dev/guide/)
-- [Gov.br Design System](https://www.gov.br/ds/)
-
----
+## 📚 Recursos & Documentação
 
 <div align="center">
 
-### ⭐ Se este projeto foi útil, considere dar uma estrela!
+[![React](https://img.shields.io/badge/React_Docs-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Firebase](https://img.shields.io/badge/Firebase_Docs-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/docs)
+[![Tailwind](https://img.shields.io/badge/Tailwind_Docs-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/docs)
+[![Vite](https://img.shields.io/badge/Vite_Guide-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/guide/)
+[![Gov.br](https://img.shields.io/badge/Gov.br_DS-1351B4?style=for-the-badge)](https://www.gov.br/ds/)
 
-**Desenvolvido com dedicação para a saúde pública brasileira** 🇧🇷
+</div>
 
 ---
 
-![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=for-the-badge&logo=react)
-![Powered by Firebase](https://img.shields.io/badge/Powered%20by-Firebase-FFCA28?style=for-the-badge&logo=firebase)
-![Styled with Tailwind](https://img.shields.io/badge/Styled%20with-Tailwind-38B2AC?style=for-the-badge&logo=tailwind-css)
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🎬 FOOTER -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
+<div align="center">
+
+<!-- Wave Footer -->
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12&height=100&section=footer" width="100%" />
+
+<br/>
+
+### ⭐ Se este projeto foi útil, considere dar uma estrela!
+
+<br/>
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=24&duration=4000&pause=1000&color=1351B4&center=true&vCenter=true&width=600&lines=🏥+Desenvolvido+com+❤️+para+o+SUS;🇧🇷+Saúde+Pública+de+Qualidade;👨‍⚕️+ESF+Catalão+•+Divinópolis%2FMG" alt="Footer Typing" />
+
+<br/><br/>
+
+<!-- Tech Stack Final -->
+<img src="https://skillicons.dev/icons?i=react,firebase,tailwind,vite,vercel,js,nodejs,git" />
+
+<br/><br/>
+
+<!-- Final Badges -->
+![Made with React](https://img.shields.io/badge/Made%20with-React_19-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Powered by Firebase](https://img.shields.io/badge/Powered%20by-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Styled with Tailwind](https://img.shields.io/badge/Styled%20with-Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+
+<br/>
+
+---
 
 **© 2024-2025 ESF Catalão** | Divinópolis, Minas Gerais
+
+<sub>Feito com 💙 para a saúde pública brasileira 🇧🇷</sub>
 
 </div>
