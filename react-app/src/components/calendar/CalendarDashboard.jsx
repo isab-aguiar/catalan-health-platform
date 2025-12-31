@@ -55,15 +55,36 @@ export default function CalendarDashboard({
       agendamento: eventosAtivos.filter(e => e.tipo === TIPOS_EVENTO.AGENDAMENTO).length,
     };
 
+    // Calcular agendas de hoje (dia da semana)
+    const diasSemanaMap = {
+      0: 'Domingo',
+      1: 'Segunda-feira',
+      2: 'Terça-feira',
+      3: 'Quarta-feira',
+      4: 'Quinta-feira',
+      5: 'Sexta-feira',
+      6: 'Sábado'
+    };
+    const diaSemanaHoje = diasSemanaMap[hoje.getDay()];
+
+    const agendasHoje = agendas.filter(agenda => {
+      if (!agenda.agendaSemanal) return false;
+      const atividades = agenda.agendaSemanal[diaSemanaHoje];
+      return atividades && atividades.length > 0;
+    });
+
     return {
       eventosHoje,
       eventosProximos,
       taxaConclusao,
       lembretesAtivos,
       porTipo,
-      total: eventosAtivos.length
+      total: eventosAtivos.length,
+      agendasHoje,
+      diaSemanaHoje,
+      totalAgendas: agendas.length
     };
-  }, [eventos]);
+  }, [eventos, agendas]);
 
   const formatarData = (data) => {
     return new Date(data).toLocaleDateString('pt-BR', {
