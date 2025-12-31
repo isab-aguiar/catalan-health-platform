@@ -210,322 +210,374 @@ Informações rápidas
 
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🎯 FUNCIONALIDADES -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
 ## 🎯 Funcionalidades
+
+<div align="center">
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=20&duration=3000&pause=1000&color=1351B4&center=true&vCenter=true&width=500&lines=🏥+13+Serviços+de+Saúde;👥+10+Especialidades+Médicas;🔐+12+Módulos+Administrativos;📊+Sistema+RBAC+Completo" alt="Features Typing" />
+
+</div>
+
+<details open>
+<summary><h3>🏥 Área Pública - 13 Serviços de Saúde</h3></summary>
 
 <table>
 <tr>
-<td width="50%">
+<td>
 
-### 🏥 Área Pública
-
-- ✅ **Homepage** com busca, galeria e avisos
-- ✅ **13 Serviços** mapeados em detalhes
-- ✅ **10 Páginas de Equipe** profissional (incluindo index)
-- ✅ **3 Grupos Operativos** (Hiperdia, Tabagismo, Dores Crônicas)
-- ✅ **Busca de ACS** por rua/endereço
-- ✅ **Calendário de Vacinação** nacional
-- ✅ **Campanhas Ativas** em carrossel
-- ✅ **Sistema de Avisos** por página
-- ✅ **Sistema de Ouvidoria** com 3 categorias (Elogios, Reclamações, Sugestões)
-- ✅ **Opção de Envio Anônimo** em feedbacks
-- ✅ **Visualização de Escalas** de trabalho por profissional
-- ✅ **Documentação por Serviço** com anexos e orientações
-
-<!-- <img src="screenshots/publico.gif" width="100%"/> -->
+| # | Serviço | Descrição |
+|:-:|:--------|:----------|
+| 1 | 📋 **Agendamento** | Central de consultas, exames e procedimentos |
+| 2 | 🏢 **Atendimento Administrativo** | Encaminhamentos e fila do SUS |
+| 3 | 🩺 **Triagem de Enfermagem** | Demanda espontânea e classificação de risco |
+| 4 | 💉 **Vacinação** | Calendário nacional para todas as idades |
+| 5 | 💊 **Farmácia** | Dispensação e orientação de medicamentos |
+| 6 | 📝 **Renovação de Receitas** | Receitas de uso contínuo |
+| 7 | 🩹 **Curativos** | Realização e troca de curativos |
 
 </td>
-<td width="50%">
+<td>
 
-### 🔐 Painel Administrativo
-
-- ✅ **Gerenciar Avisos** (criar, editar, ativar/desativar)
-- ✅ **Gerenciar Campanhas** (upload de imagens/PDFs)
-- ✅ **Gerenciar Usuários** (apenas admin)
-- ✅ **Estoque de Vacinas** com estatísticas
-- ✅ **Sistema de Permissões** (3 roles)
-- ✅ **Dashboard** com métricas
-- ✅ **Filtros e Busca** avançados
-
-<!-- <img src="screenshots/admin.gif" width="100%"/> -->
-
-</td>
-</tr>
-
-<tr>
-<td width="50%">
-
-### 📝 Sistema de Feedback (Ouvidoria)
-
-- ✅ **Elogios** - Reconhecimento do trabalho
-- ✅ **Reclamações** - Relato de problemas
-- ✅ **Sugestões** - Propostas de melhorias
-- ✅ **Envio Anônimo** opcional
-- ✅ **Validação de Formulário** completa
-- ✅ **Painel Admin** para gestão de feedbacks
-
-<!-- <img src="screenshots/ouvidoria.gif" width="100%"/> -->
-
-</td>
-<td width="50%">
-
-### 📍 Busca de ACS
-
-- ✅ **713 Microáreas** mapeadas
-- ✅ **115 Profissionais** cadastrados
-- ✅ **Autocomplete** com sugestões
-- ✅ **Modal Informativo** com detalhes
-- ✅ **Dados da Equipe** responsável
-- ✅ **Busca Fuzzy** (Fuse.js)
-
-<!-- <img src="screenshots/busca-acs.gif" width="100%"/> -->
+| # | Serviço | Descrição |
+|:-:|:--------|:----------|
+| 8 | ❤️ **ECG** | Eletrocardiograma mediante agendamento |
+| 9 | 🔬 **Procedimentos** | Medicamentos injetáveis e sinais vitais |
+| 10 | 🛡️ **Prevenção HIV** | PrEP e PEP - Estratégias de prevenção |
+| 11 | 👨‍👩‍👧 **Bolsa Família** | CadÚnico e benefícios sociais |
+| 12 | 🏥 **Recepção** | Primeiro atendimento |
+| 13 | 🩺 **Consultas** | Médicas, psicológicas, odontológicas |
 
 </td>
 </tr>
 </table>
 
-### 📊 Funcionalidades Detalhadas
+</details>
 
-#### Sistema de Ouvidoria (Feedback)
-- Três tipos de feedback: Elogios, Reclamações e Sugestões
-- Formulário com validação de campos (nome, email, telefone, mensagem)
-- Opção de envio anônimo
-- Categorização de sugestões por tipo
-- Armazenamento no Firestore em coleção 'feedbacks'
-- Painel administrativo para visualização e gestão
-- Modal de confirmação após envio
-- Redirecionamento automático após submissão
+<details>
+<summary><h3>👥 Equipe Profissional - 10 Especialidades</h3></summary>
 
-#### Sistema de Avisos
-- Criação manual via painel admin
-- Categorias: vacina, material, campanha
-- Controle de visibilidade por página (home, vacinas, serviços, educação)
-- Ativar/desativar dinamicamente
-- Exibição condicional na homepage
+<div align="center">
 
-#### Sistema de Campanhas
-- Upload de múltiplas imagens e PDFs (máx 10MB)
-- Campos completos: título, subtítulo, descrição, categoria, datas, horário, local, público-alvo
-- Flags: urgente, destaque, exibirNaHomepage
-- Permissões granulares (admin vê tudo, profissional vê apenas suas campanhas)
-- Carrossel na homepage + páginas de detalhes
+<table>
+<tr>
+<td align="center">👩‍⚕️<br/><b>Enfermeiras</b></td>
+<td align="center">👨‍⚕️<br/><b>Médicos</b></td>
+<td align="center">👩‍⚕️<br/><b>Ginecologista</b></td>
+<td align="center">👶<br/><b>Pediatra</b></td>
+<td align="center">🦷<br/><b>Dentistas</b></td>
+</tr>
+<tr>
+<td align="center">🧠<br/><b>Psicóloga</b></td>
+<td align="center">💪<br/><b>Fisioterapeuta</b></td>
+<td align="center">💊<br/><b>Farmacêutica</b></td>
+<td align="center">👩‍💼<br/><b>Assistente Social</b></td>
+<td align="center">📋<br/><b>Índice Geral</b></td>
+</tr>
+</table>
 
-#### Gestão de Vacinas
-- Estoque controlado via Firestore
-- Calendário Nacional de Vacinação 2025
-- Estatísticas: total, com estoque, sem estoque, doses totais
-- Scripts de upload em massa
+</div>
 
-### 🏥 Lista Completa de Serviços
+**+ 3 Grupos Operativos:** Hiperdia • Tabagismo • Dores Crônicas
 
-#### Serviços Principais (13 serviços)
+</details>
 
-**Categoria: Atendimento**
-1. **Sala 4 - Agendamento** ([/servicos/sala-4](react-app/src/pages/services/Sala4.jsx))
-   - Central de agendamento de consultas, exames e procedimentos
+<details>
+<summary><h3>🔐 Painel Administrativo - 12 Módulos</h3></summary>
 
-2. **Sala 9 - Atendimento Administrativo** ([/servicos/sala-9](react-app/src/pages/services/Sala9.jsx))
-   - Acompanhamento de encaminhamentos e fila do SUS
+<table>
+<tr>
+<td width="50%">
 
-3. **Triagem de Enfermagem** ([/servicos/triagem](react-app/src/pages/services/Triagem.jsx))
-   - Atendimento de demanda espontânea e classificação de risco
+| Módulo | Funcionalidades |
+|:-------|:----------------|
+| 📊 **Dashboard** | Métricas, gráficos e estatísticas |
+| 📢 **Avisos** | CRUD completo com categorização |
+| 📸 **Campanhas** | Upload imagens/PDFs até 10MB |
+| 👥 **Usuários** | Gerenciamento (apenas admin) |
+| 💉 **Estoque Vacinas** | Controle com estatísticas |
+| 📅 **Calendário** | Eventos, reuniões, lembretes |
 
-4. **Recepção** ([/servicos/recepcao](react-app/src/pages/services/Recepcao.jsx))
-   - Primeiro atendimento e direcionamento
+</td>
+<td width="50%">
 
-5. **Consultas e Atendimentos** ([/servicos/consultas](react-app/src/pages/services/Consultas.jsx))
-   - Consultas médicas, psicológicas, odontológicas e especializadas
+| Módulo | Funcionalidades |
+|:-------|:----------------|
+| 📋 **Agendas Semanais** | Atividades dos profissionais |
+| ⏰ **Escalas de Trabalho** | Por profissional e sala |
+| 🔔 **Notificações** | Sistema de alertas |
+| 📝 **Feedbacks** | Ouvidoria (3 categorias) |
+| 📄 **Orientações** | Pós-consulta |
+| 🔧 **Permissões** | Correção de acessos |
 
-**Categoria: Procedimentos**
+</td>
+</tr>
+</table>
 
-6. **Sala de Vacinação** ([/servicos/vacinas](react-app/src/pages/services/Vacinas.jsx))
-   - Vacinação para todas as idades conforme calendário nacional
+</details>
 
-7. **Sala de Procedimentos** ([/servicos/procedimentos](react-app/src/pages/services/Procedimentos.jsx))
-   - Medicamentos injetáveis, sinais vitais e procedimentos técnicos
+<details>
+<summary><h3>🔑 Sistema de Permissões (RBAC)</h3></summary>
 
-8. **Curativos** ([/servicos/curativos](react-app/src/pages/services/Curativos.jsx))
-   - Realização e troca de curativos, retirada de pontos
+<div align="center">
 
-9. **ECG - Eletrocardiograma** ([/servicos/ecg](react-app/src/pages/services/ECG.jsx))
-   - Exame cardíaco mediante agendamento
+```
+╔════════════════════════════════════════════════════════════════════════════╗
+║                        🔐 HIERARQUIA DE ACESSO                             ║
+╠════════════════════════════════════════════════════════════════════════════╣
+║                                                                            ║
+║  👑 ADMIN ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   ║
+║  │                                                                         ║
+║  ├── ✅ Acesso total ao sistema                                           ║
+║  ├── ✅ CRUD completo de usuários                                         ║
+║  ├── ✅ Gerenciar todas as campanhas e avisos                             ║
+║  ├── ✅ Controle de estoque de vacinas                                    ║
+║  └── ✅ Deletar qualquer conteúdo                                         ║
+║                                                                            ║
+║  ✏️ PROFISSIONAL ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   ║
+║  │                                                                         ║
+║  ├── ✅ Criar avisos e campanhas                                          ║
+║  ├── ✅ Editar próprio conteúdo                                           ║
+║  ├── ✅ Gerenciar agendas semanais                                        ║
+║  └── ❌ Não pode gerenciar usuários                                       ║
+║                                                                            ║
+║  👁️ DIRETORIA ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   ║
+║  │                                                                         ║
+║  ├── ✅ Visualizar dashboard e relatórios                                 ║
+║  └── ❌ Somente leitura                                                   ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+```
 
-**Categoria: Medicamentos**
+</div>
 
-10. **Farmácia** ([/servicos/farmacia](react-app/src/pages/services/Farmacia.jsx))
-    - Dispensação de medicamentos e orientação
-
-11. **Renovação de Receitas** ([/servicos/renovacao](react-app/src/pages/services/Renovacao.jsx))
-    - Renovação de receitas de uso contínuo
-
-**Categoria: Prevenção**
-
-12. **Prevenção Combinada ao HIV** ([/servicos/prevencao-hiv](react-app/src/pages/services/PrevencaoHIV.jsx))
-    - PrEP e PEP - Estratégias de prevenção
-
-**Categoria: Assistência Social**
-
-13. **Bolsa Família e Serviço Social** ([/servicos/bolsa-familia](react-app/src/pages/services/BolsaFamilia.jsx))
-    - Orientações sobre benefícios e CadÚnico
-
-#### Páginas Adicionais de Serviços
-
-- **Farmácia Dispensação** - Dispensação de medicamentos
-- **Índice de Serviços** - Página inicial de serviços
-- **Sistema de Ouvidoria** - Portal de feedback
-  - Elogios - Reconhecimento do trabalho
-  - Reclamações - Relato de problemas
-  - Sugestões - Propostas de melhorias
-
-#### Equipe Profissional (9 especialidades + índice)
-1. Enfermeiras ([/equipe/enfermeiras](react-app/src/pages/team/Enfermeiras.jsx))
-2. Médicos ([/equipe/medicos](react-app/src/pages/team/Medicos.jsx))
-3. Farmacêutica ([/equipe/farmaceutica](react-app/src/pages/team/Farmaceutica.jsx))
-4. Psicóloga ([/equipe/psicologa](react-app/src/pages/team/Psicologa.jsx))
-5. Ginecologista ([/equipe/ginecologista](react-app/src/pages/team/Ginecologista.jsx))
-6. Fisioterapeuta ([/equipe/fisioterapeuta](react-app/src/pages/team/Fisioterapeuta.jsx))
-7. Assistente Social ([/equipe/assistente-social](react-app/src/pages/team/AssistenteSocial.jsx))
-8. Dentistas ([/equipe/dentistas](react-app/src/pages/team/Dentistas.jsx))
-9. Pediatra ([/equipe/pediatra](react-app/src/pages/team/Pediatra.jsx))
-10. Índice de Equipe ([/equipe](react-app/src/pages/team/TeamIndex.jsx))
-
-#### Grupos de Apoio (3 grupos + índice)
-1. Hiperdia ([/grupos/hiperdia](react-app/src/pages/groups/Hiperdia.jsx)) - Hipertensão e Diabetes
-2. Tabagismo ([/grupos/tabagismo](react-app/src/pages/groups/Tabagismo.jsx)) - Cessação de Fumo
-3. Dores Crônicas ([/grupos/dores-cronicas](react-app/src/pages/groups/DoresCronicas.jsx)) - Apoio a Dores Crônicas
-4. Índice de Grupos ([/grupos](react-app/src/pages/groups/GroupsIndex.jsx))
-
-#### Rotas Administrativas (11 rotas)
-1. Login ([/admin/login](react-app/src/pages/admin/Login.jsx))
-2. Painel ([/admin/painel](react-app/src/pages/admin/Painel.jsx))
-3. Avisos ([/admin/avisos](react-app/src/pages/admin/Avisos.jsx))
-4. Campanhas ([/admin/campanhas](react-app/src/pages/admin/Campanhas.jsx))
-5. Usuários ([/admin/users](react-app/src/pages/admin/Users.jsx))
-6. Corrigir Permissões ([/admin/corrigir-permissoes](react-app/src/pages/admin/CorrigirPermissoes.jsx))
-7. Estoque de Vacinas ([/admin/estoque-vacinas](react-app/src/pages/admin/EstoqueVacinas.jsx))
-8. Orientações Pós-Consulta ([/admin/orientacoes-pos-consulta](react-app/src/pages/admin/OrientacoesPosConsulta.jsx))
-9. Calendário ([/admin/calendario](react-app/src/pages/admin/CalendarioAdmin.jsx))
-10. Escalas de Trabalho ([/admin/escalas](react-app/src/pages/admin/EscalasTrabalho.jsx))
-11. Notificações ([/admin/notificacoes](react-app/src/pages/admin/Notificacoes.jsx))
-
-**Total: 37 rotas configuradas**
+</details>
 
 ---
 
-## 🛠️ Tecnologias
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🛠️ STACK TECNOLÓGICA -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
-### Frontend
+## 🛠️ Stack Tecnológica
 
-<div>
-<img src="https://img.shields.io/badge/React-19.2.0-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-<img src="https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" />
-<img src="https://img.shields.io/badge/Tailwind_CSS-3.4.19-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
-<img src="https://img.shields.io/badge/Vite-7.2.4-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
-<img src="https://img.shields.io/badge/React_Router-7.10.1-CA4245?style=for-the-badge&logo=react-router&logoColor=white" />
-<img src="https://img.shields.io/badge/Lucide_React-0.561.0-F56565?style=for-the-badge" />
+<div align="center">
+
+<!-- Tech Icons Animados -->
+<a href="https://react.dev"><img src="https://skillicons.dev/icons?i=react" height="50" alt="React"/></a>
+<a href="https://firebase.google.com"><img src="https://skillicons.dev/icons?i=firebase" height="50" alt="Firebase"/></a>
+<a href="https://tailwindcss.com"><img src="https://skillicons.dev/icons?i=tailwind" height="50" alt="Tailwind"/></a>
+<a href="https://vitejs.dev"><img src="https://skillicons.dev/icons?i=vite" height="50" alt="Vite"/></a>
+<a href="https://vercel.com"><img src="https://skillicons.dev/icons?i=vercel" height="50" alt="Vercel"/></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://skillicons.dev/icons?i=js" height="50" alt="JavaScript"/></a>
+<a href="https://nodejs.org"><img src="https://skillicons.dev/icons?i=nodejs" height="50" alt="Node.js"/></a>
+<a href="https://git-scm.com"><img src="https://skillicons.dev/icons?i=git" height="50" alt="Git"/></a>
+<a href="https://github.com"><img src="https://skillicons.dev/icons?i=github" height="50" alt="GitHub"/></a>
+<a href="https://code.visualstudio.com"><img src="https://skillicons.dev/icons?i=vscode" height="50" alt="VS Code"/></a>
+
+<br/><br/>
+
+<!-- Tabela de Versões -->
+<table>
+<tr>
+<th>🎨 Frontend</th>
+<th>🔥 Backend</th>
+<th>🔧 Ferramentas</th>
+</tr>
+<tr>
+<td>
+
+| Tecnologia | Versão |
+|:----------:|:------:|
+| ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black) | `19.2.0` |
+| ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) | `3.4.19` |
+| ![Router](https://img.shields.io/badge/Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white) | `7.10.1` |
+| ![Lucide](https://img.shields.io/badge/Lucide-F56040?style=flat-square&logo=lucide&logoColor=white) | `0.561.0` |
+| ![Fuse.js](https://img.shields.io/badge/Fuse.js-00C4CC?style=flat-square) | `7.1.0` |
+
+</td>
+<td>
+
+| Tecnologia | Versão |
+|:----------:|:------:|
+| ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black) | `12.7.0` |
+| ![Firestore](https://img.shields.io/badge/Firestore-FF6F00?style=flat-square&logo=firebase&logoColor=white) | NoSQL |
+| ![Auth](https://img.shields.io/badge/Auth-039BE5?style=flat-square&logo=firebase&logoColor=white) | Email |
+| ![Storage](https://img.shields.io/badge/Storage-4285F4?style=flat-square&logo=googlecloud&logoColor=white) | Cloud |
+| ![Admin](https://img.shields.io/badge/Admin_SDK-13.6.0-FFA000?style=flat-square) | `13.6.0` |
+
+</td>
+<td>
+
+| Tecnologia | Versão |
+|:----------:|:------:|
+| ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) | `7.2.4` |
+| ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white) | `9.39.1` |
+| ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=black) | `3.7.4` |
+| ![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=flat-square&logo=postcss&logoColor=white) | `8.5.6` |
+| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white) | Deploy |
+
+</td>
+</tr>
+</table>
+
 </div>
-
-### Backend & Infraestrutura
-
-<div>
-<img src="https://img.shields.io/badge/Firebase-12.7.0-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" />
-<img src="https://img.shields.io/badge/Firestore-NoSQL-FF6F00?style=for-the-badge&logo=firebase&logoColor=white" />
-<img src="https://img.shields.io/badge/Firebase_Auth-Email/Password-FF9800?style=for-the-badge&logo=firebase&logoColor=white" />
-<img src="https://img.shields.io/badge/Firebase_Storage-Cloud-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" />
-<img src="https://img.shields.io/badge/Vercel-Deploy-000000?style=for-the-badge&logo=vercel&logoColor=white" />
-</div>
-
-### Bibliotecas Auxiliares
-
-<div>
-<img src="https://img.shields.io/badge/Fuse.js-7.1.0-00C4CC?style=for-the-badge" />
-<img src="https://img.shields.io/badge/html2pdf.js-0.12.1-E34F26?style=for-the-badge" />
-</div>
-
-### Ferramentas de Desenvolvimento
-
-<div>
-<img src="https://img.shields.io/badge/ESLint-9.39.1-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" />
-<img src="https://img.shields.io/badge/Prettier-3.7.4-F7B93E?style=for-the-badge&logo=prettier&logoColor=black" />
-<img src="https://img.shields.io/badge/PostCSS-8.5.6-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white" />
-</div>
-
-### Design System
-
-- **Gov.br Design System** - Cores e tipografia oficial
-- **Palette**: Primary Blue (#1351B4), Secondary Orange (#F08619), Accent Teal (#00AF9B)
-- **Typography**: Rawline, Source Sans Pro
-- **Acessibilidade**: WCAG 2.1 Level AA, VLibras
 
 ---
 
-## 📋 Pré-requisitos
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🚀 INSTALAÇÃO -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
-- **Node.js** (versão 18+ recomendada)
-- **npm** ou **yarn**
-- **Git**
-- **Conta Firebase** (para configurar o projeto)
-- **Conta Google Cloud** (para Gemini API - opcional)
-- **Conta Vercel** (para deploy - opcional)
+## 🚀 Instalação & Configuração
+
+<div align="center">
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=18&duration=2000&pause=500&color=00AF9B&center=true&vCenter=true&multiline=true&width=600&height=80&lines=git+clone+...;cd+react-app+%26%26+npm+install;npm+run+dev+%F0%9F%9A%80" alt="Installation Commands" />
+
+</div>
+
+### 📋 Pré-requisitos
+
+<table>
+<tr>
+<td align="center" width="100">
+
+![Node](https://img.shields.io/badge/Node.js-18+-339933?style=for-the-badge&logo=node.js&logoColor=white)
+
+</td>
+<td align="center" width="100">
+
+![npm](https://img.shields.io/badge/npm-10+-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+
+</td>
+<td align="center" width="100">
+
+![Git](https://img.shields.io/badge/Git-2.40+-F05032?style=for-the-badge&logo=git&logoColor=white)
+
+</td>
+<td align="center" width="100">
+
+![Firebase](https://img.shields.io/badge/Firebase-Account-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+
+</td>
+</tr>
+</table>
 
 ---
 
-## 🚀 Instalação
-
-### 1️⃣ Clone o repositório
+<details open>
+<summary><h3>⬇️ Passo 1: Clone & Instale</h3></summary>
 
 ```bash
+# Clone o repositório
 git clone https://github.com/Isaguiar-Dev/psf-saojose-web.git
-cd psf-saojose-web
-```
 
-### 2️⃣ Navegue para a pasta do app React
+# Navegue para o diretório
+cd psf-saojose-web/react-app
 
-```bash
-cd react-app
-```
-
-### 3️⃣ Instale as dependências
-
-```bash
+# Instale as dependências (120+ arquivos fonte)
 npm install
 ```
 
-> **Nota**: O projeto possui 120+ arquivos fonte. A instalação pode levar alguns minutos.
+> 💡 **Dica**: A instalação pode levar alguns minutos devido ao número de dependências.
 
----
+</details>
 
-## ⚙️ Configuração
+<details>
+<summary><h3>🔥 Passo 2: Configure o Firebase</h3></summary>
 
-### 4️⃣ Firebase Setup
+<table>
+<tr>
+<th>Etapa</th>
+<th>Ação</th>
+<th>Comando/Link</th>
+</tr>
+<tr>
+<td>
 
-#### A. Crie um projeto no Firebase
+**A. Criar Projeto**
 
-1. Acesse [Firebase Console](https://console.firebase.google.com/)
-2. Clique em "Adicionar projeto"
-3. Siga as etapas de criação
+</td>
+<td>
 
-#### B. Configure Authentication
+Crie um novo projeto no Firebase Console
 
-1. No Firebase Console, vá em **Authentication** → **Sign-in method**
-2. Ative **Email/Password**
+</td>
+<td>
 
-#### C. Configure Firestore Database
+[🔗 console.firebase.google.com](https://console.firebase.google.com/)
 
-1. Vá em **Firestore Database** → **Criar banco de dados**
-2. Escolha modo **Produção**
-3. Escolha a localização: `southamerica-east1` (São Paulo - recomendado para Brasil)
+</td>
+</tr>
+<tr>
+<td>
 
-#### D. Configure Storage
+**B. Authentication**
 
-1. Vá em **Storage** → **Começar**
-2. Use as regras de segurança do projeto (veja [firestore.rules](firestore.rules))
+</td>
+<td>
 
-### 5️⃣ Variáveis de Ambiente
+Authentication → Sign-in method → Ative Email/Password
 
-Crie um arquivo `.env` na pasta `react-app/`:
+</td>
+<td>
+
+📧 Email/Password
+
+</td>
+</tr>
+<tr>
+<td>
+
+**C. Firestore**
+
+</td>
+<td>
+
+Firestore Database → Criar → Modo Produção
+
+</td>
+<td>
+
+🌎 southamerica-east1 (SP)
+
+</td>
+</tr>
+<tr>
+<td>
+
+**D. Storage**
+
+</td>
+<td>
+
+Storage → Começar → Usar regras do projeto
+
+</td>
+<td>
+
+📁 Ver [firestore.rules](react-app/firestore.rules)
+
+</td>
+</tr>
+</table>
+
+</details>
+
+<details>
+<summary><h3>🔐 Passo 3: Variáveis de Ambiente</h3></summary>
+
+Crie o arquivo `react-app/.env`:
 
 ```env
-# Firebase Configuration
+# ═══════════════════════════════════════════════════════════════
+# 🔥 FIREBASE CONFIGURATION
+# ═══════════════════════════════════════════════════════════════
+
 VITE_FIREBASE_API_KEY=sua_api_key_aqui
 VITE_FIREBASE_AUTH_DOMAIN=seu-projeto.firebaseapp.com
 VITE_FIREBASE_PROJECT_ID=seu-projeto-id
@@ -535,49 +587,54 @@ VITE_FIREBASE_APP_ID=1:123456789:web:abcdef
 VITE_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-> ⚠️ **IMPORTANTE**: Nunca commite o arquivo `.env` no Git!
+> ⚠️ **SEGURANÇA**: Nunca commite `.env` no Git! Já está no `.gitignore`.
 
-**Como obter as credenciais:**
-1. Firebase Console → Configurações do projeto (engrenagem)
-2. Role até "Seus aplicativos" → SDK do Firebase
-3. Copie o objeto `firebaseConfig`
+**📍 Onde encontrar:**
+Firebase Console → ⚙️ Configurações → Seus aplicativos → SDK do Firebase
 
-### 6️⃣ Deploy das Firestore Rules
+</details>
+
+<details>
+<summary><h3>📦 Passo 4: Deploy das Regras</h3></summary>
 
 ```bash
-# Na raiz do projeto
+# Instale Firebase CLI globalmente
 npm install -g firebase-tools
+
+# Faça login
 firebase login
-firebase use --add  # Selecione seu projeto
+
+# Conecte ao projeto
+firebase use --add
+
+# Deploy das regras de segurança
 firebase deploy --only firestore:rules
 ```
 
+</details>
+
 ---
 
-## 💻 Como Usar
-
-### Iniciando o servidor de desenvolvimento
+### 🏃 Quick Start
 
 ```bash
-# Certifique-se de estar em react-app/
+# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-O aplicativo estará disponível em: **http://localhost:5173**
+<div align="center">
 
-### Criando o primeiro usuário administrador
+🌐 Acesse: **[http://localhost:5173](http://localhost:5173)**
+
+</div>
+
+### 👤 Primeiro Acesso Admin
 
 ```bash
-# Na pasta react-app/
+# Crie o usuário administrador
 node scripts/criar-admin-firestore.js
-```
 
-Siga as instruções no terminal para definir email e senha.
-
-### Populando o estoque de vacinas
-
-```bash
-# Upload das vacinas oficiais do SUS
+# Popule o estoque de vacinas (opcional)
 npm run upload:vacinas
 ```
 
@@ -759,236 +816,309 @@ _Conversação com Gemini para criação de conteúdo_
 
 ---
 
-## 🏗️ Arquitetura
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🏗️ ARQUITETURA -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
-### Estrutura de Diretórios
+## 🏗️ Arquitetura do Projeto
+
+<div align="center">
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=500&size=16&duration=3000&pause=1000&color=F08619&center=true&vCenter=true&width=500&lines=📁+64%2B+Componentes+React;📄+37+Rotas+Configuradas;🎣+17+Custom+Hooks;🔥+9+Firebase+Services" alt="Architecture Stats" />
+
+</div>
+
+<details open>
+<summary><h3>📁 Estrutura de Diretórios</h3></summary>
 
 ```
-psf-saojose-web/
-├── 📂 react-app/                    # Aplicação React
-│   ├── 📂 src/
-│   │   ├── 📂 components/           # Componentes (64 arquivos)
-│   │   │   ├── 📂 admin/            # Admin (6 componentes)
-│   │   │   ├── 📂 auth/             # Autenticação (2 componentes)
-│   │   │   ├── 📂 avisos/           # Avisos (3 componentes)
-│   │   │   ├── 📂 campaign/         # Campanhas (1 componente)
-│   │   │   ├── 📂 campanha/         # Campanhas (5 componentes)
-│   │   │   ├── 📂 common/           # Comuns (18 componentes)
-│   │   │   ├── 📂 home/             # Home (10 componentes)
-│   │   │   ├── 📂 hubs/             # Hubs (1 componente)
-│   │   │   ├── 📂 layout/           # Layout (6 componentes)
-│   │   │   ├── 📂 search/           # Busca (7 componentes)
-│   │   │   ├── 📂 services/         # Serviços (3 componentes)
-│   │   │   └── 📂 vacinas/          # Vacinas (2 componentes)
-│   │   │
-│   │   ├── 📂 pages/                # Páginas
-│   │   │   ├── 📂 admin/            # 12 páginas admin
-│   │   │   ├── 📂 services/         # 20 páginas de serviços (13 principais + 7 adicionais)
-│   │   │   ├── 📂 team/             # 10 páginas de equipe
-│   │   │   ├── 📂 groups/           # 4 páginas de grupos
-│   │   │   ├── 📄 Home.jsx
-│   │   │   ├── 📄 ACSPage.jsx
-│   │   │   ├── 📄 REMSA.jsx
-│   │   │   ├── 📄 SearchResultsPage.jsx
-│   │   │   ├── 📄 CampanhaDetalhe.jsx
-│   │   │   └── 📄 NotFound.jsx
-│   │   │
-│   │   ├── 📂 contexts/             # Context API (2 arquivos)
-│   │   │   ├── 📄 AuthContext.jsx
-│   │   │   └── 📄 ModalContext.jsx
-│   │   │
-│   │   ├── 📂 hooks/                # Custom Hooks (17 arquivos)
-│   │   │   ├── 📄 useACSSearch.js
-│   │   │   ├── 📄 useAvisos.js
-│   │   │   ├── 📄 useCampanhas.js
-│   │   │   ├── 📄 useFeedbacks.js
-│   │   │   ├── 📄 usePermissions.js
-│   │   │   └── ... (12 outros hooks)
-│   │   │
-│   │   ├── 📂 services/             # Firebase services (9 arquivos)
-│   │   │   ├── 📄 avisosService.js
-│   │   │   ├── 📄 campanhasService.js
-│   │   │   ├── 📄 feedbacksService.js
-│   │   │   ├── 📄 escalasService.js
-│   │   │   ├── 📄 usersService.js
-│   │   │   ├── 📄 uploadService.js
-│   │   │   └── ... (3 outros services)
-│   │   │
-│   │   ├── 📂 config/               # Configurações
-│   │   │   └── 📄 firebase.js
-│   │   │
-│   │   ├── 📂 data/                 # Dados estáticos (9 arquivos)
-│   │   │   ├── 📄 services.js       # 13 definições de serviços
-│   │   │   ├── 📄 microareas.js     # 713 microáreas
-│   │   │   ├── 📄 professionals.js  # 115 profissionais
-│   │   │   ├── 📄 groups.js         # Grupos de apoio
-│   │   │   ├── 📄 escalasTrabalho.js # Escalas de trabalho
-│   │   │   ├── 📄 vacinas-sus.js    # Vacinas SUS 2025
-│   │   │   └── ... (3 outros arquivos)
-│   │   │
-│   │   ├── 📄 App.jsx               # Rotas (37 rotas configuradas)
-│   │   └── 📄 main.jsx
-│   │
-│   ├── 📂 scripts/                  # Scripts utilitários
-│   │   ├── 📄 importEmployees.js
-│   │   └── ...
-│   │
-│   ├── 📄 package.json
-│   ├── 📄 vite.config.js
-│   └── 📄 tailwind.config.js
+🏗️ psf-saojose-web/
 │
-├── 📄 firebase.json
-├── 📄 firestore.rules
-├── 📄 firestore.indexes.json
-└── 📄 README.md
+├── 📂 react-app/                    # ⚛️ Aplicação React Principal
+│   │
+│   ├── 📂 src/
+│   │   │
+│   │   ├── 📂 components/           # 🧩 64+ Componentes
+│   │   │   ├── admin/               # 👑 Admin (6 componentes)
+│   │   │   ├── auth/                # 🔐 Autenticação (2)
+│   │   │   ├── avisos/              # 📢 Avisos (3)
+│   │   │   ├── calendar/            # 📅 Calendário (8)
+│   │   │   ├── campaign/            # 📸 Campanhas (6)
+│   │   │   ├── chatbot/             # 🤖 Chatbot IA (1)
+│   │   │   ├── common/              # 🔧 Utilitários (18)
+│   │   │   ├── home/                # 🏠 Homepage (10)
+│   │   │   ├── hubs/                # 🎯 Hubs (1)
+│   │   │   ├── layout/              # 📐 Layout (6)
+│   │   │   ├── search/              # 🔍 Busca ACS (7)
+│   │   │   ├── services/            # 🏥 Serviços (3)
+│   │   │   └── vacinas/             # 💉 Vacinas (2)
+│   │   │
+│   │   ├── 📂 pages/                # 📄 Páginas (37 rotas)
+│   │   │   ├── admin/               # 12 páginas admin
+│   │   │   ├── services/            # 20 páginas serviços
+│   │   │   ├── team/                # 10 páginas equipe
+│   │   │   └── groups/              # 4 páginas grupos
+│   │   │
+│   │   ├── 📂 hooks/                # 🎣 17 Custom Hooks
+│   │   ├── 📂 services/             # 🔥 9 Firebase Services
+│   │   ├── 📂 contexts/             # 🌐 2 Context APIs
+│   │   ├── 📂 data/                 # 📊 9 Arquivos Dados
+│   │   └── 📂 config/               # ⚙️ Configurações
+│   │
+│   ├── 📂 scripts/                  # 🛠️ Scripts Utilitários
+│   ├── 📄 package.json
+│   └── 📄 vite.config.js
+│
+├── 📄 firebase.json                 # Firebase Config
+├── 📄 firestore.rules               # Regras de Segurança
+└── 📄 README.md                     # Você está aqui! 📍
 ```
 
-### Fluxo de Dados
+</details>
+
+<details>
+<summary><h3>🔄 Fluxo de Dados</h3></summary>
 
 ```
-┌─────────────┐
-│   Browser   │
-└──────┬──────┘
-       │
-       ▼
-┌─────────────────┐
-│   React SPA     │  ← Vite dev/build
-│   (Client)      │  ← Tailwind CSS
-└────────┬────────┘
-         │
-         ▼
-┌────────────────────────┐
-│   Firebase SDK         │
-│   (Client-side)        │
-├────────────────────────┤
-│ • Authentication       │
-│ • Firestore DB         │
-│ • Storage              │
-└────────┬───────────────┘
-         │
-         ▼
-┌──────────────────────────┐
-│   Google Cloud           │
-│   • Firebase             │
-│   • Gemini AI            │
-└──────────────────────────┘
+                    ╭──────────────────────────────────────────╮
+                    │              🌐 BROWSER                  │
+                    │         (Usuário Final/Admin)            │
+                    ╰─────────────────┬────────────────────────╯
+                                      │
+                                      ▼
+                    ╭──────────────────────────────────────────╮
+                    │           ⚛️ REACT SPA                   │
+                    │     ┌─────────────────────────────┐      │
+                    │     │  🎨 Tailwind CSS            │      │
+                    │     │  ⚡ Vite (HMR)              │      │
+                    │     │  🔀 React Router            │      │
+                    │     └─────────────────────────────┘      │
+                    ╰─────────────────┬────────────────────────╯
+                                      │
+                                      ▼
+╭─────────────────────────────────────────────────────────────────────────────╮
+│                         🔥 FIREBASE SDK (Client)                           │
+│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐               │
+│  │  🔐 Auth       │  │  📊 Firestore  │  │  📁 Storage    │               │
+│  │  Email/Pass    │  │  NoSQL DB      │  │  Arquivos      │               │
+│  └────────────────┘  └────────────────┘  └────────────────┘               │
+╰─────────────────────────────────────────────────────────────────────────────╯
+                                      │
+                                      ▼
+                    ╭──────────────────────────────────────────╮
+                    │         ☁️ GOOGLE CLOUD                  │
+                    │     Firebase + Gemini AI (opcional)      │
+                    ╰──────────────────────────────────────────╯
 ```
 
-**Arquitetura**: BaaS (Backend as a Service) - Sem servidor Node/Express tradicional.
+> **Arquitetura**: BaaS (Backend as a Service) - Sem servidor Node/Express tradicional
+
+</details>
 
 ---
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🔒 SEGURANÇA -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 ## 🔒 Segurança
 
-### Firestore Security Rules
+<div align="center">
 
-O arquivo [firestore.rules](firestore.rules) implementa:
+<img src="https://img.shields.io/badge/🛡️_Security-ENABLED-00AF9B?style=for-the-badge&labelColor=1a1a2e" />
+<img src="https://img.shields.io/badge/🔐_Auth-Firebase-FFCA28?style=for-the-badge&labelColor=1a1a2e&logo=firebase" />
+<img src="https://img.shields.io/badge/📜_Rules-Custom-1351B4?style=for-the-badge&labelColor=1a1a2e" />
 
-#### Leitura Pública
-- ✅ Campanhas ativas
-- ✅ Avisos ativos
-- ✅ Vacinas (filtro no cliente)
+</div>
 
-#### Permissões de Escrita
+<details open>
+<summary><h3>🔐 Matriz de Permissões</h3></summary>
 
-**Staff (admin + profissional)**:
-- ✅ Criar e atualizar avisos e campanhas
+<table>
+<tr>
+<th>Recurso</th>
+<th>👁️ Público</th>
+<th>✏️ Profissional</th>
+<th>👑 Admin</th>
+</tr>
+<tr>
+<td>📢 Ler Avisos</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td>📢 Criar/Editar Avisos</td>
+<td align="center">❌</td>
+<td align="center">✅ próprios</td>
+<td align="center">✅ todos</td>
+</tr>
+<tr>
+<td>📢 Deletar Avisos</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✅</td>
+</tr>
+<tr>
+<td>📸 Campanhas</td>
+<td align="center">✅ ler</td>
+<td align="center">✅ próprias</td>
+<td align="center">✅ todas</td>
+</tr>
+<tr>
+<td>💉 Vacinas</td>
+<td align="center">✅ ler</td>
+<td align="center">✅ ler</td>
+<td align="center">✅ CRUD</td>
+</tr>
+<tr>
+<td>👥 Usuários</td>
+<td align="center">❌</td>
+<td align="center">❌</td>
+<td align="center">✅ CRUD</td>
+</tr>
+<tr>
+<td>📅 Agendas</td>
+<td align="center">❌</td>
+<td align="center">✅ CRUD</td>
+<td align="center">✅ CRUD</td>
+</tr>
+</table>
 
-**Apenas Admin**:
-- ✅ Deletar avisos e campanhas
-- ✅ CRUD de usuários
-- ✅ Gestão de vacinas
+</details>
 
-**Proteções**:
-- ❌ Usuários não podem alterar seu próprio `role`
-- ❌ Usuários não podem se auto-ativar
-- ❌ Outras coleções negadas por padrão
+<details>
+<summary><h3>✅ Checklist de Segurança</h3></summary>
 
-### Autenticação
+```diff
++ ✅ Autenticação Firebase (Email/Password)
++ ✅ Sessão persistente (localStorage)
++ ✅ Proteção de rotas (<ProtectedRoute>)
++ ✅ Roles: admin, profissional, diretoria
++ ✅ Variáveis de ambiente (.env)
++ ✅ HTTPS obrigatório (Vercel)
++ ✅ Security headers configurados
++ ✅ Validação de inputs
++ ✅ Upload limitado (10MB max)
++ ✅ Firestore rules customizadas
 
-- **Método**: Firebase Authentication (Email/Password)
-- **Sessão**: Persistente (localStorage)
-- **Proteção de Rotas**: `<ProtectedRoute>` component
-- **Roles**: admin, profissional, diretoria
+! ⚠️ Usuários não podem alterar próprio role
+! ⚠️ Usuários não podem se auto-ativar
+! ⚠️ Coleções não listadas = deny por padrão
+```
 
-### Boas Práticas
-
-- ✅ Variáveis de ambiente
-- ✅ HTTPS obrigatório (Vercel)
-- ✅ Security headers (X-Frame-Options, X-XSS-Protection)
-- ✅ Validação de inputs
-- ✅ Upload limitado (10MB)
+</details>
 
 ---
+
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🚢 DEPLOY -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 ## 🚢 Deploy
 
-### Deploy Automático na Vercel
+<div align="center">
 
-#### 1️⃣ Conecte seu repositório
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=500&size=18&duration=2500&pause=1000&color=000000&center=true&vCenter=true&width=450&lines=Powered+by+Vercel+%E2%9A%A1;Auto+Deploy+on+Push+%F0%9F%9A%80;Zero+Config+%E2%9C%A8" alt="Deploy Info" />
 
-1. Acesse [vercel.com](https://vercel.com)
-2. Clique em "New Project"
-3. Importe o repositório GitHub
+</div>
 
-#### 2️⃣ Configure Variáveis de Ambiente
+### ☁️ Vercel (Recomendado)
 
-No painel Vercel → Settings → Environment Variables:
+<table>
+<tr>
+<td width="60%">
 
+**1. Conecte o Repositório**
 ```
-VITE_FIREBASE_API_KEY
-VITE_FIREBASE_AUTH_DOMAIN
-VITE_FIREBASE_PROJECT_ID
-VITE_FIREBASE_STORAGE_BUCKET
-VITE_FIREBASE_MESSAGING_SENDER_ID
-VITE_FIREBASE_APP_ID
-VITE_FIREBASE_MEASUREMENT_ID
-VITE_GEMINI_API_KEY (opcional)
+vercel.com → New Project → Import GitHub
 ```
 
-#### 3️⃣ Deploy!
+**2. Configure Variáveis**
+```
+Settings → Environment Variables
+```
 
-A cada push na branch `main`, um novo deploy será criado automaticamente.
+**3. Deploy!**
+```
+Auto-deploy em cada push na main 🚀
+```
 
-**Configurações** ([vercel.json](vercel.json)):
-- Framework: Vite
-- Build Command: `cd react-app && npm ci && npm run build`
-- Output Directory: `react-app/dist`
+</td>
+<td width="40%">
 
-### Build Local
+**📝 vercel.json**
+```json
+{
+  "buildCommand": "cd react-app && npm ci && npm run build",
+  "outputDirectory": "react-app/dist"
+}
+```
+
+</td>
+</tr>
+</table>
+
+### 🖥️ Build Local
 
 ```bash
-cd react-app
-npm run build
+cd react-app && npm run build
+# Output: react-app/dist/
 ```
-
-Build gerado em `react-app/dist/`.
 
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🤝 CONTRIBUINDO -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas!
+<div align="center">
 
-### Como contribuir
+<img src="https://img.shields.io/badge/PRs-welcome-00AF9B?style=for-the-badge&labelColor=1a1a2e" />
+<img src="https://img.shields.io/badge/Commits-Conventional-FFA000?style=for-the-badge&labelColor=1a1a2e" />
 
-1. **Fork** o projeto
-2. Crie uma **branch**: `git checkout -b feature/NovaFuncionalidade`
-3. **Commit**: `git commit -m 'feat: Adiciona nova funcionalidade'`
-4. **Push**: `git push origin feature/NovaFuncionalidade`
-5. Abra um **Pull Request**
+</div>
 
-### Padrão de Commits
+<table>
+<tr>
+<td width="50%">
 
-Usamos [Conventional Commits](https://www.conventionalcommits.org/):
+### 📋 Como Contribuir
 
-- `feat:` Nova funcionalidade
-- `fix:` Correção de bug
-- `docs:` Documentação
-- `style:` Formatação
-- `refactor:` Refatoração
-- `test:` Testes
-- `chore:` Configurações
+```bash
+# 1. Fork o projeto
+# 2. Crie sua branch
+git checkout -b feature/NovaFeature
+
+# 3. Commit suas mudanças
+git commit -m 'feat: descrição'
+
+# 4. Push para a branch
+git push origin feature/NovaFeature
+
+# 5. Abra um Pull Request
+```
+
+</td>
+<td width="50%">
+
+### 📝 Padrão de Commits
+
+| Prefixo | Uso |
+|:-------:|:----|
+| `feat:` | Nova funcionalidade |
+| `fix:` | Correção de bug |
+| `docs:` | Documentação |
+| `style:` | Formatação |
+| `refactor:` | Refatoração |
+| `test:` | Testes |
+| `chore:` | Configurações |
+
+</td>
+</tr>
+</table>
 
 ---
 
