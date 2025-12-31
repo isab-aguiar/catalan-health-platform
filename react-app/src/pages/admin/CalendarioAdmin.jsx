@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell, Edit2, Trash2, Eye, X, MapPin, Stethoscope, Briefcase } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
@@ -10,6 +10,7 @@ import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import EventoModal from '../../components/admin/EventoModal';
 import { escalasTrabalho } from '../../data/escalasTrabalho';
 import { agendasSemanais } from '../../data/agendasSemanais';
+import { inicializarNotificacoes, pararVerificacaoNotificacoes, solicitarPermissaoNotificacoes } from '../../services/notificacoesService';
 
 export default function CalendarioAdmin() {
   const { currentUser } = useAuth();
@@ -33,6 +34,24 @@ export default function CalendarioAdmin() {
   );
 
   useBodyScrollLock(showEventModal || showDetalhesModal || showEscalasModal || showModalDia);
+
+  // Inicializar sistema de notificações
+  useEffect(() => {
+    // Solicitar permissão ao carregar a página
+    solicitarPermissaoNotificacoes();
+
+    // Quando eventos são carregados, agendar notificações
+    if (eventos && eventos.length > 0) {
+      inicializarNotificacoes(eventos).catch((error) => {
+        console.error('Erro ao inicializar notificações:', error);
+      });
+    }
+
+    // Limpar ao desmontar
+    return () => {
+      pararVerificacaoNotificacoes();
+    };
+  }, [eventos]);
 
   const meses = [
     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',

@@ -1,240 +1,221 @@
-import {
-  collection,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-  getDocs,
-  getDoc,
-  query,
-  where,
-  orderBy,
-  limit,
-  Timestamp,
-  serverTimestamp,
-  writeBatch,
-} from "firebase/firestore";
-import { db } from "../config/firebase";
+/**
+ * Serviço de Notificações para Eventos do Calendário
+ * Gerencia notificações do navegador para lembretes de eventos
+ */
 
-const COLLECTION_NAME = "notificacoes";
+let permissaoConcedida = null;
+let intervalId = null;
 
-// Tipos de notificações
-export const TIPOS_NOTIFICACAO = {
-  LEMBRETE: "lembrete",
-  REUNIAO: "reuniao",
-  SISTEMA: "sistema",
-  ALERTA: "alerta",
-};
-
-// Criar notificação
-export const criarNotificacao = async (notificacaoData) => {
-  try {
-    const notificacao = {
-      tipo: notificacaoData.tipo || TIPOS_NOTIFICACAO.SISTEMA,
-      titulo: notificacaoData.titulo,
-      mensagem: notificacaoData.mensagem || "",
-      link: notificacaoData.link || null,
-      eventoId: notificacaoData.eventoId || null,
-
-      // Destinatários
-      userId: notificacaoData.userId || null, // null = para todos
-      lida: false,
-
-      // Timestamps
-      criadoEm: serverTimestamp(),
-      lidaEm: null,
-    };
-
-    const notificacoesRef = collection(db, COLLECTION_NAME);
-    const docRef = await addDoc(notificacoesRef, notificacao);
-
-    return {
-      success: true,
-      id: docRef.id,
-      data: { id: docRef.id, ...notificacao },
-    };
-  } catch (error) {
-    console.error("Erro ao criar notificação:", error);
-    throw new Error(`Falha ao criar notificação: ${error.message}`);
+/**
+ * Solicita permissão para exibir notificações
+ */
+export async function solicitarPermissaoNotificacoes() {
+  if (!("Notification" in window)) {
+    console.warn("Este navegador não suporta notificações");
+    return false;
   }
-};
 
-// Buscar notificações do usuário
-export const buscarNotificacoesUsuario = async (userId, filtros = {}) => {
-  try {
-    const notificacoesRef = collection(db, COLLECTION_NAME);
-
-    // Buscar notificações específicas do usuário OU globais (userId === null)
-    let q = query(
-      notificacoesRef,
-      orderBy("criadoEm", "desc")
-    );
-
-    // Filtrar apenas não lidas se solicitado
-    if (filtros.apenasNaoLidas) {
-      q = query(q, where("lida", "==", false));
-    }
-
-    // Limitar quantidade
-    if (filtros.limite) {
-      q = query(q, limit(filtros.limite));
-    }
-
-    const snapshot = await getDocs(q);
-    const notificacoes = snapshot.docs
-      .map((doc) => {
-        const data = doc.data();
-        return {
-          id: doc.id,
-          ...data,
-          criadoEm: data.criadoEm?.toDate
-            ? data.criadoEm.toDate()
-            : data.criadoEm
-              ? new Date(data.criadoEm)
-              : null,
-          lidaEm: data.lidaEm?.toDate
-            ? data.lidaEm.toDate()
-            : data.lidaEm
-              ? new Date(data.lidaEm)
-              : null,
-        };
-      })
-      // Filtrar: mostrar se é para o usuário específico OU se é global
-      .filter(n => n.userId === userId || n.userId === null);
-
-    return notificacoes;
-  } catch (error) {
-    console.error("Erro ao buscar notificações:", error);
-    throw new Error(`Falha ao buscar notificações: ${error.message}`);
+  if (Notification.permission === "granted") {
+    permissaoConcedida = true;
+    return true;
   }
-};
 
-// Buscar notificações recentes (últimas 10)
-export const buscarNotificacoesRecentes = async (userId) => {
-  return buscarNotificacoesUsuario(userId, { limite: 10 });
-};
-
-// Contar notificações não lidas
-export const contarNaoLidas = async (userId) => {
-  try {
-    const notificacoes = await buscarNotificacoesUsuario(userId, { apenasNaoLidas: true });
-    return notificacoes.length;
-  } catch (error) {
-    console.error("Erro ao contar não lidas:", error);
-    return 0;
+  if (Notification.permission === "denied") {
+    permissaoConcedida = false;
+    return false;
   }
-};
 
-// Marcar como lida
-export const marcarComoLida = async (notificacaoId) => {
   try {
-    const notificacaoRef = doc(db, COLLECTION_NAME, notificacaoId);
-    await updateDoc(notificacaoRef, {
-      lida: true,
-      lidaEm: serverTimestamp(),
-    });
-
-    return {
-      success: true,
-      message: "Notificação marcada como lida",
-    };
+    const permission = await Notification.requestPermission();
+    permissaoConcedida = permission === "granted";
+    return permissaoConcedida;
   } catch (error) {
-    console.error("Erro ao marcar como lida:", error);
-    throw new Error(`Falha ao marcar como lida: ${error.message}`);
+    console.error("Erro ao solicitar permissão de notificações:", error);
+    permissaoConcedida = false;
+    return false;
   }
-};
+}
 
-// Marcar todas como lidas
-export const marcarTodasComoLidas = async (userId) => {
-  try {
-    const notificacoes = await buscarNotificacoesUsuario(userId, { apenasNaoLidas: true });
-
-    const batch = writeBatch(db);
-    notificacoes.forEach((notif) => {
-      const notifRef = doc(db, COLLECTION_NAME, notif.id);
-      batch.update(notifRef, {
-        lida: true,
-        lidaEm: serverTimestamp(),
-      });
-    });
-
-    await batch.commit();
-
-    return {
-      success: true,
-      message: `${notificacoes.length} notificações marcadas como lidas`,
-    };
-  } catch (error) {
-    console.error("Erro ao marcar todas como lidas:", error);
-    throw new Error(`Falha ao marcar todas como lidas: ${error.message}`);
+/**
+ * Exibe uma notificação
+ */
+export function exibirNotificacao(titulo, opcoes = {}) {
+  if (!("Notification" in window) || Notification.permission !== "granted") {
+    return null;
   }
-};
 
-// Deletar notificação
-export const deletarNotificacao = async (notificacaoId) => {
-  try {
-    const notificacaoRef = doc(db, COLLECTION_NAME, notificacaoId);
-    await deleteDoc(notificacaoRef);
-
-    return {
-      success: true,
-      message: "Notificação deletada com sucesso",
-    };
-  } catch (error) {
-    console.error("Erro ao deletar notificação:", error);
-    throw new Error(`Falha ao deletar notificação: ${error.message}`);
-  }
-};
-
-// Limpar todas as notificações lidas
-export const limparLidas = async (userId) => {
-  try {
-    const notificacoes = await buscarNotificacoesUsuario(userId);
-    const lidas = notificacoes.filter(n => n.lida);
-
-    const batch = writeBatch(db);
-    lidas.forEach((notif) => {
-      const notifRef = doc(db, COLLECTION_NAME, notif.id);
-      batch.delete(notifRef);
-    });
-
-    await batch.commit();
-
-    return {
-      success: true,
-      message: `${lidas.length} notificações limpas`,
-    };
-  } catch (error) {
-    console.error("Erro ao limpar lidas:", error);
-    throw new Error(`Falha ao limpar lidas: ${error.message}`);
-  }
-};
-
-// Criar notificação de lembrete de evento
-export const criarNotificacaoLembrete = async (evento, userId = null) => {
-  const dataEvento = new Date(evento.dataInicio);
-  const dataFormatada = dataEvento.toLocaleDateString('pt-BR');
-  const horaFormatada = evento.horaInicio || "não definido";
-
-  return criarNotificacao({
-    tipo: TIPOS_NOTIFICACAO.LEMBRETE,
-    titulo: `Lembrete: ${evento.titulo}`,
-    mensagem: `${evento.tipo.charAt(0).toUpperCase() + evento.tipo.slice(1)} agendado(a) para ${dataFormatada} às ${horaFormatada}`,
-    link: `/admin/calendario`,
-    eventoId: evento.id,
-    userId,
+  const notificacao = new Notification(titulo, {
+    icon: "/logo-favicon.png",
+    badge: "/logo-favicon.png",
+    tag: opcoes.tag || "calendario-evento",
+    requireInteraction: opcoes.requireInteraction || false,
+    ...opcoes,
   });
-};
 
-export default {
-  criarNotificacao,
-  buscarNotificacoesUsuario,
-  buscarNotificacoesRecentes,
-  contarNaoLidas,
-  marcarComoLida,
-  marcarTodasComoLidas,
-  deletarNotificacao,
-  limparLidas,
-  criarNotificacaoLembrete,
-  TIPOS_NOTIFICACAO,
-};
+  notificacao.onclick = () => {
+    window.focus();
+    notificacao.close();
+    if (opcoes.onClick) {
+      opcoes.onClick();
+    }
+  };
+
+  return notificacao;
+}
+
+/**
+ * Calcula quando uma notificação deve ser enviada baseado no evento
+ */
+function calcularHorarioNotificacao(evento) {
+  if (!evento.dataInicio || !evento.lembrete || !evento.lembreteMinutos) {
+    return null;
+  }
+
+  const dataEvento = evento.dataInicio instanceof Date
+    ? evento.dataInicio
+    : new Date(evento.dataInicio);
+
+  // Se o evento tem horário, usar o horário; senão, usar início do dia
+  let horaEvento = dataEvento;
+  if (evento.horaInicio) {
+    const [hora, minuto] = evento.horaInicio.split(":").map(Number);
+    horaEvento = new Date(dataEvento);
+    horaEvento.setHours(hora, minuto, 0, 0);
+  }
+
+  // Subtrair os minutos de antecedência
+  const horarioNotificacao = new Date(
+    horaEvento.getTime() - evento.lembreteMinutos * 60 * 1000
+  );
+
+  return horarioNotificacao;
+}
+
+/**
+ * Agenda uma notificação para um evento
+ */
+export function agendarNotificacaoEvento(evento) {
+  if (!evento.lembrete || !evento.lembreteMinutos) {
+    return null;
+  }
+
+  const horarioNotificacao = calcularHorarioNotificacao(evento);
+  if (!horarioNotificacao) {
+    return null;
+  }
+
+  const agora = new Date();
+  const tempoRestante = horarioNotificacao.getTime() - agora.getTime();
+
+  // Se já passou o horário, não agendar
+  if (tempoRestante <= 0) {
+    return null;
+  }
+
+  // Se for muito no futuro (> 1 dia), agendar com setTimeout (limitado a ~24 dias)
+  if (tempoRestante <= 24 * 60 * 60 * 1000) {
+    return setTimeout(() => {
+      const tipoLabel = {
+        reuniao: "Reunião",
+        lembrete: "Lembrete",
+        agendamento: "Agendamento",
+      }[evento.tipo] || "Evento";
+
+      let mensagem = `${tipoLabel}: ${evento.titulo}`;
+      if (evento.local) {
+        mensagem += `\nLocal: ${evento.local}`;
+      }
+      if (evento.horaInicio) {
+        mensagem += `\nHorário: ${evento.horaInicio}`;
+      }
+
+      exibirNotificacao(evento.titulo, {
+        body: mensagem,
+        tag: `evento-${evento.id}`,
+        requireInteraction: true,
+      });
+    }, tempoRestante);
+  }
+
+  return null;
+}
+
+/**
+ * Verifica eventos que precisam de notificação e agenda
+ */
+export async function verificarEAgendarNotificacoes(eventos) {
+  if (Notification.permission !== "granted") {
+    return;
+  }
+
+  // Limpar notificações anteriores
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
+
+  // Agendar notificações para eventos futuros
+  eventos.forEach((evento) => {
+    if (evento.lembrete && !evento.lembreteEnviado && evento.ativo && !evento.concluido) {
+      agendarNotificacaoEvento(evento);
+    }
+  });
+
+  // Verificar a cada minuto se há eventos que precisam de notificação
+  intervalId = setInterval(() => {
+    eventos.forEach((evento) => {
+      if (evento.lembrete && !evento.lembreteEnviado && evento.ativo && !evento.concluido) {
+        const horarioNotificacao = calcularHorarioNotificacao(evento);
+        if (horarioNotificacao) {
+          const agora = new Date();
+          const tempoRestante = horarioNotificacao.getTime() - agora.getTime();
+
+          // Se está no momento certo (dentro de 1 minuto antes)
+          if (tempoRestante > 0 && tempoRestante <= 60 * 1000) {
+            const tipoLabel = {
+              reuniao: "Reunião",
+              lembrete: "Lembrete",
+              agendamento: "Agendamento",
+            }[evento.tipo] || "Evento";
+
+            let mensagem = `${tipoLabel}: ${evento.titulo}`;
+            if (evento.local) {
+              mensagem += `\nLocal: ${evento.local}`;
+            }
+            if (evento.horaInicio) {
+              mensagem += `\nHorário: ${evento.horaInicio}`;
+            }
+
+            exibirNotificacao(evento.titulo, {
+              body: mensagem,
+              tag: `evento-${evento.id}`,
+              requireInteraction: true,
+            });
+
+            // Marcar como enviado (opcional - requer atualização no banco)
+          }
+        }
+      }
+    });
+  }, 60 * 1000); // Verificar a cada minuto
+}
+
+/**
+ * Para todas as notificações agendadas
+ */
+export function pararVerificacaoNotificacoes() {
+  if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+}
+
+/**
+ * Inicializa o sistema de notificações
+ */
+export async function inicializarNotificacoes(eventos = []) {
+  const permissao = await solicitarPermissaoNotificacoes();
+  if (permissao) {
+    await verificarEAgendarNotificacoes(eventos);
+  }
+  return permissao;
+}

@@ -210,21 +210,63 @@ export const atualizarEvento = async (eventoId, dadosAtualizados) => {
   try {
     const eventoRef = doc(db, COLLECTION_NAME, eventoId);
     const updates = {
-      ...dadosAtualizados,
       atualizadoEm: serverTimestamp(),
     };
 
+    // Atualizar apenas campos que foram fornecidos
+    if (dadosAtualizados.titulo !== undefined) {
+      updates.titulo = dadosAtualizados.titulo?.trim() || null;
+    }
+    if (dadosAtualizados.descricao !== undefined) {
+      updates.descricao = dadosAtualizados.descricao?.trim() || null;
+    }
+    if (dadosAtualizados.tipo !== undefined) {
+      updates.tipo = dadosAtualizados.tipo;
+    }
     if (dadosAtualizados.dataInicio) {
       updates.dataInicio = Timestamp.fromDate(
         new Date(dadosAtualizados.dataInicio)
       );
     }
-
-    if (dadosAtualizados.dataFim) {
-      updates.dataFim = Timestamp.fromDate(new Date(dadosAtualizados.dataFim));
+    if (dadosAtualizados.dataFim !== undefined) {
+      if (dadosAtualizados.dataFim) {
+        updates.dataFim = Timestamp.fromDate(new Date(dadosAtualizados.dataFim));
+      } else {
+        updates.dataFim = null;
+      }
+    }
+    if (dadosAtualizados.horaInicio !== undefined) {
+      updates.horaInicio = dadosAtualizados.horaInicio || null;
+    }
+    if (dadosAtualizados.horaFim !== undefined) {
+      updates.horaFim = dadosAtualizados.horaFim || null;
+    }
+    if (dadosAtualizados.participantes !== undefined) {
+      updates.participantes = Array.isArray(dadosAtualizados.participantes)
+        ? dadosAtualizados.participantes
+        : [];
+    }
+    if (dadosAtualizados.local !== undefined) {
+      updates.local = dadosAtualizados.local || null;
+    }
+    if (dadosAtualizados.ata !== undefined) {
+      updates.ata = dadosAtualizados.ata?.trim() || null;
+    }
+    if (dadosAtualizados.lembrete !== undefined) {
+      updates.lembrete = dadosAtualizados.lembrete || false;
+    }
+    if (dadosAtualizados.lembreteMinutos !== undefined) {
+      updates.lembreteMinutos = dadosAtualizados.lembreteMinutos || null;
+    }
+    if (dadosAtualizados.ativo !== undefined) {
+      updates.ativo = dadosAtualizados.ativo;
+    }
+    if (dadosAtualizados.concluido !== undefined) {
+      updates.concluido = dadosAtualizados.concluido;
     }
 
-    await updateDoc(eventoRef, updates);
+    const updatesSanitizado = sanitizeUndefined(updates);
+    await updateDoc(eventoRef, updatesSanitizado);
 
     return {
       success: true,
