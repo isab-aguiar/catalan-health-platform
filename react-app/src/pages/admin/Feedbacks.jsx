@@ -742,7 +742,7 @@ export default function Feedbacks() {
               </div>
             </div>
 
-            <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-6 py-4 flex justify-center">
+            <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-6 py-4 flex justify-between items-center gap-3">
               <button
                 onClick={() => handleDelete(selectedFeedback.id, getTipoLabel(selectedFeedback.tipo).toLowerCase())}
                 disabled={updating || deleteLoading === selectedFeedback.id}
@@ -756,7 +756,24 @@ export default function Feedbacks() {
                 ) : (
                   <>
                     <Trash2 size={16} />
-                    Excluir Feedback
+                    Excluir
+                  </>
+                )}
+              </button>
+              <button
+                onClick={handleResponder}
+                disabled={updating || !resposta.trim() || deleteLoading === selectedFeedback.id}
+                className="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                {updating ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    Responder
                   </>
                 )}
               </button>
