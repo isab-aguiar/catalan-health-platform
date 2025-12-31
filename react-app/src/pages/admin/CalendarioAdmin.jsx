@@ -503,6 +503,17 @@ export default function CalendarioAdmin() {
               Lista
             </button>
             <button
+              onClick={() => setViewMode('agenda')}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                viewMode === 'agenda'
+                  ? 'bg-primary-600 text-white shadow-sm'
+                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+              }`}
+            >
+              <Clock className="w-4 h-4" />
+              Agenda
+            </button>
+            <button
               onClick={() => setViewMode('month')}
               className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
                 viewMode === 'month'
@@ -526,7 +537,7 @@ export default function CalendarioAdmin() {
             </button>
 
             {/* Botão Filtros */}
-            {(viewMode === 'month' || viewMode === 'list') && (
+            {(viewMode === 'month' || viewMode === 'list' || viewMode === 'agenda') && (
               <button
                 onClick={() => setShowFilters(!showFilters)}
                 className={`ml-auto px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
@@ -575,6 +586,17 @@ export default function CalendarioAdmin() {
           onEventClick={handleVisualizarEventoSemStop}
           onEventEdit={handleEditarEventoSemStop}
           onEventDelete={handleDeletarEventoSemStop}
+        />
+      )}
+
+      {/* Agenda View */}
+      {!loading && viewMode === 'agenda' && (
+        <CalendarAgendaView
+          eventos={eventosFiltrados}
+          onEventClick={handleVisualizarEventoSemStop}
+          onEventEdit={handleEditarEventoSemStop}
+          onEventDelete={handleDeletarEventoSemStop}
+          initialDate={currentDate}
         />
       )}
 
