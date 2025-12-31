@@ -151,72 +151,113 @@ export default function CalendarAgendaView({
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Controles */}
-      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
-        <div className="flex flex-col items-center gap-4">
-          {/* Navegação e Período */}
-          <div className="flex items-center gap-2 w-full justify-center">
-            <button
-              onClick={handlePrevious}
-              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors flex-shrink-0"
-              aria-label="Período anterior"
-            >
-              <ChevronLeft className="w-5 h-5 text-neutral-700" />
-            </button>
+      {/* Controles Aprimorados */}
+      <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 rounded-xl shadow-lg border border-neutral-200/50 p-6 backdrop-blur-sm">
+        <div className="flex flex-col gap-5">
+          {/* Header com Navegação */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Navegação */}
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handlePrevious}
+                className="p-2.5 hover:bg-white/80 rounded-xl transition-all duration-200 shadow-sm border border-neutral-200 hover:shadow-md hover:scale-105 active:scale-95"
+                aria-label="Período anterior"
+              >
+                <ChevronLeft className="w-5 h-5 text-neutral-700" />
+              </button>
 
-            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-neutral-900 text-center px-2 truncate max-w-full">
-              {formatarDataCompleta(days[0])} - {formatarDataCompleta(days[days.length - 1])}
-            </h3>
+              <div className="text-center min-w-[280px]">
+                <h3 className="text-lg font-bold text-neutral-900 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  {formatarDataCompleta(days[0])}
+                </h3>
+                <p className="text-sm text-neutral-600 font-medium mt-0.5">
+                  até {formatarDataCompleta(days[days.length - 1])}
+                </p>
+              </div>
 
-            <button
-              onClick={handleNext}
-              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors flex-shrink-0"
-              aria-label="Próximo período"
-            >
-              <ChevronRight className="w-5 h-5 text-neutral-700" />
-            </button>
+              <button
+                onClick={handleNext}
+                className="p-2.5 hover:bg-white/80 rounded-xl transition-all duration-200 shadow-sm border border-neutral-200 hover:shadow-md hover:scale-105 active:scale-95"
+                aria-label="Próximo período"
+              >
+                <ChevronRight className="w-5 h-5 text-neutral-700" />
+              </button>
+            </div>
+
+            {/* Ações Rápidas */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleToday}
+                className="px-4 py-2 text-sm font-semibold text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-lg transition-all duration-200 border border-primary-200 hover:shadow-md"
+              >
+                <span className="hidden sm:inline">Ir para </span>Hoje
+              </button>
+
+              <button
+                className="p-2 hover:bg-white/80 rounded-lg transition-all duration-200 border border-neutral-200 hover:shadow-md"
+                title="Exportar agenda"
+              >
+                <Download className="w-4 h-4 text-neutral-700" />
+              </button>
+
+              <button
+                className="p-2 hover:bg-white/80 rounded-lg transition-all duration-200 border border-neutral-200 hover:shadow-md"
+                title="Compartilhar"
+              >
+                <Share2 className="w-4 h-4 text-neutral-700" />
+              </button>
+            </div>
           </div>
 
-          {/* Botões Hoje e Toggle dias */}
-          <div className="flex items-center justify-between w-full gap-3">
-            {/* Botão Hoje */}
-            <button
-              onClick={handleToday}
-              className="px-3 py-1.5 text-sm font-medium text-primary-600 hover:bg-blue-50 rounded-lg transition-colors flex-shrink-0"
-            >
-              Hoje
-            </button>
+          {/* Período de Visualização e Estatísticas */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-neutral-200/50">
+            {/* Toggle de dias */}
+            <div className="flex items-center gap-2 bg-white/80 rounded-xl p-1.5 shadow-sm border border-neutral-200">
+              <button
+                onClick={() => setDaysToShow(7)}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                  daysToShow === 7
+                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md scale-105'
+                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                }`}
+              >
+                7 dias
+              </button>
+              <button
+                onClick={() => setDaysToShow(14)}
+                className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                  daysToShow === 14
+                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md scale-105'
+                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                }`}
+              >
+                14 dias
+              </button>
+            </div>
 
-            {/* Toggle dias */}
-            <div className="flex items-center gap-2 bg-neutral-100 rounded-lg p-1 flex-shrink-0">
-            <button
-              onClick={() => setDaysToShow(7)}
-              className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${
-                daysToShow === 7
-                  ? 'bg-white text-primary-600 shadow-sm'
-                  : 'text-neutral-600 hover:text-neutral-900'
-              }`}
-            >
-              7 dias
-            </button>
-            <button
-              onClick={() => setDaysToShow(14)}
-              className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${
-                daysToShow === 14
-                  ? 'bg-white text-primary-600 shadow-sm'
-                  : 'text-neutral-600 hover:text-neutral-900'
-              }`}
-            >
-              14 dias
-            </button>
+            {/* Estatísticas Rápidas */}
+            <div className="flex items-center gap-4 text-sm">
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-white/80 rounded-lg border border-neutral-200">
+                <Calendar className="w-4 h-4 text-blue-600" />
+                <span className="font-semibold text-neutral-900">
+                  {eventos?.length || 0}
+                </span>
+                <span className="text-neutral-600">eventos</span>
+              </div>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-white/80 rounded-lg border border-neutral-200">
+                <Users className="w-4 h-4 text-indigo-600" />
+                <span className="font-semibold text-neutral-900">
+                  {agendas?.length || 0}
+                </span>
+                <span className="text-neutral-600">agendas</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Grid de Dias */}
-      <div className="space-y-4">
-        {days.map((day, index) => {
+      <div className="space-y-5">{days.map((day, index) => {
           const dayKey = day.toISOString().split('T')[0];
           const eventosDay = eventosPorDia[dayKey] || [];
           const hoje = isToday(day);
