@@ -93,6 +93,7 @@ const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesP
 const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
 const EscalasTrabalho = lazyLoad(() => import("./pages/admin/EscalasTrabalho"));
 const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
+const Feedbacks = lazyLoad(() => import("./pages/admin/Feedbacks"));
 const OuvidoriaIndex = lazyLoad(() => import("./pages/services/OuvidoriaIndex"));
 const Elogios = lazyLoad(() => import("./pages/services/Elogios"));
 const Sugestoes = lazyLoad(() => import("./pages/services/Sugestoes"));
@@ -282,6 +283,14 @@ function App() {
                         element={
                           <ProtectedRoute>
                             <Notificacoes />
+                          </ProtectedRoute>
+                        }
+                      />
+                      <Route
+                        path="/admin/feedbacks"
+                        element={
+                          <ProtectedRoute requiredRole="admin">
+                            <Feedbacks />
                           </ProtectedRoute>
                         }
                       />
