@@ -384,15 +384,15 @@ export default function CalendarAgendaView({
                           key={agenda.id} 
                           className="group/agenda relative border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/50 to-purple-50/30 rounded-xl p-3 md:p-5 transition-all duration-300 hover:shadow-lg hover:border-indigo-300"
                         >
-                          {/* Header com categoria e botões - Mobile friendly */}
-                          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 sm:gap-3 mb-3 md:mb-4">
-                            {/* Categoria badge - Mobile: no topo */}
+                          {/* Header com botões e categoria - Mobile: botões primeiro */}
+                          <div className="flex flex-col-reverse sm:flex-row sm:items-start justify-between gap-2 sm:gap-3 mb-3 md:mb-4">
+                            {/* Categoria badge - Mobile: embaixo, Desktop: esquerda */}
                             <span className="text-xs px-2 md:px-2.5 py-0.5 md:py-1 bg-indigo-600 text-white rounded-full font-bold uppercase tracking-wide shadow-md w-fit">
                               {agenda.categoria}
                             </span>
                             
-                            {/* Botões de ação - Mobile: abaixo da categoria */}
-                            <div className="flex items-center gap-1 md:gap-2 sm:ml-auto">
+                            {/* Botões de ação - Mobile: em cima, Desktop: direita */}
+                            <div className="flex items-center gap-1 md:gap-2 sm:ml-auto justify-end">
                               {onAgendaEdit && (
                                 <button
                                   onClick={(e) => {
