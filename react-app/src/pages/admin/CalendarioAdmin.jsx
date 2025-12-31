@@ -402,27 +402,6 @@ export default function CalendarioAdmin() {
   };
 
   /**
-   * Testa notificações do navegador
-   */
-  const handleTestarNotificacao = async () => {
-    const permission = await solicitarPermissaoNotificacoes();
-    if (permission) {
-      exibirNotificacao('Teste de Notificação ✅', {
-        body: 'As notificações estão funcionando corretamente! Você receberá lembretes dos seus eventos.',
-        icon: '/logo-favicon.png',
-        requireInteraction: false
-      });
-    } else {
-      await showModal({
-        type: 'warning',
-        title: 'Permissão Negada',
-        message: 'Por favor, permita notificações nas configurações do navegador para receber lembretes.',
-        confirmText: 'OK'
-      });
-    }
-  };
-
-  /**
    * Wrapper para deletar evento sem stopPropagation
    */
   const handleDeletarEventoSemStop = async (evento) => {
@@ -469,16 +448,6 @@ export default function CalendarioAdmin() {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
-              {/* Botão Testar Notificações */}
-              <button
-                onClick={handleTestarNotificacao}
-                className="px-3 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-all duration-200 flex items-center gap-2 text-sm font-medium"
-                title="Testar Notificações"
-              >
-                <Bell className="w-4 h-4" />
-                Testar
-              </button>
-
               {/* Botão Adicionar Evento */}
               <button
                 onClick={() => setShowEventModal(true)}
