@@ -36,7 +36,7 @@ export default function Sidebar({ isOpen, onClose }) {
     { name: 'E-multi', path: '/equipe' },
     { name: 'REMSA', path: '/remsa' },
     { name: 'Agentes Comunitários de Saúde', path: '/acs' },
-    { name: 'Contato', path: '/#contato', isAnchor: true },
+    { name: 'Serviços', path: '/servicos' },
     { name: 'Ouvidoria', path: '/ouvidoria' },
   ];
 

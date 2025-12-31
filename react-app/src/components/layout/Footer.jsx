@@ -114,7 +114,7 @@ export default function Footer() {
                   <p>Segunda a Sexta-feira</p>
                   <p>{openingHours.reception.weekdays}</p>
                   <p className="mt-2 text-neutral-900 font-medium">
-                    Saúde na Hora: {openingHours.reception.saudeNaHora}
+                    Saúde na Hora: <br/>{openingHours.reception.saudeNaHora}
                   </p>
                 </div>
               </div>
