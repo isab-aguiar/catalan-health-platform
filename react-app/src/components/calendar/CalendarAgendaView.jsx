@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, Clock, MapPin, Users, Bell, FileText, Eye, Edit2, Trash2 } from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { getEventColors } from '../../constants/calendarDesign';
@@ -17,6 +17,12 @@ export default function CalendarAgendaView({
 }) {
   const [currentDate, setCurrentDate] = useState(initialDate);
   const [daysToShow, setDaysToShow] = useState(7); // 7 ou 14 dias
+
+  // Log para debug
+  useEffect(() => {
+    console.log('📅 [CalendarAgendaView] Eventos recebidos:', eventos?.length || 0, eventos);
+    console.log('📋 [CalendarAgendaView] Agendas recebidas:', agendas?.length || 0, agendas);
+  }, [eventos, agendas]);
 
   // Gerar array de dias a partir da data atual
   const days = useMemo(() => {

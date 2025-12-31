@@ -4,6 +4,21 @@
  */
 
 import { atualizarEvento } from './calendarioService';
+import { 
+  collection, 
+  addDoc, 
+  updateDoc, 
+  deleteDoc, 
+  doc, 
+  getDocs, 
+  query, 
+  where, 
+  orderBy, 
+  limit,
+  Timestamp,
+  serverTimestamp
+} from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 let permissaoConcedida = null;
 let intervalId = null;
@@ -243,7 +258,9 @@ export async function inicializarNotificacoes(eventos = []) {
   return permissao;
 }
 
-// Funções stubs para compatibilidade com NotificationBell e Notificacoes (não implementadas ainda)
+// Funções do sistema de notificações persistentes
+const NOTIFICACOES_COLLECTION = 'notificacoes';
+
 export const TIPOS_NOTIFICACAO = {
   INFO: 'info',
   SUCCESS: 'success',
@@ -252,39 +269,194 @@ export const TIPOS_NOTIFICACAO = {
   LEMBRETE: 'lembrete',
   REUNIAO: 'reuniao',
   ALERTA: 'alerta',
+  SISTEMA: 'sistema'
 };
 
+/**
+ * Criar notificação no banco de dados
+ */
+export async function criarNotificacao(dadosNotificacao) {
+  try {
+    const notificacao = {
+      userId: dadosNotificacao.userId,
+      tipo: dadosNotificacao.tipo || TIPOS_NOTIFICACAO.INFO,
+      titulo: dadosNotificacao.titulo,
+      mensagem: dadosNotificacao.mensagem || '',
+      link: dadosNotificacao.link || null,
+      lida: false,
+      eventoId: dadosNotificacao.eventoId || null,
+      criadoEm: serverTimestamp()
+    };
+
+    const docRef = await addDoc(collection(db, NOTIFICACOES_COLLECTION), notificacao);
+    
+    console.log('✅ Notificação criada:', docRef.id);
+    
+    return {
+      id: docRef.id,
+      ...notificacao
+    };
+  } catch (error) {
+    console.error('❌ Erro ao criar notificação:', error);
+    throw error;
+  }
+}
+
+/**
+ * Buscar notificações recentes de um usuário
+ */
 export async function buscarNotificacoesRecentes(uid, limite = 10) {
-  // TODO: Implementar busca de notificações do sistema
-  return [];
+  try {
+    const q = query(
+      collection(db, NOTIFICACOES_COLLECTION),
+      where('userId', '==', uid),
+      orderBy('criadoEm', 'desc'),
+      limit(limite)
+    );
+    
+    const snapshot = await getDocs(q);
+    const notificacoes = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+      criadoEm: doc.data().criadoEm?.toDate() || null
+    }));
+    
+    return notificacoes;
+  } catch (error) {
+    console.error('❌ Erro ao buscar notificações recentes:', error);
+    return [];
+  }
 }
 
+/**
+ * Buscar todas as notificações de um usuário
+ */
 export async function buscarNotificacoesUsuario(uid) {
-  // TODO: Implementar busca de notificações do usuário
-  return [];
+  try {
+    const q = query(
+      collection(db, NOTIFICACOES_COLLECTION),
+      where('userId', '==', uid),
+      orderBy('criadoEm', 'desc')
+    );
+    
+    const snapshot = await getDocs(q);
+    const notificacoes = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+      criadoEm: doc.data().criadoEm?.toDate() || null
+    }));
+    
+    return notificacoes;
+  } catch (error) {
+    console.error('❌ Erro ao buscar notificações do usuário:', error);
+    return [];
+  }
 }
 
+/**
+ * Contar notificações não lidas
+ */
 export async function contarNaoLidas(uid) {
-  // TODO: Implementar contagem de notificações não lidas
-  return 0;
+  try {
+    const q = query(
+      collection(db, NOTIFICACOES_COLLECTION),
+      where('userId', '==', uid),
+      where('lida', '==', false)
+    );
+    
+    const snapshot = await getDocs(q);
+    return snapshot.size;
+  } catch (error) {
+    console.error('❌ Erro ao contar notificações não lidas:', error);
+    return 0;
+  }
 }
 
+/**
+ * Marcar notificação como lida
+ */
 export async function marcarComoLida(notificacaoId, uid) {
-  // TODO: Implementar marcação de notificação como lida
-  return { success: true };
+  try {
+    const notifRef = doc(db, NOTIFICACOES_COLLECTION, notificacaoId);
+    await updateDoc(notifRef, {
+      lida: true,
+      lidaEm: serverTimestamp()
+    });
+    
+    console.log('✅ Notificação marcada como lida:', notificacaoId);
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Erro ao marcar notificação como lida:', error);
+    return { success: false, error: error.message };
+  }
 }
 
+/**
+ * Marcar todas as notificações como lidas
+ */
 export async function marcarTodasComoLidas(uid) {
-  // TODO: Implementar marcação de todas as notificações como lidas
-  return { success: true };
+  try {
+    const q = query(
+      collection(db, NOTIFICACOES_COLLECTION),
+      where('userId', '==', uid),
+      where('lida', '==', false)
+    );
+    
+    const snapshot = await getDocs(q);
+    const promises = snapshot.docs.map(documento => 
+      updateDoc(doc(db, NOTIFICACOES_COLLECTION, documento.id), {
+        lida: true,
+        lidaEm: serverTimestamp()
+      })
+    );
+    
+    await Promise.all(promises);
+    
+    console.log(`✅ ${promises.length} notificações marcadas como lidas`);
+    return { success: true, count: promises.length };
+  } catch (error) {
+    console.error('❌ Erro ao marcar todas como lidas:', error);
+    return { success: false, error: error.message };
+  }
 }
 
+/**
+ * Deletar notificação
+ */
 export async function deletarNotificacao(notificacaoId, uid) {
-  // TODO: Implementar deleção de notificação
-  return { success: true };
+  try {
+    await deleteDoc(doc(db, NOTIFICACOES_COLLECTION, notificacaoId));
+    
+    console.log('✅ Notificação deletada:', notificacaoId);
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Erro ao deletar notificação:', error);
+    return { success: false, error: error.message };
+  }
 }
 
+/**
+ * Limpar notificações lidas
+ */
 export async function limparLidas(uid) {
-  // TODO: Implementar limpeza de notificações lidas
-  return { success: true };
+  try {
+    const q = query(
+      collection(db, NOTIFICACOES_COLLECTION),
+      where('userId', '==', uid),
+      where('lida', '==', true)
+    );
+    
+    const snapshot = await getDocs(q);
+    const promises = snapshot.docs.map(documento => 
+      deleteDoc(doc(db, NOTIFICACOES_COLLECTION, documento.id))
+    );
+    
+    await Promise.all(promises);
+    
+    console.log(`✅ ${promises.length} notificações lidas removidas`);
+    return { success: true, count: promises.length };
+  } catch (error) {
+    console.error('❌ Erro ao limpar notificações lidas:', error);
+    return { success: false, error: error.message };
+  }
 }

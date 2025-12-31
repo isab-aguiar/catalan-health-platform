@@ -104,26 +104,37 @@ export const criarEvento = async (eventoData, userId) => {
 
 export const buscarEventos = async (filtros = {}) => {
   try {
+    console.log('📅 [buscarEventos] Iniciando busca com filtros:', filtros);
+    
     const eventosRef = collection(db, COLLECTION_NAME);
     let q = query(eventosRef, orderBy("dataInicio", "desc"));
 
     if (filtros.ativo !== undefined) {
+      console.log(`📅 [buscarEventos] Filtrando por ativo: ${filtros.ativo}`);
       q = query(q, where("ativo", "==", filtros.ativo));
     }
 
     if (filtros.tipo) {
+      console.log(`📅 [buscarEventos] Filtrando por tipo: ${filtros.tipo}`);
       q = query(q, where("tipo", "==", filtros.tipo));
     }
 
     if (filtros.dataInicio && filtros.dataFim) {
+      const inicio = Timestamp.fromDate(new Date(filtros.dataInicio));
+      const fim = Timestamp.fromDate(new Date(filtros.dataFim));
+      console.log(`📅 [buscarEventos] Filtrando por data: ${filtros.dataInicio} até ${filtros.dataFim}`);
+      
       q = query(
         q,
-        where("dataInicio", ">=", Timestamp.fromDate(new Date(filtros.dataInicio))),
-        where("dataInicio", "<=", Timestamp.fromDate(new Date(filtros.dataFim)))
+        where("dataInicio", ">=", inicio),
+        where("dataInicio", "<=", fim)
       );
     }
 
+    console.log('📅 [buscarEventos] Executando query no Firestore...');
     const snapshot = await getDocs(q);
+    console.log(`📅 [buscarEventos] Query executada. ${snapshot.size} documentos retornados.`);
+    
     const eventos = snapshot.docs.map((doc) => {
       const data = doc.data();
       return {
@@ -148,9 +159,15 @@ export const buscarEventos = async (filtros = {}) => {
       };
     });
 
+    console.log(`✅ [buscarEventos] ${eventos.length} eventos processados e retornados`);
     return eventos;
   } catch (error) {
-    console.error("Erro ao buscar eventos:", error);
+    console.error("❌ [buscarEventos] Erro ao buscar eventos:", error);
+    console.error("❌ [buscarEventos] Detalhes do erro:", {
+      code: error.code,
+      message: error.message,
+      stack: error.stack
+    });
     throw new Error(`Falha ao buscar eventos: ${error.message}`);
   }
 };
@@ -160,13 +177,19 @@ export const buscarEventosPorMes = async (ano, mes) => {
     const primeiroDia = new Date(ano, mes - 1, 1);
     const ultimoDia = new Date(ano, mes, 0, 23, 59, 59);
 
-    return await buscarEventos({
+    console.log(`📅 [calendarioService] Buscando eventos de ${mes}/${ano}`);
+    console.log(`📅 [calendarioService] Período: ${primeiroDia.toLocaleDateString()} até ${ultimoDia.toLocaleDateString()}`);
+
+    const eventos = await buscarEventos({
       ativo: true,
       dataInicio: primeiroDia,
       dataFim: ultimoDia,
     });
+
+    console.log(`✅ [calendarioService] ${eventos.length} eventos encontrados no período`);
+    return eventos;
   } catch (error) {
-    console.error("Erro ao buscar eventos do mês:", error);
+    console.error("❌ [calendarioService] Erro ao buscar eventos do mês:", error);
     return [];
   }
 };

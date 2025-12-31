@@ -27,20 +27,25 @@ export function useAgendas(categoria = null) {
       setLoading(true);
       setError(null);
 
+      console.log('📋 [useAgendas] Carregando agendas...');
+
       let resultado;
       if (categoria) {
+        console.log(`📋 [useAgendas] Filtrando por categoria: ${categoria}`);
         resultado = await buscarAgendasPorCategoria(categoria);
       } else {
         resultado = await buscarTodasAgendas();
       }
 
+      console.log(`✅ [useAgendas] ${resultado.length} agendas carregadas:`, resultado);
       setAgendas(resultado);
 
       // Agrupar por categoria
       const agrupadas = agruparAgendasPorCategoria(resultado);
+      console.log('📊 [useAgendas] Agendas agrupadas:', agrupadas);
       setAgendasAgrupadas(agrupadas);
     } catch (err) {
-      console.error('Erro ao carregar agendas:', err);
+      console.error('❌ [useAgendas] Erro ao carregar agendas:', err);
       setError(err.message);
     } finally {
       setLoading(false);

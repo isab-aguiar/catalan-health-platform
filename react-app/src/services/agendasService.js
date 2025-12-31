@@ -51,6 +51,7 @@ export const DIAS_SEMANA = [
  */
 export async function buscarTodasAgendas() {
   try {
+    console.log('📋 [agendasService] Buscando todas as agendas...');
     const q = query(collection(db, COLLECTION_NAME), orderBy('categoria'), orderBy('nome'));
     const querySnapshot = await getDocs(q);
 
@@ -64,9 +65,10 @@ export async function buscarTodasAgendas() {
       });
     });
 
+    console.log(`✅ [agendasService] ${agendas.length} agendas encontradas`);
     return agendas;
   } catch (error) {
-    console.error('Erro ao buscar agendas:', error);
+    console.error('❌ [agendasService] Erro ao buscar agendas:', error);
     throw error;
   }
 }

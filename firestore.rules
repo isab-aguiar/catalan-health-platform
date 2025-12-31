@@ -163,6 +163,22 @@ service cloud.firestore {
     }
 
     // =====================================================
+    // COLEÇÃO: agendas_semanais
+    // =====================================================
+    match /agendas_semanais/{agendaId} {
+      // Leitura pública de agendas ativas
+      // Staff pode ler todas as agendas
+      allow read: if true; // Permite leitura pública para exibir agendas de atendimento
+
+      // Staff (admin + profissional) pode criar e atualizar agendas
+      allow create: if isStaff();
+      allow update: if isStaff();
+
+      // Apenas admins podem deletar agendas
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
     // COLEÇÃO: notificacoes
     // =====================================================
     match /notificacoes/{notificacaoId} {

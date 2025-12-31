@@ -26,8 +26,11 @@ export function useEventos(mes, ano) {
     try {
       setLoading(true);
       setError(null);
+      console.log(`📅 [useEventos] Carregando eventos de ${mes}/${ano}...`);
+      
       const eventosData = await buscarEventosPorMes(ano, mes);
 
+      console.log(`✅ [useEventos] ${eventosData.length} eventos carregados:`, eventosData);
       setEventos(eventosData);
     } catch (err) {
       console.error('❌ [useEventos] Erro ao carregar eventos:', err);
