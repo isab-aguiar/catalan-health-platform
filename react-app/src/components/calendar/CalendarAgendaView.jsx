@@ -265,58 +265,90 @@ export default function CalendarAgendaView({
           return (
             <div
               key={dayKey}
-              className={`bg-white rounded-lg shadow-sm border overflow-hidden ${
-                hoje ? 'border-primary-300 ring-2 ring-primary-100' : 'border-neutral-200'
+              className={`group relative bg-white rounded-xl shadow-md border overflow-hidden transition-all duration-300 hover:shadow-xl ${
+                hoje 
+                  ? 'border-blue-400 ring-2 ring-blue-100 shadow-blue-100' 
+                  : 'border-neutral-200 hover:border-blue-200'
               }`}
             >
-              {/* Header do Dia */}
-              <div className={`p-4 border-b ${
+              {/* Indicador lateral para hoje */}
+              {hoje && (
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-500 to-indigo-600" />
+              )}
+
+              {/* Header do Dia Aprimorado */}
+              <div className={`p-5 border-b backdrop-blur-sm ${
                 hoje
-                  ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border-primary-200'
-                  : 'bg-gradient-to-r from-neutral-50 to-neutral-100 border-neutral-200'
+                  ? 'bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-blue-200'
+                  : 'bg-gradient-to-r from-neutral-50 to-neutral-100/50 border-neutral-200'
               }`}>
                 <div className="flex items-center justify-between">
-                  <div>
-                    <h4 className={`text-lg font-semibold capitalize ${
-                      hoje ? 'text-primary-700' : 'text-neutral-900'
-                    }`}>
-                      {formatarDiaSemana(day)}
-                    </h4>
-                    <p className="text-sm text-neutral-600">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3">
+                      <h4 className={`text-xl font-bold capitalize ${
+                        hoje ? 'text-blue-700' : 'text-neutral-900'
+                      }`}>
+                        {formatarDiaSemana(day)}
+                      </h4>
+                      {hoje && (
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-bold rounded-full shadow-md animate-pulse">
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          HOJE
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm text-neutral-600 mt-1 font-medium">
                       {day.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
                     </p>
                   </div>
-                  <div className={`text-right ${hoje ? 'text-primary-600' : 'text-neutral-600'}`}>
-                    <div className="text-3xl font-bold">{day.getDate()}</div>
-                    {hoje && (
-                      <span className="inline-block px-2 py-1 bg-primary-600 text-white text-xs font-medium rounded-full mt-1">
-                        Hoje
-                      </span>
-                    )}
+                  
+                  <div className={`text-right ${hoje ? 'text-blue-600' : 'text-neutral-600'}`}>
+                    <div className="text-4xl font-black leading-none">{day.getDate()}</div>
+                    <div className="text-xs font-semibold mt-1 opacity-70">
+                      {day.toLocaleDateString('pt-BR', { month: 'short' }).toUpperCase()}
+                    </div>
                   </div>
                 </div>
-                <div className="mt-2 text-sm font-medium text-neutral-600 flex items-center gap-2">
-                  <span>{eventosDay.length} {eventosDay.length === 1 ? 'evento' : 'eventos'}</span>
+
+                {/* Resumo de Itens */}
+                <div className="mt-4 flex flex-wrap items-center gap-3">
+                  {eventosDay.length > 0 && (
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white/80 backdrop-blur-sm rounded-lg border border-neutral-200 shadow-sm">
+                      <Calendar className="w-4 h-4 text-blue-600" />
+                      <span className="text-sm font-bold text-neutral-900">{eventosDay.length}</span>
+                      <span className="text-sm text-neutral-600">{eventosDay.length === 1 ? 'evento' : 'eventos'}</span>
+                    </div>
+                  )}
                   {agendas.length > 0 && (
                     <>
-                      <span>•</span>
-                      <span className="text-indigo-600">{agendas.filter(a => {
-                        const diaSemana = day.toLocaleDateString('pt-BR', { weekday: 'long' });
-                        const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
-                        return (a.agendaSemanal?.[diaSemanaCapitalizado] || []).length > 0;
-                      }).length} {agendas.filter(a => {
-                        const diaSemana = day.toLocaleDateString('pt-BR', { weekday: 'long' });
-                        const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
-                        return (a.agendaSemanal?.[diaSemanaCapitalizado] || []).length > 0;
-                      }).length === 1 ? 'agenda' : 'agendas'}</span>
+                      {(() => {
+                        const agendasCount = agendas.filter(a => {
+                          const diaSemana = day.toLocaleDateString('pt-BR', { weekday: 'long' });
+                          const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+                          return (a.agendaSemanal?.[diaSemanaCapitalizado] || []).length > 0;
+                        }).length;
+                        
+                        return agendasCount > 0 ? (
+                          <div className="flex items-center gap-2 px-3 py-1.5 bg-white/80 backdrop-blur-sm rounded-lg border border-indigo-200 shadow-sm">
+                            <Users className="w-4 h-4 text-indigo-600" />
+                            <span className="text-sm font-bold text-neutral-900">{agendasCount}</span>
+                            <span className="text-sm text-neutral-600">{agendasCount === 1 ? 'agenda' : 'agendas'}</span>
+                          </div>
+                        ) : null;
+                      })()}
                     </>
+                  )}
+                  {eventosDay.length === 0 && agendas.length === 0 && (
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-100 rounded-lg">
+                      <AlertCircle className="w-4 h-4 text-neutral-400" />
+                      <span className="text-sm text-neutral-500">Sem atividades</span>
+                    </div>
                   )}
                 </div>
               </div>
 
               {/* Eventos e Agendas do Dia */}
-              <div className="p-4">
-                {eventosDay.length === 0 && agendas.length === 0 ? (
+              <div className="p-5">{eventosDay.length === 0 && agendas.length === 0 ? (
                   <div className="text-center py-8">
                     <Calendar className="w-12 h-12 text-neutral-300 mx-auto mb-2" />
                     <p className="text-sm text-neutral-500">Nenhum evento ou agenda neste dia</p>
