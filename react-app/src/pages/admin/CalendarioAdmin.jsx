@@ -62,6 +62,12 @@ export default function CalendarioAdmin() {
 
   useBodyScrollLock(showEventModal || showDetalhesModal || showEscalasModal || showModalDia || showAgendaModal);
 
+  // Debug: Log de agendas carregadas
+  useEffect(() => {
+    console.log('📋 [CalendarioAdmin] Agendas do Firestore:', agendasFirestore?.length || 0, agendasFirestore);
+    console.log('📋 [CalendarioAdmin] Loading agendas:', loadingAgendas);
+  }, [agendasFirestore, loadingAgendas]);
+
   // Inicializar sistema de notificações
   useEffect(() => {
     // Solicitar permissão ao carregar a página
@@ -632,6 +638,10 @@ export default function CalendarioAdmin() {
           onEventDelete={handleDeletarEventoSemStop}
           onAgendaEdit={handleEditarAgenda}
           onAgendaDelete={handleDeletarAgenda}
+          onCreateAgenda={() => {
+            setAgendaEditando(null);
+            setShowAgendaModal(true);
+          }}
           initialDate={currentDate}
         />
       )}

@@ -109,7 +109,7 @@ export default function CalendarDashboard({
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         <StatsCard
           icon={Calendar}
           title="Eventos Hoje"
@@ -133,6 +133,12 @@ export default function CalendarDashboard({
           title="Lembretes Ativos"
           value={stats.lembretesAtivos}
           bgColor="bg-amber-500"
+        />
+        <StatsCard
+          icon={Users}
+          title="Agendas Profissionais"
+          value={stats.totalAgendas}
+          bgColor="bg-indigo-500"
         />
       </div>
 
@@ -287,6 +293,118 @@ export default function CalendarDashboard({
               </div>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* Agendas dos Profissionais de Hoje */}
+      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
+        <div className="p-6 border-b border-neutral-200 bg-gradient-to-r from-indigo-50 to-purple-50">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-neutral-900 flex items-center gap-2">
+              <Stethoscope className="w-5 h-5 text-indigo-600" />
+              Agendas de Hoje ({stats.diaSemanaHoje})
+            </h3>
+            {onCreateAgenda && (
+              <button
+                onClick={onCreateAgenda}
+                className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-200 flex items-center gap-1.5 text-sm font-medium"
+              >
+                <Plus className="w-4 h-4" />
+                Nova Agenda
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="p-6">
+          {stats.agendasHoje.length === 0 ? (
+            <EmptyState
+              icon={Users}
+              title="Nenhuma agenda para hoje"
+              message="Não há profissionais com atividades agendadas para este dia."
+              action={
+                onCreateAgenda && (
+                  <button
+                    onClick={onCreateAgenda}
+                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md"
+                  >
+                    <Plus className="w-4 h-4" />
+                    Criar Agenda
+                  </button>
+                )
+              }
+            />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {stats.agendasHoje.map((agenda) => {
+                const atividades = agenda.agendaSemanal?.[stats.diaSemanaHoje] || [];
+
+                return (
+                  <div
+                    key={agenda.id}
+                    className="group border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/50 to-purple-50/30 rounded-xl p-5 transition-all duration-300 hover:shadow-lg hover:border-indigo-300"
+                  >
+                    {/* Header com nome e categoria */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="p-2.5 bg-indigo-600 rounded-lg shadow-md">
+                          <Stethoscope className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-lg text-indigo-900">{agenda.nome}</h4>
+                          <span className="text-xs px-2 py-0.5 bg-indigo-600 text-white rounded-full font-medium">
+                            {agenda.categoria}
+                          </span>
+                        </div>
+                      </div>
+                      {/* Botões de ação */}
+                      <div className="flex gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                        {onAgendaEdit && (
+                          <button
+                            onClick={() => onAgendaEdit(agenda)}
+                            className="p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                            title="Editar"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                        )}
+                        {onAgendaDelete && (
+                          <button
+                            onClick={() => onAgendaDelete(agenda)}
+                            className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                            title="Excluir"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Atividades do dia */}
+                    <div className="space-y-2">
+                      {atividades.slice(0, 3).map((atividade, idx) => (
+                        <div 
+                          key={idx} 
+                          className="flex items-start gap-3 p-2.5 bg-white/80 backdrop-blur-sm rounded-lg border border-indigo-100"
+                        >
+                          <div className="flex items-center gap-1.5 px-2 py-1 bg-indigo-100 rounded text-xs font-bold text-indigo-900">
+                            <Clock className="w-3 h-3" />
+                            {atividade.horario}
+                          </div>
+                          <span className="text-sm text-indigo-800 flex-1">{atividade.atividade}</span>
+                        </div>
+                      ))}
+                      {atividades.length > 3 && (
+                        <p className="text-xs text-indigo-600 font-medium text-center pt-1">
+                          + {atividades.length - 3} mais atividades
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 

@@ -34,6 +34,7 @@ export default function CalendarAgendaView({
   onEventDelete,
   onAgendaEdit,
   onAgendaDelete,
+  onCreateAgenda,
   initialDate = new Date()
 }) {
   const [currentDate, setCurrentDate] = useState(initialDate);
@@ -194,6 +195,17 @@ export default function CalendarAgendaView({
               >
                 <span className="hidden sm:inline">Ir para </span>Hoje
               </button>
+
+              {onCreateAgenda && (
+                <button
+                  onClick={onCreateAgenda}
+                  className="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg"
+                  title="Nova Agenda"
+                >
+                  <Users className="w-4 h-4" />
+                  <span className="hidden sm:inline">Nova Agenda</span>
+                </button>
+              )}
 
               <button
                 className="p-2 hover:bg-white/80 rounded-lg transition-all duration-200 border border-neutral-200 hover:shadow-md"
