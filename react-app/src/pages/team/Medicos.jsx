@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Heart, ExternalLink } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import { AlertCircle, ExternalLink } from "lucide-react";
+import { BackButton, RecommendedReadingCarousel, InfoBox } from "../../components/common";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import medicoImg from "../../assets/medico/medico.png";
 import { PageContainer } from "../../components/layout";
@@ -101,16 +101,13 @@ export default function Medicos() {
         {/* Card Atendimento Médico de Família */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
-            <div className="flex items-center gap-3">
-              <Heart size={28} className="text-primary-600" />
-              <div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
-                  Atendimento Médico de Família
-                </h2>
-                <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                  Cuidado integral para toda a família em todas as fases da vida
-                </p>
-              </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                Atendimento Médico de Família
+              </h2>
+              <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                Cuidado integral para toda a família em todas as fases da vida
+              </p>
             </div>
           </div>
 
@@ -308,28 +305,22 @@ export default function Medicos() {
         </InfoBox>
         {}
         <div className="mb-6">
-          <Alert type="info">
-            <div>
-              <p className="mb-2">
-                <strong>
-                  Importante sobre Atendimento por Demanda Espontânea
-                </strong>
-              </p>
-              <p className="mb-2">
-                O atendimento por demanda espontânea não garante consulta médica
-                imediata. Todos os casos de demanda espontânea passam por uma
-                avaliação inicial na triagem de enfermagem, que determina a
-                necessidade e prioridade do atendimento.
-              </p>
-              <p>
-                Conforme a avaliação realizada na triagem, o usuário poderá ser
-                encaminhado para consulta médica ou para consulta de enfermagem,
-                dependendo da necessidade clínica identificada. A triagem é
-                essencial para garantir o melhor encaminhamento e otimizar o
-                atendimento na unidade.
-              </p>
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <AlertCircle size={20} className="text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-green-900 mb-2 text-base">Importante sobre Atendimento por Demanda Espontânea</h3>
+                <p className="text-neutral-800 text-sm leading-relaxed mb-2">
+                  O atendimento por demanda espontânea não garante consulta médica imediata. Todos os casos de demanda espontânea passam por uma avaliação inicial na triagem de enfermagem, que determina a necessidade e prioridade do atendimento.
+                </p>
+                <p className="text-neutral-800 text-sm leading-relaxed">
+                  Conforme a avaliação realizada na triagem, o usuário poderá ser encaminhado para consulta médica ou para consulta de enfermagem, dependendo da necessidade clínica identificada. A triagem é essencial para garantir o melhor encaminhamento e otimizar o atendimento na unidade.
+                </p>
+              </div>
             </div>
-          </Alert>
+          </div>
         </div>
         {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">

@@ -1,10 +1,9 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, FileText } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 import PageContainer from "../../components/layout/PageContainer";
-import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
 
@@ -243,44 +242,53 @@ export default function Triagem() {
             </div>
           </div>
           <div className="mt-4">
-            <Alert type="warning">
-              <strong>Normativa:</strong> Documento de identificação com foto e
-              CPF são obrigatórios para qualquer atendimento na unidade.
-            </Alert>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
 
         {/* Modalidades de Atendimento */}
-        <div className="bg-gradient-to-br from-purple-50 to-violet-50 rounded-lg p-6 shadow-sm border border-purple-200 mb-6">
-          <h2 className="text-xl font-bold text-purple-900 mb-4">
+        <div className="bg-white rounded-lg p-6 shadow-sm border border-neutral-200 mb-6">
+          <h2 className="text-xl font-bold text-neutral-900 mb-4">
             Modalidades de Atendimento
           </h2>
           <div className="space-y-4">
-            <div className="bg-white/70 border border-purple-100 rounded-lg p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
+            <div className="bg-white border border-neutral-200 rounded-lg p-4">
+              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
                 Consultas de Rotina
               </h3>
-              <p className="text-neutral-700 leading-relaxed text-sm">
+              <p className="text-neutral-900 leading-relaxed text-sm">
                 As consultas de rotina devem ser agendadas com antecedência,
                 conforme disponibilidade de horários e necessidade clínica do
                 usuário. O agendamento garante melhor organização do fluxo de
                 atendimento e otimização do tempo de espera.
               </p>
             </div>
-            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
+            <div className="bg-white border border-neutral-200 rounded-lg p-4">
+              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
                 Atendimento Sob Demanda
               </h3>
-              <p className="text-neutral-700 leading-relaxed text-sm mb-3">
+              <p className="text-neutral-900 leading-relaxed text-sm mb-3">
                 O atendimento sob demanda está disponível mediante triagem
                 clínica inicial realizada:
               </p>
-              <ul className="list-disc list-inside text-sm text-neutral-700 mb-3 space-y-1">
+              <ul className="list-disc list-inside text-sm text-neutral-900 mb-3 space-y-1">
                 <li><strong>Período matutino</strong> de 07h00 às 08h00</li>
                 <li><strong>Período noturno</strong> de 18h00 às 19h00</li>
               </ul>
-              <div className="bg-white border-l-4 border-blue-600 p-3 rounded-r">
-                <p className="text-sm text-neutral-800 leading-relaxed">
+              <div className="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r">
+                <p className="text-sm text-neutral-900 leading-relaxed">
                   <strong>Como funciona a Triagem:</strong> A triagem é uma
                   avaliação clínica inicial realizada por profissional de
                   enfermagem qualificado. Este procedimento não garante consulta

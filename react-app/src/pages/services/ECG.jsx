@@ -1,5 +1,5 @@
 import { AlertCircle, Activity, FileText, Clock, CheckCircle } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import { BackButton, RecommendedReadingCarousel, InfoBox } from "../../components/common";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import { PageContainer } from "../../components/layout";
@@ -187,10 +187,19 @@ export default function ECG() {
           </div>
 
           <div className="mt-4">
-            <Alert type="warning">
-              <strong>Normativa:</strong> Documento de identificação com foto e
-              CPF são obrigatórios para qualquer atendimento na unidade.
-            </Alert>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
 

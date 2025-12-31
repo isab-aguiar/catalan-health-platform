@@ -117,23 +117,27 @@ export default function Vacinas() {
             </div>
           </div>
           <div className="mt-4">
-            <Alert type="info">
-              <p className="text-neutral-800 text-xs md:text-sm font-normal leading-relaxed">
-                <strong>Observação sobre Carteira de Vacinação:</strong>{" "}
-                Apresente sua carteira de vacinação em todas as consultas, mesmo
-                que considere estar em dia. A equipe de saúde pode identificar
-                vacinas que necessitam de reforço ou atualização conforme o
-                calendário nacional.
-              </p>
-            </Alert>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <AlertCircle size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-green-900 mb-2 text-base">Observação sobre Carteira de Vacinação</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    Apresente sua carteira de vacinação em todas as consultas, mesmo que considere estar em dia. A equipe de saúde pode identificar vacinas que necessitam de reforço ou atualização conforme o calendário nacional.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Seção Profilaxia da Raiva Humana */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
-          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-amber-50 to-orange-50">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Shield size={28} className="text-white" />
               </div>
               <div>
@@ -178,11 +182,11 @@ export default function Vacinas() {
                 </div>
 
                 {/* Soro */}
-                <div className="bg-purple-50 border-l-4 border-purple-600 rounded-r-lg p-4">
+                <div className="bg-green-50 border-l-4 border-green-600 rounded-r-lg p-4">
                   <div className="flex items-start gap-3">
-                    <Shield size={20} className="text-purple-600 mt-0.5 flex-shrink-0" />
+                    <Shield size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
                     <div>
-                      <h4 className="font-semibold text-purple-900 mb-2">
+                      <h4 className="font-semibold text-green-900 mb-2">
                         Imunoglobulina (Soro) Antirrábica
                       </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
@@ -231,22 +235,22 @@ export default function Vacinas() {
             </div>
 
             {/* Critérios de Atendimento */}
-            <div className="bg-amber-50 border-l-4 border-amber-600 rounded-r-lg p-5 mb-6">
-              <h3 className="font-semibold text-amber-900 text-lg mb-4">
+            <div className="bg-green-50 border-l-4 border-green-600 rounded-r-lg p-5 mb-6">
+              <h3 className="font-semibold text-green-900 text-lg mb-4">
                 Informações Importantes
               </h3>
               <div className="space-y-3 text-sm text-neutral-700">
                 <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+                  <AlertCircle size={16} className="text-green-600 mt-0.5 flex-shrink-0" />
                   <p>
-                    <strong className="text-amber-900">Protocolo Oficial:</strong> A aplicação dos imunobiológicos segue
+                    <strong className="text-green-900">Protocolo Oficial:</strong> A aplicação dos imunobiológicos segue
                     rigorosamente os protocolos definidos pelo Ministério da Saúde, sendo condicionada à avaliação profissional prévia.
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
+                  <AlertCircle size={16} className="text-green-600 mt-0.5 flex-shrink-0" />
                   <p>
-                    <strong className="text-amber-900">Unidades de Referência:</strong> As unidades listadas abaixo são
+                    <strong className="text-green-900">Unidades de Referência:</strong> As unidades listadas abaixo são
                     referências técnicas exclusivas para este procedimento. Elas não realizam atendimentos de rotina ou
                     outras vacinações fora deste escopo específico nos horários indicados.
                   </p>
@@ -457,12 +461,14 @@ export default function Vacinas() {
             </div>
 
             {/* Aviso Final */}
-            <div className="bg-red-50 border-l-4 border-red-600 rounded-r-lg p-4 mt-6">
-              <div className="flex items-start gap-3">
-                <AlertCircle size={20} className="text-red-600 mt-0.5 flex-shrink-0" />
-                <div className="text-sm text-neutral-700">
-                  <p className="font-semibold text-red-900 mb-2">Importante</p>
-                  <p className="leading-relaxed">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200 mt-6">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <AlertCircle size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-green-900 mb-2 text-base">Importante</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
                     Em caso de exposição ao vírus da raiva (mordida, arranhão ou contato com mucosas de
                     animais), dirija-se imediatamente à ESF Catalão para avaliação inicial. O tratamento profilático
                     deve ser iniciado o mais breve possível após a avaliação profissional para garantir sua eficácia.

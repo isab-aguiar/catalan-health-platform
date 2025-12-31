@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Heart, ExternalLink } from "lucide-react";
+import { AlertCircle, ExternalLink } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import ginecologiaImg from "../../assets/ginecologista/ilustracao-de-consulta-de-ginecologia.avif";
@@ -108,16 +108,13 @@ export default function Ginecologista() {
         {/* Card Cuidado Integral à Saúde Feminina */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
-            <div className="flex items-center gap-3">
-              <Heart size={28} className="text-primary-600" />
-              <div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
-                  Cuidado Integral à Saúde Feminina
-                </h2>
-                <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                  Atendimento especializado para mulheres em todas as fases da vida
-                </p>
-              </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                Cuidado Integral à Saúde Feminina
+              </h2>
+              <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                Atendimento especializado para mulheres em todas as fases da vida
+              </p>
             </div>
           </div>
 
@@ -371,12 +368,18 @@ export default function Ginecologista() {
             </div>
           </div>
 
-          <div className="bg-info/10 border border-blue-200 rounded p-4">
-            <p className="text-sm text-neutral-700">
-              <strong className="text-blue-900">Importante:</strong> O padrão de intercalação é:
-              1ª consulta com Enfermagem, 2ª com Ginecologista, e assim sucessivamente,
-              garantindo o acompanhamento completo e contínuo durante toda a gestação.
-            </p>
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <AlertCircle size={20} className="text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-green-900 mb-2 text-base">Importante</h3>
+                <p className="text-neutral-800 text-sm leading-relaxed">
+                  O padrão de intercalação é: 1ª consulta com Enfermagem, 2ª com Ginecologista, e assim sucessivamente, garantindo o acompanhamento completo e contínuo durante toda a gestação.
+                </p>
+              </div>
+            </div>
           </div>
         </InfoBox>
         {/* Orientação Importante */}

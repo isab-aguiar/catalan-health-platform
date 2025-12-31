@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Heart, ExternalLink } from "lucide-react";
+import { AlertCircle, ExternalLink } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import farmaceuticaImg from "../../assets/farmaceutica/farmaceutica.jpg";
@@ -98,16 +98,13 @@ export default function Farmaceutica() {
         {/* Card Consultório Farmacêutico */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
-            <div className="flex items-center gap-3">
-              <Heart size={28} className="text-primary-600" />
-              <div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
-                  Cuidado Farmacêutico Clínico
-                </h2>
-                <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                  Acompanhamento especializado para uso seguro e eficaz de medicamentos
-                </p>
-              </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                Cuidado Farmacêutico Clínico
+              </h2>
+              <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                Acompanhamento especializado para uso seguro e eficaz de medicamentos
+              </p>
             </div>
           </div>
 

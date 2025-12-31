@@ -8,7 +8,6 @@ import ImageWithCredit from "../../components/common/ImageWithCredit";
 import testePezinhoImg from "../../assets/teste-pezinho/teste-do-pezinho.svg";
 import useScrollToHash from "../../hooks/useScrollToHash";
 import PageContainer from "../../components/layout/PageContainer";
-import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
 export default function Procedimentos() {
@@ -141,9 +140,19 @@ export default function Procedimentos() {
                   <p>
                     <strong>Efeitos colaterais:</strong> Podem ocorrer reações leves no local da aplicação, náusea ou dor de cabeça. Informe qualquer reação ao profissional de saúde.
                   </p>
-                  <p>
-                    <strong>Importante:</strong> Este procedimento requer prescrição médica e acompanhamento profissional durante toda a aplicação.
-                  </p>
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 shadow-sm border border-green-200 mt-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <AlertCircle size={18} className="text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-green-900 mb-1 text-sm">Importante</h4>
+                        <p className="text-neutral-800 text-sm leading-relaxed">
+                          Este procedimento requer prescrição médica e acompanhamento profissional durante toda a aplicação.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -237,15 +246,15 @@ export default function Procedimentos() {
                 </div>
 
                 {/* Observação Importante */}
-                <div className="bg-red-50 border-l-4 border-red-600 rounded-r p-4">
-                  <div className="flex items-start gap-3">
-                    <AlertCircle size={20} className="text-red-600 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-red-900 mb-2">
-                        Importante: Não realizar antes de 48 horas
-                      </h4>
-                      <p className="text-sm text-neutral-700 leading-relaxed">
-                        O teste não deve ser realizado antes das primeiras 48 horas de vida, pois a coleta precoce pode gerar resultados "falso-negativos" devido à ausência de estabilização metabólica fora do ambiente uterino.
+                <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-lg p-5 shadow-sm border border-red-200">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <AlertCircle size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-red-900 mb-2 text-base">Importante</h3>
+                      <p className="text-neutral-800 text-sm leading-relaxed mb-2">
+                        <strong>Não realizar antes de 48 horas:</strong> O teste não deve ser realizado antes das primeiras 48 horas de vida, pois a coleta precoce pode gerar resultados "falso-negativos" devido à ausência de estabilização metabólica fora do ambiente uterino.
                       </p>
                     </div>
                   </div>
@@ -511,10 +520,19 @@ export default function Procedimentos() {
             </div>
           </div>
           <div className="mt-4">
-            <Alert type="warning">
-              <strong>Normativa:</strong> Documento de identificação com foto e
-              CPF são obrigatórios para qualquer atendimento na unidade.
-            </Alert>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
 

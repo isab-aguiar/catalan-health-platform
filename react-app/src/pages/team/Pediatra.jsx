@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Baby, ExternalLink } from "lucide-react";
+import { AlertCircle, ExternalLink } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
 import pediatriaImg from "../../assets/pediatria/pediatria.png";
 import { PageContainer } from "../../components/layout";
@@ -108,16 +108,13 @@ export default function Pediatra() {
         {/* Card Acompanhamento da Saúde Infantil */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
-            <div className="flex items-center gap-3">
-              <Baby size={28} className="text-primary-600" />
-              <div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
-                  Acompanhamento da Saúde Infantil
-                </h2>
-                <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                  Cuidado integral para o crescimento e desenvolvimento saudável da criança
-                </p>
-              </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                Acompanhamento da Saúde Infantil
+              </h2>
+              <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                Cuidado integral para o crescimento e desenvolvimento saudável da criança
+              </p>
             </div>
           </div>
 
@@ -415,9 +412,19 @@ export default function Pediatra() {
             </div>
           </div>
 
-          <Alert type="warning">
-            <strong>Importante:</strong> SEMPRE traga a carteira de vacinação da criança. É através dela que acompanhamos o desenvolvimento e verificamos se as vacinas estão em dia.
-          </Alert>
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <AlertCircle size={20} className="text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-green-900 mb-2 text-base">Importante</h3>
+                <p className="text-neutral-800 text-sm leading-relaxed">
+                  SEMPRE traga a carteira de vacinação da criança. É através dela que acompanhamos o desenvolvimento e verificamos se as vacinas estão em dia.
+                </p>
+              </div>
+            </div>
+          </div>
         </InfoBox>
         {}
         {/* Orientação Importante */}

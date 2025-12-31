@@ -1,10 +1,9 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, FileText } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 import PageContainer from "../../components/layout/PageContainer";
-import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
 
@@ -119,11 +118,19 @@ export default function Renovacao() {
             </div>
           </div>
           <div className="mt-4">
-            <Alert type="info">
-              <strong>Importante:</strong> Verifique sempre a data de emissão da
-              sua receita e planeje a renovação antes do vencimento para
-              garantir a continuidade do tratamento.
-            </Alert>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <AlertCircle size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-green-900 mb-2 text-base">Importante</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    Verifique sempre a data de emissão da sua receita e planeje a renovação antes do vencimento para garantir a continuidade do tratamento.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -169,10 +176,19 @@ export default function Renovacao() {
             </div>
           </div>
           <div className="mt-4">
-            <Alert type="warning">
-              <strong>Normativa:</strong> Documento de identificação com foto e
-              CPF são obrigatórios para qualquer atendimento na unidade.
-            </Alert>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
 

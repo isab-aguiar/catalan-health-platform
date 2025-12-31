@@ -1,10 +1,9 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, FileText } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 import PageContainer from "../../components/layout/PageContainer";
-import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
 
@@ -17,7 +16,7 @@ export default function Sala9() {
         {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
-            Sala de Atendimento Administrativo
+            Atendimento Administrativo
           </h1>
           <p className="text-primary-100 text-sm mt-1">
             Estratégia Saúde da Família Bela Vista - Catalão - São José
@@ -140,10 +139,19 @@ export default function Sala9() {
             </div>
           </div>
           <div className="mt-4">
-            <Alert type="warning">
-              <strong>Normativa:</strong> Documento de identificação com foto e
-              CPF são obrigatórios para qualquer atendimento na unidade.
-            </Alert>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
 
@@ -153,13 +161,19 @@ export default function Sala9() {
         />
 
         <div className="mt-4">
-          <Alert type="warning">
-            <strong>Lembre-se:</strong> A equipe deste setor monitora o
-            sistema diariamente. Assim que sua vaga for liberada pelo Estado,
-            entraremos em contato via WhatsApp ou ligação telefônica. Mantenha
-            seu telefone celular atualizado e fique atento às chamadas e
-            mensagens!
-          </Alert>
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <AlertCircle size={20} className="text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-green-900 mb-2 text-base">Lembre-se</h3>
+                <p className="text-neutral-800 text-sm leading-relaxed">
+                  A equipe deste setor monitora o sistema diariamente. Assim que sua vaga for liberada pelo Estado, entraremos em contato via WhatsApp ou ligação telefônica. Mantenha seu telefone celular atualizado e fique atento às chamadas e mensagens!
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-import { AlertCircle, Phone, Clock, Youtube, Baby, Smile, ExternalLink } from "lucide-react";
+import { AlertCircle, Phone, Clock, Youtube, Smile, ExternalLink } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
@@ -151,16 +151,13 @@ export default function Dentistas() {
         {/* Card Pré-natal Odontológico */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
-            <div className="flex items-center gap-3">
-              <Baby size={28} className="text-primary-600" />
-              <div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
-                  Pré-natal Odontológico
-                </h2>
-                <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                  Cuidados odontológicos especializados durante a gestação
-                </p>
-              </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                Pré-natal Odontológico
+              </h2>
+              <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                Cuidados odontológicos especializados durante a gestação
+              </p>
             </div>
           </div>
 
@@ -312,9 +309,22 @@ export default function Dentistas() {
                   </div>
                   <div className="flex-1">
                     <strong className="text-neutral-800 text-sm block mb-2">Informações por Telefone</strong>
-                    <p className="text-xs text-neutral-600 mb-2">
-                      Para esclarecimento de dúvidas, você pode entrar em contato por telefone. <strong>Importante:</strong> o agendamento é realizado apenas presencialmente.
+                    <p className="text-xs text-neutral-600 mb-3">
+                      Para esclarecimento de dúvidas, você pode entrar em contato por telefone.
                     </p>
+                    <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 shadow-sm border border-green-200">
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <AlertCircle size={18} className="text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-green-900 mb-1 text-sm">Importante</h4>
+                          <p className="text-neutral-800 text-xs leading-relaxed">
+                            O agendamento é realizado apenas presencialmente.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                     <a
                       href={`tel:${contactInfo.phones.reception.tel}`}
                       className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md transition-colors text-sm"

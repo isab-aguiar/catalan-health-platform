@@ -252,11 +252,19 @@ export default function Recepcao() {
             </div>
           </div>
           <div className="mt-4">
-            <Alert type="info">
-              <strong>Importante:</strong> Sem a apresentação desses documentos,
-              não será possível retirar receitas renovadas ou exames na
-              recepção.
-            </Alert>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <AlertCircle size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-green-900 mb-2 text-base">Importante</h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    Sem a apresentação desses documentos, não será possível retirar receitas renovadas ou exames na recepção.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </InfoBox>
       </div>

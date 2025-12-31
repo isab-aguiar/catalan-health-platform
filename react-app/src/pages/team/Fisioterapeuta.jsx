@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Heart, ExternalLink } from "lucide-react";
+import { AlertCircle, ExternalLink } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import fisioterapiaImg from "../../assets/fisioterapia/fisioterapia.png";
@@ -98,16 +98,13 @@ export default function Fisioterapeuta() {
         {/* Card Fisioterapia */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
-            <div className="flex items-center gap-3">
-              <Heart size={28} className="text-primary-600" />
-              <div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
-                  Fisioterapia na Atenção Primária
-                </h2>
-                <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                  Reabilitação e cuidado integral para recuperação funcional
-                </p>
-              </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                Fisioterapia na Atenção Primária
+              </h2>
+              <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                Reabilitação e cuidado integral para recuperação funcional
+              </p>
             </div>
           </div>
 
@@ -272,21 +269,25 @@ export default function Fisioterapeuta() {
         </InfoBox>
         {}
         <div className="mb-6">
-          <Alert type="info">
-            <div>
-              <p className="mb-2">
-                <strong>Dica Importante:</strong> Use roupas confortáveis e
-                leves nas sessões de fisioterapia. Isso facilita a realização
-                dos exercícios e procedimentos.
-              </p>
-              <p>
-                <strong>Compromisso é fundamental!</strong> A fisioterapia
-                funciona melhor quando você comparece regularmente às sessões e
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200 mb-4">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <AlertCircle size={20} className="text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-bold text-green-900 mb-2 text-base">Dica Importante</h3>
+                <p className="text-neutral-800 text-sm leading-relaxed mb-3">
+                  Use roupas confortáveis e leves nas sessões de fisioterapia. Isso facilita a realização dos exercícios e procedimentos.
+                </p>
+                <p className="text-neutral-800 text-sm leading-relaxed">
+                  <strong>Compromisso é fundamental!</strong> A fisioterapia
+                  funciona melhor quando você comparece regularmente às sessões e
                 segue as orientações da fisioterapeuta em casa. Não desista do
                 seu tratamento!
               </p>
+              </div>
             </div>
-          </Alert>
+          </div>
         </div>
         {}
         <InfoBox title="Profissionais e Horários de Atendimento">
