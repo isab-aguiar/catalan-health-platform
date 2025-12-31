@@ -142,7 +142,7 @@ export default function ACSPage() {
             <div className="flex items-center gap-2">
               <BackButton className="mb-0 bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/40 backdrop-blur-md shadow-none" />
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-normal md:whitespace-nowrap">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-normal md:whitespace-nowrap pb-2.5">
               Agentes Comunitários de Saúde
             </h1>
           </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Users, FileText, Calendar, Phone, Heart, Stethoscope, Baby, UserCheck } from "lucide-react";
+import { AlertCircle, Users, FileText, Calendar, Phone, Heart, Stethoscope, Baby, UserCheck, CheckCircle } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
@@ -106,8 +106,7 @@ export default function BolsaFamilia() {
                 />
               </div>
               <div className="text-center md:text-left">
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 flex items-center gap-3 justify-center md:justify-start">
-                  <Heart className="w-8 h-8" />
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
                   Acompanhamento de Saúde
                 </h2>
                 <p className="text-green-50 text-lg">
@@ -181,8 +180,7 @@ export default function BolsaFamilia() {
 
             {/* Serviços Realizados */}
             <div className="bg-white rounded-lg p-6 shadow-sm border border-green-200">
-              <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-                <Stethoscope className="w-6 h-6" />
+              <h3 className="text-xl font-bold text-green-800 mb-4">
                 Quais serviços são realizados?
               </h3>
               <p className="text-neutral-600 mb-4">
@@ -227,167 +225,173 @@ export default function BolsaFamilia() {
               </div>
             </div>
 
-            {/* Documentos Necessários */}
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-green-200">
-              <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
-                <FileText className="w-6 h-6" />
-                Documentos Necessários
-              </h3>
-              <p className="text-neutral-600 mb-4">
-                Para realizar o acompanhamento, compareça à <Link to="/servicos/recepcao" className="text-green-600 hover:text-green-700 font-semibold underline">recepção</Link> munido de:
-              </p>
-              <div className="grid md:grid-cols-2 gap-3">
-                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
-                  <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
-                  <span className="text-sm text-neutral-700">
-                    <strong>Cartão do Bolsa Família</strong> (com NIS)
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
-                  <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
-                  <span className="text-sm text-neutral-700">
-                    <strong>Caderneta de Vacinação</strong> das crianças
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
-                  <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
-                  <span className="text-sm text-neutral-700">
-                    <strong>Cartão da Gestante</strong> (se aplicável)
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
-                  <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
-                  <span className="text-sm text-neutral-700">
-                    <strong>Documento de identidade</strong> (RG ou CPF)
-                  </span>
-                </div>
-              </div>
-            </div>
-
             {/* Alerta sobre Prazos */}
-            <div className="bg-gradient-to-r from-amber-100 to-yellow-100 border-l-4 border-amber-500 rounded-lg p-6 shadow-md">
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-6 shadow-sm border border-amber-200">
               <div className="flex items-start gap-4">
-                <AlertCircle className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-bold text-amber-900 mb-2 text-lg">Fique Atento aos Prazos</h3>
-                  <p className="text-amber-800 leading-relaxed">
-                    As datas de vigência e os cronogramas atualizados para o comparecimento serão publicados
-                    periodicamente aqui em nosso site oficial. <strong>Mantenha seus dados atualizados</strong> e
-                    acompanhe as informações para não perder os prazos!
+                <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Calendar className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-amber-900 mb-3 text-lg">Acompanhamento de Vigências e Prazos</h3>
+                  <p className="text-neutral-700 leading-relaxed text-sm mb-3">
+                    Para garantir a continuidade do seu benefício no Programa Bolsa Família, é fundamental acompanhar
+                    os períodos de vigência estabelecidos pelo Ministério do Desenvolvimento Social.
                   </p>
+                  <div className="bg-white/60 rounded-md p-4 mb-3">
+                    <h4 className="font-semibold text-amber-900 mb-2 text-sm">Como se manter informado:</h4>
+                    <ul className="space-y-2 text-sm text-neutral-700">
+                      <li className="flex items-start gap-2">
+                        <span className="text-amber-600 font-bold mt-0.5">•</span>
+                        <span>Consulte regularmente o site oficial da unidade</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-amber-600 font-bold mt-0.5">•</span>
+                        <span>Mantenha seus dados de contato atualizados no CadÚnico</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-amber-600 font-bold mt-0.5">•</span>
+                        <span>Fique atento às comunicações enviadas pelo seu{" "}
+                          <Link
+                            to="/acs"
+                            className="text-amber-800 hover:text-amber-900 font-semibold underline"
+                          >
+                            agente comunitário de saúde
+                          </Link>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="bg-amber-100 rounded-md p-3">
+                    <p className="text-amber-900 text-sm font-semibold">
+                      O não comparecimento dentro do prazo estabelecido pode resultar no bloqueio ou suspensão do benefício.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <InfoBox title="Como Acessar" icon={<Calendar size={24} />}>
-          <div className="space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Atendimento Presencial
-              </h3>
-              <p className="text-sm text-neutral-700 mb-3">
-                O atendimento é realizado pela{" "}
-                <Link
-                  to="/equipe/assistente-social"
-                  className="text-primary-600 hover:text-primary-700 font-semibold underline"
-                >
-                  Assistente Social
-                </Link>{" "}
-                da unidade.
-              </p>
-              <p className="text-sm text-neutral-600">
-                <strong>Agendamento:</strong> Dirija-se à{" "}
-                <Link
-                  to="/servicos/sala-4"
-                  className="text-primary-600 hover:text-primary-700 underline"
-                >
-                  Sala de Agendamentos
-                </Link>{" "}
-                para marcar seu atendimento ou compareça diretamente à unidade
-                nos horários de funcionamento.
-              </p>
-            </div>
+        <div className="bg-gradient-to-br from-primary-50 to-blue-50 rounded-lg p-6 shadow-sm mb-6">
+          <h2 className="text-xl font-bold text-primary-900 mb-4">Como Acessar o Serviço</h2>
 
-            <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm flex items-center gap-2">
-                <Phone size={18} className="text-primary-600" />
-                Informações por Telefone
+          <div className="space-y-4">
+            {/* Acompanhamento de Saúde - Bolsa Família */}
+            <div className="bg-white rounded-lg p-5 shadow-sm border border-primary-200">
+              <h3 className="font-bold text-primary-900 mb-3 text-base flex items-center gap-2">
+                <Heart size={20} className="text-primary-600" />
+                Acompanhamento de Condicionalidades de Saúde
               </h3>
-              <p className="text-sm text-neutral-700">
-                Para informações gerais sobre os programas sociais, você também
-                pode entrar em contato com a unidade através dos telefones
-                disponíveis na{" "}
+              <p className="text-sm text-neutral-700 mb-3 leading-relaxed">
+                Para o acompanhamento de saúde do Programa Bolsa Família (vacinação, pré-natal, nutrição),
+                dirija-se diretamente à{" "}
                 <Link
                   to="/servicos/recepcao"
-                  className="text-primary-600 hover:text-primary-700 underline"
+                  className="text-primary-600 hover:text-primary-700 font-semibold underline"
                 >
                   Recepção
-                </Link>
-                .
+                </Link>{" "}
+                da unidade com a documentação necessária.
+              </p>
+              <div className="bg-primary-50 rounded-md p-3">
+                <p className="text-sm text-primary-900">
+                  <strong>Responsáveis:</strong> O acompanhamento é realizado pelos{" "}
+                  <span className="font-semibold">Agentes Comunitários de Saúde (ACS)</span> em parceria
+                  com a equipe de enfermagem da unidade.
+                </p>
+              </div>
+            </div>
+
+            {/* Telefone da Recepção */}
+            <div className="bg-white rounded-lg p-5 shadow-sm border border-primary-200">
+              <h3 className="font-bold text-primary-900 mb-3 text-base flex items-center gap-2">
+                <Phone size={20} className="text-primary-600" />
+                Telefone da Recepção
+              </h3>
+              <p className="text-sm text-neutral-700 leading-relaxed">
+                Para dúvidas ou informações adicionais sobre os programas sociais, entre em contato através do{" "}
+                <Link
+                  to="/#contato"
+                  className="text-primary-600 hover:text-primary-700 font-semibold underline"
+                >
+                  telefone da recepção
+                </Link>{" "}
+                disponível na página inicial.
               </p>
             </div>
+
+            {/* Documentos Necessários */}
+            <div className="bg-white rounded-lg p-5 shadow-sm border border-primary-200">
+              <h3 className="font-bold text-primary-900 mb-3 text-base flex items-center gap-2">
+                <FileText size={20} className="text-primary-600" />
+                Documentos Necessários
+              </h3>
+              <p className="text-sm text-neutral-700 mb-3 leading-relaxed">
+                Para realizar o acompanhamento, compareça à <Link to="/servicos/recepcao" className="text-primary-600 hover:text-primary-700 font-semibold underline">recepção</Link> munido de:
+              </p>
+              <div className="grid md:grid-cols-2 gap-3">
+                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
+                  <div className="w-2 h-2 bg-primary-600 rounded-full flex-shrink-0"></div>
+                  <span className="text-sm text-neutral-700">
+                    <strong>Caderneta de Vacinação</strong> das crianças
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
+                  <div className="w-2 h-2 bg-primary-600 rounded-full flex-shrink-0"></div>
+                  <span className="text-sm text-neutral-700">
+                    <strong>Cartão da Gestante</strong> (se aplicável)
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
+                  <div className="w-2 h-2 bg-primary-600 rounded-full flex-shrink-0"></div>
+                  <span className="text-sm text-neutral-700">
+                    <strong>Documento de identidade</strong> (RG ou CPF)
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
-        </InfoBox>
+        </div>
 
-        <InfoBox
-          title="Documentação Necessária"
-          icon={<FileText size={24} />}
-          highlight={true}
-        >
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documento oficial de identificação com foto (RG ou CNH)
-                </strong>
-              </div>
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <CheckCircle size={24} className="text-white" />
             </div>
-
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">CPF</strong>
+            <div className="flex-1">
+              <h3 className="font-bold text-green-900 mb-3 text-base">Manutenção do Benefício</h3>
+              <p className="text-neutral-700 leading-relaxed text-sm mb-3">
+                O acompanhamento das condicionalidades do Programa Bolsa Família é essencial para garantir
+                a continuidade do benefício da sua família. Existem duas áreas principais de acompanhamento:
+              </p>
+              <div className="grid md:grid-cols-2 gap-3">
+                <div className="bg-white/60 rounded-md p-3">
+                  <h4 className="font-semibold text-green-900 mb-2 text-sm flex items-center gap-2">
+                    <Heart size={16} className="text-green-600" />
+                    Saúde
+                  </h4>
+                  <p className="text-sm text-neutral-700">
+                    Mantenha em dia as consultas de saúde, vacinação e acompanhamento nutricional das crianças e gestantes.
+                  </p>
+                </div>
+                <div className="bg-white/60 rounded-md p-3">
+                  <h4 className="font-semibold text-green-900 mb-2 text-sm flex items-center gap-2">
+                    <Users size={16} className="text-green-600" />
+                    Educação
+                  </h4>
+                  <p className="text-sm text-neutral-700">
+                    Garanta a frequência escolar mínima de 85% para crianças e adolescentes de 6 a 15 anos.
+                  </p>
+                </div>
               </div>
-            </div>
-
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Comprovante de residência atualizado
-                </strong>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documentos de todos os membros da família (quando aplicável)
-                </strong>
-                <p className="text-xs text-neutral-600 mt-1">
-                  RG, CPF, Certidão de Nascimento ou Casamento
+              <div className="mt-3 bg-green-100 rounded-md p-3">
+                <p className="text-green-900 text-sm font-semibold">
+                  O descumprimento das condicionalidades pode resultar em advertência, bloqueio ou suspensão do benefício.
                 </p>
               </div>
             </div>
           </div>
-
-          <Alert type="info">
-            <strong>Observação:</strong> A documentação pode variar conforme o
-            tipo de atendimento ou benefício solicitado. Em caso de dúvidas,
-            consulte a Assistente Social da unidade.
-          </Alert>
-        </InfoBox>
-
-        <Alert type="warning">
-          <strong>Importante:</strong> O acompanhamento das condicionalidades
-          do Bolsa Família (saúde e educação) é fundamental para manutenção do
-          benefício. Mantenha as consultas de saúde e a frequência escolar das
-          crianças em dia.
-        </Alert>
+        </div>
       </div>
     </PageContainer>
   );
