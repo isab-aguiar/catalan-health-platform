@@ -354,7 +354,7 @@ export default function AssistenteSocial() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
           <div>
             <p className="font-semibold mb-2">Orientação Importante</p>
             <p className="text-sm text-white/90 leading-relaxed mb-3">

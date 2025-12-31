@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Heart, ExternalLink } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import ImageWithCredit from "../../components/common/ImageWithCredit";
+import fisioterapiaImg from "../../assets/fisioterapia/fisioterapia.png";
 import { PageContainer } from "../../components/layout";
 
 export default function Fisioterapeuta() {
@@ -93,32 +95,68 @@ export default function Fisioterapeuta() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Quem é a profissional?">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissional
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Especialidade
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Luana</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Fisioterapeuta
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+        {/* Card Fisioterapia */}
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+            <div className="flex items-center gap-3">
+              <Heart size={28} className="text-primary-600" />
+              <div>
+                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                  Fisioterapia na Atenção Primária
+                </h2>
+                <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                  Reabilitação e cuidado integral para recuperação funcional
+                </p>
+              </div>
+            </div>
           </div>
-        </InfoBox>
+
+          <div className="p-4 sm:p-6">
+            {/* Imagem */}
+            <div className="mb-6 flex justify-center">
+              <ImageWithCredit
+                src={fisioterapiaImg}
+                alt="Fisioterapia na Atenção Primária - Atendimento"
+                className="max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm"
+                centered={true}
+              />
+            </div>
+
+            {/* Descrição */}
+            <p className="text-neutral-700 leading-relaxed mb-5">
+              A fisioterapia na Atenção Primária à Saúde desempenha um papel fundamental na promoção da saúde, prevenção de agravos e reabilitação funcional dos usuários. Através de técnicas especializadas e acompanhamento individualizado, o fisioterapeuta trabalha para restaurar, desenvolver e conservar a capacidade física e funcional do paciente, contribuindo para maior autonomia, qualidade de vida e inclusão social. O atendimento contempla todas as faixas etárias, com foco em tratamentos não medicamentosos para dor, recuperação de movimentos e fortalecimento muscular.
+            </p>
+
+            {/* Grid de Links */}
+            <div className="grid md:grid-cols-1 gap-4">
+              {/* Link para Governo de Minas Gerais */}
+              <a
+                href="https://www.mg.gov.br/servico/solicitar-atendimento-ambulatorial-para-reabilitacao-fisica"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <ExternalLink size={24} className="text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
+                      Saiba Mais
+                    </h3>
+                    <p className="text-sm text-neutral-600 mb-2">
+                      Consulte informações completas sobre atendimento ambulatorial para reabilitação física no portal do Governo de Minas Gerais.
+                    </p>
+                    <div className="flex items-center gap-2 text-sm text-primary-600 font-semibold">
+                      <ExternalLink size={16} />
+                      <span>Acessar Portal do Governo de MG</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
         {}
         <InfoBox title="Para quem é indicado?">
           <div className="space-y-3">
@@ -254,84 +292,53 @@ export default function Fisioterapeuta() {
         <InfoBox title="Profissionais e Horários de Atendimento">
           {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissionais Responsáveis
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 11h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Luana<br/>
-                    <span className="text-neutral-600 text-xs">Função: Fisioterapeuta</span>
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Tarde</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    13h00 às 16h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Luana<br/>
-                    <span className="text-neutral-600 text-xs">Função: Fisioterapeuta</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="overflow-hidden rounded-lg shadow-sm border border-primary-200">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gradient-to-r from-primary-600 to-primary-700">
+                    <th className="border-b border-primary-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                      Período
+                    </th>
+                    <th className="border-b border-primary-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                      Horário
+                    </th>
+                    <th className="border-b border-primary-300 px-4 py-3 text-left font-semibold text-white text-sm">
+                      Profissionais Responsáveis
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm bg-white">
+                  <tr className="hover:bg-primary-50/50 transition-colors">
+                    <td className="px-4 py-3">
+                      <strong className="text-primary-900">Terça e Quinta-feira</strong>
+                    </td>
+                    <td className="px-4 py-3 text-neutral-700">
+                      07h00 às 11h00
+                    </td>
+                    <td className="px-4 py-3 text-neutral-700">
+                      Luana<br/>
+                      <span className="text-neutral-600 text-xs">Função: Fisioterapeuta</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           {/* Versão Mobile */}
           <div className="md:hidden space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <div className="bg-white/70 border border-primary-200 rounded-lg p-4 shadow-sm">
               <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Manhã
+                <span className="inline-block bg-gradient-to-r from-primary-600 to-primary-700 text-white text-sm font-semibold px-3 py-1 rounded">
+                  Terça e Quinta-feira
                 </span>
               </div>
               <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
+                <div className="pb-3 border-b border-primary-200">
                   <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
+                  <p className="text-sm font-semibold text-primary-900">07h00 às 11h00</p>
                 </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Luana</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Fisioterapeuta</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Tarde
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
+                <div className="pb-2 border-b border-primary-200">
                   <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
                   <p className="text-sm text-neutral-700">Luana</p>
                 </div>
@@ -343,7 +350,7 @@ export default function Fisioterapeuta() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
           <div className="flex items-start gap-3">
             <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
             <div>

@@ -7,34 +7,32 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
+
 export default function Renovacao() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap"
-              >
-                Renovação de Receitas
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Renovação de Receitas
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
+
         <CampanhasPaginaWrapper pagina="renovacao" />
-        {}
+
         <AvisosPaginaWrapper pagina="renovacao" />
-        {}
-        <InfoBox title="Sobre o Serviço">
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 leading-relaxed">
             A Renovação de Receitas é um serviço oferecido para pacientes que
             fazem uso contínuo de medicamentos e precisam renovar suas
@@ -42,8 +40,9 @@ export default function Renovacao() {
             crônicas controladas, como hipertensão, diabetes e outras doenças
             que exigem tratamento prolongado e acompanhamento regular.
           </p>
-        </InfoBox>
-        {}
+        </div>
+
+        {/* Para quem é indicado? */}
         <InfoBox title="Para quem é indicado?">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -74,15 +73,19 @@ export default function Renovacao() {
             </div>
           </div>
         </InfoBox>
-        {}
-        <InfoBox title="Você sabe qual o prazo de validade de sua receita?" id="prazo-validade">
+
+        {/* Prazo de Validade */}
+        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-6 shadow-sm border border-amber-200 mb-6" id="prazo-validade">
+          <h2 className="text-xl font-bold text-amber-900 mb-4">
+            Você sabe qual o prazo de validade de sua receita?
+          </h2>
           <p className="text-neutral-700 mb-4 text-sm">
             É importante conhecer o prazo de validade da sua receita para evitar
             que ela expire antes da renovação. Os prazos variam conforme o tipo
             de medicamento prescrito:
           </p>
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-warning/10 border border-amber-200 rounded p-4">
+            <div className="bg-white/70 border border-amber-300 rounded-lg p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Receitas Controladas
               </h3>
@@ -98,7 +101,7 @@ export default function Renovacao() {
                 legislação vigente.
               </p>
             </div>
-            <div className="bg-info/10 border border-blue-200 rounded p-4">
+            <div className="bg-white/70 border border-blue-300 rounded-lg p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Medicamentos de Uso Contínuo
               </h3>
@@ -122,8 +125,9 @@ export default function Renovacao() {
               garantir a continuidade do tratamento.
             </Alert>
           </div>
-        </InfoBox>
-        {}
+        </div>
+
+        {/* Documentos Necessários */}
         <InfoBox title="Documentos Necessários" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">
             Para solicitar a renovação de receitas, é obrigatória a apresentação
@@ -177,17 +181,22 @@ export default function Renovacao() {
           titulo="Profissionais Escalados na Renovação de Receitas"
         />
 
-        {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
-          <div>
-            <p className="font-semibold mb-2">Como Funciona</p>
-            <p className="text-sm text-white/90 leading-relaxed">
-              A receita será analisada e renovada pelo médico responsável e
-              estará disponível para retirada na recepção na sexta-feira mais
-              próxima. Para a retirada, é obrigatória a apresentação de
-              documento de identidade oficial com foto e CPF do titular, podendo
-              ser apresentado o documento físico ou o número do CPF.
-            </p>
+        {/* Como Funciona */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
+            <div>
+              <p className="font-bold mb-2 text-lg">Como Funciona</p>
+              <p className="text-sm text-white/95 leading-relaxed">
+                A receita será analisada e renovada pelo médico responsável e
+                estará disponível para retirada na recepção na sexta-feira mais
+                próxima. Para a retirada, é obrigatória a apresentação de
+                documento de identidade oficial com foto e CPF do titular, podendo
+                ser apresentado o documento físico ou o número do CPF.
+              </p>
+            </div>
           </div>
         </div>
       </div>

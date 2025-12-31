@@ -7,39 +7,37 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
+
 export default function Sala9() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-4 md:p-6 mb-6">
-          <div className="flex items-center gap-2 md:gap-4">
-            <div className="w-full min-w-0">
-              <h1
-                className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-neutral-900 leading-tight"
-              >
-                Sala de Atendimento Administrativo
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Sala de Atendimento Administrativo
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
+
         <CampanhasPaginaWrapper pagina="sala-9" />
-        {}
+
         <AvisosPaginaWrapper pagina="sala-9" />
-        {}
-        <InfoBox title="Sobre o Serviço">
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 mb-4 text-sm">
             Este setor é responsável por:
           </p>
           <div className="space-y-3">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -51,7 +49,7 @@ export default function Sala9() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -62,7 +60,7 @@ export default function Sala9() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -74,7 +72,7 @@ export default function Sala9() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -86,7 +84,7 @@ export default function Sala9() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -98,9 +96,9 @@ export default function Sala9() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
 
-        {}
+        {/* Documentos Necessários */}
         <InfoBox title="Documentos Necessários" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">
             Para atendimento neste setor, é obrigatória a apresentação da
@@ -154,16 +152,15 @@ export default function Sala9() {
           titulo="Profissionais Escalados na Sala Administrativa"
         />
 
-        {}
-          <div className="mt-4">
-            <Alert type="warning">
-              <strong>Lembre-se:</strong> A equipe deste setor monitora o
-              sistema diariamente. Assim que sua vaga for liberada pelo Estado,
-              entraremos em contato via WhatsApp ou ligação telefônica. Mantenha
-              seu telefone celular atualizado e fique atento às chamadas e
-              mensagens!
-            </Alert>
-          </div>
+        <div className="mt-4">
+          <Alert type="warning">
+            <strong>Lembre-se:</strong> A equipe deste setor monitora o
+            sistema diariamente. Assim que sua vaga for liberada pelo Estado,
+            entraremos em contato via WhatsApp ou ligação telefônica. Mantenha
+            seu telefone celular atualizado e fique atento às chamadas e
+            mensagens!
+          </Alert>
+        </div>
       </div>
 
       {/* Leitura Recomendada - Aparece após scroll */}

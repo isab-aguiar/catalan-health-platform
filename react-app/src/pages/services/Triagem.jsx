@@ -7,66 +7,64 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
+
 export default function Triagem() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap"
-              >
-                Triagem de Enfermagem
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
-        </div>
-        {}
-        <CampanhasPaginaWrapper pagina="triagem" />
-        {}
-        <AvisosPaginaWrapper pagina="triagem" />
-        {}
-        <InfoBox title="Sobre o Serviço">
-          <p className="text-neutral-700 leading-relaxed mb-5 text-sm" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
-            Na Unidade básica de saúde do bairro São José<span className="text-base">,</span> o acolhimento e a triagem de enfermagem são etapas fundamentais do cuidado em saúde. Embora complementares<span className="text-base">,</span> cada uma possui um papel específico no atendimento ao usuário<span className="text-base">,</span> sempre com foco no respeito<span className="text-base">,</span> na escuta e na segurança clínica.
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Triagem de Enfermagem
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
           </p>
-          <p className="text-neutral-700 leading-relaxed mb-5 text-sm" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
-            O objetivo é garantir que todas as pessoas sejam recebidas com atenção<span className="text-base">,</span> orientadas corretamente e avaliadas conforme suas necessidades<span className="text-base">,</span> assegurando prioridade aos casos que exigem maior urgência.
+        </div>
+
+        <CampanhasPaginaWrapper pagina="triagem" />
+
+        <AvisosPaginaWrapper pagina="triagem" />
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
+          <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
+            Na Unidade básica de saúde do bairro São José, o acolhimento e a triagem de enfermagem são etapas fundamentais do cuidado em saúde. Embora complementares, cada uma possui um papel específico no atendimento ao usuário, sempre com foco no respeito, na escuta e na segurança clínica.
+          </p>
+          <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
+            O objetivo é garantir que todas as pessoas sejam recebidas com atenção, orientadas corretamente e avaliadas conforme suas necessidades, assegurando prioridade aos casos que exigem maior urgência.
           </p>
           <div className="space-y-4 mb-5">
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 pb-2 border-b border-neutral-200 text-sm">
+            <div className="bg-white/70 border border-blue-100 rounded-lg p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Acolhimento
               </h3>
-              <p className="text-sm text-neutral-700 leading-relaxed mb-2" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
-                O acolhimento é o primeiro contato do usuário com a unidade. Neste momento<span className="text-base">,</span> a equipe realiza uma escuta qualificada<span className="text-base">,</span> compreendendo a queixa apresentada e orientando sobre o fluxo de atendimento disponível.
+              <p className="text-sm text-neutral-700 leading-relaxed mb-2">
+                O acolhimento é o primeiro contato do usuário com a unidade. Neste momento, a equipe realiza uma escuta qualificada, compreendendo a queixa apresentada e orientando sobre o fluxo de atendimento disponível.
               </p>
-              <p className="text-sm text-neutral-700 leading-relaxed" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
-                Mais do que um procedimento<span className="text-base">,</span> o acolhimento é uma prática humanizada<span className="text-base">,</span> que valoriza o diálogo<span className="text-base">,</span> o respeito e o vínculo entre profissional e usuário.
+              <p className="text-sm text-neutral-700 leading-relaxed">
+                Mais do que um procedimento, o acolhimento é uma prática humanizada, que valoriza o diálogo, o respeito e o vínculo entre profissional e usuário.
               </p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 pb-2 border-b border-neutral-200 text-sm">
+            <div className="bg-white/70 border border-blue-100 rounded-lg p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Triagem de Enfermagem
               </h3>
-              <p className="text-sm text-neutral-700 leading-relaxed" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
-                A triagem de enfermagem é uma avaliação clínica inicial realizada por profissional de enfermagem capacitado. Seu objetivo é identificar sinais e sintomas<span className="text-base">,</span> avaliar a gravidade do quadro e definir a prioridade de atendimento conforme protocolos estabelecidos.
+              <p className="text-sm text-neutral-700 leading-relaxed">
+                A triagem de enfermagem é uma avaliação clínica inicial realizada por profissional de enfermagem capacitado. Seu objetivo é identificar sinais e sintomas, avaliar a gravidade do quadro e definir a prioridade de atendimento conforme protocolos estabelecidos.
               </p>
-              <p className="text-sm text-neutral-700 leading-relaxed mt-2" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
-                A triagem não garante consulta médica imediata<span className="text-base">,</span> mas assegura que cada caso seja direcionado ao serviço mais adequado<span className="text-base">,</span> com segurança e responsabilidade.
+              <p className="text-sm text-neutral-700 leading-relaxed mt-2">
+                A triagem não garante consulta médica imediata, mas assegura que cada caso seja direcionado ao serviço mais adequado, com segurança e responsabilidade.
               </p>
             </div>
           </div>
-          <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
-            <h3 className="font-semibold text-neutral-800 mb-3 pb-2 border-b border-neutral-200 text-sm">
+          <div className="bg-white/70 border border-blue-100 rounded-lg p-4">
+            <h3 className="font-semibold text-neutral-800 mb-3 text-sm">
               Procedimentos Realizados na Triagem
             </h3>
 
@@ -88,8 +86,8 @@ export default function Triagem() {
                     <td className="border border-neutral-300 px-4 py-3 whitespace-nowrap">
                       <strong className="text-neutral-800">Avaliação de Sinais Vitais</strong>
                     </td>
-                    <td className="border border-neutral-300 px-4 py-3 text-neutral-700" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
-                      Verificação de pressão arterial<span className="text-base">,</span> temperatura corporal<span className="text-base">,</span> frequência cardíaca e respiratória<span className="text-base">,</span> conforme protocolos de enfermagem.
+                    <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
+                      Verificação de pressão arterial, temperatura corporal, frequência cardíaca e respiratória, conforme protocolos de enfermagem.
                     </td>
                   </tr>
                   <tr className="bg-white">
@@ -118,8 +116,8 @@ export default function Triagem() {
                 <div className="mb-3">
                   <h4 className="font-semibold text-neutral-800 text-sm">Avaliação de Sinais Vitais</h4>
                 </div>
-                <p className="text-sm text-neutral-700 leading-relaxed" style={{ letterSpacing: '0.02em', wordSpacing: '0.05em' }}>
-                  Verificação de pressão arterial<span className="text-base">,</span> temperatura corporal<span className="text-base">,</span> frequência cardíaca e respiratória<span className="text-base">,</span> conforme protocolos de enfermagem.
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Verificação de pressão arterial, temperatura corporal, frequência cardíaca e respiratória, conforme protocolos de enfermagem.
                 </p>
               </div>
 
@@ -142,14 +140,14 @@ export default function Triagem() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
 
         <EscalaFirestore
           escalaKey="triagem"
           titulo="Profissionais Escalados no Acolhimento e Triagem"
         />
 
-        {}
+        {/* Para quem é indicado */}
         <InfoBox title="Para quem é indicado">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
@@ -178,7 +176,8 @@ export default function Triagem() {
             </div>
           </div>
         </InfoBox>
-        {}
+
+        {/* Como ter acesso */}
         <InfoBox title="Como ter acesso">
           <div className="space-y-4">
             <div>
@@ -212,7 +211,8 @@ export default function Triagem() {
             </div>
           </div>
         </InfoBox>
-        {}
+
+        {/* Documentação Necessária */}
         <InfoBox title="Documentação Necessária" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">
             Para atendimento na triagem, é obrigatória a apresentação da
@@ -249,11 +249,15 @@ export default function Triagem() {
             </Alert>
           </div>
         </InfoBox>
-        {}
-        <InfoBox title="Modalidades de Atendimento">
+
+        {/* Modalidades de Atendimento */}
+        <div className="bg-gradient-to-br from-purple-50 to-violet-50 rounded-lg p-6 shadow-sm border border-purple-200 mb-6">
+          <h2 className="text-xl font-bold text-purple-900 mb-4">
+            Modalidades de Atendimento
+          </h2>
           <div className="space-y-4">
-            <div className="bg-white border border-neutral-200 rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 pb-2 border-b border-neutral-200 text-sm">
+            <div className="bg-white/70 border border-purple-100 rounded-lg p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Consultas de Rotina
               </h3>
               <p className="text-neutral-700 leading-relaxed text-sm">
@@ -263,17 +267,19 @@ export default function Triagem() {
                 atendimento e otimização do tempo de espera.
               </p>
             </div>
-            <div className="bg-info/10 border border-info rounded p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 pb-2 border-b border-neutral-200 text-sm">
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-4">
+              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Atendimento Sob Demanda
               </h3>
               <p className="text-neutral-700 leading-relaxed text-sm mb-3">
                 O atendimento sob demanda está disponível mediante triagem
-                clínica inicial realizada:<br/>
-                <strong>Período matutino </strong> de  07h00 às 08h00. <br/>
-                <strong>Período noturno </strong>de 18h00 às 19h00.
+                clínica inicial realizada:
               </p>
-              <div className="bg-white border-l-4 border-info p-3 rounded-r">
+              <ul className="list-disc list-inside text-sm text-neutral-700 mb-3 space-y-1">
+                <li><strong>Período matutino</strong> de 07h00 às 08h00</li>
+                <li><strong>Período noturno</strong> de 18h00 às 19h00</li>
+              </ul>
+              <div className="bg-white border-l-4 border-blue-600 p-3 rounded-r">
                 <p className="text-sm text-neutral-800 leading-relaxed">
                   <strong>Como funciona a Triagem:</strong> A triagem é uma
                   avaliação clínica inicial realizada por profissional de
@@ -287,17 +293,23 @@ export default function Triagem() {
               </div>
             </div>
           </div>
-        </InfoBox>
-        {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
-          <div>
-            <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-white/90 leading-relaxed">
-              Antes de se dirigir à sala de triagem, é necessário passar pela
-              recepção da unidade para realização da ficha de atendimento. Esta
-              medida é essencial para agilizar o processo de atendimento e
-              garantir a organização adequada do fluxo de pacientes na unidade.
-            </p>
+        </div>
+
+        {/* Orientação Importante */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
+            <div>
+              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
+              <p className="text-sm text-white/95 leading-relaxed">
+                Antes de se dirigir à sala de triagem, é necessário passar pela
+                recepção da unidade para realização da ficha de atendimento. Esta
+                medida é essencial para agilizar o processo de atendimento e
+                garantir a organização adequada do fluxo de pacientes na unidade.
+              </p>
+            </div>
           </div>
         </div>
       </div>

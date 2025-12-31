@@ -380,7 +380,7 @@ export default function Ginecologista() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
           <div className="flex items-start gap-3">
             <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
             <div>

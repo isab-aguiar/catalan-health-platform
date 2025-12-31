@@ -7,52 +7,56 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import EscalaSemanal from "../../components/services/EscalaSemanal";
+
 export default function Recepcao() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-3xl font-bold text-neutral-900 whitespace-nowrap"
-              >
-                Recepção
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Recepção
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
+
         <CampanhasPaginaWrapper pagina="recepcao" />
-        {}
+
         <AvisosPaginaWrapper pagina="recepcao" />
-        <p className="text-center text-neutral-700 max-w-2xl mx-auto mb-8 text-sm leading-relaxed">
-          A recepção é o setor responsável pelo primeiro atendimento ao usuário
-          na unidade, realizando o direcionamento adequado aos serviços de saúde
-          disponíveis e fornecendo informações sobre o funcionamento da unidade,
-          conforme protocolos e normativas estabelecidas.
-        </p>
-        {}
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
+          <p className="text-neutral-700 leading-relaxed text-sm">
+            A recepção é o setor responsável pelo primeiro atendimento ao usuário
+            na unidade, realizando o direcionamento adequado aos serviços de saúde
+            disponíveis e fornecendo informações sobre o funcionamento da unidade,
+            conforme protocolos e normativas estabelecidas.
+          </p>
+        </div>
+
         <EscalaSemanal
           titulo="Profissionais Escalados na Recepção"
           escalaKey="recepcao"
         />
 
-        {}
-        <InfoBox title="Preciso passar na recepção antes?" highlight={true}>
+        {/* Preciso passar na recepção antes? */}
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 shadow-sm border border-green-200 mb-6">
+          <h2 className="text-xl font-bold text-green-900 mb-4">
+            Preciso passar na recepção antes?
+          </h2>
           <p className="text-neutral-700 mb-4 text-sm">
             Sim. A recepção realiza o direcionamento para os seguintes serviços:
           </p>
           <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-green-100">
+              <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
                   Consultas Agendadas
@@ -63,8 +67,8 @@ export default function Recepcao() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-green-100">
+              <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
                   Vacinação e Medicação
@@ -75,8 +79,8 @@ export default function Recepcao() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-green-100">
+              <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
                   Exame de Eletrocardiograma
@@ -86,8 +90,8 @@ export default function Recepcao() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-green-100">
+              <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">Curativos</strong>
                 <p className="text-sm text-neutral-600 mt-0.5">
@@ -97,8 +101,9 @@ export default function Recepcao() {
               </div>
             </div>
           </div>
-        </InfoBox>
-        {}
+        </div>
+
+        {/* O que você pode retirar aqui? */}
         <InfoBox title="O que você pode retirar aqui?">
           <p className="text-neutral-700 mb-4 text-sm">
             Para agilizar o atendimento, alguns documentos ficam disponíveis
@@ -200,15 +205,9 @@ export default function Recepcao() {
               </div>
             </div>
           </div>
-
-          <div className="mt-4">
-            <Alert type="warning">
-              <strong>Atenção:</strong> Se o seu documento precisa de sua
-              assinatura, ele estará na Sala de atendimento administrativo, não na recepção.
-            </Alert>
-          </div>
         </InfoBox>
-        {}
+
+        {/* Documentos Necessários */}
         <InfoBox
           title="Documentos Necessários para Retirar Receitas Renovadas e Exames"
           highlight={true}

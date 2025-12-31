@@ -5,14 +5,15 @@ export default function ImageWithCredit({
   caption,
   className = "",
   creditPosition = "below", // "bottom-right" ou "below"
+  centered = false, // centralizar a imagem
 }) {
   return (
-    <div className="relative w-full">
+    <div className={`relative ${className} ${centered ? 'mx-auto' : ''}`}>
       <div className="relative rounded-lg overflow-hidden shadow-sm border border-neutral-200">
         <img
           src={src}
           alt={alt}
-          className={`w-full h-auto object-cover ${className}`}
+          className="w-full h-auto object-cover"
           loading="lazy"
         />
 

@@ -44,28 +44,21 @@ export default function Vacinas() {
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-slate-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-xl md:text-3xl font-bold text-slate-900 whitespace-normal md:whitespace-nowrap"
-              >
-                Sala de Vacinação
-              </h1>
-              <p
-                className="text-slate-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Sala de Vacinação
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
+
         <CampanhasPaginaWrapper pagina="vacinas" />
-        {}
+
         <AvisosPaginaWrapper pagina="vacinas" />
-        {}
+
         <div className="mb-6">
           <CalendarioVacinal />
         </div>
@@ -75,49 +68,49 @@ export default function Vacinas() {
           titulo="Profissionais Escalados na Sala de Vacinação"
         />
 
-        {}
-        <InfoBox highlight={true}>
-          {}
+        {/* Vacinas Disponíveis e Documentação */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <div className="mb-6">
             <VacinasDisponiveis />
           </div>
-          <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-200">
-            <h2 className="text-xl font-semibold text-slate-800">Documentos Necessários</h2>
-          </div>
-          <p className="text-slate-700 mb-4 text-sm">
+
+          <h2 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+            Documentação Necessária
+          </h2>
+          <p className="text-neutral-700 mb-4 text-sm">
             Para vacinação, é obrigatória a apresentação da seguinte
             documentação:
           </p>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+          <div className="space-y-2 mb-4">
+            <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Documento de Identificação com Foto
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Documento de identidade com foto e/ou Carteira de Habilitação do titular
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   CPF - Cadastro de Pessoa Física
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Documento físico original ou número do CPF do titular
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-slate-200">
+            <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-slate-800 text-sm">
+                <strong className="text-neutral-800 text-sm">
                   Carteira de Vacinação
                 </strong>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-neutral-600 mt-0.5">
                   Quando disponível, para registro das doses aplicadas
                 </p>
               </div>
@@ -125,7 +118,7 @@ export default function Vacinas() {
           </div>
           <div className="mt-4">
             <Alert type="info">
-              <p className="text-slate-800 text-xs md:text-sm font-normal leading-relaxed">
+              <p className="text-neutral-800 text-xs md:text-sm font-normal leading-relaxed">
                 <strong>Observação sobre Carteira de Vacinação:</strong>{" "}
                 Apresente sua carteira de vacinação em todas as consultas, mesmo
                 que considere estar em dia. A equipe de saúde pode identificar
@@ -134,7 +127,7 @@ export default function Vacinas() {
               </p>
             </Alert>
           </div>
-        </InfoBox>
+        </div>
 
         {/* Seção Profilaxia da Raiva Humana */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">

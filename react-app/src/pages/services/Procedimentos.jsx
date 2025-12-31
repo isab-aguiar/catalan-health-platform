@@ -18,34 +18,35 @@ export default function Procedimentos() {
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-xl md:text-3xl font-bold text-neutral-900 whitespace-nowrap"
-              >
-                Sala de Procedimentos
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Sala de Procedimentos
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
+
         <CampanhasPaginaWrapper pagina="procedimentos" />
-        {}
+
         <AvisosPaginaWrapper pagina="procedimentos" />
-        {}
-        <InfoBox title="Sobre o Serviço">
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4 flex items-center gap-2">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
             A Sala de Procedimentos da Unidade Básica de Saúde São José realiza diversos procedimentos de enfermagem essenciais para o cuidado integral da população. Entre os serviços oferecidos estão: aplicação de medicamentos injetáveis prescritos por médicos, administração de Noripurum (Sacarato de Hidróxido Férrico III) por via endovenosa mediante prescrição médica e agendamento prévio, realização de Testes Rápidos para detecção de HIV, Sífilis, Hepatites B e C e Gravidez (sem necessidade de pedido médico), e coleta do Teste do Pezinho (Triagem Neonatal) para recém-nascidos.
           </p>
+
+          <h3 className="font-bold text-blue-900 mb-4 text-base">
+            Serviços Oferecidos:
+          </h3>
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+            <div className="bg-white/70 border border-blue-100 rounded-lg p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Aplicação de Injeções
               </h3>
@@ -54,7 +55,7 @@ export default function Procedimentos() {
                 e endovenosa, conforme prescrição médica.
               </p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+            <div className="bg-white/70 border border-blue-100 rounded-lg p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Administração de Noripurum
               </h3>
@@ -63,7 +64,7 @@ export default function Procedimentos() {
                 mediante prescrição médica e agendamento prévio.
               </p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+            <div className="bg-white/70 border border-blue-100 rounded-lg p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Testes Rápidos
               </h3>
@@ -72,7 +73,7 @@ export default function Procedimentos() {
                 sem necessidade de pedido médico, com resultados em minutos.
               </p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+            <div className="bg-white/70 border border-blue-100 rounded-lg p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Teste do Pezinho
               </h3>
@@ -81,7 +82,7 @@ export default function Procedimentos() {
                 de doenças metabólicas, genéticas e infecciosas em recém-nascidos.
               </p>
             </div>
-            <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
+            <div className="bg-white/70 border border-blue-100 rounded-lg p-4">
               <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
                 Aferição de Sinais Vitais
               </h3>
@@ -91,7 +92,7 @@ export default function Procedimentos() {
               </p>
             </div>
           </div>
-        </InfoBox>
+        </div>
 
         {/* Card Noripurum Endovenoso */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
@@ -167,13 +168,14 @@ export default function Procedimentos() {
 
           <div className="p-4 sm:p-6">
             {/* Imagem */}
-            <div className="mb-6 flex justify-center px-4 md:px-8 lg:px-12">
+            <div className="mb-6 flex justify-center">
               <ImageWithCredit
                 src={testePezinhoImg}
                 alt="Teste do Pezinho - Triagem Neonatal"
                 credit="Ministério da Saúde"
                 creditPosition="below"
-                className="w-full max-w-md sm:max-w-lg md:max-w-xl"
+                className="max-w-md sm:max-w-lg md:max-w-xl"
+                centered={true}
               />
             </div>
 
@@ -461,43 +463,50 @@ export default function Procedimentos() {
         />
 
         {}
-        <InfoBox title="Documentação Necessária" highlight={true}>
+        {/* Documentação Necessária */}
+        <InfoBox title="Documentação Necessária" icon={<FileText size={24} />} highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">
             Para atendimento Sala de Medicações, é
             obrigatória a apresentação da seguinte documentação:
           </p>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documento de Identificação com Foto
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Documento de identidade com foto e/ou Carteira de Habilitação do titular
-                </p>
+          <div className="grid md:grid-cols-3 gap-3">
+            <div className="bg-white p-4 rounded-lg border border-primary-200 shadow-sm">
+              <div className="flex items-start gap-3">
+                <FileText size={20} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <strong className="text-neutral-800 text-sm block mb-1">
+                    Documento com Foto
+                  </strong>
+                  <p className="text-xs text-neutral-600">
+                    RG ou CNH do titular
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  CPF - Cadastro de Pessoa Física
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Documento físico original ou número do CPF do titular
-                </p>
+            <div className="bg-white p-4 rounded-lg border border-primary-200 shadow-sm">
+              <div className="flex items-start gap-3">
+                <FileText size={20} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <strong className="text-neutral-800 text-sm block mb-1">
+                    CPF
+                  </strong>
+                  <p className="text-xs text-neutral-600">
+                    Documento ou número
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Prescrição Médica
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Obrigatória para aplicação de medicamentos
-                </p>
+            <div className="bg-white p-4 rounded-lg border border-primary-200 shadow-sm">
+              <div className="flex items-start gap-3">
+                <FileText size={20} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <strong className="text-neutral-800 text-sm block mb-1">
+                    Prescrição Médica
+                  </strong>
+                  <p className="text-xs text-neutral-600">
+                    Obrigatória para medicamentos
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -508,15 +517,21 @@ export default function Procedimentos() {
             </Alert>
           </div>
         </InfoBox>
-        {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
-          <div>
-            <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-white/90 leading-relaxed">
-              Traga sempre a prescrição médica original e o medicamento
-              prescrito. Não esqueça de passar pela recepção primeiro para
-              realizar sua ficha de atendimento.
-            </p>
+
+        {/* Orientação Importante */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
+            <div>
+              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
+              <p className="text-sm text-white/95 leading-relaxed">
+                Traga sempre a prescrição médica original e o medicamento
+                prescrito. Não esqueça de passar pela recepção primeiro para
+                realizar sua ficha de atendimento.
+              </p>
+            </div>
           </div>
         </div>
 

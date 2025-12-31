@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Heart, ExternalLink } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import ImageWithCredit from "../../components/common/ImageWithCredit";
+import medicoImg from "../../assets/medico/medico.png";
 import { PageContainer } from "../../components/layout";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
 
@@ -9,25 +11,22 @@ export default function Medicos() {
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6 mb-6">
-          <div className="flex items-center gap-4 mb-2">
-            <div>
-              <h1
-                className="text-2xl sm:text-3xl font-bold text-neutral-900 whitespace-normal md:whitespace-nowrap"
-              >
-                Consultório Médico
-              </h1>
-              <p
-                className="text-neutral-500 text-xs mt-1"
-              >
-                Estratégia Saúde da Família Bela Vista - Catalão - São José
-              </p>
-            </div>
-          </div>
+
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">
+            Consultório Médico
+          </h1>
+          <p className="text-primary-100 text-sm mt-1">
+            Estratégia Saúde da Família Bela Vista - Catalão - São José
+          </p>
         </div>
-        {}
-        <InfoBox title="Sobre o Serviço">
+
+        {/* Sobre o Serviço */}
+        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Sobre o Serviço
+          </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
             O atendimento médico na ESF Catalão é realizado pelos médicos de
             família e comunidade, profissionais capacitados para cuidar de toda
@@ -36,8 +35,12 @@ export default function Medicos() {
             doenças comuns, acompanhamento de doenças crônicas e encaminhamentos
             quando necessário.
           </p>
+
+          <h3 className="font-bold text-blue-900 mb-4 text-base">
+            Serviços Oferecidos:
+          </h3>
           <div className="space-y-3">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -48,7 +51,7 @@ export default function Medicos() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -59,7 +62,7 @@ export default function Medicos() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -70,7 +73,7 @@ export default function Medicos() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -81,7 +84,7 @@ export default function Medicos() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
@@ -93,7 +96,70 @@ export default function Medicos() {
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
+        {}
+        {/* Card Atendimento Médico de Família */}
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+            <div className="flex items-center gap-3">
+              <Heart size={28} className="text-primary-600" />
+              <div>
+                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                  Atendimento Médico de Família
+                </h2>
+                <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                  Cuidado integral para toda a família em todas as fases da vida
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 sm:p-6">
+            {/* Imagem */}
+            <div className="mb-6 flex justify-center">
+              <ImageWithCredit
+                src={medicoImg}
+                alt="Atendimento Médico de Família - Consulta"
+                className="max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm"
+                centered={true}
+              />
+            </div>
+
+            {/* Descrição */}
+            <p className="text-neutral-700 leading-relaxed mb-5">
+              O médico de família é o profissional preparado para cuidar de você e de toda a sua família, independentemente da idade ou condição de saúde. Este profissional acompanha o paciente ao longo do tempo, conhecendo sua história clínica, seus hábitos e seu contexto familiar e social. Essa relação de confiança permite um atendimento mais humanizado e resolutivo, promovendo saúde, prevenindo doenças e tratando problemas de saúde de forma integral e coordenada.
+            </p>
+
+            {/* Grid de Links */}
+            <div className="grid md:grid-cols-1 gap-4">
+              {/* Link para Ministério da Saúde */}
+              <a
+                href="https://www.gov.br/saude/pt-br/assuntos/atencao-primaria-a-saude"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <ExternalLink size={24} className="text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
+                      Saiba Mais
+                    </h3>
+                    <p className="text-sm text-neutral-600 mb-2">
+                      Consulte informações completas sobre a Atenção Primária à Saúde no site oficial do Ministério da Saúde.
+                    </p>
+                    <div className="flex items-center gap-2 text-sm text-primary-600 font-semibold">
+                      <ExternalLink size={16} />
+                      <span>Acessar Site do Ministério da Saúde</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
         {}
         <EscalaFirestore
           escalaKey="sala-atendimento-medico"
@@ -265,13 +331,15 @@ export default function Medicos() {
             </div>
           </Alert>
         </div>
-        {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
-          <div className="flex items-start gap-3">
-            <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
+        {/* Orientação Importante */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
             <div>
-              <p className="font-semibold mb-1">Orientação Importante</p>
-              <p className="text-sm text-white/90">
+              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
+              <p className="text-sm text-white/95 leading-relaxed">
                 Antes de se dirigir à sala de consulta médica, é necessário
                 passar pela recepção da unidade para realização da ficha de
                 atendimento. Esta medida é essencial para agilizar o processo de
