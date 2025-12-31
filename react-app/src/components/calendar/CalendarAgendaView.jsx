@@ -1,5 +1,24 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Calendar, Clock, MapPin, Users, Bell, FileText, Eye, Edit2, Trash2 } from 'lucide-react';
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  Calendar, 
+  Clock, 
+  MapPin, 
+  Users, 
+  Bell, 
+  FileText, 
+  Eye, 
+  Edit2, 
+  Trash2,
+  Filter,
+  Download,
+  Share2,
+  AlertCircle,
+  CheckCircle2,
+  Tag,
+  MoreVertical
+} from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { getEventColors } from '../../constants/calendarDesign';
 import EmptyState from './EmptyState';
@@ -344,7 +363,7 @@ export default function CalendarAgendaView({
                                 </div>
 
                                 {/* Ações */}
-                                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                                <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex-shrink-0">
                                   <button
                                     onClick={(e) => {
                                       e.stopPropagation();
