@@ -186,6 +186,23 @@ service cloud.firestore {
     }
 
     // =====================================================
+    // COLEÇÃO: feedbacks
+    // =====================================================
+    match /feedbacks/{feedbackId} {
+      // Qualquer pessoa pode criar feedbacks (elogios, sugestões, reclamações)
+      allow create: if true;
+
+      // Apenas admins podem ler feedbacks
+      allow read: if isAdmin();
+
+      // Apenas admins podem atualizar feedbacks (mudar status, adicionar resposta)
+      allow update: if isAdmin();
+
+      // Apenas admins podem deletar feedbacks
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
     // PADRÃO: NEGAR TUDO
     // =====================================================
     // Qualquer coleção não explicitamente permitida acima é bloqueada
