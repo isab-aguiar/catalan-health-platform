@@ -128,40 +128,42 @@ export default function CalendarAgendaView({
     <div className="space-y-6 animate-fade-in">
       {/* Controles */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          {/* Botão Hoje */}
-          <button
-            onClick={handleToday}
-            className="px-4 py-2 text-sm font-medium text-primary-600 hover:bg-blue-50 rounded-lg transition-colors"
-          >
-            Hoje
-          </button>
-
+        <div className="flex flex-col items-center gap-4">
           {/* Navegação e Período */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 w-full justify-center">
             <button
               onClick={handlePrevious}
-              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors flex-shrink-0"
               aria-label="Período anterior"
             >
               <ChevronLeft className="w-5 h-5 text-neutral-700" />
             </button>
 
-            <h3 className="text-lg font-semibold text-neutral-900 min-w-max">
+            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-neutral-900 text-center px-2 truncate max-w-full">
               {formatarDataCompleta(days[0])} - {formatarDataCompleta(days[days.length - 1])}
             </h3>
 
             <button
               onClick={handleNext}
-              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors flex-shrink-0"
               aria-label="Próximo período"
             >
               <ChevronRight className="w-5 h-5 text-neutral-700" />
             </button>
           </div>
 
-          {/* Toggle dias */}
-          <div className="flex items-center gap-2 bg-neutral-100 rounded-lg p-1">
+          {/* Botões Hoje e Toggle dias */}
+          <div className="flex items-center justify-between w-full gap-3">
+            {/* Botão Hoje */}
+            <button
+              onClick={handleToday}
+              className="px-3 py-1.5 text-sm font-medium text-primary-600 hover:bg-blue-50 rounded-lg transition-colors flex-shrink-0"
+            >
+              Hoje
+            </button>
+
+            {/* Toggle dias */}
+            <div className="flex items-center gap-2 bg-neutral-100 rounded-lg p-1 flex-shrink-0">
             <button
               onClick={() => setDaysToShow(7)}
               className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${
@@ -182,6 +184,7 @@ export default function CalendarAgendaView({
             >
               14 dias
             </button>
+            </div>
           </div>
         </div>
       </div>
