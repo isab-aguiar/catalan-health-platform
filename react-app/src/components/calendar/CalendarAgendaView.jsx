@@ -586,40 +586,6 @@ export default function CalendarAgendaView({
                     })}
                   </div>
                 )}
-                              </div>
-
-                              {/* Descrição */}
-                              {evento.descricao && (
-                                <p className="text-sm text-neutral-600 mt-2 line-clamp-2">
-                                  {evento.descricao}
-                                </p>
-                              )}
-
-                              {/* Badges */}
-                              <div className="flex flex-wrap gap-2 mt-2">
-                                {evento.lembrete && (
-                                  <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-                                    evento.lembreteEnviado
-                                      ? 'bg-green-100 text-green-700'
-                                      : 'bg-blue-100 text-blue-700'
-                                  }`}>
-                                    <Bell className="w-3 h-3" />
-                                    {evento.lembreteEnviado ? 'Notificado' : 'Lembrete ativo'}
-                                  </span>
-                                )}
-                                {evento.concluido && (
-                                  <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
-                                    ✓ Concluído
-                                  </span>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                )}
               </div>
             </div>
           );
