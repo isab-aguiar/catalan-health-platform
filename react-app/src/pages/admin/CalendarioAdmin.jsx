@@ -13,6 +13,7 @@ import { inicializarNotificacoes, pararVerificacaoNotificacoes, solicitarPermiss
 import NotificationBanner from '../../components/calendar/NotificationBanner';
 import CalendarDashboard from '../../components/calendar/CalendarDashboard';
 import CalendarListView from '../../components/calendar/CalendarListView';
+import CalendarAgendaView from '../../components/calendar/CalendarAgendaView';
 import CalendarFilters from '../../components/calendar/CalendarFilters';
 import CalendarSkeleton from '../../components/calendar/CalendarSkeleton';
 
