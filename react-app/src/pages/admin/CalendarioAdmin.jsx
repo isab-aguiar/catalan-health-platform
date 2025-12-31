@@ -8,8 +8,6 @@ import { useEventos } from '../../hooks/useEventos';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import EventoModal from '../../components/admin/EventoModal';
 import AgendaModal from '../../components/admin/AgendaModal';
-import { escalasTrabalho } from '../../data/escalasTrabalho';
-import { agendasSemanais } from '../../data/agendasSemanais';
 import { inicializarNotificacoes, pararVerificacaoNotificacoes, solicitarPermissaoNotificacoes, exibirNotificacao } from '../../services/notificacoesService';
 import { useAgendas } from '../../hooks/useAgendas';
 import NotificationBanner from '../../components/calendar/NotificationBanner';
@@ -195,47 +193,7 @@ export default function CalendarioAdmin() {
   };
 
   /**
-   * Pega as escalas (agendas) de um dia específico
-   */
-  const getEscalasNoDia = (data) => {
-    const diasSemanaMap = {
-      0: 'Domingo',
-      1: 'Segunda',
-      2: 'Terça',
-      3: 'Quarta',
-      4: 'Quinta',
-      5: 'Sexta',
-      6: 'Sábado'
-    };
-
-    const diaSemana = diasSemanaMap[data.getDay()];
-    const escalasComAgenda = [];
-
-    // Buscar agendas médicas e de enfermeiras
-    Object.entries(escalasTrabalho).forEach(([key, escala]) => {
-      // Só pegar escalas que NÃO são públicas (agendas médicas e enfermeiras)
-      if (!escala.exibirNoPublico && escala.observacoes && escala.observacoes.length > 0) {
-        // Verificar se tem agenda para esse dia da semana (procura por "Segunda:", "Terça:", etc.)
-        const agendaDoDia = escala.observacoes.find(obs =>
-          obs.startsWith(diaSemana + ':')
-        );
-
-        if (agendaDoDia) {
-          escalasComAgenda.push({
-            ...escala,
-            key,
-            diaSemana,
-            agendaDoDia
-          });
-        }
-      }
-    });
-
-    return escalasComAgenda;
-  };
-
-  /**
-   * Pega as agendas semanais de um dia específico
+   * Pega as agendas semanais de um dia específico (DO FIRESTORE)
    */
   const getAgendasSemanaisNoDia = (data) => {
     const diasSemanaMap = {
@@ -251,48 +209,37 @@ export default function CalendarioAdmin() {
     const diaSemana = diasSemanaMap[data.getDay()];
     const agendasDoDia = [];
 
-    // Buscar agendas de todas as categorias
-    Object.entries(agendasSemanais).forEach(([categoria, profissionais]) => {
-      if (Array.isArray(profissionais)) {
-        profissionais.forEach((profissional) => {
-          if (profissional.agendaSemanal && profissional.agendaSemanal[diaSemana]) {
-            const atividades = profissional.agendaSemanal[diaSemana];
-            if (atividades && atividades.length > 0) {
-              agendasDoDia.push({
-                categoria,
-                profissional: profissional.nome,
-                atividades
-              });
-            }
+    // Buscar agendas do Firestore (não mais dos dados locais)
+    if (agendasFirestore && agendasFirestore.length > 0) {
+      agendasFirestore.forEach((agenda) => {
+        if (agenda.agendaSemanal && agenda.agendaSemanal[diaSemana]) {
+          const atividades = agenda.agendaSemanal[diaSemana];
+          if (atividades && atividades.length > 0) {
+            agendasDoDia.push({
+              id: agenda.id,
+              categoria: agenda.categoria,
+              profissional: agenda.nome,
+              nome: agenda.nome,
+              atividades,
+              agendaSemanal: agenda.agendaSemanal,
+              horarioAtendimento: agenda.horarioAtendimento
+            });
           }
-        });
-      }
-    });
+        }
+      });
+    }
 
     return agendasDoDia;
   };
 
   /**
-   * Conta o total de itens (eventos + agendas) de um dia
+   * Conta o total de itens (eventos + agendas do Firestore) de um dia
    */
   const getTotalItensNoDia = (data) => {
     const eventosNoDia = getEventosNoDia(data);
-    const escalasNoDia = getEscalasNoDia(data);
     const agendasSemanaisNoDia = getAgendasSemanaisNoDia(data);
     
-    return eventosNoDia.length + escalasNoDia.length + agendasSemanaisNoDia.length;
-  };
-
-  /**
-   * Abre modal com as escalas do dia
-   */
-  const handleVerEscalasDoDia = (data, e) => {
-    if (e) e.stopPropagation();
-    const escalas = getEscalasNoDia(data);
-    if (escalas.length > 0) {
-      setEscalasDoDia(escalas);
-      setShowEscalasModal(true);
-    }
+    return eventosNoDia.length + agendasSemanaisNoDia.length;
   };
 
   /**
@@ -622,9 +569,12 @@ export default function CalendarioAdmin() {
       {!loading && viewMode === 'list' && (
         <CalendarListView
           eventos={eventosFiltrados}
+          agendas={agendasFirestore}
           onEventClick={handleVisualizarEventoSemStop}
           onEventEdit={handleEditarEventoSemStop}
           onEventDelete={handleDeletarEventoSemStop}
+          onAgendaEdit={handleEditarAgenda}
+          onAgendaDelete={handleDeletarAgenda}
         />
       )}
 

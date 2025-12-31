@@ -15,7 +15,8 @@ import {
   Filter,
   X,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Stethoscope
 } from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { getEventColors } from '../../constants/calendarDesign';
@@ -24,9 +25,18 @@ import EmptyState from './EmptyState';
 /**
  * Vista em lista de eventos com busca e filtros
  */
-export default function CalendarListView({ eventos, onEventClick, onEventEdit, onEventDelete }) {
+export default function CalendarListView({ 
+  eventos, 
+  agendas = [],
+  onEventClick, 
+  onEventEdit, 
+  onEventDelete,
+  onAgendaEdit,
+  onAgendaDelete 
+}) {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('date'); // date, tipo, titulo
+  const [showAgendas, setShowAgendas] = useState(true);
 
   // Agrupar eventos por data
   const groupedEvents = useMemo(() => {
@@ -339,6 +349,96 @@ export default function CalendarListView({ eventos, onEventClick, onEventEdit, o
             </div>
           );
         })
+      )}
+
+      {/* Agendas Semanais */}
+      {showAgendas && agendas && agendas.length > 0 && (
+        <div className="bg-gradient-to-br from-indigo-50 via-purple-50/30 to-blue-50/30 rounded-xl shadow-lg border border-indigo-200/50 p-6 animate-fade-in">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-indigo-600 rounded-lg shadow-md">
+                <Stethoscope className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-indigo-900">Agendas Semanais</h3>
+                <p className="text-sm text-indigo-600">{agendas.length} profissionais</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowAgendas(!showAgendas)}
+              className="px-4 py-2 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors border border-indigo-200"
+            >
+              {showAgendas ? 'Ocultar' : 'Mostrar'}
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {agendas.map((agenda) => (
+              <div
+                key={agenda.id}
+                className="group relative bg-white/90 backdrop-blur-sm rounded-xl border-2 border-indigo-200 p-4 hover:shadow-xl hover:border-indigo-300 transition-all duration-300"
+              >
+                {/* Header da Agenda */}
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex-1">
+                    <h4 className="font-bold text-indigo-900 text-base">{agenda.nome}</h4>
+                    <span className="inline-block px-2.5 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold mt-1">
+                      {agenda.categoria}
+                    </span>
+                  </div>
+                  
+                  {/* Ações */}
+                  <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                    {onAgendaEdit && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onAgendaEdit(agenda);
+                        }}
+                        className="p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                        title="Editar agenda"
+                      >
+                        <Edit2 className="w-4 h-4" />
+                      </button>
+                    )}
+                    {onAgendaDelete && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onAgendaDelete(agenda);
+                        }}
+                        className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                        title="Excluir agenda"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* Atividades */}
+                <div className="space-y-2">
+                  {agenda.agendaSemanal && Object.entries(agenda.agendaSemanal).map(([dia, atividades]) => {
+                    if (!atividades || atividades.length === 0) return null;
+                    return (
+                      <div key={dia} className="text-xs">
+                        <div className="font-semibold text-indigo-700 mb-1">{dia}</div>
+                        <div className="space-y-1 pl-2">
+                          {atividades.map((ativ, idx) => (
+                            <div key={idx} className="flex items-start gap-2 text-indigo-600">
+                              <Clock className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                              <span className="text-xs">{ativ.horario} - {ativ.atividade}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );
