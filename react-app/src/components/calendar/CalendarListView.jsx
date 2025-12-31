@@ -1,5 +1,22 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Calendar, Clock, MapPin, Users, Bell, FileText, Eye, Edit2, Trash2, SlidersHorizontal } from 'lucide-react';
+import { 
+  Search, 
+  Calendar, 
+  Clock, 
+  MapPin, 
+  Users, 
+  Bell, 
+  FileText, 
+  Eye, 
+  Edit2, 
+  Trash2, 
+  SlidersHorizontal,
+  ArrowUpDown,
+  Filter,
+  X,
+  CheckCircle2,
+  AlertCircle
+} from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { getEventColors } from '../../constants/calendarDesign';
 import EmptyState from './EmptyState';
@@ -94,38 +111,60 @@ export default function CalendarListView({ eventos, onEventClick, onEventEdit, o
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Search and Sort */}
-      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
-        <div className="flex flex-col sm:flex-row gap-3">
+      <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 rounded-xl shadow-lg border border-neutral-200/50 p-6">
+        <div className="flex flex-col sm:flex-row gap-4">
           {/* Search */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
             <input
               type="text"
-              placeholder="Buscar eventos..."
+              placeholder="Buscar eventos por título, descrição ou local..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all"
+              className="w-full pl-12 pr-10 py-3 border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/80 backdrop-blur-sm text-sm font-medium"
             />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-neutral-100 rounded-lg transition-colors"
+                title="Limpar busca"
+              >
+                <X className="w-4 h-4 text-neutral-500" />
+              </button>
+            )}
           </div>
 
           {/* Sort */}
           <div className="flex items-center gap-2">
-            <SlidersHorizontal className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+            <ArrowUpDown className="w-4 h-4 text-neutral-500 flex-shrink-0" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 bg-white"
+              className="px-4 py-3 border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 bg-white/80 backdrop-blur-sm text-sm font-semibold min-w-[160px] cursor-pointer"
             >
-              <option value="date">Ordenar por Data</option>
-              <option value="tipo">Ordenar por Tipo</option>
-              <option value="titulo">Ordenar por Título</option>
+              <option value="date">📅 Por Data</option>
+              <option value="tipo">🏷️ Por Tipo</option>
+              <option value="titulo">🔤 Por Título</option>
             </select>
           </div>
         </div>
 
-        {/* Results count */}
-        <div className="mt-3 text-sm text-neutral-600">
-          {totalEventos} {totalEventos === 1 ? 'evento encontrado' : 'eventos encontrados'}
+        {/* Results count and stats */}
+        <div className="mt-4 pt-4 border-t border-neutral-200/50 flex flex-wrap items-center justify-between gap-3">
+          <div className="text-sm font-semibold text-neutral-700">
+            <span className="text-blue-600 text-base">{totalEventos}</span> {totalEventos === 1 ? 'evento encontrado' : 'eventos encontrados'}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(groupedEvents).map(([grupo, eventosGrupo]) => {
+              if (eventosGrupo.length === 0) return null;
+              return (
+                <div key={grupo} className="flex items-center gap-2 px-3 py-1.5 bg-white/80 rounded-lg border border-neutral-200 backdrop-blur-sm">
+                  <span className="text-sm font-bold text-neutral-900">{eventosGrupo.length}</span>
+                  <span className="text-xs text-neutral-600">{grupo}</span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
@@ -141,19 +180,20 @@ export default function CalendarListView({ eventos, onEventClick, onEventEdit, o
           if (eventosGrupo.length === 0) return null;
 
           return (
-            <div key={grupo} className="space-y-3">
+            <div key={grupo} className="space-y-4">
               {/* Group header */}
-              <div className="sticky top-0 bg-neutral-50 px-4 py-2 rounded-lg border border-neutral-200 z-10">
-                <h3 className="text-sm font-semibold text-neutral-700 flex items-center gap-2">
+              <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3 rounded-xl shadow-md z-10 backdrop-blur-sm">
+                <h3 className="text-sm font-bold text-white flex items-center gap-3">
+                  <Calendar className="w-5 h-5" />
                   {grupo}
-                  <span className="text-xs font-normal text-neutral-500">
-                    ({eventosGrupo.length})
+                  <span className="ml-auto px-2.5 py-0.5 bg-white/20 backdrop-blur-sm rounded-full text-xs">
+                    {eventosGrupo.length}
                   </span>
                 </h3>
               </div>
 
               {/* Events in group */}
-              <div className="space-y-2">
+              <div className="space-y-4">
                 {eventosGrupo.map(evento => {
                   const IconeEvento = getIconeEvento(evento.tipo);
                   const colors = getEventColors(evento.tipo);
@@ -161,50 +201,79 @@ export default function CalendarListView({ eventos, onEventClick, onEventEdit, o
                   return (
                     <div
                       key={evento.id}
-                      className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 hover:shadow-md hover:border-primary-200 transition-all duration-200 cursor-pointer group"
+                      className="relative bg-white rounded-xl shadow-md border-2 border-neutral-200 p-5 hover:shadow-xl hover:border-blue-300 transition-all duration-300 cursor-pointer group overflow-hidden"
                       onClick={() => onEventClick(evento)}
                     >
-                      <div className="flex items-start justify-between gap-4">
+                      {/* Barra lateral colorida */}
+                      <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${colors.bg}`} />
+
+                      <div className="flex items-start justify-between gap-4 pl-3">
                         {/* Left: Event info */}
-                        <div className="flex-1 space-y-2 min-w-0">
+                        <div className="flex-1 space-y-3 min-w-0">
                           <div className="flex items-center gap-3 flex-wrap">
                             {/* Type badge */}
-                            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 ${colors.light} ${colors.border} border rounded-full text-xs font-medium ${colors.text}`}>
-                              <IconeEvento className="w-3.5 h-3.5" />
+                            <span className={`inline-flex items-center gap-2 px-3 py-1.5 ${colors.light} border-2 ${colors.border} rounded-full text-xs font-bold ${colors.text} shadow-sm`}>
+                              <IconeEvento className="w-4 h-4" />
                               {getTipoLabel(evento.tipo)}
                             </span>
 
-                            {/* Title */}
-                            <h4 className="font-semibold text-neutral-900 flex-1 min-w-0">{evento.titulo}</h4>
-                          </div>
-
-                          {/* Details */}
-                          <div className="flex flex-wrap gap-4 text-sm text-neutral-600">
-                            <span className="flex items-center gap-1.5">
-                              <Calendar className="w-4 h-4 flex-shrink-0" />
-                              {new Date(evento.dataInicio).toLocaleDateString('pt-BR', {
-                                day: '2-digit',
-                                month: 'long',
-                                year: 'numeric'
-                              })}
-                            </span>
-                            {evento.horaInicio && (
-                              <span className="flex items-center gap-1.5">
-                                <Clock className="w-4 h-4 flex-shrink-0" />
-                                {evento.horaInicio}
+                            {/* Status badges */}
+                            {evento.concluido && (
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-green-50 border border-green-200 rounded-full text-xs font-bold text-green-700">
+                                <CheckCircle2 className="w-3.5 h-3.5" />
+                                Concluído
                               </span>
                             )}
-                            {evento.local && (
-                              <span className="flex items-center gap-1.5">
-                                <MapPin className="w-4 h-4 flex-shrink-0" />
-                                {evento.local}
+
+                            {evento.lembrete && !evento.lembreteEnviado && (
+                              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 border border-amber-200 rounded-full text-xs font-bold text-amber-700">
+                                <Bell className="w-3.5 h-3.5" />
+                                Lembrete ativo
                               </span>
+                            )}
+                          </div>
+
+                          {/* Title */}
+                          <h4 className="font-bold text-lg text-neutral-900 leading-tight">{evento.titulo}</h4>
+
+                          {/* Details in chips */}
+                          <div className="flex flex-wrap gap-2.5">
+                            <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
+                              <Calendar className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                              <span className="text-sm font-medium text-neutral-700">
+                                {new Date(evento.dataInicio).toLocaleDateString('pt-BR', {
+                                  day: '2-digit',
+                                  month: 'long',
+                                  year: 'numeric'
+                                })}
+                              </span>
+                            </div>
+                            {evento.horaInicio && (
+                              <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
+                                <Clock className="w-4 h-4 text-indigo-600 flex-shrink-0" />
+                                <span className="text-sm font-medium text-neutral-700">{evento.horaInicio}</span>
+                                {evento.horaFim && <span className="text-xs text-neutral-500">- {evento.horaFim}</span>}
+                              </div>
+                            )}
+                            {evento.local && (
+                              <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
+                                <MapPin className="w-4 h-4 text-green-600 flex-shrink-0" />
+                                <span className="text-sm font-medium text-neutral-700">{evento.local}</span>
+                              </div>
+                            )}
+                            {evento.participantes && evento.participantes.length > 0 && (
+                              <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
+                                <Users className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                                <span className="text-sm font-medium text-neutral-700">
+                                  {evento.participantes.length} {evento.participantes.length === 1 ? 'participante' : 'participantes'}
+                                </span>
+                              </div>
                             )}
                           </div>
 
                           {/* Description */}
                           {evento.descricao && (
-                            <p className="text-sm text-neutral-600 line-clamp-2">
+                            <p className="text-sm text-neutral-600 line-clamp-2 leading-relaxed">
                               {evento.descricao}
                             </p>
                           )}

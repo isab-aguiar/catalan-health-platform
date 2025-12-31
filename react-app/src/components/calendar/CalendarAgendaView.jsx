@@ -364,26 +364,41 @@ export default function CalendarAgendaView({
                       if (atividadesDoDia.length === 0) return null;
 
                       return (
-                        <div key={agenda.id} className="border border-indigo-200 bg-indigo-50/50 rounded-lg p-4">
-                          <div className="flex items-center gap-2 mb-3">
-                            <Users className="w-5 h-5 text-indigo-600" />
-                            <h6 className="font-bold text-indigo-900">{agenda.nome}</h6>
-                            <span className="text-xs px-2 py-0.5 bg-indigo-200 text-indigo-800 rounded-full font-medium">
+                        <div 
+                          key={agenda.id} 
+                          className="group/agenda relative border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/50 to-purple-50/30 rounded-xl p-5 transition-all duration-300 hover:shadow-lg hover:border-indigo-300"
+                        >
+                          {/* Badge de categoria */}
+                          <div className="absolute top-3 right-3">
+                            <span className="text-xs px-2.5 py-1 bg-indigo-600 text-white rounded-full font-bold uppercase tracking-wide shadow-md">
                               {agenda.categoria}
                             </span>
                           </div>
 
-                          <div className="space-y-2">
+                          <div className="flex items-start gap-3 mb-4">
+                            <div className="p-2.5 bg-indigo-600 rounded-lg shadow-md">
+                              <Users className="w-5 h-5 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <h6 className="font-bold text-lg text-indigo-900 leading-tight">{agenda.nome}</h6>
+                              <p className="text-sm text-indigo-600 mt-0.5">Profissional de Saúde</p>
+                            </div>
+                          </div>
+
+                          <div className="space-y-2.5 mt-4">
                             {atividadesDoDia.map((atividade, idx) => (
-                              <div key={idx} className="flex items-start gap-3 text-sm">
-                                <div className="flex-shrink-0 min-w-[100px]">
-                                  <div className="flex items-center gap-1 text-indigo-700 font-semibold">
-                                    <Clock className="w-3.5 h-3.5" />
-                                    {atividade.horario}
+                              <div 
+                                key={idx} 
+                                className="flex items-start gap-4 p-3 bg-white/80 backdrop-blur-sm rounded-lg border border-indigo-100 hover:border-indigo-200 transition-all duration-200 hover:shadow-md"
+                              >
+                                <div className="flex-shrink-0 min-w-[110px]">
+                                  <div className="flex items-center gap-2 px-3 py-1.5 bg-indigo-100 rounded-lg">
+                                    <Clock className="w-4 h-4 text-indigo-700" />
+                                    <span className="text-sm font-bold text-indigo-900">{atividade.horario}</span>
                                   </div>
                                 </div>
-                                <div className="flex-1 text-indigo-900">
-                                  {atividade.atividade}
+                                <div className="flex-1">
+                                  <p className="text-sm font-medium text-indigo-900 leading-relaxed">{atividade.atividade}</p>
                                 </div>
                               </div>
                             ))}
@@ -400,69 +415,90 @@ export default function CalendarAgendaView({
                       return (
                         <div
                           key={evento.id}
-                          className="group border border-neutral-200 rounded-lg p-4 hover:shadow-md hover:border-primary-200 transition-all duration-200 cursor-pointer"
+                          className="group/evento relative bg-white border-2 border-neutral-200 rounded-xl p-5 hover:shadow-xl hover:border-blue-300 transition-all duration-300 cursor-pointer overflow-hidden"
                           onClick={() => onEventClick(evento)}
                         >
-                          <div className="flex items-start gap-4">
-                            {/* Horário */}
-                            <div className="flex-shrink-0 text-center min-w-[80px]">
+                          {/* Barra lateral colorida */}
+                          <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${colors.bg}`} />
+
+                          <div className="flex items-start gap-5 pl-3">
+                            {/* Horário em destaque */}
+                            <div className="flex-shrink-0 text-center min-w-[100px]">
                               {evento.horaInicio ? (
-                                <>
-                                  <div className="text-lg font-bold text-neutral-900">
+                                <div className={`p-3 rounded-xl ${colors.light} border-2 ${colors.border}`}>
+                                  <div className="flex items-center justify-center gap-1.5 mb-1">
+                                    <Clock className={`w-4 h-4 ${colors.text}`} />
+                                  </div>
+                                  <div className={`text-xl font-black ${colors.text}`}>
                                     {evento.horaInicio}
                                   </div>
                                   {evento.horaFim && (
-                                    <div className="text-xs text-neutral-500">
+                                    <div className="text-xs text-neutral-600 mt-1 font-semibold">
                                       até {evento.horaFim}
                                     </div>
                                   )}
-                                </>
+                                </div>
                               ) : (
-                                <div className="text-sm text-neutral-500">
-                                  Dia inteiro
+                                <div className={`p-3 rounded-xl ${colors.light} border-2 ${colors.border}`}>
+                                  <Calendar className={`w-6 h-6 ${colors.text} mx-auto mb-1`} />
+                                  <div className="text-xs font-bold text-neutral-600">
+                                    Dia inteiro
+                                  </div>
                                 </div>
                               )}
                             </div>
 
                             {/* Conteúdo */}
                             <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between gap-3 mb-2">
-                                <div className="flex items-center gap-2 flex-wrap">
+                              <div className="flex items-start justify-between gap-3 mb-3">
+                                <div className="flex-1">
                                   {/* Badge tipo */}
-                                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 ${colors.light} ${colors.border} border rounded-full text-xs font-medium ${colors.text}`}>
-                                    <IconeEvento className="w-3.5 h-3.5" />
+                                  <span className={`inline-flex items-center gap-2 px-3 py-1.5 ${colors.light} border-2 ${colors.border} rounded-full text-xs font-bold ${colors.text} mb-2 shadow-sm`}>
+                                    <IconeEvento className="w-4 h-4" />
                                     {getTipoLabel(evento.tipo)}
                                   </span>
+
+                                  {/* Título */}
+                                  <h5 className="font-bold text-lg text-neutral-900 leading-tight mt-2">
+                                    {evento.titulo}
+                                  </h5>
+
+                                  {/* Descrição curta */}
+                                  {evento.descricao && (
+                                    <p className="text-sm text-neutral-600 mt-2 line-clamp-2">
+                                      {evento.descricao}
+                                    </p>
+                                  )}
                                 </div>
 
                                 {/* Ações */}
-                                <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex-shrink-0">
+                                <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover/evento:opacity-100 transition-all duration-200 flex-shrink-0">
                                   <button
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       onEventClick(evento);
                                     }}
-                                    className="p-1.5 rounded hover:bg-neutral-100 transition-colors"
+                                    className="p-2 rounded-lg hover:bg-blue-50 transition-all duration-200 border border-transparent hover:border-blue-200"
                                     title="Visualizar"
                                   >
-                                    <Eye className="w-4 h-4 text-neutral-600" />
+                                    <Eye className="w-4 h-4 text-blue-600" />
                                   </button>
                                   <button
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       onEventEdit(evento);
                                     }}
-                                    className="p-1.5 rounded hover:bg-neutral-100 transition-colors"
+                                    className="p-2 rounded-lg hover:bg-amber-50 transition-all duration-200 border border-transparent hover:border-amber-200"
                                     title="Editar"
                                   >
-                                    <Edit2 className="w-4 h-4 text-neutral-600" />
+                                    <Edit2 className="w-4 h-4 text-amber-600" />
                                   </button>
                                   <button
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       onEventDelete(evento);
                                     }}
-                                    className="p-1.5 rounded hover:bg-red-50 transition-colors"
+                                    className="p-2 rounded-lg hover:bg-red-50 transition-all duration-200 border border-transparent hover:border-red-200"
                                     title="Deletar"
                                   >
                                     <Trash2 className="w-4 h-4 text-red-600" />
@@ -470,25 +506,48 @@ export default function CalendarAgendaView({
                                 </div>
                               </div>
 
-                              {/* Título */}
-                              <h5 className="font-semibold text-neutral-900 mb-2">
-                                {evento.titulo}
-                              </h5>
-
-                              {/* Detalhes */}
-                              <div className="flex flex-wrap gap-4 text-sm text-neutral-600">
+                              {/* Detalhes em chips */}
+                              <div className="flex flex-wrap gap-3 mt-4">
                                 {evento.local && (
-                                  <span className="flex items-center gap-1.5">
-                                    <MapPin className="w-4 h-4 flex-shrink-0" />
-                                    {evento.local}
-                                  </span>
+                                  <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
+                                    <MapPin className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+                                    <span className="text-sm font-medium text-neutral-700">{evento.local}</span>
+                                  </div>
                                 )}
                                 {evento.participantes && evento.participantes.length > 0 && (
-                                  <span className="flex items-center gap-1.5">
-                                    <Users className="w-4 h-4 flex-shrink-0" />
-                                    {evento.participantes.length} {evento.participantes.length === 1 ? 'participante' : 'participantes'}
-                                  </span>
+                                  <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
+                                    <Users className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+                                    <span className="text-sm font-medium text-neutral-700">
+                                      {evento.participantes.length} {evento.participantes.length === 1 ? 'participante' : 'participantes'}
+                                    </span>
+                                  </div>
                                 )}
+                                {evento.lembrete && (
+                                  <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${
+                                    evento.lembreteEnviado 
+                                      ? 'bg-green-50 border border-green-200' 
+                                      : 'bg-amber-50 border border-amber-200'
+                                  }`}>
+                                    <Bell className={`w-4 h-4 ${evento.lembreteEnviado ? 'text-green-600' : 'text-amber-600'}`} />
+                                    <span className={`text-sm font-medium ${evento.lembreteEnviado ? 'text-green-700' : 'text-amber-700'}`}>
+                                      {evento.lembreteEnviado ? 'Notificado' : `${evento.lembreteMinutos} min antes`}
+                                    </span>
+                                  </div>
+                                )}
+                                {evento.concluido && (
+                                  <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 border border-green-200 rounded-lg">
+                                    <CheckCircle2 className="w-4 h-4 text-green-600" />
+                                    <span className="text-sm font-bold text-green-700">Concluído</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
                               </div>
 
                               {/* Descrição */}
