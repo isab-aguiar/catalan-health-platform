@@ -65,9 +65,16 @@ export default function Feedbacks() {
 
     setUpdating(true);
     try {
-      const result = await updateFeedback(selectedFeedback.id, {
+      const updateData = {
         status: newStatus,
-      });
+      };
+
+      // Se houver resposta, inclui na atualização
+      if (resposta.trim()) {
+        updateData.resposta = resposta.trim();
+      }
+
+      const result = await updateFeedback(selectedFeedback.id, updateData);
 
       if (result.success) {
         await showModal({
@@ -736,7 +743,7 @@ export default function Feedbacks() {
               </div>
             </div>
 
-            <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+            <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-6 py-4 flex justify-center">
               <button
                 onClick={() => handleDelete(selectedFeedback.id, getTipoLabel(selectedFeedback.tipo).toLowerCase())}
                 disabled={updating || deleteLoading === selectedFeedback.id}
@@ -750,24 +757,7 @@ export default function Feedbacks() {
                 ) : (
                   <>
                     <Trash2 size={16} />
-                    Excluir
-                  </>
-                )}
-              </button>
-              <button
-                onClick={handleResponder}
-                disabled={updating || !resposta.trim() || deleteLoading === selectedFeedback.id}
-                className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-              >
-                {updating ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Salvando...
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    Responder e Resolver
+                    Excluir Feedback
                   </>
                 )}
               </button>
