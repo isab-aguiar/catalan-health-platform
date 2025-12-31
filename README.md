@@ -1128,59 +1128,122 @@ Este projeto é de uso exclusivo da **ESF Catalão - Divinópolis, MG**.
 
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 👥 AUTORES & CONTATO -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
 ## 👥 Autores
 
+<div align="center">
+
 <table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/Isaguiar-Dev">
-        <img src="https://github.com/Isaguiar-Dev.png" width="100px;" alt=""/><br>
-        <sub><b>Isabela Aguiar</b></sub>
-      </a><br>
-      <a href="#" title="Code">💻</a>
-      <a href="#" title="Design">🎨</a>
-      <a href="#" title="Documentation">📖</a>
-    </td>
-  </tr>
+<tr>
+<td align="center">
+<a href="https://github.com/Isaguiar-Dev">
+<img src="https://github.com/Isaguiar-Dev.png" width="120px;" style="border-radius:50%;" alt="Isabela Aguiar"/><br/>
+<sub><b>Isabela Aguiar</b></sub>
+</a><br/>
+<br/>
+<a href="https://github.com/Isaguiar-Dev" title="GitHub">
+<img src="https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white" />
+</a>
+<br/>
+<sub>💻 Full Stack Developer</sub><br/>
+<sub>🎨 UI/UX Designer</sub><br/>
+<sub>📖 Documentation</sub>
+</td>
+</tr>
 </table>
+
+</div>
 
 ---
 
 ## 📞 Contato
 
-- 📧 **Email**: contato@esfcatalao.saude.mg.gov.br
-- 📱 **Telefone**: (37) 3229-0000
-- 📍 **Endereço**: Rua Catalão, Bairro São José - Divinópolis/MG
+<div align="center">
+
+<table>
+<tr>
+<td align="center">
+
+📧 **Email**
+
+[contato@esfcatalao.saude.mg.gov.br](mailto:contato@esfcatalao.saude.mg.gov.br)
+
+</td>
+<td align="center">
+
+📱 **Telefone**
+
+[(37) 3229-0000](tel:+553732290000)
+
+</td>
+<td align="center">
+
+📍 **Endereço**
+
+Rua Catalão, Bairro São José
+Divinópolis/MG
+
+</td>
+</tr>
+</table>
+
+</div>
 
 ---
 
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+<!-- 🗺️ ROADMAP -->
+<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
+
 ## 🗺️ Roadmap
 
-- [x] Sistema de autenticação
-- [x] Homepage pública completa
-- [x] 13 serviços de saúde
-- [x] 10 páginas de equipes (incluindo index)
-- [x] 3 grupos operativos
-- [x] Busca de ACS (713 microáreas)
-- [x] CRUD de avisos
-- [x] CRUD de campanhas
-- [x] Upload de imagens e PDFs
-- [x] Gestão de usuários
-- [x] Sistema de permissões (RBAC)
-- [x] Sistema de Ouvidoria (Elogios, Reclamações, Sugestões)
-- [x] Gestão de escalas de trabalho
-- [x] Gestão de estoque de vacinas
-- [x] Calendário Nacional de Vacinação
-- [x] Responsividade mobile
-- [x] Deploy na Vercel
-- [ ] Chatbot com IA para assistência (planejado)
-- [ ] Painel de visualização de feedbacks com filtros
-- [ ] Exportação de relatórios de feedback
-- [ ] Dashboard analítico avançado
-- [ ] Sistema de agendamento online
-- [ ] Notificações push
-- [ ] PWA (Progressive Web App)
-- [ ] Testes automatizados
+<div align="center">
+
+<img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=600&size=20&duration=3000&pause=1000&color=1351B4&center=true&vCenter=true&width=400&lines=🎯+Próximas+Features;📈+Em+Desenvolvimento;🚀+Coming+Soon" alt="Roadmap" />
+
+</div>
+
+<table>
+<tr>
+<td width="50%">
+
+### ✅ Implementado
+
+- [x] 🔐 Sistema de autenticação RBAC
+- [x] 🏠 Homepage pública completa
+- [x] 🏥 13 serviços de saúde
+- [x] 👥 10 páginas de equipes
+- [x] 📢 CRUD de avisos e campanhas
+- [x] 🔍 Busca de ACS (713 microáreas)
+- [x] 💉 Gestão de vacinas
+- [x] 📅 Sistema de calendário/agendas
+- [x] 📱 Responsividade mobile
+- [x] ☁️ Deploy na Vercel
+- [x] 💬 Sistema de Ouvidoria
+
+</td>
+<td width="50%">
+
+### 🔜 Planejado
+
+- [ ] 🤖 Chatbot IA com Gemini
+- [ ] 📊 Dashboard analítico avançado
+- [ ] 🔔 Notificações push
+- [ ] 📲 PWA (Progressive Web App)
+- [ ] 🗓️ Agendamento online
+- [ ] 📈 Relatórios exportáveis
+- [ ] 🧪 Testes automatizados
+- [ ] 🌙 Modo escuro
+- [ ] 🗣️ Integração VLibras aprimorada
+- [ ] 📋 Filas virtuais
+- [ ] 🔗 Integração e-SUS
+
+</td>
+</tr>
+</table>
 
 ---
 
