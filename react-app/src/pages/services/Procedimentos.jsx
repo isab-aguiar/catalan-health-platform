@@ -145,12 +145,6 @@ export default function Procedimentos() {
                   </p>
                 </div>
               </div>
-
-              <div className="mt-4 pt-4 border-t border-white/20">
-                <p className="text-white/90 text-xs italic">
-                  <strong>Atenção:</strong> Esta é uma orientação geral. Sempre siga as recomendações do seu médico e esclareça dúvidas com os profissionais de saúde da unidade.
-                </p>
-              </div>
             </div>
           </div>
         </div>
