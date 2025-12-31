@@ -136,13 +136,13 @@ export default function ACSPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-neutral-50 to-white">
       {}
-      <section className="py-12 px-4 bg-gradient-to-br from-primary-500 to-primary-700">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="flex items-center gap-2">
-              <BackButton className="mb-0 bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/40 backdrop-blur-md shadow-none" />
-            </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-normal md:whitespace-nowrap pb-2.5">
+      <section className="py-12 px-4 bg-gradient-to-br from-primary-500 to-primary-700 pt-20">
+        <div className="container mx-auto max-w-6xl relative">
+          <div className="absolute top-0 left-0">
+            <BackButton className="mb-0 bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/40 backdrop-blur-md shadow-none" />
+          </div>
+          <div className="mb-6 pt-16">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white whitespace-normal md:whitespace-nowrap">
               Agentes Comunitários de Saúde
             </h1>
           </div>
