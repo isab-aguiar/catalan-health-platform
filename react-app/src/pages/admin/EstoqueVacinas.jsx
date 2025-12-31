@@ -169,7 +169,7 @@ export default function EstoqueVacinas() {
               <Shield className="w-4 h-4 text-neutral-500" />
             </div>
             <p
-              className="text-2xl font-bold text-neutral-700"
+              className="text-2xl font-bold text-neutral-900"
             >
               {estatisticas.vacinasPublicadas}
             </p>

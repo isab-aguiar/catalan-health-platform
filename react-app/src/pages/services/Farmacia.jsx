@@ -31,7 +31,7 @@ export default function Farmacia() {
         <BackButton />
 
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-neutral-800 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
             Farmácia
           </h1>
           <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
@@ -54,7 +54,7 @@ export default function Farmacia() {
 
         {/* Consulte o Estoque */}
         <div className="mt-12 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-neutral-800 mb-6 text-center">
+          <h2 className="text-2xl font-bold text-neutral-900 mb-6 text-center">
             Consulte o Estoque de Medicamentos
           </h2>
 
