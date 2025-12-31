@@ -47,7 +47,7 @@ const Card = ({
         <>
           {title && (
             <div className="px-6 py-4 border-b border-neutral-200 flex justify-between items-center bg-white rounded-t-md">
-              <h3 className="text-lg font-bold text-neutral-900 tracking-tight">
+              <h3 className="text-lg font-bold text-neutral-700 tracking-tight">
                 {title}
               </h3>
               {headerAction && <div>{headerAction}</div>}
@@ -61,7 +61,7 @@ const Card = ({
         <>
           {title && (
             <div className="px-6 py-4 border-b border-neutral-200 flex justify-between items-center bg-white rounded-t-md">
-              <h3 className="text-lg font-bold text-neutral-900 tracking-tight">
+              <h3 className="text-lg font-bold text-neutral-700 tracking-tight">
                 {title}
               </h3>
               {headerAction && <div>{headerAction}</div>}
