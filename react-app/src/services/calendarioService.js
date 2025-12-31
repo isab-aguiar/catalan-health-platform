@@ -76,6 +76,7 @@ export const criarEvento = async (eventoData, userId) => {
       lembrete: eventoData.lembrete || false,
       lembreteMinutos: eventoData.lembreteMinutos || null,
       lembreteEnviado: false,
+      lembreteEnviadoEm: null,
 
       cor: eventoData.cor || getCor(eventoData.tipo),
       ativo: true,

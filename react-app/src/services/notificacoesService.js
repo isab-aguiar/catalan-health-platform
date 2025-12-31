@@ -3,6 +3,8 @@
  * Gerencia notificações do navegador para lembretes de eventos
  */
 
+import { atualizarEvento } from './calendarioService';
+
 let permissaoConcedida = null;
 let intervalId = null;
 
@@ -64,6 +66,23 @@ export function exibirNotificacao(titulo, opcoes = {}) {
 }
 
 /**
+ * Marca uma notificação como enviada no banco de dados
+ */
+async function marcarNotificacaoEnviada(eventoId) {
+  try {
+    await atualizarEvento(eventoId, {
+      lembreteEnviado: true,
+      lembreteEnviadoEm: new Date()
+    });
+    console.log(`✅ Notificação marcada como enviada para evento ${eventoId}`);
+    return true;
+  } catch (error) {
+    console.error('Erro ao marcar notificação como enviada:', error);
+    return false;
+  }
+}
+
+/**
  * Calcula quando uma notificação deve ser enviada baseado no evento
  */
 function calcularHorarioNotificacao(evento) {
@@ -114,7 +133,7 @@ export function agendarNotificacaoEvento(evento) {
 
   // Se for muito no futuro (> 1 dia), agendar com setTimeout (limitado a ~24 dias)
   if (tempoRestante <= 24 * 60 * 60 * 1000) {
-    return setTimeout(() => {
+    return setTimeout(async () => {
       const tipoLabel = {
         reuniao: "Reunião",
         lembrete: "Lembrete",
@@ -134,6 +153,9 @@ export function agendarNotificacaoEvento(evento) {
         tag: `evento-${evento.id}`,
         requireInteraction: true,
       });
+
+      // Marcar como enviado no banco de dados
+      await marcarNotificacaoEnviada(evento.id);
     }, tempoRestante);
   }
 
@@ -162,7 +184,7 @@ export async function verificarEAgendarNotificacoes(eventos) {
 
   // Verificar a cada minuto se há eventos que precisam de notificação
   intervalId = setInterval(() => {
-    eventos.forEach((evento) => {
+    eventos.forEach(async (evento) => {
       if (evento.lembrete && !evento.lembreteEnviado && evento.ativo && !evento.concluido) {
         const horarioNotificacao = calcularHorarioNotificacao(evento);
         if (horarioNotificacao) {
@@ -191,7 +213,8 @@ export async function verificarEAgendarNotificacoes(eventos) {
               requireInteraction: true,
             });
 
-            // Marcar como enviado (opcional - requer atualização no banco)
+            // Marcar como enviado no banco de dados
+            await marcarNotificacaoEnviada(evento.id);
           }
         }
       }
@@ -218,4 +241,50 @@ export async function inicializarNotificacoes(eventos = []) {
     await verificarEAgendarNotificacoes(eventos);
   }
   return permissao;
+}
+
+// Funções stubs para compatibilidade com NotificationBell e Notificacoes (não implementadas ainda)
+export const TIPOS_NOTIFICACAO = {
+  INFO: 'info',
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  ERROR: 'error',
+  LEMBRETE: 'lembrete',
+  REUNIAO: 'reuniao',
+  ALERTA: 'alerta',
+};
+
+export async function buscarNotificacoesRecentes(uid, limite = 10) {
+  // TODO: Implementar busca de notificações do sistema
+  return [];
+}
+
+export async function buscarNotificacoesUsuario(uid) {
+  // TODO: Implementar busca de notificações do usuário
+  return [];
+}
+
+export async function contarNaoLidas(uid) {
+  // TODO: Implementar contagem de notificações não lidas
+  return 0;
+}
+
+export async function marcarComoLida(notificacaoId, uid) {
+  // TODO: Implementar marcação de notificação como lida
+  return { success: true };
+}
+
+export async function marcarTodasComoLidas(uid) {
+  // TODO: Implementar marcação de todas as notificações como lidas
+  return { success: true };
+}
+
+export async function deletarNotificacao(notificacaoId, uid) {
+  // TODO: Implementar deleção de notificação
+  return { success: true };
+}
+
+export async function limparLidas(uid) {
+  // TODO: Implementar limpeza de notificações lidas
+  return { success: true };
 }

@@ -1,0 +1,381 @@
+import React, { useState, useMemo } from 'react';
+import { ChevronLeft, ChevronRight, Calendar, Clock, MapPin, Users, Bell, FileText, Eye, Edit2, Trash2 } from 'lucide-react';
+import { TIPOS_EVENTO } from '../../services/calendarioService';
+import { getEventColors } from '../../constants/calendarDesign';
+import EmptyState from './EmptyState';
+
+/**
+ * Vista de Agenda - Mostra eventos dia por dia com horários
+ */
+export default function CalendarAgendaView({
+  eventos,
+  onEventClick,
+  onEventEdit,
+  onEventDelete,
+  initialDate = new Date()
+}) {
+  const [currentDate, setCurrentDate] = useState(initialDate);
+  const [daysToShow, setDaysToShow] = useState(7); // 7 ou 14 dias
+
+  // Gerar array de dias a partir da data atual
+  const days = useMemo(() => {
+    const daysArray = [];
+    const startDate = new Date(currentDate);
+    startDate.setHours(0, 0, 0, 0);
+
+    for (let i = 0; i < daysToShow; i++) {
+      const day = new Date(startDate);
+      day.setDate(startDate.getDate() + i);
+      daysArray.push(day);
+    }
+
+    return daysArray;
+  }, [currentDate, daysToShow]);
+
+  // Agrupar eventos por dia
+  const eventosPorDia = useMemo(() => {
+    const grupos = {};
+
+    days.forEach(day => {
+      const dayKey = day.toISOString().split('T')[0];
+      grupos[dayKey] = [];
+    });
+
+    eventos.forEach(evento => {
+      const eventoData = new Date(evento.dataInicio);
+      eventoData.setHours(0, 0, 0, 0);
+      const dayKey = eventoData.toISOString().split('T')[0];
+
+      if (grupos[dayKey]) {
+        grupos[dayKey].push(evento);
+      }
+    });
+
+    // Ordenar eventos de cada dia por horário
+    Object.keys(grupos).forEach(dayKey => {
+      grupos[dayKey].sort((a, b) => {
+        if (!a.horaInicio && !b.horaInicio) return 0;
+        if (!a.horaInicio) return 1;
+        if (!b.horaInicio) return -1;
+        return a.horaInicio.localeCompare(b.horaInicio);
+      });
+    });
+
+    return grupos;
+  }, [days, eventos]);
+
+  const handlePrevious = () => {
+    const newDate = new Date(currentDate);
+    newDate.setDate(newDate.getDate() - daysToShow);
+    setCurrentDate(newDate);
+  };
+
+  const handleNext = () => {
+    const newDate = new Date(currentDate);
+    newDate.setDate(newDate.getDate() + daysToShow);
+    setCurrentDate(newDate);
+  };
+
+  const handleToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  const getIconeEvento = (tipo) => {
+    switch (tipo) {
+      case TIPOS_EVENTO.REUNIAO:
+        return Users;
+      case TIPOS_EVENTO.LEMBRETE:
+        return Bell;
+      case TIPOS_EVENTO.AGENDAMENTO:
+        return FileText;
+      default:
+        return Calendar;
+    }
+  };
+
+  const getTipoLabel = (tipo) => {
+    const labels = {
+      [TIPOS_EVENTO.REUNIAO]: 'Reunião',
+      [TIPOS_EVENTO.LEMBRETE]: 'Lembrete',
+      [TIPOS_EVENTO.AGENDAMENTO]: 'Agendamento',
+    };
+    return labels[tipo] || tipo;
+  };
+
+  const isToday = (date) => {
+    const hoje = new Date();
+    return (
+      date.getDate() === hoje.getDate() &&
+      date.getMonth() === hoje.getMonth() &&
+      date.getFullYear() === hoje.getFullYear()
+    );
+  };
+
+  const formatarDiaSemana = (date) => {
+    return date.toLocaleDateString('pt-BR', { weekday: 'long' });
+  };
+
+  const formatarDataCompleta = (date) => {
+    return date.toLocaleDateString('pt-BR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  return (
+    <div className="space-y-6 animate-fade-in">
+      {/* Controles */}
+      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Navegação */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handlePrevious}
+              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+              aria-label="Período anterior"
+            >
+              <ChevronLeft className="w-5 h-5 text-neutral-700" />
+            </button>
+
+            <button
+              onClick={handleToday}
+              className="px-4 py-2 text-sm font-medium text-primary-600 hover:bg-blue-50 rounded-lg transition-colors"
+            >
+              Hoje
+            </button>
+
+            <button
+              onClick={handleNext}
+              className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+              aria-label="Próximo período"
+            >
+              <ChevronRight className="w-5 h-5 text-neutral-700" />
+            </button>
+          </div>
+
+          {/* Período */}
+          <div className="text-center">
+            <h3 className="text-lg font-semibold text-neutral-900">
+              {formatarDataCompleta(days[0])} - {formatarDataCompleta(days[days.length - 1])}
+            </h3>
+          </div>
+
+          {/* Toggle dias */}
+          <div className="flex items-center gap-2 bg-neutral-100 rounded-lg p-1">
+            <button
+              onClick={() => setDaysToShow(7)}
+              className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${
+                daysToShow === 7
+                  ? 'bg-white text-primary-600 shadow-sm'
+                  : 'text-neutral-600 hover:text-neutral-900'
+              }`}
+            >
+              7 dias
+            </button>
+            <button
+              onClick={() => setDaysToShow(14)}
+              className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${
+                daysToShow === 14
+                  ? 'bg-white text-primary-600 shadow-sm'
+                  : 'text-neutral-600 hover:text-neutral-900'
+              }`}
+            >
+              14 dias
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Grid de Dias */}
+      <div className="space-y-4">
+        {days.map((day, index) => {
+          const dayKey = day.toISOString().split('T')[0];
+          const eventosDay = eventosPorDia[dayKey] || [];
+          const hoje = isToday(day);
+
+          return (
+            <div
+              key={dayKey}
+              className={`bg-white rounded-lg shadow-sm border overflow-hidden ${
+                hoje ? 'border-primary-300 ring-2 ring-primary-100' : 'border-neutral-200'
+              }`}
+            >
+              {/* Header do Dia */}
+              <div className={`p-4 border-b ${
+                hoje
+                  ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border-primary-200'
+                  : 'bg-gradient-to-r from-neutral-50 to-neutral-100 border-neutral-200'
+              }`}>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h4 className={`text-lg font-semibold capitalize ${
+                      hoje ? 'text-primary-700' : 'text-neutral-900'
+                    }`}>
+                      {formatarDiaSemana(day)}
+                    </h4>
+                    <p className="text-sm text-neutral-600">
+                      {day.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                    </p>
+                  </div>
+                  <div className={`text-right ${hoje ? 'text-primary-600' : 'text-neutral-600'}`}>
+                    <div className="text-3xl font-bold">{day.getDate()}</div>
+                    {hoje && (
+                      <span className="inline-block px-2 py-1 bg-primary-600 text-white text-xs font-medium rounded-full mt-1">
+                        Hoje
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-2 text-sm font-medium text-neutral-600">
+                  {eventosDay.length} {eventosDay.length === 1 ? 'evento' : 'eventos'}
+                </div>
+              </div>
+
+              {/* Eventos do Dia */}
+              <div className="p-4">
+                {eventosDay.length === 0 ? (
+                  <div className="text-center py-8">
+                    <Calendar className="w-12 h-12 text-neutral-300 mx-auto mb-2" />
+                    <p className="text-sm text-neutral-500">Nenhum evento neste dia</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {eventosDay.map(evento => {
+                      const IconeEvento = getIconeEvento(evento.tipo);
+                      const colors = getEventColors(evento.tipo);
+
+                      return (
+                        <div
+                          key={evento.id}
+                          className="group border border-neutral-200 rounded-lg p-4 hover:shadow-md hover:border-primary-200 transition-all duration-200 cursor-pointer"
+                          onClick={() => onEventClick(evento)}
+                        >
+                          <div className="flex items-start gap-4">
+                            {/* Horário */}
+                            <div className="flex-shrink-0 text-center min-w-[80px]">
+                              {evento.horaInicio ? (
+                                <>
+                                  <div className="text-lg font-bold text-neutral-900">
+                                    {evento.horaInicio}
+                                  </div>
+                                  {evento.horaFim && (
+                                    <div className="text-xs text-neutral-500">
+                                      até {evento.horaFim}
+                                    </div>
+                                  )}
+                                </>
+                              ) : (
+                                <div className="text-sm text-neutral-500">
+                                  Dia inteiro
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Conteúdo */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between gap-3 mb-2">
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  {/* Badge tipo */}
+                                  <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 ${colors.light} ${colors.border} border rounded-full text-xs font-medium ${colors.text}`}>
+                                    <IconeEvento className="w-3.5 h-3.5" />
+                                    {getTipoLabel(evento.tipo)}
+                                  </span>
+                                </div>
+
+                                {/* Ações */}
+                                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onEventClick(evento);
+                                    }}
+                                    className="p-1.5 rounded hover:bg-neutral-100 transition-colors"
+                                    title="Visualizar"
+                                  >
+                                    <Eye className="w-4 h-4 text-neutral-600" />
+                                  </button>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onEventEdit(evento);
+                                    }}
+                                    className="p-1.5 rounded hover:bg-neutral-100 transition-colors"
+                                    title="Editar"
+                                  >
+                                    <Edit2 className="w-4 h-4 text-neutral-600" />
+                                  </button>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onEventDelete(evento);
+                                    }}
+                                    className="p-1.5 rounded hover:bg-red-50 transition-colors"
+                                    title="Deletar"
+                                  >
+                                    <Trash2 className="w-4 h-4 text-red-600" />
+                                  </button>
+                                </div>
+                              </div>
+
+                              {/* Título */}
+                              <h5 className="font-semibold text-neutral-900 mb-2">
+                                {evento.titulo}
+                              </h5>
+
+                              {/* Detalhes */}
+                              <div className="flex flex-wrap gap-4 text-sm text-neutral-600">
+                                {evento.local && (
+                                  <span className="flex items-center gap-1.5">
+                                    <MapPin className="w-4 h-4 flex-shrink-0" />
+                                    {evento.local}
+                                  </span>
+                                )}
+                                {evento.participantes && evento.participantes.length > 0 && (
+                                  <span className="flex items-center gap-1.5">
+                                    <Users className="w-4 h-4 flex-shrink-0" />
+                                    {evento.participantes.length} {evento.participantes.length === 1 ? 'participante' : 'participantes'}
+                                  </span>
+                                )}
+                              </div>
+
+                              {/* Descrição */}
+                              {evento.descricao && (
+                                <p className="text-sm text-neutral-600 mt-2 line-clamp-2">
+                                  {evento.descricao}
+                                </p>
+                              )}
+
+                              {/* Badges */}
+                              <div className="flex flex-wrap gap-2 mt-2">
+                                {evento.lembrete && (
+                                  <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+                                    evento.lembreteEnviado
+                                      ? 'bg-green-100 text-green-700'
+                                      : 'bg-blue-100 text-blue-700'
+                                  }`}>
+                                    <Bell className="w-3 h-3" />
+                                    {evento.lembreteEnviado ? 'Notificado' : 'Lembrete ativo'}
+                                  </span>
+                                )}
+                                {evento.concluido && (
+                                  <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+                                    ✓ Concluído
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

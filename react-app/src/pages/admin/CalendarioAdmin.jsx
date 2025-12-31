@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell, Edit2, Trash2, Eye, X, MapPin, Stethoscope, Briefcase } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell, Edit2, Trash2, X, MapPin, Stethoscope, Briefcase, LayoutGrid, List, BarChart3 } from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useModal } from '../../contexts/ModalContext';
@@ -10,13 +9,25 @@ import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import EventoModal from '../../components/admin/EventoModal';
 import { escalasTrabalho } from '../../data/escalasTrabalho';
 import { agendasSemanais } from '../../data/agendasSemanais';
-import { inicializarNotificacoes, pararVerificacaoNotificacoes, solicitarPermissaoNotificacoes } from '../../services/notificacoesService';
+import { inicializarNotificacoes, pararVerificacaoNotificacoes, solicitarPermissaoNotificacoes, exibirNotificacao } from '../../services/notificacoesService';
+import NotificationBanner from '../../components/calendar/NotificationBanner';
+import CalendarDashboard from '../../components/calendar/CalendarDashboard';
+import CalendarListView from '../../components/calendar/CalendarListView';
+import CalendarFilters from '../../components/calendar/CalendarFilters';
+import CalendarSkeleton from '../../components/calendar/CalendarSkeleton';
 
 export default function CalendarioAdmin() {
   const { currentUser } = useAuth();
   const { showModal } = useModal();
-  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [viewMode, setViewMode] = useState('dashboard'); // 'dashboard', 'month', 'list', 'agendas'
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters] = useState({
+    tipos: [],
+    search: '',
+    dateRange: { start: '', end: '' },
+    status: 'all'
+  });
   const [filtroTipo, setFiltroTipo] = useState('todos');
   const [showEventModal, setShowEventModal] = useState(false);
   const [showDetalhesModal, setShowDetalhesModal] = useState(false);
@@ -99,15 +110,64 @@ export default function CalendarioAdmin() {
     return dias;
   };
 
-  const getEventosNoDia = (data) => {
+  // Filtrar eventos baseado nos filtros avançados
+  const eventosFiltrados = useMemo(() => {
     return eventos.filter(evento => {
+      // Filtro por tipo
+      if (filters.tipos.length > 0 && !filters.tipos.includes(evento.tipo)) {
+        return false;
+      }
+
+      // Filtro por busca
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        const matchTitulo = evento.titulo?.toLowerCase().includes(searchLower);
+        const matchDescricao = evento.descricao?.toLowerCase().includes(searchLower);
+        const matchLocal = evento.local?.toLowerCase().includes(searchLower);
+        if (!matchTitulo && !matchDescricao && !matchLocal) {
+          return false;
+        }
+      }
+
+      // Filtro por data
+      if (filters.dateRange?.start) {
+        const dataInicio = new Date(filters.dateRange.start);
+        const eventoData = new Date(evento.dataInicio);
+        if (eventoData < dataInicio) return false;
+      }
+      if (filters.dateRange?.end) {
+        const dataFim = new Date(filters.dateRange.end);
+        const eventoData = new Date(evento.dataInicio);
+        if (eventoData > dataFim) return false;
+      }
+
+      // Filtro por status
+      if (filters.status === 'active' && (!evento.ativo || evento.concluido)) {
+        return false;
+      }
+      if (filters.status === 'completed' && !evento.concluido) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [eventos, filters]);
+
+  // Contagem de eventos por tipo (para os filtros)
+  const eventCounts = useMemo(() => ({
+    reuniao: eventos.filter(e => e.tipo === TIPOS_EVENTO.REUNIAO).length,
+    lembrete: eventos.filter(e => e.tipo === TIPOS_EVENTO.LEMBRETE).length,
+    agendamento: eventos.filter(e => e.tipo === TIPOS_EVENTO.AGENDAMENTO).length,
+  }), [eventos]);
+
+  const getEventosNoDia = (data) => {
+    return eventosFiltrados.filter(evento => {
       if (!evento.dataInicio) return false;
       const eventoData = new Date(evento.dataInicio);
       return (
         eventoData.getDate() === data.getDate() &&
         eventoData.getMonth() === data.getMonth() &&
-        eventoData.getFullYear() === data.getFullYear() &&
-        (filtroTipo === 'todos' || evento.tipo === filtroTipo)
+        eventoData.getFullYear() === data.getFullYear()
       );
     });
   };
@@ -328,64 +388,197 @@ export default function CalendarioAdmin() {
     setShowEventModal(true);
   };
 
+  /**
+   * Testa notificações do navegador
+   */
+  const handleTestarNotificacao = async () => {
+    const permission = await solicitarPermissaoNotificacoes();
+    if (permission) {
+      exibirNotificacao('Teste de Notificação ✅', {
+        body: 'As notificações estão funcionando corretamente! Você receberá lembretes dos seus eventos.',
+        icon: '/logo-favicon.png',
+        requireInteraction: false
+      });
+    } else {
+      await showModal({
+        type: 'warning',
+        title: 'Permissão Negada',
+        message: 'Por favor, permita notificações nas configurações do navegador para receber lembretes.',
+        confirmText: 'OK'
+      });
+    }
+  };
+
+  /**
+   * Wrapper para deletar evento sem stopPropagation
+   */
+  const handleDeletarEventoSemStop = async (evento) => {
+    await handleDeletarEvento(evento, { stopPropagation: () => {} });
+  };
+
+  /**
+   * Wrapper para editar evento sem stopPropagation
+   */
+  const handleEditarEventoSemStop = (evento) => {
+    handleEditarEvento(evento, { stopPropagation: () => {} });
+  };
+
+  /**
+   * Wrapper para visualizar evento sem stopPropagation
+   */
+  const handleVisualizarEventoSemStop = (evento) => {
+    handleVisualizarEvento(evento, { stopPropagation: () => {} });
+  };
+
   const diasDoMes = getDiasNoMes(currentDate);
   const dataHoje = new Date();
-  const [viewMode, setViewMode] = useState('month'); // 'month' ou 'agendas'
 
   const diasSemanaCompletos = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira'];
 
   return (
     <AdminLayout currentPage="calendario">
       <div className="space-y-6">
+      {/* Notification Banner */}
+      <NotificationBanner />
+
       {/* Header */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
-              <CalendarIcon className="w-7 h-7 text-primary-600" />
-              Calendário Administrativo
-            </h1>
-            <p className="text-neutral-600 mt-1">
-              Gerencie reuniões, lembretes e agendamentos
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            {/* Toggle de Visualização */}
-            <div className="flex items-center gap-2 bg-neutral-100 rounded-lg p-1">
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-neutral-900 flex items-center gap-2">
+                <CalendarIcon className="w-7 h-7 text-primary-600" />
+                Calendário Administrativo
+              </h1>
+              <p className="text-neutral-600 mt-1">
+                Gerencie reuniões, lembretes e agendamentos
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Botão Testar Notificações */}
               <button
-                onClick={() => setViewMode('month')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  viewMode === 'month'
-                    ? 'bg-white text-primary-600 shadow-sm'
-                    : 'text-neutral-600 hover:text-neutral-900'
-                }`}
+                onClick={handleTestarNotificacao}
+                className="px-3 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-all duration-200 flex items-center gap-2 text-sm font-medium"
+                title="Testar Notificações"
               >
-                Calendário Mensal
+                <Bell className="w-4 h-4" />
+                Testar
               </button>
+
+              {/* Botão Adicionar Evento */}
               <button
-                onClick={() => setViewMode('agendas')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                  viewMode === 'agendas'
-                    ? 'bg-white text-primary-600 shadow-sm'
-                    : 'text-neutral-600 hover:text-neutral-900'
-                }`}
+                onClick={() => setShowEventModal(true)}
+                className="bg-primary-600 text-white px-4 py-2.5 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md"
               >
-                Agendas Semanais
+                <Plus className="w-5 h-5" />
+                Adicionar Evento
               </button>
             </div>
+          </div>
+
+          {/* Toggle de Visualização */}
+          <div className="flex flex-wrap items-center gap-2 border-t border-neutral-200 pt-4">
+            <span className="text-sm font-medium text-neutral-700 mr-2">Visualização:</span>
             <button
-              onClick={() => setShowEventModal(true)}
-              className="bg-primary-600 text-white px-4 py-2.5 rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-colors flex items-center gap-2 font-medium shadow-sm"
+              onClick={() => setViewMode('dashboard')}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                viewMode === 'dashboard'
+                  ? 'bg-primary-600 text-white shadow-sm'
+                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+              }`}
             >
-              <Plus className="w-5 h-5" />
-              Adicionar Evento
+              <BarChart3 className="w-4 h-4" />
+              Dashboard
             </button>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                viewMode === 'list'
+                  ? 'bg-primary-600 text-white shadow-sm'
+                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+              }`}
+            >
+              <List className="w-4 h-4" />
+              Lista
+            </button>
+            <button
+              onClick={() => setViewMode('month')}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                viewMode === 'month'
+                  ? 'bg-primary-600 text-white shadow-sm'
+                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+              }`}
+            >
+              <LayoutGrid className="w-4 h-4" />
+              Calendário
+            </button>
+            <button
+              onClick={() => setViewMode('agendas')}
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                viewMode === 'agendas'
+                  ? 'bg-primary-600 text-white shadow-sm'
+                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+              }`}
+            >
+              <CalendarIcon className="w-4 h-4" />
+              Agendas Semanais
+            </button>
+
+            {/* Botão Filtros */}
+            {(viewMode === 'month' || viewMode === 'list') && (
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className={`ml-auto px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                  showFilters
+                    ? 'bg-primary-100 text-primary-700 border border-primary-300'
+                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                }`}
+              >
+                <Filter className="w-4 h-4" />
+                Filtros
+              </button>
+            )}
           </div>
         </div>
       </div>
 
+      {/* Filtros Avançados */}
+      {showFilters && (viewMode === 'month' || viewMode === 'list') && (
+        <div className="animate-slide-down">
+          <CalendarFilters
+            filters={filters}
+            onFiltersChange={setFilters}
+            eventCounts={eventCounts}
+          />
+        </div>
+      )}
+
+      {/* Loading State */}
+      {loading && <CalendarSkeleton viewMode={viewMode} />}
+
+      {/* Dashboard View */}
+      {!loading && viewMode === 'dashboard' && (
+        <CalendarDashboard
+          eventos={eventosFiltrados}
+          onEventClick={handleVisualizarEventoSemStop}
+          onEventEdit={handleEditarEventoSemStop}
+          onEventDelete={handleDeletarEventoSemStop}
+          onCreateEvent={() => setShowEventModal(true)}
+        />
+      )}
+
+      {/* List View */}
+      {!loading && viewMode === 'list' && (
+        <CalendarListView
+          eventos={eventosFiltrados}
+          onEventClick={handleVisualizarEventoSemStop}
+          onEventEdit={handleEditarEventoSemStop}
+          onEventDelete={handleDeletarEventoSemStop}
+        />
+      )}
+
       {/* Controles do Calendário */}
-      {viewMode === 'month' && (
+      {!loading && viewMode === 'month' && (
         <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
           <div className="flex flex-col gap-4">
             {/* Navegação de Meses */}
@@ -492,13 +685,13 @@ export default function CalendarioAdmin() {
                       return (
                         <div
                           key={index}
-                          className={`min-h-[100px] border-r border-b border-neutral-200 last:border-r-0 p-2 flex flex-col ${
+                          className={`group min-h-[110px] border-r border-b border-neutral-200 last:border-r-0 p-3 flex flex-col ${
                             diaInfo.mes !== 'atual'
-                              ? 'bg-neutral-50'
+                              ? 'bg-neutral-50 opacity-60'
                               : isHoje
-                                ? 'bg-blue-50'
+                                ? 'bg-gradient-to-br from-blue-50 to-indigo-50 border-primary-300'
                                 : 'bg-white hover:bg-neutral-50'
-                          } transition-colors cursor-pointer relative`}
+                          } transition-all duration-200 cursor-pointer relative hover:shadow-md hover:z-10`}
                           onClick={(e) => {
                             if (totalItens > 0) {
                               handleVerDiaCompleto(diaInfo.data, e);
@@ -508,7 +701,7 @@ export default function CalendarioAdmin() {
                           }}
                         >
                           <div
-                            className={`text-sm font-semibold ${
+                            className={`text-sm font-semibold inline-flex items-center justify-center ${
                               diaInfo.mes !== 'atual'
                                 ? 'text-neutral-400'
                                 : isHoje
