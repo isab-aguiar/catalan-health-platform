@@ -61,7 +61,6 @@ const Farmacia = lazyLoad(() => import("./pages/services/Farmacia"));
 const FarmaciaDispensacao = lazyLoad(() => import("./pages/services/FarmaciaDispensacao"));
 const PrevencaoHIV = lazyLoad(() => import("./pages/services/PrevencaoHIV"));
 const Consultas = lazyLoad(() => import("./pages/services/Consultas"));
-const ConsultasEnfermagem = lazyLoad(() => import("./pages/services/ConsultasEnfermagem"));
 const BolsaFamilia = lazyLoad(() => import("./pages/services/BolsaFamilia"));
 const GroupsIndex = lazyLoad(() => import("./pages/groups/GroupsIndex"));
 const Hiperdia = lazyLoad(() => import("./pages/groups/Hiperdia"));
@@ -94,6 +93,7 @@ const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesP
 const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
 const EscalasTrabalho = lazyLoad(() => import("./pages/admin/EscalasTrabalho"));
 const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
+const OuvidoriaIndex = lazyLoad(() => import("./pages/services/OuvidoriaIndex"));
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
@@ -155,13 +155,10 @@ function App() {
                         element={<Consultas />}
                       />
                       <Route
-                        path="/servicos/consultas-enfermagem"
-                        element={<ConsultasEnfermagem />}
-                      />
-                      <Route
                         path="/servicos/bolsa-familia"
                         element={<BolsaFamilia />}
                       />
+                      <Route path="/ouvidoria" element={<OuvidoriaIndex />} />
                       {}
                       <Route path="/grupos" element={<GroupsIndex />} />
                       <Route path="/grupos/hiperdia" element={<Hiperdia />} />
