@@ -9,6 +9,7 @@ import EmptyState from './EmptyState';
  */
 export default function CalendarAgendaView({
   eventos,
+  agendas = [],
   onEventClick,
   onEventEdit,
   onEventDelete,
@@ -128,8 +129,16 @@ export default function CalendarAgendaView({
       {/* Controles */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          {/* Navegação */}
-          <div className="flex items-center gap-2">
+          {/* Botão Hoje */}
+          <button
+            onClick={handleToday}
+            className="px-4 py-2 text-sm font-medium text-primary-600 hover:bg-blue-50 rounded-lg transition-colors"
+          >
+            Hoje
+          </button>
+
+          {/* Navegação e Período */}
+          <div className="flex items-center gap-3">
             <button
               onClick={handlePrevious}
               className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
@@ -138,12 +147,9 @@ export default function CalendarAgendaView({
               <ChevronLeft className="w-5 h-5 text-neutral-700" />
             </button>
 
-            <button
-              onClick={handleToday}
-              className="px-4 py-2 text-sm font-medium text-primary-600 hover:bg-blue-50 rounded-lg transition-colors"
-            >
-              Hoje
-            </button>
+            <h3 className="text-lg font-semibold text-neutral-900 min-w-max">
+              {formatarDataCompleta(days[0])} - {formatarDataCompleta(days[days.length - 1])}
+            </h3>
 
             <button
               onClick={handleNext}
@@ -152,13 +158,6 @@ export default function CalendarAgendaView({
             >
               <ChevronRight className="w-5 h-5 text-neutral-700" />
             </button>
-          </div>
-
-          {/* Período */}
-          <div className="text-center">
-            <h3 className="text-lg font-semibold text-neutral-900">
-              {formatarDataCompleta(days[0])} - {formatarDataCompleta(days[days.length - 1])}
-            </h3>
           </div>
 
           {/* Toggle dias */}
@@ -227,20 +226,72 @@ export default function CalendarAgendaView({
                     )}
                   </div>
                 </div>
-                <div className="mt-2 text-sm font-medium text-neutral-600">
-                  {eventosDay.length} {eventosDay.length === 1 ? 'evento' : 'eventos'}
+                <div className="mt-2 text-sm font-medium text-neutral-600 flex items-center gap-2">
+                  <span>{eventosDay.length} {eventosDay.length === 1 ? 'evento' : 'eventos'}</span>
+                  {agendas.length > 0 && (
+                    <>
+                      <span>•</span>
+                      <span className="text-indigo-600">{agendas.filter(a => {
+                        const diaSemana = day.toLocaleDateString('pt-BR', { weekday: 'long' });
+                        const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+                        return (a.agendaSemanal?.[diaSemanaCapitalizado] || []).length > 0;
+                      }).length} {agendas.filter(a => {
+                        const diaSemana = day.toLocaleDateString('pt-BR', { weekday: 'long' });
+                        const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+                        return (a.agendaSemanal?.[diaSemanaCapitalizado] || []).length > 0;
+                      }).length === 1 ? 'agenda' : 'agendas'}</span>
+                    </>
+                  )}
                 </div>
               </div>
 
-              {/* Eventos do Dia */}
+              {/* Eventos e Agendas do Dia */}
               <div className="p-4">
-                {eventosDay.length === 0 ? (
+                {eventosDay.length === 0 && agendas.length === 0 ? (
                   <div className="text-center py-8">
                     <Calendar className="w-12 h-12 text-neutral-300 mx-auto mb-2" />
-                    <p className="text-sm text-neutral-500">Nenhum evento neste dia</p>
+                    <p className="text-sm text-neutral-500">Nenhum evento ou agenda neste dia</p>
                   </div>
                 ) : (
-                  <div className="space-y-3">
+                  <div className="space-y-4">
+                    {/* Agendas dos Profissionais */}
+                    {agendas.length > 0 && agendas.map(agenda => {
+                      const diaSemana = day.toLocaleDateString('pt-BR', { weekday: 'long' });
+                      const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
+                      const atividadesDoDia = agenda.agendaSemanal?.[diaSemanaCapitalizado] || [];
+
+                      if (atividadesDoDia.length === 0) return null;
+
+                      return (
+                        <div key={agenda.id} className="border border-indigo-200 bg-indigo-50/50 rounded-lg p-4">
+                          <div className="flex items-center gap-2 mb-3">
+                            <Users className="w-5 h-5 text-indigo-600" />
+                            <h6 className="font-bold text-indigo-900">{agenda.nome}</h6>
+                            <span className="text-xs px-2 py-0.5 bg-indigo-200 text-indigo-800 rounded-full font-medium">
+                              {agenda.categoria}
+                            </span>
+                          </div>
+
+                          <div className="space-y-2">
+                            {atividadesDoDia.map((atividade, idx) => (
+                              <div key={idx} className="flex items-start gap-3 text-sm">
+                                <div className="flex-shrink-0 min-w-[100px]">
+                                  <div className="flex items-center gap-1 text-indigo-700 font-semibold">
+                                    <Clock className="w-3.5 h-3.5" />
+                                    {atividade.horario}
+                                  </div>
+                                </div>
+                                <div className="flex-1 text-indigo-900">
+                                  {atividade.atividade}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+
+                    {/* Eventos */}
                     {eventosDay.map(evento => {
                       const IconeEvento = getIconeEvento(evento.tipo);
                       const colors = getEventColors(evento.tipo);

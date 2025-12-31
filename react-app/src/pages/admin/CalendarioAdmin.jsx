@@ -10,6 +10,7 @@ import EventoModal from '../../components/admin/EventoModal';
 import { escalasTrabalho } from '../../data/escalasTrabalho';
 import { agendasSemanais } from '../../data/agendasSemanais';
 import { inicializarNotificacoes, pararVerificacaoNotificacoes, solicitarPermissaoNotificacoes, exibirNotificacao } from '../../services/notificacoesService';
+import { useAgendas } from '../../hooks/useAgendas';
 import NotificationBanner from '../../components/calendar/NotificationBanner';
 import CalendarDashboard from '../../components/calendar/CalendarDashboard';
 import CalendarListView from '../../components/calendar/CalendarListView';
@@ -44,6 +45,17 @@ export default function CalendarioAdmin() {
     currentDate.getMonth() + 1,
     currentDate.getFullYear()
   );
+
+  // Hook para gerenciar agendas do Firestore
+  const {
+    agendas: agendasFirestore,
+    agendasAgrupadas,
+    loading: loadingAgendas,
+    criar: criarAgenda,
+    atualizar: atualizarAgenda,
+    deletar: deletarAgenda,
+    recarregar: recarregarAgendas
+  } = useAgendas();
 
   useBodyScrollLock(showEventModal || showDetalhesModal || showEscalasModal || showModalDia);
 
@@ -431,6 +443,7 @@ export default function CalendarioAdmin() {
     handleVisualizarEvento(evento, { stopPropagation: () => {} });
   };
 
+
   const diasDoMes = getDiasNoMes(currentDate);
   const dataHoje = new Date();
 
@@ -524,17 +537,6 @@ export default function CalendarioAdmin() {
               <LayoutGrid className="w-4 h-4" />
               Calendário
             </button>
-            <button
-              onClick={() => setViewMode('agendas')}
-              className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
-                viewMode === 'agendas'
-                  ? 'bg-primary-600 text-white shadow-sm'
-                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
-              }`}
-            >
-              <CalendarIcon className="w-4 h-4" />
-              Agendas Semanais
-            </button>
 
             {/* Botão Filtros */}
             {(viewMode === 'month' || viewMode === 'list' || viewMode === 'agenda') && (
@@ -593,6 +595,7 @@ export default function CalendarioAdmin() {
       {!loading && viewMode === 'agenda' && (
         <CalendarAgendaView
           eventos={eventosFiltrados}
+          agendas={agendasFirestore}
           onEventClick={handleVisualizarEventoSemStop}
           onEventEdit={handleEditarEventoSemStop}
           onEventDelete={handleDeletarEventoSemStop}
@@ -830,348 +833,6 @@ export default function CalendarioAdmin() {
       )}
 
       {/* Seção de Agendas Semanais */}
-      {viewMode === 'agendas' && (
-        <div className="space-y-6">
-          {/* Agendas dos Médicos */}
-          <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-            <h2 className="text-xl font-bold text-neutral-900 mb-6">
-              Agendas dos Médicos
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {agendasSemanais.medicos.map((medico) => (
-                <div
-                  key={medico.id}
-                  className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-blue-50 to-white hover:shadow-md transition-shadow"
-                >
-                  <h3 className="text-lg font-bold text-neutral-900 mb-3">{medico.nome}</h3>
-                  <div className="mb-4 space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-neutral-700">
-                      <Clock className="w-4 h-4 text-blue-600" />
-                      <span className="font-medium">Manhã:</span>
-                      <span>{medico.horarioAtendimento.manha.display}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-neutral-700">
-                      <Clock className="w-4 h-4 text-amber-600" />
-                      <span className="font-medium">Tarde:</span>
-                      <span>{medico.horarioAtendimento.tarde.display}</span>
-                    </div>
-                  </div>
-                  <div className="border-t border-neutral-200 pt-4 space-y-3">
-                    {diasSemanaCompletos.map((dia) => {
-                      const atividades = medico.agendaSemanal[dia] || [];
-                      return (
-                        <div key={dia} className="text-sm">
-                          <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
-                          {atividades.map((item, idx) => (
-                            <div key={idx} className="text-neutral-700 ml-2 text-xs">
-                              {item.horario} – {item.atividade}
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Agendas das Enfermeiras */}
-          <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-            <h2 className="text-xl font-bold text-neutral-900 mb-6">
-              Agendas das Enfermeiras
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-              {agendasSemanais.enfermeiras.map((enfermeira) => (
-                <div
-                  key={enfermeira.id}
-                  className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition-shadow"
-                >
-                  <h3 className="text-lg font-bold text-neutral-900 mb-3">{enfermeira.nome}</h3>
-                  <div className="mb-4 space-y-2">
-                    <div className="flex items-center gap-2 text-sm text-neutral-700">
-                      <Clock className="w-4 h-4 text-blue-600" />
-                      <span className="font-medium">Manhã:</span>
-                      <span>{enfermeira.horarioAtendimento.manha.display}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-neutral-700">
-                      <Clock className="w-4 h-4 text-amber-600" />
-                      <span className="font-medium">Tarde:</span>
-                      <span>{enfermeira.horarioAtendimento.tarde.display}</span>
-                    </div>
-                  </div>
-                  <div className="border-t border-neutral-200 pt-4 space-y-3">
-                    {diasSemanaCompletos.map((dia) => {
-                      const atividades = enfermeira.agendaSemanal[dia] || [];
-                      return (
-                        <div key={dia} className="text-sm">
-                          <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
-                          {atividades.map((item, idx) => (
-                            <div key={idx} className="text-neutral-700 ml-2 text-xs">
-                              {item.horario} – {item.atividade}
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Agendas - Ginecologista */}
-          {agendasSemanais.ginecologista && agendasSemanais.ginecologista.length > 0 && (
-            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-              <h2 className="text-xl font-bold text-neutral-900 mb-6">
-                Agendas - Ginecologista
-              </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {agendasSemanais.ginecologista.map((profissional) => (
-                  <div
-                    key={profissional.id}
-                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-blue-50 to-white hover:shadow-md transition-shadow"
-                  >
-                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
-                    <div className="mb-4 space-y-2">
-                      {profissional.horarioAtendimento.manha && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-blue-600" />
-                          <span className="font-medium">Manhã:</span>
-                          <span>{profissional.horarioAtendimento.manha.display}</span>
-                        </div>
-                      )}
-                      {profissional.horarioAtendimento.tarde && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-amber-600" />
-                          <span className="font-medium">Tarde:</span>
-                          <span>{profissional.horarioAtendimento.tarde.display}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="border-t border-neutral-200 pt-4 space-y-3">
-                      {diasSemanaCompletos.map((dia) => {
-                        const atividades = profissional.agendaSemanal[dia] || [];
-                        return (
-                          <div key={dia} className="text-sm">
-                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
-                            {atividades.map((item, idx) => (
-                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
-                                {item.horario} – {item.atividade}
-                              </div>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Agendas - Pediatra */}
-          {agendasSemanais.pediatra && agendasSemanais.pediatra.length > 0 && (
-            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-              <h2 className="text-xl font-bold text-neutral-900 mb-6">
-                Agendas - Pediatra
-              </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {agendasSemanais.pediatra.map((profissional) => (
-                  <div
-                    key={profissional.id}
-                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-blue-50 to-white hover:shadow-md transition-shadow"
-                  >
-                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
-                    <div className="mb-4 space-y-2">
-                      {profissional.horarioAtendimento.manha && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-blue-600" />
-                          <span className="font-medium">Manhã:</span>
-                          <span>{profissional.horarioAtendimento.manha.display}</span>
-                        </div>
-                      )}
-                      {profissional.horarioAtendimento.tarde && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-amber-600" />
-                          <span className="font-medium">Tarde:</span>
-                          <span>{profissional.horarioAtendimento.tarde.display}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="border-t border-neutral-200 pt-4 space-y-3">
-                      {diasSemanaCompletos.map((dia) => {
-                        const atividades = profissional.agendaSemanal[dia] || [];
-                        return (
-                          <div key={dia} className="text-sm">
-                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
-                            {atividades.map((item, idx) => (
-                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
-                                {item.horario} – {item.atividade}
-                              </div>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Agendas - Fisioterapeuta */}
-          {agendasSemanais.fisioterapeuta && agendasSemanais.fisioterapeuta.length > 0 && (
-            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-              <h2 className="text-xl font-bold text-neutral-900 mb-6">
-                Agendas - Fisioterapeuta
-              </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {agendasSemanais.fisioterapeuta.map((profissional) => (
-                  <div
-                    key={profissional.id}
-                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition-shadow"
-                  >
-                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
-                    <div className="mb-4 space-y-2">
-                      {profissional.horarioAtendimento.manha && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-blue-600" />
-                          <span className="font-medium">Manhã:</span>
-                          <span>{profissional.horarioAtendimento.manha.display}</span>
-                        </div>
-                      )}
-                      {profissional.horarioAtendimento.tarde && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-amber-600" />
-                          <span className="font-medium">Tarde:</span>
-                          <span>{profissional.horarioAtendimento.tarde.display}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="border-t border-neutral-200 pt-4 space-y-3">
-                      {diasSemanaCompletos.map((dia) => {
-                        const atividades = profissional.agendaSemanal[dia] || [];
-                        return (
-                          <div key={dia} className="text-sm">
-                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
-                            {atividades.map((item, idx) => (
-                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
-                                {item.horario} – {item.atividade}
-                              </div>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Agendas - Psicóloga */}
-          {agendasSemanais.psicologa && agendasSemanais.psicologa.length > 0 && (
-            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-              <h2 className="text-xl font-bold text-neutral-900 mb-6">
-                Agendas - Psicóloga
-              </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {agendasSemanais.psicologa.map((profissional) => (
-                  <div
-                    key={profissional.id}
-                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition-shadow"
-                  >
-                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
-                    <div className="mb-4 space-y-2">
-                      {profissional.horarioAtendimento.manha && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-blue-600" />
-                          <span className="font-medium">Manhã:</span>
-                          <span>{profissional.horarioAtendimento.manha.display}</span>
-                        </div>
-                      )}
-                      {profissional.horarioAtendimento.tarde && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-amber-600" />
-                          <span className="font-medium">Tarde:</span>
-                          <span>{profissional.horarioAtendimento.tarde.display}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="border-t border-neutral-200 pt-4 space-y-3">
-                      {diasSemanaCompletos.map((dia) => {
-                        const atividades = profissional.agendaSemanal[dia] || [];
-                        return (
-                          <div key={dia} className="text-sm">
-                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
-                            {atividades.map((item, idx) => (
-                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
-                                {item.horario} – {item.atividade}
-                              </div>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Agendas - Assistente Social */}
-          {agendasSemanais.assistenteSocial && agendasSemanais.assistenteSocial.length > 0 && (
-            <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-              <h2 className="text-xl font-bold text-neutral-900 mb-6">
-                Agendas - Assistente Social
-              </h2>
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {agendasSemanais.assistenteSocial.map((profissional) => (
-                  <div
-                    key={profissional.id}
-                    className="border border-neutral-200 rounded-lg p-5 bg-gradient-to-br from-green-50 to-white hover:shadow-md transition-shadow"
-                  >
-                    <h3 className="text-lg font-bold text-neutral-900 mb-3">{profissional.nome}</h3>
-                    <div className="mb-4 space-y-2">
-                      {profissional.horarioAtendimento.manha && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-blue-600" />
-                          <span className="font-medium">Manhã:</span>
-                          <span>{profissional.horarioAtendimento.manha.display}</span>
-                        </div>
-                      )}
-                      {profissional.horarioAtendimento.tarde && (
-                        <div className="flex items-center gap-2 text-sm text-neutral-700">
-                          <Clock className="w-4 h-4 text-amber-600" />
-                          <span className="font-medium">Tarde:</span>
-                          <span>{profissional.horarioAtendimento.tarde.display}</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className="border-t border-neutral-200 pt-4 space-y-3">
-                      {diasSemanaCompletos.map((dia) => {
-                        const atividades = profissional.agendaSemanal[dia] || [];
-                        return (
-                          <div key={dia} className="text-sm">
-                            <div className="font-semibold text-neutral-900 mb-1">{dia}</div>
-                            {atividades.map((item, idx) => (
-                              <div key={idx} className="text-neutral-700 ml-2 text-xs">
-                                {item.horario} – {item.atividade}
-                              </div>
-                            ))}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
       {/* Modal de Evento (Criar/Editar) */}
       <EventoModal
         isOpen={showEventModal}

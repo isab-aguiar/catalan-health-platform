@@ -75,6 +75,29 @@ export default function CalendarSkeleton({ viewMode = 'month' }) {
     );
   }
 
+  if (viewMode === 'agenda') {
+    return (
+      <div className="animate-pulse space-y-6">
+        {/* Controls skeleton */}
+        <div className="h-16 bg-neutral-100 rounded-lg"></div>
+
+        {/* Day cards */}
+        {Array.from({ length: 7 }).map((_, i) => (
+          <div key={i} className="bg-white rounded-lg border border-neutral-200 overflow-hidden">
+            {/* Day header */}
+            <div className="h-20 bg-neutral-100"></div>
+            {/* Events */}
+            <div className="p-4 space-y-3">
+              {Array.from({ length: Math.floor(Math.random() * 3) + 1 }).map((_, j) => (
+                <div key={j} className="h-24 bg-neutral-100 rounded-lg"></div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   // Default skeleton
   return (
     <div className="animate-pulse">

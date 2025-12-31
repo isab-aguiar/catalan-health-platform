@@ -1,0 +1,30 @@
+// =========================================
+// REGRAS DO FIRESTORE PARA COLEÇÃO AGENDAS
+// =========================================
+// ADICIONE ESTAS REGRAS NO FIREBASE CONSOLE
+// Link: https://console.firebase.google.com/project/esf-catalao-7da48/firestore/rules
+// =========================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // REGRA PARA A COLEÇÃO AGENDAS
+    // Permite ler e escrever apenas para usuários autenticados
+    match /agendas/{agendaId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Suas outras regras existentes abaixo...
+    // (mantenha suas regras para users, eventos, etc.)
+  }
+}
+
+// =========================================
+// INSTRUÇÕES:
+// =========================================
+// 1. Acesse: https://console.firebase.google.com/project/esf-catalao-7da48/firestore/rules
+// 2. Adicione a regra acima para a coleção "agendas"
+// 3. Clique em "Publicar"
+// 4. Execute o script: node --env-file=.env scripts/popular-agendas-firestore.js
+// =========================================
