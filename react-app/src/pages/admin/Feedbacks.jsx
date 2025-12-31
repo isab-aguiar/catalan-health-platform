@@ -703,9 +703,29 @@ export default function Feedbacks() {
               )}
 
               <div>
-                <label className="block text-sm font-semibold text-neutral-900 mb-2">
-                  Resposta
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-semibold text-neutral-900">
+                    Resposta
+                  </label>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => handleUpdateStatus("em_analise")}
+                      disabled={updating || selectedFeedback.status === "em_analise" || deleteLoading === selectedFeedback.id}
+                      className="px-2 py-1 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+                    >
+                      <Clock size={12} />
+                      Em Análise
+                    </button>
+                    <button
+                      onClick={() => handleUpdateStatus("arquivado")}
+                      disabled={updating || selectedFeedback.status === "arquivado" || deleteLoading === selectedFeedback.id}
+                      className="px-2 py-1 text-xs bg-neutral-600 hover:bg-neutral-700 text-white rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+                    >
+                      <Archive size={12} />
+                      Arquivar
+                    </button>
+                  </div>
+                </div>
                 <textarea
                   value={resposta}
                   onChange={(e) => setResposta(e.target.value)}
@@ -734,41 +754,23 @@ export default function Feedbacks() {
                   </>
                 )}
               </button>
-              <div className="flex flex-wrap items-center justify-end gap-3">
-                <button
-                  onClick={() => handleUpdateStatus("em_analise")}
-                  disabled={updating || selectedFeedback.status === "em_analise" || deleteLoading === selectedFeedback.id}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Clock size={16} className="inline mr-1" />
-                  Em Análise
-                </button>
-                <button
-                  onClick={() => handleUpdateStatus("arquivado")}
-                  disabled={updating || selectedFeedback.status === "arquivado" || deleteLoading === selectedFeedback.id}
-                  className="px-4 py-2 bg-neutral-600 hover:bg-neutral-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <Archive size={16} className="inline mr-1" />
-                  Arquivar
-                </button>
-                <button
-                  onClick={handleResponder}
-                  disabled={updating || !resposta.trim() || deleteLoading === selectedFeedback.id}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                >
-                  {updating ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Salvando...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={16} />
-                      Responder e Resolver
-                    </>
-                  )}
-                </button>
-              </div>
+              <button
+                onClick={handleResponder}
+                disabled={updating || !resposta.trim() || deleteLoading === selectedFeedback.id}
+                className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              >
+                {updating ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Salvando...
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    Responder e Resolver
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>
