@@ -6,7 +6,7 @@
  * e preparado para futura integração com Firebase Authentication.
  *
  * Estrutura:
- * - Organização por departamentos (14 departamentos, 48 funcionários)
+ * - Organização por departamentos (16 departamentos, 45 funcionários)
  * - Cada funcionário possui: id, nome completo, nome de exibição, cargo, equipe ESF, horários
  * - Helper functions para busca e filtragem
  *
@@ -14,7 +14,7 @@
  */
 
 export const employees = {
-  // 1. Agente Comunitário de Saúde (6 funcionários)
+  // 1. Agente Comunitário de Saúde (7 funcionários)
   agenteComunitario: {
     departmentName: 'Agente Comunitário de Saúde',
     departmentCode: 'ACS',
@@ -22,141 +22,141 @@ export const employees = {
       {
         id: 'acs-daniel-ferreira',
         fullName: 'Daniel Henrique Ferreira Silva',
-        displayName: 'Daniel',
+        displayName: 'Daniel Ferreira',
         role: 'Agente Comunitário de Saúde',
         roleBase: 'Agente Comunitário de Saúde',
         isPsf: false,
         department: 'agenteComunitario',
         esf: 'sao-jose',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '17h00', display: '07h00 às 17h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'acs-davi-faria',
         fullName: 'Davi de Castro Faria',
-        displayName: 'Davi',
+        displayName: 'Davi de Castro',
         role: 'Agente Comunitário de Saúde',
         roleBase: 'Agente Comunitário de Saúde',
         isPsf: false,
         department: 'agenteComunitario',
         esf: 'sao-jose',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '17h00', display: '07h00 às 17h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'acs-enes-sousa',
         fullName: 'Enes Lino Sousa Junior',
-        displayName: 'Enes',
+        displayName: 'Enes Souza',
         role: 'Agente Comunitário de Saúde',
         roleBase: 'Agente Comunitário de Saúde',
         isPsf: false,
         department: 'agenteComunitario',
         esf: 'catalao',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '17h00', display: '07h00 às 17h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
+      },
+      {
+        id: 'acs-erika-roscoe',
+        fullName: 'Erika Roscoe',
+        displayName: 'Erika Roscoe',
+        role: 'Agente Comunitário de Saúde',
+        roleBase: 'Agente Comunitário de Saúde',
+        isPsf: false,
+        department: 'agenteComunitario',
+        esf: 'sao-jose',
+        schedule: {
+          morning: { start: '07h00', end: '17h00', display: '07h00 às 17h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
+        },
+        contact: { phone: null, email: null },
+        firebaseUid: null,
+        active: true,
+        metadata: { createdAt: '2025-12-31', updatedAt: '2025-12-31' }
       },
       {
         id: 'acs-matheus-ferreira',
         fullName: 'Matheus José Ferreira Alves',
-        displayName: 'Matheus',
+        displayName: 'Matheus José Ferreira',
         role: 'Agente Comunitário de Saúde',
         roleBase: 'Agente Comunitário de Saúde',
         isPsf: false,
         department: 'agenteComunitario',
         esf: 'catalao',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '17h00', display: '07h00 às 17h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'acs-renata-coimbra',
         fullName: 'Renata Rodrigues Coimbra',
-        displayName: 'Renata',
+        displayName: 'Renata Rodrigues',
         role: 'Agente Comunitário de Saúde',
         roleBase: 'Agente Comunitário de Saúde',
         isPsf: false,
         department: 'agenteComunitario',
         esf: 'bela-vista',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '17h00', display: '07h00 às 17h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'acs-wasley-borges',
         fullName: 'Wasley Hudson Borges',
-        displayName: 'Wasley',
+        displayName: 'Wasley Borges',
         role: 'Agente Comunitário de Saúde',
         roleBase: 'Agente Comunitário de Saúde',
         isPsf: false,
         department: 'agenteComunitario',
         esf: 'bela-vista',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '17h00', display: '07h00 às 17h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
 
-  // 2. Assistente Social (2 funcionários)
+  // 2. Assistente Social (1 funcionário)
   assistenteSocial: {
     departmentName: 'Assistente Social',
     departmentCode: 'AS',
     employees: [
       {
-        id: 'as-luciana-almeida',
-        fullName: 'Luciana Rodrigues Almeida',
-        displayName: 'Luciana',
-        role: 'Assistente Social',
-        roleBase: 'Assistente Social',
-        isPsf: false,
-        department: 'assistenteSocial',
-        esf: null,
-        schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
-        },
-        contact: { phone: null, email: null },
-        firebaseUid: null,
-        active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
-      },
-      {
         id: 'as-noelia-silva',
         fullName: 'Noelia Pereira da Silva',
-        displayName: 'Noelia',
+        displayName: 'Noelia Pereira',
         role: 'Assistente Social',
         roleBase: 'Assistente Social',
         isPsf: false,
@@ -169,7 +169,7 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -182,25 +182,25 @@ export const employees = {
       {
         id: 'acd-cibele-dias',
         fullName: 'Cibele Ribeiro Coimbra Dias',
-        displayName: 'Cibele',
+        displayName: 'Cibele Ribeiro',
         role: 'Atendente de Consultório Dentário - P.S.F.',
         roleBase: 'Atendente de Consultório Dentário',
         isPsf: true,
         department: 'atendenteConsultorioDentario',
         esf: 'catalao',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
+          morning: { start: '07h00', end: '12h00', display: '07h00 às 12h00', enabled: true },
           afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'acd-maycon-teixeira',
         fullName: 'Maycon Alves Teixeira',
-        displayName: 'Maycon',
+        displayName: 'Maycon Alves',
         role: 'Atendente de Consultório Dentário - P.S.F.',
         roleBase: 'Atendente de Consultório Dentário',
         isPsf: true,
@@ -208,12 +208,12 @@ export const employees = {
         esf: 'catalao',
         schedule: {
           morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          afternoon: { start: '12h00', end: '16h00', display: '12h00 às 16h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -226,38 +226,42 @@ export const employees = {
       {
         id: 'aux-enf-angelita-melo',
         fullName: 'Angelita Lara de Melo',
-        displayName: 'Angelita',
+        displayName: 'Angelita Lara',
         role: 'Auxiliar de Enfermagem',
         roleBase: 'Auxiliar de Enfermagem',
         isPsf: false,
         department: 'auxiliarEnfermagem',
         esf: 'sao-jose',
+        workStation: {
+          location: 'Farmácia',
+          shift: 'Manhã'
+        },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h30', end: '16h00', display: '07h30 às 16h00', enabled: true },
+          afternoon: { enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'aux-enf-jose-lopes',
         fullName: 'Jose Ferreira Lopes',
-        displayName: 'Jose',
+        displayName: 'Jose Ferreira',
         role: 'Auxiliar de Enfermagem',
         roleBase: 'Auxiliar de Enfermagem',
         isPsf: false,
         department: 'auxiliarEnfermagem',
         esf: 'sao-jose',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '11h00', end: '17h00', display: '11h00 às 17h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -270,20 +274,24 @@ export const employees = {
       {
         id: 'aux-serv-1-marinete-silva',
         fullName: 'Marinete Maria Silva',
-        displayName: 'Marinete',
+        displayName: 'Marinete Silva',
         role: 'Auxiliar de Serviços I',
         roleBase: 'Auxiliar de Serviços I',
         isPsf: false,
         department: 'auxiliarServicosI',
         esf: null,
+        workStation: {
+          location: 'Farmácia',
+          shift: 'Integral'
+        },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h30', end: '16h00', display: '07h30 às 16h00', enabled: true },
+          afternoon: { enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -296,38 +304,46 @@ export const employees = {
       {
         id: 'aux-serv-2-denivia-santos',
         fullName: 'Denivia Miranda Santos',
-        displayName: 'Denivia',
+        displayName: 'Denivia Santos',
         role: 'Auxiliar de Serviços II',
         roleBase: 'Auxiliar de Serviços II',
         isPsf: false,
         department: 'auxiliarServicosII',
         esf: null,
+        workStation: {
+          location: 'Recepção',
+          shift: 'Integral'
+        },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '17h00', display: '07h00 às 17h00', enabled: true },
+          afternoon: { enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'aux-serv-2-rosana-marcal',
         fullName: 'Rosana da Silva Marçal',
-        displayName: 'Rosana',
+        displayName: 'Rosana Marçal',
         role: 'Auxiliar de Serviços II',
         roleBase: 'Auxiliar de Serviços II',
         isPsf: false,
         department: 'auxiliarServicosII',
         esf: null,
+        workStation: {
+          location: 'Atendimento Administrativo',
+          days: ['Segunda', 'Quarta', 'Sexta']
+        },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '12h00', display: '07h00 às 12h00', enabled: true },
+          afternoon: { start: '13h00', end: '17h00', display: '13h00 às 17h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -340,20 +356,22 @@ export const employees = {
       {
         id: 'dentista-gabriel-assuncao',
         fullName: 'Gabriel Couto Assunção',
-        displayName: 'Dr. Gabriel',
-        role: 'Dentista',
+        displayName: 'Dr. Gabriel Couto',
+        role: 'Dentista - Saúde na Hora',
         roleBase: 'Dentista',
         isPsf: false,
+        isSaudeNaHora: true,
         department: 'dentista',
         esf: null,
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { enabled: false },
+          afternoon: { enabled: false },
+          evening: { start: '17h00', end: '22h00', display: '17h00 às 22h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'dentista-helena-campos',
@@ -366,30 +384,30 @@ export const employees = {
         esf: 'catalao',
         schedule: {
           morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          afternoon: { start: '12h00', end: '16h00', display: '12h00 às 16h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'dentista-mayra-gama',
         fullName: 'Mayra Paula Morais Gama',
-        displayName: 'Dra. Mayra Paula Morais',
+        displayName: 'Dra. Mayra Paula',
         role: 'Dentista - P.S.F.',
         roleBase: 'Dentista',
         isPsf: true,
         department: 'dentista',
         esf: 'catalao',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
+          morning: { start: '07h00', end: '12h00', display: '07h00 às 12h00', enabled: true },
           afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -410,7 +428,7 @@ export const employees = {
         esf: 'catalao',
         schedule: {
           morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          afternoon: { start: '13h00', end: '17h00', display: '13h00 às 17h00', enabled: true }
         },
         weeklySchedule: {
           segunda: { morning: 'Demanda', afternoon: 'Preventivo' },
@@ -422,12 +440,12 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'enfermeiro-fabiola-oliveira',
         fullName: 'Fabiola Cristina da Silva Oliveira',
-        displayName: 'Fabíola',
+        displayName: 'Fabiola Oliveira',
         role: 'Enfermeiro - P.S.F.',
         roleBase: 'Enfermeiro',
         isPsf: true,
@@ -435,7 +453,7 @@ export const employees = {
         esf: 'sao-jose',
         schedule: {
           morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          afternoon: { start: '13h00', end: '17h00', display: '13h00 às 17h00', enabled: true }
         },
         weeklySchedule: {
           segunda: { morning: 'Demanda espontânea', afternoon: 'Pré-natal' },
@@ -447,12 +465,12 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'enfermeiro-naiara-simoes',
         fullName: 'Naiara Cristina Silva Simões',
-        displayName: 'Naiara',
+        displayName: 'Naiara Simões',
         role: 'Enfermeiro - P.S.F.',
         roleBase: 'Enfermeiro',
         isPsf: true,
@@ -460,7 +478,7 @@ export const employees = {
         esf: 'bela-vista',
         schedule: {
           morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          afternoon: { start: '13h00', end: '17h00', display: '13h00 às 17h00', enabled: true }
         },
         weeklySchedule: {
           segunda: { morning: 'Demanda espontânea', afternoon: 'Puericultura' },
@@ -472,30 +490,32 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'enfermeiro-talita-silva',
         fullName: 'Talita Ingrid Magalhães Silva',
-        displayName: 'Talita',
-        role: 'Enfermeiro',
+        displayName: 'Talita Ingrid Magalhães',
+        role: 'Enfermeiro - Saúde na Hora',
         roleBase: 'Enfermeiro',
         isPsf: false,
+        isSaudeNaHora: true,
         department: 'enfermeiro',
         esf: null,
         schedule: {
-          morning: { start: '17h00', end: '22h00', display: '17h00 às 22h00', enabled: true },
-          afternoon: { start: '17h00', end: '22h00', display: '17h00 às 22h00', enabled: true }
+          morning: { enabled: false },
+          afternoon: { enabled: false },
+          evening: { start: '17h00', end: '22h00', display: '17h00 às 22h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
 
-  // 9. Farmacêutico (4 funcionários)
+  // 9. Farmacêutico (3 funcionários)
   farmaceutico: {
     departmentName: 'Farmacêutico',
     departmentCode: 'FARM',
@@ -503,7 +523,7 @@ export const employees = {
       {
         id: 'farmaceutico-marcella-melo',
         fullName: 'Marcella Oliveira Gama de Melo',
-        displayName: 'Marcela',
+        displayName: 'Marcella Oliveira',
         role: 'Farmacêutico',
         roleBase: 'Farmacêutico',
         isPsf: false,
@@ -516,12 +536,12 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'farmaceutico-mariana-freitas',
         fullName: 'Mariana Ribas Freitas',
-        displayName: 'Mariana',
+        displayName: 'Mariana Ribas',
         role: 'Farmacêutico',
         roleBase: 'Farmacêutico',
         isPsf: false,
@@ -534,12 +554,12 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'farmaceutico-tauany-santos',
         fullName: 'Tauany Cristyne Guerra Santos',
-        displayName: 'Tauany',
+        displayName: 'Tauany Santos',
         role: 'Farmacêutico',
         roleBase: 'Farmacêutico',
         isPsf: false,
@@ -552,25 +572,7 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
-      },
-      {
-        id: 'farmaceutico-vanessa-prado',
-        fullName: 'Vanessa Borges do Prado',
-        displayName: 'Vanessa',
-        role: 'Farmacêutico',
-        roleBase: 'Farmacêutico',
-        isPsf: false,
-        department: 'farmaceutico',
-        esf: null,
-        schedule: {
-          morning: { start: '07h30', end: '16h00', display: '07h30 às 16h00', enabled: true },
-          afternoon: { enabled: false }
-        },
-        contact: { phone: null, email: null },
-        firebaseUid: null,
-        active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -583,7 +585,7 @@ export const employees = {
       {
         id: 'fisioterapeuta-luana-paulo',
         fullName: 'Luana Rocha Paulo',
-        displayName: 'Luana',
+        displayName: 'Luana Rocha',
         role: 'Fisioterapeuta',
         roleBase: 'Fisioterapeuta',
         isPsf: false,
@@ -596,7 +598,7 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -609,20 +611,24 @@ export const employees = {
       {
         id: 'medico-gineco-luana-godoi',
         fullName: 'Luana Nogueira Godoi',
-        displayName: 'Dra. Luana',
+        displayName: 'Dra. Luana Nogueira',
         role: 'Médico Ginecologista',
         roleBase: 'Médico Ginecologista',
         isPsf: false,
         department: 'medicoGinecologista',
         esf: null,
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '13h00', display: '07h00 às 13h00', enabled: true },
+          afternoon: { enabled: false }
+        },
+        weeklySchedule: {
+          segunda: { morning: 'Consulta ginecológica/obstétrica' },
+          quarta: { morning: 'Consulta ginecológica/obstétrica' }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -635,25 +641,27 @@ export const employees = {
       {
         id: 'medico-beatriz-freitas',
         fullName: 'Beatriz Rodrigues de Freitas',
-        displayName: 'Dra. Beatriz',
-        role: 'Médico Generalista - P.S.F.',
+        displayName: 'Dra. Beatriz Rodrigues',
+        role: 'Médico Generalista - Saúde na Hora',
         roleBase: 'Médico Generalista',
         isPsf: true,
+        isSaudeNaHora: true,
         department: 'medicoGeneralistaPsf',
         esf: null,
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { enabled: false },
+          afternoon: { enabled: false },
+          evening: { start: '19h00', end: '22h00', display: '19h00 às 22h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'medico-frederico-pereira',
         fullName: 'Frederico Mendes Silva Pereira',
-        displayName: 'Dr. Frederico',
+        displayName: 'Dr. Frederico Mendes',
         role: 'Médico Generalista - P.S.F.',
         roleBase: 'Médico Generalista',
         isPsf: true,
@@ -661,7 +669,7 @@ export const employees = {
         esf: 'catalao',
         schedule: {
           morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          afternoon: { start: '12h00', end: '16h00', display: '12h00 às 16h00', enabled: true }
         },
         weeklySchedule: {
           segunda: { morning: 'Consulta médica', afternoon: 'Consulta médica' },
@@ -673,20 +681,20 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'medico-gustavo-trindade',
         fullName: 'Gustavo Cambraia Trindade',
-        displayName: 'Dr. Gustavo',
+        displayName: 'Dr. Gustavo Cambraia',
         role: 'Médico Generalista - P.S.F.',
         roleBase: 'Médico Generalista',
         isPsf: true,
         department: 'medicoGeneralistaPsf',
         esf: 'bela-vista',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '11h30', display: '07h00 às 11h30', enabled: true },
+          afternoon: { start: '12h30', end: '16h00', display: '12h30 às 16h00', enabled: true }
         },
         weeklySchedule: {
           segunda: { morning: 'Consulta médica', afternoon: 'Consulta médica' },
@@ -698,20 +706,20 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'medico-joao-sousa',
         fullName: 'João Alves de Sousa Junior',
-        displayName: 'Dr. João',
+        displayName: 'Dr. João Alves',
         role: 'Médico Generalista - P.S.F.',
         roleBase: 'Médico Generalista',
         isPsf: true,
         department: 'medicoGeneralistaPsf',
         esf: 'sao-jose',
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '08h00', end: '12h00', display: '08h00 às 12h00', enabled: true },
+          afternoon: { start: '13h00', end: '17h00', display: '13h00 às 17h00', enabled: true }
         },
         weeklySchedule: {
           segunda: { morning: 'Consulta médica', afternoon: 'Pré-natal' },
@@ -723,7 +731,7 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -736,7 +744,7 @@ export const employees = {
       {
         id: 'medico-pediatra-antonio-filho',
         fullName: 'Antonio Fernando Bolina Batista Filho',
-        displayName: 'Dr. Antônio Fernando Bolina',
+        displayName: 'Dr. Antonio Fernando Bolina',
         role: 'Médico Pediatra',
         roleBase: 'Médico Pediatra',
         isPsf: false,
@@ -749,12 +757,12 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'medico-pediatra-jessica-silva',
         fullName: 'Jéssica de Carvalho Antão da Silva',
-        displayName: 'Dra. Jéssica',
+        displayName: 'Dra. Jéssica Carvalho',
         role: 'Médico Pediatra',
         roleBase: 'Médico Pediatra',
         isPsf: false,
@@ -767,7 +775,7 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -780,25 +788,28 @@ export const employees = {
       {
         id: 'psicologo-sandra-menezes',
         fullName: 'Sandra de Sousa Penha Menezes',
-        displayName: 'Sandra',
+        displayName: 'Sandra de Sousa Penha',
         role: 'Psicólogo',
         roleBase: 'Psicólogo',
         isPsf: false,
         department: 'psicologo',
         esf: null,
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '13h00', display: '07h00 às 13h00', enabled: true },
+          afternoon: { enabled: false }
+        },
+        weeklySchedule: {
+          quarta: { morning: 'Atendimento psicológico' }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
 
-  // 15. Técnico de Enfermagem (15 funcionários)
+  // 15. Técnico de Enfermagem (13 funcionários)
   tecnicoEnfermagem: {
     departmentName: 'Técnico de Enfermagem',
     departmentCode: 'TEC-ENF',
@@ -806,20 +817,26 @@ export const employees = {
       {
         id: 'tec-enf-alexsandra-cantinho',
         fullName: 'Alexsandra Gambogi Cantinho',
-        displayName: 'Alexsandra',
-        role: 'Técnico de Enfermagem',
+        displayName: 'Alexsandra Gambogi',
+        role: 'Técnico de Enfermagem - Saúde na Hora',
         roleBase: 'Técnico de Enfermagem',
         isPsf: false,
+        isSaudeNaHora: true,
         department: 'tecnicoEnfermagem',
         esf: null,
+        workStation: {
+          location: 'Recepção / Triagem / Vacinação',
+          shift: 'Noite'
+        },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { enabled: false },
+          afternoon: { enabled: false },
+          evening: { start: '17h00', end: '22h00', display: '17h00 às 22h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-cristiane-assis',
@@ -831,75 +848,85 @@ export const employees = {
         department: 'tecnicoEnfermagem',
         esf: 'sao-jose',
         workStation: {
-          location: 'Sala de Curativos',
-          shift: 'Manhã'
+          morning: { location: 'Sala de Curativos' },
+          afternoon: { location: 'Renovação de Receitas' }
         },
         schedule: {
           morning: { start: '07h00', end: '12h00', display: '07h00 às 12h00', enabled: true },
-          afternoon: { enabled: false }
+          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-darlei-camargos',
         fullName: 'Darlei Pereira Camargos',
-        displayName: 'Darlei Pereira',
+        displayName: 'Darlei Camargos',
         role: 'Técnico de Enfermagem - P.S.F.',
         roleBase: 'Técnico de Enfermagem',
         isPsf: true,
         department: 'tecnicoEnfermagem',
         esf: 'sao-jose',
         workStation: {
-          morning: { location: 'Triagem' },
-          afternoon: { location: 'Sala de Medicação' }
+          morning: { location: 'Triagem (07:00-08:00) / Sala de Procedimentos' },
+          afternoon: { location: 'Sala de Procedimentos' }
         },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
+          morning: { start: '07h00', end: '12h00', display: '07h00 às 12h00', enabled: true },
           afternoon: { start: '12h00', end: '16h00', display: '12h00 às 16h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-ellen-venancio',
         fullName: 'Ellen Fernanda Venancio',
-        displayName: 'Ellen',
-        role: 'Técnico de Enfermagem',
+        displayName: 'Ellen Venâncio',
+        role: 'Técnico de Enfermagem - Saúde na Hora',
         roleBase: 'Técnico de Enfermagem',
         isPsf: false,
+        isSaudeNaHora: true,
         department: 'tecnicoEnfermagem',
         esf: null,
+        workStation: {
+          location: 'Recepção / Triagem / Vacinação',
+          shift: 'Noite'
+        },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { enabled: false },
+          afternoon: { enabled: false },
+          evening: { start: '17h00', end: '22h00', display: '17h00 às 22h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-fadeslaine-monteiro',
         fullName: 'Fadeslaine Cristina de Oliveira Monteiro',
-        displayName: 'Fadeslaine',
+        displayName: 'Fadeslaine Cristina',
         role: 'Técnico de Enfermagem',
         roleBase: 'Técnico de Enfermagem',
         isPsf: false,
         department: 'tecnicoEnfermagem',
         esf: null,
+        workStation: {
+          location: 'Farmácia',
+          shift: 'Integral'
+        },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h30', end: '16h00', display: '07h30 às 16h00', enabled: true },
+          afternoon: { enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-isabela-aguiar',
@@ -912,7 +939,7 @@ export const employees = {
         esf: 'catalao',
         workStation: {
           morning: { location: 'Sala de Agendamento' },
-          afternoon: { location: 'ECG', days: ['Segunda', 'Terça', 'Quinta', 'Sexta'] }
+          afternoon: { location: 'ECG', days: ['Segunda', 'Quarta', 'Quinta', 'Sexta'] }
         },
         schedule: {
           morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
@@ -921,25 +948,29 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-priscila-silva',
         fullName: 'Priscila Fernandes Silva',
-        displayName: 'Priscila',
+        displayName: 'Priscila Silva',
         role: 'Técnico de Enfermagem - P.S.F.',
         roleBase: 'Técnico de Enfermagem',
         isPsf: true,
         department: 'tecnicoEnfermagem',
         esf: 'catalao',
+        workStation: {
+          location: 'Atendimento Administrativo',
+          days: ['Segunda', 'Quarta', 'Sexta']
+        },
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '12h00', display: '07h00 às 12h00', enabled: true },
+          afternoon: { start: '13h00', end: '17h00', display: '13h00 às 17h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-renata-kelly-oliveira',
@@ -951,13 +982,13 @@ export const employees = {
         department: 'tecnicoEnfermagem',
         esf: null,
         schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
+          morning: { start: '07h00', end: '13h00', display: '07h00 às 13h00', enabled: true },
+          afternoon: { start: '', end: '', display: '', enabled: false }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-renata-vieira-lopes',
@@ -979,12 +1010,12 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-rita-mendonca',
         fullName: 'Rita de Cássia Mendonça',
-        displayName: 'Rita',
+        displayName: 'Rita Mendonça',
         role: 'Técnico de Enfermagem - P.S.F.',
         roleBase: 'Técnico de Enfermagem',
         isPsf: true,
@@ -997,25 +1028,7 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
-      },
-      {
-        id: 'tec-enf-silvania-guarda',
-        fullName: 'Silvania Soares Oliveira da Guarda',
-        displayName: 'Silvania',
-        role: 'Técnico de Enfermagem - P.S.F.',
-        roleBase: 'Técnico de Enfermagem',
-        isPsf: true,
-        department: 'tecnicoEnfermagem',
-        esf: 'bela-vista',
-        schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
-        },
-        contact: { phone: null, email: null },
-        firebaseUid: null,
-        active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-tatiana-pichitelli',
@@ -1027,22 +1040,23 @@ export const employees = {
         department: 'tecnicoEnfermagem',
         esf: 'bela-vista',
         workStation: {
-          location: 'Sala de Vacinação',
-          shift: 'Tarde'
+          morning: { location: 'Renovação de Receitas' },
+          afternoon: { location: 'Sala de Vacinação' },
+          shift: 'Integral'
         },
         schedule: {
-          morning: { enabled: false },
+          morning: { start: '09h00', end: '12h00', display: '09h00 às 12h00', enabled: true },
           afternoon: { start: '12h00', end: '17h00', display: '12h00 às 17h00', enabled: true }
         },
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-thaciane-souza',
         fullName: 'Thaciane Aparecida de Souza',
-        displayName: 'Thaciane Aparecida',
+        displayName: 'Thaciane Souza',
         role: 'Técnico de Enfermagem - P.S.F.',
         roleBase: 'Técnico de Enfermagem',
         isPsf: true,
@@ -1059,19 +1073,19 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'tec-enf-valeria-costa',
         fullName: 'Valeria Aparecida da Costa',
-        displayName: 'Valeria Aparecida',
+        displayName: 'Valéria Costa',
         role: 'Técnico de Enfermagem - P.S.F.',
         roleBase: 'Técnico de Enfermagem',
         isPsf: true,
         department: 'tecnicoEnfermagem',
         esf: 'sao-jose',
         workStation: {
-          morning: { location: 'Sala de Medicação' },
+          morning: { location: 'Sala de Procedimentos' },
           afternoon: { location: 'Sala de Curativos' }
         },
         schedule: {
@@ -1081,25 +1095,7 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
-      },
-      {
-        id: 'tec-enf-zulmira-moura',
-        fullName: 'Zulmira Moura',
-        displayName: 'Zulmira',
-        role: 'Técnico de Enfermagem',
-        roleBase: 'Técnico de Enfermagem',
-        isPsf: false,
-        department: 'tecnicoEnfermagem',
-        esf: null,
-        schedule: {
-          morning: { start: '07h00', end: '11h00', display: '07h00 às 11h00', enabled: true },
-          afternoon: { start: '13h00', end: '16h00', display: '13h00 às 16h00', enabled: true }
-        },
-        contact: { phone: null, email: null },
-        firebaseUid: null,
-        active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   },
@@ -1112,7 +1108,7 @@ export const employees = {
       {
         id: 'thd-miriam-ferreira',
         fullName: 'Miriam de Jesus Ferreira',
-        displayName: 'Miriam',
+        displayName: 'Miriam Ferreira',
         role: 'Técnico de Higiene Dental',
         roleBase: 'Técnico de Higiene Dental',
         isPsf: false,
@@ -1125,15 +1121,16 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       },
       {
         id: 'thd-neide-oliveira',
         fullName: 'Neide Aparecida de Sousa Oliveira',
-        displayName: 'Neide',
-        role: 'Técnico de Higiene Dental',
+        displayName: 'Neide Oliveira',
+        role: 'Técnico de Higiene Dental - Saúde na Hora',
         roleBase: 'Técnico de Higiene Dental',
         isPsf: false,
+        isSaudeNaHora: true,
         department: 'tecnicoHigieneDental',
         esf: 'catalao',
         schedule: {
@@ -1143,7 +1140,7 @@ export const employees = {
         contact: { phone: null, email: null },
         firebaseUid: null,
         active: true,
-        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-29' }
+        metadata: { createdAt: '2025-12-29', updatedAt: '2025-12-31' }
       }
     ]
   }
@@ -1202,6 +1199,19 @@ export const getEmployeesByRole = (role) => {
 };
 
 /**
+ * Retorna todos os funcionários do Saúde na Hora
+ * @returns {Array} Lista de funcionários do Saúde na Hora
+ */
+export const getSaudeNaHoraEmployees = () => {
+  const result = [];
+  for (const dept in employees) {
+    const filtered = employees[dept].employees?.filter(emp => emp.isSaudeNaHora === true) || [];
+    result.push(...filtered);
+  }
+  return result;
+};
+
+/**
  * Retorna todos os funcionários ativos
  * @returns {Array} Lista de todos os funcionários
  */
@@ -1221,9 +1231,7 @@ export const getActiveEmployees = () => {
   return getAllEmployees().filter(emp => emp.active === true);
 };
 
-/**
- * Lista de todos os departamentos
- */
+
 export const departments = Object.keys(employees).map(key => ({
   code: key,
   name: employees[key].departmentName,

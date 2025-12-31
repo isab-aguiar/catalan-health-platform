@@ -52,10 +52,11 @@ O **ESF Catalão Web** é a evolução digital da Unidade Básica de Saúde São
 + Interface intuitiva seguindo padrões Gov.br
 + Busca inteligente de ACS por endereço (713 microáreas mapeadas)
 + Sistema completo de gerenciamento de avisos e campanhas
-+ Chatbot com IA Gemini para criação assistida de conteúdo
-+ 10 serviços de saúde + 9 profissionais + 3 grupos operativos
++ Sistema de Ouvidoria (Elogios, Reclamações, Sugestões) com envio anônimo
++ 13 serviços de saúde + 9 profissionais + 3 grupos operativos + sistema de feedback
 + Sistema robusto de permissões (Admin, Profissional, Diretoria)
 + Gestão de estoque de vacinas com calendário nacional
++ Gestão de escalas de trabalho por profissional e sala
 + Upload de imagens e PDFs com Firebase Storage
 + Responsivo e acessível (WCAG 2.1 Level AA)
 + Zero emojis no código (Lucide React icons)
@@ -79,13 +80,17 @@ O **ESF Catalão Web** é a evolução digital da Unidade Básica de Saúde São
 ### 🏥 Área Pública
 
 - ✅ **Homepage** com busca, galeria e avisos
-- ✅ **10 Serviços** mapeados em detalhes
-- ✅ **9 Páginas de Equipe** profissional
+- ✅ **13 Serviços** mapeados em detalhes
+- ✅ **10 Páginas de Equipe** profissional (incluindo index)
 - ✅ **3 Grupos Operativos** (Hiperdia, Tabagismo, Dores Crônicas)
 - ✅ **Busca de ACS** por rua/endereço
 - ✅ **Calendário de Vacinação** nacional
 - ✅ **Campanhas Ativas** em carrossel
 - ✅ **Sistema de Avisos** por página
+- ✅ **Sistema de Ouvidoria** com 3 categorias (Elogios, Reclamações, Sugestões)
+- ✅ **Opção de Envio Anônimo** em feedbacks
+- ✅ **Visualização de Escalas** de trabalho por profissional
+- ✅ **Documentação por Serviço** com anexos e orientações
 
 <!-- <img src="screenshots/publico.gif" width="100%"/> -->
 
@@ -110,16 +115,16 @@ O **ESF Catalão Web** é a evolução digital da Unidade Básica de Saúde São
 <tr>
 <td width="50%">
 
-### 🤖 Chatbot com IA
+### 📝 Sistema de Feedback (Ouvidoria)
 
-- ✅ **Google Gemini 2.5 Pro** integrado
-- ✅ **Criação de Avisos** via conversação
-- ✅ **Análise de Imagens** (Vision API)
-- ✅ **Reformulação de Textos** informal → formal
-- ✅ **Refinamento de Campanhas** com NLP
-- ✅ **Histórico de Interações**
+- ✅ **Elogios** - Reconhecimento do trabalho
+- ✅ **Reclamações** - Relato de problemas
+- ✅ **Sugestões** - Propostas de melhorias
+- ✅ **Envio Anônimo** opcional
+- ✅ **Validação de Formulário** completa
+- ✅ **Painel Admin** para gestão de feedbacks
 
-<!-- <img src="screenshots/chatbot.gif" width="100%"/> -->
+<!-- <img src="screenshots/ouvidoria.gif" width="100%"/> -->
 
 </td>
 <td width="50%">
@@ -141,6 +146,16 @@ O **ESF Catalão Web** é a evolução digital da Unidade Básica de Saúde São
 
 ### 📊 Funcionalidades Detalhadas
 
+#### Sistema de Ouvidoria (Feedback)
+- Três tipos de feedback: Elogios, Reclamações e Sugestões
+- Formulário com validação de campos (nome, email, telefone, mensagem)
+- Opção de envio anônimo
+- Categorização de sugestões por tipo
+- Armazenamento no Firestore em coleção 'feedbacks'
+- Painel administrativo para visualização e gestão
+- Modal de confirmação após envio
+- Redirecionamento automático após submissão
+
 #### Sistema de Avisos
 - Criação manual via painel admin
 - Categorias: vacina, material, campanha
@@ -160,6 +175,100 @@ O **ESF Catalão Web** é a evolução digital da Unidade Básica de Saúde São
 - Calendário Nacional de Vacinação 2025
 - Estatísticas: total, com estoque, sem estoque, doses totais
 - Scripts de upload em massa
+
+### 🏥 Lista Completa de Serviços
+
+#### Serviços Principais (13 serviços)
+
+**Categoria: Atendimento**
+1. **Sala 4 - Agendamento** ([/servicos/sala-4](react-app/src/pages/services/Sala4.jsx))
+   - Central de agendamento de consultas, exames e procedimentos
+
+2. **Sala 9 - Atendimento Administrativo** ([/servicos/sala-9](react-app/src/pages/services/Sala9.jsx))
+   - Acompanhamento de encaminhamentos e fila do SUS
+
+3. **Triagem de Enfermagem** ([/servicos/triagem](react-app/src/pages/services/Triagem.jsx))
+   - Atendimento de demanda espontânea e classificação de risco
+
+4. **Recepção** ([/servicos/recepcao](react-app/src/pages/services/Recepcao.jsx))
+   - Primeiro atendimento e direcionamento
+
+5. **Consultas e Atendimentos** ([/servicos/consultas](react-app/src/pages/services/Consultas.jsx))
+   - Consultas médicas, psicológicas, odontológicas e especializadas
+
+**Categoria: Procedimentos**
+
+6. **Sala de Vacinação** ([/servicos/vacinas](react-app/src/pages/services/Vacinas.jsx))
+   - Vacinação para todas as idades conforme calendário nacional
+
+7. **Sala de Procedimentos** ([/servicos/procedimentos](react-app/src/pages/services/Procedimentos.jsx))
+   - Medicamentos injetáveis, sinais vitais e procedimentos técnicos
+
+8. **Curativos** ([/servicos/curativos](react-app/src/pages/services/Curativos.jsx))
+   - Realização e troca de curativos, retirada de pontos
+
+9. **ECG - Eletrocardiograma** ([/servicos/ecg](react-app/src/pages/services/ECG.jsx))
+   - Exame cardíaco mediante agendamento
+
+**Categoria: Medicamentos**
+
+10. **Farmácia** ([/servicos/farmacia](react-app/src/pages/services/Farmacia.jsx))
+    - Dispensação de medicamentos e orientação
+
+11. **Renovação de Receitas** ([/servicos/renovacao](react-app/src/pages/services/Renovacao.jsx))
+    - Renovação de receitas de uso contínuo
+
+**Categoria: Prevenção**
+
+12. **Prevenção Combinada ao HIV** ([/servicos/prevencao-hiv](react-app/src/pages/services/PrevencaoHIV.jsx))
+    - PrEP e PEP - Estratégias de prevenção
+
+**Categoria: Assistência Social**
+
+13. **Bolsa Família e Serviço Social** ([/servicos/bolsa-familia](react-app/src/pages/services/BolsaFamilia.jsx))
+    - Orientações sobre benefícios e CadÚnico
+
+#### Páginas Adicionais de Serviços
+
+- **Farmácia Dispensação** - Dispensação de medicamentos
+- **Índice de Serviços** - Página inicial de serviços
+- **Sistema de Ouvidoria** - Portal de feedback
+  - Elogios - Reconhecimento do trabalho
+  - Reclamações - Relato de problemas
+  - Sugestões - Propostas de melhorias
+
+#### Equipe Profissional (9 especialidades + índice)
+1. Enfermeiras ([/equipe/enfermeiras](react-app/src/pages/team/Enfermeiras.jsx))
+2. Médicos ([/equipe/medicos](react-app/src/pages/team/Medicos.jsx))
+3. Farmacêutica ([/equipe/farmaceutica](react-app/src/pages/team/Farmaceutica.jsx))
+4. Psicóloga ([/equipe/psicologa](react-app/src/pages/team/Psicologa.jsx))
+5. Ginecologista ([/equipe/ginecologista](react-app/src/pages/team/Ginecologista.jsx))
+6. Fisioterapeuta ([/equipe/fisioterapeuta](react-app/src/pages/team/Fisioterapeuta.jsx))
+7. Assistente Social ([/equipe/assistente-social](react-app/src/pages/team/AssistenteSocial.jsx))
+8. Dentistas ([/equipe/dentistas](react-app/src/pages/team/Dentistas.jsx))
+9. Pediatra ([/equipe/pediatra](react-app/src/pages/team/Pediatra.jsx))
+10. Índice de Equipe ([/equipe](react-app/src/pages/team/TeamIndex.jsx))
+
+#### Grupos de Apoio (3 grupos + índice)
+1. Hiperdia ([/grupos/hiperdia](react-app/src/pages/groups/Hiperdia.jsx)) - Hipertensão e Diabetes
+2. Tabagismo ([/grupos/tabagismo](react-app/src/pages/groups/Tabagismo.jsx)) - Cessação de Fumo
+3. Dores Crônicas ([/grupos/dores-cronicas](react-app/src/pages/groups/DoresCronicas.jsx)) - Apoio a Dores Crônicas
+4. Índice de Grupos ([/grupos](react-app/src/pages/groups/GroupsIndex.jsx))
+
+#### Rotas Administrativas (11 rotas)
+1. Login ([/admin/login](react-app/src/pages/admin/Login.jsx))
+2. Painel ([/admin/painel](react-app/src/pages/admin/Painel.jsx))
+3. Avisos ([/admin/avisos](react-app/src/pages/admin/Avisos.jsx))
+4. Campanhas ([/admin/campanhas](react-app/src/pages/admin/Campanhas.jsx))
+5. Usuários ([/admin/users](react-app/src/pages/admin/Users.jsx))
+6. Corrigir Permissões ([/admin/corrigir-permissoes](react-app/src/pages/admin/CorrigirPermissoes.jsx))
+7. Estoque de Vacinas ([/admin/estoque-vacinas](react-app/src/pages/admin/EstoqueVacinas.jsx))
+8. Orientações Pós-Consulta ([/admin/orientacoes-pos-consulta](react-app/src/pages/admin/OrientacoesPosConsulta.jsx))
+9. Calendário ([/admin/calendario](react-app/src/pages/admin/CalendarioAdmin.jsx))
+10. Escalas de Trabalho ([/admin/escalas](react-app/src/pages/admin/EscalasTrabalho.jsx))
+11. Notificações ([/admin/notificacoes](react-app/src/pages/admin/Notificacoes.jsx))
+
+**Total: 37 rotas configuradas**
 
 ---
 
@@ -186,10 +295,9 @@ O **ESF Catalão Web** é a evolução digital da Unidade Básica de Saúde São
 <img src="https://img.shields.io/badge/Vercel-Deploy-000000?style=for-the-badge&logo=vercel&logoColor=white" />
 </div>
 
-### IA & Bibliotecas
+### Bibliotecas Auxiliares
 
 <div>
-<img src="https://img.shields.io/badge/Google_Gemini-2.5_Pro-4285F4?style=for-the-badge&logo=google&logoColor=white" />
 <img src="https://img.shields.io/badge/Fuse.js-7.1.0-00C4CC?style=for-the-badge" />
 <img src="https://img.shields.io/badge/html2pdf.js-0.12.1-E34F26?style=for-the-badge" />
 </div>
@@ -286,9 +394,6 @@ VITE_FIREBASE_STORAGE_BUCKET=seu-projeto.appspot.com
 VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
 VITE_FIREBASE_APP_ID=1:123456789:web:abcdef
 VITE_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
-
-# Google Gemini AI (opcional - para chatbot)
-VITE_GEMINI_API_KEY=sua_chave_gemini_aqui
 ```
 
 > ⚠️ **IMPORTANTE**: Nunca commite o arquivo `.env` no Git!
@@ -297,10 +402,6 @@ VITE_GEMINI_API_KEY=sua_chave_gemini_aqui
 1. Firebase Console → Configurações do projeto (engrenagem)
 2. Role até "Seus aplicativos" → SDK do Firebase
 3. Copie o objeto `firebaseConfig`
-
-**Gemini API (opcional):**
-1. Acesse [Google AI Studio](https://aistudio.google.com/app/apikey)
-2. Crie uma chave de API gratuita
 
 ### 6️⃣ Deploy das Firestore Rules
 
@@ -407,44 +508,42 @@ A campanha ficará visível imediatamente se marcada como "ativa".
 </details>
 
 <details>
-<summary>🤖 <b>Usando o Chatbot IA</b></summary>
+<summary>📝 <b>Enviando Feedback (Ouvidoria)</b></summary>
 
-#### 1. Acesse o Chatbot
+#### 1. Acesse a Ouvidoria
 
-No painel admin, clique no ícone de chat (se disponível na interface).
+Navegue até `http://localhost:5173/ouvidoria`
 
-#### 2. Converse Naturalmente
+#### 2. Escolha o Tipo de Feedback
 
-Exemplo:
-```
-Preciso criar um aviso sobre falta de seringas.
-Será para a página de vacinas.
-```
+- **Elogios**: Para reconhecer o bom trabalho da equipe
+- **Reclamações**: Para relatar problemas ou insatisfações
+- **Sugestões**: Para propor melhorias no atendimento
 
-#### 3. A IA Responde
+#### 3. Preencha o Formulário
 
-O Gemini criará um texto formal e técnico adequado.
+Campos obrigatórios:
+- **Nome**: Seu nome completo (ou marque "Enviar anonimamente")
+- **Email**: Endereço de email para contato
+- **Telefone**: Telefone com DDD (formato: (37) 99999-9999)
+- **Mensagem**: Detalhes do seu feedback (mínimo 10 caracteres)
 
-#### 4. Refine se Necessário
+Campos adicionais (apenas Sugestões):
+- **Categoria**: Tipo de sugestão (atendimento, infraestrutura, etc.)
 
-```
-Deixe mais formal
-```
+#### 4. Opção de Anonimato
 
-ou
+☑️ Marque "Enviar anonimamente" se preferir não se identificar
 
-```
-Adicione informações sobre prazo de reposição
-```
+#### 5. Envie
 
-#### 5. Use na Campanha
+Clique em "Enviar" e aguarde a confirmação.
 
-Copie o texto gerado e cole no formulário de avisos.
-
-**Funcionalidades Avançadas:**
-- Upload de imagens para análise
-- Reformulação de textos informais
-- Geração de campanhas completas a partir de fotos
+**Validações Automáticas:**
+- Email em formato válido
+- Telefone com 10-11 dígitos
+- Mensagem com no mínimo 10 caracteres
+- Campos obrigatórios preenchidos
 
 </details>
 
@@ -529,57 +628,70 @@ _Conversação com Gemini para criação de conteúdo_
 psf-saojose-web/
 ├── 📂 react-app/                    # Aplicação React
 │   ├── 📂 src/
-│   │   ├── 📂 components/           # Componentes (30+)
-│   │   │   ├── 📂 admin/            # Admin (Header, Sidebar, Tables)
-│   │   │   ├── 📂 avisos/           # Avisos (Card, List, Wrapper)
-│   │   │   ├── 📂 campaign/         # Campanhas (Card, Carousel, Gallery)
-│   │   │   ├── 📂 chatbot/          # Chatbot IA (ChatBot, Message, Input)
-│   │   │   ├── 📂 common/           # Comuns (Modal, Button, Alert, Spinner)
-│   │   │   ├── 📂 layout/           # Layout (Header, Footer, Sidebar)
-│   │   │   ├── 📂 search/           # Busca (GlobalSearch, ACSModal)
-│   │   │   └── 📂 vacinas/          # Vacinas (Calendário, Lista)
+│   │   ├── 📂 components/           # Componentes (64 arquivos)
+│   │   │   ├── 📂 admin/            # Admin (6 componentes)
+│   │   │   ├── 📂 auth/             # Autenticação (2 componentes)
+│   │   │   ├── 📂 avisos/           # Avisos (3 componentes)
+│   │   │   ├── 📂 campaign/         # Campanhas (1 componente)
+│   │   │   ├── 📂 campanha/         # Campanhas (5 componentes)
+│   │   │   ├── 📂 common/           # Comuns (18 componentes)
+│   │   │   ├── 📂 home/             # Home (10 componentes)
+│   │   │   ├── 📂 hubs/             # Hubs (1 componente)
+│   │   │   ├── 📂 layout/           # Layout (6 componentes)
+│   │   │   ├── 📂 search/           # Busca (7 componentes)
+│   │   │   ├── 📂 services/         # Serviços (3 componentes)
+│   │   │   └── 📂 vacinas/          # Vacinas (2 componentes)
 │   │   │
 │   │   ├── 📂 pages/                # Páginas
-│   │   │   ├── 📂 admin/            # 6 páginas admin
-│   │   │   ├── 📂 services/         # 10 serviços
-│   │   │   ├── 📂 team/             # 9 profissionais
-│   │   │   ├── 📂 groups/           # 3 grupos
+│   │   │   ├── 📂 admin/            # 12 páginas admin
+│   │   │   ├── 📂 services/         # 20 páginas de serviços (13 principais + 7 adicionais)
+│   │   │   ├── 📂 team/             # 10 páginas de equipe
+│   │   │   ├── 📂 groups/           # 4 páginas de grupos
 │   │   │   ├── 📄 Home.jsx
-│   │   │   ├── 📄 ACS.jsx
+│   │   │   ├── 📄 ACSPage.jsx
 │   │   │   ├── 📄 REMSA.jsx
-│   │   │   └── 📄 Educacao.jsx
+│   │   │   ├── 📄 SearchResultsPage.jsx
+│   │   │   ├── 📄 CampanhaDetalhe.jsx
+│   │   │   └── 📄 NotFound.jsx
 │   │   │
-│   │   ├── 📂 contexts/             # Context API
-│   │   │   └── 📄 AuthContext.jsx
+│   │   ├── 📂 contexts/             # Context API (2 arquivos)
+│   │   │   ├── 📄 AuthContext.jsx
+│   │   │   └── 📄 ModalContext.jsx
 │   │   │
-│   │   ├── 📂 hooks/                # Custom Hooks (15+)
+│   │   ├── 📂 hooks/                # Custom Hooks (17 arquivos)
+│   │   │   ├── 📄 useACSSearch.js
 │   │   │   ├── 📄 useAvisos.js
 │   │   │   ├── 📄 useCampanhas.js
+│   │   │   ├── 📄 useFeedbacks.js
 │   │   │   ├── 📄 usePermissions.js
-│   │   │   └── ...
+│   │   │   └── ... (12 outros hooks)
 │   │   │
-│   │   ├── 📂 services/             # Firebase services
+│   │   ├── 📂 services/             # Firebase services (9 arquivos)
 │   │   │   ├── 📄 avisosService.js
 │   │   │   ├── 📄 campanhasService.js
+│   │   │   ├── 📄 feedbacksService.js
+│   │   │   ├── 📄 escalasService.js
 │   │   │   ├── 📄 usersService.js
-│   │   │   ├── 📄 geminiService.js   # IA Gemini
-│   │   │   └── 📄 uploadService.js
+│   │   │   ├── 📄 uploadService.js
+│   │   │   └── ... (3 outros services)
 │   │   │
 │   │   ├── 📂 config/               # Configurações
 │   │   │   └── 📄 firebase.js
 │   │   │
-│   │   ├── 📂 data/                 # Dados estáticos
-│   │   │   ├── 📄 acs-data.js       # 713 microáreas
-│   │   │   ├── 📄 profissionais.js  # 115 profissionais
+│   │   ├── 📂 data/                 # Dados estáticos (9 arquivos)
+│   │   │   ├── 📄 services.js       # 13 definições de serviços
+│   │   │   ├── 📄 microareas.js     # 713 microáreas
+│   │   │   ├── 📄 professionals.js  # 115 profissionais
+│   │   │   ├── 📄 groups.js         # Grupos de apoio
+│   │   │   ├── 📄 escalasTrabalho.js # Escalas de trabalho
 │   │   │   ├── 📄 vacinas-sus.js    # Vacinas SUS 2025
-│   │   │   └── ...
+│   │   │   └── ... (3 outros arquivos)
 │   │   │
-│   │   ├── 📄 App.jsx               # Rotas
+│   │   ├── 📄 App.jsx               # Rotas (37 rotas configuradas)
 │   │   └── 📄 main.jsx
 │   │
-│   ├── 📂 scripts/                  # Scripts utilitários (10+)
-│   │   ├── 📄 criar-admin-firestore.js
-│   │   ├── 📄 upload-vacinas-firestore.js
+│   ├── 📂 scripts/                  # Scripts utilitários
+│   │   ├── 📄 importEmployees.js
 │   │   └── ...
 │   │
 │   ├── 📄 package.json
@@ -588,7 +700,7 @@ psf-saojose-web/
 │
 ├── 📄 firebase.json
 ├── 📄 firestore.rules
-├── 📄 vercel.json
+├── 📄 firestore.indexes.json
 └── 📄 README.md
 ```
 
@@ -777,8 +889,8 @@ Este projeto é de uso exclusivo da **ESF Catalão - Divinópolis, MG**.
 
 - [x] Sistema de autenticação
 - [x] Homepage pública completa
-- [x] 10 serviços de saúde
-- [x] 9 páginas de equipes
+- [x] 13 serviços de saúde
+- [x] 10 páginas de equipes (incluindo index)
 - [x] 3 grupos operativos
 - [x] Busca de ACS (713 microáreas)
 - [x] CRUD de avisos
@@ -786,11 +898,15 @@ Este projeto é de uso exclusivo da **ESF Catalão - Divinópolis, MG**.
 - [x] Upload de imagens e PDFs
 - [x] Gestão de usuários
 - [x] Sistema de permissões (RBAC)
-- [x] Chatbot com IA Gemini
+- [x] Sistema de Ouvidoria (Elogios, Reclamações, Sugestões)
+- [x] Gestão de escalas de trabalho
 - [x] Gestão de estoque de vacinas
 - [x] Calendário Nacional de Vacinação
 - [x] Responsividade mobile
 - [x] Deploy na Vercel
+- [ ] Chatbot com IA para assistência (planejado)
+- [ ] Painel de visualização de feedbacks com filtros
+- [ ] Exportação de relatórios de feedback
 - [ ] Dashboard analítico avançado
 - [ ] Sistema de agendamento online
 - [ ] Notificações push
@@ -806,7 +922,6 @@ Este projeto é de uso exclusivo da **ESF Catalão - Divinópolis, MG**.
 - [Tailwind CSS](https://tailwindcss.com/docs)
 - [Vite Guide](https://vitejs.dev/guide/)
 - [Gov.br Design System](https://www.gov.br/ds/)
-- [Google Gemini API](https://ai.google.dev/docs)
 
 ---
 
