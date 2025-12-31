@@ -30,13 +30,13 @@ export default function Sidebar({ isOpen, onClose }) {
   }, [isOpen]);
 
   const navLinks = [
+    { name: 'Serviços', path: '/servicos' },
     { name: 'Sala de Atendimento Administrativo', path: '/servicos/sala-9' },
     { name: 'Sala de Vacinação', path: '/servicos/vacinas' },
     { name: 'Sala de Agendamentos', path: '/servicos/sala-4' },
     { name: 'E-multi', path: '/equipe' },
     { name: 'REMSA', path: '/remsa' },
     { name: 'Agentes Comunitários de Saúde', path: '/acs' },
-    { name: 'Serviços', path: '/servicos' },
     { name: 'Ouvidoria', path: '/ouvidoria' },
   ];
 
