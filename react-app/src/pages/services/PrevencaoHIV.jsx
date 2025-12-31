@@ -1,5 +1,5 @@
 import React from "react";
-import { Shield, Clock, Calendar, MapPin, Phone, AlertCircle, Heart, CheckCircle } from "lucide-react";
+import { Shield, Clock, Calendar, MapPin, Phone, AlertCircle, Heart, CheckCircle, AlertTriangle } from "lucide-react";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
 import BackButton from "../../components/common/BackButton";
 import { contactInfo } from "../../config";
@@ -14,7 +14,7 @@ const PrevencaoHIV = () => {
         <div className="flex items-center gap-3 mb-3">
           <Shield size={32} className="flex-shrink-0" />
           <div>
-            <h1 className="text-2xl font-bold">Prevenção Combinada ao HIV</h1>
+            <h1 className="text-2xl font-bold text-white">Prevenção Combinada ao HIV</h1>
             <p className="text-primary-100 text-sm mt-1">
               PrEP e PEP: Estratégias eficazes de prevenção disponíveis no SUS
             </p>
@@ -23,18 +23,18 @@ const PrevencaoHIV = () => {
       </div>
 
       {/* Introdução */}
-      <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-5 mb-6">
-        <p className="text-neutral-700 leading-relaxed">
-          O SUS oferece <strong>estratégias medicamentosas eficazes</strong> para evitar a infecção pelo HIV.
-          É fundamental entender a diferença entre elas para buscar o atendimento correto no momento adequado.
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-6 mb-6 shadow-sm">
+        <h2 className="text-lg font-bold text-blue-900 mb-3">Estratégias de Prevenção ao HIV no SUS</h2>
+        <p className="text-neutral-700 leading-relaxed text-sm">
+          O Sistema Único de Saúde disponibiliza <strong className="text-blue-700">estratégias medicamentosas eficazes e gratuitas</strong> para prevenir a infecção pelo HIV.
+          Compreender as diferenças entre PEP e PrEP é essencial para buscar o atendimento adequado no momento certo e garantir a máxima proteção.
         </p>
       </div>
 
       {/* PEP - Urgência */}
       <div className="mb-8">
         <div className="bg-gradient-to-br from-red-50 to-rose-50 border border-red-200 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <AlertCircle size={28} className="text-red-600 flex-shrink-0" />
+          <div className="mb-4">
             <h2 className="text-xl font-bold text-red-900">
               PEP<br/>
               <span className="text-sm font-normal text-red-700">Profilaxia Pós-Exposição (Urgência)</span>
@@ -80,10 +80,16 @@ const PrevencaoHIV = () => {
                 preferencialmente nas <strong>primeiras 2 horas</strong> e, no máximo,
                 até <strong>72 horas (3 dias)</strong> após a exposição.
               </p>
-              <div className="bg-red-100 border-l-4 border-red-500 rounded-r-md p-3">
-                <p className="text-red-700 font-semibold text-sm">
-                  ⚠️ Quanto mais rápido iniciar, maior a eficácia!
-                </p>
+              <div className="bg-gradient-to-r from-red-100 to-rose-100 rounded-lg p-4 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <AlertTriangle size={20} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-red-900 font-bold text-sm mb-1">Atenção: Urgência Médica</p>
+                    <p className="text-red-700 text-sm">Quanto mais rápido iniciar o tratamento, maior a eficácia na prevenção!</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -93,8 +99,7 @@ const PrevencaoHIV = () => {
       {/* PrEP - Rotina */}
       <div className="mb-8">
         <div className="bg-gradient-to-br from-purple-50 to-violet-50 border border-purple-200 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <Calendar size={28} className="text-purple-600 flex-shrink-0" />
+          <div className="mb-4">
             <h2 className="text-xl font-bold text-purple-900">
               PrEP<br/>
               <span className="text-sm font-normal text-purple-700">Profilaxia Pré-Exposição (Rotina)</span>
@@ -143,8 +148,7 @@ const PrevencaoHIV = () => {
 
       {/* Onde Buscar Atendimento */}
       <div className="mb-8">
-        <h2 className="text-xl font-bold text-neutral-800 mb-4 flex items-center gap-2">
-          <MapPin size={24} className="text-primary-600" />
+        <h2 className="text-xl font-bold text-neutral-800 mb-4">
           Onde Buscar Atendimento em Divinópolis
         </h2>
 
@@ -205,16 +209,39 @@ const PrevencaoHIV = () => {
         </div>
 
         {/* Plantão de Urgência */}
-        <div className="bg-amber-50 border-l-4 border-amber-500 rounded-r-lg p-4">
-          <div className="flex items-start gap-2">
-            <AlertCircle size={20} className="text-amber-600 mt-0.5 flex-shrink-0" />
-            <div>
-              <h3 className="font-semibold text-amber-900 mb-1">Plantão de Urgência (PEP)</h3>
-              <p className="text-neutral-700 leading-relaxed text-sm">
-                Se a exposição de risco ocorrer <strong>à noite, finais de semana ou feriados</strong>,
-                procure <strong className="text-amber-700">imediatamente a UPA</strong> (Unidade de Pronto Atendimento)
-                mais próxima para iniciar a profilaxia dentro das 72 horas.
+        <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-5 shadow-sm">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Clock size={24} className="text-white" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-amber-900 text-base mb-2">Atendimento de Urgência Fora do Horário Comercial</h3>
+              <p className="text-neutral-700 leading-relaxed text-sm mb-3">
+                A PEP é considerada uma <strong className="text-amber-800">urgência médica</strong>. Se a exposição de risco ocorrer durante:
               </p>
+              <div className="bg-white/60 rounded-md p-3 mb-3">
+                <ul className="space-y-1.5 text-sm text-neutral-700">
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold mt-0.5">•</span>
+                    <span>Período noturno (após as 17h)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold mt-0.5">•</span>
+                    <span>Finais de semana (sábados e domingos)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-amber-600 font-bold mt-0.5">•</span>
+                    <span>Feriados</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-amber-100 rounded-md p-3">
+                <p className="text-amber-900 text-sm font-semibold flex items-start gap-2">
+                  <MapPin size={18} className="flex-shrink-0 mt-0.5" />
+                  <span>Dirija-se imediatamente à <strong>UPA (Unidade de Pronto Atendimento)</strong> mais próxima.
+                  O atendimento deve ocorrer nas primeiras 72 horas após a exposição.</span>
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -223,8 +250,7 @@ const PrevencaoHIV = () => {
       {/* Acolhimento e Sigilo */}
       <div className="mb-8">
         <div className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200 rounded-lg p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <Heart size={28} className="text-green-600 flex-shrink-0" />
+          <div className="mb-4">
             <h2 className="text-xl font-bold text-green-900">
               Seu Bem-estar é Nossa Prioridade
             </h2>

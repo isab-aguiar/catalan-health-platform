@@ -222,7 +222,7 @@ export default function Enfermeiras() {
 
           <div className="p-4 sm:p-6">
             {/* Imagem */}
-            <div className="mb-6 flex justify-center">
+            <div className="mb-6 flex justify-center px-4 md:px-8 lg:px-12">
               <img
                 src={enfermeiraImg}
                 alt="Enfermeira realizando atendimento ao paciente"

@@ -100,7 +100,7 @@ export default function Procedimentos() {
               <Droplet size={24} className="text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-lg mb-2">
+              <h3 className="font-bold text-lg mb-2 text-white">
                 Administração de Noripurum Endovenoso
               </h3>
               <p className="text-white/90 text-sm leading-relaxed mb-4">
@@ -408,49 +408,32 @@ export default function Procedimentos() {
 
             {/* Documentação Necessária */}
             <div className="bg-neutral-50 border-l-4 border-emerald-600 rounded-r-lg p-5 mb-5">
-              <h3 className="font-semibold text-neutral-800 text-lg mb-4 flex items-center gap-2">
-                <IdCard size={20} className="text-emerald-600" />
+              <h3 className="font-semibold text-neutral-800 text-lg mb-4">
                 Documentação Necessária
               </h3>
               <div className="space-y-2 text-sm text-neutral-700">
-                <div className="flex items-start gap-2">
-                  <FileText size={16} className="text-emerald-600 mt-0.5 flex-shrink-0" />
-                  <p>Documento oficial de identificação com foto (RG, CNH ou Carteira de Trabalho)</p>
-                </div>
+                <p>Documento oficial de identificação com foto (RG, CNH ou Carteira de Trabalho)</p>
               </div>
             </div>
 
             {/* Informações Importantes */}
             <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-5">
-              <h3 className="font-semibold text-blue-900 text-lg mb-3 flex items-center gap-2">
-                <Info size={20} className="text-blue-600" />
+              <h3 className="font-semibold text-blue-900 text-lg mb-3">
                 Informações Importantes
               </h3>
               <div className="space-y-3 text-sm text-neutral-700">
-                <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
-                  <p>
-                    <strong className="text-blue-900">Não é necessário pedido médico</strong> - Os testes rápidos podem ser realizados sem prescrição médica
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
-                  <p>
-                    <strong className="text-blue-900">Atendimento por ordem de chegada</strong> - Não é necessário agendamento prévio
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
-                  <p>
-                    <strong className="text-blue-900">Sigilo absoluto</strong> - Todos os resultados são confidenciais e entregues apenas ao paciente
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-blue-600 mt-0.5 flex-shrink-0" />
-                  <p>
-                    <strong className="text-blue-900">Aconselhamento disponível</strong> - Profissionais de saúde estão disponíveis para orientação antes e após o teste
-                  </p>
-                </div>
+                <p>
+                  <strong className="text-blue-900">Não é necessário pedido médico</strong> - Os testes rápidos podem ser realizados sem prescrição médica
+                </p>
+                <p>
+                  <strong className="text-blue-900">Atendimento por ordem de chegada</strong> - Não é necessário agendamento prévio
+                </p>
+                <p>
+                  <strong className="text-blue-900">Sigilo absoluto</strong> - Todos os resultados são confidenciais e entregues apenas ao paciente
+                </p>
+                <p>
+                  <strong className="text-blue-900">Aconselhamento disponível</strong> - Profissionais de saúde estão disponíveis para orientação antes e após o teste
+                </p>
               </div>
             </div>
 

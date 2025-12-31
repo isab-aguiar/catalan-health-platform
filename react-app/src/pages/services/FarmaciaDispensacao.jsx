@@ -1,4 +1,4 @@
-import { AlertCircle, Phone, ExternalLink } from "lucide-react";
+import { AlertCircle, Phone, ExternalLink, Package } from "lucide-react";
 import { Link } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
@@ -79,41 +79,74 @@ export default function FarmaciaDispensacao() {
           </div>
         </InfoBox>
 
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-              <ExternalLink size={24} className="text-white" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-bold text-lg mb-2">
-                Consulte o Estoque de Medicamentos
-              </h3>
-              <p className="text-white/90 text-sm leading-relaxed mb-4">
-                Para verificar a disponibilidade de medicamentos nas farmácias municipais de Divinópolis,
-                acesse o portal oficial da Prefeitura. O sistema apresenta informações atualizadas sobre
-                o estoque disponível em todas as unidades de saúde do município.
-              </p>
-              <a
-                href="https://www.divinopolis.mg.gov.br/portal/servicos/1074/estoque-de-medicamentos-das-farmacias-municipais/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white text-primary-700 font-semibold px-5 py-2.5 rounded-md hover:bg-neutral-50 transition-colors shadow-sm"
-              >
-                <ExternalLink size={18} />
-                Acessar Portal de Consulta
-              </a>
+        {/* Consulte o Estoque */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-neutral-900 mb-6">
+            Consulte o Estoque de Medicamentos
+          </h2>
 
-              <div className="mt-6 pt-6 border-t border-white/20">
-                <p className="text-white/90 text-sm mb-2">Em caso de dúvidas, entre em contato:</p>
-                <a
-                  href={`tel:${contactInfo.phones.pharmacy.tel}`}
-                  className="inline-flex items-center gap-2 text-white hover:text-white/80 transition-colors no-underline"
-                >
-                  <Phone size={18} />
-                  <span className="font-semibold">{contactInfo.phones.pharmacy.display}</span>
-                </a>
+          {/* Desktop: Card horizontal */}
+          <div className="hidden md:block bg-gradient-to-r from-accent-50 to-accent-100 border-2 border-accent-200 rounded-xl p-6 hover:shadow-lg transition-shadow mb-6">
+            <a
+              href="https://www.divinopolis.mg.gov.br/portal/servicos/1074/estoque-de-medicamentos-das-farmacias-municipais/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-6 group"
+            >
+              <div className="flex-shrink-0 w-16 h-16 bg-accent-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Package className="w-8 h-8 text-white" strokeWidth={2} />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-xl font-bold text-neutral-900 mb-2 group-hover:text-accent-700 transition-colors">
+                  Portal da Prefeitura - Estoque de Medicamentos
+                </h3>
+                <p className="text-neutral-700">
+                  Verifique em tempo real a disponibilidade de medicamentos nas farmácias municipais
+                </p>
+              </div>
+              <ExternalLink className="w-6 h-6 text-accent-600 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+
+          {/* Mobile: Card vertical */}
+          <a
+            href="https://www.divinopolis.mg.gov.br/portal/servicos/1074/estoque-de-medicamentos-das-farmacias-municipais/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="md:hidden block bg-gradient-to-br from-accent-50 to-accent-100 border-2 border-accent-200 rounded-xl p-6 hover:shadow-lg transition-shadow mb-6"
+          >
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="w-16 h-16 bg-accent-500 rounded-xl flex items-center justify-center">
+                <Package className="w-8 h-8 text-white" strokeWidth={2} />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-neutral-900 mb-2">
+                  Portal da Prefeitura
+                </h3>
+                <p className="text-sm text-neutral-700 mb-3">
+                  Estoque de Medicamentos
+                </p>
+                <p className="text-xs text-neutral-600">
+                  Verifique em tempo real a disponibilidade de medicamentos nas farmácias municipais
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-accent-600 font-semibold text-sm">
+                <span>Consultar Estoque</span>
+                <ExternalLink className="w-4 h-4" />
               </div>
             </div>
+          </a>
+
+          {/* Contato da Farmácia */}
+          <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <p className="text-neutral-700 text-sm mb-2">Em caso de dúvidas, entre em contato:</p>
+            <a
+              href={`tel:${contactInfo.phones.pharmacy.tel}`}
+              className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors no-underline font-semibold"
+            >
+              <Phone size={18} />
+              <span>{contactInfo.phones.pharmacy.display}</span>
+            </a>
           </div>
         </div>
 
