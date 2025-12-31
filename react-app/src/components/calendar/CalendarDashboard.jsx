@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Calendar, Clock, CheckCircle, Bell, Plus, Users, FileText, CalendarCheck, Eye, Edit2, Trash2, MapPin } from 'lucide-react';
+import { Calendar, Clock, CheckCircle, Bell, Plus, Users, FileText, CalendarCheck, Eye, Edit2, Trash2, MapPin, Stethoscope, Briefcase } from 'lucide-react';
 import StatsCard from './StatsCard';
 import EmptyState from './EmptyState';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
@@ -8,7 +8,17 @@ import { getEventColors } from '../../constants/calendarDesign';
 /**
  * Dashboard com estatísticas e resumo do calendário
  */
-export default function CalendarDashboard({ eventos, onEventClick, onEventEdit, onEventDelete, onCreateEvent }) {
+export default function CalendarDashboard({ 
+  eventos, 
+  agendas = [],
+  onEventClick, 
+  onEventEdit, 
+  onEventDelete, 
+  onCreateEvent,
+  onAgendaEdit,
+  onAgendaDelete,
+  onCreateAgenda
+}) {
   // Calcular estatísticas
   const stats = useMemo(() => {
     const hoje = new Date();

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { X, Clock, Plus, Trash2, Calendar } from 'lucide-react';
-import { CATEGORIAS_PROFISSIONAL, DIAS_SEMANA } from '../../services/agendasService';
+import { CATEGORIAS_PROFISSIONAL, DIAS_SEMANA, criarAgenda, atualizarAgenda } from '../../services/agendasService';
 
 /**
  * Modal para criar/editar agendas semanais
  */
-export default function AgendaModal({ agenda = null, onSave, onClose }) {
-  const isEditMode = !!agenda;
+export default function AgendaModal({ isOpen, agendaEditando = null, onAgendaSalva, onClose }) {
+  const isEditMode = !!agendaEditando;
 
   const [formData, setFormData] = useState({
     nome: '',
@@ -21,22 +21,51 @@ export default function AgendaModal({ agenda = null, onSave, onClose }) {
   });
 
   useEffect(() => {
-    if (agenda) {
+    if (agendaEditando) {
       setFormData({
-        nome: agenda.nome || '',
-        categoria: agenda.categoria || CATEGORIAS_PROFISSIONAL.MEDICO,
-        horarioAtendimento: agenda.horarioAtendimento || {},
-        agendaSemanal: agenda.agendaSemanal || {},
-        ativa: agenda.ativa !== undefined ? agenda.ativa : true,
-        observacoes: agenda.observacoes || ''
+        nome: agendaEditando.nome || '',
+        categoria: agendaEditando.categoria || CATEGORIAS_PROFISSIONAL.MEDICO,
+        horarioAtendimento: agendaEditando.horarioAtendimento || {
+          manha: { inicio: '07:00', fim: '11:00', display: '07:00 às 11:00' },
+          tarde: { inicio: '13:00', fim: '17:00', display: '13:00 às 17:00' }
+        },
+        agendaSemanal: agendaEditando.agendaSemanal || {},
+        ativa: agendaEditando.ativa !== undefined ? agendaEditando.ativa : true,
+        observacoes: agendaEditando.observacoes || ''
+      });
+    } else {
+      // Reset para estado inicial ao criar nova agenda
+      setFormData({
+        nome: '',
+        categoria: CATEGORIAS_PROFISSIONAL.MEDICO,
+        horarioAtendimento: {
+          manha: { inicio: '07:00', fim: '11:00', display: '07:00 às 11:00' },
+          tarde: { inicio: '13:00', fim: '17:00', display: '13:00 às 17:00' }
+        },
+        agendaSemanal: {},
+        ativa: true,
+        observacoes: ''
       });
     }
-  }, [agenda]);
+  }, [agendaEditando]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave(formData);
+    
+    try {
+      if (isEditMode) {
+        await atualizarAgenda(agendaEditando.id, formData);
+      } else {
+        await criarAgenda(formData);
+      }
+      onAgendaSalva();
+    } catch (error) {
+      console.error('Erro ao salvar agenda:', error);
+      alert('Erro ao salvar agenda: ' + error.message);
+    }
   };
+
+  if (!isOpen) return null;
 
   const handleAddAtividade = (dia) => {
     setFormData(prev => ({

@@ -60,7 +60,7 @@ export default function CalendarioAdmin() {
     recarregar: recarregarAgendas
   } = useAgendas();
 
-  useBodyScrollLock(showEventModal || showDetalhesModal || showEscalasModal || showModalDia);
+  useBodyScrollLock(showEventModal || showDetalhesModal || showEscalasModal || showModalDia || showAgendaModal);
 
   // Inicializar sistema de notificações
   useEffect(() => {
@@ -492,6 +492,17 @@ export default function CalendarioAdmin() {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
+              {/* Botão Adicionar Agenda */}
+              <button
+                onClick={() => {
+                  setAgendaEditando(null);
+                  setShowAgendaModal(true);
+                }}
+                className="bg-indigo-600 text-white px-4 py-2.5 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-indigo-800 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md"
+              >
+                <Users className="w-5 h-5" />
+                Nova Agenda
+              </button>
               {/* Botão Adicionar Evento */}
               <button
                 onClick={() => setShowEventModal(true)}
@@ -587,10 +598,17 @@ export default function CalendarioAdmin() {
       {!loading && viewMode === 'dashboard' && (
         <CalendarDashboard
           eventos={eventosFiltrados}
+          agendas={agendasFirestore}
           onEventClick={handleVisualizarEventoSemStop}
           onEventEdit={handleEditarEventoSemStop}
           onEventDelete={handleDeletarEventoSemStop}
           onCreateEvent={() => setShowEventModal(true)}
+          onAgendaEdit={handleEditarAgenda}
+          onAgendaDelete={handleDeletarAgenda}
+          onCreateAgenda={() => {
+            setAgendaEditando(null);
+            setShowAgendaModal(true);
+          }}
         />
       )}
 
@@ -859,6 +877,21 @@ export default function CalendarioAdmin() {
         eventoEditando={eventoEditando}
         dataInicial={selectedDate}
         onEventoSalvo={handleEventoSalvo}
+      />
+
+      {/* Modal de Agenda (Criar/Editar) */}
+      <AgendaModal
+        isOpen={showAgendaModal}
+        onClose={() => {
+          setShowAgendaModal(false);
+          setAgendaEditando(null);
+        }}
+        agendaEditando={agendaEditando}
+        onAgendaSalva={async () => {
+          setShowAgendaModal(false);
+          setAgendaEditando(null);
+          await recarregarAgendas();
+        }}
       />
 
       {/* Modal de Escalas/Agendas do Dia */}
