@@ -16,7 +16,9 @@
     "upload:vacinas:admin:force": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js --force",
     "list:vacinas": "node --no-warnings --env-file=.env scripts/upload-vacinas-firestore.js --list",
     "list:vacinas:admin": "node --no-warnings --env-file=.env scripts/upload-vacinas-admin.js --list",
-    "import:employees": "node scripts/importEmployees.js"
+    "import:employees": "node scripts/importEmployees.js",
+    "export:escalas": "node --no-warnings scripts/exportarEscalasParaBanco.mjs",
+    "criar:escala-administrativa": "node --no-warnings scripts/criarEscalaAdministrativa.mjs"
   },
   "dependencies": {
     "firebase": "^12.7.0",

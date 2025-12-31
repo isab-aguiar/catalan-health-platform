@@ -59,8 +59,8 @@ export default function HomeServices() {
     {
       to: "/servicos/consultas",
       icon: Users,
-      title: "Consultas Médicas",
-      description: "Consultas médicas, psicológicas e especializadas",
+      title: "Consultas e Atendimentos",
+      description: "Consultas médicas, de enfermagem, psicológicas e especializadas.",
     },
     {
       to: "/servicos/farmacia",
@@ -83,8 +83,8 @@ export default function HomeServices() {
     {
       to: "/servicos/bolsa-familia",
       icon: HandHeart,
-      title: "Bolsa Família e Serviço Social",
-      description: "Benefícios sociais, CadÚnico e assistência",
+      title: "Bolsa Família e Serviços Sociais",
+      description: "Orientações, acompanhamento de benefícios sociais, CadÚnico e assistência.",
     },
     {
       to: "/ouvidoria",

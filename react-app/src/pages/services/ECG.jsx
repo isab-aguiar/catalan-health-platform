@@ -3,7 +3,7 @@ import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../co
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import { PageContainer } from "../../components/layout";
-import EscalaPorSala from "../../components/services/EscalaPorSala";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 export default function ECG() {
   return (
     <PageContainer>
@@ -111,9 +111,9 @@ export default function ECG() {
           </div>
         </InfoBox>
 
-        <EscalaPorSala
-          titulo="Profissionais Escalados para ECG"
+        <EscalaFirestore
           escalaKey="ecg"
+          titulo="Profissionais Escalados na Sala de ECG"
         />
 
         {}

@@ -6,7 +6,7 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
-import EscalaPorSala from "../../components/services/EscalaPorSala";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 export default function Sala9() {
   return (
     <PageContainer>
@@ -100,44 +100,6 @@ export default function Sala9() {
           </div>
         </InfoBox>
 
-        {/* Horários de Atendimento ao Público */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg p-6 shadow-md mb-6">
-          <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Horários de Atendimento ao Público
-          </h3>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4">
-            <p className="text-sm text-white/90 mb-3">
-              O atendimento ao público é realizado nos seguintes dias e horários:
-            </p>
-            <div className="space-y-3">
-              <div className="bg-white/20 rounded-lg p-3">
-                <div className="font-semibold mb-2">Dias de Atendimento:</div>
-                <div className="flex flex-wrap gap-2">
-                  <span className="bg-white text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Segunda-feira</span>
-                  <span className="bg-white text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Quarta-feira</span>
-                  <span className="bg-white text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Sexta-feira</span>
-                </div>
-              </div>
-              <div className="grid md:grid-cols-2 gap-3">
-                <div className="bg-white/20 rounded-lg p-3">
-                  <div className="text-xs text-white/80 mb-1">Turno da Manhã</div>
-                  <div className="text-xl font-bold">07:00 às 12:00</div>
-                </div>
-                <div className="bg-white/20 rounded-lg p-3">
-                  <div className="text-xs text-white/80 mb-1">Turno da Tarde</div>
-                  <div className="text-xl font-bold">13:00 às 16:30</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="text-xs text-white/80 italic">
-            * Horários sujeitos a alterações. Em caso de dúvidas, entre em contato com a unidade.
-          </div>
-        </div>
-
         {}
         <InfoBox title="Documentos Necessários" highlight={true}>
           <p className="text-neutral-700 mb-4 text-sm">
@@ -187,9 +149,9 @@ export default function Sala9() {
           </div>
         </InfoBox>
 
-        <EscalaPorSala
-          titulo="Profissionais Escalados na Sala de Atendimento Administrativo"
-          escalaKey="administrativo"
+        <EscalaFirestore
+          escalaKey="sala-administrativa"
+          titulo="Profissionais Escalados na Sala Administrativa"
         />
 
         {}

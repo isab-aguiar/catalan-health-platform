@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Users, FileText, Calendar, Phone } from "lucide-react";
+import { AlertCircle, Users, FileText, Calendar, Phone, Heart, Stethoscope, Baby, UserCheck } from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
+import logoBolsaFamilia from "../../assets/bolsa-familia/Logo_Bolsa_Familia.png";
 
 export default function BolsaFamilia() {
   return (
@@ -91,6 +92,194 @@ export default function BolsaFamilia() {
             </div>
           </div>
         </InfoBox>
+
+        {/* Seção Acompanhamento de Saúde - Bolsa Família */}
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl shadow-lg overflow-hidden mb-6">
+          {/* Header com Logo */}
+          <div className="bg-gradient-to-r from-green-600 to-green-700 px-6 py-8">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="bg-white rounded-lg p-4 shadow-md flex-shrink-0">
+                <img
+                  src={logoBolsaFamilia}
+                  alt="Logo Bolsa Família"
+                  className="w-32 h-32 object-contain"
+                />
+              </div>
+              <div className="text-center md:text-left">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-2 flex items-center gap-3 justify-center md:justify-start">
+                  <Heart className="w-8 h-8" />
+                  Acompanhamento de Saúde
+                </h2>
+                <p className="text-green-50 text-lg">
+                  Programa Bolsa Família
+                </p>
+                <p className="text-green-100 text-sm mt-2 max-w-2xl">
+                  Cuidar da saúde da sua família é garantir o futuro. Estamos aqui para apoiar você nessa jornada.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Conteúdo Principal */}
+          <div className="p-6 md:p-8 space-y-6">
+            {/* Introdução */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-green-200">
+              <p className="text-neutral-700 leading-relaxed">
+                O acompanhamento de saúde é uma <strong className="text-green-700">etapa obrigatória</strong> para as famílias beneficiárias do Programa Bolsa Família.
+                Mais do que garantir a continuidade do benefício financeiro, este procedimento visa assegurar o <strong>desenvolvimento saudável das crianças</strong>,
+                o <strong>cuidado integral com a saúde da mulher</strong> e o <strong>acompanhamento adequado das gestantes</strong>.
+              </p>
+            </div>
+
+            {/* Público-Alvo */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-green-200">
+              <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+                <Users className="w-6 h-6" />
+                Quem deve comparecer à Unidade de Saúde?
+              </h3>
+              <p className="text-neutral-600 mb-4">
+                O público-alvo para o acompanhamento das condicionalidades de saúde inclui:
+              </p>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border-2 border-blue-200">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="bg-blue-600 rounded-full p-2">
+                      <Baby className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="font-bold text-blue-900">Crianças</h4>
+                  </div>
+                  <p className="text-sm text-blue-800">
+                    De <strong>0 a 7 anos</strong> de idade
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-4 border-2 border-pink-200">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="bg-pink-600 rounded-full p-2">
+                      <UserCheck className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="font-bold text-pink-900">Mulheres</h4>
+                  </div>
+                  <p className="text-sm text-pink-800">
+                    De <strong>14 a 44 anos</strong> de idade
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 border-2 border-purple-200">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="bg-purple-600 rounded-full p-2">
+                      <Heart className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="font-bold text-purple-900">Gestantes</h4>
+                  </div>
+                  <p className="text-sm text-purple-800">
+                    Em qualquer <strong>idade e fase</strong> da gestação
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Serviços Realizados */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-green-200">
+              <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+                <Stethoscope className="w-6 h-6" />
+                Quais serviços são realizados?
+              </h3>
+              <p className="text-neutral-600 mb-4">
+                Durante o comparecimento à ESF Catalão, realizamos:
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-start gap-4 bg-green-50 p-4 rounded-lg border border-green-200">
+                  <div className="bg-green-600 rounded-full p-2 flex-shrink-0 mt-0.5">
+                    <FileText className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-green-900 mb-1">Verificação do Calendário Vacinal</h4>
+                    <p className="text-sm text-neutral-700">
+                      Conferência e atualização de doses atrasadas
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 bg-green-50 p-4 rounded-lg border border-green-200">
+                  <div className="bg-green-600 rounded-full p-2 flex-shrink-0 mt-0.5">
+                    <Users className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-green-900 mb-1">Acompanhamento Nutricional</h4>
+                    <p className="text-sm text-neutral-700">
+                      Medição de peso e altura para monitoramento do crescimento e desenvolvimento
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 bg-green-50 p-4 rounded-lg border border-green-200">
+                  <div className="bg-green-600 rounded-full p-2 flex-shrink-0 mt-0.5">
+                    <Heart className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-green-900 mb-1">Pré-natal</h4>
+                    <p className="text-sm text-neutral-700">
+                      Acompanhamento obrigatório e contínuo para gestantes beneficiárias
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Documentos Necessários */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-green-200">
+              <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+                <FileText className="w-6 h-6" />
+                Documentos Necessários
+              </h3>
+              <p className="text-neutral-600 mb-4">
+                Para realizar o acompanhamento, compareça à <Link to="/servicos/recepcao" className="text-green-600 hover:text-green-700 font-semibold underline">recepção</Link> munido de:
+              </p>
+              <div className="grid md:grid-cols-2 gap-3">
+                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
+                  <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
+                  <span className="text-sm text-neutral-700">
+                    <strong>Cartão do Bolsa Família</strong> (com NIS)
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
+                  <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
+                  <span className="text-sm text-neutral-700">
+                    <strong>Caderneta de Vacinação</strong> das crianças
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
+                  <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
+                  <span className="text-sm text-neutral-700">
+                    <strong>Cartão da Gestante</strong> (se aplicável)
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 bg-neutral-50 p-3 rounded border border-neutral-200">
+                  <div className="w-2 h-2 bg-green-600 rounded-full flex-shrink-0"></div>
+                  <span className="text-sm text-neutral-700">
+                    <strong>Documento de identidade</strong> (RG ou CPF)
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Alerta sobre Prazos */}
+            <div className="bg-gradient-to-r from-amber-100 to-yellow-100 border-l-4 border-amber-500 rounded-lg p-6 shadow-md">
+              <div className="flex items-start gap-4">
+                <AlertCircle className="w-6 h-6 text-amber-700 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-bold text-amber-900 mb-2 text-lg">Fique Atento aos Prazos</h3>
+                  <p className="text-amber-800 leading-relaxed">
+                    As datas de vigência e os cronogramas atualizados para o comparecimento serão publicados
+                    periodicamente aqui em nosso site oficial. <strong>Mantenha seus dados atualizados</strong> e
+                    acompanhe as informações para não perder os prazos!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <InfoBox title="Como Acessar" icon={<Calendar size={24} />}>
           <div className="space-y-4">

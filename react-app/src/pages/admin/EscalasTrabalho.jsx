@@ -3,10 +3,12 @@ import {
   getAllEscalas,
   saveEscala,
   deleteEscala,
-  bulkImportEscalas
+  updateEscala
 } from "../../services/escalasService";
-import { escalasTrabalho } from "../../data/escalasTrabalho";
-import { Plus, Edit2, Trash2, Eye, EyeOff, Upload, Save, X } from "lucide-react";
+import { Plus, Edit2, Trash2, Eye, EyeOff, Save, X, User } from "lucide-react";
+import ProfissionalAutocomplete from "../../components/admin/ProfissionalAutocomplete";
+import Modal from "../../components/common/Modal";
+import BackButton from "../../components/common/BackButton";
 
 export default function EscalasTrabalho() {
   const [escalas, setEscalas] = useState([]);
@@ -17,6 +19,8 @@ export default function EscalasTrabalho() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState(null);
   const [filter, setFilter] = useState("all");
+  const [modalConfig, setModalConfig] = useState(null);
+  const [togglingVisibility, setTogglingVisibility] = useState(null); // ID da escala sendo atualizada
 
   useEffect(() => {
     loadEscalas();
@@ -29,26 +33,6 @@ export default function EscalasTrabalho() {
       setEscalas(result.data);
     }
     setLoading(false);
-  };
-
-  const handleImportData = async () => {
-    if (!window.confirm("Importar dados do arquivo escalasTrabalho.js? Isso irá sobrescrever escalas existentes.")) {
-      return;
-    }
-
-    setSaving(true);
-    setMessage(null);
-
-    const result = await bulkImportEscalas(escalasTrabalho);
-
-    if (result.success) {
-      setMessage({ type: "success", text: result.message });
-      await loadEscalas();
-    } else {
-      setMessage({ type: "error", text: "Erro ao importar: " + result.error });
-    }
-
-    setSaving(false);
   };
 
   const handleCreate = () => {
@@ -71,9 +55,25 @@ export default function EscalasTrabalho() {
           fim: "16h00",
           display: "13h00 às 16h00",
           ativo: true
+        },
+        saudeNaHora: {
+          inicio: "17h00",
+          fim: "22h00",
+          display: "17h00 às 22h00",
+          ativo: false
         }
       },
       profissionais: [],
+      escalaSemanal: {
+        habilitado: false,
+        dias: {
+          segunda: { profissionais: [] },
+          terca: { profissionais: [] },
+          quarta: { profissionais: [] },
+          quinta: { profissionais: [] },
+          sexta: { profissionais: [] }
+        }
+      },
       exibirNoPublico: true,
       observacoes: []
     });
@@ -82,7 +82,37 @@ export default function EscalasTrabalho() {
   const handleEdit = (escala) => {
     setEditingId(escala.id);
     setCreating(false);
-    setEditData({ ...escala });
+    
+    // Garantir que escalaSemanal tenha a estrutura completa
+    const escalaSemanalCompleta = {
+      habilitado: escala.escalaSemanal?.habilitado || false,
+      dias: escala.escalaSemanal?.dias || {
+        segunda: { profissionais: [], ativo: false },
+        terca: { profissionais: [], ativo: false },
+        quarta: { profissionais: [], ativo: false },
+        quinta: { profissionais: [], ativo: false },
+        sexta: { profissionais: [], ativo: false }
+      }
+    };
+
+    // Garantir que cada dia tenha a estrutura correta
+    ['segunda', 'terca', 'quarta', 'quinta', 'sexta'].forEach(dia => {
+      if (!escalaSemanalCompleta.dias[dia]) {
+        escalaSemanalCompleta.dias[dia] = { profissionais: [], ativo: false };
+      } else {
+        if (!escalaSemanalCompleta.dias[dia].profissionais) {
+          escalaSemanalCompleta.dias[dia].profissionais = [];
+        }
+        if (escalaSemanalCompleta.dias[dia].ativo === undefined) {
+          escalaSemanalCompleta.dias[dia].ativo = false;
+        }
+      }
+    });
+
+    setEditData({ 
+      ...escala, 
+      escalaSemanal: escalaSemanalCompleta 
+    });
   };
 
   const handleCancel = () => {
@@ -113,24 +143,31 @@ export default function EscalasTrabalho() {
     setSaving(false);
   };
 
-  const handleDelete = async (escalaId) => {
-    if (!window.confirm("Tem certeza que deseja deletar esta escala?")) {
-      return;
-    }
+  const handleDelete = (escalaId, escalaNome) => {
+    setModalConfig({
+      type: "warning",
+      title: "Confirmar Exclusão",
+      message: `Tem certeza que deseja deletar a escala "${escalaNome}"?\n\nEsta ação não pode ser desfeita.`,
+      confirmText: "Sim, Deletar",
+      cancelText: "Cancelar",
+      onConfirm: async () => {
+        setModalConfig(null);
+        setSaving(true);
+        setMessage(null);
 
-    setSaving(true);
-    setMessage(null);
+        const result = await deleteEscala(escalaId);
 
-    const result = await deleteEscala(escalaId);
+        if (result.success) {
+          setMessage({ type: "success", text: "Escala deletada com sucesso!" });
+          await loadEscalas();
+        } else {
+          setMessage({ type: "error", text: "Erro ao deletar: " + result.error });
+        }
 
-    if (result.success) {
-      setMessage({ type: "success", text: "Escala deletada com sucesso!" });
-      await loadEscalas();
-    } else {
-      setMessage({ type: "error", text: "Erro ao deletar: " + result.error });
-    }
-
-    setSaving(false);
+        setSaving(false);
+      },
+      onCancel: () => setModalConfig(null)
+    });
   };
 
   const handleFieldChange = (field, value) => {
@@ -153,6 +190,175 @@ export default function EscalasTrabalho() {
     }));
   };
 
+  const handleAddProfissional = (profissional) => {
+    setEditData(prev => ({
+      ...prev,
+      profissionais: [...(prev.profissionais || []), profissional]
+    }));
+  };
+
+  const handleRemoveProfissional = (index) => {
+    setEditData(prev => ({
+      ...prev,
+      profissionais: prev.profissionais.filter((_, i) => i !== index)
+    }));
+  };
+
+  const handleUpdateProfissionalTurno = (index, turno) => {
+    setEditData(prev => ({
+      ...prev,
+      profissionais: prev.profissionais.map((prof, i) =>
+        i === index ? { ...prof, turno } : prof
+      )
+    }));
+  };
+
+  const handleToggleEscalaSemanal = (habilitado) => {
+    setEditData(prev => ({
+      ...prev,
+      escalaSemanal: {
+        ...prev.escalaSemanal,
+        habilitado,
+        dias: habilitado ? {
+          segunda: { profissionais: [] },
+          terca: { profissionais: [] },
+          quarta: { profissionais: [] },
+          quinta: { profissionais: [] },
+          sexta: { profissionais: [] }
+        } : {
+          segunda: { profissionais: [] },
+          terca: { profissionais: [] },
+          quarta: { profissionais: [] },
+          quinta: { profissionais: [] },
+          sexta: { profissionais: [] }
+        }
+      }
+    }));
+  };
+
+  const handleToggleDiaSemanal = (dia) => {
+    setEditData(prev => {
+      const diasAtuais = prev.escalaSemanal?.dias || {};
+      const diaAtual = diasAtuais[dia] || { profissionais: [] };
+      const diasAtualizados = { ...diasAtuais };
+      
+      if (diaAtual.ativo) {
+        diasAtualizados[dia] = { profissionais: [], ativo: false };
+      } else {
+        diasAtualizados[dia] = { profissionais: [], ativo: true };
+      }
+
+      return {
+        ...prev,
+        escalaSemanal: {
+          ...prev.escalaSemanal,
+          dias: diasAtualizados
+        }
+      };
+    });
+  };
+
+  const handleAddProfissionalPorDia = (dia, profissional) => {
+    setEditData(prev => {
+      const diasAtuais = prev.escalaSemanal?.dias || {};
+      const diaAtual = diasAtuais[dia] || { profissionais: [] };
+      const profissionaisAtuais = diaAtual.profissionais || [];
+      
+      const profissionalJaExiste = profissionaisAtuais.some(
+        p => p.id === profissional.id
+      );
+
+      if (profissionalJaExiste) {
+        return prev;
+      }
+
+      return {
+        ...prev,
+        escalaSemanal: {
+          ...prev.escalaSemanal,
+          dias: {
+            ...diasAtuais,
+            [dia]: {
+              ...diaAtual,
+              profissionais: [...profissionaisAtuais, {
+                ...profissional,
+                turno: profissional.turno || 'manha'
+              }]
+            }
+          }
+        }
+      };
+    });
+  };
+
+  const handleRemoveProfissionalPorDia = (dia, index) => {
+    setEditData(prev => {
+      const diasAtuais = prev.escalaSemanal?.dias || {};
+      const diaAtual = diasAtuais[dia] || { profissionais: [] };
+      
+      return {
+        ...prev,
+        escalaSemanal: {
+          ...prev.escalaSemanal,
+          dias: {
+            ...diasAtuais,
+            [dia]: {
+              ...diaAtual,
+              profissionais: diaAtual.profissionais.filter((_, i) => i !== index)
+            }
+          }
+        }
+      };
+    });
+  };
+
+  const handleUpdateProfissionalTurnoPorDia = (dia, index, turno) => {
+    setEditData(prev => {
+      const diasAtuais = prev.escalaSemanal?.dias || {};
+      const diaAtual = diasAtuais[dia] || { profissionais: [] };
+      
+      return {
+        ...prev,
+        escalaSemanal: {
+          ...prev.escalaSemanal,
+          dias: {
+            ...diasAtuais,
+            [dia]: {
+              ...diaAtual,
+              profissionais: diaAtual.profissionais.map((prof, i) =>
+                i === index ? { ...prof, turno } : prof
+              )
+            }
+          }
+        }
+      };
+    });
+  };
+
+  const handleToggleVisibilidade = async (e, escalaId, currentValue) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setTogglingVisibility(escalaId);
+    setMessage(null);
+
+    const result = await updateEscala(escalaId, {
+      exibirNoPublico: !currentValue
+    });
+
+    if (result.success) {
+      setMessage({
+        type: "success",
+        text: !currentValue ? "Escala agora está visível no site público" : "Escala ocultada do site público"
+      });
+      await loadEscalas();
+    } else {
+      setMessage({ type: "error", text: "Erro ao atualizar visibilidade: " + result.error });
+    }
+
+    setTogglingVisibility(null);
+  };
+
   const filteredEscalas = escalas.filter(escala => {
     if (filter === "all") return true;
     if (filter === "publicas") return escala.exibirNoPublico;
@@ -171,30 +377,22 @@ export default function EscalasTrabalho() {
   }
 
   return (
-    <div className="p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-neutral-900 mb-2">Escalas de Trabalho</h1>
-          <p className="text-neutral-600">Gerencie as escalas de trabalho dos profissionais</p>
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={handleImportData}
-            disabled={saving}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
-          >
-            <Upload size={18} />
-            Importar Dados
-          </button>
-          <button
-            onClick={handleCreate}
-            disabled={saving || creating}
-            className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50"
-          >
-            <Plus size={18} />
-            Nova Escala
-          </button>
-        </div>
+    <div className="p-4 md:p-6">
+      <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <BackButton />
+        <button
+          onClick={handleCreate}
+          disabled={saving || creating}
+          className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:opacity-50 w-full sm:w-auto"
+        >
+          <Plus size={18} />
+          Nova Escala
+        </button>
+      </div>
+
+      <div className="mb-6">
+        <h1 className="text-xl md:text-2xl font-bold text-neutral-900 mb-2">Escalas de Trabalho</h1>
+        <p className="text-sm md:text-base text-neutral-600">Gerencie as escalas de trabalho dos profissionais</p>
       </div>
 
       {message && (
@@ -224,14 +422,36 @@ export default function EscalasTrabalho() {
         </select>
       </div>
 
-      {/* Formulário de Criação/Edição */}
+      {/* Formulário de Criação/Edição - Modal Overlay */}
       {(creating || editingId) && (
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6 border-2 border-blue-500">
-          <h2 className="text-xl font-bold mb-4">
-            {creating ? "Criar Nova Escala" : "Editar Escala"}
-          </h2>
+        <>
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            onClick={handleCancel}
+          />
 
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
+          {/* Modal */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+            <div
+              className="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+                <h2 className="text-xl font-bold text-neutral-900">
+                  {creating ? "Criar Nova Escala" : "Editar Escala"}
+                </h2>
+                <button
+                  onClick={handleCancel}
+                  className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                  title="Fechar"
+                >
+                  <X size={20} className="text-neutral-600" />
+                </button>
+              </div>
+
+              <div className="p-6">
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="block text-sm font-medium text-neutral-700 mb-1">
                 Nome *
@@ -303,7 +523,7 @@ export default function EscalasTrabalho() {
 
           <div className="border-t pt-4 mb-4">
             <h3 className="font-semibold mb-3">Horários</h3>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-3 gap-4">
               <div className="border rounded p-3">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className="font-medium">Manhã</h4>
@@ -347,31 +567,228 @@ export default function EscalasTrabalho() {
                   placeholder="13h00 às 16h00"
                 />
               </div>
+
+              <div className="border rounded p-3 bg-green-50">
+                <div className="flex items-center justify-between mb-2">
+                  <h4 className="font-medium text-green-900">Saúde na Hora</h4>
+                  <label className="flex items-center text-sm">
+                    <input
+                      type="checkbox"
+                      checked={editData.horarios?.saudeNaHora?.ativo || false}
+                      onChange={(e) => handleHorarioChange("saudeNaHora", "ativo", e.target.checked)}
+                      className="mr-1"
+                    />
+                    Ativo
+                  </label>
+                </div>
+                <input
+                  type="text"
+                  value={editData.horarios?.saudeNaHora?.display || ""}
+                  onChange={(e) => handleHorarioChange("saudeNaHora", "display", e.target.value)}
+                  className="w-full px-2 py-1 border border-neutral-300 rounded text-sm"
+                  placeholder="17h00 às 22h00"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="flex gap-2 justify-end">
-            <button
-              onClick={handleCancel}
-              disabled={saving}
-              className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded hover:bg-neutral-50 disabled:opacity-50"
-            >
-              Cancelar
-            </button>
-            <button
-              onClick={handleSave}
-              disabled={saving || !editData.nome}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-            >
-              <Save size={18} />
-              {saving ? "Salvando..." : "Salvar"}
-            </button>
+          <div className="border-t pt-4 mb-4">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold flex items-center gap-2">
+                <User className="w-5 h-5" />
+                Profissionais
+              </h3>
+              <label className="flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={editData.escalaSemanal?.habilitado || false}
+                  onChange={(e) => handleToggleEscalaSemanal(e.target.checked)}
+                  className="mr-2 w-4 h-4"
+                />
+                <span className="text-sm font-medium text-neutral-700">
+                  Escala por dias da semana
+                </span>
+              </label>
+            </div>
+
+            {editData.escalaSemanal?.habilitado ? (
+              /* Modo Escala Semanal - Profissionais por Dia */
+              <div className="space-y-4">
+                {['segunda', 'terca', 'quarta', 'quinta', 'sexta'].map((dia) => {
+                  const diaLabel = {
+                    segunda: 'Segunda-feira',
+                    terca: 'Terça-feira',
+                    quarta: 'Quarta-feira',
+                    quinta: 'Quinta-feira',
+                    sexta: 'Sexta-feira'
+                  }[dia];
+                  
+                  const diaAtual = editData.escalaSemanal?.dias?.[dia] || { profissionais: [], ativo: false };
+                  const profissionaisDoDia = diaAtual.profissionais || [];
+
+                  return (
+                    <div key={dia} className="border border-neutral-200 rounded-lg p-4 bg-neutral-50">
+                      <div className="flex items-center justify-between mb-3">
+                        <label className="flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={diaAtual.ativo || false}
+                            onChange={() => handleToggleDiaSemanal(dia)}
+                            className="mr-2 w-4 h-4"
+                          />
+                          <span className="font-semibold text-neutral-900">
+                            {diaLabel}
+                          </span>
+                        </label>
+                      </div>
+
+                      {diaAtual.ativo && (
+                        <div className="space-y-3">
+                          <div>
+                            <label className="block text-sm font-medium text-neutral-700 mb-2">
+                              Adicionar Profissional para {diaLabel}
+                            </label>
+                            <ProfissionalAutocomplete 
+                              onAddProfissional={(prof) => handleAddProfissionalPorDia(dia, prof)} 
+                            />
+                          </div>
+
+                          {profissionaisDoDia.length > 0 ? (
+                            <div className="space-y-2">
+                              {profissionaisDoDia.map((prof, index) => (
+                                <div
+                                  key={index}
+                                  className="flex items-center gap-3 p-3 bg-white border border-neutral-200 rounded"
+                                >
+                                  <div className="flex-1">
+                                    <div className="font-medium text-sm text-neutral-900">
+                                      {prof.nome}
+                                    </div>
+                                    <div className="text-xs text-neutral-600">{prof.funcao}</div>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <select
+                                      value={prof.turno || 'manha'}
+                                      onChange={(e) => handleUpdateProfissionalTurnoPorDia(dia, index, e.target.value)}
+                                      className="px-2 py-1 text-xs border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                      <option value="manha">Manhã</option>
+                                      <option value="tarde">Tarde</option>
+                                      <option value="saudeNaHora">Saúde na Hora</option>
+                                      <option value="both">Manhã e Tarde</option>
+                                    </select>
+                                    <button
+                                      onClick={() => handleRemoveProfissionalPorDia(dia, index)}
+                                      className="p-1 text-red-600 hover:bg-red-50 rounded"
+                                      title="Remover"
+                                    >
+                                      <X size={16} />
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center py-4 bg-white border border-neutral-200 rounded">
+                              <p className="text-xs text-neutral-500">
+                                Nenhum profissional adicionado para este dia
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              /* Modo Normal - Profissionais Gerais */
+              <>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Adicionar Profissional
+                  </label>
+                  <ProfissionalAutocomplete onAddProfissional={handleAddProfissional} />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    Digite o nome para buscar e adicionar profissionais
+                  </p>
+                </div>
+
+                {editData.profissionais && editData.profissionais.length > 0 ? (
+                  <div className="space-y-2">
+                    {editData.profissionais.map((prof, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center gap-3 p-3 bg-neutral-50 border border-neutral-200 rounded"
+                      >
+                        <div className="flex-1">
+                          <div className="font-medium text-sm text-neutral-900">
+                            {prof.nome}
+                          </div>
+                          <div className="text-xs text-neutral-600">{prof.funcao}</div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <select
+                            value={prof.turno}
+                            onChange={(e) => handleUpdateProfissionalTurno(index, e.target.value)}
+                            className="px-2 py-1 text-xs border border-neutral-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          >
+                            <option value="manha">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="saudeNaHora">Saúde na Hora</option>
+                            <option value="both">Manhã e Tarde</option>
+                          </select>
+                          <button
+                            onClick={() => handleRemoveProfissional(index)}
+                            className="p-1 text-red-600 hover:bg-red-50 rounded"
+                            title="Remover"
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-6 bg-neutral-50 border border-neutral-200 rounded">
+                    <User className="w-8 h-8 text-neutral-300 mx-auto mb-2" />
+                    <p className="text-sm text-neutral-600">
+                      Nenhum profissional adicionado
+                    </p>
+                    <p className="text-xs text-neutral-500 mt-1">
+                      Use o campo acima para adicionar profissionais
+                    </p>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-        </div>
+              </div>
+
+              <div className="sticky bottom-0 bg-white border-t border-neutral-200 px-6 py-4 flex gap-2 justify-end">
+                <button
+                  onClick={handleCancel}
+                  disabled={saving}
+                  className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded hover:bg-neutral-50 disabled:opacity-50"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleSave}
+                  disabled={saving || !editData.nome}
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                >
+                  <Save size={18} />
+                  {saving ? "Salvando..." : "Salvar"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
       )}
 
-      {/* Lista de Escalas */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      {/* Lista de Escalas - Desktop (Tabela) */}
+      <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-neutral-100 border-b border-neutral-200">
@@ -386,7 +803,7 @@ export default function EscalasTrabalho() {
                   Horários
                 </th>
                 <th className="px-4 py-3 text-center text-sm font-semibold text-neutral-700">
-                  Público
+                  Visibilidade
                 </th>
                 <th className="px-4 py-3 text-center text-sm font-semibold text-neutral-700">
                   Ações
@@ -412,13 +829,27 @@ export default function EscalasTrabalho() {
                     {escala.horarios?.tarde?.ativo && (
                       <div>Tarde: {escala.horarios.tarde.display}</div>
                     )}
+                    {escala.horarios?.saudeNaHora?.ativo && (
+                      <div className="text-green-700 font-medium">Saúde na Hora: {escala.horarios.saudeNaHora.display}</div>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-center">
-                    {escala.exibirNoPublico ? (
-                      <Eye size={18} className="inline text-green-600" />
-                    ) : (
-                      <EyeOff size={18} className="inline text-neutral-400" />
-                    )}
+                    <button
+                      onClick={(e) => handleToggleVisibilidade(e, escala.id, escala.exibirNoPublico)}
+                      disabled={togglingVisibility === escala.id}
+                      className={`p-2 rounded-lg transition-all disabled:opacity-50 ${
+                        escala.exibirNoPublico
+                          ? 'bg-green-50 hover:bg-green-100'
+                          : 'bg-neutral-50 hover:bg-neutral-100'
+                      }`}
+                      title={escala.exibirNoPublico ? "✓ Visível no site - Clique para ocultar" : "✗ Oculto do site - Clique para exibir"}
+                    >
+                      {escala.exibirNoPublico ? (
+                        <Eye size={20} className="text-green-600" />
+                      ) : (
+                        <EyeOff size={20} className="text-neutral-500" />
+                      )}
+                    </button>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex gap-2 justify-center">
@@ -430,7 +861,7 @@ export default function EscalasTrabalho() {
                         <Edit2 size={18} />
                       </button>
                       <button
-                        onClick={() => handleDelete(escala.id)}
+                        onClick={() => handleDelete(escala.id, escala.nome)}
                         disabled={saving}
                         className="p-1 text-red-600 hover:bg-red-50 rounded disabled:opacity-50"
                         title="Deletar"
@@ -446,10 +877,92 @@ export default function EscalasTrabalho() {
         </div>
       </div>
 
+      {/* Lista de Escalas - Mobile (Cards) */}
+      <div className="md:hidden space-y-4">
+        {filteredEscalas.map(escala => (
+          <div key={escala.id} className="bg-white rounded-lg shadow-md border border-neutral-200 overflow-hidden">
+            <div className="p-4">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1">
+                  <h3 className="font-bold text-neutral-900 mb-1">{escala.nome}</h3>
+                  <p className="text-xs text-neutral-500 mb-2">{escala.descricao}</p>
+                  <span className="inline-block px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                    {escala.categoria}
+                  </span>
+                </div>
+                <button
+                  onClick={(e) => handleToggleVisibilidade(e, escala.id, escala.exibirNoPublico)}
+                  disabled={togglingVisibility === escala.id}
+                  className={`p-2 rounded-lg transition-all disabled:opacity-50 flex-shrink-0 ${
+                    escala.exibirNoPublico
+                      ? 'bg-green-50 hover:bg-green-100'
+                      : 'bg-neutral-50 hover:bg-neutral-100'
+                  }`}
+                  title={escala.exibirNoPublico ? "✓ Visível" : "✗ Oculto"}
+                >
+                  {escala.exibirNoPublico ? (
+                    <Eye size={20} className="text-green-600" />
+                  ) : (
+                    <EyeOff size={20} className="text-neutral-500" />
+                  )}
+                </button>
+              </div>
+
+              <div className="border-t border-neutral-100 pt-3 mb-3">
+                <div className="text-sm text-neutral-700 space-y-1">
+                  {escala.horarios?.manha?.ativo && (
+                    <div><strong>Manhã:</strong> {escala.horarios.manha.display}</div>
+                  )}
+                  {escala.horarios?.tarde?.ativo && (
+                    <div><strong>Tarde:</strong> {escala.horarios.tarde.display}</div>
+                  )}
+                  {escala.horarios?.saudeNaHora?.ativo && (
+                    <div className="text-green-700 font-medium">
+                      <strong>Saúde na Hora:</strong> {escala.horarios.saudeNaHora.display}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex gap-2 border-t border-neutral-100 pt-3">
+                <button
+                  onClick={() => handleEdit(escala)}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <Edit2 size={16} />
+                  Editar
+                </button>
+                <button
+                  onClick={() => handleDelete(escala.id, escala.nome)}
+                  disabled={saving}
+                  className="flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50"
+                >
+                  <Trash2 size={16} />
+                  Deletar
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {filteredEscalas.length === 0 && (
         <div className="text-center py-8 text-neutral-500">
           Nenhuma escala encontrada para este filtro.
         </div>
+      )}
+
+      {/* Modal de Confirmação */}
+      {modalConfig && (
+        <Modal
+          type={modalConfig.type}
+          title={modalConfig.title}
+          message={modalConfig.message}
+          confirmText={modalConfig.confirmText}
+          cancelText={modalConfig.cancelText}
+          onConfirm={modalConfig.onConfirm}
+          onCancel={modalConfig.onCancel}
+        />
       )}
     </div>
   );

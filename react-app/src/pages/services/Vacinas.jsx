@@ -10,7 +10,7 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import { contactInfo, openingHours } from "../../config";
-import EscalaPorSala from "../../components/services/EscalaPorSala";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 
 const horariosVacinas = [
   {
@@ -70,10 +70,9 @@ export default function Vacinas() {
           <CalendarioVacinal />
         </div>
 
-        {/* Escalas de Profissionais */}
-        <EscalaPorSala
-          titulo="Profissionais Escalados na Sala de Vacinação"
+        <EscalaFirestore
           escalaKey="sala-vacinacao"
+          titulo="Profissionais Escalados na Sala de Vacinação"
         />
 
         {}
@@ -161,10 +160,10 @@ export default function Vacinas() {
               <h3 className="font-semibold text-neutral-800 text-lg mb-4">
                 Sobre o Tratamento
               </h3>
-              <p className="text-neutral-700 leading-relaxed mb-4">
-                A profilaxia da raiva humana é composta por dois tipos de imunobiológicos,
-                indicados conforme a gravidade da exposição ao vírus (mordidas, arranhões
-                ou contato com mucosas de animais suspeitos ou confirmados):
+              <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
+                A profilaxia da raiva humana é um tratamento preventivo composto por dois tipos de imunobiológicos,
+                indicados conforme a gravidade da exposição ao vírus da raiva. O protocolo é aplicado em casos de
+                mordidas, arranhões ou contato com mucosas de animais suspeitos ou confirmados com a doença:
               </p>
 
               <div className="grid md:grid-cols-2 gap-4 mb-5">
@@ -204,32 +203,59 @@ export default function Vacinas() {
               </div>
             </div>
 
+            {/* Fluxo de Atendimento */}
+            <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-5 mb-6">
+              <h3 className="font-semibold text-blue-900 text-lg mb-4">
+                Como Solicitar o Atendimento
+              </h3>
+              <p className="text-neutral-700 mb-4 text-sm leading-relaxed">
+                Em caso de acidente com animal (mordida, arranhão ou contato com mucosas), siga o fluxo de atendimento abaixo:
+              </p>
+              <div className="space-y-3 text-sm text-neutral-700">
+                <div className="flex items-start gap-2">
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">1</div>
+                  <p>
+                    <strong className="text-blue-900">Primeiro Passo:</strong> Dirija-se à ESF Catalão e comunique na recepção
+                    que sofreu um acidente com animal.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">2</div>
+                  <p>
+                    <strong className="text-blue-900">Avaliação Profissional:</strong> Você será encaminhado para avaliação
+                    com a enfermeira de sua área de abrangência, que irá analisar a necessidade do tratamento profilático.
+                  </p>
+                </div>
+                <div className="flex items-start gap-2">
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">3</div>
+                  <p>
+                    <strong className="text-blue-900">Encaminhamento:</strong> Após a avaliação, caso seja identificada a
+                    necessidade de profilaxia da raiva humana, você será encaminhado para uma das unidades de referência
+                    listadas abaixo, conforme protocolos estabelecidos pelo Ministério da Saúde.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             {/* Critérios de Atendimento */}
             <div className="bg-amber-50 border-l-4 border-amber-600 rounded-r-lg p-5 mb-6">
               <h3 className="font-semibold text-amber-900 text-lg mb-4">
-                Critérios de Atendimento
+                Informações Importantes
               </h3>
               <div className="space-y-3 text-sm text-neutral-700">
                 <div className="flex items-start gap-2">
                   <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
                   <p>
-                    <strong className="text-amber-900">Atenção:</strong> A aplicação destes
-                    imunobiológicos segue rigorosamente os protocolos definidos pelo Ministério da Saúde.
+                    <strong className="text-amber-900">Protocolo Oficial:</strong> A aplicação dos imunobiológicos segue
+                    rigorosamente os protocolos definidos pelo Ministério da Saúde, sendo condicionada à avaliação profissional prévia.
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
                   <p>
-                    <strong className="text-amber-900">Avaliação Obrigatória:</strong> A administração
-                    da vacina ou do soro é condicionada à avaliação profissional prévia no local de atendimento.
-                  </p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-amber-600 mt-0.5 flex-shrink-0" />
-                  <p>
-                    <strong className="text-amber-900">Exclusividade:</strong> As unidades listadas
-                    abaixo são referências técnicas para este procedimento. Elas não realizam atendimentos
-                    de rotina ou outras vacinações fora deste escopo específico nos horários indicados.
+                    <strong className="text-amber-900">Unidades de Referência:</strong> As unidades listadas abaixo são
+                    referências técnicas exclusivas para este procedimento. Elas não realizam atendimentos de rotina ou
+                    outras vacinações fora deste escopo específico nos horários indicados.
                   </p>
                 </div>
               </div>
@@ -445,8 +471,8 @@ export default function Vacinas() {
                   <p className="font-semibold text-red-900 mb-2">Importante</p>
                   <p className="leading-relaxed">
                     Em caso de exposição ao vírus da raiva (mordida, arranhão ou contato com mucosas de
-                    animais), procure imediatamente uma das unidades de referência listadas acima.
-                    O tratamento profilático deve ser iniciado o mais breve possível para garantir sua eficácia.
+                    animais), dirija-se imediatamente à ESF Catalão para avaliação inicial. O tratamento profilático
+                    deve ser iniciado o mais breve possível após a avaliação profissional para garantir sua eficácia.
                   </p>
                 </div>
               </div>

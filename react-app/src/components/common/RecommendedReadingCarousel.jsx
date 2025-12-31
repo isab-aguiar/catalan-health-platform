@@ -61,7 +61,7 @@ export default function RecommendedReadingCarousel({ pageId }) {
   };
 
   return (
-    <div className="bg-gradient-to-r from-neutral-50 to-neutral-100 border-t-2 border-neutral-200 py-8 px-4 animate-fade-in">
+    <div className="bg-gradient-to-r from-neutral-50 to-neutral-100 border-t-2 border-neutral-200 mt-5 pt-5 pb-8 px-4 animate-fade-in">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6">

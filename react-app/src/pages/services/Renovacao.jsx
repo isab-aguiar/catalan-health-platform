@@ -6,7 +6,7 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
-import EscalaPorSala from "../../components/services/EscalaPorSala";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 export default function Renovacao() {
   return (
     <PageContainer>
@@ -172,9 +172,9 @@ export default function Renovacao() {
           </div>
         </InfoBox>
 
-        <EscalaPorSala
-          titulo="Profissionais Escalados para Renovação de Receitas"
-          escalaKey="sala-medicacao"
+        <EscalaFirestore
+          escalaKey="renovacao-receitas"
+          titulo="Profissionais Escalados na Renovação de Receitas"
         />
 
         {}

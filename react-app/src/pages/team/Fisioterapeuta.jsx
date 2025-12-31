@@ -157,41 +157,42 @@ export default function Fisioterapeuta() {
         </InfoBox>
         {}
         <InfoBox title="Acesso ao Serviço">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+          <div className="space-y-4">
+            <div className="relative pl-12 pb-8 border-l-2 border-blue-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 1
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Consulta Médica e Encaminhamento
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   Solicite avaliação e encaminhamento para fisioterapia ao seu
                   médico
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+
+            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Agendamento na Central de Marcação
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   Dirija-se à{" "}
                   <Link
                     to="/servicos/sala-4"
-                    className="text-info hover:text-primary-700 underline font-semibold"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     Sala de Agendamentos
                   </Link>{" "}
                   com o encaminhamento médico. Veja a{" "}
                   <Link
                     to="/servicos/sala-4#documentacao-necessaria"
-                    className="text-info hover:text-primary-700 underline font-semibold"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     documentação necessária para agendar
                   </Link>
@@ -199,29 +200,31 @@ export default function Fisioterapeuta() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+
+            <div className="relative pl-12 pb-8 border-l-2 border-green-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 3
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Avaliação Inicial
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   A fisioterapeuta realizará a primeira avaliação e definirá o
                   plano de tratamento
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+
+            <div className="relative pl-12">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 4
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-orange-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Comparecimento às Sessões
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   Compareça às sessões conforme agendado, seguindo o plano de
                   tratamento estabelecido
                 </p>
@@ -247,43 +250,6 @@ export default function Fisioterapeuta() {
             </div>
           </Alert>
         </div>
-        {}
-        <InfoBox title="Documentação Necessária" highlight={true}>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documento de Identificação com Foto
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Encaminhamento médico
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Obrigatório para iniciar fisioterapia
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">Exames</strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Se houver (raio-x, ressonância, entre outros)
-                </p>
-              </div>
-            </div>
-          </div>
-        </InfoBox>
         {}
         <InfoBox title="Profissionais e Horários de Atendimento">
           {/* Versão Desktop */}

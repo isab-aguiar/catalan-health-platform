@@ -3,6 +3,7 @@ import { AlertCircle, Baby, ExternalLink } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
 import pediatriaImg from "../../assets/pediatria/pediatria.png";
 import { PageContainer } from "../../components/layout";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 
 export default function Pediatra() {
   return (
@@ -195,121 +196,33 @@ export default function Pediatra() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Cronograma de Atendimento">
-          {/* Versão Desktop */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Dia da Semana
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Modalidade de Atendimento
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissional Responsável
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Terça e Quarta-feira</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Atendimento mediante ordem de chegada
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 13h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Dr. Antônio Fernando Bolina
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Quinta-feira</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Atendimento exclusivo mediante agendamento prévio
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 13h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Dr. Antônio Fernando Bolina
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          {/* Versão Mobile */}
-          <div className="md:hidden space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Terça e Quarta-feira
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Modalidade de Atendimento</p>
-                  <p className="text-sm font-semibold text-neutral-800">Atendimento mediante ordem de chegada</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm text-neutral-700">07h00 às 13h00</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Quinta-feira
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Modalidade de Atendimento</p>
-                  <p className="text-sm font-semibold text-neutral-800">Atendimento exclusivo mediante agendamento prévio</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm text-neutral-700">07h00 às 13h00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </InfoBox>
+        <EscalaFirestore
+          escalaKey="consultorio-pediatrico"
+          titulo="Profissionais Escalados no Consultório Pediátrico"
+        />
         {}
         <InfoBox title="Acesso ao Serviço">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+          <div className="space-y-4">
+            <div className="relative pl-12 pb-8 border-l-2 border-blue-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 1
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Agendamento na Sala de Agendamentos
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   Dirija-se à{" "}
                   <Link
                     to="/servicos/sala-4"
-                    className="text-info hover:text-primary-700 underline font-semibold"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     Sala de Agendamentos
                   </Link>
                   . Veja a{" "}
                   <Link
                     to="/servicos/sala-4#documentacao-necessaria"
-                    className="text-info hover:text-primary-700 underline font-semibold"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     documentação necessária para agendar
                   </Link>
@@ -317,15 +230,16 @@ export default function Pediatra() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+
+            <div className="relative pl-12">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Comparecimento à Consulta
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   Apresentar-se no horário agendado com 15 minutos de
                   antecedência, documentação completa e carteira de vacinação
                 </p>

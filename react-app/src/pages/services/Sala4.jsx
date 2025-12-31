@@ -8,7 +8,7 @@ import useScrollToHash from "../../hooks/useScrollToHash";
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
-import EscalaPorSala from "../../components/services/EscalaPorSala";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 export default function Sala4() {
   useScrollToHash();
 
@@ -145,9 +145,9 @@ export default function Sala4() {
           </div>
         </InfoBox>
 
-        <EscalaPorSala
-          titulo="Profissionais Escalados na Sala de Agendamentos"
+        <EscalaFirestore
           escalaKey="sala-agendamentos"
+          titulo="Profissionais Escalados na Sala de Agendamentos"
         />
 
         {}

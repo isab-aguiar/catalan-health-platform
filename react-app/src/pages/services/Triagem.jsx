@@ -6,7 +6,7 @@ import RecommendedReadingCarousel from "../../components/common/RecommendedReadi
 import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
-import EscalaPorSala from "../../components/services/EscalaPorSala";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 export default function Triagem() {
   return (
     <PageContainer>
@@ -144,10 +144,9 @@ export default function Triagem() {
           </div>
         </InfoBox>
 
-        {/* Escalas de Profissionais */}
-        <EscalaPorSala
-          titulo="Profissionais Escalados na Triagem"
+        <EscalaFirestore
           escalaKey="triagem"
+          titulo="Profissionais Escalados no Acolhimento e Triagem"
         />
 
         {}

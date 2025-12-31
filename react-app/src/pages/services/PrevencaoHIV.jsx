@@ -1,11 +1,14 @@
 import React from "react";
 import { Shield, Clock, Calendar, MapPin, Phone, AlertCircle, Heart, CheckCircle } from "lucide-react";
 import RecommendedReadingCarousel from "../../components/common/RecommendedReadingCarousel";
+import BackButton from "../../components/common/BackButton";
 import { contactInfo } from "../../config";
 
 const PrevencaoHIV = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-6">
+      <BackButton />
+
       {/* Header */}
       <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 mb-6 shadow-md">
         <div className="flex items-center gap-3 mb-3">

@@ -94,6 +94,9 @@ const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
 const EscalasTrabalho = lazyLoad(() => import("./pages/admin/EscalasTrabalho"));
 const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
 const OuvidoriaIndex = lazyLoad(() => import("./pages/services/OuvidoriaIndex"));
+const Elogios = lazyLoad(() => import("./pages/services/Elogios"));
+const Sugestoes = lazyLoad(() => import("./pages/services/Sugestoes"));
+const Reclamacoes = lazyLoad(() => import("./pages/services/Reclamacoes"));
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   return (
@@ -159,6 +162,9 @@ function App() {
                         element={<BolsaFamilia />}
                       />
                       <Route path="/ouvidoria" element={<OuvidoriaIndex />} />
+                      <Route path="/ouvidoria/elogios" element={<Elogios />} />
+                      <Route path="/ouvidoria/sugestoes" element={<Sugestoes />} />
+                      <Route path="/ouvidoria/reclamacoes" element={<Reclamacoes />} />
                       {}
                       <Route path="/grupos" element={<GroupsIndex />} />
                       <Route path="/grupos/hiperdia" element={<Hiperdia />} />

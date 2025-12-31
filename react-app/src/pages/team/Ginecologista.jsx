@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, Heart, ExternalLink } from "lucide-react";
 import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import ImageWithCredit from "../../components/common/ImageWithCredit";
+import ginecologiaImg from "../../assets/ginecologista/ilustracao-de-consulta-de-ginecologia.avif";
 import { PageContainer } from "../../components/layout";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 
 export default function Ginecologista() {
   return (
@@ -31,9 +34,20 @@ export default function Ginecologista() {
             O atendimento de ginecologia e obstetrícia oferece cuidado integral à
             saúde feminina em todas as fases da vida. Realizamos consultas
             ginecológicas, acompanhamento pré-natal intercalado com enfermagem,
-            preventivo de câncer de colo uterino (Papanicolau), inserção e
-            retirada de DIU de cobre, e planejamento familiar.
+            inserção e retirada de DIU de cobre, e planejamento familiar.
           </p>
+          <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4 mb-5">
+            <p className="text-neutral-700 text-sm leading-relaxed">
+              Para informações sobre a documentação necessária para acesso aos serviços oferecidos, favor consultar a{" "}
+              <Link
+                to="/servicos/sala-4#documentacao-necessaria"
+                className="text-blue-700 hover:text-blue-900 underline font-semibold"
+              >
+                Sala de Agendamentos
+              </Link>
+              .
+            </p>
+          </div>
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
@@ -81,18 +95,6 @@ export default function Ginecologista() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Preventivo (Papanicolau)
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Prevenção do câncer de colo de útero, realizado pela equipe de
-                  enfermagem
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
                   Planejamento Familiar
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
@@ -102,7 +104,192 @@ export default function Ginecologista() {
             </div>
           </div>
         </InfoBox>
+        {}
+        {/* Card Cuidado Integral à Saúde Feminina */}
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+            <div className="flex items-center gap-3">
+              <Heart size={28} className="text-primary-600" />
+              <div>
+                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                  Cuidado Integral à Saúde Feminina
+                </h2>
+                <p className="text-neutral-600 text-sm sm:text-base mt-1">
+                  Atendimento especializado para mulheres em todas as fases da vida
+                </p>
+              </div>
+            </div>
+          </div>
 
+          <div className="p-4 sm:p-6">
+            {/* Imagem */}
+            <div className="mb-6 flex justify-center">
+              <ImageWithCredit
+                src={ginecologiaImg}
+                alt="Cuidado Integral à Saúde Feminina - Ginecologia e Obstetrícia"
+                credit="Ministério da Saúde"
+                creditPosition="below"
+                className="w-full max-w-md sm:max-w-lg md:max-w-xl rounded-lg shadow-sm mx-auto"
+              />
+            </div>
+
+            {/* Descrição */}
+            <p className="text-neutral-700 leading-relaxed mb-5">
+              O cuidado integral à saúde feminina é fundamental para garantir o bem-estar e a qualidade de vida da mulher em todas as etapas da vida. Através do atendimento ginecológico e obstétrico, oferecemos acompanhamento desde a adolescência até a menopausa, incluindo consultas de rotina, prevenção de doenças, acompanhamento pré-natal, planejamento familiar e orientações sobre saúde reprodutiva. Este cuidado permite identificar precocemente possíveis alterações, promover hábitos saudáveis e intervir de forma adequada, contribuindo para uma vida saudável e com melhor qualidade de vida.
+            </p>
+
+            {/* Grid de Links */}
+            <div className="grid md:grid-cols-1 gap-4">
+              {/* Link para Ministério da Saúde */}
+              <a
+                href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-da-mulher"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <ExternalLink size={24} className="text-white" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
+                      Saiba Mais
+                    </h3>
+                    <p className="text-sm text-neutral-600 mb-2">
+                      Consulte informações completas sobre saúde da mulher no site oficial do Ministério da Saúde.
+                    </p>
+                    <div className="flex items-center gap-2 text-sm text-primary-600 font-semibold">
+                      <ExternalLink size={16} />
+                      <span>Acessar Site do Ministério da Saúde</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        {}
+        <InfoBox title="Para quem é indicado?">
+          <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div className="text-neutral-700 text-sm">
+                Mulheres que iniciaram vida sexual (consultas anuais de rotina)
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div className="text-neutral-700 text-sm">
+                Gestantes para acompanhamento pré-natal
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div className="text-neutral-700 text-sm">
+                Mulheres de 25 a 64 anos (preventivo de câncer de colo uterino)
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div className="text-neutral-700 text-sm">
+                Mulheres em climatério ou menopausa
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+              <div className="text-neutral-700 text-sm">
+                Mulheres que necessitam de planejamento familiar
+              </div>
+            </div>
+          </div>
+        </InfoBox>
+        {}
+        <EscalaFirestore
+          escalaKey="sala-atendimento-ginecologico"
+          titulo="Profissionais Escalados no Consultório Ginecológico/Obstétrico"
+        />
+        {}
+        <InfoBox title="Acesso ao Serviço">
+          <div className="space-y-4">
+            <div className="relative pl-12 pb-8 border-l-2 border-blue-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+                1
+              </div>
+              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
+                  Inserção e Retirada de DIU de Cobre
+                </strong>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  O acesso ocorre mediante avaliação clínica e encaminhamento pela enfermeira ou pelo médico da unidade. Após o encaminhamento, dirija-se à{" "}
+                  <Link
+                    to="/servicos/sala-4"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
+                  >
+                    Sala de Agendamentos
+                  </Link>{" "}
+                  para realizar a marcação do procedimento.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+                2
+              </div>
+              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
+                  Consulta com Ginecologista (com encaminhamento)
+                </strong>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  O encaminhamento é realizado pela enfermeira ou pelo médico da unidade, conforme avaliação clínica. Após o encaminhamento, dirija-se à{" "}
+                  <Link
+                    to="/servicos/sala-4"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
+                  >
+                    Sala de Agendamentos
+                  </Link>{" "}
+                  para realizar a marcação da consulta.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative pl-12 pb-8 border-l-2 border-green-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+                3
+              </div>
+              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
+                  Agendamento de Retorno em Ginecologia (sem novo encaminhamento)
+                </strong>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Para usuárias em acompanhamento ginecológico em retorno na unidade. Dirija-se diretamente à{" "}
+                  <Link
+                    to="/servicos/sala-4"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
+                  >
+                    Sala de Agendamentos
+                  </Link>{" "}
+                  para realizar a marcação da consulta, sem necessidade de novo encaminhamento.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative pl-12">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+                4
+              </div>
+              <div className="bg-gradient-to-r from-orange-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
+                  Pré-natal
+                </strong>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  O acompanhamento é realizado de forma intercalada entre enfermeira e médico. A primeira consulta é obrigatoriamente realizada pela enfermeira, que fará a avaliação inicial e os encaminhamentos necessários para a continuidade do cuidado.
+                </p>
+              </div>
+            </div>
+          </div>
+        </InfoBox>
+        {}
         <InfoBox title="Cronograma de Pré-natal">
           <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
             O acompanhamento pré-natal segue protocolo estabelecido pelo
@@ -190,345 +377,6 @@ export default function Ginecologista() {
               1ª consulta com Enfermagem, 2ª com Ginecologista, e assim sucessivamente,
               garantindo o acompanhamento completo e contínuo durante toda a gestação.
             </p>
-          </div>
-        </InfoBox>
-        {}
-        <InfoBox title="Atendimento">
-          <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
-            O atendimento de ginecologia e obstetrícia é realizado pela
-            médica ginecologista/obstetra da equipe, com possibilidade de
-            encaminhamento para especialista quando necessário.
-          </p>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Tipo de Atendimento
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Como Acessar
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">
-                      Consulta Ginecológica
-                    </strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Agendamento na{" "}
-                    <Link
-                      to="/servicos/sala-4"
-                      className="text-info hover:text-primary-700 underline font-semibold"
-                    >
-                      Sala de Agendamentos
-                    </Link>{" "}
-                    com solicitação de retorno escrito por médica ou por
-                    encaminhamento
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">
-                      Inserção/Retirada de DIU de Cobre
-                    </strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Agendamento na{" "}
-                    <Link
-                      to="/servicos/sala-4"
-                      className="text-info hover:text-primary-700 underline font-semibold"
-                    >
-                      Sala de Agendamentos
-                    </Link>
-                    . Verifique a documentação necessária para este serviço
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Pré-natal</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Primeiro é agendado com enfermeira, que faz o encaminhamento
-                    necessário. Consultas intercaladas conforme cronograma
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Preventivo (Papanicolau)</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Com enfermeira (sem necessidade de encaminhamento)
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </InfoBox>
-        {}
-        <InfoBox title="Profissionais e Horários de Atendimento">
-          {/* Versão Desktop */}
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Período
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Horário
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissionais Responsáveis
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 11h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Dra. Luana Nogueira Godoi<br/>
-                    <span className="text-neutral-600 text-xs">Função: Médica Ginecologista/Obstetra</span>
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Tarde</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    13h00 às 16h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Dra. Luana Nogueira Godoi<br/>
-                    <span className="text-neutral-600 text-xs">Função: Médica Ginecologista/Obstetra</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          {/* Versão Mobile */}
-          <div className="md:hidden space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Manhã
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Dra. Luana Nogueira Godoi</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Médica Ginecologista/Obstetra</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Tarde
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Dra. Luana Nogueira Godoi</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Médica Ginecologista/Obstetra</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </InfoBox>
-        {}
-        <InfoBox title="Para quem é indicado?">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-neutral-700 text-sm">
-                Mulheres que iniciaram vida sexual (consultas anuais de rotina)
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-neutral-700 text-sm">
-                Gestantes para acompanhamento pré-natal
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-neutral-700 text-sm">
-                Mulheres de 25 a 64 anos (preventivo de câncer de colo uterino)
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-neutral-700 text-sm">
-                Mulheres em climatério ou menopausa
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="text-neutral-700 text-sm">
-                Mulheres que necessitam de planejamento familiar
-              </div>
-            </div>
-          </div>
-        </InfoBox>
-        {}
-        <InfoBox title="Acesso ao Serviço">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                1
-              </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  Agendamento na Central de Marcação
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Dirija-se à{" "}
-                  <Link
-                    to="/servicos/sala-4"
-                    className="text-info hover:text-primary-700 underline font-semibold"
-                  >
-                    Sala de Agendamentos
-                  </Link>
-                  . Veja a{" "}
-                  <Link
-                    to="/servicos/sala-4#documentacao-necessaria"
-                    className="text-info hover:text-primary-700 underline font-semibold"
-                  >
-                    documentação necessária para agendar
-                  </Link>
-                  .
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                2
-              </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  Agendamento Direto com Ginecologista
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Disponível somente para pacientes com solicitação de retorno
-                  escrito por médica ou por encaminhamento médico
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                3
-              </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  Para Preventivo (Papanicolau)
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Procure a enfermeira da sua equipe (sem necessidade de
-                  encaminhamento)
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
-                4
-              </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
-                  Para Pré-natal
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Primeiro é agendado com enfermeira, que faz o encaminhamento
-                  necessário para o ginecologista
-                </p>
-              </div>
-            </div>
-          </div>
-        </InfoBox>
-        {}
-        <div className="mb-6">
-          <Alert type="info">
-            <div>
-              <p className="mb-2">
-                <strong>Preventivo (Papanicolau):</strong> Deve ser feito
-                anualmente por mulheres de 25 a 64 anos que já iniciaram vida
-                sexual. É rápido, indolor e pode salvar sua vida! Agende com a
-                enfermeira.
-              </p>
-              <p>
-                <strong>Descobriu que está grávida?</strong> Parabéns! Inicie o
-                pré-natal o mais cedo possível. Procure a{" "}
-                <Link
-                  to="/servicos/sala-4"
-                  className="text-info hover:text-primary-700 underline font-semibold"
-                >
-                  Sala de Agendamentos
-                </Link>{" "}
-                para agendar sua primeira consulta. O pré-natal é essencial para
-                uma gravidez saudável!
-              </p>
-            </div>
-          </Alert>
-        </div>
-        {}
-        <InfoBox title="Documentação Necessária" highlight={true}>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documento de Identificação com Foto
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Encaminhamento médico
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Para consultas ginecológicas especializadas
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Exames anteriores
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">Se houver</p>
-              </div>
-            </div>
           </div>
         </InfoBox>
         {}

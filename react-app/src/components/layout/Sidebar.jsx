@@ -30,17 +30,36 @@ export default function Sidebar({ isOpen, onClose }) {
   }, [isOpen]);
 
   const navLinks = [
-    { name: 'Serviços', path: '/servicos' },
-    { name: 'Sala de Agendamento', path: '/servicos/sala-4' },
-    { name: 'Consultas Médicas', path: '/servicos/consultas' },
+    { name: 'Sala de Atendimento Administrativo', path: '/servicos/sala-9' },
     { name: 'Sala de Vacinação', path: '/servicos/vacinas' },
-    { name: 'Farmácia', path: '/servicos/farmacia' },
-    { name: 'Prevenção Combinada ao HIV', path: '/servicos/prevencao-hiv' },
-    { name: 'Grupos', path: '/grupos' },
-    { name: 'Bolsa Família e Serviço Social', path: '/servicos/bolsa-familia' },
+    { name: 'Sala de Agendamentos', path: '/servicos/sala-4' },
+    { name: 'E-multi', path: '/equipe' },
     { name: 'REMSA', path: '/remsa' },
     { name: 'Agentes Comunitários de Saúde', path: '/acs' },
+    { name: 'Contato', path: '/#contato', isAnchor: true },
+    { name: 'Ouvidoria', path: '/ouvidoria' },
   ];
+
+  const handleLinkClick = (e, link) => {
+    if (link.isAnchor) {
+      e.preventDefault();
+      const scrollToElement = () => {
+        const element = document.getElementById('contato');
+        if (element) {
+          const yOffset = -80;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      };
+      if (location.pathname === '/') {
+        scrollToElement();
+      } else {
+        navigate('/');
+        setTimeout(scrollToElement, 300);
+      }
+      onClose();
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -97,6 +116,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 <li key={link.path}>
                   <Link
                     to={link.path}
+                    onClick={(e) => handleLinkClick(e, link)}
                     className={`block px-4 py-3 rounded-lg transition-colors ${
                       isActive
                         ? 'bg-primary-50 text-primary-700 font-semibold'

@@ -8,7 +8,7 @@ import PageContainer from "../../components/layout/PageContainer";
 import { Alert } from "../../components/common/Alert";
 import InfoBox from "../../components/common/InfoBox";
 import { contactInfo } from "../../config";
-import EscalaPorSala from "../../components/services/EscalaPorSala";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 
 export default function FarmaciaDispensacao() {
   return (
@@ -118,9 +118,9 @@ export default function FarmaciaDispensacao() {
         </div>
 
 
-        <EscalaPorSala
-          titulo="Profissionais Escalados na Farmácia"
+        <EscalaFirestore
           escalaKey="farmacia"
+          titulo="Profissionais Escalados na Farmácia"
         />
 
         <InfoBox title="Documentação Necessária" highlight={true}>

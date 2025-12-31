@@ -93,42 +93,6 @@ export default function Farmaceutica() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Quem é a profissional?">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-neutral-300">
-              <thead>
-                <tr className="bg-neutral-100">
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Profissional
-                  </th>
-                  <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-neutral-700 text-sm">
-                    Especialidade
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Marcela</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Farmacêutica Clínica
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-4 text-xs text-neutral-500 italic">
-            * Agendamento através da{" "}
-            <Link
-              to="/servicos/sala-4"
-              className="text-info hover:text-primary-700 underline font-semibold"
-            >
-              Sala de Agendamentos
-            </Link>
-          </p>
-        </InfoBox>
-        {}
         <InfoBox title="Profissionais e Horários de Atendimento">
           {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto">
@@ -149,25 +113,13 @@ export default function Farmaceutica() {
               <tbody className="text-sm">
                 <tr className="bg-white">
                   <td className="border border-neutral-300 px-4 py-3">
-                    <strong className="text-neutral-800">Manhã</strong>
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    07h00 às 11h00
-                  </td>
-                  <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Marcela<br/>
-                    <span className="text-neutral-600 text-xs">Função: Farmacêutica Clínica</span>
-                  </td>
-                </tr>
-                <tr className="bg-white">
-                  <td className="border border-neutral-300 px-4 py-3">
                     <strong className="text-neutral-800">Tarde</strong>
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                     13h00 às 16h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Marcela<br/>
+                    Marcella Oliveira<br/>
                     <span className="text-neutral-600 text-xs">Função: Farmacêutica Clínica</span>
                   </td>
                 </tr>
@@ -177,27 +129,6 @@ export default function Farmaceutica() {
 
           {/* Versão Mobile */}
           <div className="md:hidden space-y-4">
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-              <div className="mb-3">
-                <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
-                  Manhã
-                </span>
-              </div>
-              <div className="space-y-3">
-                <div className="pb-3 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
-                </div>
-                <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Marcela</p>
-                </div>
-                <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Farmacêutica Clínica</p>
-                </div>
-              </div>
-            </div>
-
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="mb-3">
                 <span className="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded">
@@ -211,7 +142,7 @@ export default function Farmaceutica() {
                 </div>
                 <div className="pb-2 border-b border-neutral-300">
                   <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
-                  <p className="text-sm text-neutral-700">Marcela</p>
+                  <p className="text-sm text-neutral-700">Marcella Oliveira</p>
                 </div>
                 <div className="pt-1">
                   <p className="text-sm text-neutral-700"><strong>Função:</strong> Farmacêutica Clínica</p>
@@ -257,27 +188,27 @@ export default function Farmaceutica() {
         </InfoBox>
         {}
         <InfoBox title="Acesso ao Serviço">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+          <div className="space-y-4">
+            <div className="relative pl-12 pb-8 border-l-2 border-blue-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 1
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Agendamento na Central de Marcação
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   Dirija-se à{" "}
                   <Link
                     to="/servicos/sala-4"
-                    className="text-info hover:text-primary-700 underline font-semibold"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     Sala de Agendamentos
                   </Link>
                   . Veja a{" "}
                   <Link
                     to="/servicos/sala-4#documentacao-necessaria"
-                    className="text-info hover:text-primary-700 underline font-semibold"
+                    className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     documentação necessária para agendar
                   </Link>
@@ -285,28 +216,30 @@ export default function Farmaceutica() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+
+            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Identificação da Profissional
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   A consulta será agendada com a farmacêutica responsável
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+
+            <div className="relative pl-12">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 3
               </div>
-              <div>
-                <strong className="text-neutral-800 text-sm">
+              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
+                <strong className="text-neutral-900 text-base block mb-2">
                   Comparecimento à Consulta
                 </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
+                <p className="text-sm text-neutral-700 leading-relaxed">
                   Apresentar-se no horário agendado com documentação completa,
                   todos os medicamentos em uso (incluindo receitas e embalagens)
                   e lista de problemas de saúde, se souber
@@ -334,45 +267,6 @@ export default function Farmaceutica() {
             </div>
           </Alert>
         </div>
-        {}
-        <InfoBox title="Documentação Necessária" highlight={true}>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documento de Identificação com Foto
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  RG (Registro Geral) ou CNH (Carteira Nacional de Habilitação)
-                  do titular
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Todos os medicamentos em uso
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Incluindo receitas e embalagens
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Lista de problemas de saúde
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Se souber suas condições médicas
-                </p>
-              </div>
-            </div>
-          </div>
-        </InfoBox>
         {}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm">
           <div className="flex items-start gap-3">

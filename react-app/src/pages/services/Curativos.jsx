@@ -4,11 +4,12 @@ import {
   FileText,
   Package,
   Calendar,
+  AlertCircle,
 } from "lucide-react";
 import { PageContainer } from "../../components/layout";
 import { Alert, InfoBox, BackButton, RecommendedReadingCarousel } from "../../components/common";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
-import EscalaPorSala from "../../components/services/EscalaPorSala";
+import EscalaFirestore from "../../components/services/EscalaFirestore";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 export default function Curativos() {
   return (
@@ -217,10 +218,9 @@ export default function Curativos() {
           </div>
         </InfoBox>
 
-        {/* Escalas de Profissionais */}
-        <EscalaPorSala
-          titulo="Profissionais Escalados na Sala de Curativos"
+        <EscalaFirestore
           escalaKey="sala-curativos"
+          titulo="Profissionais Escalados na Sala de Curativos"
         />
 
         {}
