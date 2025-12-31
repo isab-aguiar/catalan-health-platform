@@ -7,6 +7,7 @@ import AdminLayout from '../../layouts/AdminLayout';
 import { useEventos } from '../../hooks/useEventos';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import EventoModal from '../../components/admin/EventoModal';
+import AgendaModal from '../../components/admin/AgendaModal';
 import { escalasTrabalho } from '../../data/escalasTrabalho';
 import { agendasSemanais } from '../../data/agendasSemanais';
 import { inicializarNotificacoes, pararVerificacaoNotificacoes, solicitarPermissaoNotificacoes, exibirNotificacao } from '../../services/notificacoesService';
@@ -40,6 +41,8 @@ export default function CalendarioAdmin() {
   const [escalasDoDia, setEscalasDoDia] = useState([]);
   const [showModalDia, setShowModalDia] = useState(false);
   const [dataModalDia, setDataModalDia] = useState(null);
+  const [agendaEditando, setAgendaEditando] = useState(null);
+  const [showAgendaModal, setShowAgendaModal] = useState(false);
 
   const { eventos, loading, deletar, recarregar } = useEventos(
     currentDate.getMonth() + 1,
@@ -422,6 +425,47 @@ export default function CalendarioAdmin() {
     handleVisualizarEvento(evento, { stopPropagation: () => {} });
   };
 
+  /**
+   * Abre modal para editar agenda
+   */
+  const handleEditarAgenda = (agenda) => {
+    setAgendaEditando(agenda);
+    setShowAgendaModal(true);
+  };
+
+  /**
+   * Deleta agenda com confirmação
+   */
+  const handleDeletarAgenda = async (agenda) => {
+    const confirmed = await showModal({
+      type: 'warning',
+      title: 'Confirmar Exclusão',
+      message: `Tem certeza que deseja deletar a agenda de "${agenda.nome}"? Esta ação não pode ser desfeita.`,
+      confirmText: 'Deletar',
+      cancelText: 'Cancelar'
+    });
+
+    if (!confirmed) return;
+
+    try {
+      await deletarAgenda(agenda.id);
+      await showModal({
+        type: 'success',
+        title: 'Agenda Deletada',
+        message: 'Agenda deletada com sucesso!',
+        confirmText: 'OK'
+      });
+    } catch (error) {
+      console.error('Erro ao deletar agenda:', error);
+      await showModal({
+        type: 'error',
+        title: 'Erro ao Deletar',
+        message: `Não foi possível deletar a agenda: ${error.message}`,
+        confirmText: 'OK'
+      });
+    }
+  };
+
 
   const diasDoMes = getDiasNoMes(currentDate);
   const dataHoje = new Date();
@@ -568,6 +612,8 @@ export default function CalendarioAdmin() {
           onEventClick={handleVisualizarEventoSemStop}
           onEventEdit={handleEditarEventoSemStop}
           onEventDelete={handleDeletarEventoSemStop}
+          onAgendaEdit={handleEditarAgenda}
+          onAgendaDelete={handleDeletarAgenda}
           initialDate={currentDate}
         />
       )}

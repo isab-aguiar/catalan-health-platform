@@ -32,6 +32,8 @@ export default function CalendarAgendaView({
   onEventClick,
   onEventEdit,
   onEventDelete,
+  onAgendaEdit,
+  onAgendaDelete,
   initialDate = new Date()
 }) {
   const [currentDate, setCurrentDate] = useState(initialDate);
@@ -368,11 +370,35 @@ export default function CalendarAgendaView({
                           key={agenda.id} 
                           className="group/agenda relative border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/50 to-purple-50/30 rounded-xl p-5 transition-all duration-300 hover:shadow-lg hover:border-indigo-300"
                         >
-                          {/* Badge de categoria */}
-                          <div className="absolute top-3 right-3">
+                          {/* Botões de ação */}
+                          <div className="absolute top-3 right-3 flex items-center gap-2">
                             <span className="text-xs px-2.5 py-1 bg-indigo-600 text-white rounded-full font-bold uppercase tracking-wide shadow-md">
                               {agenda.categoria}
                             </span>
+                            {onAgendaEdit && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  onAgendaEdit(agenda);
+                                }}
+                                className="opacity-100 sm:opacity-0 sm:group-hover/agenda:opacity-100 p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                                title="Editar agenda"
+                              >
+                                <Edit2 className="w-4 h-4" />
+                              </button>
+                            )}
+                            {onAgendaDelete && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  onAgendaDelete(agenda);
+                                }}
+                                className="opacity-100 sm:opacity-0 sm:group-hover/agenda:opacity-100 p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
+                                title="Excluir agenda"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            )}
                           </div>
 
                           <div className="flex items-start gap-3 mb-4">
