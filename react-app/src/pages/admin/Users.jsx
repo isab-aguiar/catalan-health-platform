@@ -405,7 +405,7 @@ export default function Users() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center flex-wrap justify-end gap-2">
                       <button
                         onClick={() => handleEditarRole(user)}
                         disabled={isCurrentUser}
