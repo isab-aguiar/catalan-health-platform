@@ -214,9 +214,9 @@ export default function AssistenteSocial() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Documentação Necessária" highlight={true}>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
+        <InfoBox title="Documentação Necessária">
+          <div className="space-y-3">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-neutral-800 text-sm">
@@ -228,7 +228,7 @@ export default function AssistenteSocial() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-neutral-800 text-sm">
@@ -239,7 +239,7 @@ export default function AssistenteSocial() {
                 </p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-neutral-800 text-sm">
@@ -248,7 +248,7 @@ export default function AssistenteSocial() {
                 <p className="text-xs text-neutral-600 mt-0.5">Atualizado</p>
               </div>
             </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
+            <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
                 <strong className="text-neutral-800 text-sm">
@@ -354,19 +354,24 @@ export default function AssistenteSocial() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
-          <div>
-            <p className="font-semibold mb-2">Orientação Importante</p>
-            <p className="text-sm text-white/90 leading-relaxed mb-3">
-              <strong>Atendimento sigiloso:</strong> Todos os atendimentos do
-              Serviço Social são confidenciais. Suas informações pessoais são
-              protegidas pelo sigilo profissional.
-            </p>
-            <p className="text-sm text-white/90 leading-relaxed">
-              <strong>Você não está sozinho:</strong> O Serviço Social está aqui
-              para ajudar você a enfrentar dificuldades e garantir seus
-              direitos. Não hesite em procurar apoio quando precisar!
-            </p>
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
+            <div>
+              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
+              <p className="text-sm text-white/95 leading-relaxed mb-3">
+                <strong>Atendimento sigiloso:</strong> Todos os atendimentos do
+                Serviço Social são confidenciais. Suas informações pessoais são
+                protegidas pelo sigilo profissional.
+              </p>
+              <p className="text-sm text-white/95 leading-relaxed">
+                <strong>Você não está sozinho:</strong> O Serviço Social está aqui
+                para ajudar você a enfrentar dificuldades e garantir seus
+                direitos. Não hesite em procurar apoio quando precisar!
+              </p>
+            </div>
           </div>
         </div>
       </div>

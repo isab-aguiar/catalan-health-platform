@@ -28,96 +28,109 @@ export default function Renovacao() {
         <AvisosPaginaWrapper pagina="renovacao" />
 
         {/* Sobre o Serviço */}
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
-          <h2 className="text-xl font-bold text-blue-900 mb-4">
-            Sobre o Serviço
-          </h2>
-          <p className="text-neutral-700 leading-relaxed">
-            A Renovação de Receitas é um serviço oferecido para pacientes que
-            fazem uso contínuo de medicamentos e precisam renovar suas
-            prescrições médicas. Este serviço é ideal para quem possui condições
-            crônicas controladas, como hipertensão, diabetes e outras doenças
-            que exigem tratamento prolongado e acompanhamento regular.
-          </p>
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+              Sobre o Serviço
+            </h2>
+          </div>
+          <div className="p-4 sm:p-6">
+            <p className="text-neutral-700 text-sm leading-relaxed">
+              A Renovação de Receitas é um serviço oferecido para pacientes que
+              fazem uso contínuo de medicamentos e precisam renovar suas
+              prescrições médicas. Este serviço é ideal para quem possui condições
+              crônicas controladas, como hipertensão, diabetes e outras doenças
+              que exigem tratamento prolongado e acompanhamento regular.
+            </p>
+          </div>
         </div>
 
         {/* Para quem é indicado? */}
-        <InfoBox title="Para quem é indicado?">
-          <div className="space-y-3">
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <p className="text-neutral-700 text-sm">
-                  Pacientes com doenças crônicas controladas (hipertensão,
-                  diabetes, entre outras)
-                </p>
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+              Para quem é indicado?
+            </h2>
+          </div>
+          <div className="p-4 sm:p-6">
+            <div className="space-y-3">
+              <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <p className="text-neutral-700 text-sm leading-relaxed">
+                    Pacientes com doenças crônicas controladas (hipertensão,
+                    diabetes, entre outras)
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <p className="text-neutral-700 text-sm">
-                  Pessoas que fazem uso contínuo de medicamentos
-                </p>
+              <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <p className="text-neutral-700 text-sm leading-relaxed">
+                    Pessoas que fazem uso contínuo de medicamentos
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <p className="text-neutral-700 text-sm">
-                  Pacientes que já possuem acompanhamento médico regular na
-                  unidade
-                </p>
+              <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <p className="text-neutral-700 text-sm leading-relaxed">
+                    Pacientes que já possuem acompanhamento médico regular na
+                    unidade
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </InfoBox>
+        </div>
 
         {/* Prazo de Validade */}
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-6 shadow-sm border border-amber-200 mb-6" id="prazo-validade">
-          <h2 className="text-xl font-bold text-amber-900 mb-4">
-            Você sabe qual o prazo de validade de sua receita?
-          </h2>
-          <p className="text-neutral-700 mb-4 text-sm">
-            É importante conhecer o prazo de validade da sua receita para evitar
-            que ela expire antes da renovação. Os prazos variam conforme o tipo
-            de medicamento prescrito:
-          </p>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-white/70 border border-amber-300 rounded-lg p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Receitas Controladas
-              </h3>
-              <p className="text-sm text-neutral-700 mb-2">
-                <strong>Prazo de validade:</strong>
-              </p>
-              <p className="text-sm text-neutral-600">
-                60 dias (2 meses) contados a partir da data de emissão da
-                receita.
-              </p>
-              <p className="text-xs text-neutral-500 mt-2 italic">
-                Aplicável a medicamentos sujeitos a controle especial conforme
-                legislação vigente.
-              </p>
-            </div>
-            <div className="bg-white/70 border border-blue-300 rounded-lg p-4">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Medicamentos de Uso Contínuo
-              </h3>
-              <p className="text-sm text-neutral-700 mb-2">
-                <strong>Prazo de validade:</strong>
-              </p>
-              <p className="text-sm text-neutral-600">
-                6 meses (180 dias) contados a partir da data de emissão da
-                receita.
-              </p>
-              <p className="text-xs text-neutral-500 mt-2 italic">
-                Aplicável a medicamentos para tratamento de condições crônicas
-                controladas.
-              </p>
-            </div>
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6" id="prazo-validade">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+              Você sabe qual o prazo de validade de sua receita?
+            </h2>
           </div>
-          <div className="mt-4">
+          <div className="p-4 sm:p-6">
+            <p className="text-neutral-700 mb-4 text-sm leading-relaxed">
+              É importante conhecer o prazo de validade da sua receita para evitar
+              que ela expire antes da renovação. Os prazos variam conforme o tipo
+              de medicamento prescrito:
+            </p>
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
+                <h3 className="font-semibold text-blue-900 mb-2">
+                  Receitas Controladas
+                </h3>
+                <p className="text-sm text-neutral-700 mb-2 leading-relaxed">
+                  <strong>Prazo de validade:</strong>
+                </p>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  60 dias (2 meses) contados a partir da data de emissão da
+                  receita.
+                </p>
+                <p className="text-xs text-neutral-600 mt-2 italic">
+                  Aplicável a medicamentos sujeitos a controle especial conforme
+                  legislação vigente.
+                </p>
+              </div>
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
+                <h3 className="font-semibold text-blue-900 mb-2">
+                  Medicamentos de Uso Contínuo
+                </h3>
+                <p className="text-sm text-neutral-700 mb-2 leading-relaxed">
+                  <strong>Prazo de validade:</strong>
+                </p>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  6 meses (180 dias) contados a partir da data de emissão da
+                  receita.
+                </p>
+                <p className="text-xs text-neutral-600 mt-2 italic">
+                  Aplicável a medicamentos para tratamento de condições crônicas
+                  controladas.
+                </p>
+              </div>
+            </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -135,62 +148,69 @@ export default function Renovacao() {
         </div>
 
         {/* Documentos Necessários */}
-        <InfoBox title="Documentos Necessários" highlight={true}>
-          <p className="text-neutral-700 mb-4 text-sm">
-            Para solicitar a renovação de receitas, é obrigatória a apresentação
-            da seguinte documentação:
-          </p>
-          <div className="space-y-2">
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Documento de Identificação com Foto
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Documento de identidade com foto e/ou Carteira de Habilitação do titular
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  CPF - Cadastro de Pessoa Física
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  Documento físico original ou número do CPF do titular
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-              <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  Receita Antiga
-                </strong>
-                <p className="text-xs text-neutral-600 mt-0.5">
-                  A receita que precisa ser renovada
-                </p>
-              </div>
-            </div>
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+              Documentos Necessários
+            </h2>
           </div>
-          <div className="mt-4">
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <FileText size={20} className="text-white" />
-                </div>
+          <div className="p-4 sm:p-6">
+            <p className="text-neutral-700 mb-4 text-sm leading-relaxed">
+              Para solicitar a renovação de receitas, é obrigatória a apresentação
+              da seguinte documentação:
+            </p>
+            <div className="space-y-2">
+              <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
-                  <p className="text-neutral-800 text-sm leading-relaxed">
-                    Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                  <strong className="text-neutral-800 text-sm">
+                    Documento de Identificação com Foto
+                  </strong>
+                  <p className="text-xs text-neutral-600 mt-0.5">
+                    Documento de identidade com foto e/ou Carteira de Habilitação do titular
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="flex-1">
+                  <strong className="text-neutral-800 text-sm">
+                    CPF - Cadastro de Pessoa Física
+                  </strong>
+                  <p className="text-xs text-neutral-600 mt-0.5">
+                    Documento físico original ou número do CPF do titular
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="flex-1">
+                  <strong className="text-neutral-800 text-sm">
+                    Receita Antiga
+                  </strong>
+                  <p className="text-xs text-neutral-600 mt-0.5">
+                    A receita que precisa ser renovada
                   </p>
                 </div>
               </div>
             </div>
+            <div className="mt-4">
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FileText size={20} className="text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                    <p className="text-neutral-800 text-sm leading-relaxed">
+                      Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </InfoBox>
+        </div>
 
         <EscalaFirestore
           escalaKey="renovacao-receitas"

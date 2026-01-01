@@ -33,122 +33,141 @@ export default function Sala4() {
         <AvisosPaginaWrapper pagina="sala-4" />
 
         {/* Sobre o Serviço */}
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
-          <h2 className="text-xl font-bold text-blue-900 mb-4">
-            Sobre o Serviço
-          </h2>
-          <p className="text-neutral-700 leading-relaxed mb-5">
-            Este setor da Unidade Básica de Saúde São José é responsável pelo
-            gerenciamento e organização dos agendamentos de consultas médicas,
-            consultas de enfermagem, exames laboratoriais, exames de imagem e
-            procedimentos diversos. O serviço atua como central de agendamento,
-            garantindo o acesso organizado aos serviços de saúde disponíveis na
-            unidade e na rede de atenção à saúde.
-          </p>
-
-          <h3 className="font-bold text-blue-900 mb-4 text-base">
-            Serviços Oferecidos:
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
-            <div id="puericultura" className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Consultas
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Agendamento de consultas médicas e de enfermagem conforme
-                disponibilidade de horários e necessidade clínica do usuário.
-              </p>
-            </div>
-            <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Exames
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Agendamento de exames laboratoriais e de imagem mediante
-                apresentação de prescrição médica válida ou pedido de exame
-                original emitido pelo médico assistente.
-              </p>
-            </div>
-            <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Procedimentos
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Confirmação e remarcação de procedimentos diversos conforme
-                protocolos estabelecidos pela unidade.
-              </p>
-            </div>
-            <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-800 mb-2 text-sm">
-                Orientações
-              </h3>
-              <p className="text-sm text-neutral-600">
-                Fornecimento de orientações sobre preparo para exames e
-                procedimentos, conforme protocolos estabelecidos.
-              </p>
-            </div>
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+              Sobre o Serviço
+            </h2>
           </div>
+          <div className="p-4 sm:p-6">
+            <p className="text-neutral-700 text-sm leading-relaxed mb-5">
+              Este setor da Unidade Básica de Saúde São José é responsável pelo
+              gerenciamento e organização dos agendamentos de consultas médicas,
+              consultas de enfermagem, exames laboratoriais, exames de imagem e
+              procedimentos diversos. O serviço atua como central de agendamento,
+              garantindo o acesso organizado aos serviços de saúde disponíveis na
+              unidade e na rede de atenção à saúde.
+            </p>
 
-          <div className="bg-blue-100/50 border border-blue-300 rounded-lg p-4">
-            <h3 className="font-semibold text-blue-900 mb-2 text-sm">
-              SUS Fácil
+            <h3 className="font-bold text-blue-900 mb-4 text-base">
+              Serviços Oferecidos:
             </h3>
-            <p className="text-sm text-neutral-700 mb-2">
-              Este setor realiza a entrada de usuários na fila do SUS Fácil para
-              agendamento de exames, consultas especializadas e cirurgias. É
-              necessário apresentar documentação completa para protocolização.
-            </p>
-            <p className="text-xs text-neutral-600 italic">
-              Nota: O acompanhamento da posição na fila é realizado na Sala de atendimento Administrativo.
-            </p>
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div id="puericultura" className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
+                <h3 className="font-semibold text-blue-900 mb-2">
+                  Consultas
+                </h3>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Agendamento de consultas médicas e de enfermagem conforme
+                  disponibilidade de horários e necessidade clínica do usuário.
+                </p>
+              </div>
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
+                <h3 className="font-semibold text-blue-900 mb-2">
+                  Exames
+                </h3>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Agendamento de exames laboratoriais e de imagem mediante
+                  apresentação de prescrição médica válida ou pedido de exame
+                  original emitido pelo médico assistente.
+                </p>
+              </div>
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
+                <h3 className="font-semibold text-blue-900 mb-2">
+                  Procedimentos
+                </h3>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Confirmação e remarcação de procedimentos diversos conforme
+                  protocolos estabelecidos pela unidade.
+                </p>
+              </div>
+              <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
+                <h3 className="font-semibold text-blue-900 mb-2">
+                  Orientações
+                </h3>
+                <p className="text-sm text-neutral-700 leading-relaxed">
+                  Fornecimento de orientações sobre preparo para exames e
+                  procedimentos, conforme protocolos estabelecidos.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <AlertCircle size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-green-900 mb-2 text-base">
+                    SUS Fácil
+                  </h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed mb-2">
+                    Este setor realiza a entrada de usuários na fila do SUS Fácil para
+                    agendamento de exames, consultas especializadas e cirurgias. É
+                    necessário apresentar documentação completa para protocolização.
+                  </p>
+                  <p className="text-xs text-neutral-700 italic">
+                    Nota: O acompanhamento da posição na fila é realizado na Sala de atendimento Administrativo.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <DocumentacaoPorServico />
 
         {/* Como Agendar */}
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-6 shadow-sm border border-green-200 mb-6">
-          <h2 className="text-xl font-bold text-green-900 mb-4">
-            Como Agendar
-          </h2>
-
-          <div className="bg-white/70 rounded-lg p-5 border border-green-100 mb-4">
-            <h3 className="font-bold text-green-900 mb-3 text-base">
-              Atendimento Presencial
-            </h3>
-            <p className="text-neutral-700 leading-relaxed text-sm">
-              O agendamento é realizado exclusivamente de forma presencial,
-              durante os horários de funcionamento estabelecidos. O usuário
-              deve comparecer à unidade com a documentação necessária conforme
-              o tipo de serviço solicitado.
-            </p>
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+              Como Agendar
+            </h2>
           </div>
+          <div className="p-4 sm:p-6">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200 mb-4">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <AlertCircle size={20} className="text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-bold text-green-900 mb-2 text-base">
+                    Atendimento Presencial
+                  </h3>
+                  <p className="text-neutral-800 text-sm leading-relaxed">
+                    O agendamento é realizado exclusivamente de forma presencial,
+                    durante os horários de funcionamento estabelecidos. O usuário
+                    deve comparecer à unidade com a documentação necessária conforme
+                    o tipo de serviço solicitado.
+                  </p>
+                </div>
+              </div>
+            </div>
 
-          <div className="bg-white/70 rounded-lg p-5 border border-green-100">
-            <h3 className="font-semibold text-green-900 mb-3 text-base">
+            <h3 className="font-semibold text-blue-900 mb-3 text-base">
               Orientações para Agendamento
             </h3>
-            <ul className="space-y-2 text-sm text-neutral-700">
-              <li className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                <span>
+            <div className="space-y-2">
+              <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-neutral-700 text-sm leading-relaxed">
                   Compareça com antecedência aos horários de atendimento
                 </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                <span>
+              </div>
+              <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-neutral-700 text-sm leading-relaxed">
                   Apresente toda a documentação necessária conforme o serviço
                   solicitado
                 </span>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                <span>
+              </div>
+              <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                <span className="text-neutral-700 text-sm leading-relaxed">
                   Para exames, traga sempre o pedido médico original e válido.
                 </span>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
 

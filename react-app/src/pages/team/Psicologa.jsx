@@ -79,9 +79,11 @@ export default function Psicologa() {
         {}
         {/* Card Assistência Psicológica */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
-          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
-              <Brain size={28} className="text-primary-600" />
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Brain size={28} className="text-white" />
+              </div>
               <div>
                 <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
                   Psicologia na Atenção Primária à Saúde
@@ -104,7 +106,7 @@ export default function Psicologa() {
             </div>
 
             {/* Descrição */}
-            <p className="text-neutral-700 leading-relaxed mb-5">
+            <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
               A Psicologia na Atenção Primária à Saúde desempenha um papel
               fundamental na promoção, prevenção e tratamento de questões
               relacionadas à saúde mental e ao bem-estar emocional da população.

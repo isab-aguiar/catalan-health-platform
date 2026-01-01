@@ -100,7 +100,7 @@ export default function Medicos() {
         {}
         {/* Card Atendimento Médico de Família */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
-          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div>
               <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
                 Atendimento Médico de Família
@@ -123,7 +123,7 @@ export default function Medicos() {
             </div>
 
             {/* Descrição */}
-            <p className="text-neutral-700 leading-relaxed mb-5">
+            <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
               O médico de família é o profissional preparado para cuidar de você e de toda a sua família, independentemente da idade ou condição de saúde. Este profissional acompanha o paciente ao longo do tempo, conhecendo sua história clínica, seus hábitos e seu contexto familiar e social. Essa relação de confiança permite um atendimento mais humanizado e resolutivo, promovendo saúde, prevenindo doenças e tratando problemas de saúde de forma integral e coordenada.
             </p>
 
@@ -134,14 +134,14 @@ export default function Medicos() {
                 href="https://www.gov.br/saude/pt-br/assuntos/atencao-primaria-a-saude"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
+                className="bg-blue-50 rounded-lg p-4 sm:p-5 border border-blue-100 hover:shadow-md transition-shadow cursor-pointer block"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <ExternalLink size={24} className="text-white" />
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <ExternalLink size={20} className="text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
+                    <h3 className="font-bold text-neutral-900 mb-2 text-base">
                       Saiba Mais
                     </h3>
                     <p className="text-sm text-neutral-600 mb-2">

@@ -25,287 +25,332 @@ export default function GroupsIndex() {
     <PageContainer>
       <div className="max-w-5xl mx-auto space-y-6">
         <BackButton />
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-600 mb-6 flex items-center gap-3">
-          <Users size={32} className="sm:w-10 sm:h-10" />
-          Grupos de Atividade Coletiva e Atividades Coletivas
-        </h1>
-        <Alert type="info">
-          <div className="flex items-start gap-3">
-            <Heart size={20} className="text-info flex-shrink-0 mt-0.5" />
-            <div>
-              <strong>Bem-vindo aos nossos grupos!</strong>
-              <br />
-              Os Grupos de Atividade Coletiva são espaços de acolhimento, troca
-              de experiências e aprendizado coletivo. Aqui você encontra pessoas
-              que compartilham situações semelhantes e profissionais de saúde
-              comprometidos com seu bem-estar.
-            </div>
-          </div>
-        </Alert>
-        <h2 className="text-2xl md:text-3xl font-bold text-primary-600 mt-8 mb-4">
-          Nossos Grupos
-        </h2>
-        {}
-        <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
-              <Pill size={28} />
-            </div>
-            <h3 className="text-2xl font-bold text-neutral-900">
-              Grupo de Diabetes e Hipertensão (Hiperdia)
-            </h3>
-          </div>
-          <InfoBox title="Como funciona" icon={<ClipboardList size={24} />}>
-            <p className="text-neutral-700 leading-relaxed mb-4">
-              O Hiperdia é um grupo voltado para pessoas que convivem com
-              diabetes e/ou hipertensão arterial. Nossos encontros incluem:
-            </p>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Verificação de pressão arterial e glicemia
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Orientações sobre alimentação saudável
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Prática de atividades físicas leves
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Educação em saúde sobre o manejo das doenças
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Troca de experiências entre os participantes
-                </div>
-              </li>
-            </ul>
-          </InfoBox>
-          <InfoBox
-            title="Dias e Horários"
-            icon={<Calendar size={24} />}
-            highlight={true}
-          >
-            {/* Versão Desktop */}
-            <div className="hidden md:block overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-neutral-100">
-                    <th className="border border-neutral-300 px-4 py-3 text-left font-semibold">
-                      Dia
-                    </th>
-                    <th className="border border-neutral-300 px-4 py-3 text-left font-semibold">
-                      Horário
-                    </th>
-                    <th className="border border-neutral-300 px-4 py-3 text-left font-semibold">
-                      Local
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-neutral-300 px-4 py-3">
-                      <strong>Quartas-feiras</strong>
-                    </td>
-                    <td className="border border-neutral-300 px-4 py-3">
-                      07:30
-                    </td>
-                    <td className="border border-neutral-300 px-4 py-3">
-                      Sala de Grupos - ESF Catalão
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
 
-            {/* Versão Mobile */}
-            <div className="md:hidden space-y-3">
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-                <div className="space-y-2">
-                  <div>
-                    <span className="text-xs font-semibold text-neutral-500 uppercase">Dia</span>
-                    <p className="text-sm font-semibold text-neutral-900">Quartas-feiras</p>
-                  </div>
-                  <div>
-                    <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
-                    <p className="text-sm text-neutral-900">07:30</p>
-                  </div>
-                  <div>
-                    <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
-                    <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <p className="mt-4 text-neutral-600 italic text-sm">
-              * Confirme os dias e horários na recepção, pois podem sofrer
-              alterações.
-            </p>
-          </InfoBox>
-          <Alert type="success">
-            <div className="flex items-start gap-3">
-              <Users
-                size={20}
-                className="text-success flex-shrink-0 mt-0.5"
-              />
-              <div>
-                <strong>Como participar:</strong> Procure sua equipe de saúde ou
-                passe na recepção para se inscrever. A participação é gratuita e
-                aberta a todos os usuários da unidade.
-              </div>
-            </div>
-          </Alert>
-          <div className="mt-4">
-            <Link
-              to="/grupos/hiperdia"
-              className="inline-block px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-semibold"
-            >
-              Saiba mais sobre o Grupo Hiperdia
-            </Link>
+        {/* Header com gradiente */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
+          <div className="flex items-center gap-3">
+            <Users size={32} className="sm:w-10 sm:h-10 text-white flex-shrink-0" />
+            <h1 className="text-xl sm:text-2xl font-bold text-white">
+              Grupos de Atividade Coletiva e Atividades Coletivas
+            </h1>
           </div>
         </div>
-        {}
-        <div className="bg-white rounded-lg shadow-md p-6 space-y-4">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600">
-              <Dumbbell size={28} />
+        {/* Bem-vindo */}
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 shadow-sm border border-blue-200 mb-6">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Heart size={20} className="text-white" />
             </div>
-            <h3 className="text-2xl font-bold text-neutral-900">
-              Grupo de Fibromialgia
-            </h3>
+            <div>
+              <h3 className="font-bold text-blue-900 mb-2 text-base">Bem-vindo aos nossos grupos!</h3>
+              <p className="text-neutral-800 text-sm leading-relaxed">
+                Os Grupos de Atividade Coletiva são espaços de acolhimento, troca
+                de experiências e aprendizado coletivo. Aqui você encontra pessoas
+                que compartilham situações semelhantes e profissionais de saúde
+                comprometidos com seu bem-estar.
+              </p>
+            </div>
           </div>
-          <InfoBox title="Como funciona" icon={<ClipboardList size={24} />}>
-            <p className="text-neutral-700 leading-relaxed mb-4">
-              Espaço de acolhimento para pessoas que convivem com fibromialgia.
-              Nossos encontros incluem:
-            </p>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Técnicas de manejo da dor crônica
+        </div>
+
+        {/* Nossos Grupos Header */}
+        <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 mt-8 mb-4">
+          Nossos Grupos
+        </h2>
+        {/* Grupo Hiperdia */}
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Pill size={24} className="sm:w-7 sm:h-7 text-white" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                Grupo de Diabetes e Hipertensão (Hiperdia)
+              </h3>
+            </div>
+          </div>
+          <div className="p-4 sm:p-6 space-y-4">
+            {/* Como funciona */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <ClipboardList size={20} className="text-blue-600" />
+                <h4 className="font-semibold text-neutral-900 text-base">Como funciona</h4>
+              </div>
+              <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
+                O Hiperdia é um grupo voltado para pessoas que convivem com
+                diabetes e/ou hipertensão arterial. Nossos encontros incluem:
+              </p>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Verificação de pressão arterial e glicemia
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Orientações sobre alimentação saudável
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Prática de atividades físicas leves
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Educação em saúde sobre o manejo das doenças
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Troca de experiências entre os participantes
+                  </div>
+                </li>
+              </ul>
+            </div>
+            {/* Dias e Horários */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 shadow-sm border border-blue-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Calendar size={20} className="text-blue-900" />
+                <h4 className="font-bold text-blue-900 text-base">Dias e Horários</h4>
+              </div>
+
+              {/* Versão Desktop */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-neutral-100">
+                      <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-sm">
+                        Dia
+                      </th>
+                      <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-sm">
+                        Horário
+                      </th>
+                      <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-sm">
+                        Local
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-neutral-300 px-4 py-3 text-sm">
+                        <strong>Quartas-feiras</strong>
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-3 text-sm">
+                        07:30
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-3 text-sm">
+                        Sala de Grupos - ESF Catalão
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Versão Mobile */}
+              <div className="md:hidden space-y-3">
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+                  <div className="space-y-2">
+                    <div>
+                      <span className="text-xs font-semibold text-neutral-500 uppercase">Dia</span>
+                      <p className="text-sm font-semibold text-neutral-900">Quartas-feiras</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
+                      <p className="text-sm text-neutral-900">07:30</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
+                      <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
+                    </div>
+                  </div>
                 </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Exercícios terapêuticos e alongamentos
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Relaxamento e mindfulness
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Orientações sobre qualidade de vida
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-success font-bold text-xl">✓</span>
-                <div className="text-neutral-700">
-                  Apoio emocional e troca de experiências
-                </div>
-              </li>
-            </ul>
-          </InfoBox>
-          <InfoBox
-            title="Dias e Horários"
-            icon={<Calendar size={24} />}
-            highlight={true}
-          >
-            {/* Versão Desktop */}
-            <div className="hidden md:block overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="bg-neutral-100">
-                    <th className="border border-neutral-300 px-4 py-3 text-left font-semibold">
-                      Dia
-                    </th>
-                    <th className="border border-neutral-300 px-4 py-3 text-left font-semibold">
-                      Horário
-                    </th>
-                    <th className="border border-neutral-300 px-4 py-3 text-left font-semibold">
-                      Local
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-neutral-300 px-4 py-3">
-                      <strong>Quintas-feiras (quinzenal)</strong>
-                    </td>
-                    <td className="border border-neutral-300 px-4 py-3">
-                      08:00
-                    </td>
-                    <td className="border border-neutral-300 px-4 py-3">
-                      Sala de Grupos - ESF Catalão
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              </div>
+              <p className="mt-3 text-neutral-600 italic text-xs">
+                * Confirme os dias e horários na recepção, pois podem sofrer
+                alterações.
+              </p>
             </div>
 
-            {/* Versão Mobile */}
-            <div className="md:hidden space-y-3">
-              <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
-                <div className="space-y-2">
-                  <div>
-                    <span className="text-xs font-semibold text-neutral-500 uppercase">Dia</span>
-                    <p className="text-sm font-semibold text-neutral-900">Quintas-feiras (quinzenal)</p>
-                  </div>
-                  <div>
-                    <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
-                    <p className="text-sm text-neutral-900">08:00</p>
-                  </div>
-                  <div>
-                    <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
-                    <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
-                  </div>
+            {/* Como participar */}
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 shadow-sm border border-green-200">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Users size={16} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-sm text-neutral-800 leading-relaxed">
+                    <strong className="text-green-900">Como participar:</strong> Procure sua equipe de saúde ou
+                    passe na recepção para se inscrever. A participação é gratuita e
+                    aberta a todos os usuários da unidade.
+                  </p>
                 </div>
               </div>
             </div>
 
-            <p className="mt-4 text-neutral-600 italic text-sm">
-              * Confirme os dias e horários na recepção, pois podem sofrer
-              alterações.
-            </p>
-          </InfoBox>
-          <Alert type="success">
-            <div className="flex items-start gap-3">
-              <Users
-                size={20}
-                className="text-success flex-shrink-0 mt-0.5"
-              />
-              <div>
-                <strong>Como participar:</strong> Procure sua equipe de saúde ou
-                passe na recepção para se inscrever. Traga roupas confortáveis
-                para os exercícios.
+            {/* Link */}
+            <div className="mt-4">
+              <Link
+                to="/grupos/hiperdia"
+                className="inline-block px-4 sm:px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-semibold text-sm"
+              >
+                Saiba mais sobre o Grupo Hiperdia
+              </Link>
+            </div>
+          </div>
+        </div>
+        {/* Grupo de Fibromialgia */}
+        <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Dumbbell size={24} className="sm:w-7 sm:h-7 text-white" />
+              </div>
+              <h3 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+                Grupo de Fibromialgia
+              </h3>
+            </div>
+          </div>
+          <div className="p-4 sm:p-6 space-y-4">
+            {/* Como funciona */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <ClipboardList size={20} className="text-blue-600" />
+                <h4 className="font-semibold text-neutral-900 text-base">Como funciona</h4>
+              </div>
+              <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
+                Espaço de acolhimento para pessoas que convivem com fibromialgia.
+                Nossos encontros incluem:
+              </p>
+              <ul className="space-y-2">
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Técnicas de manejo da dor crônica
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Exercícios terapêuticos e alongamentos
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Relaxamento e mindfulness
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Orientações sobre qualidade de vida
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
+                  <div className="text-neutral-700 text-sm">
+                    Apoio emocional e troca de experiências
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* Dias e Horários */}
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 shadow-sm border border-blue-200">
+              <div className="flex items-center gap-2 mb-3">
+                <Calendar size={20} className="text-blue-900" />
+                <h4 className="font-bold text-blue-900 text-base">Dias e Horários</h4>
+              </div>
+
+              {/* Versão Desktop */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-neutral-100">
+                      <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-sm">
+                        Dia
+                      </th>
+                      <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-sm">
+                        Horário
+                      </th>
+                      <th className="border border-neutral-300 px-4 py-3 text-left font-semibold text-sm">
+                        Local
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-neutral-300 px-4 py-3 text-sm">
+                        <strong>Quintas-feiras (quinzenal)</strong>
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-3 text-sm">
+                        08:00
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-3 text-sm">
+                        Sala de Grupos - ESF Catalão
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Versão Mobile */}
+              <div className="md:hidden space-y-3">
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+                  <div className="space-y-2">
+                    <div>
+                      <span className="text-xs font-semibold text-neutral-500 uppercase">Dia</span>
+                      <p className="text-sm font-semibold text-neutral-900">Quintas-feiras (quinzenal)</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
+                      <p className="text-sm text-neutral-900">08:00</p>
+                    </div>
+                    <div>
+                      <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
+                      <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-3 text-neutral-600 italic text-xs">
+                * Confirme os dias e horários na recepção, pois podem sofrer
+                alterações.
+              </p>
+            </div>
+
+            {/* Como participar */}
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 shadow-sm border border-green-200">
+              <div className="flex items-start gap-3">
+                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Users size={16} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-sm text-neutral-800 leading-relaxed">
+                    <strong className="text-green-900">Como participar:</strong> Procure sua equipe de saúde ou
+                    passe na recepção para se inscrever. Traga roupas confortáveis
+                    para os exercícios.
+                  </p>
+                </div>
               </div>
             </div>
-          </Alert>
-          <div className="mt-4">
-            <Link
-              to="/grupos/dores-cronicas"
-              className="inline-block px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-semibold"
-            >
-              Saiba mais sobre o Grupo de Dores Crônicas
-            </Link>
+
+            {/* Link */}
+            <div className="mt-4">
+              <Link
+                to="/grupos/dores-cronicas"
+                className="inline-block px-4 sm:px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-semibold text-sm"
+              >
+                Saiba mais sobre o Grupo de Dores Crônicas
+              </Link>
+            </div>
           </div>
         </div>
         {}

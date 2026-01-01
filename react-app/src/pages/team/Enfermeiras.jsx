@@ -203,7 +203,7 @@ export default function Enfermeiras() {
         {}
         {/* Card Assistência de Enfermagem */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
-          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div>
               <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
                 Assistência de Enfermagem na Atenção Primária
@@ -226,7 +226,7 @@ export default function Enfermeiras() {
             </div>
 
             {/* Descrição */}
-            <p className="text-neutral-700 leading-relaxed mb-5">
+            <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
               A assistência de enfermagem na Atenção Primária à Saúde constitui-se
               como um componente essencial do Sistema Único de Saúde (SUS),
               fundamentada na Sistematização da Assistência de Enfermagem (SAE) e

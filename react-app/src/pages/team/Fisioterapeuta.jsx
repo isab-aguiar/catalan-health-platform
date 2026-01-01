@@ -97,7 +97,7 @@ export default function Fisioterapeuta() {
         {}
         {/* Card Fisioterapia */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
-          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div>
               <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
                 Fisioterapia na Atenção Primária
@@ -120,7 +120,7 @@ export default function Fisioterapeuta() {
             </div>
 
             {/* Descrição */}
-            <p className="text-neutral-700 leading-relaxed mb-5">
+            <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
               A fisioterapia na Atenção Primária à Saúde desempenha um papel fundamental na promoção da saúde, prevenção de agravos e reabilitação funcional dos usuários. Através de técnicas especializadas e acompanhamento individualizado, o fisioterapeuta trabalha para restaurar, desenvolver e conservar a capacidade física e funcional do paciente, contribuindo para maior autonomia, qualidade de vida e inclusão social. O atendimento contempla todas as faixas etárias, com foco em tratamentos não medicamentosos para dor, recuperação de movimentos e fortalecimento muscular.
             </p>
 
@@ -131,14 +131,14 @@ export default function Fisioterapeuta() {
                 href="https://www.mg.gov.br/servico/solicitar-atendimento-ambulatorial-para-reabilitacao-fisica"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
+                className="bg-blue-50 rounded-lg p-4 sm:p-5 border border-blue-100 hover:shadow-md transition-shadow cursor-pointer block"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <ExternalLink size={24} className="text-white" />
+                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <ExternalLink size={20} className="text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-neutral-900 mb-3 text-lg sm:text-xl">
+                    <h3 className="font-bold text-neutral-900 mb-2 text-base">
                       Saiba Mais
                     </h3>
                     <p className="text-sm text-neutral-600 mb-2">
@@ -351,12 +351,14 @@ export default function Fisioterapeuta() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
-          <div className="flex items-start gap-3">
-            <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
             <div>
-              <p className="font-semibold mb-1">Orientação Importante</p>
-              <p className="text-sm text-white/90">
+              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
+              <p className="text-sm text-white/95 leading-relaxed">
                 Antes de se dirigir à sala de consulta da fisioterapeuta
                 responsável, é necessário passar pela recepção da unidade para
                 realização da ficha de atendimento. Esta medida é essencial para

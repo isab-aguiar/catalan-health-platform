@@ -360,12 +360,14 @@ export default function Farmaceutica() {
           </div>
         </div>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-md p-5 shadow-sm mt-6">
-          <div className="flex items-start gap-3">
-            <AlertCircle size={22} className="flex-shrink-0 mt-0.5" />
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={24} className="text-white" />
+            </div>
             <div>
-              <p className="font-semibold mb-1">Orientação Importante</p>
-              <p className="text-sm text-white/90">
+              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
+              <p className="text-sm text-white/95 leading-relaxed">
                 Antes de se dirigir à sala de consulta da farmacêutica
                 responsável, é necessário passar pela recepção da unidade para
                 realização da ficha de atendimento. Esta medida é essencial para

@@ -185,7 +185,7 @@ export default function EscalaFirestore({
   };
 
   return (
-    <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-5">
+    <div className="bg-white border border-neutral-200 rounded-lg shadow-md p-4 sm:p-5">
       <h3 className="font-semibold text-neutral-800 mb-4 pb-3 border-b border-neutral-300 text-sm flex items-center gap-2">
         <Calendar className="w-5 h-5 text-blue-600" />
         {titulo}

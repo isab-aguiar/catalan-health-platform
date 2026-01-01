@@ -80,20 +80,21 @@ export default function Consultas() {
 
   return (
     <PageContainer>
-      <div className="max-w-6xl mx-auto space-y-8">
+      <div className="max-w-6xl mx-auto">
         <BackButton />
 
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
             Consultas e Atendimentos
           </h1>
-          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
+          <p className="text-primary-100 text-sm sm:text-base">
             Conheça todos os tipos de consultas e atendimentos especializados
             disponíveis na unidade. Agende sua consulta e cuide da sua saúde!
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6">
           {consultaTypes.map((consulta) => (
             <Card
               key={consulta.id}
@@ -106,44 +107,53 @@ export default function Consultas() {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-primary-50 to-primary-100 border border-primary-200 rounded-lg p-6 mt-12">
-          <h2 className="text-xl font-bold text-neutral-900 mb-3">
-            Como Agendar sua Consulta
-          </h2>
-          <div className="space-y-2 text-sm text-neutral-700">
-            <p className="flex items-start gap-2">
-              <span className="text-primary-600 font-bold">1.</span>
-              <span>
-                Dirija-se à{" "}
-                <Link
-                  to="/servicos/sala-4"
-                  className="text-primary-600 hover:text-primary-700 font-semibold underline"
-                >
-                  Sala de Agendamento (Sala 4)
-                </Link>{" "}
-                com sua documentação
-              </span>
-            </p>
-            <p className="flex items-start gap-2">
-              <span className="text-primary-600 font-bold">2.</span>
-              <span>
-                Informe o tipo de consulta que você precisa e sua preferência
-                de horário
-              </span>
-            </p>
-            <p className="flex items-start gap-2">
-              <span className="text-primary-600 font-bold">3.</span>
-              <span>
-                Aguarde a confirmação do agendamento e anote a data e horário
-              </span>
-            </p>
-            <p className="flex items-start gap-2">
-              <span className="text-primary-600 font-bold">4.</span>
-              <span>
-                Compareça no dia e horário marcados com toda a documentação
-                necessária
-              </span>
-            </p>
+        {/* Como Agendar */}
+        <div className="bg-white border border-neutral-200 rounded-lg shadow-md overflow-hidden">
+          <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
+            <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
+              Como Agendar sua Consulta
+            </h2>
+          </div>
+
+          <div className="p-4 sm:p-6">
+            <div className="space-y-3 text-sm">
+              <div className="flex items-start gap-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-3">
+                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">1</div>
+                <p className="text-neutral-700">
+                  Dirija-se à{" "}
+                  <Link
+                    to="/servicos/sala-4"
+                    className="text-blue-700 hover:text-blue-900 font-semibold underline"
+                  >
+                    Sala de Agendamento (Sala 4)
+                  </Link>{" "}
+                  com sua documentação
+                </p>
+              </div>
+
+              <div className="flex items-start gap-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-3">
+                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">2</div>
+                <p className="text-neutral-700">
+                  Informe o tipo de consulta que você precisa e sua preferência
+                  de horário
+                </p>
+              </div>
+
+              <div className="flex items-start gap-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-3">
+                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">3</div>
+                <p className="text-neutral-700">
+                  Aguarde a confirmação do agendamento e anote a data e horário
+                </p>
+              </div>
+
+              <div className="flex items-start gap-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-3">
+                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">4</div>
+                <p className="text-neutral-700">
+                  Compareça no dia e horário marcados com toda a documentação
+                  necessária
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

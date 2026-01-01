@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PageContainer } from "../../components/layout";
-import { BackButton, LoadingSpinner } from "../../components/common";
+import PageContainer from "../../components/layout/PageContainer";
+import BackButton from "../../components/common/BackButton";
 import { useFeedbacks } from "../../hooks/useFeedbacks";
 import { useModal } from "../../contexts/ModalContext";
 import { Smile, Send } from "lucide-react";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 export default function Elogios() {
   const navigate = useNavigate();
@@ -132,26 +133,44 @@ export default function Elogios() {
 
   return (
     <PageContainer>
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="max-w-3xl mx-auto">
         <BackButton />
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-              <Smile size={32} className="text-green-600" />
+
+        {/* Header */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Smile size={28} className="text-white" />
             </div>
+            <h1 className="text-2xl sm:text-3xl font-bold text-white">
+              Enviar Elogio
+            </h1>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-3">
-            Enviar Elogio
-          </h1>
-          <p className="text-lg text-neutral-600">
-            Compartilhe experiências positivas e reconheça o trabalho da nossa
-            equipe. Seu feedback é muito importante!
+          <p className="text-primary-100 text-sm sm:text-base">
+            Compartilhe experiências positivas e reconheça o trabalho da nossa equipe.
+            Seu feedback é muito importante!
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 md:p-8 space-y-6">
+        {/* Aviso Importante */}
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-5 shadow-sm mb-6">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Smile size={20} className="text-white" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-bold text-blue-900 mb-2 text-base">Importante</h3>
+              <p className="text-neutral-800 text-sm leading-relaxed">
+                Todos os elogios são analisados pela equipe administrativa.
+                Seu feedback positivo motiva e valoriza o trabalho de toda a equipe.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md border border-neutral-200 p-4 sm:p-6 md:p-8 space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-neutral-900 mb-2">
+            <label className="block text-sm font-semibold text-neutral-800 mb-2">
               Nome <span className="text-error">*</span>
             </label>
             <input
@@ -160,18 +179,18 @@ export default function Elogios() {
               value={formData.nome}
               onChange={handleChange}
               disabled={formData.anonimo}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+              className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                 errors.nome ? "border-error" : "border-neutral-300"
               } ${formData.anonimo ? "bg-neutral-100" : ""}`}
               placeholder="Seu nome completo"
             />
             {errors.nome && (
-              <p className="mt-1 text-sm text-error">{errors.nome}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">{errors.nome}</p>
             )}
           </div>
 
-          <div>
-            <label className="flex items-center gap-2 mb-2">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 name="anonimo"
@@ -179,14 +198,14 @@ export default function Elogios() {
                 onChange={handleChange}
                 className="w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
               />
-              <span className="text-sm font-semibold text-neutral-900">
+              <span className="text-sm font-medium text-blue-900">
                 Enviar anonimamente
               </span>
             </label>
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-neutral-900 mb-2">
+            <label className="block text-sm font-semibold text-neutral-800 mb-2">
               Email
             </label>
             <input
@@ -194,18 +213,18 @@ export default function Elogios() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+              className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                 errors.email ? "border-error" : "border-neutral-300"
               }`}
               placeholder="seu@email.com"
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-error">{errors.email}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">{errors.email}</p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-neutral-900 mb-2">
+            <label className="block text-sm font-semibold text-neutral-800 mb-2">
               Telefone
             </label>
             <input
@@ -213,18 +232,18 @@ export default function Elogios() {
               name="telefone"
               value={formData.telefone}
               onChange={handleChange}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+              className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                 errors.telefone ? "border-error" : "border-neutral-300"
               }`}
               placeholder="(37) 99999-9999"
             />
             {errors.telefone && (
-              <p className="mt-1 text-sm text-error">{errors.telefone}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">{errors.telefone}</p>
             )}
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-neutral-900 mb-2">
+            <label className="block text-sm font-semibold text-neutral-800 mb-2">
               Mensagem <span className="text-error">*</span>
             </label>
             <textarea
@@ -232,13 +251,13 @@ export default function Elogios() {
               value={formData.mensagem}
               onChange={handleChange}
               rows={6}
-              className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none ${
+              className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none ${
                 errors.mensagem ? "border-error" : "border-neutral-300"
               }`}
               placeholder="Compartilhe seu elogio aqui..."
             />
             {errors.mensagem && (
-              <p className="mt-1 text-sm text-error">{errors.mensagem}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">{errors.mensagem}</p>
             )}
             <p className="mt-1 text-xs text-neutral-500">
               Mínimo de 10 caracteres
@@ -248,7 +267,7 @@ export default function Elogios() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-md text-sm sm:text-base"
           >
             {loading ? (
               <>
