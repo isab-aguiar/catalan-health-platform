@@ -354,19 +354,19 @@ export default function AssistenteSocial() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-              <AlertCircle size={24} className="text-white" />
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-6 shadow-md mt-6">
+          <div className="flex items-start gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
-              <p className="text-sm text-white/95 leading-relaxed mb-3">
+            <div className="flex-1 min-w-0">
+              <p className="font-bold mb-2 text-base sm:text-lg">Orientação Importante</p>
+              <p className="text-xs sm:text-sm text-white/95 leading-relaxed mb-3 break-words">
                 <strong>Atendimento sigiloso:</strong> Todos os atendimentos do
                 Serviço Social são confidenciais. Suas informações pessoais são
                 protegidas pelo sigilo profissional.
               </p>
-              <p className="text-sm text-white/95 leading-relaxed">
+              <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
                 <strong>Você não está sozinho:</strong> O Serviço Social está aqui
                 para ajudar você a enfrentar dificuldades e garantir seus
                 direitos. Não hesite em procurar apoio quando precisar!

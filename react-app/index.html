@@ -34,21 +34,49 @@
         <div class="vw-plugin-top-wrapper"></div>
       </div>
     </div>
-    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
     <script>
-      new window.VLibras.Widget('https://vlibras.gov.br/app');
+      // Função para inicializar VLibras com tratamento de erro
+      function initVLibras() {
+        try {
+          if (window.VLibras && window.VLibras.Widget) {
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+
+            // Forçar posicionamento após inicialização
+            setTimeout(function() {
+              var vwDiv = document.querySelector('div[vw].enabled');
+              if (vwDiv) {
+                vwDiv.style.right = '5px';
+                vwDiv.style.left = 'auto';
+              }
+            }, 500);
+          } else {
+            // Tentar novamente após um tempo
+            setTimeout(initVLibras, 100);
+          }
+        } catch (error) {
+          console.warn('VLibras não pôde ser carregado:', error.message);
+        }
+      }
     </script>
+    <script
+      src="https://vlibras.gov.br/app/vlibras-plugin.js"
+      onload="initVLibras()"
+      onerror="console.warn('Erro ao carregar script VLibras')"
+    ></script>
 
     <style>
       div[vw].enabled {
         position: fixed !important;
-        bottom: 20px !important;
-        right: 20px !important;
+        bottom: 160px !important;
+        right: 10px !important;
+        left: auto !important;
         z-index: 9999 !important;
         opacity: 0.9 !important;
         pointer-events: none !important;
         width: auto !important;
         height: auto !important;
+        transform: scale(0.8) !important;
+        transform-origin: bottom right !important;
       }
 
       [vw-access-button] {
@@ -56,10 +84,16 @@
         cursor: pointer !important;
         width: auto !important;
         height: auto !important;
+        position: relative !important;
+        right: 0 !important;
+        left: auto !important;
       }
 
       [vw-plugin-wrapper] {
         pointer-events: auto !important;
+        position: relative !important;
+        right: 0 !important;
+        left: auto !important;
       }
 
       [vw-plugin-wrapper] * {
@@ -68,8 +102,10 @@
 
       @media (max-width: 768px) {
         div[vw].enabled {
-          bottom: 15px !important;
-          right: 15px !important;
+          bottom: 130px !important;
+          right: 8px !important;
+          left: auto !important;
+          transform: scale(0.7) !important;
         }
       }
     </style>

@@ -274,52 +274,52 @@ export default function Dentistas() {
         </div>
         {}
         <InfoBox title="Como ter acesso?">
-          <p className="text-neutral-700 leading-relaxed mb-5">
+          <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed mb-4">
             Para ter acesso ao atendimento odontológico, o agendamento é realizado exclusivamente de forma presencial. Confira abaixo as informações sobre agendamento e localização:
           </p>
 
           {/* Formas de Agendamento */}
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-5 mb-5">
-            <h3 className="font-semibold text-blue-900 text-base mb-4">Agendamento e Informações</h3>
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-3 sm:p-5 mb-4 sm:mb-5">
+            <h3 className="font-semibold text-blue-900 text-sm sm:text-base mb-3 sm:mb-4">Agendamento e Informações</h3>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {/* Agendamento Presencial */}
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-sm">18</span>
+              <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold text-xs sm:text-sm">18</span>
                   </div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm block mb-2">Agendamento Presencial</strong>
-                    <p className="text-xs text-neutral-600 mb-2">
+                  <div className="flex-1 min-w-0">
+                    <strong className="text-neutral-800 text-xs sm:text-sm block mb-1.5 sm:mb-2">Agendamento Presencial</strong>
+                    <p className="text-xs text-neutral-600 mb-1.5 sm:mb-2 break-words">
                       O agendamento é realizado <strong>exclusivamente de forma presencial</strong> nos Consultórios Odontológicos 18 e 19, localizados no <strong>2º andar</strong> da unidade de saúde.
                     </p>
-                    <p className="text-xs text-neutral-700 font-semibold">
-                      Horário de atendimento para agendamentos e informações: <strong>10h às 16h</strong>
+                    <p className="text-xs text-neutral-700 font-semibold break-words">
+                      Horário de atendimento para agendamentos e informações: <strong className="whitespace-nowrap">10h às 16h</strong>
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Informações por Telefone */}
-              <div className="bg-white rounded-lg p-4 shadow-sm">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone size={20} className="text-white" />
+              <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone size={16} className="text-white sm:w-5 sm:h-5" />
                   </div>
-                  <div className="flex-1">
-                    <strong className="text-neutral-800 text-sm block mb-2">Informações por Telefone</strong>
-                    <p className="text-xs text-neutral-600 mb-3">
+                  <div className="flex-1 min-w-0">
+                    <strong className="text-neutral-800 text-xs sm:text-sm block mb-1.5 sm:mb-2">Informações por Telefone</strong>
+                    <p className="text-xs text-neutral-600 mb-2 sm:mb-3 break-words">
                       Para esclarecimento de dúvidas, você pode entrar em contato por telefone.
                     </p>
-                    <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 shadow-sm border border-green-200">
-                      <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                          <AlertCircle size={18} className="text-white" />
+                    <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-3 sm:p-4 shadow-sm border border-green-200">
+                      <div className="flex items-start gap-2 sm:gap-3">
+                        <div className="w-7 h-7 sm:w-8 sm:h-8 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <AlertCircle size={14} className="text-white sm:w-[18px] sm:h-[18px]" />
                         </div>
-                        <div className="flex-1">
-                          <h4 className="font-bold text-green-900 mb-1 text-sm">Importante</h4>
-                          <p className="text-neutral-800 text-xs leading-relaxed">
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-bold text-green-900 mb-1 text-xs sm:text-sm">Importante</h4>
+                          <p className="text-neutral-800 text-xs leading-relaxed break-words">
                             O agendamento é realizado apenas presencialmente.
                           </p>
                         </div>
@@ -327,10 +327,10 @@ export default function Dentistas() {
                     </div>
                     <a
                       href={`tel:${contactInfo.phones.reception.tel}`}
-                      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-3 py-1.5 rounded-md transition-colors text-xs mt-4"
+                      className="inline-flex items-center gap-1.5 sm:gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-2.5 sm:px-3 py-1.5 rounded-md transition-colors text-xs mt-3 sm:mt-4"
                     >
-                      <Phone size={14} />
-                      {contactInfo.phones.reception.display}
+                      <Phone size={12} className="sm:w-[14px] sm:h-[14px]" />
+                      <span className="whitespace-nowrap">{contactInfo.phones.reception.display}</span>
                     </a>
                   </div>
                 </div>
@@ -339,24 +339,24 @@ export default function Dentistas() {
           </div>
 
           {/* Atendimento de Urgência */}
-          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200 mb-5">
-            <h3 className="font-bold text-green-900 text-base mb-3">Atendimento de Urgência</h3>
-            <p className="text-neutral-800 text-sm leading-relaxed">
-              <strong>Demandas de urgência odontológica</strong> (dor intensa, trauma, infecção) são atendidas <strong>diariamente às 07h00</strong>. Compareça no horário para avaliação prioritária.
+          <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-3 sm:p-5 shadow-sm border border-green-200 mb-4 sm:mb-5">
+            <h3 className="font-bold text-green-900 text-sm sm:text-base mb-2 sm:mb-3">Atendimento de Urgência</h3>
+            <p className="text-neutral-800 text-xs sm:text-sm leading-relaxed break-words">
+              <strong>Demandas de urgência odontológica</strong> (dor intensa, trauma, infecção) são atendidas <strong className="whitespace-nowrap">diariamente às 07h00</strong>. Compareça no horário para avaliação prioritária.
             </p>
           </div>
 
           {/* Documentação */}
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 shadow-sm border border-blue-200">
-            <h3 className="font-bold text-blue-900 text-base mb-4">Documentação Necessária</h3>
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-3 sm:p-5 shadow-sm border border-blue-200">
+            <h3 className="font-bold text-blue-900 text-sm sm:text-base mb-3 sm:mb-4">Documentação Necessária</h3>
             <div className="space-y-3">
-              <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
+              <div className="flex items-start gap-2 sm:gap-3 bg-white/70 rounded-lg p-3 sm:p-4 border border-blue-100">
                 <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                <div>
-                  <strong className="text-neutral-800 text-sm block mb-1">
+                <div className="flex-1 min-w-0">
+                  <strong className="text-neutral-800 text-xs sm:text-sm block mb-1 break-words">
                     Documento de Identificação com Foto
                   </strong>
-                  <p className="text-xs text-neutral-600">
+                  <p className="text-xs text-neutral-600 break-words">
                     RG, CNH ou Carteira de Trabalho do titular
                   </p>
                 </div>
@@ -370,14 +370,14 @@ export default function Dentistas() {
           titulo="Profissionais e Horários de Atendimento"
         />
         {/* Orientação Importante */}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-              <AlertCircle size={24} className="text-white" />
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-6 shadow-md mt-6">
+          <div className="flex items-start gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <p className="font-bold mb-2 text-lg">Orientações Importantes</p>
-              <p className="text-sm text-white/95 leading-relaxed">
+            <div className="flex-1 min-w-0">
+              <p className="font-bold mb-2 text-base sm:text-lg">Orientações Importantes</p>
+              <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
                 <strong>Saúde Bucal Preventiva:</strong> Mantenha uma rotina de higiene bucal adequada! Escove os dentes pelo menos três vezes ao dia, utilize fio dental diariamente e realize visitas regulares ao dentista. A prevenção é a melhor estratégia para manter sua saúde bucal em dia.
               </p>
             </div>

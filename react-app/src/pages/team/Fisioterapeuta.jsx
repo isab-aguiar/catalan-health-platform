@@ -191,32 +191,34 @@ export default function Fisioterapeuta() {
           </div>
         </InfoBox>
         {}
-        <InfoBox title="Acesso ao Serviço">
+        <InfoBox title="Acesso ao Serviço" className="mb-8">
           <div className="space-y-4">
-            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            {/* Passo 1 */}
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 1
               </div>
-              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
-                <strong className="text-neutral-900 text-base block mb-2">
+              <div className="flex-1 min-w-0 bg-gradient-to-r from-purple-50 to-transparent p-3 sm:p-4 rounded-lg border-l-4 border-purple-500">
+                <strong className="text-neutral-900 text-sm sm:text-base block mb-2">
                   Consulta Médica e Encaminhamento
                 </strong>
-                <p className="text-sm text-neutral-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
                   Solicite avaliação e encaminhamento para fisioterapia ao seu
                   médico
                 </p>
               </div>
             </div>
 
-            <div className="relative pl-12 pb-8 border-l-2 border-emerald-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            {/* Passo 2 */}
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 2
               </div>
-              <div className="bg-gradient-to-r from-emerald-50 to-transparent p-4 rounded-r-lg">
-                <strong className="text-neutral-900 text-base block mb-2">
+              <div className="flex-1 min-w-0 bg-gradient-to-r from-emerald-50 to-transparent p-3 sm:p-4 rounded-lg border-l-4 border-emerald-500">
+                <strong className="text-neutral-900 text-sm sm:text-base block mb-2">
                   Agendamento na Central de Marcação
                 </strong>
-                <p className="text-sm text-neutral-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
                   Dirija-se à{" "}
                   <Link
                     to="/servicos/sala-4"
@@ -236,30 +238,32 @@ export default function Fisioterapeuta() {
               </div>
             </div>
 
-            <div className="relative pl-12 pb-8 border-l-2 border-blue-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            {/* Passo 3 */}
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 3
               </div>
-              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
-                <strong className="text-neutral-900 text-base block mb-2">
+              <div className="flex-1 min-w-0 bg-gradient-to-r from-blue-50 to-transparent p-3 sm:p-4 rounded-lg border-l-4 border-blue-500">
+                <strong className="text-neutral-900 text-sm sm:text-base block mb-2">
                   Avaliação Inicial
                 </strong>
-                <p className="text-sm text-neutral-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
                   A fisioterapeuta realizará a primeira avaliação e definirá o
                   plano de tratamento
                 </p>
               </div>
             </div>
 
-            <div className="relative pl-12">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            {/* Passo 4 */}
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 4
               </div>
-              <div className="bg-gradient-to-r from-pink-50 to-transparent p-4 rounded-r-lg">
-                <strong className="text-neutral-900 text-base block mb-2">
+              <div className="flex-1 min-w-0 bg-gradient-to-r from-pink-50 to-transparent p-3 sm:p-4 rounded-lg border-l-4 border-pink-500">
+                <strong className="text-neutral-900 text-sm sm:text-base block mb-2">
                   Comparecimento às Sessões
                 </strong>
-                <p className="text-sm text-neutral-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
                   Compareça às sessões conforme agendado, seguindo o plano de
                   tratamento estabelecido
                 </p>
@@ -351,14 +355,14 @@ export default function Fisioterapeuta() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
-              <AlertCircle size={24} className="text-white" />
+        <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-6 shadow-md mt-6">
+          <div className="flex items-start gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+              <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
-            <div>
-              <p className="font-bold mb-2 text-lg">Orientação Importante</p>
-              <p className="text-sm text-white/95 leading-relaxed">
+            <div className="flex-1 min-w-0">
+              <p className="font-bold mb-2 text-base sm:text-lg">Orientação Importante</p>
+              <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
                 Antes de se dirigir à sala de consulta da fisioterapeuta
                 responsável, é necessário passar pela recepção da unidade para
                 realização da ficha de atendimento. Esta medida é essencial para
