@@ -142,3 +142,37 @@
     word-break: break-word;
   }
 }
+
+/* VLibras - Garantir funcionamento em toda a aplicação */
+div[vw],
+div[vw].enabled {
+  position: fixed !important;
+  z-index: 9999999 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+[vw-access-button],
+[vw-access-button].active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+[vw-plugin-wrapper],
+[vw-plugin-wrapper] * {
+  pointer-events: auto !important;
+}
+
+/* Garantir que VLibras não seja afetado pelo touch-action global */
+div[vw] *,
+[vw-access-button],
+[vw-plugin-wrapper] * {
+  touch-action: auto !important;
+}

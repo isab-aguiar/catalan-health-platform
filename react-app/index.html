@@ -28,85 +28,237 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
+    <!-- VLibras Widget Container -->
     <div vw class="enabled">
       <div vw-access-button class="active"></div>
       <div vw-plugin-wrapper>
         <div class="vw-plugin-top-wrapper"></div>
       </div>
     </div>
+
     <script>
-      // Função para inicializar VLibras com tratamento de erro
+      // Variável para controle de tentativas
+      var vlibrasRetries = 0;
+      var maxVlibrasRetries = 10;
+      var vlibrasInitialized = false;
+
+      // Função para inicializar VLibras com tratamento de erro robusto
       function initVLibras() {
+        if (vlibrasInitialized) return;
+        
         try {
           if (window.VLibras && window.VLibras.Widget) {
             new window.VLibras.Widget('https://vlibras.gov.br/app');
+            vlibrasInitialized = true;
+            console.log('VLibras inicializado com sucesso');
 
-            // Forçar posicionamento após inicialização
+            // Forçar posicionamento e visibilidade após inicialização
             setTimeout(function() {
-              var vwDiv = document.querySelector('div[vw].enabled');
-              if (vwDiv) {
-                vwDiv.style.right = '5px';
-                vwDiv.style.left = 'auto';
-              }
-            }, 500);
+              fixVLibrasPosition();
+            }, 1000);
+
+            // Verificar novamente após mais tempo (para garantir em dispositivos lentos)
+            setTimeout(function() {
+              fixVLibrasPosition();
+            }, 3000);
+
+            // Observer para garantir que o widget permaneça visível
+            observeVLibras();
+          } else if (vlibrasRetries < maxVlibrasRetries) {
+            vlibrasRetries++;
+            console.log('VLibras não disponível, tentativa ' + vlibrasRetries + '/' + maxVlibrasRetries);
+            setTimeout(initVLibras, 500);
           } else {
-            // Tentar novamente após um tempo
-            setTimeout(initVLibras, 100);
+            console.warn('VLibras: número máximo de tentativas atingido');
           }
         } catch (error) {
           console.warn('VLibras não pôde ser carregado:', error.message);
+          if (vlibrasRetries < maxVlibrasRetries) {
+            vlibrasRetries++;
+            setTimeout(initVLibras, 500);
+          }
         }
       }
+
+      // Função para corrigir posição do VLibras
+      function fixVLibrasPosition() {
+        var vwDiv = document.querySelector('div[vw]');
+        var accessButton = document.querySelector('[vw-access-button]');
+        var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
+
+        if (vwDiv) {
+          vwDiv.classList.add('enabled');
+          vwDiv.style.cssText = 'position: fixed !important; bottom: 100px !important; right: 10px !important; left: auto !important; z-index: 9999999 !important; display: block !important; visibility: visible !important; opacity: 1 !important;';
+        }
+
+        if (accessButton) {
+          accessButton.classList.add('active');
+          accessButton.style.cssText = 'display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; cursor: pointer !important;';
+        }
+
+        if (pluginWrapper) {
+          pluginWrapper.style.cssText = 'pointer-events: auto !important;';
+        }
+
+        // Corrigir para mobile
+        if (window.innerWidth <= 768) {
+          if (vwDiv) {
+            vwDiv.style.bottom = '80px';
+            vwDiv.style.right = '5px';
+            vwDiv.style.transform = 'scale(0.85)';
+            vwDiv.style.transformOrigin = 'bottom right';
+          }
+        }
+      }
+
+      // Observer para manter VLibras visível
+      function observeVLibras() {
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' || mutation.type === 'childList') {
+              var vwDiv = document.querySelector('div[vw]');
+              if (vwDiv && (vwDiv.style.display === 'none' || vwDiv.style.visibility === 'hidden')) {
+                fixVLibrasPosition();
+              }
+            }
+          });
+        });
+
+        var vwDiv = document.querySelector('div[vw]');
+        if (vwDiv) {
+          observer.observe(vwDiv, { attributes: true, childList: true, subtree: true });
+        }
+      }
+
+      // Reinicializar VLibras quando a janela for redimensionada
+      var resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          fixVLibrasPosition();
+        }, 250);
+      });
+
+      // Garantir que VLibras funcione após navegação SPA
+      window.addEventListener('popstate', function() {
+        setTimeout(fixVLibrasPosition, 500);
+      });
     </script>
+
     <script
       src="https://vlibras.gov.br/app/vlibras-plugin.js"
       onload="initVLibras()"
-      onerror="console.warn('Erro ao carregar script VLibras')"
+      onerror="console.warn('Erro ao carregar script VLibras - tentando novamente'); setTimeout(function() { var s = document.createElement('script'); s.src = 'https://vlibras.gov.br/app/vlibras-plugin.js'; s.onload = initVLibras; document.body.appendChild(s); }, 2000);"
+      async
     ></script>
 
     <style>
-      div[vw].enabled {
+      /* VLibras - Estilos base */
+      div[vw] {
         position: fixed !important;
-        bottom: 160px !important;
+        bottom: 100px !important;
         right: 10px !important;
         left: auto !important;
-        z-index: 9999 !important;
-        opacity: 0.9 !important;
-        pointer-events: none !important;
-        width: auto !important;
-        height: auto !important;
-        transform: scale(0.8) !important;
-        transform-origin: bottom right !important;
+        z-index: 9999999 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+
+      div[vw].enabled {
+        display: block !important;
+        visibility: visible !important;
       }
 
       [vw-access-button] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
         pointer-events: auto !important;
         cursor: pointer !important;
-        width: auto !important;
-        height: auto !important;
         position: relative !important;
-        right: 0 !important;
-        left: auto !important;
+        z-index: 9999999 !important;
+        -webkit-tap-highlight-color: transparent !important;
+        touch-action: manipulation !important;
+      }
+
+      [vw-access-button].active {
+        display: block !important;
+        visibility: visible !important;
       }
 
       [vw-plugin-wrapper] {
         pointer-events: auto !important;
         position: relative !important;
-        right: 0 !important;
-        left: auto !important;
+        z-index: 9999999 !important;
       }
 
       [vw-plugin-wrapper] * {
         pointer-events: auto !important;
       }
 
-      @media (max-width: 768px) {
-        div[vw].enabled {
-          bottom: 130px !important;
-          right: 8px !important;
-          left: auto !important;
-          transform: scale(0.7) !important;
+      /* VLibras - Estilos para o player/tradutor */
+      .vw-plugin-top-wrapper,
+      .vp-box,
+      .vw-plugin-wrapper .vp-box {
+        pointer-events: auto !important;
+        touch-action: auto !important;
+      }
+
+      /* Mobile - Telas pequenas */
+      @media (max-width: 480px) {
+        div[vw] {
+          bottom: 70px !important;
+          right: 5px !important;
+          transform: scale(0.8) !important;
+          transform-origin: bottom right !important;
         }
+
+        [vw-access-button] {
+          min-width: 44px !important;
+          min-height: 44px !important;
+        }
+      }
+
+      /* Mobile - Tablets */
+      @media (min-width: 481px) and (max-width: 768px) {
+        div[vw] {
+          bottom: 85px !important;
+          right: 8px !important;
+          transform: scale(0.9) !important;
+          transform-origin: bottom right !important;
+        }
+      }
+
+      /* Desktop */
+      @media (min-width: 769px) {
+        div[vw] {
+          bottom: 100px !important;
+          right: 15px !important;
+          transform: scale(1) !important;
+        }
+      }
+
+      /* Garantir que não seja coberto por outros elementos */
+      div[vw],
+      div[vw] * {
+        box-sizing: border-box !important;
+      }
+
+      /* Fix para iOS Safari */
+      @supports (-webkit-touch-callout: none) {
+        div[vw] {
+          bottom: 90px !important;
+        }
+
+        [vw-access-button] {
+          -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+        }
+      }
+
+      /* Fix para evitar conflito com footer fixo */
+      div[vw].enabled {
+        margin-bottom: env(safe-area-inset-bottom, 0px) !important;
       }
     </style>
   </body>
