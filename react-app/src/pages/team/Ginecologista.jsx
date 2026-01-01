@@ -208,11 +208,11 @@ export default function Ginecologista() {
         {}
         <InfoBox title="Acesso ao Serviço">
           <div className="space-y-4">
-            <div className="relative pl-12 pb-8 border-l-2 border-blue-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 1
               </div>
-              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Inserção e Retirada de DIU de Cobre
                 </strong>
@@ -229,11 +229,11 @@ export default function Ginecologista() {
               </div>
             </div>
 
-            <div className="relative pl-12 pb-8 border-l-2 border-green-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            <div className="relative pl-12 pb-8 border-l-2 border-emerald-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-emerald-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Consulta com Ginecologista (com encaminhamento)
                 </strong>
@@ -250,11 +250,11 @@ export default function Ginecologista() {
               </div>
             </div>
 
-            <div className="relative pl-12 pb-8 border-l-2 border-green-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            <div className="relative pl-12 pb-8 border-l-2 border-blue-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 3
               </div>
-              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Agendamento de Retorno em Ginecologia (sem novo encaminhamento)
                 </strong>
@@ -272,10 +272,10 @@ export default function Ginecologista() {
             </div>
 
             <div className="relative pl-12">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 4
               </div>
-              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-pink-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Pré-natal
                 </strong>

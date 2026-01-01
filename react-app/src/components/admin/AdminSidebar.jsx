@@ -15,7 +15,6 @@ import {
   ClipboardList,
   Calendar,
   CalendarDays,
-  BellDot,
   MessageSquareHeart,
 } from "lucide-react";
 export default function AdminSidebar({
@@ -87,13 +86,6 @@ export default function AdminSidebar({
       label: "Escalas de Trabalho",
       icon: CalendarDays,
       path: "/admin/escalas",
-      permission: null,
-    },
-    {
-      id: "notificacoes",
-      label: "Notificações",
-      icon: BellDot,
-      path: "/admin/notificacoes",
       permission: null,
     },
     {

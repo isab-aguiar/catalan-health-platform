@@ -200,11 +200,11 @@ export default function Pediatra() {
         {}
         <InfoBox title="Acesso ao Serviço">
           <div className="space-y-4">
-            <div className="relative pl-12 pb-8 border-l-2 border-blue-200">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+            <div className="relative pl-12 pb-8 border-l-2 border-purple-200">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 1
               </div>
-              <div className="bg-gradient-to-r from-blue-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-purple-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Agendamento na Sala de Agendamentos
                 </strong>
@@ -229,10 +229,10 @@ export default function Pediatra() {
             </div>
 
             <div className="relative pl-12">
-              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-green-500 to-green-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
+              <div className="absolute -left-[17px] top-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-md">
                 2
               </div>
-              <div className="bg-gradient-to-r from-green-50 to-transparent p-4 rounded-r-lg">
+              <div className="bg-gradient-to-r from-emerald-50 to-transparent p-4 rounded-r-lg">
                 <strong className="text-neutral-900 text-base block mb-2">
                   Comparecimento à Consulta
                 </strong>
@@ -245,7 +245,7 @@ export default function Pediatra() {
           </div>
         </InfoBox>
         {}
-        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 shadow-sm mb-6 border border-green-200">
+        <div className="bg-white rounded-lg p-6 shadow-sm mb-6 border border-neutral-200">
           <h2 className="text-xl font-bold text-green-900 mb-4">Calendário de Consultas de Puericultura</h2>
 
           <p className="text-neutral-700 text-sm mb-5 leading-relaxed">

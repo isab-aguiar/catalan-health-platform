@@ -308,19 +308,19 @@ export default function Users() {
             <Alert type="error">{error}</Alert>
           </div>
         )}
-        <div className="mb-6 flex justify-between items-center">
+        <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-neutral-900">Usuários</h2>
-            <p className="text-sm text-neutral-600 mt-1">
+            <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">Usuários</h2>
+            <p className="text-xs sm:text-sm text-neutral-600 mt-1">
               Gerencie os usuários do sistema e suas permissões
             </p>
           </div>
           <button
             onClick={handleNovoUsuario}
-            className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium"
+            className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium text-sm w-full sm:w-auto"
           >
-            <Plus className="w-5 h-5" />
-            Novo Usuário
+            <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span>Novo Usuário</span>
           </button>
         </div>
         {users.length === 0 ? (
@@ -348,48 +348,48 @@ export default function Users() {
               return (
                 <div
                   key={user.uid}
-                  className={`bg-white rounded-xl p-6 shadow-sm border ${
+                  className={`bg-white rounded-xl p-4 sm:p-6 shadow-sm border ${
                     !user.active
                       ? "border-red-200 opacity-60"
                       : "border-neutral-200"
                   } hover:shadow-md transition-shadow`}
                 >
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                    <div className="flex items-start gap-4 flex-1">
+                  <div className="flex flex-col gap-3 sm:gap-4">
+                    <div className="flex items-start gap-3 sm:gap-4 flex-1">
                       <div
-                        className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${getRoleColor(user.role)}`}
+                        className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 ${getRoleColor(user.role)}`}
                       >
-                        <RoleIcon className="w-6 h-6" />
+                        <RoleIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                          <h3 className="text-lg font-bold text-neutral-900 truncate">
+                        <div className="flex flex-col gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                          <h3 className="text-base sm:text-lg font-bold text-neutral-900 truncate">
                             {user.displayName || user.email}
                           </h3>
-                          <div className="flex items-center gap-2 flex-wrap">
+                          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                             <span
-                              className={`px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap ${getRoleColor(
+                              className={`px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-semibold whitespace-nowrap ${getRoleColor(
                                 user.role
                               )}`}
                             >
                               {getRoleLabel(user.role)}
                             </span>
                             {!user.active && (
-                              <span className="px-2 py-1 bg-red-100 text-red-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                              <span className="px-2 py-0.5 sm:py-1 bg-red-100 text-red-700 rounded-full text-[10px] sm:text-xs font-semibold whitespace-nowrap">
                                 Inativo
                               </span>
                             )}
                             {isCurrentUser && (
-                              <span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                              <span className="px-2 py-0.5 sm:py-1 bg-yellow-100 text-yellow-700 rounded-full text-[10px] sm:text-xs font-semibold whitespace-nowrap">
                                 Você
                               </span>
                             )}
                           </div>
                         </div>
-                        <p className="text-sm text-neutral-600 mb-2 truncate" title={user.email}>
+                        <p className="text-xs sm:text-sm text-neutral-600 mb-1 sm:mb-2 truncate" title={user.email}>
                           {user.email}
                         </p>
-                        <div className="flex items-center gap-4 text-xs text-neutral-500">
+                        <div className="flex items-center gap-4 text-[10px] sm:text-xs text-neutral-500">
                           {user.createdAt && (
                             <span>
                               Criado em:{" "}
@@ -405,21 +405,21 @@ export default function Users() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 flex-shrink-0 self-start">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0 justify-end border-t sm:border-t-0 pt-3 sm:pt-0 mt-1 sm:mt-0">
                       <button
                         onClick={() => handleEditarRole(user)}
                         disabled={isCurrentUser}
-                        className="p-2 text-info hover:bg-info/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        className="p-1.5 sm:p-2 text-info hover:bg-info/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                         title="Editar Role"
                       >
-                        <Edit className="w-5 h-5" />
+                        <Edit className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
                       <button
                         onClick={() =>
                           handleToggleActive(user.uid, user.active)
                         }
                         disabled={actionLoading === user.uid || isCurrentUser}
-                        className={`p-2 rounded-lg transition-colors disabled:opacity-50 ${
+                        className={`p-1.5 sm:p-2 rounded-lg transition-colors disabled:opacity-50 ${
                           user.active
                             ? "text-error hover:bg-error/10"
                             : "text-success hover:bg-success/10"
@@ -427,20 +427,20 @@ export default function Users() {
                         title={user.active ? "Desativar" : "Ativar"}
                       >
                         {actionLoading === user.uid ? (
-                          <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                          <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
                         ) : user.active ? (
-                          <PowerOff className="w-5 h-5" />
+                          <PowerOff className="w-4 h-4 sm:w-5 sm:h-5" />
                         ) : (
-                          <Power className="w-5 h-5" />
+                          <Power className="w-4 h-4 sm:w-5 sm:h-5" />
                         )}
                       </button>
                       <button
                         onClick={() => handleDeleteUser(user.uid, user.email)}
                         disabled={actionLoading === user.uid || isCurrentUser || user.email === "root@esfcatalao.com"}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                        className="p-1.5 sm:p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                         title="Deletar usuário permanentemente"
                       >
-                        <Trash2 className="w-5 h-5" />
+                        <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
                     </div>
                   </div>

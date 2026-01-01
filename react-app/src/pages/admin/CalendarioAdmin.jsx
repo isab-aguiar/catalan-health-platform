@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Bell, Edit2, Trash2, X, MapPin, Stethoscope, Briefcase, LayoutGrid, List, BarChart3 } from 'lucide-react';
+import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Edit2, Trash2, X, MapPin, Stethoscope, Briefcase, LayoutGrid, List, BarChart3 } from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useModal } from '../../contexts/ModalContext';
@@ -8,9 +8,7 @@ import { useEventos } from '../../hooks/useEventos';
 import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import EventoModal from '../../components/admin/EventoModal';
 import AgendaModal from '../../components/admin/AgendaModal';
-import { inicializarNotificacoes, pararVerificacaoNotificacoes, solicitarPermissaoNotificacoes, exibirNotificacao } from '../../services/notificacoesService';
 import { useAgendas } from '../../hooks/useAgendas';
-import NotificationBanner from '../../components/calendar/NotificationBanner';
 import CalendarDashboard from '../../components/calendar/CalendarDashboard';
 import CalendarListView from '../../components/calendar/CalendarListView';
 import CalendarAgendaView from '../../components/calendar/CalendarAgendaView';
@@ -65,24 +63,6 @@ export default function CalendarioAdmin() {
     console.log('[CalendarioAdmin] Agendas do Firestore:', agendasFirestore?.length || 0, agendasFirestore);
     console.log('[CalendarioAdmin] Loading agendas:', loadingAgendas);
   }, [agendasFirestore, loadingAgendas]);
-
-  // Inicializar sistema de notificações
-  useEffect(() => {
-    // Solicitar permissão ao carregar a página
-    solicitarPermissaoNotificacoes();
-
-    // Quando eventos são carregados, agendar notificações
-    if (eventos && eventos.length > 0) {
-      inicializarNotificacoes(eventos).catch((error) => {
-        console.error('Erro ao inicializar notificações:', error);
-      });
-    }
-
-    // Limpar ao desmontar
-    return () => {
-      pararVerificacaoNotificacoes();
-    };
-  }, [eventos]);
 
   const meses = [
     'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -428,8 +408,6 @@ export default function CalendarioAdmin() {
   return (
     <AdminLayout currentPage="calendario">
       <div className="space-y-6">
-      {/* Notification Banner */}
-      <NotificationBanner />
 
       {/* Header */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 md:p-6">
@@ -1072,31 +1050,6 @@ export default function CalendarioAdmin() {
                 </div>
               )}
 
-              {/* Escalas do Dia */}
-              {getEscalasNoDia(dataModalDia).length > 0 && (
-                <div>
-                  <h4 className="text-lg font-semibold text-neutral-900 mb-4 flex items-center gap-2">
-                    <Stethoscope className="w-5 h-5 text-teal-600" />
-                    Escalas/Agendas Médicas
-                  </h4>
-                  <div className="space-y-4">
-                    {getEscalasNoDia(dataModalDia).map((escala, idx) => (
-                      <div key={idx} className="bg-neutral-50 rounded-lg p-4 border border-neutral-200">
-                        <div className="flex items-start justify-between mb-2">
-                          <h5 className="font-semibold text-neutral-900">{escala.nome}</h5>
-                          <span className="px-2 py-1 bg-teal-100 text-teal-700 rounded text-xs font-medium">
-                            {escala.categoria}
-                          </span>
-                        </div>
-                        {escala.agendaDoDia && (
-                          <p className="text-sm text-neutral-700">{escala.agendaDoDia}</p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               {/* Agendas Semanais do Dia */}
               {getAgendasSemanaisNoDia(dataModalDia).length > 0 && (
                 <div>
@@ -1124,7 +1077,6 @@ export default function CalendarioAdmin() {
 
               {/* Mensagem quando não há itens */}
               {getEventosNoDia(dataModalDia).length === 0 && 
-               getEscalasNoDia(dataModalDia).length === 0 && 
                getAgendasSemanaisNoDia(dataModalDia).length === 0 && (
                 <div className="text-center py-8 text-neutral-500">
                   <CalendarIcon className="w-12 h-12 mx-auto mb-3 text-neutral-400" />
@@ -1291,19 +1243,6 @@ export default function CalendarioAdmin() {
                   </label>
                   <p className="mt-1 text-neutral-900 whitespace-pre-wrap">
                     {eventoVisualizando.ata}
-                  </p>
-                </div>
-              )}
-
-              {/* Lembrete */}
-              {eventoVisualizando.lembrete && (
-                <div>
-                  <label className="text-sm font-medium text-neutral-700 flex items-center gap-1">
-                    <Bell className="w-4 h-4" />
-                    Lembrete
-                  </label>
-                  <p className="mt-1 text-neutral-900">
-                    {eventoVisualizando.lembreteMinutos} minutos antes
                   </p>
                 </div>
               )}

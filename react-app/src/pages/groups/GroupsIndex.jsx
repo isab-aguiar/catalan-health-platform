@@ -353,22 +353,24 @@ export default function GroupsIndex() {
             </div>
           </div>
         </div>
-        {}
-        <InfoBox
-          title="Outros Grupos em Planejamento"
-          icon={<Rocket size={24} />}
-          highlight={true}
-        >
-          <p className="text-neutral-700 mb-6">
+        {/* Outros Grupos em Planejamento */}
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 shadow-sm border border-blue-200 mb-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Rocket size={24} className="text-blue-900" />
+            <h2 className="text-xl sm:text-2xl font-bold text-blue-900">
+              Outros Grupos em Planejamento
+            </h2>
+          </div>
+          <p className="text-neutral-700 mb-6 text-sm">
             Estamos trabalhando para ampliar nossas atividades coletivas. Em
             breve, teremos:
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
-              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600 shadow-sm">
+              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2 text-sm">
                 <Baby size={18} /> Grupo de Gestantes
               </h4>
-              <p className="text-neutral-600 text-sm mb-2">
+              <p className="text-neutral-600 text-sm mb-2 leading-relaxed">
                 Preparação para o parto, aleitamento materno e cuidados com o
                 bebê.
               </p>
@@ -376,11 +378,11 @@ export default function GroupsIndex() {
                 Em breve
               </span>
             </div>
-            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
-              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600 shadow-sm">
+              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2 text-sm">
                 <Brain size={18} /> Grupo de Saúde Mental
               </h4>
-              <p className="text-neutral-600 text-sm mb-2">
+              <p className="text-neutral-600 text-sm mb-2 leading-relaxed">
                 Acolhimento e apoio para pessoas com ansiedade, depressão e
                 outros transtornos.
               </p>
@@ -388,11 +390,11 @@ export default function GroupsIndex() {
                 Em breve
               </span>
             </div>
-            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
-              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600 shadow-sm">
+              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2 text-sm">
                 <UserPlus size={18} /> Grupo de Idosos
               </h4>
-              <p className="text-neutral-600 text-sm mb-2">
+              <p className="text-neutral-600 text-sm mb-2 leading-relaxed">
                 Atividades físicas, sociais e de promoção do envelhecimento
                 saudável.
               </p>
@@ -400,11 +402,11 @@ export default function GroupsIndex() {
                 Em breve
               </span>
             </div>
-            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
-              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600 shadow-sm">
+              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2 text-sm">
                 <Scale size={18} /> Grupo de Obesidade
               </h4>
-              <p className="text-neutral-600 text-sm mb-2">
+              <p className="text-neutral-600 text-sm mb-2 leading-relaxed">
                 Educação nutricional, atividade física e apoio para perda de
                 peso saudável.
               </p>
@@ -412,11 +414,11 @@ export default function GroupsIndex() {
                 Em breve
               </span>
             </div>
-            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600">
-              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2">
+            <div className="p-4 bg-white rounded-lg border-l-4 border-secondary-600 shadow-sm">
+              <h4 className="text-primary-600 font-bold mb-2 flex items-center gap-2 text-sm">
                 <Palette size={18} /> Grupo de Artesanato
               </h4>
-              <p className="text-neutral-600 text-sm mb-2">
+              <p className="text-neutral-600 text-sm mb-2 leading-relaxed">
                 Atividades manuais para promover socialização e bem-estar.
               </p>
               <span className="inline-block px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold">
@@ -424,63 +426,69 @@ export default function GroupsIndex() {
               </span>
             </div>
           </div>
-        </InfoBox>
-        <Alert type="info">
+        </div>
+
+        {/* Tem interesse */}
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 sm:p-6 shadow-sm border border-green-200 mb-6">
           <div className="flex items-start gap-3">
-            <Lightbulb
-              size={20}
-              className="text-info flex-shrink-0 mt-0.5"
-            />
+            <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Lightbulb size={20} className="text-white" />
+            </div>
             <div>
-              <strong>Tem interesse em algum grupo específico?</strong>
-              <br />
-              Fale com sua equipe de saúde ou deixe sua sugestão na recepção. A
-              participação da comunidade é essencial para planejarmos as
-              atividades!
+              <h3 className="font-bold text-green-900 mb-2 text-base">Tem interesse em algum grupo específico?</h3>
+              <p className="text-neutral-800 text-sm leading-relaxed">
+                Fale com sua equipe de saúde ou deixe sua sugestão na recepção. A
+                participação da comunidade é essencial para planejarmos as
+                atividades!
+              </p>
             </div>
           </div>
-        </Alert>
-        {}
-        <h2 className="text-2xl md:text-3xl font-bold text-primary-600 mt-8 mb-4 flex items-center gap-2">
-          <Sparkles size={32} />
-          Benefícios de Participar
-        </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="text-center p-6 bg-white rounded-lg shadow-md">
-            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <Users size={32} className="text-primary-600" />
-            </div>
-            <h4 className="text-primary-600 font-bold mb-2">Apoio Social</h4>
-            <p className="text-neutral-600 text-sm">
-              Conhecer pessoas que vivem situações semelhantes
-            </p>
+        </div>
+        {/* Benefícios de Participar */}
+        <div className="mb-6">
+          <div className="flex items-center gap-2 mb-6">
+            <Sparkles size={28} className="text-primary-600" />
+            <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+              Benefícios de Participar
+            </h2>
           </div>
-          <div className="text-center p-6 bg-white rounded-lg shadow-md">
-            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <ClipboardList size={32} className="text-primary-600" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="text-center p-4 sm:p-6 bg-white rounded-lg shadow-md border border-neutral-200">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Users size={28} className="sm:w-8 sm:h-8 text-primary-600" />
+              </div>
+              <h4 className="text-primary-600 font-bold mb-2 text-sm sm:text-base">Apoio Social</h4>
+              <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                Conhecer pessoas que vivem situações semelhantes
+              </p>
             </div>
-            <h4 className="text-primary-600 font-bold mb-2">Aprendizado</h4>
-            <p className="text-neutral-600 text-sm">
-              Informações sobre sua condição de saúde
-            </p>
-          </div>
-          <div className="text-center p-6 bg-white rounded-lg shadow-md">
-            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <Activity size={32} className="text-primary-600" />
+            <div className="text-center p-4 sm:p-6 bg-white rounded-lg shadow-md border border-neutral-200">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <ClipboardList size={28} className="sm:w-8 sm:h-8 text-primary-600" />
+              </div>
+              <h4 className="text-primary-600 font-bold mb-2 text-sm sm:text-base">Aprendizado</h4>
+              <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                Informações sobre sua condição de saúde
+              </p>
             </div>
-            <h4 className="text-primary-600 font-bold mb-2">Motivação</h4>
-            <p className="text-neutral-600 text-sm">
-              Incentivo para seguir o tratamento
-            </p>
-          </div>
-          <div className="text-center p-6 bg-white rounded-lg shadow-md">
-            <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <Heart size={32} className="text-primary-600" />
+            <div className="text-center p-4 sm:p-6 bg-white rounded-lg shadow-md border border-neutral-200">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Activity size={28} className="sm:w-8 sm:h-8 text-primary-600" />
+              </div>
+              <h4 className="text-primary-600 font-bold mb-2 text-sm sm:text-base">Motivação</h4>
+              <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                Incentivo para seguir o tratamento
+              </p>
             </div>
-            <h4 className="text-primary-600 font-bold mb-2">Bem-estar</h4>
-            <p className="text-neutral-600 text-sm">
-              Melhora da qualidade de vida
-            </p>
+            <div className="text-center p-4 sm:p-6 bg-white rounded-lg shadow-md border border-neutral-200">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Heart size={28} className="sm:w-8 sm:h-8 text-primary-600" />
+              </div>
+              <h4 className="text-primary-600 font-bold mb-2 text-sm sm:text-base">Bem-estar</h4>
+              <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed">
+                Melhora da qualidade de vida
+              </p>
+            </div>
           </div>
         </div>
       </div>

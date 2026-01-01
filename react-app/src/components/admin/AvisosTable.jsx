@@ -103,8 +103,78 @@ function AvisosTable({ avisos, onEdit, onDelete, deleteLoading }) {
             : "avisos encontrados"}
         </p>
       </div>
-      {}
-      <div className="overflow-x-auto">
+      {/* Mobile View - Cards */}
+      <div className="md:hidden p-3 space-y-3">
+        {paginatedAvisos.length === 0 ? (
+          <div className="px-4 py-8 text-center text-neutral-500 text-sm">
+            Nenhum aviso encontrado com os critérios selecionados
+          </div>
+        ) : (
+          paginatedAvisos.map((aviso) => (
+            <div
+              key={aviso.id}
+              className="bg-white rounded-lg border border-neutral-200 p-4 shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <h4 className="font-semibold text-neutral-900 text-sm flex-1">
+                  {aviso.titulo}
+                </h4>
+                <div className="flex items-center gap-1.5 flex-shrink-0">
+                  <PermissionGate requiredPermission="canEditAvisos">
+                    <button
+                      onClick={() => onEdit(aviso)}
+                      className="p-1.5 text-info hover:bg-info/10 rounded-md transition-colors"
+                      title="Editar Aviso"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                  </PermissionGate>
+                  <PermissionGate requiredPermission="canDeleteAvisos">
+                    <button
+                      onClick={() => onDelete(aviso.id)}
+                      disabled={deleteLoading === aviso.id}
+                      className="p-1.5 text-error hover:bg-error/10 rounded-md transition-colors disabled:opacity-50"
+                      title="Excluir Aviso"
+                    >
+                      {deleteLoading === aviso.id ? (
+                        <div className="w-4 h-4 border-2 border-error border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <Trash2 className="w-4 h-4" />
+                      )}
+                    </button>
+                  </PermissionGate>
+                </div>
+              </div>
+              <p className="text-xs text-neutral-600 line-clamp-2 mb-3">
+                {aviso.descricao}
+              </p>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span
+                  className={`inline-flex px-2 py-0.5 rounded-md text-[10px] font-semibold border ${getCategoriaColor(aviso.categoria)}`}
+                >
+                  {getCategoriaLabel(aviso.categoria)}
+                </span>
+                {aviso.exibirNaHomepage ? (
+                  <span className="inline-flex px-2 py-0.5 bg-success/10 text-green-800 border border-green-200 rounded-md text-[10px] font-semibold">
+                    Público
+                  </span>
+                ) : (
+                  <span className="inline-flex px-2 py-0.5 bg-neutral-100 text-neutral-700 border border-neutral-200 rounded-md text-[10px] font-semibold">
+                    Rascunho
+                  </span>
+                )}
+                <span className="inline-flex items-center gap-1 text-[10px] text-neutral-500 ml-auto">
+                  <Calendar className="w-3 h-3" />
+                  {formatarData(aviso.data)}
+                </span>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Desktop View - Table */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full">
           <thead className="bg-neutral-100 border-b border-neutral-300">
             <tr>

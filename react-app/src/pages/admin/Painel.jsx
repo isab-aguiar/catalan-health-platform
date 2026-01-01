@@ -20,7 +20,6 @@ import {
   Package,
   ClipboardList,
   CalendarDays,
-  BellDot,
   MessageSquareHeart,
 } from "lucide-react";
 const AvisoItem = memo(({ aviso, getCategoriaColor, formatarData }) => (
@@ -109,16 +108,16 @@ export default function Painel() {
     <AdminLayout currentPage="dashboard">
       <div className="space-y-6">
         {}
-        <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-6">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-primary-700 rounded-md flex items-center justify-center shadow-sm">
-              <Building2 className="w-7 h-7 text-white" />
+        <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-4 sm:p-6">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-primary-700 rounded-md flex items-center justify-center shadow-sm flex-shrink-0">
+              <Building2 className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-neutral-900">
+            <div className="min-w-0">
+              <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 truncate">
                 Painel de Controle
               </h1>
-              <p className="text-neutral-600 text-sm">
+              <p className="text-neutral-600 text-xs sm:text-sm truncate">
                 Sistema de Gerenciamento - ESF Catalão
               </p>
             </div>
@@ -184,12 +183,12 @@ export default function Painel() {
           )}
         </div>
         {}
-        <div className="bg-white rounded-md p-6 shadow-sm border border-neutral-300">
-          <h2 className="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
-            <ArrowRight className="w-5 h-5 text-info" />
+        <div className="bg-white rounded-md p-4 sm:p-6 shadow-sm border border-neutral-300">
+          <h2 className="text-base sm:text-lg font-bold text-neutral-900 mb-3 sm:mb-4 flex items-center gap-2">
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-info" />
             Acesso Rápido
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
             {permissions.canViewAvisos() && (
               <Link
                 to="/admin/avisos"
@@ -274,17 +273,6 @@ export default function Painel() {
               </h3>
             </Link>
             <Link
-              to="/admin/notificacoes"
-              className="flex flex-col items-center gap-3 p-4 border-2 border-pink-200 rounded-md hover:border-pink-400 hover:bg-pink-50 transition-all group"
-            >
-              <div className="w-12 h-12 bg-pink-100 rounded-md flex items-center justify-center group-hover:bg-pink-600 transition-colors border border-pink-200">
-                <BellDot className="w-6 h-6 text-pink-700 group-hover:text-white transition-colors" />
-              </div>
-              <h3 className="font-bold text-neutral-900 text-sm text-center">
-                Notificações
-              </h3>
-            </Link>
-            <Link
               to="/admin/feedbacks"
               className="flex flex-col items-center gap-3 p-4 border-2 border-rose-200 rounded-md hover:border-rose-400 hover:bg-rose-50 transition-all group"
             >
@@ -298,12 +286,12 @@ export default function Painel() {
           </div>
         </div>
         {}
-        <div className="bg-white rounded-md p-6 shadow-sm border border-neutral-300">
-          <h2 className="text-lg font-bold text-neutral-900 mb-4 flex items-center gap-2">
-            <ArrowRight className="w-5 h-5 text-info" />
+        <div className="bg-white rounded-md p-4 sm:p-6 shadow-sm border border-neutral-300">
+          <h2 className="text-base sm:text-lg font-bold text-neutral-900 mb-3 sm:mb-4 flex items-center gap-2">
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-info" />
             Ações Rápidas
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-3 sm:gap-4">
             {permissions.canViewAvisos() && (
               <Link
                 to="/admin/avisos"

@@ -92,7 +92,6 @@ const EstoqueVacinas = lazyLoad(() => import("./pages/admin/EstoqueVacinas"));
 const OrientacoesPosConsulta = lazyLoad(() => import("./pages/admin/OrientacoesPosConsulta"));
 const CalendarioAdmin = lazyLoad(() => import("./pages/admin/CalendarioAdmin"));
 const EscalasTrabalho = lazyLoad(() => import("./pages/admin/EscalasTrabalho"));
-const Notificacoes = lazyLoad(() => import("./pages/admin/Notificacoes"));
 const Feedbacks = lazyLoad(() => import("./pages/admin/Feedbacks"));
 const OuvidoriaIndex = lazyLoad(() => import("./pages/services/OuvidoriaIndex"));
 const Elogios = lazyLoad(() => import("./pages/services/Elogios"));
@@ -275,14 +274,6 @@ function App() {
                         element={
                           <ProtectedRoute>
                             <EscalasTrabalho />
-                          </ProtectedRoute>
-                        }
-                      />
-                      <Route
-                        path="/admin/notificacoes"
-                        element={
-                          <ProtectedRoute>
-                            <Notificacoes />
                           </ProtectedRoute>
                         }
                       />

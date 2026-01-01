@@ -10,7 +10,6 @@ export { default as ImageWithCredit } from './ImageWithCredit';
 export { default as InfoBox } from './InfoBox';
 export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as Modal } from './Modal';
-export { default as NotificationBell } from './NotificationBell';
 export { default as RecommendedReading } from './RecommendedReading';
 export { default as RecommendedReadingCarousel } from './RecommendedReadingCarousel';
 export { default as ScrollToTop } from './ScrollToTop';
