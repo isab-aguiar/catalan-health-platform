@@ -354,7 +354,7 @@ export default function Users() {
                       : "border-neutral-200"
                   } hover:shadow-md transition-shadow`}
                 >
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     <div className="flex items-start gap-4 flex-1">
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${getRoleColor(user.role)}`}
@@ -405,7 +405,7 @@ export default function Users() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-shrink-0 self-start">
                       <button
                         onClick={() => handleEditarRole(user)}
                         disabled={isCurrentUser}
