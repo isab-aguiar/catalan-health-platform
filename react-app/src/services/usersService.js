@@ -10,7 +10,6 @@ import {
   orderBy,
   Timestamp,
 } from "firebase/firestore";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { httpsCallable } from "firebase/functions";
 import { auth, db, functions } from "../config/firebase";
 const COLLECTION_NAME = "users";
@@ -69,40 +68,44 @@ export async function createUser(userData, password, createdByUid) {
     if (!["admin", "profissional", "diretoria"].includes(userData.role)) {
       return { success: false, error: "Role inválido" };
     }
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      userData.email,
-      password
-    );
-    const newUser = userCredential.user;
-    const userDoc = {
-      uid: newUser.uid,
+
+    // Usar Cloud Function para criar usuário sem deslogar o admin
+    if (!functions) {
+      return {
+        success: false,
+        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+      };
+    }
+
+    const createUserFn = httpsCallable(functions, "createUserComplete");
+    const result = await createUserFn({
       email: userData.email,
       displayName: userData.displayName,
+      password: password,
       role: userData.role,
-      active: true,
-      createdAt: Timestamp.now(),
-      updatedAt: Timestamp.now(),
-      createdBy: createdByUid || null,
-    };
-    await setDoc(doc(db, COLLECTION_NAME, newUser.uid), userDoc);
+    });
+
     return {
       success: true,
-      data: {
-        uid: newUser.uid,
-        ...userDoc,
-      },
+      data: result.data,
+      message: result.data.message,
     };
   } catch (error) {
     console.error("Erro ao criar usuário:", error);
     let errorMessage = "Erro ao criar usuário";
-    if (error.code === "auth/email-already-in-use") {
+
+    if (error.code === "already-exists") {
       errorMessage = "Este email já está em uso";
-    } else if (error.code === "auth/invalid-email") {
-      errorMessage = "Email inválido";
-    } else if (error.code === "auth/weak-password") {
-      errorMessage = "Senha muito fraca";
+    } else if (error.code === "invalid-argument") {
+      errorMessage = error.message || "Dados inválidos";
+    } else if (error.code === "permission-denied") {
+      errorMessage = error.message || "Permissão negada";
+    } else if (error.code === "unauthenticated") {
+      errorMessage = "Você precisa estar autenticado";
+    } else if (error.message) {
+      errorMessage = error.message;
     }
+
     return { success: false, error: errorMessage };
   }
 }
