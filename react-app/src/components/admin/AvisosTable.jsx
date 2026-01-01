@@ -278,26 +278,26 @@ function AvisosTable({ avisos, onEdit, onDelete, deleteLoading }) {
           </tbody>
         </table>
       </div>
-      {}
+      {/* Pagination */}
       {totalPages > 1 && (
-        <div className="px-6 py-4 border-t border-neutral-300 bg-neutral-50 flex items-center justify-between">
-          <p className="text-sm text-neutral-700 font-medium">
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-neutral-300 bg-neutral-50 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs sm:text-sm text-neutral-700 font-medium">
             Página {currentPage} de {totalPages}
           </p>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="p-2 text-neutral-600 hover:bg-neutral-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-neutral-300"
+              className="p-1.5 sm:p-2 text-neutral-600 hover:bg-neutral-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-neutral-300"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="p-2 text-neutral-600 hover:bg-neutral-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-neutral-300"
+              className="p-1.5 sm:p-2 text-neutral-600 hover:bg-neutral-200 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-neutral-300"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
