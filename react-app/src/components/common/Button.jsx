@@ -6,9 +6,10 @@ export function Button({
   onClick,
   type = 'button',
   disabled = false,
+  fullWidth = false,
   ...props
 }) {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap overflow-hidden text-ellipsis max-w-full';
 
   const variants = {
     primary: 'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500',
@@ -19,12 +20,15 @@ export function Button({
   };
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg',
+    xs: 'px-2 py-1 text-xs',
+    sm: 'px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm',
+    md: 'px-3 sm:px-4 py-2 text-sm sm:text-base',
+    lg: 'px-4 sm:px-6 py-2.5 sm:py-3 text-base sm:text-lg',
   };
 
-  const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
+  const widthClass = fullWidth ? 'w-full' : '';
+
+  const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`;
 
   return (
     <button
@@ -34,7 +38,7 @@ export function Button({
       disabled={disabled}
       {...props}
     >
-      {children}
+      <span className="truncate">{children}</span>
     </button>
   );
 }

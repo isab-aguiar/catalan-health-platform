@@ -497,47 +497,47 @@ export default function Campanhas() {
     <AdminLayout currentPage="campanhas">
       <div className="min-h-screen bg-neutral-50">
         <div className="p-4 sm:p-6 lg:p-8">
-          <div className="max-w-7xl mx-auto space-y-6">
-            {}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <h1 className="text-2xl font-bold text-neutral-900">
+          <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+              <div className="min-w-0">
+                <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 truncate">
                   Gerenciar Campanhas
                 </h1>
-                <p className="text-neutral-600 text-sm">
+                <p className="text-neutral-600 text-xs sm:text-sm">
                   Edite, ative/desative ou exclua campanhas
                 </p>
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={handleOpenCreateModal}
-                  className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                  className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm w-full sm:w-auto"
                 >
                   <Plus className="w-4 h-4" />
-                  Nova Campanha
+                  <span>Nova Campanha</span>
                 </button>
               </div>
             </div>
-            {}
-            <div className="bg-white rounded-xl shadow-sm border border-neutral-200 p-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {}
-                <div className="relative">
+            {/* Filters */}
+            <div className="bg-white rounded-xl shadow-sm border border-neutral-200 p-3 sm:p-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                {/* Search */}
+                <div className="relative sm:col-span-2 lg:col-span-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
                   <input
                     type="text"
-                    placeholder="Buscar por título ou descrição..."
+                    placeholder="Buscar por título..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                 </div>
-                {}
+                {/* Categoria Filter */}
                 <div>
                   <select
                     value={filterCategoria}
                     onChange={(e) => setFilterCategoria(e.target.value)}
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   >
                     <option value="todas">Todas Categorias</option>
                     <option value="vacina">Vacina</option>
@@ -545,12 +545,12 @@ export default function Campanhas() {
                     <option value="campanha">Campanha</option>
                   </select>
                 </div>
-                {}
+                {/* Status Filter */}
                 <div>
                   <select
                     value={filterStatus}
                     onChange={(e) => setFilterStatus(e.target.value)}
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 sm:px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   >
                     <option value="todas">Todos Status</option>
                     <option value="ativas">Ativas</option>
@@ -559,25 +559,25 @@ export default function Campanhas() {
                 </div>
               </div>
             </div>
-            {}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
-                <p className="text-sm text-neutral-600 mb-1">
-                  Total de Campanhas
+            {/* Stats Cards */}
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
+              <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-3 sm:p-4">
+                <p className="text-[10px] sm:text-sm text-neutral-600 mb-0.5 sm:mb-1">
+                  Total
                 </p>
-                <p className="text-2xl font-bold text-neutral-900">
+                <p className="text-lg sm:text-2xl font-bold text-neutral-900">
                   {campanhas.length}
                 </p>
               </div>
-              <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
-                <p className="text-sm text-neutral-600 mb-1">Ativas</p>
-                <p className="text-2xl font-bold text-success">
+              <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-3 sm:p-4">
+                <p className="text-[10px] sm:text-sm text-neutral-600 mb-0.5 sm:mb-1">Ativas</p>
+                <p className="text-lg sm:text-2xl font-bold text-success">
                   {campanhas.filter((c) => c.ativo).length}
                 </p>
               </div>
-              <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4">
-                <p className="text-sm text-neutral-600 mb-1">Inativas</p>
-                <p className="text-2xl font-bold text-error">
+              <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-3 sm:p-4">
+                <p className="text-[10px] sm:text-sm text-neutral-600 mb-0.5 sm:mb-1">Inativas</p>
+                <p className="text-lg sm:text-2xl font-bold text-error">
                   {campanhas.filter((c) => !c.ativo).length}
                 </p>
               </div>

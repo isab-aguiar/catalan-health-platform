@@ -51,10 +51,11 @@ export default function Footer() {
 
   return (
     <footer className="bg-neutral-100 text-neutral-900 mt-auto relative">
-      <div className="container mx-auto max-w-6xl px-4 py-8">
-        <div className="grid md:grid-cols-2 gap-20">
-          <div className="md:pr-8">
-            <h4 className="font-semibold text-lg mb-3 text-neutral-900 border-b border-neutral-300 pb-2">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
+          {/* Coluna Esquerda - Acesso Fácil */}
+          <div>
+            <h4 className="font-semibold text-base mb-3 text-neutral-900 border-b border-neutral-300 pb-2">
               Acesso Fácil
             </h4>
             <ul className="space-y-2">
@@ -66,24 +67,25 @@ export default function Footer() {
                     className="flex items-center gap-2 text-sm text-neutral-700 hover:text-primary-600 transition-colors group"
                   >
                     <ChevronRight
-                      size={16}
-                      className="text-primary-600 group-hover:translate-x-1 transition-transform"
+                      size={14}
+                      className="text-primary-600 group-hover:translate-x-1 transition-transform flex-shrink-0"
                     />
-                    {link.name.toUpperCase()}
+                    <span className="truncate">{link.name.toUpperCase()}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Coluna Direita - Fale Conosco */}
           <div>
-            <h4 className="font-semibold text-lg mb-3 text-neutral-900 border-b border-neutral-300 pb-2">
+            <h4 className="font-semibold text-base mb-3 text-neutral-900 border-b border-neutral-300 pb-2">
               Fale Conosco
             </h4>
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <MapPin size={18} className="text-neutral-500" />
+                <div className="flex items-center gap-2 mb-1">
+                  <MapPin size={16} className="text-neutral-500 flex-shrink-0" />
                   <p className="font-semibold text-neutral-900 text-sm">
                     Endereço
                   </p>
@@ -92,72 +94,65 @@ export default function Footer() {
                   href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.main.mapsQuery}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors leading-relaxed"
+                  className="block pl-6 text-xs text-neutral-700 hover:text-primary-600 transition-colors leading-relaxed"
                 >
-                  <p>{contactInfo.address.main.street}</p>
-                  <p>{contactInfo.address.main.neighborhood}</p>
-                  <p>{contactInfo.address.main.city} - {contactInfo.address.main.state}</p>
-                  <p className="text-xs text-neutral-600 mt-1">
-                    CEP: {contactInfo.address.main.cep}
-                  </p>
+                  <p>{contactInfo.address.main.street}, {contactInfo.address.main.neighborhood}</p>
+                  <p>{contactInfo.address.main.city} - {contactInfo.address.main.state} | CEP: {contactInfo.address.main.cep}</p>
                 </a>
               </div>
 
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Clock size={18} className="text-neutral-500" />
-                  <p className="font-semibold text-neutral-900 text-sm">
-                    Horário de Atendimento
-                  </p>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Clock size={16} className="text-neutral-500 flex-shrink-0" />
+                    <p className="font-semibold text-neutral-900 text-sm">
+                      Horário
+                    </p>
+                  </div>
+                  <div className="pl-6 text-xs text-neutral-700 space-y-1.5">
+                    <p>Seg-Sex: {openingHours.reception.weekdays}</p>
+                    <p className="text-neutral-900 font-medium">Saúde na Hora: {openingHours.reception.saudeNaHora}</p>
+                  </div>
                 </div>
-                <div className="pl-7 text-sm text-neutral-700 leading-relaxed">
-                  <p>Segunda a Sexta-feira</p>
-                  <p>{openingHours.reception.weekdays}</p>
-                  <p className="mt-2 text-neutral-900 font-medium">
-                    Saúde na Hora: <br/>{openingHours.reception.saudeNaHora}
-                  </p>
-                </div>
-              </div>
 
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Phone size={18} className="text-neutral-500" />
-                  <p className="font-semibold text-neutral-900 text-sm">
-                    Telefone
-                  </p>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Phone size={16} className="text-neutral-500 flex-shrink-0" />
+                    <p className="font-semibold text-neutral-900 text-sm">
+                      Telefone
+                    </p>
+                  </div>
+                  <a
+                    href={`tel:${contactInfo.phones.reception.tel}`}
+                    className="block pl-6 text-xs text-neutral-700 hover:text-primary-600 transition-colors font-medium"
+                  >
+                    {contactInfo.phones.reception.display}
+                  </a>
                 </div>
-                <a
-                  href={`tel:${contactInfo.phones.reception.tel}`}
-                  className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors font-medium"
-                >
-                  {contactInfo.phones.reception.display}
-                </a>
-              </div>
 
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Mail size={18} className="text-neutral-500" />
-                  <p className="font-semibold text-neutral-900 text-sm">
-                    E-mail
-                  </p>
+                <div>
+                  <div className="flex items-center gap-2 mb-1">
+                    <Mail size={16} className="text-neutral-500 flex-shrink-0" />
+                    <p className="font-semibold text-neutral-900 text-sm">
+                      E-mail
+                    </p>
+                  </div>
+                  <a
+                    href={`mailto:${contactInfo.emails.general}`}
+                    className="block pl-6 text-xs text-neutral-700 hover:text-primary-600 transition-colors break-all"
+                  >
+                    {contactInfo.emails.general}
+                  </a>
                 </div>
-                <a
-                  href={`mailto:${contactInfo.emails.general}`}
-                  className="block pl-7 text-sm text-neutral-700 hover:text-primary-600 transition-colors break-all"
-                >
-                  {contactInfo.emails.general}
-                </a>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-neutral-300 mt-8 pt-6 text-center">
-          <p className="text-sm text-neutral-600">
-            © {new Date().getFullYear()} Estratégia Saúde da Família ESF Catalão
-            - Todos os direitos reservados
+        <div className="border-t border-neutral-300 mt-6 pt-4 text-center">
+          <p className="text-xs text-neutral-600">
+            © {new Date().getFullYear()} Estratégia Saúde da Família ESF Catalão - Todos os direitos reservados
           </p>
-         
         </div>
       </div>
     </footer>

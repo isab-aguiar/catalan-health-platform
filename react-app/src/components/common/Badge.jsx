@@ -14,16 +14,17 @@ export default function Badge({
   };
 
   const sizes = {
-    sm: 'px-2.5 py-0.5 text-xs',
-    md: 'px-3 py-1 text-sm',
-    lg: 'px-4 py-1.5 text-sm',
+    xs: 'px-1.5 py-0.5 text-[10px]',
+    sm: 'px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-xs',
+    md: 'px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm',
+    lg: 'px-3 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm',
   };
 
   return (
     <span
-      className={`inline-flex items-center font-semibold rounded-md shadow-sm ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`inline-flex items-center font-semibold rounded-md shadow-sm max-w-full truncate ${variants[variant]} ${sizes[size]} ${className}`}
     >
-      {children}
+      <span className="truncate">{children}</span>
     </span>
   );
 }

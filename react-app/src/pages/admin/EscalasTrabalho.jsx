@@ -377,40 +377,40 @@ export default function EscalasTrabalho() {
   }
 
   return (
-    <div className="p-4 md:p-6">
-      <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+    <div className="p-3 sm:p-4 md:p-6">
+      <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <BackButton />
         <button
           onClick={handleCreate}
           disabled={saving || creating}
-          className="flex items-center justify-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:opacity-50 w-full sm:w-auto"
+          className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:opacity-50 w-full sm:w-auto text-sm"
         >
-          <Plus size={18} />
-          Nova Escala
+          <Plus size={16} className="sm:w-[18px] sm:h-[18px]" />
+          <span>Nova Escala</span>
         </button>
       </div>
 
-      <div className="mb-6">
-        <h1 className="text-xl md:text-2xl font-bold text-neutral-900 mb-2">Escalas de Trabalho</h1>
-        <p className="text-sm md:text-base text-neutral-600">Gerencie as escalas de trabalho dos profissionais</p>
+      <div className="mb-4 sm:mb-6">
+        <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-neutral-900 mb-1 sm:mb-2">Escalas de Trabalho</h1>
+        <p className="text-xs sm:text-sm md:text-base text-neutral-600">Gerencie as escalas de trabalho dos profissionais</p>
       </div>
 
       {message && (
-        <div className={`p-4 mb-4 rounded ${
+        <div className={`p-3 sm:p-4 mb-3 sm:mb-4 rounded text-sm ${
           message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
         }`}>
           {message.text}
         </div>
       )}
 
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-neutral-700 mb-2">
+      <div className="mb-3 sm:mb-4">
+        <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1.5 sm:mb-2">
           Filtrar
         </label>
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="w-full md:w-64 px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full sm:w-64 px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
         >
           <option value="all">Todas as Escalas</option>
           <option value="publicas">Apenas Públicas</option>
@@ -432,25 +432,25 @@ export default function EscalasTrabalho() {
           />
 
           {/* Modal */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
             <div
-              className="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
-                <h2 className="text-xl font-bold text-neutral-900">
+              <div className="sticky top-0 bg-white border-b border-neutral-200 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+                <h2 className="text-lg sm:text-xl font-bold text-neutral-900">
                   {creating ? "Criar Nova Escala" : "Editar Escala"}
                 </h2>
                 <button
                   onClick={handleCancel}
-                  className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+                  className="p-1.5 sm:p-2 hover:bg-neutral-100 rounded-lg transition-colors"
                   title="Fechar"
                 >
-                  <X size={20} className="text-neutral-600" />
+                  <X size={18} className="sm:w-5 sm:h-5 text-neutral-600" />
                 </button>
               </div>
 
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
             <div>
               <label className="block text-sm font-medium text-neutral-700 mb-1">

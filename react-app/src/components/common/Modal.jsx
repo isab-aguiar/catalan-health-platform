@@ -82,30 +82,30 @@ export default function Modal({
       />
 
       {/* Modal */}
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
         <div
-          className="bg-white rounded-2xl shadow-strong max-w-md w-full animate-scale-in"
+          className="bg-white rounded-xl sm:rounded-2xl shadow-strong max-w-md w-full animate-scale-in overflow-hidden"
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-start gap-4 p-6 pb-4">
-            <div className={`${config.iconBg} rounded-full p-3 flex-shrink-0`}>
-              <Icon className={`w-6 h-6 ${config.iconColor}`} />
+          <div className="flex items-start gap-3 sm:gap-4 p-4 sm:p-6 pb-3 sm:pb-4">
+            <div className={`${config.iconBg} rounded-full p-2 sm:p-3 flex-shrink-0`}>
+              <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${config.iconColor}`} />
             </div>
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 overflow-hidden">
               {title && (
                 <h2
                   id="modal-title"
-                  className="text-xl font-bold text-neutral-900 mb-2"
+                  className="text-base sm:text-xl font-bold text-neutral-900 mb-1 sm:mb-2 truncate"
                 >
                   {title}
                 </h2>
               )}
               {message && (
-                <p className="text-sm text-neutral-700 leading-relaxed whitespace-pre-line">
+                <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed whitespace-pre-line line-clamp-6">
                   {message}
                 </p>
               )}
@@ -115,23 +115,23 @@ export default function Modal({
               className="p-1 hover:bg-neutral-100 rounded-lg transition-colors flex-shrink-0"
               aria-label="Fechar modal"
             >
-              <X size={20} className="text-neutral-600" />
+              <X size={18} className="sm:w-5 sm:h-5 text-neutral-600" />
             </button>
           </div>
 
           {/* Actions */}
-          <div className="flex gap-3 p-6 pt-2 border-t border-neutral-100">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 p-4 sm:p-6 pt-2 border-t border-neutral-100">
             {isConfirmation || onCancel ? (
               <>
                 <button
                   onClick={onCancel}
-                  className="flex-1 px-4 py-2.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-900 rounded-lg font-semibold transition-colors"
+                  className="flex-1 px-3 sm:px-4 py-2 sm:py-2.5 bg-neutral-200 hover:bg-neutral-300 text-neutral-900 rounded-lg text-sm sm:text-base font-semibold transition-colors truncate"
                 >
                   {cancelText}
                 </button>
                 <button
                   onClick={onConfirm}
-                  className={`flex-1 px-4 py-2.5 text-white rounded-lg font-semibold transition-colors ${config.buttonBg}`}
+                  className={`flex-1 px-3 sm:px-4 py-2 sm:py-2.5 text-white rounded-lg text-sm sm:text-base font-semibold transition-colors truncate ${config.buttonBg}`}
                   autoFocus
                 >
                   {confirmText}
@@ -140,7 +140,7 @@ export default function Modal({
             ) : (
               <button
                 onClick={onConfirm || onClose}
-                className={`w-full px-4 py-2.5 text-white rounded-lg font-semibold transition-colors ${config.buttonBg}`}
+                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 text-white rounded-lg text-sm sm:text-base font-semibold transition-colors truncate ${config.buttonBg}`}
                 autoFocus
               >
                 {confirmText}

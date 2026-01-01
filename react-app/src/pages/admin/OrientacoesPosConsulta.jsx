@@ -167,48 +167,48 @@ export default function OrientacoesPosConsulta() {
 
   return (
     <AdminLayout currentPage="orientacoes">
-      <div className="max-w-5xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-4 sm:space-y-6">
         {/* Header */}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6">
-          <div className="flex items-center gap-4 mb-4">
+        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-4 sm:p-6">
+          <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <button
               onClick={() => navigate(-1)}
-              className="flex items-center gap-2 text-neutral-600 hover:text-neutral-900 transition-colors"
+              className="flex items-center gap-1.5 sm:gap-2 text-neutral-600 hover:text-neutral-900 transition-colors"
               aria-label="Voltar"
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="hidden sm:inline">Voltar</span>
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="hidden sm:inline text-sm">Voltar</span>
             </button>
-            <div className="flex-1">
-              <h1 className="text-2xl font-bold text-neutral-900">
+            <div className="flex-1 min-w-0">
+              <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-neutral-900 truncate">
                 Orientações Pós-Consulta
               </h1>
             </div>
           </div>
-          <p className="text-neutral-600 text-sm">
+          <p className="text-neutral-600 text-xs sm:text-sm">
             Consulte as orientações, documentos necessários e informações importantes
             para cada procedimento médico oferecido pela unidade.
           </p>
         </div>
 
         {/* Seletor de Procedimento */}
-        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6">
-          <div className="mb-4">
-            <label className="block text-sm font-semibold text-neutral-700 mb-2">
+        <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-4 sm:p-6">
+          <div className="mb-3 sm:mb-4">
+            <label className="block text-xs sm:text-sm font-semibold text-neutral-700 mb-1.5 sm:mb-2">
               Buscar Procedimento
             </label>
             <div className="relative">
               <Search
-                size={20}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400"
+                size={18}
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 sm:w-5 sm:h-5"
               />
               <input
                 type="text"
                 value={termoBusca}
                 onChange={(e) => setTermoBusca(e.target.value)}
                 onFocus={() => setMenuAberto(true)}
-                placeholder="Digite para buscar por nome, categoria ou local..."
-                className="w-full pl-10 pr-4 py-3 border-2 border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-info focus:border-transparent text-sm"
+                placeholder="Digite para buscar..."
+                className="w-full pl-9 sm:pl-10 pr-4 py-2.5 sm:py-3 border-2 border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-info focus:border-transparent text-sm"
               />
             </div>
           </div>
@@ -216,16 +216,16 @@ export default function OrientacoesPosConsulta() {
           <div className="relative" ref={menuRef}>
             <button
               onClick={() => setMenuAberto(!menuAberto)}
-              className="w-full flex items-center justify-between bg-white border-2 border-neutral-300 rounded-lg px-4 py-3 text-left font-medium text-sm text-neutral-700 hover:border-info focus:outline-none focus:ring-2 focus:ring-info focus:border-transparent transition-colors"
+              className="w-full flex items-center justify-between bg-white border-2 border-neutral-300 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 text-left font-medium text-xs sm:text-sm text-neutral-700 hover:border-info focus:outline-none focus:ring-2 focus:ring-info focus:border-transparent transition-colors"
             >
-              <span className="flex items-center gap-2">
-                <Menu size={20} className="text-neutral-500" />
+              <span className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
+                <Menu size={18} className="text-neutral-500 flex-shrink-0 sm:w-5 sm:h-5" />
                 <span className="truncate">{procedimentoSelecionadoNome}</span>
               </span>
               {menuAberto ? (
-                <X size={18} className="text-neutral-500 flex-shrink-0" />
+                <X size={16} className="text-neutral-500 flex-shrink-0 sm:w-[18px] sm:h-[18px]" />
               ) : (
-                <ChevronDown size={18} className="text-neutral-500 flex-shrink-0" />
+                <ChevronDown size={16} className="text-neutral-500 flex-shrink-0 sm:w-[18px] sm:h-[18px]" />
               )}
             </button>
 
@@ -298,23 +298,23 @@ export default function OrientacoesPosConsulta() {
 
         {/* Detalhes do Procedimento */}
         {procedimentoAtual && (
-          <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-6">
+          <div className="bg-white border border-neutral-200 rounded-md shadow-sm p-4 sm:p-6">
             {/* Cabeçalho do Procedimento */}
-            <div className="flex items-start justify-between gap-4 mb-6 pb-4 border-b border-neutral-200">
-              <div className="flex items-center gap-3">
-                <FileText size={28} className="text-info flex-shrink-0" />
-                <div>
-                  <h2 className="text-xl font-bold text-neutral-800">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-4 sm:mb-6 pb-4 border-b border-neutral-200">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <FileText size={24} className="text-info flex-shrink-0 sm:w-7 sm:h-7" />
+                <div className="min-w-0">
+                  <h2 className="text-lg sm:text-xl font-bold text-neutral-800 truncate">
                     {procedimentoAtual.nome}
                   </h2>
-                  <p className="text-sm text-neutral-600 mt-1">
+                  <p className="text-xs sm:text-sm text-neutral-600 mt-0.5 sm:mt-1">
                     {procedimentoAtual.categoria}
                   </p>
                 </div>
               </div>
 
               {/* Badges */}
-              <div className="flex flex-wrap gap-2 justify-end">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {procedimentoAtual.filaUnica && (
                   <Badge type="filaUnica">
                     <CheckCircle size={14} />

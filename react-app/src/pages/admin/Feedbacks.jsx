@@ -275,17 +275,17 @@ export default function Feedbacks() {
 
   return (
     <AdminLayout currentPage="feedbacks">
-      <div className="space-y-6">
-        <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-6">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-primary-700 rounded-md flex items-center justify-center shadow-sm">
-              <MessageSquareHeart className="w-7 h-7 text-white" />
+      <div className="space-y-4 sm:space-y-6">
+        <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-4 sm:p-6">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 bg-primary-700 rounded-md flex items-center justify-center shadow-sm flex-shrink-0">
+              <MessageSquareHeart className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-neutral-900">
+            <div className="min-w-0">
+              <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 truncate">
                 Feedbacks e Ouvidoria
               </h1>
-              <p className="text-neutral-600 text-sm">
+              <p className="text-neutral-600 text-xs sm:text-sm">
                 Gerencie elogios, sugestões e reclamações dos usuários
               </p>
             </div>
@@ -304,7 +304,7 @@ export default function Feedbacks() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
           <StatsCard
             icon={MessageSquareHeart}
             title="Total de Feedbacks"
@@ -339,11 +339,11 @@ export default function Feedbacks() {
           />
         </div>
 
-        <div className="bg-white rounded-md p-6 shadow-sm border border-neutral-300">
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="bg-white rounded-md p-4 sm:p-6 shadow-sm border border-neutral-300">
+          <div className="flex flex-col gap-3 sm:gap-4 mb-4 sm:mb-6">
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 w-5 h-5" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 w-4 h-4 sm:w-5 sm:h-5" />
                 <input
                   type="text"
                   placeholder="Buscar por nome ou email..."
@@ -351,19 +351,19 @@ export default function Feedbacks() {
                   onChange={(e) =>
                     setFilters({ ...filters, busca: e.target.value })
                   }
-                  className="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full pl-9 sm:pl-10 pr-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm"
                 />
               </div>
             </div>
-            <div className="flex gap-3">
+            <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-3">
               <select
                 value={filters.tipo}
                 onChange={(e) =>
                   setFilters({ ...filters, tipo: e.target.value })
                 }
-                className="px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white"
+                className="px-3 sm:px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-xs sm:text-sm"
               >
-                <option value="todos">Todos os Tipos</option>
+                <option value="todos">Todos Tipos</option>
                 <option value="elogio">Elogios</option>
                 <option value="sugestao">Sugestões</option>
                 <option value="reclamacao">Reclamações</option>
@@ -373,9 +373,9 @@ export default function Feedbacks() {
                 onChange={(e) =>
                   setFilters({ ...filters, status: e.target.value })
                 }
-                className="px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white"
+                className="px-3 sm:px-4 py-2 border border-neutral-300 rounded-md focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-xs sm:text-sm"
               >
-                <option value="todos">Todos os Status</option>
+                <option value="todos">Todos Status</option>
                 <option value="pendente">Pendente</option>
                 <option value="em_analise">Em Análise</option>
                 <option value="resolvido">Resolvido</option>
@@ -586,17 +586,17 @@ export default function Feedbacks() {
       </div>
 
       {showDetailModal && selectedFeedback && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4">
           <div className="bg-white rounded-md max-w-full sm:max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-neutral-300">
-            <div className="sticky top-0 bg-neutral-50 border-b border-neutral-300 px-6 py-4 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-neutral-900">
+            <div className="sticky top-0 bg-neutral-50 border-b border-neutral-300 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+              <h3 className="text-lg sm:text-xl font-bold text-neutral-900">
                 Detalhes do Feedback
               </h3>
               <button
                 onClick={handleCloseModal}
-                className="p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 rounded-md transition-colors"
+                className="p-1.5 sm:p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 rounded-md transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
 

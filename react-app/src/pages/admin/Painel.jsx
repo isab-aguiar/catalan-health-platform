@@ -23,30 +23,30 @@ import {
   MessageSquareHeart,
 } from "lucide-react";
 const AvisoItem = memo(({ aviso, getCategoriaColor, formatarData }) => (
-  <div className="flex items-start gap-4 p-4 bg-neutral-50 rounded-md hover:bg-neutral-100 transition-colors border border-neutral-200">
-    <div className="w-10 h-10 bg-info/10 rounded-md flex items-center justify-center flex-shrink-0 border border-blue-200">
-      <Bell className="w-5 h-5 text-primary-700" />
+  <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-neutral-50 rounded-md hover:bg-neutral-100 transition-colors border border-neutral-200">
+    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-info/10 rounded-md flex items-center justify-center flex-shrink-0 border border-blue-200">
+      <Bell className="w-4 h-4 sm:w-5 sm:h-5 text-primary-700" />
     </div>
     <div className="flex-1 min-w-0">
-      <div className="flex items-center gap-2 mb-1 flex-wrap">
-        <h3 className="font-semibold text-neutral-900 truncate text-sm">
+      <div className="flex items-center gap-1.5 sm:gap-2 mb-1 flex-wrap">
+        <h3 className="font-semibold text-neutral-900 truncate text-xs sm:text-sm">
           {aviso.titulo}
         </h3>
         <span
-          className={`px-2 py-0.5 rounded-md text-xs font-semibold border ${getCategoriaColor(aviso.categoria)}`}
+          className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[10px] sm:text-xs font-semibold border ${getCategoriaColor(aviso.categoria)}`}
         >
           {aviso.categoria}
         </span>
         {aviso.exibirNaHomepage && (
-          <span className="px-2 py-0.5 bg-success/10 text-green-800 border border-green-200 rounded-md text-xs font-semibold">
+          <span className="px-1.5 sm:px-2 py-0.5 bg-success/10 text-green-800 border border-green-200 rounded-md text-[10px] sm:text-xs font-semibold">
             Público
           </span>
         )}
       </div>
-      <p className="text-sm text-neutral-600 line-clamp-2 mb-2">
+      <p className="text-xs sm:text-sm text-neutral-600 line-clamp-2 mb-1.5 sm:mb-2">
         {aviso.descricao}
       </p>
-      <div className="flex items-center gap-2 text-xs text-neutral-500">
+      <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-neutral-500">
         <Calendar className="w-3 h-3" />
         <span>{formatarData(aviso.createdAt)}</span>
       </div>
@@ -188,99 +188,99 @@ export default function Painel() {
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-info" />
             Acesso Rápido
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3">
             {permissions.canViewAvisos() && (
               <Link
                 to="/admin/avisos"
-                className="flex flex-col items-center gap-3 p-4 border-2 border-blue-200 rounded-md hover:border-blue-400 hover:bg-info/10 transition-all group"
+                className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-blue-200 rounded-md hover:border-blue-400 hover:bg-info/10 transition-all group"
               >
-                <div className="w-12 h-12 bg-info/10 rounded-md flex items-center justify-center group-hover:bg-info-600 transition-colors border border-blue-200">
-                  <Bell className="w-6 h-6 text-primary-700 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-info/10 rounded-md flex items-center justify-center group-hover:bg-info-600 transition-colors border border-blue-200">
+                  <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-primary-700 group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="font-bold text-neutral-900 text-sm text-center">
-                  Gerenciar Avisos
+                <h3 className="font-bold text-neutral-900 text-xs sm:text-sm text-center">
+                  Avisos
                 </h3>
               </Link>
             )}
             {permissions.canViewAvisos() && (
               <Link
                 to="/admin/campanhas"
-                className="flex flex-col items-center gap-3 p-4 border-2 border-green-200 rounded-md hover:border-green-400 hover:bg-success/10 transition-all group"
+                className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-green-200 rounded-md hover:border-green-400 hover:bg-success/10 transition-all group"
               >
-                <div className="w-12 h-12 bg-success/10 rounded-md flex items-center justify-center group-hover:bg-green-600 transition-colors border border-green-200">
-                  <Megaphone className="w-6 h-6 text-green-700 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-success/10 rounded-md flex items-center justify-center group-hover:bg-green-600 transition-colors border border-green-200">
+                  <Megaphone className="w-5 h-5 sm:w-6 sm:h-6 text-green-700 group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="font-bold text-neutral-900 text-sm text-center">
-                  Gerenciar Campanhas
+                <h3 className="font-bold text-neutral-900 text-xs sm:text-sm text-center">
+                  Campanhas
                 </h3>
               </Link>
             )}
             {permissions.canManageUsers() && (
               <Link
                 to="/admin/users"
-                className="flex flex-col items-center gap-3 p-4 border-2 border-amber-200 rounded-md hover:border-amber-400 hover:bg-warning/10 transition-all group"
+                className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-amber-200 rounded-md hover:border-amber-400 hover:bg-warning/10 transition-all group"
               >
-                <div className="w-12 h-12 bg-warning/10 rounded-md flex items-center justify-center group-hover:bg-amber-600 transition-colors border border-amber-200">
-                  <Users className="w-6 h-6 text-amber-700 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-warning/10 rounded-md flex items-center justify-center group-hover:bg-amber-600 transition-colors border border-amber-200">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-amber-700 group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="font-bold text-neutral-900 text-sm text-center">
-                  Gerenciar Usuários
+                <h3 className="font-bold text-neutral-900 text-xs sm:text-sm text-center">
+                  Usuários
                 </h3>
               </Link>
             )}
             <Link
               to="/admin/estoque-vacinas"
-              className="flex flex-col items-center gap-3 p-4 border-2 border-neutral-300 rounded-md hover:border-neutral-500 hover:bg-neutral-50 transition-all group"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-neutral-300 rounded-md hover:border-neutral-500 hover:bg-neutral-50 transition-all group"
             >
-              <div className="w-12 h-12 bg-neutral-200 rounded-md flex items-center justify-center group-hover:bg-neutral-700 transition-colors border border-neutral-300">
-                <Package className="w-6 h-6 text-neutral-700 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-200 rounded-md flex items-center justify-center group-hover:bg-neutral-700 transition-colors border border-neutral-300">
+                <Package className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="font-bold text-neutral-900 text-sm text-center">
-                Estoque de Vacinas
+              <h3 className="font-bold text-neutral-900 text-xs sm:text-sm text-center">
+                Vacinas
               </h3>
             </Link>
             <Link
               to="/admin/orientacoes-pos-consulta"
-              className="flex flex-col items-center gap-3 p-4 border-2 border-purple-200 rounded-md hover:border-purple-400 hover:bg-purple-50 transition-all group"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-purple-200 rounded-md hover:border-purple-400 hover:bg-purple-50 transition-all group"
             >
-              <div className="w-12 h-12 bg-purple-100 rounded-md flex items-center justify-center group-hover:bg-purple-600 transition-colors border border-purple-200">
-                <ClipboardList className="w-6 h-6 text-purple-700 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-md flex items-center justify-center group-hover:bg-purple-600 transition-colors border border-purple-200">
+                <ClipboardList className="w-5 h-5 sm:w-6 sm:h-6 text-purple-700 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="font-bold text-neutral-900 text-sm text-center">
-                Orientações Pós-Consulta
+              <h3 className="font-bold text-neutral-900 text-xs sm:text-sm text-center">
+                Orientações
               </h3>
             </Link>
             <Link
               to="/admin/calendario"
-              className="flex flex-col items-center gap-3 p-4 border-2 border-indigo-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-all group"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-indigo-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-all group"
             >
-              <div className="w-12 h-12 bg-indigo-100 rounded-md flex items-center justify-center group-hover:bg-indigo-600 transition-colors border border-indigo-200">
-                <Calendar className="w-6 h-6 text-indigo-700 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-100 rounded-md flex items-center justify-center group-hover:bg-indigo-600 transition-colors border border-indigo-200">
+                <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-700 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="font-bold text-neutral-900 text-sm text-center">
-                Calendário de Eventos
+              <h3 className="font-bold text-neutral-900 text-xs sm:text-sm text-center">
+                Calendário
               </h3>
             </Link>
             <Link
               to="/admin/escalas"
-              className="flex flex-col items-center gap-3 p-4 border-2 border-teal-200 rounded-md hover:border-teal-400 hover:bg-teal-50 transition-all group"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-teal-200 rounded-md hover:border-teal-400 hover:bg-teal-50 transition-all group"
             >
-              <div className="w-12 h-12 bg-teal-100 rounded-md flex items-center justify-center group-hover:bg-teal-600 transition-colors border border-teal-200">
-                <CalendarDays className="w-6 h-6 text-teal-700 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-teal-100 rounded-md flex items-center justify-center group-hover:bg-teal-600 transition-colors border border-teal-200">
+                <CalendarDays className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="font-bold text-neutral-900 text-sm text-center">
-                Escalas de Trabalho
+              <h3 className="font-bold text-neutral-900 text-xs sm:text-sm text-center">
+                Escalas
               </h3>
             </Link>
             <Link
               to="/admin/feedbacks"
-              className="flex flex-col items-center gap-3 p-4 border-2 border-rose-200 rounded-md hover:border-rose-400 hover:bg-rose-50 transition-all group"
+              className="flex flex-col items-center gap-2 sm:gap-3 p-3 sm:p-4 border-2 border-rose-200 rounded-md hover:border-rose-400 hover:bg-rose-50 transition-all group"
             >
-              <div className="w-12 h-12 bg-rose-100 rounded-md flex items-center justify-center group-hover:bg-rose-600 transition-colors border border-rose-200">
-                <MessageSquareHeart className="w-6 h-6 text-rose-700 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-rose-100 rounded-md flex items-center justify-center group-hover:bg-rose-600 transition-colors border border-rose-200">
+                <MessageSquareHeart className="w-5 h-5 sm:w-6 sm:h-6 text-rose-700 group-hover:text-white transition-colors" />
               </div>
-              <h3 className="font-bold text-neutral-900 text-sm text-center">
-                Feedbacks e Ouvidoria
+              <h3 className="font-bold text-neutral-900 text-xs sm:text-sm text-center">
+                Feedbacks
               </h3>
             </Link>
           </div>
@@ -291,135 +291,136 @@ export default function Painel() {
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-info" />
             Ações Rápidas
           </h2>
-          <div className="grid grid-cols-1 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 gap-2 sm:gap-3">
             {permissions.canViewAvisos() && (
               <Link
                 to="/admin/avisos"
-                className="flex items-center gap-4 p-4 border-2 border-blue-200 rounded-md hover:border-blue-400 hover:bg-info/10 transition-all group"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-blue-200 rounded-md hover:border-blue-400 hover:bg-info/10 transition-all group"
               >
-                <div className="w-12 h-12 bg-info/10 rounded-md flex items-center justify-center group-hover:bg-info-600 transition-colors border border-blue-200">
-                  <Bell className="w-6 h-6 text-primary-700 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-info/10 rounded-md flex items-center justify-center group-hover:bg-info-600 transition-colors border border-blue-200 flex-shrink-0">
+                  <Bell className="w-5 h-5 sm:w-6 sm:h-6 text-primary-700 group-hover:text-white transition-colors" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-neutral-900 text-base">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-neutral-900 text-sm sm:text-base truncate">
                     Gerenciar Avisos
                   </h3>
-                  <p className="text-sm text-neutral-600">
+                  <p className="text-xs sm:text-sm text-neutral-600 truncate">
                     {permissions.canDeleteAvisos()
                       ? "Criar, editar e excluir avisos"
                       : "Criar e editar avisos"}
                   </p>
                 </div>
-                <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-info group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-info group-hover:translate-x-1 transition-all flex-shrink-0" />
               </Link>
             )}
             {permissions.canViewAvisos() && (
               <Link
                 to="/admin/campanhas"
-                className="flex items-center gap-4 p-4 border-2 border-green-200 rounded-md hover:border-green-400 hover:bg-success/10 transition-all group"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-green-200 rounded-md hover:border-green-400 hover:bg-success/10 transition-all group"
               >
-                <div className="w-12 h-12 bg-success/10 rounded-md flex items-center justify-center group-hover:bg-green-600 transition-colors border border-green-200">
-                  <Megaphone className="w-6 h-6 text-green-700 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-success/10 rounded-md flex items-center justify-center group-hover:bg-green-600 transition-colors border border-green-200 flex-shrink-0">
+                  <Megaphone className="w-5 h-5 sm:w-6 sm:h-6 text-green-700 group-hover:text-white transition-colors" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-neutral-900 text-base">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-neutral-900 text-sm sm:text-base truncate">
                     Gerenciar Campanhas
                   </h3>
-                  <p className="text-sm text-neutral-600">
+                  <p className="text-xs sm:text-sm text-neutral-600 truncate">
                     Editar, ativar ou excluir campanhas
                   </p>
                 </div>
-                <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-success group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-success group-hover:translate-x-1 transition-all flex-shrink-0" />
               </Link>
             )}
             <Link
               to="/admin/calendario"
-              className="flex items-center gap-4 p-4 border-2 border-purple-200 rounded-md hover:border-purple-400 hover:bg-purple-50 transition-all group"
+              className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-purple-200 rounded-md hover:border-purple-400 hover:bg-purple-50 transition-all group"
             >
-              <div className="w-12 h-12 bg-purple-100 rounded-md flex items-center justify-center group-hover:bg-purple-600 transition-colors border border-purple-200">
-                <Calendar className="w-6 h-6 text-purple-700 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-md flex items-center justify-center group-hover:bg-purple-600 transition-colors border border-purple-200 flex-shrink-0">
+                <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-purple-700 group-hover:text-white transition-colors" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-bold text-neutral-900 text-base">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-neutral-900 text-sm sm:text-base truncate">
                   Calendário
                 </h3>
-                <p className="text-sm text-neutral-600">
+                <p className="text-xs sm:text-sm text-neutral-600 truncate">
                   Gerenciar reuniões, lembretes e agendamentos
                 </p>
               </div>
-              <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
             </Link>
             <Link
               to="/admin/escalas"
-              className="flex items-center gap-4 p-4 border-2 border-teal-200 rounded-md hover:border-teal-400 hover:bg-teal-50 transition-all group"
+              className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-teal-200 rounded-md hover:border-teal-400 hover:bg-teal-50 transition-all group"
             >
-              <div className="w-12 h-12 bg-teal-100 rounded-md flex items-center justify-center group-hover:bg-teal-600 transition-colors border border-teal-200">
-                <Users className="w-6 h-6 text-teal-700 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-teal-100 rounded-md flex items-center justify-center group-hover:bg-teal-600 transition-colors border border-teal-200 flex-shrink-0">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 group-hover:text-white transition-colors" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-bold text-neutral-900 text-base">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-neutral-900 text-sm sm:text-base truncate">
                   Escalas de Trabalho
                 </h3>
-                <p className="text-sm text-neutral-600">
+                <p className="text-xs sm:text-sm text-neutral-600 truncate">
                   Visualizar e montar escalas mensais
                 </p>
               </div>
-              <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all flex-shrink-0" />
             </Link>
             <Link
               to="/admin/estoque-vacinas"
-              className="flex items-center gap-4 p-4 border-2 border-neutral-300 rounded-md hover:border-neutral-500 hover:bg-neutral-50 transition-all group"
+              className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-neutral-300 rounded-md hover:border-neutral-500 hover:bg-neutral-50 transition-all group"
             >
-              <div className="w-12 h-12 bg-neutral-200 rounded-md flex items-center justify-center group-hover:bg-neutral-700 transition-colors border border-neutral-300">
-                <Package className="w-6 h-6 text-neutral-700 group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-200 rounded-md flex items-center justify-center group-hover:bg-neutral-700 transition-colors border border-neutral-300 flex-shrink-0">
+                <Package className="w-5 h-5 sm:w-6 sm:h-6 text-neutral-700 group-hover:text-white transition-colors" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-bold text-neutral-900 text-base">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-neutral-900 text-sm sm:text-base truncate">
                   Estoque de Vacinas
                 </h3>
-                <p className="text-sm text-neutral-600">
+                <p className="text-xs sm:text-sm text-neutral-600 truncate">
                   Visualizar e controlar o estoque de vacinas
                 </p>
               </div>
-              <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-neutral-700 group-hover:translate-x-1 transition-all" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-neutral-700 group-hover:translate-x-1 transition-all flex-shrink-0" />
             </Link>
             {permissions.canManageUsers() && (
               <Link
                 to="/admin/users"
-                className="flex items-center gap-4 p-4 border-2 border-green-200 rounded-md hover:border-green-400 hover:bg-success/10 transition-all group"
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 border-2 border-green-200 rounded-md hover:border-green-400 hover:bg-success/10 transition-all group"
               >
-                <div className="w-12 h-12 bg-success/10 rounded-md flex items-center justify-center group-hover:bg-green-600 transition-colors border border-green-200">
-                  <Users className="w-6 h-6 text-green-700 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-success/10 rounded-md flex items-center justify-center group-hover:bg-green-600 transition-colors border border-green-200 flex-shrink-0">
+                  <Users className="w-5 h-5 sm:w-6 sm:h-6 text-green-700 group-hover:text-white transition-colors" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-neutral-900 text-base">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-bold text-neutral-900 text-sm sm:text-base truncate">
                     Gerenciar Usuários
                   </h3>
-                  <p className="text-sm text-neutral-600">
+                  <p className="text-xs sm:text-sm text-neutral-600 truncate">
                     Administrar usuários e permissões
                   </p>
                 </div>
-                <ArrowRight className="w-5 h-5 text-neutral-400 group-hover:text-success group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-400 group-hover:text-success group-hover:translate-x-1 transition-all flex-shrink-0" />
               </Link>
             )}
           </div>
         </div>
-        {}
+        {/* Avisos Recentes */}
         {ultimosAvisos.length > 0 && (
-          <div className="bg-white rounded-md p-6 shadow-sm border border-neutral-300">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold text-neutral-900">
+          <div className="bg-white rounded-md p-4 sm:p-6 shadow-sm border border-neutral-300">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <h2 className="text-base sm:text-lg font-bold text-neutral-900">
                 Avisos Recentes
               </h2>
               <Link
                 to="/admin/avisos"
-                className="text-sm text-primary-700 hover:text-primary-800 font-semibold flex items-center gap-1 hover:underline"
+                className="text-xs sm:text-sm text-primary-700 hover:text-primary-800 font-semibold flex items-center gap-1 hover:underline"
               >
-                Visualizar Todos
-                <ArrowRight className="w-4 h-4" />
+                <span className="hidden sm:inline">Visualizar Todos</span>
+                <span className="sm:hidden">Ver todos</span>
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </Link>
             </div>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {ultimosAvisos.map((aviso) => (
                 <AvisoItem
                   key={aviso.id}

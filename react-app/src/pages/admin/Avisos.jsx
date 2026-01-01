@@ -317,22 +317,22 @@ export default function Avisos() {
       </div>
       {}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4">
           <div className="bg-white rounded-md max-w-full sm:max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-neutral-300">
-            {}
-            <div className="sticky top-0 bg-neutral-50 border-b border-neutral-300 px-6 py-4 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-neutral-900">
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-neutral-50 border-b border-neutral-300 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+              <h3 className="text-lg sm:text-xl font-bold text-neutral-900">
                 {editingAviso ? "Editar Aviso" : "Cadastrar Novo Aviso"}
               </h3>
               <button
                 onClick={handleFecharModal}
-                className="p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 rounded-md transition-colors"
+                className="p-1.5 sm:p-2 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 rounded-md transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
-            {}
-            <div className="p-6 space-y-4">
+            {/* Modal Body */}
+            <div className="p-4 sm:p-6 space-y-4">
               {formError && (
                 <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-md">
                   <div className="flex gap-3">
@@ -466,18 +466,18 @@ export default function Avisos() {
                 )}
               </div>
             </div>
-            {}
-            <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-6 py-4 flex items-center justify-end gap-3">
+            {/* Modal Footer */}
+            <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-3">
               <button
                 onClick={handleFecharModal}
-                className="px-4 py-2 text-neutral-700 hover:bg-neutral-200 rounded-md transition-colors font-medium border border-neutral-300"
+                className="px-4 py-2 text-neutral-700 hover:bg-neutral-200 rounded-md transition-colors font-medium border border-neutral-300 text-sm order-2 sm:order-1"
               >
                 Cancelar
               </button>
               <button
                 onClick={handleSalvar}
                 disabled={formLoading}
-                className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 border border-blue-700 shadow-sm"
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 hover:bg-info-700 text-white rounded-md transition-colors font-medium disabled:opacity-50 border border-blue-700 shadow-sm text-sm order-1 sm:order-2"
               >
                 {formLoading ? (
                   <>

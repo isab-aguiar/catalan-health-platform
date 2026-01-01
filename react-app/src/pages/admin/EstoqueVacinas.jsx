@@ -77,128 +77,101 @@ export default function EstoqueVacinas() {
   return (
     <AdminLayout currentPage="estoque-vacinas">
       <div className="max-w-7xl mx-auto space-y-6">
-        {}
-        <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-6">
+        {/* Header */}
+        <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4 sm:p-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 bg-primary-700 rounded-md flex items-center justify-center">
-              <Shield className="w-6 h-6 text-white" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-700 rounded-md flex items-center justify-center flex-shrink-0">
+              <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </div>
-            <div>
-              <h1
-                className="text-2xl font-bold text-neutral-900"
-              >
+            <div className="min-w-0">
+              <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 truncate">
                 Estoque de Vacinas
               </h1>
-              <p
-                className="text-sm text-neutral-600"
-              >
+              <p className="text-xs sm:text-sm text-neutral-600">
                 Controle e monitoramento do estoque de vacinas
               </p>
             </div>
           </div>
         </div>
-        {}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <span
-                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
-              >
-                Total de Vacinas
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-3 sm:p-4">
+            <div className="flex items-center justify-between mb-1 sm:mb-2">
+              <span className="text-[10px] sm:text-xs font-semibold text-neutral-600 uppercase tracking-wide">
+                Total
               </span>
-              <Package className="w-4 h-4 text-neutral-500" />
+              <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neutral-500" />
             </div>
-            <p
-              className="text-2xl font-bold text-neutral-900"
-            >
+            <p className="text-xl sm:text-2xl font-bold text-neutral-900">
               {estatisticas.totalVacinas}
             </p>
           </div>
-          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <span
-                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
-              >
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-3 sm:p-4">
+            <div className="flex items-center justify-between mb-1 sm:mb-2">
+              <span className="text-[10px] sm:text-xs font-semibold text-neutral-600 uppercase tracking-wide">
                 Com Estoque
               </span>
-              <TrendingUp className="w-4 h-4 text-success" />
+              <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-success" />
             </div>
-            <p
-              className="text-2xl font-bold text-green-700"
-            >
+            <p className="text-xl sm:text-2xl font-bold text-green-700">
               {estatisticas.vacinasComEstoque}
             </p>
           </div>
-          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <span
-                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
-              >
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-3 sm:p-4">
+            <div className="flex items-center justify-between mb-1 sm:mb-2">
+              <span className="text-[10px] sm:text-xs font-semibold text-neutral-600 uppercase tracking-wide">
                 Sem Estoque
               </span>
-              <TrendingDown className="w-4 h-4 text-error" />
+              <TrendingDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-error" />
             </div>
-            <p
-              className="text-2xl font-bold text-red-700"
-            >
+            <p className="text-xl sm:text-2xl font-bold text-red-700">
               {estatisticas.vacinasSemEstoque}
             </p>
           </div>
-          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <span
-                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-3 sm:p-4">
+            <div className="flex items-center justify-between mb-1 sm:mb-2">
+              <span className="text-[10px] sm:text-xs font-semibold text-neutral-600 uppercase tracking-wide"
               >
                 Total de Doses
               </span>
-              <Shield className="w-4 h-4 text-info" />
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-info" />
             </div>
-            <p
-              className="text-2xl font-bold text-primary-700"
-            >
+            <p className="text-xl sm:text-2xl font-bold text-primary-700">
               {formatarNumero(estatisticas.totalDoses)}
             </p>
           </div>
-          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4">
-            <div className="flex items-center justify-between mb-2">
-              <span
-                className="text-xs font-semibold text-neutral-600 uppercase tracking-wide"
-              >
+          <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-3 sm:p-4">
+            <div className="flex items-center justify-between mb-1 sm:mb-2">
+              <span className="text-[10px] sm:text-xs font-semibold text-neutral-600 uppercase tracking-wide">
                 Publicadas
               </span>
-              <Shield className="w-4 h-4 text-neutral-500" />
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-neutral-500" />
             </div>
-            <p
-              className="text-2xl font-bold text-neutral-900"
-            >
+            <p className="text-xl sm:text-2xl font-bold text-neutral-900">
               {estatisticas.vacinasPublicadas}
             </p>
           </div>
         </div>
-        {}
+        {/* Vacinas Table */}
         <div className="bg-white rounded-md shadow-sm border border-neutral-300 overflow-hidden">
-          <div className="bg-primary-700 p-5">
-            <div className="flex items-center justify-between">
+          <div className="bg-primary-700 p-4 sm:p-5">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-white/20 rounded-md flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-white" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-md flex items-center justify-center flex-shrink-0">
+                  <Shield className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <div>
-                  <h2
-                    className="text-lg font-semibold text-white"
-                  >
+                <div className="min-w-0">
+                  <h2 className="text-base sm:text-lg font-semibold text-white truncate">
                     Programação de Vacinas
                   </h2>
-                  <p
-                    className="text-neutral-200 text-xs mt-1"
-                  >
+                  <p className="text-neutral-200 text-[10px] sm:text-xs mt-0.5 sm:mt-1">
                     Gerencie quantidade, período e publicação das vacinas do SUS
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setShowModalVacina(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-white text-neutral-700 rounded-md hover:bg-neutral-100 transition-colors font-semibold text-sm shadow-sm"
+                className="flex items-center justify-center gap-2 px-3 sm:px-4 py-2 bg-white text-neutral-700 rounded-md hover:bg-neutral-100 transition-colors font-semibold text-xs sm:text-sm shadow-sm w-full sm:w-auto"
               >
                 <Plus className="w-4 h-4" />
                 Nova Vacina
