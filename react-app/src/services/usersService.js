@@ -146,15 +146,33 @@ export async function updateUser(uid, updates) {
     if (!uid) {
       return { success: false, error: "UID é obrigatório" };
     }
-    const userRef = doc(db, COLLECTION_NAME, uid);
-    const updateData = {
-      ...updates,
-      updatedAt: Timestamp.now(),
-    };
-    delete updateData.uid;
-    delete updateData.createdAt;
-    delete updateData.createdBy;
-    await updateDoc(userRef, updateData);
+
+    // Se email está sendo atualizado, usar Cloud Function
+    if (updates.email) {
+      const emailResult = await updateUserEmail(uid, updates.email);
+      if (!emailResult.success) {
+        return emailResult;
+      }
+      // Remove email from updates since it was handled by Cloud Function
+      delete updates.email;
+    }
+
+    // Se houver outras atualizações, aplicar no Firestore
+    if (Object.keys(updates).length > 0) {
+      const userRef = doc(db, COLLECTION_NAME, uid);
+      const updateData = {
+        ...updates,
+        updatedAt: Timestamp.now(),
+      };
+
+      // Proteger campos sensíveis
+      delete updateData.uid;
+      delete updateData.createdAt;
+      delete updateData.createdBy;
+
+      await updateDoc(userRef, updateData);
+    }
+
     return { success: true };
   } catch (error) {
     console.error("Erro ao atualizar usuário:", error);
@@ -310,6 +328,57 @@ export async function setUserPasswordByAdmin(uid, newPassword) {
     return { success: false, error: errorMessage };
   }
 }
+
+/**
+ * Admin atualiza email do usuário
+ * Atualiza no Authentication e Firestore via Cloud Function
+ */
+export async function updateUserEmail(uid, newEmail) {
+  try {
+    if (!uid) {
+      return { success: false, error: "UID é obrigatório" };
+    }
+
+    if (!newEmail || !newEmail.trim()) {
+      return { success: false, error: "Email é obrigatório" };
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newEmail)) {
+      return { success: false, error: "Email inválido" };
+    }
+
+    if (!functions) {
+      return {
+        success: false,
+        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+      };
+    }
+
+    const updateEmailFn = httpsCallable(functions, "updateUserEmail");
+    const result = await updateEmailFn({ uid, newEmail });
+
+    return {
+      success: true,
+      message: result.data.message,
+    };
+  } catch (error) {
+    console.error("Erro ao atualizar email:", error);
+
+    let errorMessage = error.message;
+
+    if (error.code === "auth/email-already-in-use") {
+      errorMessage = "Este email já está em uso";
+    } else if (error.code === "auth/invalid-email") {
+      errorMessage = "Email inválido";
+    } else if (error.code === "permission-denied") {
+      errorMessage = error.message;
+    }
+
+    return { success: false, error: errorMessage };
+  }
+}
+
 export async function setUserData(uid, userData) {
   try {
     if (!uid) {

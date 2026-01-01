@@ -548,3 +548,132 @@ exports.updateUserRole = functions.https.onCall(async (data, context) => {
     );
   }
 });
+
+/**
+ * Cloud Function: Atualizar email do usuário
+ * Atualiza no Auth e no Firestore de forma segura
+ */
+exports.updateUserEmail = functions.https.onCall(async (data, context) => {
+  // Verificar autenticação
+  if (!context.auth) {
+    throw new functions.https.HttpsError(
+      "unauthenticated",
+      "Você precisa estar autenticado para executar esta ação"
+    );
+  }
+
+  const performerUid = context.auth.uid;
+  const { uid, newEmail } = data;
+
+  // Validar parâmetros
+  if (!uid) {
+    throw new functions.https.HttpsError(
+      "invalid-argument",
+      "UID do usuário é obrigatório"
+    );
+  }
+
+  if (!newEmail) {
+    throw new functions.https.HttpsError(
+      "invalid-argument",
+      "Novo email é obrigatório"
+    );
+  }
+
+  // Validar formato do email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(newEmail)) {
+    throw new functions.https.HttpsError(
+      "invalid-argument",
+      "Email inválido"
+    );
+  }
+
+  try {
+    // Verificar se quem está executando é admin
+    const isAdminUser = await isAdmin(performerUid);
+    if (!isAdminUser) {
+      throw new functions.https.HttpsError(
+        "permission-denied",
+        "Apenas administradores podem atualizar emails de usuários"
+      );
+    }
+
+    // Não permitir modificar próprio email
+    if (uid === performerUid) {
+      throw new functions.https.HttpsError(
+        "permission-denied",
+        "Use o perfil para atualizar seu próprio email"
+      );
+    }
+
+    // Buscar dados do usuário
+    const targetUser = await getUserData(uid);
+    if (!targetUser) {
+      throw new functions.https.HttpsError(
+        "not-found",
+        "Usuário não encontrado"
+      );
+    }
+
+    // Proteger conta root
+    if (targetUser.email === "root@esfcatalao.com") {
+      throw new functions.https.HttpsError(
+        "permission-denied",
+        "Não é permitido modificar o email do usuário root"
+      );
+    }
+
+    const oldEmail = targetUser.email;
+
+    // Atualizar no Firebase Authentication
+    await admin.auth().updateUser(uid, {
+      email: newEmail,
+    });
+
+    console.log(`Email atualizado no Auth: ${oldEmail} -> ${newEmail}`);
+
+    // Atualizar no Firestore
+    await admin.firestore().collection("users").doc(uid).update({
+      email: newEmail,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    console.log(`Email atualizado no Firestore: ${uid}`);
+
+    // Log de auditoria
+    await admin.firestore().collection("audit_logs").add({
+      action: "UPDATE_USER_EMAIL",
+      performedBy: performerUid,
+      targetUser: uid,
+      oldEmail,
+      newEmail,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+      success: true,
+    });
+
+    return {
+      success: true,
+      message: `Email atualizado com sucesso: ${oldEmail} -> ${newEmail}`,
+    };
+  } catch (error) {
+    console.error("Erro ao atualizar email:", error);
+
+    if (error instanceof functions.https.HttpsError) {
+      throw error;
+    }
+
+    // Tratar erro de email já em uso
+    if (error.code === "auth/email-already-exists") {
+      throw new functions.https.HttpsError(
+        "already-exists",
+        "Este email já está em uso"
+      );
+    }
+
+    throw new functions.https.HttpsError(
+      "internal",
+      `Erro ao atualizar email: ${error.message}`
+    );
+  }
+});

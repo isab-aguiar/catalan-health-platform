@@ -17,9 +17,37 @@ import {
   Briefcase,
   Eye,
   Trash2,
+  Key,
 } from "lucide-react";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Alert from "../../components/common/Alert";
+
+// Validation utilities
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
+
+const validateEmail = (email) => {
+  if (!email?.trim()) return "Email é obrigatório";
+  if (!EMAIL_REGEX.test(email)) return "Email inválido. Use o formato: usuario@exemplo.com";
+  return null;
+};
+
+const validatePassword = (password) => {
+  if (!password || password.length < 8) {
+    return "Senha deve ter no mínimo 8 caracteres";
+  }
+  if (!PASSWORD_REGEX.test(password)) {
+    return "Senha deve conter pelo menos uma letra E um número";
+  }
+  return null;
+};
+
+const validateDisplayName = (name) => {
+  if (!name?.trim()) return "Nome é obrigatório";
+  if (name.trim().length < 3) return "Nome deve ter no mínimo 3 caracteres";
+  return null;
+};
+
 export default function Users() {
   const { currentUser } = useAuth();
   const { showModal } = useModal();
@@ -31,6 +59,9 @@ export default function Users() {
     updateUserRole,
     toggleUserActive,
     deleteUser,
+    updateUser,
+    resetPassword,
+    setPassword,
   } = useUsers();
   const [showFormModal, setShowFormModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
@@ -39,10 +70,17 @@ export default function Users() {
     displayName: "",
     password: "",
     role: "diretoria",
+    active: true,
   });
   const [formError, setFormError] = useState("");
   const [formLoading, setFormLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(null);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [passwordModalType, setPasswordModalType] = useState('reset');
+  const [selectedUserForPassword, setSelectedUserForPassword] = useState(null);
+  const [newPasswordInput, setNewPasswordInput] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   // Bloquear scroll quando modal estiver aberto
   useEffect(() => {
@@ -70,18 +108,20 @@ export default function Users() {
       displayName: "",
       password: "",
       role: "diretoria",
+      active: true,
     });
     setFormError("");
     setShowFormModal(true);
   };
-  // Abrir modal para editar role do usuário
-  const handleEditarRole = (user) => {
+  // Abrir modal para editar usuário
+  const handleEditarUsuario = (user) => {
     setEditingUser(user);
     setFormData({
       email: user.email,
       displayName: user.displayName,
-      password: "", // Não permitir mudança de senha
+      password: "", // Não permitir mudança de senha aqui
       role: user.role,
+      active: user.active,
     });
     setFormError("");
     setShowFormModal(true);
@@ -95,23 +135,31 @@ export default function Users() {
       displayName: "",
       password: "",
       role: "diretoria",
+      active: true,
     });
     setFormError("");
   };
   // Validar formulário
   const validarFormulario = () => {
-    if (!formData.email.trim()) {
-      return "Email é obrigatório";
+    // Validate email
+    const emailError = validateEmail(formData.email);
+    if (emailError) return emailError;
+
+    // Validate display name
+    const nameError = validateDisplayName(formData.displayName);
+    if (nameError) return nameError;
+
+    // Validate password (only for new users)
+    if (!editingUser) {
+      const passwordError = validatePassword(formData.password);
+      if (passwordError) return passwordError;
     }
-    if (!formData.displayName.trim()) {
-      return "Nome é obrigatório";
-    }
-    if (!editingUser && (!formData.password || formData.password.length < 6)) {
-      return "Senha deve ter no mínimo 6 caracteres";
-    }
+
+    // Validate role
     if (!formData.role) {
       return "Role é obrigatório";
     }
+
     return null;
   };
   const handleSalvar = async () => {
@@ -124,13 +172,58 @@ export default function Users() {
     setFormLoading(true);
     try {
       if (editingUser) {
-        // Apenas atualizar role
-        const result = await updateUserRole(editingUser.uid, formData.role);
+        // Build updates object
+        const updates = {};
+
+        if (formData.displayName !== editingUser.displayName) {
+          updates.displayName = formData.displayName;
+        }
+
+        if (formData.role !== editingUser.role) {
+          updates.role = formData.role;
+        }
+
+        if (formData.active !== editingUser.active) {
+          updates.active = formData.active;
+        }
+
+        // Email change requires confirmation
+        if (formData.email !== editingUser.email) {
+          const confirmEmailChange = await showModal({
+            type: 'warning',
+            title: 'Alterar Email',
+            message: 'Alterar o email do usuário irá:\n• Atualizar no Firebase Authentication\n• Pode deslogar o usuário\n• Requerer novo login\n\nDeseja continuar?',
+            confirmText: 'Sim, alterar',
+            cancelText: 'Cancelar',
+          });
+
+          if (!confirmEmailChange) {
+            setFormLoading(false);
+            return;
+          }
+
+          updates.email = formData.email;
+        }
+
+        // If nothing changed
+        if (Object.keys(updates).length === 0) {
+          setFormError("Nenhuma alteração detectada");
+          setFormLoading(false);
+          return;
+        }
+
+        // Update user
+        const result = await updateUser(editingUser.uid, updates);
         if (result.success) {
           handleFecharModal();
-          alert("Role atualizado com sucesso!");
+          await showModal({
+            type: 'success',
+            title: 'Usuário Atualizado',
+            message: 'Dados do usuário atualizados com sucesso!',
+            confirmText: 'OK',
+          });
         } else {
-          setFormError(result.error || "Erro ao atualizar role");
+          setFormError(result.error || "Erro ao atualizar usuário");
         }
       } else {
         const result = await createUser(
@@ -144,7 +237,12 @@ export default function Users() {
         );
         if (result.success) {
           handleFecharModal();
-          alert("Usuário criado com sucesso!");
+          await showModal({
+            type: 'success',
+            title: 'Usuário Criado',
+            message: 'Usuário criado com sucesso!',
+            confirmText: 'OK',
+          });
         } else {
           setFormError(result.error || "Erro ao criar usuário");
         }
@@ -155,32 +253,131 @@ export default function Users() {
       setFormLoading(false);
     }
   };
+  const handleResetPassword = (user) => {
+    setSelectedUserForPassword(user);
+    setPasswordModalType('reset');
+    setNewPasswordInput('');
+    setPasswordError('');
+    setShowPasswordModal(true);
+  };
+
+  const handleSetPassword = (user) => {
+    setSelectedUserForPassword(user);
+    setPasswordModalType('set');
+    setNewPasswordInput('');
+    setPasswordError('');
+    setShowPasswordModal(true);
+  };
+
+  const handleClosePasswordModal = () => {
+    setShowPasswordModal(false);
+    setSelectedUserForPassword(null);
+    setNewPasswordInput('');
+    setPasswordError('');
+    setPasswordModalType('reset');
+  };
+
+  const handlePasswordSubmit = async () => {
+    setPasswordError('');
+
+    if (passwordModalType === 'reset') {
+      setPasswordLoading(true);
+      try {
+        const result = await resetPassword(selectedUserForPassword.email);
+        if (result.success) {
+          handleClosePasswordModal();
+          await showModal({
+            type: 'success',
+            title: 'Email Enviado',
+            message: `Email de reset enviado para ${selectedUserForPassword.email}`,
+            confirmText: 'OK',
+          });
+        } else {
+          setPasswordError(result.error || 'Erro ao enviar email');
+        }
+      } finally {
+        setPasswordLoading(false);
+      }
+    } else {
+      const passwordValidation = validatePassword(newPasswordInput);
+      if (passwordValidation) {
+        setPasswordError(passwordValidation);
+        return;
+      }
+
+      setPasswordLoading(true);
+      try {
+        const result = await setPassword(selectedUserForPassword.uid, newPasswordInput);
+        if (result.success) {
+          handleClosePasswordModal();
+          await showModal({
+            type: 'success',
+            title: 'Senha Atualizada',
+            message: `Senha definida com sucesso para ${selectedUserForPassword.email}`,
+            confirmText: 'OK',
+          });
+        } else {
+          setPasswordError(result.error || 'Erro ao definir senha');
+        }
+      } finally {
+        setPasswordLoading(false);
+      }
+    }
+  };
+
   const handleToggleActive = async (uid, currentActive) => {
     if (uid === currentUser.uid) {
-      alert("Você não pode desativar sua própria conta!");
+      await showModal({
+        type: 'error',
+        title: 'Ação Não Permitida',
+        message: 'Você não pode desativar sua própria conta!',
+        confirmText: 'OK',
+      });
       return;
     }
+
     const newStatus = !currentActive;
     const confirmMsg = newStatus
       ? "Tem certeza que deseja ativar este usuário?"
       : "Tem certeza que deseja desativar este usuário? Ele não poderá mais fazer login.";
-    if (!window.confirm(confirmMsg)) {
+
+    const confirmed = await showModal({
+      type: newStatus ? 'info' : 'warning',
+      title: newStatus ? 'Ativar Usuário' : 'Desativar Usuário',
+      message: confirmMsg,
+      confirmText: 'Confirmar',
+      cancelText: 'Cancelar',
+    });
+
+    if (!confirmed) {
       return;
     }
+
     setActionLoading(uid);
     try {
       const result = await toggleUserActive(uid, newStatus);
       if (result.success) {
-        alert(
-          newStatus
-            ? "Usuário ativado com sucesso!"
-            : "Usuário desativado com sucesso!"
-        );
+        await showModal({
+          type: 'success',
+          title: 'Status Atualizado',
+          message: newStatus ? 'Usuário ativado com sucesso!' : 'Usuário desativado com sucesso!',
+          confirmText: 'OK',
+        });
       } else {
-        alert("Erro: " + (result.error || "Erro desconhecido"));
+        await showModal({
+          type: 'error',
+          title: 'Erro',
+          message: result.error || 'Erro desconhecido',
+          confirmText: 'OK',
+        });
       }
     } catch (err) {
-      alert("Erro inesperado ao alterar status do usuário");
+      await showModal({
+        type: 'error',
+        title: 'Erro',
+        message: 'Erro inesperado ao alterar status do usuário',
+        confirmText: 'OK',
+      });
     } finally {
       setActionLoading(null);
     }
@@ -407,13 +604,42 @@ export default function Users() {
                     </div>
                     <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0 justify-end border-t sm:border-t-0 pt-3 sm:pt-0 mt-1 sm:mt-0">
                       <button
-                        onClick={() => handleEditarRole(user)}
+                        onClick={() => handleEditarUsuario(user)}
                         disabled={isCurrentUser}
                         className="p-1.5 sm:p-2 text-info hover:bg-info/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                        title="Editar Role"
+                        title="Editar Usuário"
                       >
                         <Edit className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
+
+                      {/* Dropdown para gerenciar senha */}
+                      <div className="relative group">
+                        <button
+                          disabled={isCurrentUser}
+                          className="p-1.5 sm:p-2 text-warning hover:bg-warning/10 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                          title="Gerenciar Senha"
+                        >
+                          <Key className="w-4 h-4 sm:w-5 sm:h-5" />
+                        </button>
+
+                        {!isCurrentUser && (
+                          <div className="absolute right-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-neutral-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
+                            <button
+                              onClick={() => handleResetPassword(user)}
+                              className="w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 rounded-t-lg"
+                            >
+                              Enviar Email de Reset
+                            </button>
+                            <button
+                              onClick={() => handleSetPassword(user)}
+                              className="w-full text-left px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 rounded-b-lg"
+                            >
+                              Definir Senha Manualmente
+                            </button>
+                          </div>
+                        )}
+                      </div>
+
                       <button
                         onClick={() =>
                           handleToggleActive(user.uid, user.active)
@@ -458,12 +684,94 @@ export default function Users() {
             Voltar para o site público
           </a>
         </div>
+        {/* Password Management Modal */}
+        {showPasswordModal && selectedUserForPassword && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl max-w-md w-full">
+              <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+                <h3 className="text-xl font-bold text-neutral-900">
+                  {passwordModalType === 'reset' ? 'Enviar Email de Reset' : 'Definir Nova Senha'}
+                </h3>
+                <button
+                  onClick={handleClosePasswordModal}
+                  className="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-4">
+                {passwordError && <Alert type="error">{passwordError}</Alert>}
+
+                <Alert type="info">
+                  Usuário: <strong>{selectedUserForPassword.displayName}</strong><br />
+                  Email: <strong>{selectedUserForPassword.email}</strong>
+                </Alert>
+
+                {passwordModalType === 'reset' ? (
+                  <div>
+                    <p className="text-sm text-neutral-700 mb-4">
+                      Um email será enviado para <strong>{selectedUserForPassword.email}</strong> com instruções para redefinir a senha.
+                    </p>
+                    <Alert type="warning">
+                      O usuário receberá um link por email que expira em 1 hora.
+                    </Alert>
+                  </div>
+                ) : (
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                      Nova Senha <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="password"
+                      value={newPasswordInput}
+                      onChange={(e) => setNewPasswordInput(e.target.value)}
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="Mínimo 8 caracteres (letras e números)"
+                      minLength={8}
+                    />
+                    <p className="text-xs text-neutral-500 mt-1">
+                      A senha deve ter no mínimo 8 caracteres, contendo letras E números
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="sticky bottom-0 bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-end gap-3">
+                <button
+                  onClick={handleClosePasswordModal}
+                  className="px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors font-medium"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handlePasswordSubmit}
+                  disabled={passwordLoading}
+                  className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50"
+                >
+                  {passwordLoading ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      {passwordModalType === 'reset' ? 'Enviando...' : 'Definindo...'}
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4" />
+                      {passwordModalType === 'reset' ? 'Enviar Email' : 'Definir Senha'}
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {showFormModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
               <h3 className="text-xl font-bold text-neutral-900">
-                {editingUser ? "Editar Role do Usuário" : "Novo Usuário"}
+                {editingUser ? "Editar Usuário" : "Novo Usuário"}
               </h3>
               <button
                 onClick={handleFecharModal}
@@ -476,8 +784,10 @@ export default function Users() {
               {formError && <Alert type="error">{formError}</Alert>}
               {editingUser && (
                 <Alert type="info">
-                  Você está editando o role de:{" "}
+                  Você pode editar o nome, email, role e status do usuário:{" "}
                   <strong>{editingUser.displayName}</strong>
+                  <br />
+                  <span className="text-xs">Nota: Alterar o email pode deslogar o usuário temporariamente.</span>
                 </Alert>
               )}
               <div>
@@ -490,8 +800,7 @@ export default function Users() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  disabled={!!editingUser}
-                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100 disabled:cursor-not-allowed"
+                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   placeholder="usuario@exemplo.com"
                 />
               </div>
@@ -505,8 +814,7 @@ export default function Users() {
                   onChange={(e) =>
                     setFormData({ ...formData, displayName: e.target.value })
                   }
-                  disabled={!!editingUser}
-                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-neutral-100 disabled:cursor-not-allowed"
+                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   placeholder="Nome do usuário"
                 />
               </div>
@@ -522,9 +830,12 @@ export default function Users() {
                       setFormData({ ...formData, password: e.target.value })
                     }
                     className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Mínimo 6 caracteres"
-                    minLength={6}
+                    placeholder="Mínimo 8 caracteres (letras e números)"
+                    minLength={8}
                   />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    A senha deve ter no mínimo 8 caracteres, contendo letras E números
+                  </p>
                 </div>
               )}
               <div>
@@ -555,6 +866,26 @@ export default function Users() {
                     "Pode apenas visualizar informações"}
                 </p>
               </div>
+              {editingUser && (
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Status
+                  </label>
+                  <select
+                    value={formData.active}
+                    onChange={(e) =>
+                      setFormData({ ...formData, active: e.target.value === 'true' })
+                    }
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  >
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
+                  </select>
+                  <p className="text-xs text-neutral-500 mt-1">
+                    Usuários inativos não podem fazer login
+                  </p>
+                </div>
+              )}
             </div>
             <div className="sticky bottom-0 bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-end gap-3">
               <button
