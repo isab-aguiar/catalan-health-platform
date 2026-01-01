@@ -70,12 +70,43 @@ export function useUsers() {
   };
   const deleteUser = async (uid) => {
     setError(null);
-    const result = await usersService.deleteUser(uid);
+    // Usar deleteUserComplete se functions estiver disponível
+    // Caso contrário, usar deleteUser básico (apenas Firestore)
+    try {
+      const result = await usersService.deleteUserComplete(uid);
+      if (!result.success) {
+        setError(result.error);
+      }
+      return result;
+    } catch (error) {
+      // Fallback para método antigo se functions não estiver disponível
+      console.warn("Cloud Functions não disponível, usando método básico");
+      const result = await usersService.deleteUser(uid);
+      if (!result.success) {
+        setError(result.error);
+      }
+      return result;
+    }
+  };
+
+  const resetPassword = async (email) => {
+    setError(null);
+    const result = await usersService.sendPasswordResetEmail(email);
     if (!result.success) {
       setError(result.error);
     }
     return result;
   };
+
+  const setPassword = async (uid, newPassword) => {
+    setError(null);
+    const result = await usersService.setUserPasswordByAdmin(uid, newPassword);
+    if (!result.success) {
+      setError(result.error);
+    }
+    return result;
+  };
+
   return {
     users,
     loading,
@@ -85,5 +116,7 @@ export function useUsers() {
     toggleUserActive,
     updateUser,
     deleteUser,
+    resetPassword,
+    setPassword,
   };
 }

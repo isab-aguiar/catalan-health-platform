@@ -1,0 +1,12 @@
+# Compiled JavaScript files
+**/*.js.map
+
+# TypeScript v1 declaration files
+typings/
+
+# Node.js dependency directory
+node_modules/
+
+# npm debug log
+npm-debug.log
+yarn-error.log

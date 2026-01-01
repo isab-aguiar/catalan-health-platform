@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getFunctions } from "firebase/functions";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -49,6 +50,7 @@ let app;
 let auth;
 let db;
 let storage;
+let functions;
 
 try {
   if (isValidConfig) {
@@ -56,6 +58,7 @@ try {
     auth = getAuth(app);
     db = getFirestore(app);
     storage = getStorage(app);
+    functions = getFunctions(app);
   } else {
     console.warn(
       "⚠️ Firebase não inicializado - variáveis de ambiente ausentes ou inválidas"
@@ -65,5 +68,5 @@ try {
   console.error("❌ Erro ao inicializar Firebase:", error);
 }
 
-export { auth, db, storage };
+export { auth, db, storage, functions };
 export default app;

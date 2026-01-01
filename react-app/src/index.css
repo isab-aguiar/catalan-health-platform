@@ -18,6 +18,9 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
+    /* Prevenir zoom em dispositivos touch */
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
   }
   @media (max-width: 640px) {
     body {
@@ -61,6 +64,34 @@
   }
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary-500;
+  }
+
+  /* Prevenir zoom automático em inputs no iOS */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+
+  /* Prevenir zoom em foco de inputs no mobile */
+  @media screen and (max-width: 640px) {
+    input:focus,
+    select:focus,
+    textarea:focus {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Prevenir zoom em botões e links */
+  button,
+  a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevenir zoom duplo-toque em toda a página */
+  * {
+    touch-action: manipulation;
   }
 }
 @layer utilities {

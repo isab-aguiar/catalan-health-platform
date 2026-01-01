@@ -11,7 +11,8 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../config/firebase";
+import { httpsCallable } from "firebase/functions";
+import { auth, db, functions } from "../config/firebase";
 const COLLECTION_NAME = "users";
 export async function getUserData(uid) {
   try {
@@ -161,6 +162,8 @@ export async function updateUser(uid, updates) {
   }
 }
 export async function deleteUser(uid) {
+  // DEPRECADO: Usar deleteUserComplete ao invés
+  // Esta função apenas remove do Firestore, não do Authentication
   try {
     if (!uid) {
       return { success: false, error: "UID é obrigatório" };
@@ -171,6 +174,140 @@ export async function deleteUser(uid) {
   } catch (error) {
     console.error("Erro ao deletar usuário:", error);
     return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Deletar usuário completamente (Authentication + Firestore)
+ * Usa Cloud Function para maior segurança
+ */
+export async function deleteUserComplete(uid) {
+  try {
+    if (!uid) {
+      return { success: false, error: "UID é obrigatório" };
+    }
+
+    // Verificar se functions está disponível
+    if (!functions) {
+      console.warn("Firebase Functions não inicializado");
+      return {
+        success: false,
+        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+      };
+    }
+
+    const deleteUserFn = httpsCallable(functions, "deleteUserComplete");
+    const result = await deleteUserFn({ uid });
+
+    return {
+      success: true,
+      message: result.data.message,
+    };
+  } catch (error) {
+    console.error("Erro ao deletar usuário:", error);
+
+    // Tratamento de erros específicos do Firebase Functions
+    let errorMessage = error.message;
+
+    if (error.code === "unauthenticated") {
+      errorMessage = "Você precisa estar autenticado";
+    } else if (error.code === "permission-denied") {
+      errorMessage = error.message; // Já vem com mensagem específica
+    } else if (error.code === "not-found") {
+      errorMessage = "Usuário não encontrado";
+    } else if (error.code === "invalid-argument") {
+      errorMessage = error.message;
+    }
+
+    return { success: false, error: errorMessage };
+  }
+}
+
+/**
+ * Enviar email de reset de senha
+ * Usa Cloud Function para gerar link seguro
+ */
+export async function sendPasswordResetEmail(email) {
+  try {
+    if (!email) {
+      return { success: false, error: "Email é obrigatório" };
+    }
+
+    if (!functions) {
+      return {
+        success: false,
+        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+      };
+    }
+
+    const resetPasswordFn = httpsCallable(functions, "resetUserPassword");
+    const result = await resetPasswordFn({ email });
+
+    return {
+      success: true,
+      message: result.data.message,
+    };
+  } catch (error) {
+    console.error("Erro ao enviar email de reset:", error);
+
+    let errorMessage = error.message;
+
+    if (error.code === "unauthenticated") {
+      errorMessage = "Você precisa estar autenticado";
+    } else if (error.code === "permission-denied") {
+      errorMessage = error.message;
+    } else if (error.code === "not-found") {
+      errorMessage = "Usuário não encontrado";
+    }
+
+    return { success: false, error: errorMessage };
+  }
+}
+
+/**
+ * Admin define senha diretamente
+ * Usa Cloud Function para alterar senha sem enviar email
+ */
+export async function setUserPasswordByAdmin(uid, newPassword) {
+  try {
+    if (!uid) {
+      return { success: false, error: "UID é obrigatório" };
+    }
+
+    if (!newPassword || newPassword.length < 6) {
+      return { success: false, error: "Senha deve ter no mínimo 6 caracteres" };
+    }
+
+    if (!functions) {
+      return {
+        success: false,
+        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+      };
+    }
+
+    const setPasswordFn = httpsCallable(functions, "setUserPassword");
+    const result = await setPasswordFn({ uid, newPassword });
+
+    return {
+      success: true,
+      message: result.data.message,
+    };
+  } catch (error) {
+    console.error("Erro ao definir senha:", error);
+
+    let errorMessage = error.message;
+
+    if (error.code === "unauthenticated") {
+      errorMessage = "Você precisa estar autenticado";
+    } else if (error.code === "permission-denied") {
+      errorMessage = error.message;
+    } else if (error.code === "not-found") {
+      errorMessage = "Usuário não encontrado";
+    } else if (error.code === "invalid-argument") {
+      errorMessage = error.message;
+    }
+
+    return { success: false, error: errorMessage };
   }
 }
 export async function setUserData(uid, userData) {
