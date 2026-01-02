@@ -99,16 +99,6 @@
         if (pluginWrapper) {
           pluginWrapper.style.cssText = 'pointer-events: auto !important;';
         }
-
-        // Corrigir para mobile
-        if (window.innerWidth <= 768) {
-          if (vwDiv) {
-            vwDiv.style.bottom = '80px';
-            vwDiv.style.right = '5px';
-            vwDiv.style.transform = 'scale(0.85)';
-            vwDiv.style.transformOrigin = 'bottom right';
-          }
-        }
       }
 
       // Observer para manter VLibras visível
@@ -294,55 +284,10 @@
         touch-action: auto !important;
       }
 
-      /* Mobile - Telas pequenas */
-      @media (max-width: 480px) {
-        div[vw] {
-          bottom: 70px !important;
-          right: 5px !important;
-          transform: scale(0.8) !important;
-          transform-origin: bottom right !important;
-        }
-
-        [vw-access-button] {
-          min-width: 44px !important;
-          min-height: 44px !important;
-        }
-      }
-
-      /* Mobile - Tablets */
-      @media (min-width: 481px) and (max-width: 768px) {
-        div[vw] {
-          bottom: 85px !important;
-          right: 8px !important;
-          transform: scale(0.9) !important;
-          transform-origin: bottom right !important;
-        }
-      }
-
-      /* Desktop */
-      @media (min-width: 769px) {
-        div[vw] {
-          bottom: 100px !important;
-          right: 15px !important;
-          transform: scale(1) !important;
-        }
-      }
-
       /* Garantir que não seja coberto por outros elementos */
       div[vw],
       div[vw] * {
         box-sizing: border-box !important;
-      }
-
-      /* Fix para iOS Safari */
-      @supports (-webkit-touch-callout: none) {
-        div[vw] {
-          bottom: 90px !important;
-        }
-
-        [vw-access-button] {
-          -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-        }
       }
 
       /* Fix para evitar conflito com footer fixo */
