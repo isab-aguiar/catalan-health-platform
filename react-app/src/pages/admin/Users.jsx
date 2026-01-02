@@ -18,6 +18,7 @@ import {
   Eye,
   Trash2,
   Key,
+  UserCog,
 } from "lucide-react";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Alert from "../../components/common/Alert";
@@ -467,6 +468,7 @@ export default function Users() {
       admin: "Administrador",
       profissional: "Profissional",
       diretoria: "Diretória",
+      supervisor: "Supervisor",
     };
     return labels[role] || role;
   };
@@ -475,6 +477,7 @@ export default function Users() {
       admin: "bg-purple-100 text-purple-700",
       profissional: "bg-info/10 text-primary-700",
       diretoria: "bg-success/10 text-green-700",
+      supervisor: "bg-orange-100 text-orange-700",
     };
     return colors[role] || "bg-neutral-100 text-neutral-700";
   };
@@ -486,6 +489,8 @@ export default function Users() {
         return Briefcase;
       case "diretoria":
         return Eye;
+      case "supervisor":
+        return UserCog;
       default:
         return User;
     }
@@ -856,6 +861,9 @@ export default function Users() {
                   <option value="diretoria">
                     Diretória (apenas visualização)
                   </option>
+                  <option value="supervisor">
+                    Supervisor (gerenciar conteúdo)
+                  </option>
                 </select>
                 <p className="text-xs text-neutral-500 mt-1">
                   {formData.role === "admin" &&
@@ -864,6 +872,8 @@ export default function Users() {
                     "Pode criar e editar avisos"}
                   {formData.role === "diretoria" &&
                     "Pode apenas visualizar informações"}
+                  {formData.role === "supervisor" &&
+                    "Pode criar, editar e deletar conteúdo (avisos, orientações, feedbacks)"}
                 </p>
               </div>
               {editingUser && (

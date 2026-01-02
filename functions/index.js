@@ -358,7 +358,7 @@ exports.createUserComplete = functions.https.onCall(async (data, context) => {
     );
   }
 
-  const validRoles = ["admin", "profissional", "diretoria"];
+  const validRoles = ["admin", "profissional", "diretoria", "supervisor"];
   if (!validRoles.includes(role)) {
     throw new functions.https.HttpsError(
       "invalid-argument",
@@ -468,7 +468,7 @@ exports.updateUserRole = functions.https.onCall(async (data, context) => {
     );
   }
 
-  const validRoles = ["admin", "profissional", "diretoria"];
+  const validRoles = ["admin", "profissional", "diretoria", "supervisor"];
   if (!validRoles.includes(role)) {
     throw new functions.https.HttpsError(
       "invalid-argument",

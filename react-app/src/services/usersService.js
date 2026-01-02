@@ -65,7 +65,7 @@ export async function createUser(userData, password, createdByUid) {
     if (!password || password.length < 6) {
       return { success: false, error: "Senha deve ter no mínimo 6 caracteres" };
     }
-    if (!["admin", "profissional", "diretoria"].includes(userData.role)) {
+    if (!["admin", "profissional", "diretoria", "supervisor"].includes(userData.role)) {
       return { success: false, error: "Role inválido" };
     }
 
@@ -114,7 +114,7 @@ export async function updateUserRole(uid, role) {
     if (!uid) {
       return { success: false, error: "UID é obrigatório" };
     }
-    if (!["admin", "profissional", "diretoria"].includes(role)) {
+    if (!["admin", "profissional", "diretoria", "supervisor"].includes(role)) {
       return { success: false, error: "Role inválido" };
     }
     const userRef = doc(db, COLLECTION_NAME, uid);

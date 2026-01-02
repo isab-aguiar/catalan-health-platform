@@ -101,6 +101,7 @@ export function AuthProvider({ children }) {
   const isAdmin = userRole === "admin";
   const isProfissional = userRole === "profissional";
   const isDiretoria = userRole === "diretoria";
+  const isSupervisor = userRole === "supervisor";
   const isActive = userData?.active !== false;
   const value = {
     currentUser,
@@ -109,6 +110,7 @@ export function AuthProvider({ children }) {
     isAdmin,
     isProfissional,
     isDiretoria,
+    isSupervisor,
     isActive,
     login,
     logout,
