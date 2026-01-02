@@ -226,6 +226,23 @@ service cloud.firestore {
     }
 
     // =====================================================
+    // COLEÇÃO: employees
+    // =====================================================
+    match /employees/{employeeId} {
+      // Staff pode ler todos os funcionários (para autocomplete e listagens)
+      allow read: if isStaff();
+
+      // Apenas admins podem criar funcionários
+      allow create: if isAdmin();
+
+      // Apenas admins podem atualizar funcionários
+      allow update: if isAdmin();
+
+      // Apenas admins podem deletar funcionários
+      allow delete: if isAdmin();
+    }
+
+    // =====================================================
     // PADRÃO: NEGAR TUDO
     // =====================================================
     // Qualquer coleção não explicitamente permitida acima é bloqueada
