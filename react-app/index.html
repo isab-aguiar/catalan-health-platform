@@ -55,6 +55,7 @@
             // Forçar posicionamento e visibilidade após inicialização
             setTimeout(function() {
               fixVLibrasPosition();
+              startWidgetWatcher();
             }, 1000);
 
             // Verificar novamente após mais tempo (para garantir em dispositivos lentos)
@@ -129,27 +130,41 @@
         var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
         var vpBox = document.querySelector('.vp-box');
         var topWrapper = document.querySelector('.vw-plugin-top-wrapper');
+        var vpWrapper = document.querySelector('.vp-wrapper');
+        var vpPlayer = document.querySelector('.vp-player');
         
-        // Verificar se o widget está aberto (tem conteúdo visível)
+        // Verificar se o widget está aberto (múltiplas formas de detecção)
         var isWidgetOpen = (vpBox && vpBox.offsetHeight > 0) || 
                           (topWrapper && topWrapper.children.length > 0 && topWrapper.offsetHeight > 0) ||
-                          (pluginWrapper && pluginWrapper.classList.contains('active'));
+                          (pluginWrapper && pluginWrapper.classList.contains('active')) ||
+                          (vpWrapper && vpWrapper.offsetHeight > 0) ||
+                          (vpPlayer && vpPlayer.offsetHeight > 0) ||
+                          (pluginWrapper && pluginWrapper.offsetHeight > 100);
         
         if (accessButton) {
           if (isWidgetOpen) {
-            accessButton.style.display = 'none';
-            accessButton.style.visibility = 'hidden';
-            accessButton.style.opacity = '0';
+            accessButton.style.setProperty('display', 'none', 'important');
+            accessButton.style.setProperty('visibility', 'hidden', 'important');
+            accessButton.style.setProperty('opacity', '0', 'important');
+            accessButton.style.setProperty('pointer-events', 'none', 'important');
           } else {
-            accessButton.style.display = 'block';
-            accessButton.style.visibility = 'visible';
-            accessButton.style.opacity = '1';
+            accessButton.style.setProperty('display', 'block', 'important');
+            accessButton.style.setProperty('visibility', 'visible', 'important');
+            accessButton.style.setProperty('opacity', '1', 'important');
+            accessButton.style.setProperty('pointer-events', 'auto', 'important');
           }
         }
       }
 
       // Expor função globalmente
       window.toggleAccessButton = toggleAccessButton;
+
+      // Verificar periodicamente se o widget está aberto (para mobile)
+      function startWidgetWatcher() {
+        setInterval(function() {
+          toggleAccessButton();
+        }, 500);
+      }
 
       // Reinicializar VLibras quando a janela for redimensionada
       var resizeTimeout;
