@@ -55,7 +55,6 @@ export default function CalendarDashboard({
       agendamento: eventosAtivos.filter(e => e.tipo === TIPOS_EVENTO.AGENDAMENTO).length,
     };
 
-    // Calcular agendas de hoje (dia da semana)
     const diasSemanaMap = {
       0: 'Domingo',
       1: 'Segunda-feira',
@@ -300,19 +299,21 @@ export default function CalendarDashboard({
 
       {/* Agendas dos Profissionais de Hoje */}
       <div className="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
-        <div className="p-6 border-b border-neutral-200 bg-gradient-to-r from-indigo-50 to-purple-50">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-neutral-900 flex items-center gap-2">
-              <Stethoscope className="w-5 h-5 text-indigo-600" />
-              Agendas de Hoje ({stats.diaSemanaHoje})
+        <div className="p-3 md:p-6 border-b border-neutral-200 bg-gradient-to-r from-indigo-50 to-purple-50">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <h3 className="text-sm md:text-lg font-semibold text-neutral-900 flex items-center gap-2">
+              <Stethoscope className="w-4 h-4 md:w-5 md:h-5 text-indigo-600 flex-shrink-0" />
+              <span>Agendas de Hoje</span>
+              <span className="text-xs md:text-sm font-normal text-neutral-600">({stats.diaSemanaHoje})</span>
             </h3>
             {onCreateAgenda && (
               <button
                 onClick={onCreateAgenda}
-                className="px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-200 flex items-center gap-1.5 text-sm font-medium"
+                className="px-2.5 py-1.5 md:px-3 md:py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-200 flex items-center gap-1.5 text-xs md:text-sm font-medium self-start sm:self-auto"
               >
-                <Plus className="w-4 h-4" />
-                Nova Agenda
+                <Plus className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <span className="hidden sm:inline">Nova Agenda</span>
+                <span className="sm:hidden">Nova</span>
               </button>
             )}
           </div>
