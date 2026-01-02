@@ -105,37 +105,32 @@ export const criarEvento = async (eventoData, userId) => {
 export const buscarEventos = async (filtros = {}) => {
   try {
     console.log('📅 [buscarEventos] Iniciando busca com filtros:', filtros);
-    
+
     const eventosRef = collection(db, COLLECTION_NAME);
-    let q = query(eventosRef, orderBy("dataInicio", "desc"));
+
+    // Construir query base - aplicar filtros simples no Firestore
+    const constraints = [];
 
     if (filtros.ativo !== undefined) {
       console.log(`📅 [buscarEventos] Filtrando por ativo: ${filtros.ativo}`);
-      q = query(q, where("ativo", "==", filtros.ativo));
+      constraints.push(where("ativo", "==", filtros.ativo));
     }
 
     if (filtros.tipo) {
       console.log(`📅 [buscarEventos] Filtrando por tipo: ${filtros.tipo}`);
-      q = query(q, where("tipo", "==", filtros.tipo));
+      constraints.push(where("tipo", "==", filtros.tipo));
     }
 
-    if (filtros.dataInicio && filtros.dataFim) {
-      const inicio = Timestamp.fromDate(new Date(filtros.dataInicio));
-      const fim = Timestamp.fromDate(new Date(filtros.dataFim));
-      console.log(`📅 [buscarEventos] Filtrando por data: ${filtros.dataInicio} até ${filtros.dataFim}`);
-      
-      q = query(
-        q,
-        where("dataInicio", ">=", inicio),
-        where("dataInicio", "<=", fim)
-      );
-    }
+    // Adicionar orderBy no final
+    constraints.push(orderBy("dataInicio", "desc"));
+
+    const q = query(eventosRef, ...constraints);
 
     console.log('📅 [buscarEventos] Executando query no Firestore...');
     const snapshot = await getDocs(q);
     console.log(`📅 [buscarEventos] Query executada. ${snapshot.size} documentos retornados.`);
-    
-    const eventos = snapshot.docs.map((doc) => {
+
+    let eventos = snapshot.docs.map((doc) => {
       const data = doc.data();
       return {
         id: doc.id,
@@ -158,6 +153,20 @@ export const buscarEventos = async (filtros = {}) => {
             : null,
       };
     });
+
+    // Aplicar filtro de data no cliente (evita necessidade de índice composto)
+    if (filtros.dataInicio && filtros.dataFim) {
+      const inicio = new Date(filtros.dataInicio);
+      const fim = new Date(filtros.dataFim);
+      console.log(`📅 [buscarEventos] Filtrando por data no cliente: ${inicio.toLocaleDateString()} até ${fim.toLocaleDateString()}`);
+
+      eventos = eventos.filter(evento => {
+        if (!evento.dataInicio) return false;
+        const dataEvento = new Date(evento.dataInicio);
+        return dataEvento >= inicio && dataEvento <= fim;
+      });
+      console.log(`📅 [buscarEventos] ${eventos.length} eventos após filtro de data`);
+    }
 
     console.log(`✅ [buscarEventos] ${eventos.length} eventos processados e retornados`);
     return eventos;
