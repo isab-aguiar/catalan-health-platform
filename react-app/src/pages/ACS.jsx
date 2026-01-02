@@ -14,6 +14,26 @@ import ACSModal from "../components/search/ACSModal";
 import { useACSSearch } from "../hooks/useACSSearch";
 import { normalize } from "../utils/normalize";
 import { BackButton } from "../components/common";
+
+// Mapeamento de nomes curtos para nomes completos - ACS
+const nomesCompletosACS = {
+  'wasley': 'Wasley Borges',
+  'ênes júnior': 'Enes Junior',
+  'ênes': 'Enes Junior',
+  'enes júnior': 'Enes Junior',
+  'enes junior': 'Enes Junior',
+  'erika': 'Erika Roscoe',
+  'renata': 'Renata Rodrigues',
+  'daniel': 'Daniel Henrique',
+  'davi': 'Davi de Castro',
+  'matheus': 'Matheus José',
+};
+
+function getNomeCompleto(nome) {
+  if (!nome) return nome;
+  const nomeNormalizado = nome.trim().toLowerCase();
+  return nomesCompletosACS[nomeNormalizado] || nome;
+}
 export default function ACSPage() {
   const { query, setQuery, suggestions: acsSearchSuggestions } = useACSSearch();
   const [selectedESF, setSelectedESF] = useState("all");
@@ -317,7 +337,7 @@ function ACSCard({ acs, onClick }) {
             {acs.photo && !imageError ? (
               <img
                 src={acs.photo}
-                alt={`Foto de ${acs.nome}`}
+                alt={`Foto de ${getNomeCompleto(acs.nome)}`}
                 className="w-full h-full object-cover"
                 onError={() => setImageError(true)}
               />
@@ -328,7 +348,7 @@ function ACSCard({ acs, onClick }) {
           {}
           <div className="flex-1">
             <h3 className="text-xl font-bold mb-1 group-hover:text-white/90 transition-colors">
-              {acs.nome}
+              {getNomeCompleto(acs.nome)}
             </h3>
             <div className="flex items-center gap-2 text-white/90 text-sm">
               <MapPin size={14} />

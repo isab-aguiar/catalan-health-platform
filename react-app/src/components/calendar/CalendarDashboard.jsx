@@ -4,6 +4,7 @@ import StatsCard from './StatsCard';
 import EmptyState from './EmptyState';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { getEventColors } from '../../constants/calendarDesign';
+import { normalizarDataParaMidnight, isMesmoDia } from '../../utils/dateUtils';
 
 /**
  * Dashboard com estatísticas e resumo do calendário
@@ -45,16 +46,17 @@ export default function CalendarDashboard({
 
     const eventosHoje = eventosAtivos.filter(e => {
       if (!e.dataInicio) return false;
-      const dataEvento = e.dataInicio?.toDate ? e.dataInicio.toDate() : new Date(e.dataInicio);
-      dataEvento.setHours(0, 0, 0, 0);
-      const isHoje = dataEvento.getTime() === hoje.getTime();
+      const dataEvento = normalizarDataParaMidnight(e.dataInicio);
+      if (!dataEvento) return false;
+      const isHoje = isMesmoDia(dataEvento, hoje);
       console.log(`[CalendarDashboard] Evento "${e.titulo}" - data: ${dataEvento.toLocaleDateString()}, hoje: ${hoje.toLocaleDateString()}, isHoje: ${isHoje}`);
       return isHoje;
     });
 
     const eventosProximos = eventosAtivos.filter(e => {
       if (!e.dataInicio) return false;
-      const dataEvento = e.dataInicio?.toDate ? e.dataInicio.toDate() : new Date(e.dataInicio);
+      const dataEvento = normalizarDataParaMidnight(e.dataInicio);
+      if (!dataEvento) return false;
       const isProximo = dataEvento >= hoje && dataEvento <= proximos7Dias;
       return isProximo;
     });

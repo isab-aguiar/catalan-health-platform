@@ -13,6 +13,7 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { normalizarDataParaMidnight } from "../utils/dateUtils";
 
 const COLLECTION_NAME = "calendario_eventos";
 
@@ -56,10 +57,10 @@ export const criarEvento = async (eventoData, userId) => {
       descricao: eventoData.descricao?.trim() || null,
       tipo: eventoData.tipo,
       dataInicio: eventoData.dataInicio
-        ? Timestamp.fromDate(new Date(eventoData.dataInicio))
+        ? Timestamp.fromDate(normalizarDataParaMidnight(eventoData.dataInicio))
         : null,
       dataFim: eventoData.dataFim
-        ? Timestamp.fromDate(new Date(eventoData.dataFim))
+        ? Timestamp.fromDate(normalizarDataParaMidnight(eventoData.dataFim))
         : null,
       horaInicio: eventoData.horaInicio || null,
       horaFim: eventoData.horaFim || null,
@@ -156,13 +157,14 @@ export const buscarEventos = async (filtros = {}) => {
 
     // Aplicar filtro de data no cliente (evita necessidade de índice composto)
     if (filtros.dataInicio && filtros.dataFim) {
-      const inicio = new Date(filtros.dataInicio);
-      const fim = new Date(filtros.dataFim);
+      const inicio = normalizarDataParaMidnight(filtros.dataInicio);
+      const fim = normalizarDataParaMidnight(filtros.dataFim);
       console.log(`📅 [buscarEventos] Filtrando por data no cliente: ${inicio.toLocaleDateString()} até ${fim.toLocaleDateString()}`);
 
       eventos = eventos.filter(evento => {
         if (!evento.dataInicio) return false;
-        const dataEvento = new Date(evento.dataInicio);
+        const dataEvento = normalizarDataParaMidnight(evento.dataInicio);
+        if (!dataEvento) return false;
         return dataEvento >= inicio && dataEvento <= fim;
       });
       console.log(`📅 [buscarEventos] ${eventos.length} eventos após filtro de data`);

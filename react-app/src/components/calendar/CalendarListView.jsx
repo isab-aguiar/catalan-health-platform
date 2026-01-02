@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  Search, 
-  Calendar, 
-  Clock, 
-  MapPin, 
-  Users, 
-  Bell, 
-  FileText, 
-  Eye, 
-  Edit2, 
-  Trash2, 
+import {
+  Search,
+  Calendar,
+  Clock,
+  MapPin,
+  Users,
+  Bell,
+  FileText,
+  Eye,
+  Edit2,
+  Trash2,
   SlidersHorizontal,
   ArrowUpDown,
   Filter,
@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { getEventColors } from '../../constants/calendarDesign';
+import { normalizarDataParaMidnight, isMesmoDia } from '../../utils/dateUtils';
 import EmptyState from './EmptyState';
 
 /**
@@ -80,12 +81,12 @@ export default function CalendarListView({
     };
 
     filtrados.forEach(evento => {
-      const dataEvento = new Date(evento.dataInicio);
-      dataEvento.setHours(0, 0, 0, 0);
+      const dataEvento = normalizarDataParaMidnight(evento.dataInicio);
+      if (!dataEvento) return;
 
-      if (dataEvento.getTime() === hoje.getTime()) {
+      if (isMesmoDia(dataEvento, hoje)) {
         grupos['Hoje'].push(evento);
-      } else if (dataEvento.getTime() === amanha.getTime()) {
+      } else if (isMesmoDia(dataEvento, amanha)) {
         grupos['Amanhã'].push(evento);
       } else if (dataEvento >= estaSemanInicio && dataEvento < estaSemanaFim) {
         grupos['Esta Semana'].push(evento);

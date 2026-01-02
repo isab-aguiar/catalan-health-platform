@@ -9,7 +9,6 @@ export const agendasSemanais = {
       id: "dr-joao-alves",
       nome: "Dr. João Alves",
       horarioAtendimento: {
-        manha: { inicio: "08:00", fim: "12:00", display: "08:00 às 12:00" },
         tarde: { inicio: "13:00", fim: "17:00", display: "13:00 às 17:00" }
       },
       agendaSemanal: {

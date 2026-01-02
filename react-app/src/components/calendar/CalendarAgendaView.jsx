@@ -1,15 +1,15 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  Calendar, 
-  Clock, 
-  MapPin, 
-  Users, 
-  Bell, 
-  FileText, 
-  Eye, 
-  Edit2, 
+import {
+  ChevronLeft,
+  ChevronRight,
+  Calendar,
+  Clock,
+  MapPin,
+  Users,
+  Bell,
+  FileText,
+  Eye,
+  Edit2,
   Trash2,
   Filter,
   Download,
@@ -22,6 +22,7 @@ import {
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { getEventColors } from '../../constants/calendarDesign';
 import EmptyState from './EmptyState';
+import { normalizarDataParaMidnight, formatarDataParaISO } from '../../utils/dateUtils';
 
 /**
  * Vista de Agenda - Mostra eventos dia por dia com horários
@@ -66,14 +67,26 @@ export default function CalendarAgendaView({
     const grupos = {};
 
     days.forEach(day => {
-      const dayKey = formatarDataParaChave(day);
+      const dayKey = formatarDataParaISO(day);
       grupos[dayKey] = [];
     });
 
     eventos.forEach(evento => {
-      const eventoData = new Date(evento.dataInicio);
-      eventoData.setHours(0, 0, 0, 0);
-      const dayKey = formatarDataParaChave(eventoData);
+      // Validação de data
+      if (!evento.dataInicio) {
+        console.warn('[CalendarAgendaView] Evento sem dataInicio:', evento);
+        return;
+      }
+
+      const eventoData = normalizarDataParaMidnight(evento.dataInicio);
+
+      // Verificar se data é válida
+      if (!eventoData || isNaN(eventoData.getTime())) {
+        console.warn('[CalendarAgendaView] Evento com data inválida:', evento);
+        return;
+      }
+
+      const dayKey = formatarDataParaISO(eventoData);
 
       if (grupos[dayKey]) {
         grupos[dayKey].push(evento);
@@ -152,20 +165,12 @@ export default function CalendarAgendaView({
     });
   };
 
-  // Formata data para YYYY-MM-DD no timezone local (não UTC)
-  const formatarDataParaChave = (date) => {
-    const ano = date.getFullYear();
-    const mes = String(date.getMonth() + 1).padStart(2, '0');
-    const dia = String(date.getDate()).padStart(2, '0');
-    return `${ano}-${mes}-${dia}`;
-  };
-
   const handleExportar = () => {
     // Gerar conteúdo da agenda em texto
     let conteudo = `AGENDA - ${formatarDataCompleta(days[0])} até ${formatarDataCompleta(days[days.length - 1])}\n\n`;
 
     days.forEach(day => {
-      const dayKey = formatarDataParaChave(day);
+      const dayKey = formatarDataParaISO(day);
       const eventosDay = eventosPorDia[dayKey] || [];
 
       conteudo += `\n${formatarDiaSemana(day).toUpperCase()} - ${formatarDataCompleta(day)}\n`;
@@ -189,7 +194,7 @@ export default function CalendarAgendaView({
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `agenda_${formatarDataParaChave(days[0])}.txt`;
+    link.download = `agenda_${formatarDataParaISO(days[0])}.txt`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -347,7 +352,7 @@ export default function CalendarAgendaView({
 
       {/* Grid de Dias */}
       <div className="space-y-5">{days.map((day, index) => {
-          const dayKey = formatarDataParaChave(day);
+          const dayKey = formatarDataParaISO(day);
           const eventosDay = eventosPorDia[dayKey] || [];
           const hoje = isToday(day);
 
