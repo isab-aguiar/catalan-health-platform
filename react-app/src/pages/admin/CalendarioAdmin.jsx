@@ -1134,30 +1134,30 @@ export default function CalendarioAdmin() {
 
       {/* Modal de Detalhes do Evento */}
       {showDetalhesModal && eventoVisualizando && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4" onClick={() => {
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-2 sm:p-4" onClick={() => {
           setShowDetalhesModal(false);
           setEventoVisualizando(null);
         }}>
           <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             {/* Header */}
-            <div className="sticky top-0 bg-white px-6 py-4 border-b border-neutral-200 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
-                {getIconeEvento(eventoVisualizando.tipo)}
-                {eventoVisualizando.titulo}
+            <div className="sticky top-0 bg-white px-4 sm:px-6 py-3 sm:py-4 border-b border-neutral-200 flex items-start justify-between gap-3">
+              <h3 className="text-base sm:text-xl font-bold text-neutral-900 flex items-start gap-2 min-w-0">
+                <span className="flex-shrink-0">{getIconeEvento(eventoVisualizando.tipo)}</span>
+                <span className="break-words">{eventoVisualizando.titulo}</span>
               </h3>
               <button
                 onClick={() => {
                   setShowDetalhesModal(false);
                   setEventoVisualizando(null);
                 }}
-                className="text-neutral-500 hover:text-neutral-700 transition-colors"
+                className="text-neutral-500 hover:text-neutral-700 transition-colors flex-shrink-0"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Corpo */}
-            <div className="p-6 space-y-4">
+            <div className="p-4 sm:p-6 space-y-4">
               {/* Tipo */}
               <div>
                 <label className="text-sm font-medium text-neutral-700">Tipo</label>
@@ -1259,13 +1259,13 @@ export default function CalendarioAdmin() {
             </div>
 
             {/* Footer com Ações */}
-            <div className="sticky bottom-0 bg-white px-6 py-4 border-t border-neutral-200 flex gap-3 justify-end">
+            <div className="sticky bottom-0 bg-white px-4 sm:px-6 py-3 sm:py-4 border-t border-neutral-200 flex flex-wrap gap-2 sm:gap-3 justify-end">
               <button
                 onClick={() => {
                   setShowDetalhesModal(false);
                   setEventoVisualizando(null);
                 }}
-                className="px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors"
+                className="px-3 sm:px-4 py-2 border border-neutral-300 text-neutral-700 rounded-lg hover:bg-neutral-50 transition-colors text-sm sm:text-base"
               >
                 Fechar
               </button>
@@ -1274,7 +1274,7 @@ export default function CalendarioAdmin() {
                   setShowDetalhesModal(false);
                   handleEditarEvento(eventoVisualizando, { stopPropagation: () => {} });
                 }}
-                className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-colors flex items-center gap-2"
+                className="px-3 sm:px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 active:bg-primary-800 transition-colors flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base"
               >
                 <Edit2 className="w-4 h-4" />
                 Editar
@@ -1284,7 +1284,7 @@ export default function CalendarioAdmin() {
                   setShowDetalhesModal(false);
                   handleDeletarEvento(eventoVisualizando, { stopPropagation: () => {} });
                 }}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 active:bg-red-800 transition-colors flex items-center gap-2"
+                className="px-3 sm:px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 active:bg-red-800 transition-colors flex items-center gap-1.5 sm:gap-2 text-sm sm:text-base"
               >
                 <Trash2 className="w-4 h-4" />
                 Deletar
