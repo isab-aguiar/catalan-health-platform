@@ -1164,34 +1164,19 @@ export default function CalendarioAdmin() {
                 <p className="mt-1 text-neutral-900 capitalize">{eventoVisualizando.tipo}</p>
               </div>
 
-              {/* Data e Hora */}
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-neutral-700 flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    Data Início
-                  </label>
-                  <p className="mt-1 text-neutral-900">
-                    {eventoVisualizando.dataInicio
-                      ? (eventoVisualizando.dataInicio.toDate
-                          ? eventoVisualizando.dataInicio.toDate().toLocaleDateString('pt-BR')
-                          : new Date(eventoVisualizando.dataInicio).toLocaleDateString('pt-BR'))
-                      : '-'}
-                  </p>
-                </div>
-                {eventoVisualizando.dataFim && (
-                  <div>
-                    <label className="text-sm font-medium text-neutral-700 flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      Data Fim
-                    </label>
-                    <p className="mt-1 text-neutral-900">
-                      {eventoVisualizando.dataFim.toDate
-                        ? eventoVisualizando.dataFim.toDate().toLocaleDateString('pt-BR')
-                        : new Date(eventoVisualizando.dataFim).toLocaleDateString('pt-BR')}
-                    </p>
-                  </div>
-                )}
+              {/* Data do Evento */}
+              <div>
+                <label className="text-sm font-medium text-neutral-700 flex items-center gap-1">
+                  <CalendarIcon className="w-4 h-4" />
+                  Data do Evento
+                </label>
+                <p className="mt-1 text-neutral-900">
+                  {eventoVisualizando.dataInicio
+                    ? (eventoVisualizando.dataInicio.toDate
+                        ? eventoVisualizando.dataInicio.toDate().toLocaleDateString('pt-BR')
+                        : new Date(eventoVisualizando.dataInicio).toLocaleDateString('pt-BR'))
+                    : '-'}
+                </p>
               </div>
 
               {/* Horário */}
