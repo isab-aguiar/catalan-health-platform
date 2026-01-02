@@ -159,7 +159,7 @@ export default function AgendaModal({ isOpen, agendaEditando = null, onAgendaSal
                   onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
                   className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
                   required
-                  placeholder="Ex: Dr. João Silva"
+                  placeholder=" Ex: Maria Silva "
                 />
               </div>
 
