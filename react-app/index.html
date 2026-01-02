@@ -126,48 +126,28 @@
 
       // Função para esconder/mostrar o botão quando o widget abre/fecha
       function toggleAccessButton() {
-        var accessButton = document.querySelector('[vw-access-button]');
-        var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
-        var vpBox = document.querySelector('.vp-box');
-        var topWrapper = document.querySelector('.vw-plugin-top-wrapper');
-        var vpWrapper = document.querySelector('.vp-wrapper');
-        var vpPlayer = document.querySelector('.vp-player');
-        var vpWindow = document.querySelector('.vp-window');
-        
-        // Verificar se o widget está aberto (múltiplas formas de detecção)
-        var isWidgetOpen = false;
-        
-        if (vpBox && vpBox.offsetHeight > 0 && vpBox.offsetWidth > 0) isWidgetOpen = true;
-        if (topWrapper && topWrapper.innerHTML.trim() !== '' && topWrapper.offsetHeight > 50) isWidgetOpen = true;
-        if (vpWrapper && vpWrapper.offsetHeight > 0) isWidgetOpen = true;
-        if (vpPlayer && vpPlayer.offsetHeight > 0) isWidgetOpen = true;
-        if (vpWindow && vpWindow.offsetHeight > 0) isWidgetOpen = true;
-        if (pluginWrapper && pluginWrapper.offsetHeight > 100) isWidgetOpen = true;
-        
-        // Verificar se há elementos visíveis dentro do plugin-wrapper
-        if (pluginWrapper) {
-          var visibleChildren = pluginWrapper.querySelectorAll('[style*="display: block"], [style*="visibility: visible"]');
-          if (visibleChildren.length > 0) {
-            visibleChildren.forEach(function(child) {
-              if (child.offsetHeight > 50) isWidgetOpen = true;
-            });
+        try {
+          var accessButton = document.querySelector('[vw-access-button]');
+          var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
+          var vpBox = document.querySelector('.vp-box');
+          var topWrapper = document.querySelector('.vw-plugin-top-wrapper');
+          
+          // Verificar se o widget está aberto (forma simplificada)
+          var isWidgetOpen = false;
+          
+          if (vpBox && vpBox.offsetHeight > 0) isWidgetOpen = true;
+          if (topWrapper && topWrapper.offsetHeight > 50) isWidgetOpen = true;
+          if (pluginWrapper && pluginWrapper.offsetHeight > 100) isWidgetOpen = true;
+          
+          if (accessButton) {
+            if (isWidgetOpen) {
+              accessButton.classList.add('vlibras-hidden');
+            } else {
+              accessButton.classList.remove('vlibras-hidden');
+            }
           }
-        }
-        
-        if (accessButton) {
-          if (isWidgetOpen) {
-            accessButton.classList.add('vlibras-hidden');
-            accessButton.style.setProperty('display', 'none', 'important');
-            accessButton.style.setProperty('visibility', 'hidden', 'important');
-            accessButton.style.setProperty('opacity', '0', 'important');
-            accessButton.style.setProperty('pointer-events', 'none', 'important');
-          } else {
-            accessButton.classList.remove('vlibras-hidden');
-            accessButton.style.setProperty('display', 'block', 'important');
-            accessButton.style.setProperty('visibility', 'visible', 'important');
-            accessButton.style.setProperty('opacity', '1', 'important');
-            accessButton.style.setProperty('pointer-events', 'auto', 'important');
-          }
+        } catch (e) {
+          console.warn('Erro no toggleAccessButton:', e);
         }
       }
 
@@ -175,9 +155,14 @@
       window.toggleAccessButton = toggleAccessButton;
 
       // Verificar periodicamente se o widget está aberto (para mobile)
+      var widgetWatcherStarted = false;
       function startWidgetWatcher() {
+        if (widgetWatcherStarted) return;
+        widgetWatcherStarted = true;
         setInterval(function() {
           toggleAccessButton();
+        }, 1000); // A cada 1 segundo ao invés de 500ms
+      }
         }, 500);
       }
 
