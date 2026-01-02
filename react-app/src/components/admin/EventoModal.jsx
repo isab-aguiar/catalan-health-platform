@@ -3,7 +3,7 @@ import { X, Upload, Trash2, Calendar, Clock, Users, MapPin, FileText, Bell, Chec
 import { criarEvento, atualizarEvento, TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useModal } from '../../contexts/ModalContext';
-import { getAllUsers } from '../../services/usersService';
+import { getAllEmployees } from '../../services/employeesService';
 
 export default function EventoModal({ isOpen, onClose, eventoEditando = null, dataInicial = null, onEventoSalvo }) {
   const { currentUser } = useAuth();
@@ -26,30 +26,32 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
 
   const [participanteInput, setParticipanteInput] = useState('');
   const [pdfFile, setPdfFile] = useState(null);
-  const [usuarios, setUsuarios] = useState([]);
+  const [profissionais, setProfissionais] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [loadingUsuarios, setLoadingUsuarios] = useState(false);
+  const [loadingProfissionais, setLoadingProfissionais] = useState(false);
 
-  // Carregar usuários quando o modal abrir
+  // Carregar profissionais quando o modal abrir
   useEffect(() => {
     if (isOpen) {
-      carregarUsuarios();
+      carregarProfissionais();
     }
   }, [isOpen]);
 
-  const carregarUsuarios = async () => {
+  const carregarProfissionais = async () => {
     try {
-      setLoadingUsuarios(true);
-      const result = await getAllUsers();
+      setLoadingProfissionais(true);
+      const result = await getAllEmployees();
       if (result.success) {
-        // Filtrar apenas usuários ativos
-        const usuariosAtivos = result.data.filter(u => u.active !== false);
-        setUsuarios(usuariosAtivos);
+        // Ordenar por nome
+        const profissionaisOrdenados = result.data.sort((a, b) =>
+          (a.displayName || '').localeCompare(b.displayName || '')
+        );
+        setProfissionais(profissionaisOrdenados);
       }
     } catch (error) {
-      console.error('Erro ao carregar usuários:', error);
+      console.error('Erro ao carregar profissionais:', error);
     } finally {
-      setLoadingUsuarios(false);
+      setLoadingProfissionais(false);
     }
   };
 
@@ -186,10 +188,16 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
     }
 
     const inputLower = participanteInput.toLowerCase();
-    return usuarios.filter(usuario => {
-      const nome = usuario.displayName || usuario.email || '';
+    return profissionais.filter(profissional => {
+      const nome = profissional.displayName || '';
+      const cargo = profissional.roleBase || profissional.role || '';
       const jaAdicionado = formData.participantes.includes(nome);
-      return !jaAdicionado && nome.toLowerCase().includes(inputLower);
+
+      // Buscar por nome ou cargo
+      return !jaAdicionado && (
+        nome.toLowerCase().includes(inputLower) ||
+        cargo.toLowerCase().includes(inputLower)
+      );
     }).slice(0, 5); // Limitar a 5 sugestões
   };
 
@@ -401,36 +409,42 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
                 {/* Sugestões de autocomplete */}
                 {showSuggestions && getSuggestions().length > 0 && (
                   <div className="absolute z-10 w-full bg-white border border-neutral-300 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
-                    {getSuggestions().map((usuario, index) => (
+                    {getSuggestions().map((profissional, index) => (
                       <button
-                        key={usuario.uid || index}
+                        key={profissional.id || index}
                         type="button"
-                        onClick={() => adicionarParticipante(usuario.displayName || usuario.email)}
+                        onClick={() => adicionarParticipante(profissional.displayName)}
                         className="w-full px-3 py-2 text-left hover:bg-blue-50 transition-colors flex items-center gap-2 border-b border-neutral-100 last:border-b-0"
                       >
                         <Users className="w-4 h-4 text-neutral-500 flex-shrink-0" />
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-medium text-neutral-900 truncate">
-                            {usuario.displayName || usuario.email}
+                            {profissional.displayName}
                           </div>
-                          {usuario.displayName && usuario.email && (
-                            <div className="text-xs text-neutral-500 truncate">{usuario.email}</div>
-                          )}
+                          <div className="text-xs text-neutral-500 truncate">
+                            {profissional.roleBase || profissional.role}
+                            {profissional.esf && (
+                              <span className="ml-1">
+                                • ESF {profissional.esf.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                        <span className="text-xs text-neutral-500 px-2 py-0.5 bg-neutral-100 rounded">
-                          {usuario.role === 'admin' ? 'Admin' :
-                           usuario.role === 'profissional' ? 'Prof.' :
-                           usuario.role === 'supervisor' ? 'Superv.' : 'Staff'}
+                        <span className="text-xs text-neutral-500 px-2 py-0.5 bg-blue-100 rounded">
+                          {profissional.department === 'medico' ? 'Médico' :
+                           profissional.department === 'enfermeiro' ? 'Enfermeiro' :
+                           profissional.department === 'tecnicoEnfermagem' ? 'Técnico' :
+                           profissional.department === 'dentista' ? 'Dentista' : 'Profissional'}
                         </span>
                       </button>
                     ))}
                   </div>
                 )}
 
-                {/* Mensagem quando está carregando usuários */}
-                {loadingUsuarios && showSuggestions && (
+                {/* Mensagem quando está carregando profissionais */}
+                {loadingProfissionais && showSuggestions && (
                   <div className="absolute z-10 w-full bg-white border border-neutral-300 rounded-lg shadow-lg mt-1 p-3 text-center text-sm text-neutral-500">
-                    Carregando usuários...
+                    Carregando profissionais...
                   </div>
                 )}
               </div>
