@@ -25,7 +25,13 @@
 
 <br/>
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=1351B4&center=true&vCenter=true&multiline=true&repeat=true&width=800&height=120&lines=🏥+UBS+São+José+-+Divinópolis%2C+MG;Plataforma+Digital+de+Saúde+Pública;React+19+%2B+Firebase+%2B+Tailwind+CSS" alt="Typing SVG" />
+<div align="center">
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=32&duration=3000&pause=1000&color=1351B4&center=true&vCenter=true&width=800&lines=🏥+ESF+CATALÃO+-+Divinópolis%2C+MG" alt="Typing SVG" />
+<br/>
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=500&size=20&duration=3000&pause=1000&color=6C757D&center=true&vCenter=true&width=800&lines=Plataforma+Digital+de+Saúde+Pública" alt="Typing SVG" />
+<br/>
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=500&size=18&duration=3000&pause=1000&color=6C757D&center=true&vCenter=true&width=800&lines=React+19+%2B+Firebase+%2B+Tailwind+CSS" alt="Typing SVG" />
+</div>
 
 <br/>
 
@@ -48,7 +54,7 @@
 <br/><b>Páginas</b>
 </td>
 <td align="center">
-<img src="https://img.shields.io/badge/📍-713-9B59B6?style=for-the-badge&labelColor=121212"/>
+<img src="https://img.shields.io/badge/📍-16-9B59B6?style=for-the-badge&labelColor=121212"/>
 <br/><b>Microáreas</b>
 </td>
 <td align="center">
@@ -117,7 +123,7 @@
 </table>
 
 <!-- Código sendo digitado em tempo real -->
-<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=400&size=13&duration=25&pause=3000&color=9CDCFE&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=250&lines=const+ESFCatalao+%3D+{;++nome%3A+'UBS+São+José'%2C;++cidade%3A+'Divinópolis'%2C;++estado%3A+'MG'%2C;++servicos%3A+13%2C;++profissionais%3A+115%2C;++microareas%3A+713%2C;++tecnologias%3A+['React'%2C+'Firebase'%2C+'Tailwind']%2C;++status%3A+'🟢+Em+Produção';};;" alt="Code Typing Animation" />
+<img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=400&size=13&duration=25&pause=3000&color=9CDCFE&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=250&lines=const+ESFCatalao+%3D+{;++nome%3A+'UAPS+São+José'%2C;++cidade%3A+'Divinópolis'%2C;++estado%3A+'MG'%2C;++servicos%3A+13%2C;++profissionais%3A+115%2C;++microareas%3A+16%2C;++tecnologias%3A+['React'%2C+'Firebase'%2C+'Tailwind']%2C;++status%3A+'🟢+Em+Produção';};;" alt="Code Typing Animation" />
 
 </div>
 
@@ -148,7 +154,7 @@
 
 <div align="center">
 
-> 🎯 **Plataforma SPA completa** para digitalização dos serviços da UBS São José em Divinópolis/MG, conectando cidadãos, profissionais de saúde e administradores.
+> 🎯 **Plataforma SPA completa** para digitalização dos serviços da UAPS São José em Divinópolis/MG, conectando cidadãos, profissionais de saúde e administradores.
 
 <img src="https://readme-typing-svg.herokuapp.com?font=Poppins&weight=500&size=16&duration=4000&pause=1000&color=6C757D&center=true&vCenter=true&width=600&lines=Substituindo+processos+manuais+por+tecnologia;Conectando+pacientes+e+profissionais;Modernizando+a+saúde+pública+brasileira" alt="Description Typing" />
 
@@ -186,7 +192,7 @@ Escalas de trabalho
 <img src="https://img.shields.io/badge/🏥-ACS-9B59B6?style=for-the-badge"/>
 <br/><br/>
 <b>Busca territorial</b><br/>
-713 microáreas<br/>
+16 microáreas<br/>
 Equipes mapeadas<br/>
 Informações rápidas
 </td>
@@ -197,7 +203,7 @@ Informações rápidas
 
 ```diff
 + ✅ Interface Gov.br Design System - Padrões governamentais
-+ ✅ 713 microáreas mapeadas - Busca inteligente de ACS
++ ✅ 16 microáreas mapeadas - Busca inteligente de ACS
 + ✅ Sistema RBAC completo - Admin, Profissional, Diretoria
 + ✅ Upload até 10MB - Imagens e PDFs no Firebase Storage
 + ✅ Calendário administrativo - Eventos e reuniões
@@ -1211,7 +1217,7 @@ R. Júlio Nogueira, 1320 - Bela Vista, Divinópolis - MG
 - [x] 🏥 13 serviços de saúde
 - [x] 👥 10 páginas de equipes
 - [x] 📢 CRUD de avisos e campanhas
-- [x] 🔍 Busca de ACS (713 microáreas)
+- [x] 🔍 Busca de ACS (16 microáreas)
 - [x] 💉 Gestão de vacinas
 - [x] 📅 Sistema de calendário/agendas
 - [x] 📱 Responsividade mobile
