@@ -11,12 +11,12 @@
 <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 <p>
-<a href="#"><img src="https://img.shields.io/badge/🚀_Status-Em_Produção-00C851?style=for-the-badge&labelColor=1a1a2e"/></a>
-<a href="#"><img src="https://img.shields.io/badge/📦_Version-2.0.0-1351B4?style=for-the-badge&labelColor=1a1a2e"/></a>
-<a href="#"><img src="https://img.shields.io/badge/⚛️_React-19.2.0-61DAFB?style=for-the-badge&labelColor=1a1a2e"/></a>
-<a href="#"><img src="https://img.shields.io/badge/🔥_Firebase-12.7.0-FFCA28?style=for-the-badge&labelColor=1a1a2e"/></a>
-<a href="#"><img src="https://img.shields.io/badge/🎨_Tailwind-3.4.19-06B6D4?style=for-the-badge&labelColor=1a1a2e"/></a>
-<a href="#"><img src="https://img.shields.io/badge/⚡_Vite-7.2.4-646CFF?style=for-the-badge&labelColor=1a1a2e"/></a>
+<a href="#"><img src="https://img.shields.io/badge/🚀_Status-Em_Produção-00C851?style=for-the-badge&labelColor=121212"/></a>
+<a href="#"><img src="https://img.shields.io/badge/📦_Version-2.0.0-1351B4?style=for-the-badge&labelColor=121212"/></a>
+<a href="#"><img src="https://img.shields.io/badge/⚛️_React-19.2.0-61DAFB?style=for-the-badge&labelColor=121212"/></a>
+<a href="#"><img src="https://img.shields.io/badge/🔥_Firebase-12.7.0-FFCA28?style=for-the-badge&labelColor=121212"/></a>
+<a href="#"><img src="https://img.shields.io/badge/🎨_Tailwind-3.4.19-06B6D4?style=for-the-badge&labelColor=121212"/></a>
+<a href="#"><img src="https://img.shields.io/badge/⚡_Vite-7.2.4-646CFF?style=for-the-badge&labelColor=121212"/></a>
 </p>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════════ -->
@@ -25,7 +25,7 @@
 
 <br/>
 
-<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=1351B4&center=true&vCenter=true&multiline=true&repeat=true&width=800&height=100&lines=🏥+UBS+São+José+-+Divinópolis%2C+MG;💻+Plataforma+Digital+de+Saúde+Pública;🚀+React+19+%2B+Firebase+%2B+Tailwind+CSS" alt="Typing SVG" />
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=1351B4&center=true&vCenter=true&multiline=true&repeat=true&width=800&height=120&lines=🏥+UBS+São+José+-+Divinópolis%2C+MG;Plataforma+Digital+de+Saúde+Pública;React+19+%2B+Firebase+%2B+Tailwind+CSS" alt="Typing SVG" />
 
 <br/>
 
@@ -36,27 +36,27 @@
 <table>
 <tr>
 <td align="center">
-<img src="https://img.shields.io/badge/📄-37-1351B4?style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/badge/📄-37-1351B4?style=for-the-badge&labelColor=121212"/>
 <br/><b>Rotas</b>
 </td>
 <td align="center">
-<img src="https://img.shields.io/badge/🧩-64+-00C851?style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/badge/🧩-64+-00C851?style=for-the-badge&labelColor=121212"/>
 <br/><b>Componentes</b>
 </td>
 <td align="center">
-<img src="https://img.shields.io/badge/📱-45+-FF6B6B?style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/badge/📱-45+-FF6B6B?style=for-the-badge&labelColor=121212"/>
 <br/><b>Páginas</b>
 </td>
 <td align="center">
-<img src="https://img.shields.io/badge/📍-713-9B59B6?style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/badge/📍-713-9B59B6?style=for-the-badge&labelColor=121212"/>
 <br/><b>Microáreas</b>
 </td>
 <td align="center">
-<img src="https://img.shields.io/badge/👨‍⚕️-115+-E67E22?style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/badge/👨‍⚕️-115+-E67E22?style=for-the-badge&labelColor=121212"/>
 <br/><b>Profissionais</b>
 </td>
 <td align="center">
-<img src="https://img.shields.io/badge/🪝-18-1ABC9C?style=for-the-badge&labelColor=0d1117"/>
+<img src="https://img.shields.io/badge/🪝-18-1ABC9C?style=for-the-badge&labelColor=121212"/>
 <br/><b>Hooks</b>
 </td>
 </tr>
@@ -69,7 +69,7 @@
 <p>
 <a href="https://esf-catalao.vercel.app">🌐 Demo ao Vivo</a> •
 <a href="#-instalação">📖 Documentação</a> •
-<a href="https://github.com/Isaguiar-Dev/psf-saojose-web/issues">🐛 Reportar Bug</a> •
+<a href="https://github.com/isab-aguiar/catalan-health-platform/issues">🐛 Reportar Bug</a> •
 <a href="#-contribuindo">🤝 Contribuir</a>
 </p>
 
@@ -95,7 +95,7 @@
 // ╠══════════════════════════════════════════════════════════════════════╣
 // ║  📁 EXPLORER          │  App.jsx                                    ║
 // ║  ─────────────────────│──────────────────────────────────────────── ║
-// ║  ▼ 📦 psf-saojose-web │                                             ║
+// ║  ▼ 📦 catalan-health-platform │                                             ║
 // ║    ▼ 📂 react-app     │  1  import React from 'react';              ║
 // ║      ▼ 📂 src         │  2  import { BrowserRouter } from '...';    ║
 // ║        📂 components  │  3  import { AuthProvider } from '...';     ║
@@ -200,7 +200,7 @@ Informações rápidas
 + ✅ 713 microáreas mapeadas - Busca inteligente de ACS
 + ✅ Sistema RBAC completo - Admin, Profissional, Diretoria
 + ✅ Upload até 10MB - Imagens e PDFs no Firebase Storage
-+ ✅ Calendário administrativo - Eventos, reuniões, lembretes
++ ✅ Calendário administrativo - Eventos e reuniões
 + ✅ Agendas semanais - Atividades dos profissionais
 + ✅ Estoque de vacinas - Calendário nacional 2025
 + ✅ Sistema de ouvidoria - Elogios, reclamações, sugestões
@@ -299,7 +299,7 @@ Informações rápidas
 | 📸 **Campanhas** | Upload imagens/PDFs até 10MB |
 | 👥 **Usuários** | Gerenciamento (apenas admin) |
 | 💉 **Estoque Vacinas** | Controle com estatísticas |
-| 📅 **Calendário** | Eventos, reuniões, lembretes |
+| 📅 **Calendário** | Eventos e reuniões |
 
 </td>
 <td width="50%">
@@ -474,10 +474,10 @@ Informações rápidas
 
 ```bash
 # Clone o repositório
-git clone https://github.com/Isaguiar-Dev/psf-saojose-web.git
+git clone https://github.com/isab-aguiar/catalan-health-platform.git
 
 # Navegue para o diretório
-cd psf-saojose-web/react-app
+cd catalan-health-platform/react-app
 
 # Instale as dependências (120+ arquivos fonte)
 npm install
@@ -800,10 +800,6 @@ _Lista e criação de avisos_
 <!-- <img src="screenshots/campanhas.png" width="100%"/> -->
 _Upload de imagens e criação de campanhas_
 
-### Chatbot IA
-<!-- <img src="screenshots/chatbot.png" width="100%"/> -->
-_Conversação com Gemini para criação de conteúdo_
-
 ### Mobile Responsivo
 
 <p align="center">
@@ -832,7 +828,7 @@ _Conversação com Gemini para criação de conteúdo_
 <summary><h3>📁 Estrutura de Diretórios</h3></summary>
 
 ```
-🏗️ psf-saojose-web/
+🏗️ catalan-health-platform/
 │
 ├── 📂 react-app/                    # ⚛️ Aplicação React Principal
 │   │
@@ -844,7 +840,6 @@ _Conversação com Gemini para criação de conteúdo_
 │   │   │   ├── avisos/              # 📢 Avisos (3)
 │   │   │   ├── calendar/            # 📅 Calendário (8)
 │   │   │   ├── campaign/            # 📸 Campanhas (6)
-│   │   │   ├── chatbot/             # 🤖 Chatbot IA (1)
 │   │   │   ├── common/              # 🔧 Utilitários (18)
 │   │   │   ├── home/                # 🏠 Homepage (10)
 │   │   │   ├── hubs/                # 🎯 Hubs (1)
@@ -925,9 +920,9 @@ _Conversação com Gemini para criação de conteúdo_
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/🛡️_Security-ENABLED-00AF9B?style=for-the-badge&labelColor=1a1a2e" />
-<img src="https://img.shields.io/badge/🔐_Auth-Firebase-FFCA28?style=for-the-badge&labelColor=1a1a2e&logo=firebase" />
-<img src="https://img.shields.io/badge/📜_Rules-Custom-1351B4?style=for-the-badge&labelColor=1a1a2e" />
+<img src="https://img.shields.io/badge/🛡️_Security-ENABLED-00AF9B?style=for-the-badge&labelColor=121212" />
+<img src="https://img.shields.io/badge/🔐_Auth-Firebase-FFCA28?style=for-the-badge&labelColor=121212&logo=firebase" />
+<img src="https://img.shields.io/badge/📜_Rules-Custom-1351B4?style=for-the-badge&labelColor=121212" />
 
 </div>
 
@@ -1076,8 +1071,8 @@ cd react-app && npm run build
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/PRs-welcome-00AF9B?style=for-the-badge&labelColor=1a1a2e" />
-<img src="https://img.shields.io/badge/Commits-Conventional-FFA000?style=for-the-badge&labelColor=1a1a2e" />
+<img src="https://img.shields.io/badge/PRs-welcome-00AF9B?style=for-the-badge&labelColor=121212" />
+<img src="https://img.shields.io/badge/Commits-Conventional-FFA000?style=for-the-badge&labelColor=121212" />
 
 </div>
 
@@ -1139,12 +1134,12 @@ Este projeto é de uso exclusivo da **ESF Catalão - Divinópolis, MG**.
 <table>
 <tr>
 <td align="center">
-<a href="https://github.com/Isaguiar-Dev">
-<img src="https://github.com/Isaguiar-Dev.png" width="120px;" style="border-radius:50%;" alt="Isabela Aguiar"/><br/>
+<a href="https://github.com/isab-aguiar">
+<img src="https://github.com/isab-aguiar.png" width="120px;" style="border-radius:50%;" alt="Isabela Aguiar"/><br/>
 <sub><b>Isabela Aguiar</b></sub>
 </a><br/>
 <br/>
-<a href="https://github.com/Isaguiar-Dev" title="GitHub">
+<a href="https://github.com/isab-aguiar" title="GitHub">
 <img src="https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white" />
 </a>
 <br/>
@@ -1169,22 +1164,21 @@ Este projeto é de uso exclusivo da **ESF Catalão - Divinópolis, MG**.
 
 📧 **Email**
 
-[contato@esfcatalao.saude.mg.gov.br](mailto:contato@esfcatalao.saude.mg.gov.br)
+[staff.sj21@gmail.com](mailto:staff.sj21@gmail.com)
 
 </td>
 <td align="center">
 
 📱 **Telefone**
 
-[(37) 3229-0000](tel:+553732290000)
+[(37) 3229-6080](tel:+553732296080)
 
 </td>
 <td align="center">
 
 📍 **Endereço**
 
-Rua Catalão, Bairro São José
-Divinópolis/MG
+R. Júlio Nogueira, 1320 - Bela Vista, Divinópolis - MG
 
 </td>
 </tr>
@@ -1229,7 +1223,7 @@ Divinópolis/MG
 
 ### 🔜 Planejado
 
-- [ ] 🤖 Chatbot IA com Gemini
+- [ ] 🤖 Chatbot IA com Gemini (removido anteriormente, pode ser reimplementado)
 - [ ] 📊 Dashboard analítico avançado
 - [ ] 🔔 Notificações push
 - [ ] 📲 PWA (Progressive Web App)
@@ -1299,7 +1293,7 @@ Divinópolis/MG
 
 ---
 
-**© 2024-2025 ESF Catalão** | Divinópolis, Minas Gerais
+**© 2025-2026 ESF Catalão** | Divinópolis, Minas Gerais
 
 <sub>Feito com 💙 para a saúde pública brasileira 🇧🇷</sub>
 

@@ -35,7 +35,7 @@ import {
   X as XIcon,
 } from "lucide-react";
 export default function Campanhas() {
-  const { currentUser, userData, isAdmin, isProfissional, isDiretoria } =
+  const { currentUser, userData, isAdmin, isProfissional, isDiretoria, isSupervisor } =
     useAuth();
   const { showModal } = useModal();
   const permissions = usePermissions();
@@ -97,7 +97,7 @@ export default function Campanhas() {
     if (currentUser) {
       loadCampanhas();
     }
-  }, [currentUser, isAdmin, isProfissional, isDiretoria]);
+  }, [currentUser, isAdmin, isProfissional, isDiretoria, isSupervisor]);
 
   const loadCampanhas = async () => {
     try {
@@ -106,11 +106,16 @@ export default function Campanhas() {
       let data = [];
 
       if (isAdmin) {
-        data = await buscarCampanhas({});
+        // Admin vê TODAS as campanhas, inclusive expiradas
+        data = await buscarCampanhas({ incluirExpiradas: true });
+      } else if (isSupervisor) {
+        // Supervisor também vê todas as campanhas
+        data = await buscarCampanhas({ incluirExpiradas: true });
       } else if (isProfissional && currentUser?.uid) {
         data = await buscarCampanhasPorCriador(currentUser.uid);
       } else if (isDiretoria) {
-        data = await buscarCampanhas({});
+        // Diretoria também vê todas as campanhas
+        data = await buscarCampanhas({ incluirExpiradas: true });
       }
       setCampanhas(data);
     } catch (err) {
