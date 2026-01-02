@@ -33,13 +33,13 @@ export default function CalendarDashboard({
     const eventosAtivos = eventos.filter(e => e.ativo && !e.concluido);
 
     const eventosHoje = eventosAtivos.filter(e => {
-      const dataEvento = new Date(e.dataInicio);
+      const dataEvento = e.dataInicio?.toDate ? e.dataInicio.toDate() : new Date(e.dataInicio);
       dataEvento.setHours(0, 0, 0, 0);
       return dataEvento.getTime() === hoje.getTime();
     });
 
     const eventosProximos = eventosAtivos.filter(e => {
-      const dataEvento = new Date(e.dataInicio);
+      const dataEvento = e.dataInicio?.toDate ? e.dataInicio.toDate() : new Date(e.dataInicio);
       return dataEvento >= hoje && dataEvento <= proximos7Dias;
     });
 

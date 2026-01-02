@@ -135,24 +135,43 @@
       // Função para esconder o ícone quando a janela está aberta
       function toggleAccessButton() {
         var accessButton = document.querySelector('[vw-access-button]');
-        var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
+        var vpWrapper = document.querySelector('.vp-wrapper');
+        var vpWindow = document.querySelector('.vp-window');
         var vpBox = document.querySelector('.vp-box');
+        var vwPluginWrapper = document.querySelector('[vw-plugin-wrapper]');
         
         if (!accessButton) return;
         
-        // Verificar se a janela está aberta
-        var isOpen = (pluginWrapper && pluginWrapper.offsetHeight > 100) || 
-                     (vpBox && vpBox.offsetHeight > 0);
+        // Verificar se a janela está aberta (múltiplas formas)
+        var isOpen = false;
+        
+        if (vpWrapper && getComputedStyle(vpWrapper).display !== 'none') isOpen = true;
+        if (vpWindow && getComputedStyle(vpWindow).display !== 'none') isOpen = true;
+        if (vpBox && vpBox.offsetHeight > 0) isOpen = true;
+        if (vwPluginWrapper) {
+          var wrapperHeight = vwPluginWrapper.offsetHeight;
+          var wrapperChildren = vwPluginWrapper.querySelectorAll('*');
+          for (var i = 0; i < wrapperChildren.length; i++) {
+            if (wrapperChildren[i].offsetHeight > 100) {
+              isOpen = true;
+              break;
+            }
+          }
+        }
         
         if (isOpen) {
-          accessButton.style.display = 'none';
+          accessButton.style.setProperty('display', 'none', 'important');
+          accessButton.style.setProperty('visibility', 'hidden', 'important');
+          accessButton.style.setProperty('opacity', '0', 'important');
         } else {
-          accessButton.style.display = 'block';
+          accessButton.style.setProperty('display', 'block', 'important');
+          accessButton.style.setProperty('visibility', 'visible', 'important');
+          accessButton.style.setProperty('opacity', '1', 'important');
         }
       }
 
       // Verificar periodicamente se a janela está aberta
-      setInterval(toggleAccessButton, 500);
+      setInterval(toggleAccessButton, 300);
 
       // Reinicializar VLibras quando a janela for redimensionada
       var resizeTimeout;
