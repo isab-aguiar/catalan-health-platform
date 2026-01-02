@@ -132,22 +132,37 @@
         var topWrapper = document.querySelector('.vw-plugin-top-wrapper');
         var vpWrapper = document.querySelector('.vp-wrapper');
         var vpPlayer = document.querySelector('.vp-player');
+        var vpWindow = document.querySelector('.vp-window');
         
         // Verificar se o widget está aberto (múltiplas formas de detecção)
-        var isWidgetOpen = (vpBox && vpBox.offsetHeight > 0) || 
-                          (topWrapper && topWrapper.children.length > 0 && topWrapper.offsetHeight > 0) ||
-                          (pluginWrapper && pluginWrapper.classList.contains('active')) ||
-                          (vpWrapper && vpWrapper.offsetHeight > 0) ||
-                          (vpPlayer && vpPlayer.offsetHeight > 0) ||
-                          (pluginWrapper && pluginWrapper.offsetHeight > 100);
+        var isWidgetOpen = false;
+        
+        if (vpBox && vpBox.offsetHeight > 0 && vpBox.offsetWidth > 0) isWidgetOpen = true;
+        if (topWrapper && topWrapper.innerHTML.trim() !== '' && topWrapper.offsetHeight > 50) isWidgetOpen = true;
+        if (vpWrapper && vpWrapper.offsetHeight > 0) isWidgetOpen = true;
+        if (vpPlayer && vpPlayer.offsetHeight > 0) isWidgetOpen = true;
+        if (vpWindow && vpWindow.offsetHeight > 0) isWidgetOpen = true;
+        if (pluginWrapper && pluginWrapper.offsetHeight > 100) isWidgetOpen = true;
+        
+        // Verificar se há elementos visíveis dentro do plugin-wrapper
+        if (pluginWrapper) {
+          var visibleChildren = pluginWrapper.querySelectorAll('[style*="display: block"], [style*="visibility: visible"]');
+          if (visibleChildren.length > 0) {
+            visibleChildren.forEach(function(child) {
+              if (child.offsetHeight > 50) isWidgetOpen = true;
+            });
+          }
+        }
         
         if (accessButton) {
           if (isWidgetOpen) {
+            accessButton.classList.add('vlibras-hidden');
             accessButton.style.setProperty('display', 'none', 'important');
             accessButton.style.setProperty('visibility', 'hidden', 'important');
             accessButton.style.setProperty('opacity', '0', 'important');
             accessButton.style.setProperty('pointer-events', 'none', 'important');
           } else {
+            accessButton.classList.remove('vlibras-hidden');
             accessButton.style.setProperty('display', 'block', 'important');
             accessButton.style.setProperty('visibility', 'visible', 'important');
             accessButton.style.setProperty('opacity', '1', 'important');
@@ -223,7 +238,7 @@
         visibility: visible !important;
       }
 
-      /* Popup/Badge de acessibilidade em Libras - aparece no hover */
+      /* Popup/Badge de acessibilidade em Libras - aparece no hover (apenas desktop) */
       [vw-access-button] .vp-pop-up,
       .vp-pop-up {
         display: none !important;
@@ -232,19 +247,36 @@
         top: 50% !important;
         transform: translateY(-50%) !important;
         z-index: 9999999 !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
         pointer-events: none !important;
         max-width: 200px !important;
         border-radius: 8px !important;
         box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
       }
 
-      [vw-access-button]:hover .vp-pop-up,
-      [vw-access-button].active:hover .vp-pop-up {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+      /* Hover só funciona em desktop (dispositivos com mouse) */
+      @media (hover: hover) and (pointer: fine) {
+        [vw-access-button]:hover .vp-pop-up,
+        [vw-access-button].active:hover .vp-pop-up {
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+
+        [vw-access-button]:hover .vp-access-button {
+          transform: translateX(-10px) !important;
+        }
+      }
+
+      /* Em mobile/touch, NUNCA mostrar o popup */
+      @media (hover: none), (pointer: coarse) {
+        [vw-access-button] .vp-pop-up,
+        .vp-pop-up {
+          display: none !important;
+          visibility: hidden !important;
+          opacity: 0 !important;
+        }
       }
 
       /* Ícone do botão de acesso */
@@ -259,10 +291,6 @@
         transition: transform 0.3s ease !important;
       }
 
-      [vw-access-button]:hover .vp-access-button {
-        transform: translateX(-10px) !important;
-      }
-
       /* Esconder o ícone quando o widget está aberto */
       div[vw].enabled [vw-access-button].active[style*="display: none"],
       div[vw] .vw-plugin-top-wrapper:not(:empty) ~ [vw-access-button],
@@ -270,6 +298,7 @@
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
+        pointer-events: none !important;
       }
 
       /* Quando o player/widget está visível, esconder o botão */
@@ -279,6 +308,15 @@
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      /* Classe para forçar esconder o botão via JS */
+      [vw-access-button].vlibras-hidden {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
       }
 
       [vw-plugin-wrapper] {
