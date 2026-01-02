@@ -29,19 +29,38 @@ export default function CalendarDashboard({
 
     const proximos7Dias = new Date(hoje);
     proximos7Dias.setDate(proximos7Dias.getDate() + 7);
+    proximos7Dias.setHours(23, 59, 59, 999); // Incluir todo o 7º dia
 
-    const eventosAtivos = eventos.filter(e => e.ativo && !e.concluido);
+    // Debug: log dos eventos recebidos
+    console.log('[CalendarDashboard] Eventos recebidos:', eventos?.length || 0, eventos);
+
+    const eventosAtivos = eventos.filter(e => {
+      // Considerar evento ativo se ativo === true ou se ativo não estiver definido (retrocompatibilidade)
+      const isAtivo = e.ativo === true || e.ativo === undefined;
+      const naoConcluido = !e.concluido;
+      return isAtivo && naoConcluido;
+    });
+
+    console.log('[CalendarDashboard] Eventos ativos:', eventosAtivos.length, eventosAtivos);
 
     const eventosHoje = eventosAtivos.filter(e => {
+      if (!e.dataInicio) return false;
       const dataEvento = e.dataInicio?.toDate ? e.dataInicio.toDate() : new Date(e.dataInicio);
       dataEvento.setHours(0, 0, 0, 0);
-      return dataEvento.getTime() === hoje.getTime();
+      const isHoje = dataEvento.getTime() === hoje.getTime();
+      console.log(`[CalendarDashboard] Evento "${e.titulo}" - data: ${dataEvento.toLocaleDateString()}, hoje: ${hoje.toLocaleDateString()}, isHoje: ${isHoje}`);
+      return isHoje;
     });
 
     const eventosProximos = eventosAtivos.filter(e => {
+      if (!e.dataInicio) return false;
       const dataEvento = e.dataInicio?.toDate ? e.dataInicio.toDate() : new Date(e.dataInicio);
-      return dataEvento >= hoje && dataEvento <= proximos7Dias;
+      const isProximo = dataEvento >= hoje && dataEvento <= proximos7Dias;
+      return isProximo;
     });
+
+    console.log('[CalendarDashboard] Eventos hoje:', eventosHoje.length);
+    console.log('[CalendarDashboard] Eventos próximos 7 dias:', eventosProximos.length);
 
     const eventosTotal = eventos.length;
     const eventosConcluidos = eventos.filter(e => e.concluido).length;
@@ -243,14 +262,14 @@ export default function CalendarDashboard({
 
         {/* Próximos Eventos */}
         <div className="bg-white rounded-lg shadow-sm border border-neutral-200 overflow-hidden">
-          <div className="p-6 border-b border-neutral-200 bg-gradient-to-r from-purple-50 to-pink-50">
-            <h3 className="text-lg font-semibold text-neutral-900 flex items-center gap-2">
-              <Clock className="w-5 h-5 text-purple-600" />
+          <div className="p-3 md:p-6 border-b border-neutral-200 bg-gradient-to-r from-purple-50 to-pink-50">
+            <h3 className="text-base md:text-lg font-semibold text-neutral-900 flex items-center gap-2">
+              <Clock className="w-4 h-4 md:w-5 md:h-5 text-purple-600" />
               Próximos 7 Dias
             </h3>
           </div>
 
-          <div className="p-6">
+          <div className="p-3 md:p-6">
             {stats.eventosProximos.length === 0 ? (
               <EmptyState
                 icon={Clock}
@@ -319,7 +338,7 @@ export default function CalendarDashboard({
           </div>
         </div>
 
-        <div className="p-6">
+        <div className="p-3 md:p-6">
           {stats.agendasHoje.length === 0 ? (
             <EmptyState
               icon={Users}
@@ -329,32 +348,33 @@ export default function CalendarDashboard({
                 onCreateAgenda && (
                   <button
                     onClick={onCreateAgenda}
-                    className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md"
+                    className="px-3 md:px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-200 flex items-center gap-2 font-medium shadow-sm hover:shadow-md text-sm"
                   >
                     <Plus className="w-4 h-4" />
-                    Criar Agenda
+                    <span className="hidden sm:inline">Criar Agenda</span>
+                    <span className="sm:hidden">Criar</span>
                   </button>
                 )
               }
             />
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
               {stats.agendasHoje.map((agenda) => {
                 const atividades = agenda.agendaSemanal?.[stats.diaSemanaHoje] || [];
 
                 return (
                   <div
                     key={agenda.id}
-                    className="group border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/50 to-purple-50/30 rounded-xl p-5 transition-all duration-300 hover:shadow-lg hover:border-indigo-300"
+                    className="group border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/50 to-purple-50/30 rounded-xl p-3 md:p-5 transition-all duration-300 hover:shadow-lg hover:border-indigo-300"
                   >
                     {/* Header com nome e categoria */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2.5 bg-indigo-600 rounded-lg shadow-md">
-                          <Stethoscope className="w-5 h-5 text-white" />
+                    <div className="flex items-start justify-between mb-3 md:mb-4">
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <div className="p-2 md:p-2.5 bg-indigo-600 rounded-lg shadow-md">
+                          <Stethoscope className="w-4 h-4 md:w-5 md:h-5 text-white" />
                         </div>
                         <div>
-                          <h4 className="font-bold text-lg text-indigo-900">{agenda.nome}</h4>
+                          <h4 className="font-bold text-base md:text-lg text-indigo-900">{agenda.nome}</h4>
                           <span className="text-xs px-2 py-0.5 bg-indigo-600 text-white rounded-full font-medium">
                             {agenda.categoria}
                           </span>
