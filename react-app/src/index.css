@@ -166,7 +166,7 @@ div[vw].enabled {
   position: relative !important;
 }
 
-/* Popup/Badge de acessibilidade em Libras - escondido por padrão */
+/* Popup/Badge de acessibilidade em Libras - aparece no hover */
 [vw-access-button] .vp-pop-up,
 .vp-pop-up {
   display: none !important;
@@ -175,36 +175,19 @@ div[vw].enabled {
   top: 50% !important;
   transform: translateY(-50%) !important;
   z-index: 9999999 !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   pointer-events: none !important;
   max-width: 200px !important;
   border-radius: 8px !important;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
 }
 
-/* Hover só funciona em desktop (dispositivos com mouse) */
-@media (hover: hover) and (pointer: fine) {
-  [vw-access-button]:hover .vp-pop-up,
-  [vw-access-button].active:hover .vp-pop-up {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  [vw-access-button]:hover .vp-access-button {
-    transform: translateX(-10px) !important;
-  }
-}
-
-/* Em mobile/touch, NUNCA mostrar o popup */
-@media (hover: none), (pointer: coarse) {
-  [vw-access-button] .vp-pop-up,
-  .vp-pop-up {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-  }
+[vw-access-button]:hover .vp-pop-up,
+[vw-access-button].active:hover .vp-pop-up {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* Ícone do botão de acesso */
@@ -217,32 +200,8 @@ div[vw].enabled {
   transition: transform 0.3s ease !important;
 }
 
-/* Esconder o ícone quando o widget está aberto */
-div[vw].enabled [vw-access-button].active[style*="display: none"],
-div[vw] .vw-plugin-top-wrapper:not(:empty) ~ [vw-access-button],
-div[vw].enabled .vp-box ~ [vw-access-button] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Quando o player/widget está visível, esconder o botão */
-div[vw] [vw-plugin-wrapper].active ~ [vw-access-button],
-div[vw] .vw-plugin-top-wrapper.active ~ [vw-access-button],
-div[vw].enabled .vp-wrapper-active [vw-access-button] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Classe para forçar esconder o botão via JS */
-[vw-access-button].vlibras-hidden {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
+[vw-access-button]:hover .vp-access-button {
+  transform: translateX(-10px) !important;
 }
 
 [vw-plugin-wrapper],
