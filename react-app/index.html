@@ -120,6 +120,9 @@
               if (vwDiv && (vwDiv.style.display === 'none' || vwDiv.style.visibility === 'hidden')) {
                 fixVLibrasPosition();
               }
+              
+              // Verificar se o widget está aberto para esconder/mostrar o botão
+              toggleAccessButton();
             }
           });
         });
@@ -129,6 +132,34 @@
           observer.observe(vwDiv, { attributes: true, childList: true, subtree: true });
         }
       }
+
+      // Função para esconder/mostrar o botão quando o widget abre/fecha
+      function toggleAccessButton() {
+        var accessButton = document.querySelector('[vw-access-button]');
+        var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
+        var vpBox = document.querySelector('.vp-box');
+        var topWrapper = document.querySelector('.vw-plugin-top-wrapper');
+        
+        // Verificar se o widget está aberto (tem conteúdo visível)
+        var isWidgetOpen = (vpBox && vpBox.offsetHeight > 0) || 
+                          (topWrapper && topWrapper.children.length > 0 && topWrapper.offsetHeight > 0) ||
+                          (pluginWrapper && pluginWrapper.classList.contains('active'));
+        
+        if (accessButton) {
+          if (isWidgetOpen) {
+            accessButton.style.display = 'none';
+            accessButton.style.visibility = 'hidden';
+            accessButton.style.opacity = '0';
+          } else {
+            accessButton.style.display = 'block';
+            accessButton.style.visibility = 'visible';
+            accessButton.style.opacity = '1';
+          }
+        }
+      }
+
+      // Expor função globalmente
+      window.toggleAccessButton = toggleAccessButton;
 
       // Reinicializar VLibras quando a janela for redimensionada
       var resizeTimeout;
@@ -225,6 +256,24 @@
 
       [vw-access-button]:hover .vp-access-button {
         transform: translateX(-10px) !important;
+      }
+
+      /* Esconder o ícone quando o widget está aberto */
+      div[vw].enabled [vw-access-button].active[style*="display: none"],
+      div[vw] .vw-plugin-top-wrapper:not(:empty) ~ [vw-access-button],
+      div[vw].enabled .vp-box ~ [vw-access-button] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+      }
+
+      /* Quando o player/widget está visível, esconder o botão */
+      div[vw] [vw-plugin-wrapper].active ~ [vw-access-button],
+      div[vw] .vw-plugin-top-wrapper.active ~ [vw-access-button],
+      div[vw].enabled .vp-wrapper-active [vw-access-button] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
       }
 
       [vw-plugin-wrapper] {

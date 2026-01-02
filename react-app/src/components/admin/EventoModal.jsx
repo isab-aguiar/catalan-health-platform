@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { X, Upload, Trash2, Calendar, Clock, Users, MapPin, FileText, Bell } from 'lucide-react';
+import { X, Upload, Trash2, Calendar, Clock, Users, MapPin, FileText, Bell, Check } from 'lucide-react';
 import { criarEvento, atualizarEvento, TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useModal } from '../../contexts/ModalContext';
+import { getAllUsers } from '../../services/usersService';
 
 export default function EventoModal({ isOpen, onClose, eventoEditando = null, dataInicial = null, onEventoSalvo }) {
   const { currentUser } = useAuth();
@@ -25,6 +26,32 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
 
   const [participanteInput, setParticipanteInput] = useState('');
   const [pdfFile, setPdfFile] = useState(null);
+  const [usuarios, setUsuarios] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [loadingUsuarios, setLoadingUsuarios] = useState(false);
+
+  // Carregar usuários quando o modal abrir
+  useEffect(() => {
+    if (isOpen) {
+      carregarUsuarios();
+    }
+  }, [isOpen]);
+
+  const carregarUsuarios = async () => {
+    try {
+      setLoadingUsuarios(true);
+      const result = await getAllUsers();
+      if (result.success) {
+        // Filtrar apenas usuários ativos
+        const usuariosAtivos = result.data.filter(u => u.active !== false);
+        setUsuarios(usuariosAtivos);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar usuários:', error);
+    } finally {
+      setLoadingUsuarios(false);
+    }
+  };
 
   useEffect(() => {
     if (eventoEditando) {
@@ -95,7 +122,8 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
       }
 
       if (onEventoSalvo) {
-        onEventoSalvo();
+        // Passa a data do evento para o callback
+        onEventoSalvo(formData.dataInicio);
       }
 
       handleClose();
@@ -132,13 +160,15 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
     onClose();
   };
 
-  const adicionarParticipante = () => {
-    if (participanteInput.trim()) {
+  const adicionarParticipante = (nome) => {
+    const nomeParticipante = nome || participanteInput.trim();
+    if (nomeParticipante && !formData.participantes.includes(nomeParticipante)) {
       setFormData({
         ...formData,
-        participantes: [...formData.participantes, participanteInput.trim()],
+        participantes: [...formData.participantes, nomeParticipante],
       });
       setParticipanteInput('');
+      setShowSuggestions(false);
     }
   };
 
@@ -147,6 +177,20 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
       ...formData,
       participantes: formData.participantes.filter((_, i) => i !== index),
     });
+  };
+
+  // Filtrar sugestões baseado no input
+  const getSuggestions = () => {
+    if (!participanteInput.trim() || participanteInput.length < 2) {
+      return [];
+    }
+
+    const inputLower = participanteInput.toLowerCase();
+    return usuarios.filter(usuario => {
+      const nome = usuario.displayName || usuario.email || '';
+      const jaAdicionado = formData.participantes.includes(nome);
+      return !jaAdicionado && nome.toLowerCase().includes(inputLower);
+    }).slice(0, 5); // Limitar a 5 sugestões
   };
 
   const getTipoLabel = (tipo) => {
@@ -322,40 +366,89 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
                 <Users className="w-4 h-4" />
                 Participantes
               </label>
-              <div className="flex gap-2 mb-2">
-                <input
-                  type="text"
-                  value={participanteInput}
-                  onChange={(e) => setParticipanteInput(e.target.value)}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      e.preventDefault();
-                      adicionarParticipante();
-                    }
-                  }}
-                  placeholder="Nome do participante"
-                  className="flex-1 px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
-                />
-                <button
-                  type="button"
-                  onClick={adicionarParticipante}
-                  className="px-4 py-2 bg-gov-blue text-white rounded-lg hover:bg-gov-blue-dark transition-colors"
-                >
-                  Adicionar
-                </button>
+              <div className="relative">
+                <div className="flex gap-2 mb-2">
+                  <input
+                    type="text"
+                    value={participanteInput}
+                    onChange={(e) => {
+                      setParticipanteInput(e.target.value);
+                      setShowSuggestions(true);
+                    }}
+                    onFocus={() => setShowSuggestions(true)}
+                    onBlur={() => {
+                      // Delay para permitir click nas sugestões
+                      setTimeout(() => setShowSuggestions(false), 200);
+                    }}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        adicionarParticipante();
+                      }
+                    }}
+                    placeholder="Digite o nome do participante..."
+                    className="flex-1 px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => adicionarParticipante()}
+                    className="px-4 py-2 bg-gov-blue text-white rounded-lg hover:bg-gov-blue-dark transition-colors"
+                  >
+                    Adicionar
+                  </button>
+                </div>
+
+                {/* Sugestões de autocomplete */}
+                {showSuggestions && getSuggestions().length > 0 && (
+                  <div className="absolute z-10 w-full bg-white border border-neutral-300 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
+                    {getSuggestions().map((usuario, index) => (
+                      <button
+                        key={usuario.uid || index}
+                        type="button"
+                        onClick={() => adicionarParticipante(usuario.displayName || usuario.email)}
+                        className="w-full px-3 py-2 text-left hover:bg-blue-50 transition-colors flex items-center gap-2 border-b border-neutral-100 last:border-b-0"
+                      >
+                        <Users className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-neutral-900 truncate">
+                            {usuario.displayName || usuario.email}
+                          </div>
+                          {usuario.displayName && usuario.email && (
+                            <div className="text-xs text-neutral-500 truncate">{usuario.email}</div>
+                          )}
+                        </div>
+                        <span className="text-xs text-neutral-500 px-2 py-0.5 bg-neutral-100 rounded">
+                          {usuario.role === 'admin' ? 'Admin' :
+                           usuario.role === 'profissional' ? 'Prof.' :
+                           usuario.role === 'supervisor' ? 'Superv.' : 'Staff'}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Mensagem quando está carregando usuários */}
+                {loadingUsuarios && showSuggestions && (
+                  <div className="absolute z-10 w-full bg-white border border-neutral-300 rounded-lg shadow-lg mt-1 p-3 text-center text-sm text-neutral-500">
+                    Carregando usuários...
+                  </div>
+                )}
               </div>
+
+              {/* Lista de participantes adicionados */}
               {formData.participantes.length > 0 && (
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-2">
                   {formData.participantes.map((participante, index) => (
                     <div
                       key={index}
                       className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm flex items-center gap-2"
                     >
+                      <Check className="w-3 h-3" />
                       <span>{participante}</span>
                       <button
                         type="button"
                         onClick={() => removerParticipante(index)}
-                        className="text-blue-500 hover:text-blue-700"
+                        className="text-blue-500 hover:text-blue-700 transition-colors"
                       >
                         <X className="w-3 h-3" />
                       </button>

@@ -204,6 +204,24 @@ div[vw].enabled {
   transform: translateX(-10px) !important;
 }
 
+/* Esconder o ícone quando o widget está aberto */
+div[vw].enabled [vw-access-button].active[style*="display: none"],
+div[vw] .vw-plugin-top-wrapper:not(:empty) ~ [vw-access-button],
+div[vw].enabled .vp-box ~ [vw-access-button] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Quando o player/widget está visível, esconder o botão */
+div[vw] [vw-plugin-wrapper].active ~ [vw-access-button],
+div[vw] .vw-plugin-top-wrapper.active ~ [vw-access-button],
+div[vw].enabled .vp-wrapper-active [vw-access-button] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 [vw-plugin-wrapper],
 [vw-plugin-wrapper] * {
   pointer-events: auto !important;

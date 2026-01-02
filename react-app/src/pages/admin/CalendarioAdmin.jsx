@@ -320,9 +320,30 @@ export default function CalendarioAdmin() {
 
   /**
    * Fecha modal de criação/edição e recarrega eventos
+   * Se a data do evento estiver em outro mês, navega para esse mês
    */
-  const handleEventoSalvo = () => {
-    recarregar();
+  const handleEventoSalvo = (dataEvento) => {
+    // Se foi fornecida a data do evento, verificar se precisa mudar de mês
+    if (dataEvento) {
+      const dataEventoObj = new Date(dataEvento);
+      const mesEvento = dataEventoObj.getMonth();
+      const anoEvento = dataEventoObj.getFullYear();
+      const mesAtual = currentDate.getMonth();
+      const anoAtual = currentDate.getFullYear();
+
+      // Se o evento foi criado para um mês diferente, navegar para esse mês
+      if (mesEvento !== mesAtual || anoEvento !== anoAtual) {
+        console.log(`📅 Evento criado para ${mesEvento + 1}/${anoEvento}, navegando para esse mês...`);
+        setCurrentDate(new Date(anoEvento, mesEvento, 1));
+      } else {
+        // Mesmo mês, apenas recarregar
+        recarregar();
+      }
+    } else {
+      // Sem data fornecida, apenas recarregar
+      recarregar();
+    }
+
     setShowEventModal(false);
     setEventoEditando(null);
     setSelectedDate(null);
