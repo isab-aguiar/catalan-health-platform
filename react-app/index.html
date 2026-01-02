@@ -120,6 +120,8 @@
               if (vwDiv && (vwDiv.style.display === 'none' || vwDiv.style.visibility === 'hidden')) {
                 fixVLibrasPosition();
               }
+              // Esconder/mostrar o ícone quando a janela abre/fecha
+              toggleAccessButton();
             }
           });
         });
@@ -127,6 +129,23 @@
         var vwDiv = document.querySelector('div[vw]');
         if (vwDiv) {
           observer.observe(vwDiv, { attributes: true, childList: true, subtree: true });
+        }
+      }
+
+      // Função para esconder o ícone quando a janela está aberta
+      function toggleAccessButton() {
+        var accessButton = document.querySelector('[vw-access-button]');
+        var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
+        
+        if (!accessButton || !pluginWrapper) return;
+        
+        // Verificar se a janela está aberta (tem altura significativa)
+        var isOpen = pluginWrapper.offsetHeight > 100;
+        
+        if (isOpen) {
+          accessButton.style.display = 'none';
+        } else {
+          accessButton.style.display = 'block';
         }
       }
 
