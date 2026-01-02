@@ -152,6 +152,70 @@ export default function CalendarAgendaView({
     });
   };
 
+  const handleExportar = () => {
+    // Gerar conteúdo da agenda em texto
+    let conteudo = `AGENDA - ${formatarDataCompleta(days[0])} até ${formatarDataCompleta(days[days.length - 1])}\n\n`;
+
+    days.forEach(day => {
+      const dayKey = day.toISOString().split('T')[0];
+      const eventosDay = eventosPorDia[dayKey] || [];
+
+      conteudo += `\n${formatarDiaSemana(day).toUpperCase()} - ${formatarDataCompleta(day)}\n`;
+      conteudo += '─'.repeat(60) + '\n';
+
+      if (eventosDay.length === 0) {
+        conteudo += 'Nenhum evento\n';
+      } else {
+        eventosDay.forEach(evento => {
+          conteudo += `\n${evento.horaInicio || 'Dia inteiro'} - ${evento.titulo}\n`;
+          if (evento.descricao) conteudo += `  ${evento.descricao}\n`;
+          if (evento.local) conteudo += `  📍 ${evento.local}\n`;
+          if (evento.participantes?.length) conteudo += `  👥 ${evento.participantes.length} participante(s)\n`;
+        });
+      }
+      conteudo += '\n';
+    });
+
+    // Criar blob e download
+    const blob = new Blob([conteudo], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `agenda_${days[0].toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleCompartilhar = async () => {
+    const textoAgenda = `Agenda de ${formatarDataCompleta(days[0])} até ${formatarDataCompleta(days[days.length - 1])}\n${eventos?.length || 0} eventos programados`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Minha Agenda',
+          text: textoAgenda,
+        });
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          console.error('Erro ao compartilhar:', error);
+          copiarParaClipboard(textoAgenda);
+        }
+      }
+    } else {
+      copiarParaClipboard(textoAgenda);
+    }
+  };
+
+  const copiarParaClipboard = (texto) => {
+    navigator.clipboard.writeText(texto).then(() => {
+      alert('Agenda copiada para a área de transferência!');
+    }).catch(err => {
+      console.error('Erro ao copiar:', err);
+    });
+  };
+
   return (
     <div className="space-y-4 md:space-y-6 animate-fade-in">
       {/* Controles Aprimorados */}
@@ -209,6 +273,7 @@ export default function CalendarAgendaView({
               )}
 
               <button
+                onClick={handleExportar}
                 className="p-2 hover:bg-white/80 rounded-lg transition-all duration-200 border border-neutral-200 hover:shadow-md"
                 title="Exportar agenda"
               >
@@ -216,6 +281,7 @@ export default function CalendarAgendaView({
               </button>
 
               <button
+                onClick={handleCompartilhar}
                 className="p-2 hover:bg-white/80 rounded-lg transition-all duration-200 border border-neutral-200 hover:shadow-md"
                 title="Compartilhar"
               >

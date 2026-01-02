@@ -20,9 +20,20 @@ const COLLECTION_NAME = "employees";
  */
 export async function getAllEmployees() {
   try {
+    console.log('👥 [getAllEmployees] Buscando todos os funcionários...');
     const employeesRef = collection(db, COLLECTION_NAME);
-    const q = query(employeesRef, orderBy("metadata.createdAt", "desc"));
-    const querySnapshot = await getDocs(q);
+
+    // Tentar com ordenação primeiro
+    let querySnapshot;
+    try {
+      const q = query(employeesRef, orderBy("displayName", "asc"));
+      querySnapshot = await getDocs(q);
+      console.log('✅ [getAllEmployees] Query com orderBy executada com sucesso');
+    } catch (orderError) {
+      // Se falhar, buscar sem ordenação
+      console.log('⚠️ [getAllEmployees] orderBy falhou, buscando sem ordenação:', orderError.message);
+      querySnapshot = await getDocs(employeesRef);
+    }
 
     const employees = [];
     querySnapshot.forEach((doc) => {
@@ -32,10 +43,18 @@ export async function getAllEmployees() {
       });
     });
 
+    // Ordenar no cliente por displayName
+    employees.sort((a, b) => {
+      const nomeA = (a.displayName || '').toLowerCase();
+      const nomeB = (b.displayName || '').toLowerCase();
+      return nomeA.localeCompare(nomeB);
+    });
+
+    console.log(`✅ [getAllEmployees] ${employees.length} funcionários encontrados`);
     return { success: true, data: employees };
   } catch (error) {
-    console.error("Erro ao buscar funcionários:", error);
-    return { success: false, error: error.message };
+    console.error("❌ [getAllEmployees] Erro ao buscar funcionários:", error);
+    return { success: false, error: error.message, data: [] };
   }
 }
 
