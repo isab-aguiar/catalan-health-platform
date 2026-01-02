@@ -475,42 +475,6 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
               />
             </div>
           )}
-
-          {/* Lembrete */}
-          <div className="border border-neutral-200 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <input
-                type="checkbox"
-                id="lembrete"
-                checked={formData.lembrete}
-                onChange={(e) => setFormData({ ...formData, lembrete: e.target.checked })}
-                className="w-4 h-4 text-gov-blue focus:ring-gov-blue border-neutral-300 rounded"
-              />
-              <label htmlFor="lembrete" className="text-sm font-medium text-neutral-700 flex items-center gap-2">
-                <Bell className="w-4 h-4" />
-                Ativar Lembrete
-              </label>
-            </div>
-
-            {formData.lembrete && (
-              <div>
-                <label className="block text-sm text-neutral-600 mb-2">
-                  Lembrar com antecedência de:
-                </label>
-                <select
-                  value={formData.lembreteMinutos}
-                  onChange={(e) => setFormData({ ...formData, lembreteMinutos: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
-                >
-                  <option value={15}>15 minutos</option>
-                  <option value={30}>30 minutos</option>
-                  <option value={60}>1 hora</option>
-                  <option value={120}>2 horas</option>
-                  <option value={1440}>1 dia</option>
-                </select>
-              </div>
-            )}
-          </div>
         </form>
 
         {/* Footer */}

@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Edit2, Trash2, X, MapPin, Stethoscope, Briefcase, LayoutGrid, List, BarChart3 } from 'lucide-react';
+import { Calendar as CalendarIcon, Plus, ChevronLeft, ChevronRight, Filter, Clock, Users, FileText, Edit2, Trash2, X, MapPin, Stethoscope, Briefcase, LayoutGrid, List, BarChart3, Bell } from 'lucide-react';
 import { TIPOS_EVENTO } from '../../services/calendarioService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useModal } from '../../contexts/ModalContext';
