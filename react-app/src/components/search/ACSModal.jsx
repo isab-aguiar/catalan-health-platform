@@ -4,54 +4,48 @@ import { contactInfo } from '../../config';
 
 // Mapeamento de nomes curtos para nomes completos - ACS
 const nomesCompletosACS = {
-  'wasley': 'Wasley Hudson Borges',
-  'ênes júnior': 'Ênes Lino de Souza Júnior',
-  'ênes': 'Ênes Lino de Souza Júnior',
-  'enes júnior': 'Ênes Lino de Souza Júnior',
-  'enes junior': 'Ênes Lino de Souza Júnior',
+  'wasley': 'Wasley Borges',
+  'ênes júnior': 'Enes Junior',
+  'ênes': 'Enes Junior',
+  'enes júnior': 'Enes Junior',
+  'enes junior': 'Enes Junior',
   'erika': 'Erika Roscoe',
-  'renata': 'Renata Rodrigues Coimbra',
-  'daniel': 'Daniel Henrique Ferreira Silva',
-  'davi': 'Davi de Castro Faria',
-  'matheus': 'Matheus José Ferreira Alves',
-  'denivia': 'Denívia Miranda Santos',
-  'rosana': 'Rosana da Silva Marçal',
-  'marinete': 'Marinete Maria Silva',
-  'thaciane': 'Thaciane Fonseca',
-  'izabelle': 'Izabelle Cristina',
-  'amanda': 'Amanda Cristina',
-  'juliana': 'Juliana Aparecida',
+  'renata': 'Renata Rodrigues',
+  'daniel': 'Daniel Henrique',
+  'davi': 'Davi de Castro',
+  'matheus': 'Matheus José',
 };
 
 // Mapeamento de nomes curtos para nomes completos - Médicos
 const nomesCompletosMedicos = {
-  'dr. frederico': 'Dr. Frederico Fonseca Campos',
-  'dr. gustavo': 'Dr. Gustavo Henrique Silva',
-  'dr. joão': 'Dr. João Paulo Ferreira',
-  'dr. lúcio': 'Dr. Lúcio Flávio de Oliveira',
-  'dr. lucio': 'Dr. Lúcio Flávio de Oliveira',
+  'dr. frederico': 'Dr. Frederico Mendes',
+  'dr. gustavo': 'Dr. Gustavo Cambraia',
+  'dr. joão': 'Dr. João Alves',
+  'dr. lúcio': 'Dr. Lúcio',
+  'dr. lucio': 'Dr. Lúcio',
 };
 
 // Mapeamento de nomes curtos para nomes completos - Enfermeiras
 const nomesCompletosEnfermeiras = {
-  'enf. aline macedo': 'Enf. Aline Macedo Rodrigues',
-  'enf. naiara': 'Enf. Naiara Cristina Santos',
-  'enf. fabíola': 'Enf. Fabíola Cristina da Silva Oliveira',
-  'enf. fabiola': 'Enf. Fabíola Cristina da Silva Oliveira',
-  'enf. jéssica barros': 'Enf. Jéssica Barros de Souza',
-  'enf. jessica barros': 'Enf. Jéssica Barros de Souza',
+  'enf. aline macedo': 'Enf. Aline Macedo',
+  'enf. naiara': 'Enf. Naiara Cristina',
+  'enf. fabíola': 'Enf. Fabiola Cristina',
+  'enf. fabiola': 'Enf. Fabiola Cristina',
+  'enf. jéssica barros': 'Enf. Jéssica Barros',
+  'enf. jessica barros': 'Enf. Jéssica Barros',
 };
 
 // Mapeamento de nomes curtos para nomes completos - Dentistas
 const nomesCompletosDentistas = {
-  'dra. helena': 'Dra. Helena Dias de Campos',
-  'dra. mayra': 'Dra. Mayra Paula Morais Gama',
+  'dra. helena': 'Dra. Helena Dias',
+  'dra. mayra': 'Dra. Mayra Paula',
+  'dr. gabriel': 'Dr. Gabriel Couto',
 };
 
 // Mapeamento de nomes curtos para nomes completos - ASB
 const nomesCompletosASB = {
-  'maycon': 'Maycon Alves Teixeira',
-  'cibele': 'Cibele Ribeiro Coimbra Dias',
+  'maycon': 'Maycon Alves',
+  'cibele': 'Cibele Ribeiro',
 };
 
 function getNomeCompleto(nome) {
