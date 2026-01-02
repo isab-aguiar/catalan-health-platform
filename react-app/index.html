@@ -136,11 +136,13 @@
       function toggleAccessButton() {
         var accessButton = document.querySelector('[vw-access-button]');
         var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
+        var vpBox = document.querySelector('.vp-box');
         
-        if (!accessButton || !pluginWrapper) return;
+        if (!accessButton) return;
         
-        // Verificar se a janela está aberta (tem altura significativa)
-        var isOpen = pluginWrapper.offsetHeight > 100;
+        // Verificar se a janela está aberta
+        var isOpen = (pluginWrapper && pluginWrapper.offsetHeight > 100) || 
+                     (vpBox && vpBox.offsetHeight > 0);
         
         if (isOpen) {
           accessButton.style.display = 'none';
@@ -148,6 +150,9 @@
           accessButton.style.display = 'block';
         }
       }
+
+      // Verificar periodicamente se a janela está aberta
+      setInterval(toggleAccessButton, 500);
 
       // Reinicializar VLibras quando a janela for redimensionada
       var resizeTimeout;

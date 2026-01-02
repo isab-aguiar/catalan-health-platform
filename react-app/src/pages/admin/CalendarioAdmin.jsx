@@ -1173,7 +1173,9 @@ export default function CalendarioAdmin() {
                   </label>
                   <p className="mt-1 text-neutral-900">
                     {eventoVisualizando.dataInicio
-                      ? new Date(eventoVisualizando.dataInicio).toLocaleDateString('pt-BR')
+                      ? (eventoVisualizando.dataInicio.toDate
+                          ? eventoVisualizando.dataInicio.toDate().toLocaleDateString('pt-BR')
+                          : new Date(eventoVisualizando.dataInicio).toLocaleDateString('pt-BR'))
                       : '-'}
                   </p>
                 </div>
@@ -1184,7 +1186,9 @@ export default function CalendarioAdmin() {
                       Data Fim
                     </label>
                     <p className="mt-1 text-neutral-900">
-                      {new Date(eventoVisualizando.dataFim).toLocaleDateString('pt-BR')}
+                      {eventoVisualizando.dataFim.toDate
+                        ? eventoVisualizando.dataFim.toDate().toLocaleDateString('pt-BR')
+                        : new Date(eventoVisualizando.dataFim).toLocaleDateString('pt-BR')}
                     </p>
                   </div>
                 )}
