@@ -2,6 +2,88 @@ import { useState } from 'react';
 import { MapPin, Phone, Stethoscope, UserCircle2, Users, X } from 'lucide-react';
 import { contactInfo } from '../../config';
 
+// Mapeamento de nomes curtos para nomes completos - ACS
+const nomesCompletosACS = {
+  'wasley': 'Wasley Hudson Borges',
+  'ênes júnior': 'Ênes Lino de Souza Júnior',
+  'ênes': 'Ênes Lino de Souza Júnior',
+  'enes júnior': 'Ênes Lino de Souza Júnior',
+  'enes junior': 'Ênes Lino de Souza Júnior',
+  'erika': 'Erika Roscoe',
+  'renata': 'Renata Rodrigues Coimbra',
+  'daniel': 'Daniel Henrique Ferreira Silva',
+  'davi': 'Davi de Castro Faria',
+  'matheus': 'Matheus José Ferreira Alves',
+  'denivia': 'Denívia Miranda Santos',
+  'rosana': 'Rosana da Silva Marçal',
+  'marinete': 'Marinete Maria Silva',
+  'thaciane': 'Thaciane Fonseca',
+  'izabelle': 'Izabelle Cristina',
+  'amanda': 'Amanda Cristina',
+  'juliana': 'Juliana Aparecida',
+};
+
+// Mapeamento de nomes curtos para nomes completos - Médicos
+const nomesCompletosMedicos = {
+  'dr. frederico': 'Dr. Frederico Fonseca Campos',
+  'dr. gustavo': 'Dr. Gustavo Henrique Silva',
+  'dr. joão': 'Dr. João Paulo Ferreira',
+  'dr. lúcio': 'Dr. Lúcio Flávio de Oliveira',
+  'dr. lucio': 'Dr. Lúcio Flávio de Oliveira',
+};
+
+// Mapeamento de nomes curtos para nomes completos - Enfermeiras
+const nomesCompletosEnfermeiras = {
+  'enf. aline macedo': 'Enf. Aline Macedo Rodrigues',
+  'enf. naiara': 'Enf. Naiara Cristina Santos',
+  'enf. fabíola': 'Enf. Fabíola Cristina da Silva Oliveira',
+  'enf. fabiola': 'Enf. Fabíola Cristina da Silva Oliveira',
+  'enf. jéssica barros': 'Enf. Jéssica Barros de Souza',
+  'enf. jessica barros': 'Enf. Jéssica Barros de Souza',
+};
+
+// Mapeamento de nomes curtos para nomes completos - Dentistas
+const nomesCompletosDentistas = {
+  'dra. helena': 'Dra. Helena Dias de Campos',
+  'dra. mayra': 'Dra. Mayra Paula Morais Gama',
+};
+
+// Mapeamento de nomes curtos para nomes completos - ASB
+const nomesCompletosASB = {
+  'maycon': 'Maycon Alves Teixeira',
+  'cibele': 'Cibele Ribeiro Coimbra Dias',
+};
+
+function getNomeCompleto(nome) {
+  if (!nome) return nome;
+  const nomeNormalizado = nome.trim().toLowerCase();
+  return nomesCompletosACS[nomeNormalizado] || nome;
+}
+
+function getNomeCompletoMedico(nome) {
+  if (!nome) return nome;
+  const nomeNormalizado = nome.trim().toLowerCase();
+  return nomesCompletosMedicos[nomeNormalizado] || nome;
+}
+
+function getNomeCompletoEnfermeira(nome) {
+  if (!nome) return nome;
+  const nomeNormalizado = nome.trim().toLowerCase();
+  return nomesCompletosEnfermeiras[nomeNormalizado] || nome;
+}
+
+function getNomeCompletoDentista(nome) {
+  if (!nome) return nome;
+  const nomeNormalizado = nome.trim().toLowerCase();
+  return nomesCompletosDentistas[nomeNormalizado] || nome;
+}
+
+function getNomeCompletoASB(nome) {
+  if (!nome) return nome;
+  const nomeNormalizado = nome.trim().toLowerCase();
+  return nomesCompletosASB[nomeNormalizado] || nome;
+}
+
 function getGenderFromName(nome) {
   if (!nome) return 'feminino';
   const nomeNormalizado = nome.trim().toLowerCase();
@@ -89,10 +171,11 @@ export default function ACSModal({ acs, onClose }) {
   if (!acs) return null;
 
   const photoUrl = acs.photo || 'https://via.placeholder.com/500x500/2196F3/ffffff?text=ACS';
-  const nomeACS = acs.nome || acs.acs;
-  const isAreaDescoberta = nomeACS.includes('Área Descoberta');
+  const nomeOriginal = acs.nome || acs.acs;
+  const nomeACS = getNomeCompleto(nomeOriginal);
+  const isAreaDescoberta = nomeOriginal.includes('Área Descoberta');
   const isSaoJudas = acs.esf === 'ESF SÃO JUDAS';
-  const genero = getGenderFromName(nomeACS);
+  const genero = getGenderFromName(nomeOriginal);
   const tituloAgente =
     genero === 'masculino'
       ? 'Agente Comunitário de Saúde (ACS)'
@@ -132,7 +215,7 @@ export default function ACSModal({ acs, onClose }) {
                   {!imageError ? (
                     <img
                       src={photoUrl}
-                      alt={`Foto de ${acs.nome || acs.acs}`}
+                      alt={`Foto de ${nomeACS}`}
                       className="w-full h-full object-cover"
                       onError={() => setImageError(true)}
                     />
@@ -148,7 +231,7 @@ export default function ACSModal({ acs, onClose }) {
             )}
             <div className="text-center mb-6">
               <h3 className="text-3xl font-bold text-neutral-900 mb-3">
-                {acs.nome || acs.acs}
+                {nomeACS}
               </h3>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 text-primary-700 rounded-full font-semibold mb-4">
                 <Users size={18} />
@@ -240,22 +323,22 @@ export default function ACSModal({ acs, onClose }) {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="bg-white rounded-lg p-4 shadow-sm">
                   <p className="text-sm text-neutral-600 mb-1">Médico(a)</p>
-                  <p className="font-bold text-neutral-900">{acs.medico}</p>
+                  <p className="font-bold text-neutral-900">{getNomeCompletoMedico(acs.medico)}</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm">
                   <p className="text-sm text-neutral-600 mb-1">Enfermeira</p>
-                  <p className="font-bold text-neutral-900">{acs.enfermeira}</p>
+                  <p className="font-bold text-neutral-900">{getNomeCompletoEnfermeira(acs.enfermeira)}</p>
                 </div>
                 {!isSaoJudas && (
                   <div className="bg-white rounded-lg p-4 shadow-sm">
                     <p className="text-sm text-neutral-600 mb-1">Dentista</p>
-                    <p className="font-bold text-neutral-900">{acs.dentista}</p>
+                    <p className="font-bold text-neutral-900">{getNomeCompletoDentista(acs.dentista)}</p>
                   </div>
                 )}
                 {acs.asb && !isSaoJudas && (
                   <div className="bg-white rounded-lg p-4 shadow-sm">
                     <p className="text-sm text-neutral-600 mb-1">ASB</p>
-                    <p className="font-bold text-neutral-900">{acs.asb}</p>
+                    <p className="font-bold text-neutral-900">{getNomeCompletoASB(acs.asb)}</p>
                   </div>
                 )}
               </div>
