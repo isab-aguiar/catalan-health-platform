@@ -163,7 +163,7 @@ export default function CalendarioAdmin() {
   const getEventosNoDia = (data) => {
     return eventosFiltrados.filter(evento => {
       if (!evento.dataInicio) return false;
-      const eventoData = new Date(evento.dataInicio);
+      const eventoData = evento.dataInicio?.toDate ? evento.dataInicio.toDate() : new Date(evento.dataInicio);
       return (
         eventoData.getDate() === data.getDate() &&
         eventoData.getMonth() === data.getMonth() &&

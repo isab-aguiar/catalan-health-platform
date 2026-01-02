@@ -87,7 +87,8 @@ export default function CalendarDashboard({
   }, [eventos, agendas]);
 
   const formatarData = (data) => {
-    return new Date(data).toLocaleDateString('pt-BR', {
+    const dateObj = data?.toDate ? data.toDate() : new Date(data);
+    return dateObj.toLocaleDateString('pt-BR', {
       day: '2-digit',
       month: 'short'
     });
