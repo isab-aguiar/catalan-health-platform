@@ -773,8 +773,8 @@ export default function Users() {
 
         {showFormModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
+          <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] flex flex-col overflow-hidden">
+            <div className="bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between flex-shrink-0 z-10">
               <h3 className="text-xl font-bold text-neutral-900">
                 {editingUser ? "Editar Usuário" : "Novo Usuário"}
               </h3>
@@ -785,7 +785,7 @@ export default function Users() {
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="p-6 space-y-4">
+            <div className="p-6 space-y-4 overflow-y-auto flex-1">
               {formError && <Alert type="error">{formError}</Alert>}
               {editingUser && (
                 <Alert type="info">
@@ -897,7 +897,7 @@ export default function Users() {
                 </div>
               )}
             </div>
-            <div className="sticky bottom-0 bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-end gap-3">
+            <div className="bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-end gap-3 flex-shrink-0 z-10">
               <button
                 onClick={handleFecharModal}
                 className="px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors font-medium"
