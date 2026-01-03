@@ -23,13 +23,13 @@ import {
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import Alert from "../../components/common/Alert";
 
-// Validation utilities
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/;
 
 const validateEmail = (email) => {
   if (!email?.trim()) return "Email é obrigatório";
-  if (!EMAIL_REGEX.test(email)) return "Email inválido. Use o formato: usuario@exemplo.com";
+  if (!EMAIL_REGEX.test(email))
+    return "Email inválido. Use o formato: usuario@exemplo.com";
   return null;
 };
 
@@ -77,26 +77,25 @@ export default function Users() {
   const [formLoading, setFormLoading] = useState(false);
   const [actionLoading, setActionLoading] = useState(null);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [passwordModalType, setPasswordModalType] = useState('reset');
+  const [passwordModalType, setPasswordModalType] = useState("reset");
   const [selectedUserForPassword, setSelectedUserForPassword] = useState(null);
-  const [newPasswordInput, setNewPasswordInput] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [newPasswordInput, setNewPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [passwordLoading, setPasswordLoading] = useState(false);
 
-  // Bloquear scroll quando modal estiver aberto
   useEffect(() => {
     if (showFormModal) {
       const scrollY = window.scrollY;
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
+      document.body.style.width = "100%";
 
       return () => {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
         window.scrollTo(0, scrollY);
       };
     }
@@ -114,20 +113,18 @@ export default function Users() {
     setFormError("");
     setShowFormModal(true);
   };
-  // Abrir modal para editar usuário
   const handleEditarUsuario = (user) => {
     setEditingUser(user);
     setFormData({
       email: user.email,
       displayName: user.displayName,
-      password: "", // Não permitir mudança de senha aqui
+      password: "",
       role: user.role,
       active: user.active,
     });
     setFormError("");
     setShowFormModal(true);
   };
-  // Fechar modal
   const handleFecharModal = () => {
     setShowFormModal(false);
     setEditingUser(null);
@@ -140,23 +137,18 @@ export default function Users() {
     });
     setFormError("");
   };
-  // Validar formulário
   const validarFormulario = () => {
-    // Validate email
     const emailError = validateEmail(formData.email);
     if (emailError) return emailError;
 
-    // Validate display name
     const nameError = validateDisplayName(formData.displayName);
     if (nameError) return nameError;
 
-    // Validate password (only for new users)
     if (!editingUser) {
       const passwordError = validatePassword(formData.password);
       if (passwordError) return passwordError;
     }
 
-    // Validate role
     if (!formData.role) {
       return "Role é obrigatório";
     }
@@ -173,7 +165,6 @@ export default function Users() {
     setFormLoading(true);
     try {
       if (editingUser) {
-        // Build updates object
         const updates = {};
 
         if (formData.displayName !== editingUser.displayName) {
@@ -188,14 +179,14 @@ export default function Users() {
           updates.active = formData.active;
         }
 
-        // Email change requires confirmation
         if (formData.email !== editingUser.email) {
           const confirmEmailChange = await showModal({
-            type: 'warning',
-            title: 'Alterar Email',
-            message: 'Alterar o email do usuário irá:\n• Atualizar no Firebase Authentication\n• Pode deslogar o usuário\n• Requerer novo login\n\nDeseja continuar?',
-            confirmText: 'Sim, alterar',
-            cancelText: 'Cancelar',
+            type: "warning",
+            title: "Alterar Email",
+            message:
+              "Alterar o email do usuário irá:\n• Atualizar no Firebase Authentication\n• Pode deslogar o usuário\n• Requerer novo login\n\nDeseja continuar?",
+            confirmText: "Sim, alterar",
+            cancelText: "Cancelar",
           });
 
           if (!confirmEmailChange) {
@@ -206,22 +197,20 @@ export default function Users() {
           updates.email = formData.email;
         }
 
-        // If nothing changed
         if (Object.keys(updates).length === 0) {
           setFormError("Nenhuma alteração detectada");
           setFormLoading(false);
           return;
         }
 
-        // Update user
         const result = await updateUser(editingUser.uid, updates);
         if (result.success) {
           handleFecharModal();
           await showModal({
-            type: 'success',
-            title: 'Usuário Atualizado',
-            message: 'Dados do usuário atualizados com sucesso!',
-            confirmText: 'OK',
+            type: "success",
+            title: "Usuário Atualizado",
+            message: "Dados do usuário atualizados com sucesso!",
+            confirmText: "OK",
           });
         } else {
           setFormError(result.error || "Erro ao atualizar usuário");
@@ -239,10 +228,10 @@ export default function Users() {
         if (result.success) {
           handleFecharModal();
           await showModal({
-            type: 'success',
-            title: 'Usuário Criado',
-            message: 'Usuário criado com sucesso!',
-            confirmText: 'OK',
+            type: "success",
+            title: "Usuário Criado",
+            message: "Usuário criado com sucesso!",
+            confirmText: "OK",
           });
         } else {
           setFormError(result.error || "Erro ao criar usuário");
@@ -256,45 +245,45 @@ export default function Users() {
   };
   const handleResetPassword = (user) => {
     setSelectedUserForPassword(user);
-    setPasswordModalType('reset');
-    setNewPasswordInput('');
-    setPasswordError('');
+    setPasswordModalType("reset");
+    setNewPasswordInput("");
+    setPasswordError("");
     setShowPasswordModal(true);
   };
 
   const handleSetPassword = (user) => {
     setSelectedUserForPassword(user);
-    setPasswordModalType('set');
-    setNewPasswordInput('');
-    setPasswordError('');
+    setPasswordModalType("set");
+    setNewPasswordInput("");
+    setPasswordError("");
     setShowPasswordModal(true);
   };
 
   const handleClosePasswordModal = () => {
     setShowPasswordModal(false);
     setSelectedUserForPassword(null);
-    setNewPasswordInput('');
-    setPasswordError('');
-    setPasswordModalType('reset');
+    setNewPasswordInput("");
+    setPasswordError("");
+    setPasswordModalType("reset");
   };
 
   const handlePasswordSubmit = async () => {
-    setPasswordError('');
+    setPasswordError("");
 
-    if (passwordModalType === 'reset') {
+    if (passwordModalType === "reset") {
       setPasswordLoading(true);
       try {
         const result = await resetPassword(selectedUserForPassword.email);
         if (result.success) {
           handleClosePasswordModal();
           await showModal({
-            type: 'success',
-            title: 'Email Enviado',
+            type: "success",
+            title: "Email Enviado",
             message: `Email de reset enviado para ${selectedUserForPassword.email}`,
-            confirmText: 'OK',
+            confirmText: "OK",
           });
         } else {
-          setPasswordError(result.error || 'Erro ao enviar email');
+          setPasswordError(result.error || "Erro ao enviar email");
         }
       } finally {
         setPasswordLoading(false);
@@ -308,17 +297,20 @@ export default function Users() {
 
       setPasswordLoading(true);
       try {
-        const result = await setPassword(selectedUserForPassword.uid, newPasswordInput);
+        const result = await setPassword(
+          selectedUserForPassword.uid,
+          newPasswordInput
+        );
         if (result.success) {
           handleClosePasswordModal();
           await showModal({
-            type: 'success',
-            title: 'Senha Atualizada',
+            type: "success",
+            title: "Senha Atualizada",
             message: `Senha definida com sucesso para ${selectedUserForPassword.email}`,
-            confirmText: 'OK',
+            confirmText: "OK",
           });
         } else {
-          setPasswordError(result.error || 'Erro ao definir senha');
+          setPasswordError(result.error || "Erro ao definir senha");
         }
       } finally {
         setPasswordLoading(false);
@@ -329,10 +321,10 @@ export default function Users() {
   const handleToggleActive = async (uid, currentActive) => {
     if (uid === currentUser.uid) {
       await showModal({
-        type: 'error',
-        title: 'Ação Não Permitida',
-        message: 'Você não pode desativar sua própria conta!',
-        confirmText: 'OK',
+        type: "error",
+        title: "Ação Não Permitida",
+        message: "Você não pode desativar sua própria conta!",
+        confirmText: "OK",
       });
       return;
     }
@@ -343,11 +335,11 @@ export default function Users() {
       : "Tem certeza que deseja desativar este usuário? Ele não poderá mais fazer login.";
 
     const confirmed = await showModal({
-      type: newStatus ? 'info' : 'warning',
-      title: newStatus ? 'Ativar Usuário' : 'Desativar Usuário',
+      type: newStatus ? "info" : "warning",
+      title: newStatus ? "Ativar Usuário" : "Desativar Usuário",
       message: confirmMsg,
-      confirmText: 'Confirmar',
-      cancelText: 'Cancelar',
+      confirmText: "Confirmar",
+      cancelText: "Cancelar",
     });
 
     if (!confirmed) {
@@ -359,25 +351,27 @@ export default function Users() {
       const result = await toggleUserActive(uid, newStatus);
       if (result.success) {
         await showModal({
-          type: 'success',
-          title: 'Status Atualizado',
-          message: newStatus ? 'Usuário ativado com sucesso!' : 'Usuário desativado com sucesso!',
-          confirmText: 'OK',
+          type: "success",
+          title: "Status Atualizado",
+          message: newStatus
+            ? "Usuário ativado com sucesso!"
+            : "Usuário desativado com sucesso!",
+          confirmText: "OK",
         });
       } else {
         await showModal({
-          type: 'error',
-          title: 'Erro',
-          message: result.error || 'Erro desconhecido',
-          confirmText: 'OK',
+          type: "error",
+          title: "Erro",
+          message: result.error || "Erro desconhecido",
+          confirmText: "OK",
         });
       }
     } catch (err) {
       await showModal({
-        type: 'error',
-        title: 'Erro',
-        message: 'Erro inesperado ao alterar status do usuário',
-        confirmText: 'OK',
+        type: "error",
+        title: "Erro",
+        message: "Erro inesperado ao alterar status do usuário",
+        confirmText: "OK",
       });
     } finally {
       setActionLoading(null);
@@ -385,48 +379,44 @@ export default function Users() {
   };
 
   const handleDeleteUser = async (uid, userEmail) => {
-    // Não permitir deletar a própria conta
     if (uid === currentUser.uid) {
       await showModal({
-        type: 'error',
-        title: 'Ação Não Permitida',
-        message: 'Você não pode deletar sua própria conta!',
-        confirmText: 'OK',
+        type: "error",
+        title: "Ação Não Permitida",
+        message: "Você não pode deletar sua própria conta!",
+        confirmText: "OK",
       });
       return;
     }
 
-    // Não permitir deletar o admin root
     if (userEmail === "root@esfcatalao.com") {
       await showModal({
-        type: 'error',
-        title: 'Ação Não Permitida',
-        message: 'Não é permitido deletar o usuário administrador root!',
-        confirmText: 'OK',
+        type: "error",
+        title: "Ação Não Permitida",
+        message: "Não é permitido deletar o usuário administrador root!",
+        confirmText: "OK",
       });
       return;
     }
 
-    // Primeira confirmação
     const confirmed = await showModal({
-      type: 'warning',
-      title: 'Confirmar Exclusão',
+      type: "warning",
+      title: "Confirmar Exclusão",
       message: `⚠️ ATENÇÃO: Tem certeza que deseja DELETAR PERMANENTEMENTE o usuário ${userEmail}?\n\nEsta ação NÃO pode ser desfeita!\n\n• O usuário será removido do Firebase Authentication\n• Os dados do usuário serão removidos do Firestore\n• O usuário não poderá mais fazer login`,
-      confirmText: 'Sim, deletar',
-      cancelText: 'Cancelar',
+      confirmText: "Sim, deletar",
+      cancelText: "Cancelar",
     });
 
     if (!confirmed) {
       return;
     }
 
-    // Segunda confirmação para segurança
     const doubleConfirmed = await showModal({
-      type: 'error',
-      title: 'Última Confirmação',
+      type: "error",
+      title: "Última Confirmação",
       message: `Confirma DELETAR ${userEmail}?\n\nEsta é sua ÚLTIMA CHANCE de cancelar!\n\nO usuário será PERMANENTEMENTE removido do sistema.`,
-      confirmText: 'DELETAR PERMANENTEMENTE',
-      cancelText: 'Cancelar',
+      confirmText: "DELETAR PERMANENTEMENTE",
+      cancelText: "Cancelar",
     });
 
     if (!doubleConfirmed) {
@@ -438,25 +428,28 @@ export default function Users() {
       const result = await deleteUser(uid);
       if (result.success) {
         await showModal({
-          type: 'success',
-          title: 'Usuário Deletado',
+          type: "success",
+          title: "Usuário Deletado",
           message: `O usuário ${userEmail} foi deletado com sucesso!`,
-          confirmText: 'OK',
+          confirmText: "OK",
         });
       } else {
         await showModal({
-          type: 'error',
-          title: 'Erro ao Deletar',
-          message: result.error || 'Não foi possível deletar o usuário. Tente novamente.',
-          confirmText: 'OK',
+          type: "error",
+          title: "Erro ao Deletar",
+          message:
+            result.error ||
+            "Não foi possível deletar o usuário. Tente novamente.",
+          confirmText: "OK",
         });
       }
     } catch (err) {
       await showModal({
-        type: 'error',
-        title: 'Erro Inesperado',
-        message: 'Ocorreu um erro inesperado ao deletar o usuário. Tente novamente.',
-        confirmText: 'OK',
+        type: "error",
+        title: "Erro Inesperado",
+        message:
+          "Ocorreu um erro inesperado ao deletar o usuário. Tente novamente.",
+        confirmText: "OK",
       });
     } finally {
       setActionLoading(null);
@@ -512,7 +505,9 @@ export default function Users() {
         )}
         <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">Usuários</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+              Usuários
+            </h2>
             <p className="text-xs sm:text-sm text-neutral-600 mt-1">
               Gerencie os usuários do sistema e suas permissões
             </p>
@@ -588,7 +583,10 @@ export default function Users() {
                             )}
                           </div>
                         </div>
-                        <p className="text-xs sm:text-sm text-neutral-600 mb-1 sm:mb-2 truncate" title={user.email}>
+                        <p
+                          className="text-xs sm:text-sm text-neutral-600 mb-1 sm:mb-2 truncate"
+                          title={user.email}
+                        >
                           {user.email}
                         </p>
                         <div className="flex items-center gap-4 text-[10px] sm:text-xs text-neutral-500">
@@ -617,7 +615,6 @@ export default function Users() {
                         <Edit className="w-4 h-4 sm:w-5 sm:h-5" />
                       </button>
 
-                      {/* Dropdown para gerenciar senha */}
                       <div className="relative group">
                         <button
                           disabled={isCurrentUser}
@@ -667,7 +664,11 @@ export default function Users() {
                       </button>
                       <button
                         onClick={() => handleDeleteUser(user.uid, user.email)}
-                        disabled={actionLoading === user.uid || isCurrentUser || user.email === "root@esfcatalao.com"}
+                        disabled={
+                          actionLoading === user.uid ||
+                          isCurrentUser ||
+                          user.email === "root@esfcatalao.com"
+                        }
                         className="p-1.5 sm:p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                         title="Deletar usuário permanentemente"
                       >
@@ -689,13 +690,14 @@ export default function Users() {
             Voltar para o site público
           </a>
         </div>
-        {/* Password Management Modal */}
         {showPasswordModal && selectedUserForPassword && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl max-w-md w-full">
               <div className="sticky top-0 bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between">
                 <h3 className="text-xl font-bold text-neutral-900">
-                  {passwordModalType === 'reset' ? 'Enviar Email de Reset' : 'Definir Nova Senha'}
+                  {passwordModalType === "reset"
+                    ? "Enviar Email de Reset"
+                    : "Definir Nova Senha"}
                 </h3>
                 <button
                   onClick={handleClosePasswordModal}
@@ -709,14 +711,18 @@ export default function Users() {
                 {passwordError && <Alert type="error">{passwordError}</Alert>}
 
                 <Alert type="info">
-                  Usuário: <strong>{selectedUserForPassword.displayName}</strong><br />
+                  Usuário:{" "}
+                  <strong>{selectedUserForPassword.displayName}</strong>
+                  <br />
                   Email: <strong>{selectedUserForPassword.email}</strong>
                 </Alert>
 
-                {passwordModalType === 'reset' ? (
+                {passwordModalType === "reset" ? (
                   <div>
                     <p className="text-sm text-neutral-700 mb-4">
-                      Um email será enviado para <strong>{selectedUserForPassword.email}</strong> com instruções para redefinir a senha.
+                      Um email será enviado para{" "}
+                      <strong>{selectedUserForPassword.email}</strong> com
+                      instruções para redefinir a senha.
                     </p>
                     <Alert type="warning">
                       O usuário receberá um link por email que expira em 1 hora.
@@ -736,7 +742,8 @@ export default function Users() {
                       minLength={8}
                     />
                     <p className="text-xs text-neutral-500 mt-1">
-                      A senha deve ter no mínimo 8 caracteres, contendo letras E números
+                      A senha deve ter no mínimo 8 caracteres, contendo letras E
+                      números
                     </p>
                   </div>
                 )}
@@ -757,12 +764,16 @@ export default function Users() {
                   {passwordLoading ? (
                     <>
                       <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      {passwordModalType === 'reset' ? 'Enviando...' : 'Definindo...'}
+                      {passwordModalType === "reset"
+                        ? "Enviando..."
+                        : "Definindo..."}
                     </>
                   ) : (
                     <>
                       <Save className="w-4 h-4" />
-                      {passwordModalType === 'reset' ? 'Enviar Email' : 'Definir Senha'}
+                      {passwordModalType === "reset"
+                        ? "Enviar Email"
+                        : "Definir Senha"}
                     </>
                   )}
                 </button>
@@ -772,159 +783,166 @@ export default function Users() {
         )}
 
         {showFormModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] flex flex-col overflow-hidden">
-            <div className="bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between flex-shrink-0 z-10">
-              <h3 className="text-xl font-bold text-neutral-900">
-                {editingUser ? "Editar Usuário" : "Novo Usuário"}
-              </h3>
-              <button
-                onClick={handleFecharModal}
-                className="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <div className="p-6 space-y-4 overflow-y-auto flex-1">
-              {formError && <Alert type="error">{formError}</Alert>}
-              {editingUser && (
-                <Alert type="info">
-                  Você pode editar o nome, email, role e status do usuário:{" "}
-                  <strong>{editingUser.displayName}</strong>
-                  <br />
-                  <span className="text-xs">Nota: Alterar o email pode deslogar o usuário temporariamente.</span>
-                </Alert>
-              )}
-              <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">
-                  Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="usuario@exemplo.com"
-                />
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] flex flex-col overflow-hidden">
+              <div className="bg-white border-b border-neutral-200 px-6 py-4 flex items-center justify-between flex-shrink-0 z-10">
+                <h3 className="text-xl font-bold text-neutral-900">
+                  {editingUser ? "Editar Usuário" : "Novo Usuário"}
+                </h3>
+                <button
+                  onClick={handleFecharModal}
+                  className="p-2 text-neutral-500 hover:text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">
-                  Nome Completo <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={formData.displayName}
-                  onChange={(e) =>
-                    setFormData({ ...formData, displayName: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Nome do usuário"
-                />
-              </div>
-              {!editingUser && (
+              <div className="p-6 space-y-4 overflow-y-auto flex-1">
+                {formError && <Alert type="error">{formError}</Alert>}
+                {editingUser && (
+                  <Alert type="info">
+                    Você pode editar o nome, email, role e status do usuário:{" "}
+                    <strong>{editingUser.displayName}</strong>
+                    <br />
+                    <span className="text-xs">
+                      Nota: Alterar o email pode deslogar o usuário
+                      temporariamente.
+                    </span>
+                  </Alert>
+                )}
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Senha Inicial <span className="text-red-500">*</span>
+                    Email <span className="text-red-500">*</span>
                   </label>
                   <input
-                    type="password"
-                    value={formData.password}
+                    type="email"
+                    value={formData.email}
                     onChange={(e) =>
-                      setFormData({ ...formData, password: e.target.value })
+                      setFormData({ ...formData, email: e.target.value })
                     }
                     className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Mínimo 8 caracteres (letras e números)"
-                    minLength={8}
+                    placeholder="usuario@exemplo.com"
                   />
-                  <p className="text-xs text-neutral-500 mt-1">
-                    A senha deve ter no mínimo 8 caracteres, contendo letras E números
-                  </p>
                 </div>
-              )}
-              <div>
-                <label className="block text-sm font-medium text-neutral-700 mb-2">
-                  Nível de Acesso <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={formData.role}
-                  onChange={(e) =>
-                    setFormData({ ...formData, role: e.target.value })
-                  }
-                  className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                >
-                  <option value="admin">Administrador (acesso total)</option>
-                  <option value="profissional">
-                    Profissional (criar/editar avisos)
-                  </option>
-                  <option value="diretoria">
-                    Diretória (apenas visualização)
-                  </option>
-                  <option value="supervisor">
-                    Supervisor (gerenciar conteúdo)
-                  </option>
-                </select>
-                <p className="text-xs text-neutral-500 mt-1">
-                  {formData.role === "admin" &&
-                    "Pode gerenciar usuários e deletar avisos"}
-                  {formData.role === "profissional" &&
-                    "Pode criar e editar avisos"}
-                  {formData.role === "diretoria" &&
-                    "Pode apenas visualizar informações"}
-                  {formData.role === "supervisor" &&
-                    "Pode criar, editar e deletar conteúdo (avisos, orientações, feedbacks)"}
-                </p>
-              </div>
-              {editingUser && (
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Status
+                    Nome Completo <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.displayName}
+                    onChange={(e) =>
+                      setFormData({ ...formData, displayName: e.target.value })
+                    }
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    placeholder="Nome do usuário"
+                  />
+                </div>
+                {!editingUser && (
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                      Senha Inicial <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="password"
+                      value={formData.password}
+                      onChange={(e) =>
+                        setFormData({ ...formData, password: e.target.value })
+                      }
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="Mínimo 8 caracteres (letras e números)"
+                      minLength={8}
+                    />
+                    <p className="text-xs text-neutral-500 mt-1">
+                      A senha deve ter no mínimo 8 caracteres, contendo letras E
+                      números
+                    </p>
+                  </div>
+                )}
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Nível de Acesso <span className="text-red-500">*</span>
                   </label>
                   <select
-                    value={formData.active}
+                    value={formData.role}
                     onChange={(e) =>
-                      setFormData({ ...formData, active: e.target.value === 'true' })
+                      setFormData({ ...formData, role: e.target.value })
                     }
                     className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
-                    <option value="true">Ativo</option>
-                    <option value="false">Inativo</option>
+                    <option value="admin">Administrador (acesso total)</option>
+                    <option value="profissional">
+                      Profissional (criar/editar avisos)
+                    </option>
+                    <option value="diretoria">
+                      Diretória (apenas visualização)
+                    </option>
+                    <option value="supervisor">
+                      Supervisor (gerenciar conteúdo)
+                    </option>
                   </select>
                   <p className="text-xs text-neutral-500 mt-1">
-                    Usuários inativos não podem fazer login
+                    {formData.role === "admin" &&
+                      "Pode gerenciar usuários e deletar avisos"}
+                    {formData.role === "profissional" &&
+                      "Pode criar e editar avisos"}
+                    {formData.role === "diretoria" &&
+                      "Pode apenas visualizar informações"}
+                    {formData.role === "supervisor" &&
+                      "Pode criar, editar e deletar conteúdo (avisos, orientações, feedbacks)"}
                   </p>
                 </div>
-              )}
-            </div>
-            <div className="bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-end gap-3 flex-shrink-0 z-10">
-              <button
-                onClick={handleFecharModal}
-                className="px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors font-medium"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={handleSalvar}
-                disabled={formLoading}
-                className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50"
-              >
-                {formLoading ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Salvando...
-                  </>
-                ) : (
-                  <>
-                    <Save className="w-4 h-4" />
-                    Salvar
-                  </>
+                {editingUser && (
+                  <div>
+                    <label className="block text-sm font-medium text-neutral-700 mb-2">
+                      Status
+                    </label>
+                    <select
+                      value={formData.active}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          active: e.target.value === "true",
+                        })
+                      }
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    >
+                      <option value="true">Ativo</option>
+                      <option value="false">Inativo</option>
+                    </select>
+                    <p className="text-xs text-neutral-500 mt-1">
+                      Usuários inativos não podem fazer login
+                    </p>
+                  </div>
                 )}
-              </button>
+              </div>
+              <div className="bg-white border-t border-neutral-200 px-6 py-4 flex items-center justify-end gap-3 flex-shrink-0 z-10">
+                <button
+                  onClick={handleFecharModal}
+                  className="px-4 py-2 text-neutral-700 hover:bg-neutral-100 rounded-lg transition-colors font-medium"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={handleSalvar}
+                  disabled={formLoading}
+                  className="flex items-center gap-2 px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors font-medium disabled:opacity-50"
+                >
+                  {formLoading ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Salvando...
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-4 h-4" />
+                      Salvar
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
     </AdminLayout>
   );

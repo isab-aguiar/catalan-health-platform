@@ -1,11 +1,5 @@
-// ============================================
-// ARQUIVO: recommendedReading.js
-// Sistema de recomendações de leitura baseado em contexto
-// ============================================
-
 export const readingRecommendations = {
-  // Serviços
-  "procedimentos": {
+  procedimentos: {
     title: "Continue Explorando",
     subtitle: "Outros serviços que podem te interessar",
     recommendations: [
@@ -17,7 +11,7 @@ export const readingRecommendations = {
         path: "/servicos/sala-4",
         category: "Próximo Passo",
         icon: "Calendar",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "farmacia",
@@ -27,7 +21,7 @@ export const readingRecommendations = {
         path: "/servicos/farmacia",
         category: "Relacionado",
         icon: "PillBottle",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "triagem",
@@ -37,9 +31,9 @@ export const readingRecommendations = {
         path: "/servicos/triagem",
         category: "Alternativa",
         icon: "Stethoscope",
-        color: "secondary"
-      }
-    ]
+        color: "secondary",
+      },
+    ],
   },
 
   "sala-4": {
@@ -54,7 +48,7 @@ export const readingRecommendations = {
         path: "/servicos/sala-9",
         category: "Relacionado",
         icon: "Users",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "ecg",
@@ -64,7 +58,7 @@ export const readingRecommendations = {
         path: "/servicos/ecg",
         category: "Exame",
         icon: "Activity",
-        color: "secondary"
+        color: "secondary",
       },
       {
         id: "ginecologista",
@@ -74,9 +68,9 @@ export const readingRecommendations = {
         path: "/equipe/ginecologista",
         category: "Especialidade",
         icon: "Heart",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
   "sala-9": {
@@ -91,7 +85,7 @@ export const readingRecommendations = {
         path: "/servicos/recepcao",
         category: "Relacionado",
         icon: "Users",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "renovacao",
@@ -101,7 +95,7 @@ export const readingRecommendations = {
         path: "/servicos/renovacao",
         category: "Serviço",
         icon: "FileText",
-        color: "secondary"
+        color: "secondary",
       },
       {
         id: "farmacia",
@@ -111,12 +105,12 @@ export const readingRecommendations = {
         path: "/servicos/farmacia",
         category: "Próximo Passo",
         icon: "PillBottle",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "triagem": {
+  triagem: {
     title: "Continue Explorando",
     subtitle: "Outros serviços de saúde disponíveis",
     recommendations: [
@@ -128,7 +122,7 @@ export const readingRecommendations = {
         path: "/servicos/procedimentos",
         category: "Próximo Passo",
         icon: "Pill",
-        color: "green"
+        color: "green",
       },
       {
         id: "sala-4",
@@ -138,7 +132,7 @@ export const readingRecommendations = {
         path: "/servicos/sala-4",
         category: "Agendamento",
         icon: "Calendar",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "farmacia",
@@ -148,12 +142,12 @@ export const readingRecommendations = {
         path: "/servicos/farmacia",
         category: "Medicação",
         icon: "PillBottle",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "vacinas": {
+  vacinas: {
     title: "Continue Explorando",
     subtitle: "Serviços relacionados à saúde preventiva",
     recommendations: [
@@ -165,7 +159,7 @@ export const readingRecommendations = {
         path: "/servicos/sala-4#puericultura",
         category: "Acompanhamento",
         icon: "Baby",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "procedimentos",
@@ -175,12 +169,12 @@ export const readingRecommendations = {
         path: "/servicos/procedimentos#testes-rapidos",
         category: "Prevenção",
         icon: "TestTube2",
-        color: "green"
-      }
-    ]
+        color: "green",
+      },
+    ],
   },
 
-  "farmacia": {
+  farmacia: {
     title: "Continue Explorando",
     subtitle: "Serviços complementares à medicação",
     recommendations: [
@@ -192,7 +186,7 @@ export const readingRecommendations = {
         path: "/servicos/renovacao",
         category: "Medicação Contínua",
         icon: "FileText",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "farmaceutica",
@@ -202,7 +196,7 @@ export const readingRecommendations = {
         path: "/equipe/farmaceutica",
         category: "Orientação",
         icon: "UserCircle",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "hiperdia",
@@ -212,12 +206,12 @@ export const readingRecommendations = {
         path: "/grupos/hiperdia",
         category: "Grupo",
         icon: "Users",
-        color: "secondary"
-      }
-    ]
+        color: "secondary",
+      },
+    ],
   },
 
-  "curativos": {
+  curativos: {
     title: "Continue Explorando",
     subtitle: "Outros cuidados de enfermagem",
     recommendations: [
@@ -229,7 +223,7 @@ export const readingRecommendations = {
         path: "/servicos/procedimentos",
         category: "Procedimentos",
         icon: "Pill",
-        color: "green"
+        color: "green",
       },
       {
         id: "enfermeiras",
@@ -239,7 +233,7 @@ export const readingRecommendations = {
         path: "/equipe/enfermeiras",
         category: "Equipe",
         icon: "UserCircle",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "sala-4",
@@ -249,12 +243,12 @@ export const readingRecommendations = {
         path: "/servicos/sala-4",
         category: "Agendamento",
         icon: "Calendar",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "ecg": {
+  ecg: {
     title: "Continue Explorando",
     subtitle: "Cuidados com a saúde cardiovascular",
     recommendations: [
@@ -266,7 +260,7 @@ export const readingRecommendations = {
         path: "/grupos/hiperdia",
         category: "Grupo",
         icon: "Users",
-        color: "secondary"
+        color: "secondary",
       },
       {
         id: "medicos",
@@ -276,7 +270,7 @@ export const readingRecommendations = {
         path: "/equipe/medicos",
         category: "Consulta",
         icon: "UserCircle",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "sala-4",
@@ -286,12 +280,12 @@ export const readingRecommendations = {
         path: "/servicos/sala-4",
         category: "Agendamento",
         icon: "Calendar",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "renovacao": {
+  renovacao: {
     title: "Continue Explorando",
     subtitle: "Gestão da sua saúde contínua",
     recommendations: [
@@ -303,7 +297,7 @@ export const readingRecommendations = {
         path: "/servicos/farmacia",
         category: "Próximo Passo",
         icon: "PillBottle",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "hiperdia",
@@ -313,7 +307,7 @@ export const readingRecommendations = {
         path: "/grupos/hiperdia",
         category: "Grupo",
         icon: "Users",
-        color: "secondary"
+        color: "secondary",
       },
       {
         id: "farmaceutica",
@@ -323,13 +317,12 @@ export const readingRecommendations = {
         path: "/equipe/farmaceutica",
         category: "Orientação",
         icon: "UserCircle",
-        color: "primary"
-      }
-    ]
+        color: "primary",
+      },
+    ],
   },
 
-  // Equipe E-multi
-  "medicos": {
+  medicos: {
     title: "Continue Explorando",
     subtitle: "Serviços médicos disponíveis",
     recommendations: [
@@ -341,7 +334,7 @@ export const readingRecommendations = {
         path: "/servicos/sala-4",
         category: "Agendamento",
         icon: "Calendar",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "triagem",
@@ -351,7 +344,7 @@ export const readingRecommendations = {
         path: "/servicos/triagem",
         category: "Urgência",
         icon: "Stethoscope",
-        color: "secondary"
+        color: "secondary",
       },
       {
         id: "farmacia",
@@ -361,12 +354,12 @@ export const readingRecommendations = {
         path: "/servicos/farmacia",
         category: "Medicação",
         icon: "PillBottle",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "enfermeiras": {
+  enfermeiras: {
     title: "Continue Explorando",
     subtitle: "Serviços de enfermagem",
     recommendations: [
@@ -378,7 +371,7 @@ export const readingRecommendations = {
         path: "/servicos/procedimentos",
         category: "Serviços",
         icon: "Pill",
-        color: "green"
+        color: "green",
       },
       {
         id: "curativos",
@@ -388,7 +381,7 @@ export const readingRecommendations = {
         path: "/servicos/curativos",
         category: "Cuidados",
         icon: "Bandage",
-        color: "secondary"
+        color: "secondary",
       },
       {
         id: "vacinas",
@@ -398,12 +391,12 @@ export const readingRecommendations = {
         path: "/servicos/vacinas",
         category: "Prevenção",
         icon: "Syringe",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "psicologa": {
+  psicologa: {
     title: "Continue Explorando",
     subtitle: "Cuidados com a saúde mental",
     recommendations: [
@@ -415,7 +408,7 @@ export const readingRecommendations = {
         path: "/servicos/sala-4",
         category: "Agendamento",
         icon: "Calendar",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "assistente-social",
@@ -425,12 +418,12 @@ export const readingRecommendations = {
         path: "/equipe/assistente-social",
         category: "Apoio",
         icon: "UserCircle",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "ginecologista": {
+  ginecologista: {
     title: "Continue Explorando",
     subtitle: "Saúde da mulher",
     recommendations: [
@@ -442,7 +435,7 @@ export const readingRecommendations = {
         path: "/servicos/sala-4",
         category: "Agendamento",
         icon: "Calendar",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "procedimentos",
@@ -452,7 +445,7 @@ export const readingRecommendations = {
         path: "/servicos/procedimentos#testes-rapidos",
         category: "Exame",
         icon: "TestTube2",
-        color: "green"
+        color: "green",
       },
       {
         id: "enfermeiras",
@@ -462,12 +455,12 @@ export const readingRecommendations = {
         path: "/equipe/enfermeiras",
         category: "Cuidados",
         icon: "UserCircle",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "farmaceutica": {
+  farmaceutica: {
     title: "Continue Explorando",
     subtitle: "Gestão de medicamentos",
     recommendations: [
@@ -479,7 +472,7 @@ export const readingRecommendations = {
         path: "/servicos/farmacia",
         category: "Medicação",
         icon: "PillBottle",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "renovacao",
@@ -489,7 +482,7 @@ export const readingRecommendations = {
         path: "/servicos/renovacao",
         category: "Receita",
         icon: "FileText",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "hiperdia",
@@ -499,12 +492,12 @@ export const readingRecommendations = {
         path: "/grupos/hiperdia",
         category: "Grupo",
         icon: "Users",
-        color: "secondary"
-      }
-    ]
+        color: "secondary",
+      },
+    ],
   },
 
-  "dentistas": {
+  dentistas: {
     title: "Continue Explorando",
     subtitle: "Cuidados com a saúde bucal",
     recommendations: [
@@ -516,7 +509,7 @@ export const readingRecommendations = {
         path: "/equipe/pediatra",
         category: "Saúde Infantil",
         icon: "Baby",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "ginecologista",
@@ -526,7 +519,7 @@ export const readingRecommendations = {
         path: "/equipe/ginecologista",
         category: "Saúde da Mulher",
         icon: "Heart",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "procedimentos",
@@ -536,12 +529,12 @@ export const readingRecommendations = {
         path: "/servicos/procedimentos",
         category: "Serviços",
         icon: "Pill",
-        color: "secondary"
-      }
-    ]
+        color: "secondary",
+      },
+    ],
   },
 
-  "pediatra": {
+  pediatra: {
     title: "Continue Explorando",
     subtitle: "Cuidados com a saúde infantil",
     recommendations: [
@@ -553,7 +546,7 @@ export const readingRecommendations = {
         path: "/servicos/vacinas",
         category: "Prevenção",
         icon: "Syringe",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "dentistas",
@@ -563,7 +556,7 @@ export const readingRecommendations = {
         path: "/equipe/dentistas",
         category: "Saúde Bucal",
         icon: "Smile",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "enfermeiras",
@@ -573,12 +566,12 @@ export const readingRecommendations = {
         path: "/equipe/enfermeiras",
         category: "Cuidados",
         icon: "UserCircle",
-        color: "secondary"
-      }
-    ]
+        color: "secondary",
+      },
+    ],
   },
 
-  "fisioterapeuta": {
+  fisioterapeuta: {
     title: "Continue Explorando",
     subtitle: "Reabilitação e cuidados físicos",
     recommendations: [
@@ -590,7 +583,7 @@ export const readingRecommendations = {
         path: "/grupos/dores-cronicas",
         category: "Grupo",
         icon: "Users",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "medicos",
@@ -600,7 +593,7 @@ export const readingRecommendations = {
         path: "/equipe/medicos",
         category: "Consulta",
         icon: "Stethoscope",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "sala-4",
@@ -610,9 +603,9 @@ export const readingRecommendations = {
         path: "/servicos/sala-4",
         category: "Agendamento",
         icon: "Calendar",
-        color: "secondary"
-      }
-    ]
+        color: "secondary",
+      },
+    ],
   },
 
   "assistente-social": {
@@ -627,7 +620,7 @@ export const readingRecommendations = {
         path: "/equipe/psicologa",
         category: "Apoio",
         icon: "UserCircle",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "sala-9",
@@ -637,13 +630,12 @@ export const readingRecommendations = {
         path: "/servicos/sala-9",
         category: "Informações",
         icon: "Users",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  // Grupos
-  "hiperdia": {
+  hiperdia: {
     title: "Continue Explorando",
     subtitle: "Cuidados com doenças crônicas",
     recommendations: [
@@ -655,7 +647,7 @@ export const readingRecommendations = {
         path: "/servicos/farmacia",
         category: "Medicação",
         icon: "PillBottle",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "renovacao",
@@ -665,7 +657,7 @@ export const readingRecommendations = {
         path: "/servicos/renovacao",
         category: "Receita",
         icon: "FileText",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "ecg",
@@ -675,12 +667,12 @@ export const readingRecommendations = {
         path: "/servicos/ecg",
         category: "Exame",
         icon: "Activity",
-        color: "secondary"
-      }
-    ]
+        color: "secondary",
+      },
+    ],
   },
 
-  "tabagismo": {
+  tabagismo: {
     title: "Continue Explorando",
     subtitle: "Apoio para cessar o tabagismo",
     recommendations: [
@@ -692,7 +684,7 @@ export const readingRecommendations = {
         path: "/equipe/psicologa",
         category: "Apoio",
         icon: "UserCircle",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "medicos",
@@ -702,7 +694,7 @@ export const readingRecommendations = {
         path: "/equipe/medicos",
         category: "Consulta",
         icon: "Stethoscope",
-        color: "secondary"
+        color: "secondary",
       },
       {
         id: "farmacia",
@@ -712,9 +704,9 @@ export const readingRecommendations = {
         path: "/servicos/farmacia",
         category: "Medicação",
         icon: "PillBottle",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
   "dores-cronicas": {
@@ -729,7 +721,7 @@ export const readingRecommendations = {
         path: "/equipe/fisioterapeuta",
         category: "Tratamento",
         icon: "UserCircle",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "medicos",
@@ -739,7 +731,7 @@ export const readingRecommendations = {
         path: "/equipe/medicos",
         category: "Consulta",
         icon: "Stethoscope",
-        color: "secondary"
+        color: "secondary",
       },
       {
         id: "psicologa",
@@ -749,13 +741,12 @@ export const readingRecommendations = {
         path: "/equipe/psicologa",
         category: "Apoio",
         icon: "Heart",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  // ACS e REMSA
-  "acs": {
+  acs: {
     title: "Continue Explorando",
     subtitle: "Serviços da unidade",
     recommendations: [
@@ -767,7 +758,7 @@ export const readingRecommendations = {
         path: "/servicos",
         category: "Serviços",
         icon: "Hospital",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "equipe",
@@ -777,12 +768,12 @@ export const readingRecommendations = {
         path: "/equipe",
         category: "Equipe",
         icon: "Users",
-        color: "accent"
-      }
-    ]
+        color: "accent",
+      },
+    ],
   },
 
-  "remsa": {
+  remsa: {
     title: "Continue Explorando",
     subtitle: "Serviços para adolescentes",
     recommendations: [
@@ -794,7 +785,7 @@ export const readingRecommendations = {
         path: "/equipe/psicologa",
         category: "Apoio",
         icon: "UserCircle",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "assistente-social",
@@ -804,7 +795,7 @@ export const readingRecommendations = {
         path: "/equipe/assistente-social",
         category: "Assistência",
         icon: "Heart",
-        color: "accent"
+        color: "accent",
       },
       {
         id: "educacao",
@@ -814,9 +805,9 @@ export const readingRecommendations = {
         path: "/educacao",
         category: "Aprenda Mais",
         icon: "GraduationCap",
-        color: "secondary"
-      }
-    ]
+        color: "secondary",
+      },
+    ],
   },
 
   "prevencao-hiv": {
@@ -831,7 +822,7 @@ export const readingRecommendations = {
         path: "/servicos/procedimentos#testes-rapidos",
         category: "Testagem",
         icon: "TestTube2",
-        color: "green"
+        color: "green",
       },
       {
         id: "sala-9",
@@ -841,7 +832,7 @@ export const readingRecommendations = {
         path: "/servicos/sala-9",
         category: "Atendimento",
         icon: "Users",
-        color: "primary"
+        color: "primary",
       },
       {
         id: "psicologa",
@@ -851,10 +842,10 @@ export const readingRecommendations = {
         path: "/equipe/psicologa",
         category: "Apoio",
         icon: "Heart",
-        color: "accent"
-      }
-    ]
-  }
+        color: "accent",
+      },
+    ],
+  },
 };
 
 export function getRecommendations(pageId) {

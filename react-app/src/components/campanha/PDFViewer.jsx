@@ -9,17 +9,14 @@ export default function PDFViewer({
 }) {
   const [loadError, setLoadError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  // Handle iframe load error
   const handleError = () => {
     setLoadError(true);
     setIsLoading(false);
   };
-  // Handle successful load
   const handleLoad = () => {
     setIsLoading(false);
     setLoadError(false);
   };
-  // Download PDF
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = pdfURL;

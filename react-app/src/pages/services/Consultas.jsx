@@ -34,8 +34,7 @@ export default function Consultas() {
     {
       id: "ginecologista",
       title: "Ginecologia",
-      description:
-        "Saúde da mulher, pré-natal e atendimento ginecológico",
+      description: "Saúde da mulher, pré-natal e atendimento ginecológico",
       icon: HeartPulse,
       path: "/equipe/ginecologista",
       colorScheme: "secondary",
@@ -61,8 +60,7 @@ export default function Consultas() {
     {
       id: "dentistas",
       title: "Consultório Odontológico",
-      description:
-        "Atendimento odontológico para toda a família e saúde bucal",
+      description: "Atendimento odontológico para toda a família e saúde bucal",
       icon: Smile,
       path: "/equipe/dentistas",
       colorScheme: "accent",
@@ -83,7 +81,6 @@ export default function Consultas() {
       <div className="max-w-6xl mx-auto">
         <BackButton />
 
-        {/* Header */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
             Consultas e Atendimentos
@@ -107,7 +104,6 @@ export default function Consultas() {
           ))}
         </div>
 
-        {/* Como Agendar */}
         <div className="bg-white border border-neutral-200 rounded-lg shadow-md overflow-hidden">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -118,7 +114,9 @@ export default function Consultas() {
           <div className="p-4 sm:p-6">
             <div className="space-y-3 text-sm">
               <div className="flex items-start gap-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-3">
-                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">1</div>
+                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">
+                  1
+                </div>
                 <p className="text-neutral-700">
                   Dirija-se à{" "}
                   <Link
@@ -132,7 +130,9 @@ export default function Consultas() {
               </div>
 
               <div className="flex items-start gap-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-3">
-                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">2</div>
+                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">
+                  2
+                </div>
                 <p className="text-neutral-700">
                   Informe o tipo de consulta que você precisa e sua preferência
                   de horário
@@ -140,14 +140,18 @@ export default function Consultas() {
               </div>
 
               <div className="flex items-start gap-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-3">
-                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">3</div>
+                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">
+                  3
+                </div>
                 <p className="text-neutral-700">
                   Aguarde a confirmação do agendamento e anote a data e horário
                 </p>
               </div>
 
               <div className="flex items-start gap-3 bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-3">
-                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">4</div>
+                <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold">
+                  4
+                </div>
                 <p className="text-neutral-700">
                   Compareça no dia e horário marcados com toda a documentação
                   necessária

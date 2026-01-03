@@ -1,7 +1,3 @@
-/**
- * HomeHero - Seção principal/banner da página inicial
- * Exibe o título principal e descrição da ESF Catalão
- */
 export default function HomeHero() {
   return (
     <section className="pt-16 pb-8 px-4">
@@ -28,4 +24,3 @@ export default function HomeHero() {
     </section>
   );
 }
-

@@ -10,7 +10,6 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const { login, currentUser } = useAuth();
   const navigate = useNavigate();
-  // Se já estiver logado, redireciona para o painel
   useEffect(() => {
     if (currentUser) {
       navigate("/admin/painel", { replace: true });
@@ -22,12 +21,10 @@ export default function Login() {
       setError("Por favor, preencha todos os campos");
       return;
     }
-    setError(""); // Limpa erros anteriores
-    setLoading(true); // Ativa estado de carregamento
-    // Tenta fazer login
+    setError("");
+    setLoading(true);
     const result = await login(email, password);
     if (result.success) {
-      // Login bem-sucedido! Redireciona para o painel
       navigate("/admin/painel", { replace: true });
     } else {
       setError(result.error);
@@ -46,22 +43,14 @@ export default function Login() {
                 <Building2 className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h1
-                  className="text-lg font-semibold text-neutral-900"
-                >
+                <h1 className="text-lg font-semibold text-neutral-900">
                   ESF CATALÃO
                 </h1>
-                <p
-                  className="text-xs text-neutral-500"
-                >
-                  Sistema Interno
-                </p>
+                <p className="text-xs text-neutral-500">Sistema Interno</p>
               </div>
             </div>
             <div className="h-px bg-neutral-200 my-4"></div>
-            <h2
-              className="text-sm font-semibold text-neutral-700 uppercase tracking-wide"
-            >
+            <h2 className="text-sm font-semibold text-neutral-700 uppercase tracking-wide">
               Acesso Restrito
             </h2>
           </div>
@@ -69,11 +58,7 @@ export default function Login() {
           {error && (
             <div className="mb-6 p-3 bg-error/10 border border-red-200 rounded-md flex items-center gap-2">
               <AlertCircle className="w-4 h-4 text-error flex-shrink-0" />
-              <p
-                className="text-sm text-red-700"
-              >
-                {error}
-              </p>
+              <p className="text-sm text-red-700">{error}</p>
             </div>
           )}
           {}
@@ -163,9 +148,7 @@ export default function Login() {
           </div>
         </div>
         {}
-        <div
-          className="mt-4 text-center text-xs text-neutral-600"
-        >
+        <div className="mt-4 text-center text-xs text-neutral-600">
           <p>
             Área destinada a profissionais da unidade. Sem acesso? Contate o
             administrador.

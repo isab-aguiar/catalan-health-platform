@@ -14,7 +14,6 @@ export default function FarmaciaDispensacao() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Farmácia - Retirada de Medicamentos
@@ -28,7 +27,6 @@ export default function FarmaciaDispensacao() {
 
         <AvisosPaginaWrapper pagina="farmacia" />
 
-        {/* Sobre o Serviço */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
@@ -74,13 +72,11 @@ export default function FarmaciaDispensacao() {
           </div>
         </div>
 
-        {/* Consulte o Estoque */}
         <div className="mb-6">
           <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4">
             Consulte o Estoque de Medicamentos
           </h2>
 
-          {/* Desktop: Card horizontal */}
           <div className="hidden md:block bg-gradient-to-r from-accent-50 to-accent-100 border-2 border-accent-200 rounded-xl p-4 sm:p-6 hover:shadow-lg transition-shadow mb-6">
             <a
               href="https://www.divinopolis.mg.gov.br/portal/servicos/1074/estoque-de-medicamentos-das-farmacias-municipais/"
@@ -89,21 +85,24 @@ export default function FarmaciaDispensacao() {
               className="flex items-center gap-6 group"
             >
               <div className="flex-shrink-0 w-12 h-12 sm:w-16 sm:h-16 bg-accent-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Package className="w-6 h-6 sm:w-8 sm:h-8 text-white" strokeWidth={2} />
+                <Package
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-white"
+                  strokeWidth={2}
+                />
               </div>
               <div className="flex-1">
                 <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2 group-hover:text-accent-700 transition-colors">
                   Portal da Prefeitura - Estoque de Medicamentos
                 </h3>
                 <p className="text-sm text-neutral-700 leading-relaxed">
-                  Verifique em tempo real a disponibilidade de medicamentos nas farmácias municipais
+                  Verifique em tempo real a disponibilidade de medicamentos nas
+                  farmácias municipais
                 </p>
               </div>
               <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 text-accent-600 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
 
-          {/* Mobile: Card vertical */}
           <a
             href="https://www.divinopolis.mg.gov.br/portal/servicos/1074/estoque-de-medicamentos-das-farmacias-municipais/"
             target="_blank"
@@ -122,7 +121,8 @@ export default function FarmaciaDispensacao() {
                   Estoque de Medicamentos
                 </p>
                 <p className="text-xs text-neutral-600 leading-relaxed">
-                  Verifique em tempo real a disponibilidade de medicamentos nas farmácias municipais
+                  Verifique em tempo real a disponibilidade de medicamentos nas
+                  farmácias municipais
                 </p>
               </div>
               <div className="flex items-center gap-2 text-accent-600 font-semibold text-sm">
@@ -132,9 +132,10 @@ export default function FarmaciaDispensacao() {
             </div>
           </a>
 
-          {/* Contato da Farmácia */}
           <div className="bg-white border border-neutral-200 rounded-lg shadow-md p-4">
-            <p className="text-neutral-700 text-sm mb-2 leading-relaxed">Em caso de dúvidas, entre em contato:</p>
+            <p className="text-neutral-700 text-sm mb-2 leading-relaxed">
+              Em caso de dúvidas, entre em contato:
+            </p>
             <a
               href={`tel:${contactInfo.phones.pharmacy.tel}`}
               className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 transition-colors no-underline font-semibold text-sm"
@@ -145,13 +146,11 @@ export default function FarmaciaDispensacao() {
           </div>
         </div>
 
-
         <EscalaFirestore
           escalaKey="farmacia"
           titulo="Profissionais Escalados na Farmácia"
         />
 
-        {/* Documentação Necessária */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Documentação Necessária
@@ -186,14 +185,15 @@ export default function FarmaciaDispensacao() {
           </div>
         </div>
 
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 sm:p-6 shadow-sm border border-green-200 mb-6">
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
               <AlertCircle size={20} className="text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-green-900 mb-2 text-base">Orientação Importante</h3>
+              <h3 className="font-bold text-green-900 mb-2 text-base">
+                Orientação Importante
+              </h3>
               <p className="text-neutral-800 text-sm leading-relaxed">
                 Traga sempre a receita médica original e válida.{" "}
                 <Link

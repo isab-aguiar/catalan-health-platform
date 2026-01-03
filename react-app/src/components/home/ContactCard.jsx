@@ -1,10 +1,13 @@
-import { Phone, Building2, Smile, Pill, Droplet, MapPin, MessageCircle } from "lucide-react";
+import {
+  Phone,
+  Building2,
+  Smile,
+  Pill,
+  Droplet,
+  MapPin,
+  MessageCircle,
+} from "lucide-react";
 import { contactInfo, openingHours } from "../../config";
-
-/**
- * ContactCard - Card individual de informação de contato
- * @param {string} type - Tipo de contato (reception, administrative, dental, pharmacy, bloodCollection, address)
- */
 export default function ContactCard({ type }) {
   const cards = {
     reception: {
@@ -53,7 +56,10 @@ export default function ContactCard({ type }) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-success transition-colors"
               >
-                <MessageCircle size={18} className="text-success flex-shrink-0" />
+                <MessageCircle
+                  size={18}
+                  className="text-success flex-shrink-0"
+                />
                 <span>{contactInfo.phones.whatsapp.admin1.display}</span>
               </a>
               <a
@@ -62,7 +68,10 @@ export default function ContactCard({ type }) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900 hover:text-success transition-colors"
               >
-                <MessageCircle size={18} className="text-success flex-shrink-0" />
+                <MessageCircle
+                  size={18}
+                  className="text-success flex-shrink-0"
+                />
                 <span>{contactInfo.phones.whatsapp.admin2.display}</span>
               </a>
             </div>
@@ -186,7 +195,9 @@ export default function ContactCard({ type }) {
   return (
     <div className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow">
       <div className="flex items-start gap-3">
-        <div className={`w-12 h-12 sm:w-14 sm:h-14 ${card.iconBg} rounded-lg flex items-center justify-center flex-shrink-0`}>
+        <div
+          className={`w-12 h-12 sm:w-14 sm:h-14 ${card.iconBg} rounded-lg flex items-center justify-center flex-shrink-0`}
+        >
           <IconComponent size={24} className="text-white" />
         </div>
         <div className="flex-1 min-w-0">
@@ -199,4 +210,3 @@ export default function ContactCard({ type }) {
     </div>
   );
 }
-

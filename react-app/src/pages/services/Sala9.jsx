@@ -13,7 +13,6 @@ export default function Sala9() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Atendimento Administrativo
@@ -27,7 +26,6 @@ export default function Sala9() {
 
         <AvisosPaginaWrapper pagina="sala-9" />
 
-        {/* Sobre o Serviço */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -46,8 +44,8 @@ export default function Sala9() {
                     Consulta de Posição na Fila do SUS
                   </strong>
                   <p className="text-sm text-neutral-600 mt-0.5 leading-relaxed">
-                    Verificação da posição na fila para consultas especializadas e
-                    exames
+                    Verificação da posição na fila para consultas especializadas
+                    e exames
                   </p>
                 </div>
               </div>
@@ -101,7 +99,6 @@ export default function Sala9() {
           </div>
         </div>
 
-        {/* Documentos Necessários */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -121,7 +118,8 @@ export default function Sala9() {
                     Documento de Identificação com Foto
                   </strong>
                   <p className="text-xs text-neutral-600 mt-0.5">
-                    Documento de identidade com foto e/ou Carteira de Habilitação do titular
+                    Documento de identidade com foto e/ou Carteira de
+                    Habilitação do titular
                   </p>
                 </div>
               </div>
@@ -155,9 +153,12 @@ export default function Sala9() {
                     <FileText size={20} className="text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                    <h3 className="font-bold text-blue-900 mb-2 text-base">
+                      Normativa
+                    </h3>
                     <p className="text-neutral-800 text-sm leading-relaxed">
-                      Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                      Documento de identificação com foto e CPF são obrigatórios
+                      para qualquer atendimento na unidade.
                     </p>
                   </div>
                 </div>
@@ -177,16 +178,20 @@ export default function Sala9() {
               <AlertCircle size={20} className="text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-green-900 mb-2 text-base">Lembre-se</h3>
+              <h3 className="font-bold text-green-900 mb-2 text-base">
+                Lembre-se
+              </h3>
               <p className="text-neutral-800 text-sm leading-relaxed">
-                A equipe deste setor monitora o sistema diariamente. Assim que sua vaga for liberada pelo Estado, entraremos em contato via WhatsApp ou ligação telefônica. Mantenha seu telefone celular atualizado e fique atento às chamadas e mensagens!
+                A equipe deste setor monitora o sistema diariamente. Assim que
+                sua vaga for liberada pelo Estado, entraremos em contato via
+                WhatsApp ou ligação telefônica. Mantenha seu telefone celular
+                atualizado e fique atento às chamadas e mensagens!
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="sala-9" />
       </div>

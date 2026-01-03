@@ -1,12 +1,16 @@
 import { Calendar, Clock, AlertCircle, Users } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+  Alert,
+  InfoBox,
+} from "../../components/common";
 import { PageContainer } from "../../components/layout";
 export default function Tabagismo() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-white">
             Grupo de Tabagismo
@@ -15,7 +19,6 @@ export default function Tabagismo() {
             Estratégia Saúde da Família Bela Vista - Catalão - São José
           </p>
         </div>
-        {/* Sobre o Grupo */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -56,7 +59,6 @@ export default function Tabagismo() {
             </div>
           </div>
         </div>
-        {/* Atividades Desenvolvidas */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -76,8 +78,8 @@ export default function Tabagismo() {
                     Avaliação e Classificação do Grau de Dependência
                   </strong>
                   <p className="text-xs text-neutral-600 mt-0.5 leading-relaxed">
-                    Identificação do nível de dependência nicotínica e elaboração
-                    de plano de tratamento individualizado.
+                    Identificação do nível de dependência nicotínica e
+                    elaboração de plano de tratamento individualizado.
                   </p>
                 </div>
               </div>
@@ -113,8 +115,8 @@ export default function Tabagismo() {
                   </strong>
                   <p className="text-xs text-neutral-600 mt-0.5 leading-relaxed">
                     Quando indicado, prescrição e acompanhamento do uso de
-                    medicamentos para auxiliar na cessação do tabagismo, conforme
-                    protocolos estabelecidos.
+                    medicamentos para auxiliar na cessação do tabagismo,
+                    conforme protocolos estabelecidos.
                   </p>
                 </div>
               </div>
@@ -126,7 +128,8 @@ export default function Tabagismo() {
                   </strong>
                   <p className="text-xs text-neutral-600 mt-0.5 leading-relaxed">
                     Monitoramento do processo de cessação, identificação de
-                    dificuldades e fortalecimento de estratégias de enfrentamento.
+                    dificuldades e fortalecimento de estratégias de
+                    enfrentamento.
                   </p>
                 </div>
               </div>
@@ -137,21 +140,19 @@ export default function Tabagismo() {
                     Troca de Experiências
                   </strong>
                   <p className="text-xs text-neutral-600 mt-0.5 leading-relaxed">
-                    Espaço de acolhimento e compartilhamento de vivências entre os
-                    participantes, promovendo apoio mútuo e motivação.
+                    Espaço de acolhimento e compartilhamento de vivências entre
+                    os participantes, promovendo apoio mútuo e motivação.
                   </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {/* Dias e Horários */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Dias e Horários
           </h2>
 
-          {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
@@ -183,21 +184,30 @@ export default function Tabagismo() {
             </table>
           </div>
 
-          {/* Versão Mobile */}
           <div className="md:hidden space-y-3">
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="space-y-2">
                 <div>
-                  <span className="text-xs font-semibold text-neutral-500 uppercase">Dia da Semana</span>
-                  <p className="text-sm font-semibold text-neutral-900">A definir</p>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">
+                    Dia da Semana
+                  </span>
+                  <p className="text-sm font-semibold text-neutral-900">
+                    A definir
+                  </p>
                 </div>
                 <div>
-                  <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">
+                    Horário
+                  </span>
                   <p className="text-sm text-neutral-900">A definir</p>
                 </div>
                 <div>
-                  <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
-                  <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">
+                    Local
+                  </span>
+                  <p className="text-sm text-neutral-900">
+                    Sala de Grupos - ESF Catalão
+                  </p>
                 </div>
               </div>
             </div>
@@ -209,7 +219,6 @@ export default function Tabagismo() {
             unidade.
           </p>
         </div>
-        {/* Como Participar */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -218,9 +227,10 @@ export default function Tabagismo() {
           </div>
           <div className="p-4 sm:p-6">
             <p className="text-neutral-700 mb-4 text-sm leading-relaxed">
-              A participação no Grupo de Tabagismo é gratuita e aberta a todos os
-              usuários da unidade que desejam parar de fumar, independentemente do
-              tempo de tabagismo ou quantidade de cigarros consumidos.
+              A participação no Grupo de Tabagismo é gratuita e aberta a todos
+              os usuários da unidade que desejam parar de fumar,
+              independentemente do tempo de tabagismo ou quantidade de cigarros
+              consumidos.
             </p>
             <div className="space-y-2">
               <div className="flex items-start gap-3 bg-white p-3 rounded border border-neutral-200">
@@ -252,7 +262,6 @@ export default function Tabagismo() {
           </div>
         </div>
 
-        {/* Benefícios da Cessação do Tabagismo */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -291,7 +300,6 @@ export default function Tabagismo() {
           </div>
         </div>
 
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-5 shadow-md mb-6">
           <p className="font-semibold mb-2 text-base">Orientação Importante</p>
           <p className="text-sm text-white/90 leading-relaxed">
@@ -304,7 +312,6 @@ export default function Tabagismo() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="tabagismo" />
       </div>

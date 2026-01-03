@@ -1,16 +1,7 @@
-import {
-  Phone,
-  Mail,
-  Instagram,
-  Hospital,
-} from "lucide-react";
+import { Phone, Mail, Instagram, Hospital } from "lucide-react";
 import { contactInfo, socialMedia } from "../../config";
 import ContactCard from "./ContactCard";
 
-/**
- * HomeContact - Seção de informações de contato
- * Exibe telefones, horários, endereço e redes sociais
- */
 export default function HomeContact() {
   return (
     <div
@@ -78,4 +69,3 @@ export default function HomeContact() {
     </div>
   );
 }
-

@@ -54,7 +54,9 @@ function AvisosTable({ avisos, onEdit, onDelete, deleteLoading }) {
       material: "bg-success/10 text-green-800 border-green-200",
       campanha: "bg-warning/20 text-amber-800 border-amber-200",
     };
-    return colors[categoria] || "bg-neutral-100 text-neutral-800 border-neutral-200";
+    return (
+      colors[categoria] || "bg-neutral-100 text-neutral-800 border-neutral-200"
+    );
   };
   const getCategoriaLabel = (categoria) => {
     const labels = {
@@ -103,7 +105,6 @@ function AvisosTable({ avisos, onEdit, onDelete, deleteLoading }) {
             : "avisos encontrados"}
         </p>
       </div>
-      {/* Mobile View - Cards */}
       <div className="md:hidden p-3 space-y-3">
         {paginatedAvisos.length === 0 ? (
           <div className="px-4 py-8 text-center text-neutral-500 text-sm">
@@ -173,7 +174,6 @@ function AvisosTable({ avisos, onEdit, onDelete, deleteLoading }) {
         )}
       </div>
 
-      {/* Desktop View - Table */}
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full">
           <thead className="bg-neutral-100 border-b border-neutral-300">
@@ -278,7 +278,6 @@ function AvisosTable({ avisos, onEdit, onDelete, deleteLoading }) {
           </tbody>
         </table>
       </div>
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-neutral-300 bg-neutral-50 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs sm:text-sm text-neutral-700 font-medium">

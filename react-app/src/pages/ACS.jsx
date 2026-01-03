@@ -15,18 +15,17 @@ import { useACSSearch } from "../hooks/useACSSearch";
 import { normalize } from "../utils/normalize";
 import { BackButton } from "../components/common";
 
-// Mapeamento de nomes curtos para nomes completos - ACS
 const nomesCompletosACS = {
-  'wasley': 'Wasley Borges',
-  'ênes júnior': 'Enes Junior',
-  'ênes': 'Enes Junior',
-  'enes júnior': 'Enes Junior',
-  'enes junior': 'Enes Junior',
-  'erika': 'Erika Roscoe',
-  'renata': 'Renata Rodrigues',
-  'daniel': 'Daniel Henrique',
-  'davi': 'Davi de Castro',
-  'matheus': 'Matheus José',
+  wasley: "Wasley Borges",
+  "ênes júnior": "Enes Junior",
+  ênes: "Enes Junior",
+  "enes júnior": "Enes Junior",
+  "enes junior": "Enes Junior",
+  erika: "Erika Roscoe",
+  renata: "Renata Rodrigues",
+  daniel: "Daniel Henrique",
+  davi: "Davi de Castro",
+  matheus: "Matheus José",
 };
 
 function getNomeCompleto(nome) {
@@ -64,13 +63,11 @@ export default function ACSPage() {
     });
     return acsArray;
   }, []);
-  // Criar sugestões combinadas: busca inteligente + busca por nome de ACS
   const suggestions = useMemo(() => {
     if (query.trim().length < 2) return [];
     const normalizedQuery = normalize(query);
     const matches = [];
     const seen = new Set();
-    // 1. Adicionar resultados da busca inteligente (endereços com números)
     acsSearchSuggestions.forEach((suggestion) => {
       const key = `${suggestion.esf}-${suggestion.microarea}`;
       if (!seen.has(key)) {
@@ -126,7 +123,6 @@ export default function ACSPage() {
   const handleSuggestionClick = (suggestion) => {
     setQuery("");
     setShowSuggestions(false);
-    // Montar objeto ACS completo para o modal
     let acsData;
     if (suggestion.type === "rua") {
       acsData = {

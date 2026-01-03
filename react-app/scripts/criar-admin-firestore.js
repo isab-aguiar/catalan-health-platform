@@ -35,14 +35,14 @@ function loadEnv() {
       });
       return envVars;
     } catch (err) {
-      // Continuar tentando outros caminhos
+
     }
   }
   return {};
 }
-// Carregar variáveis de ambiente
+
 const envVars = loadEnv();
-// ✅ CONFIGURAÇÃO DO FIREBASE (usando variáveis de ambiente)
+
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_API_KEY || envVars.VITE_FIREBASE_API_KEY,
   authDomain:
@@ -57,7 +57,7 @@ const firebaseConfig = {
     envVars.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.VITE_FIREBASE_APP_ID || envVars.VITE_FIREBASE_APP_ID,
 };
-// Validar variáveis de ambiente
+
 if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
   console.error("❌ ERRO: Variáveis de ambiente não configuradas!");
   console.error(

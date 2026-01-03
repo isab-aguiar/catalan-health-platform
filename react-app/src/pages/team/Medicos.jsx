@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { AlertCircle, ExternalLink } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, InfoBox } from "../../components/common";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+  InfoBox,
+} from "../../components/common";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import medicoImg from "../../assets/medico/medico.png";
 import { PageContainer } from "../../components/layout";
@@ -12,7 +16,6 @@ export default function Medicos() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Consultório Médico
@@ -22,7 +25,6 @@ export default function Medicos() {
           </p>
         </div>
 
-        {/* Sobre o Serviço */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
@@ -98,7 +100,6 @@ export default function Medicos() {
           </div>
         </div>
         {}
-        {/* Card Atendimento Médico de Família */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div>
@@ -112,7 +113,6 @@ export default function Medicos() {
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Imagem */}
             <div className="mb-6 flex justify-center">
               <ImageWithCredit
                 src={medicoImg}
@@ -122,14 +122,18 @@ export default function Medicos() {
               />
             </div>
 
-            {/* Descrição */}
             <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
-              O médico de família é o profissional preparado para cuidar de você e de toda a sua família, independentemente da idade ou condição de saúde. Este profissional acompanha o paciente ao longo do tempo, conhecendo sua história clínica, seus hábitos e seu contexto familiar e social. Essa relação de confiança permite um atendimento mais humanizado e resolutivo, promovendo saúde, prevenindo doenças e tratando problemas de saúde de forma integral e coordenada.
+              O médico de família é o profissional preparado para cuidar de você
+              e de toda a sua família, independentemente da idade ou condição de
+              saúde. Este profissional acompanha o paciente ao longo do tempo,
+              conhecendo sua história clínica, seus hábitos e seu contexto
+              familiar e social. Essa relação de confiança permite um
+              atendimento mais humanizado e resolutivo, promovendo saúde,
+              prevenindo doenças e tratando problemas de saúde de forma integral
+              e coordenada.
             </p>
 
-            {/* Grid de Links */}
             <div className="grid md:grid-cols-1 gap-4">
-              {/* Link para Ministério da Saúde */}
               <a
                 href="https://www.gov.br/saude/pt-br/assuntos/atencao-primaria-a-saude"
                 target="_blank"
@@ -145,7 +149,8 @@ export default function Medicos() {
                       Saiba Mais
                     </h3>
                     <p className="text-sm text-neutral-600 mb-2">
-                      Consulte informações completas sobre a Atenção Primária à Saúde no site oficial do Ministério da Saúde.
+                      Consulte informações completas sobre a Atenção Primária à
+                      Saúde no site oficial do Ministério da Saúde.
                     </p>
                     <div className="flex items-center gap-2 text-sm text-primary-600 font-semibold">
                       <ExternalLink size={16} />
@@ -227,7 +232,6 @@ export default function Medicos() {
         {}
         <InfoBox title="Acesso ao Serviço" className="mb-8">
           <div className="space-y-4">
-            {/* Passo 1 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 1
@@ -256,7 +260,6 @@ export default function Medicos() {
               </div>
             </div>
 
-            {/* Passo 2 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 2
@@ -272,7 +275,6 @@ export default function Medicos() {
               </div>
             </div>
 
-            {/* Passo 3 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 3
@@ -290,7 +292,6 @@ export default function Medicos() {
               </div>
             </div>
 
-            {/* Passo 4 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 4
@@ -315,25 +316,35 @@ export default function Medicos() {
                 <AlertCircle size={20} className="text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="font-bold text-green-900 mb-2 text-base">Importante sobre Atendimento por Demanda Espontânea</h3>
+                <h3 className="font-bold text-green-900 mb-2 text-base">
+                  Importante sobre Atendimento por Demanda Espontânea
+                </h3>
                 <p className="text-neutral-800 text-sm leading-relaxed mb-2">
-                  O atendimento por demanda espontânea não garante consulta médica imediata. Todos os casos de demanda espontânea passam por uma avaliação inicial na triagem de enfermagem, que determina a necessidade e prioridade do atendimento.
+                  O atendimento por demanda espontânea não garante consulta
+                  médica imediata. Todos os casos de demanda espontânea passam
+                  por uma avaliação inicial na triagem de enfermagem, que
+                  determina a necessidade e prioridade do atendimento.
                 </p>
                 <p className="text-neutral-800 text-sm leading-relaxed">
-                  Conforme a avaliação realizada na triagem, o usuário poderá ser encaminhado para consulta médica ou para consulta de enfermagem, dependendo da necessidade clínica identificada. A triagem é essencial para garantir o melhor encaminhamento e otimizar o atendimento na unidade.
+                  Conforme a avaliação realizada na triagem, o usuário poderá
+                  ser encaminhado para consulta médica ou para consulta de
+                  enfermagem, dependendo da necessidade clínica identificada. A
+                  triagem é essencial para garantir o melhor encaminhamento e
+                  otimizar o atendimento na unidade.
                 </p>
               </div>
             </div>
           </div>
         </div>
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-6 shadow-md mt-6">
           <div className="flex items-start gap-3 sm:gap-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
               <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold mb-2 text-base sm:text-lg">Orientação Importante</p>
+              <p className="font-bold mb-2 text-base sm:text-lg">
+                Orientação Importante
+              </p>
               <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
                 Antes de se dirigir à sala de consulta médica, é necessário
                 passar pela recepção da unidade para realização da ficha de
@@ -346,7 +357,6 @@ export default function Medicos() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="medicos" />
       </div>

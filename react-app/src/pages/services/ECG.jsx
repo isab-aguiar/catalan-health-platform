@@ -1,5 +1,15 @@
-import { AlertCircle, Activity, FileText, Clock, CheckCircle } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, InfoBox } from "../../components/common";
+import {
+  AlertCircle,
+  Activity,
+  FileText,
+  Clock,
+  CheckCircle,
+} from "lucide-react";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+  InfoBox,
+} from "../../components/common";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
 import { PageContainer } from "../../components/layout";
@@ -11,7 +21,6 @@ export default function ECG() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Eletrocardiograma
@@ -25,7 +34,6 @@ export default function ECG() {
 
         <AvisosPaginaWrapper pagina="ecg" />
 
-        {/* Sobre o Serviço */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
@@ -41,24 +49,28 @@ export default function ECG() {
           </div>
           <div className="p-4 sm:p-6">
             <p className="text-neutral-700 text-sm leading-relaxed mb-5">
-              O Eletrocardiograma é um exame que registra a atividade elétrica do
-              coração. É um procedimento simples, rápido e indolor que auxilia na
-              identificação de problemas cardíacos como arritmias, infarto,
-              insuficiência cardíaca e outras alterações do sistema
+              O Eletrocardiograma é um exame que registra a atividade elétrica
+              do coração. É um procedimento simples, rápido e indolor que
+              auxilia na identificação de problemas cardíacos como arritmias,
+              infarto, insuficiência cardíaca e outras alterações do sistema
               cardiovascular.
             </p>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
                 <div className="flex items-start gap-3">
-                  <CheckCircle size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <h3 className="font-bold text-blue-900 mb-2">
                       Avaliação Cardíaca
                     </h3>
                     <p className="text-sm text-neutral-700 leading-relaxed">
-                      Identifica alterações no ritmo e função do coração, auxiliando
-                      no diagnóstico e acompanhamento de condições cardíacas.
+                      Identifica alterações no ritmo e função do coração,
+                      auxiliando no diagnóstico e acompanhamento de condições
+                      cardíacas.
                     </p>
                   </div>
                 </div>
@@ -66,14 +78,17 @@ export default function ECG() {
 
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
                 <div className="flex items-start gap-3">
-                  <Clock size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <Clock
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <h3 className="font-bold text-blue-900 mb-2">
                       Exame Rápido e Indolor
                     </h3>
                     <p className="text-sm text-neutral-700 leading-relaxed">
-                      Procedimento não invasivo com duração aproximada de 10 a 15
-                      minutos.
+                      Procedimento não invasivo com duração aproximada de 10 a
+                      15 minutos.
                     </p>
                   </div>
                 </div>
@@ -82,7 +97,6 @@ export default function ECG() {
           </div>
         </div>
 
-        {/* Preparo para o Exame */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -142,7 +156,6 @@ export default function ECG() {
           titulo="Profissionais Escalados na Sala de ECG"
         />
 
-        {/* Documentação Necessária */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
@@ -206,9 +219,12 @@ export default function ECG() {
                     <FileText size={20} className="text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                    <h3 className="font-bold text-blue-900 mb-2 text-base">
+                      Normativa
+                    </h3>
                     <p className="text-neutral-800 text-sm leading-relaxed">
-                      Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                      Documento de identificação com foto e CPF são obrigatórios
+                      para qualquer atendimento na unidade.
                     </p>
                   </div>
                 </div>
@@ -217,7 +233,6 @@ export default function ECG() {
           </div>
         </div>
 
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -237,7 +252,6 @@ export default function ECG() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="ecg" />
       </div>

@@ -18,7 +18,7 @@
     overflow-x: hidden;
     width: 100%;
     position: relative;
-    /* Prevenir zoom em dispositivos touch */
+
     touch-action: manipulation;
     -webkit-text-size-adjust: 100%;
   }
@@ -66,14 +66,12 @@
     @apply outline-2 outline-offset-2 outline-primary-500;
   }
 
-  /* Prevenir zoom automático em inputs no iOS */
   input,
   select,
   textarea {
     font-size: 16px !important;
   }
 
-  /* Prevenir zoom em foco de inputs no mobile */
   @media screen and (max-width: 640px) {
     input:focus,
     select:focus,
@@ -82,14 +80,12 @@
     }
   }
 
-  /* Prevenir zoom em botões e links */
   button,
   a {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Prevenir zoom duplo-toque em toda a página */
   * {
     touch-action: manipulation;
   }
@@ -143,7 +139,6 @@
   }
 }
 
-/* VLibras - Garantir funcionamento em toda a aplicação */
 div[vw],
 div[vw].enabled {
   position: fixed !important;
@@ -166,7 +161,6 @@ div[vw].enabled {
   position: relative !important;
 }
 
-/* Popup/Badge de acessibilidade em Libras - aparece no hover */
 [vw-access-button] .vp-pop-up,
 .vp-pop-up {
   display: none !important;
@@ -180,7 +174,7 @@ div[vw].enabled {
   pointer-events: none !important;
   max-width: 200px !important;
   border-radius: 8px !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
 }
 
 [vw-access-button]:hover .vp-pop-up,
@@ -190,7 +184,6 @@ div[vw].enabled {
   opacity: 1 !important;
 }
 
-/* Ícone do botão de acesso */
 [vw-access-button] .vp-access-button,
 .vp-access-button {
   display: block !important;
@@ -209,7 +202,6 @@ div[vw].enabled {
   pointer-events: auto !important;
 }
 
-/* Garantir que VLibras não seja afetado pelo touch-action global */
 div[vw] *,
 [vw-access-button],
 [vw-plugin-wrapper] * {

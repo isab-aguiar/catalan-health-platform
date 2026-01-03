@@ -1,10 +1,5 @@
 import { ImageGallery, LoadingSpinner } from "../common";
 
-/**
- * HomeGallery - Galeria de imagens da unidade
- * @param {Array} images - Array de objetos com src, caption e credit
- * @param {boolean} loading - Estado de carregamento
- */
 export default function HomeGallery({ images, loading }) {
   return (
     <section className="pt-8 pb-16 px-4 bg-gradient-to-b from-white to-neutral-50">
@@ -28,4 +23,3 @@ export default function HomeGallery({ images, loading }) {
     </section>
   );
 }
-

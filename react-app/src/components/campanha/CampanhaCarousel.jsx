@@ -48,7 +48,6 @@ export default function CampanhaCarousel({ campanhas = [], onCampanhaClick }) {
   const currentCampanha = campanhasComImagem[currentIndex];
   return (
     <div className="relative w-full">
-      {/* Card da imagem */}
       <div className="relative w-full rounded-2xl overflow-hidden shadow-xl bg-neutral-100 border border-neutral-200 mx-auto">
         <div className="relative w-full group">
           {}
@@ -90,14 +89,12 @@ export default function CampanhaCarousel({ campanhas = [], onCampanhaClick }) {
         )}
       </div>
 
-      {/* Crédito da imagem - fora do slide */}
       {currentCampanha.imageCredit && (
         <p className="text-xs text-neutral-500 italic mt-2 text-right px-2">
           Fonte: {currentCampanha.imageCredit}
         </p>
       )}
 
-      {/* Título e descrição da campanha */}
       <div className="mt-4 space-y-2 px-2 sm:px-0">
         <h3 className="text-base sm:text-lg md:text-xl font-bold text-neutral-900 leading-tight">
           {currentCampanha.titulo}

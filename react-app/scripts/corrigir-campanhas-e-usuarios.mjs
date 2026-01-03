@@ -1,10 +1,4 @@
-// =========================================
-// SCRIPT PARA CORRIGIR CAMPANHAS E CRIAR USUÁRIOS
-// =========================================
-// Este script:
-// 1. Lista todas as campanhas do Firebase
-// 2. Permite deletar campanhas específicas
-// 3. Cria o usuário da Diretória
+
 
 import { initializeApp } from "firebase/app";
 import {
@@ -18,9 +12,6 @@ import {
 } from "firebase/firestore";
 import * as readline from "readline";
 
-// ✅ CONFIGURAÇÃO DO FIREBASE
-// IMPORTANTE: Configure as variáveis de ambiente no arquivo .env
-// Execute: node --env-file=../.env scripts/corrigir-campanhas-e-usuarios.mjs
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_API_KEY,
   authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -30,7 +21,6 @@ const firebaseConfig = {
   appId: process.env.VITE_FIREBASE_APP_ID,
 };
 
-// Validar que as variáveis de ambiente estão configuradas
 if (!firebaseConfig.apiKey) {
   console.error("❌ ERRO: Variáveis de ambiente não configuradas!");
   console.error(
@@ -39,11 +29,9 @@ if (!firebaseConfig.apiKey) {
   process.exit(1);
 }
 
-// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Interface para input do usuário
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -53,9 +41,6 @@ function question(query) {
   return new Promise((resolve) => rl.question(query, resolve));
 }
 
-// ==========================================
-// FUNÇÃO 1: LISTAR TODAS AS CAMPANHAS
-// ==========================================
 async function listarCampanhas() {
   console.log("\n📊 LISTANDO TODAS AS CAMPANHAS DO FIREBASE...\n");
 
@@ -99,9 +84,6 @@ async function listarCampanhas() {
   }
 }
 
-// ==========================================
-// FUNÇÃO 2: DELETAR CAMPANHA POR ID
-// ==========================================
 async function deletarCampanhaPorId(campanhaId) {
   console.log(`\n🗑️  DELETANDO CAMPANHA: ${campanhaId}...\n`);
 
@@ -117,9 +99,6 @@ async function deletarCampanhaPorId(campanhaId) {
   }
 }
 
-// ==========================================
-// FUNÇÃO 3: DELETAR TODAS AS CAMPANHAS
-// ==========================================
 async function deletarTodasCampanhas() {
   console.log("\n⚠️  DELETANDO TODAS AS CAMPANHAS...\n");
 
@@ -142,9 +121,6 @@ async function deletarTodasCampanhas() {
   }
 }
 
-// ==========================================
-// FUNÇÃO 4: CRIAR USUÁRIO DA DIRETÓRIA
-// ==========================================
 async function criarUsuarioDiretoria() {
   console.log("\n👤 CRIANDO USUÁRIO DA DIRETÓRIA...\n");
 
@@ -186,9 +162,6 @@ async function criarUsuarioDiretoria() {
   }
 }
 
-// ==========================================
-// MENU PRINCIPAL
-// ==========================================
 async function main() {
   console.log("╔════════════════════════════════════════════════╗");
   console.log("║  🔧 CORREÇÃO DE CAMPANHAS E USUÁRIOS           ║");
@@ -259,7 +232,6 @@ async function main() {
   }
 }
 
-// Executar
 main().catch((error) => {
   console.error("\n❌ Erro fatal:", error);
   rl.close();

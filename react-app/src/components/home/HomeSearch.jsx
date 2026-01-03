@@ -1,9 +1,5 @@
 import SearchSection from "../search/SearchSection";
 
-/**
- * HomeSearch - Seção de busca de ACS
- * Permite que o usuário encontre seu Agente Comunitário de Saúde
- */
 export default function HomeSearch() {
   return (
     <section className="py-16 px-4 bg-gradient-to-br from-primary-500 to-primary-700">
@@ -22,4 +18,3 @@ export default function HomeSearch() {
     </section>
   );
 }
-

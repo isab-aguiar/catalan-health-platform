@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { AlertCircle, Brain, Heart } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+  Alert,
+  InfoBox,
+} from "../../components/common";
 import psicologiaImg from "../../assets/bolsa-familia/psicologia.jpg";
 import { PageContainer } from "../../components/layout";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
@@ -11,7 +16,6 @@ export default function Psicologa() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Atendimento Psicológico
@@ -21,7 +25,6 @@ export default function Psicologa() {
           </p>
         </div>
 
-        {/* Sobre o Serviço */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
@@ -37,7 +40,8 @@ export default function Psicologa() {
                   Acolhimento e Escuta Qualificada
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Atendimento individual breve para compreensão da queixa, suporte emocional imediato e orientação.
+                  Atendimento individual breve para compreensão da queixa,
+                  suporte emocional imediato e orientação.
                 </p>
               </div>
             </div>
@@ -48,7 +52,8 @@ export default function Psicologa() {
                   Grupos Terapêuticos e Educativos
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Rodas de conversa e atividades coletivas focadas em ansiedade, convivência comunitária e promoção de saúde.
+                  Rodas de conversa e atividades coletivas focadas em ansiedade,
+                  convivência comunitária e promoção de saúde.
                 </p>
               </div>
             </div>
@@ -59,7 +64,8 @@ export default function Psicologa() {
                   Apoio à Família
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Orientações para familiares e cuidadores sobre como lidar com questões de saúde mental no domicílio.
+                  Orientações para familiares e cuidadores sobre como lidar com
+                  questões de saúde mental no domicílio.
                 </p>
               </div>
             </div>
@@ -70,14 +76,15 @@ export default function Psicologa() {
                   Triagem e Encaminhamento
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Avaliação da necessidade de tratamento especializado e, quando necessário, direcionamento para a rede de apoio (CAPS, Ambulatório de Saúde Mental, Assistência Social).
+                  Avaliação da necessidade de tratamento especializado e, quando
+                  necessário, direcionamento para a rede de apoio (CAPS,
+                  Ambulatório de Saúde Mental, Assistência Social).
                 </p>
               </div>
             </div>
           </div>
         </div>
-        {}
-        {/* Card Assistência Psicológica */}
+
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
@@ -89,14 +96,14 @@ export default function Psicologa() {
                   Psicologia na Atenção Primária à Saúde
                 </h2>
                 <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                  Cuidado integral, acolhimento humanizado e promoção de saúde mental
+                  Cuidado integral, acolhimento humanizado e promoção de saúde
+                  mental
                 </p>
               </div>
             </div>
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Imagem */}
             <div className="mb-6 flex justify-center">
               <img
                 src={psicologiaImg}
@@ -105,37 +112,36 @@ export default function Psicologa() {
               />
             </div>
 
-            {/* Descrição */}
             <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
               A Psicologia na Atenção Primária à Saúde desempenha um papel
               fundamental na promoção, prevenção e tratamento de questões
               relacionadas à saúde mental e ao bem-estar emocional da população.
-              Integrada às Equipes de Saúde da Família, a psicóloga atua de forma
-              interdisciplinar, oferecendo atendimento clínico individual e em
-              grupo, intervenções em crise, avaliações psicológicas, orientações,
-              apoio às famílias e articulação com a rede de saúde mental. O
-              atendimento psicológico é pautado em evidências científicas, ética
-              profissional, sigilo absoluto e respeito à singularidade de cada
-              pessoa. Reconhecemos que a saúde mental é tão importante quanto a
-              saúde física, e que cuidar das emoções é um direito de todos,
-              garantido pelo Sistema Único de Saúde (SUS).
+              Integrada às Equipes de Saúde da Família, a psicóloga atua de
+              forma interdisciplinar, oferecendo atendimento clínico individual
+              e em grupo, intervenções em crise, avaliações psicológicas,
+              orientações, apoio às famílias e articulação com a rede de saúde
+              mental. O atendimento psicológico é pautado em evidências
+              científicas, ética profissional, sigilo absoluto e respeito à
+              singularidade de cada pessoa. Reconhecemos que a saúde mental é
+              tão importante quanto a saúde física, e que cuidar das emoções é
+              um direito de todos, garantido pelo Sistema Único de Saúde (SUS).
             </p>
           </div>
         </div>
-        {}
+
         <EscalaFirestore
           escalaKey="consultorio-psicologico"
           titulo="Profissionais Escalados no Consultório Psicológico"
         />
-        {}
+
         <InfoBox title="Público-alvo">
           <div className="space-y-3">
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="text-neutral-700 text-sm">
-                Pessoas com ansiedade, depressão, transtorno de pânico,
-                fobias, transtorno obsessivo-compulsivo (TOC) e outros
-                transtornos mentais
+                Pessoas com ansiedade, depressão, transtorno de pânico, fobias,
+                transtorno obsessivo-compulsivo (TOC) e outros transtornos
+                mentais
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -162,15 +168,15 @@ export default function Psicologa() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="text-neutral-700 text-sm">
-                Vítimas de violência doméstica, sexual, psicológica,
-                negligência ou abuso
+                Vítimas de violência doméstica, sexual, psicológica, negligência
+                ou abuso
               </div>
             </div>
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="text-neutral-700 text-sm">
-                Usuários com problemas relacionados ao uso de álcool, drogas
-                ou outras dependências
+                Usuários com problemas relacionados ao uso de álcool, drogas ou
+                outras dependências
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -183,8 +189,8 @@ export default function Psicologa() {
             <div className="flex items-start gap-3">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="text-neutral-700 text-sm">
-                Pacientes com doenças crônicas, condições incapacitantes ou
-                em tratamentos prolongados que necessitam de apoio emocional
+                Pacientes com doenças crônicas, condições incapacitantes ou em
+                tratamentos prolongados que necessitam de apoio emocional
               </div>
             </div>
             <div className="flex items-start gap-3">
@@ -203,10 +209,9 @@ export default function Psicologa() {
             </div>
           </div>
         </InfoBox>
-        {}
+
         <InfoBox title="Acesso ao Serviço" className="mb-8">
           <div className="space-y-4">
-            {/* Passo 1 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 1
@@ -222,21 +227,20 @@ export default function Psicologa() {
                     className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     Sala de Agendamentos
-                  </Link>
-                  {" "}para agendamento de consulta psicológica. Não esqueça de
+                  </Link>{" "}
+                  para agendamento de consulta psicológica. Não esqueça de
                   consultar os{" "}
                   <Link
                     to="/servicos/sala-4#documentacao-necessaria"
                     className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     documentos necessários
-                  </Link>
-                  {" "}antes de comparecer.
+                  </Link>{" "}
+                  antes de comparecer.
                 </p>
               </div>
             </div>
 
-            {/* Passo 2 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 2
@@ -246,14 +250,13 @@ export default function Psicologa() {
                   Encaminhamento por Outros Profissionais
                 </strong>
                 <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
-                  Médicos, enfermeiros, assistente social e outros
-                  profissionais da equipe podem encaminhar pacientes para
-                  atendimento psicológico quando identificarem necessidade.
+                  Médicos, enfermeiros, assistente social e outros profissionais
+                  da equipe podem encaminhar pacientes para atendimento
+                  psicológico quando identificarem necessidade.
                 </p>
               </div>
             </div>
 
-            {/* Passo 3 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 3
@@ -269,7 +272,6 @@ export default function Psicologa() {
               </div>
             </div>
 
-            {/* Passo 4 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 4
@@ -279,15 +281,15 @@ export default function Psicologa() {
                   Comparecimento às Sessões
                 </strong>
                 <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
-                  Apresentar-se no horário agendado com documentação completa
-                  e, quando houver, encaminhamento médico. A continuidade do
+                  Apresentar-se no horário agendado com documentação completa e,
+                  quando houver, encaminhamento médico. A continuidade do
                   tratamento é fundamental para o sucesso terapêutico.
                 </p>
               </div>
             </div>
           </div>
         </InfoBox>
-        {}
+
         <div className="mb-6">
           <div className="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200 rounded-xl shadow-lg overflow-hidden">
             <div className="bg-gradient-to-r from-green-600 to-green-700 px-6 py-4">
@@ -304,9 +306,8 @@ export default function Psicologa() {
                 autolesão, ideação suicida ou surto psicótico, procure
                 imediatamente:
               </p>
-              
+
               <div className="grid md:grid-cols-2 gap-4 mb-6">
-                {/* Pronto-Socorro */}
                 <div className="bg-white border-2 border-red-200 rounded-lg p-5 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -323,16 +324,13 @@ export default function Psicologa() {
                   </div>
                 </div>
 
-                {/* SAMU */}
                 <div className="bg-white border-2 border-amber-200 rounded-lg p-5 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       <AlertCircle className="w-5 h-5 text-amber-600" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-neutral-900 mb-2">
-                        SAMU
-                      </h4>
+                      <h4 className="font-bold text-neutral-900 mb-2">SAMU</h4>
                       <p className="text-xs text-neutral-600 mb-2">
                         Atendimento móvel de urgência
                       </p>
@@ -340,8 +338,18 @@ export default function Psicologa() {
                         href="tel:192"
                         className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-bold px-4 py-2 rounded-lg transition-colors text-sm"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
                         </svg>
                         Ligue 192
                       </a>
@@ -349,7 +357,6 @@ export default function Psicologa() {
                   </div>
                 </div>
 
-                {/* CVV */}
                 <div className="bg-white border-2 border-green-200 rounded-lg p-5 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -360,14 +367,25 @@ export default function Psicologa() {
                         Centro de Valorização da Vida (CVV)
                       </h4>
                       <p className="text-xs text-neutral-600 mb-2">
-                        24 horas, gratuito - Apoio emocional e prevenção ao suicídio
+                        24 horas, gratuito - Apoio emocional e prevenção ao
+                        suicídio
                       </p>
                       <a
                         href="tel:188"
                         className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2 rounded-lg transition-colors text-sm"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
                         </svg>
                         Ligue 188
                       </a>
@@ -375,18 +393,16 @@ export default function Psicologa() {
                   </div>
                 </div>
 
-                {/* CAPS */}
                 <div className="bg-white border-2 border-blue-200 rounded-lg p-5 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Brain className="w-5 h-5 text-blue-600" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-neutral-900 mb-1">
-                        CAPS
-                      </h4>
+                      <h4 className="font-bold text-neutral-900 mb-1">CAPS</h4>
                       <p className="text-xs text-neutral-600">
-                        Centro de Atenção Psicossocial - Atendimento especializado em saúde mental
+                        Centro de Atenção Psicossocial - Atendimento
+                        especializado em saúde mental
                       </p>
                     </div>
                   </div>
@@ -396,34 +412,35 @@ export default function Psicologa() {
               <div className="bg-white border-l-4 border-red-600 rounded-r-lg p-4">
                 <p className="text-neutral-800 font-semibold text-sm">
                   <Heart className="w-4 h-4 inline-block mr-2 text-red-600" />
-                  Sua vida é importante! Não hesite em buscar ajuda imediata em situações de risco.
+                  Sua vida é importante! Não hesite em buscar ajuda imediata em
+                  situações de risco.
                 </p>
               </div>
             </div>
           </div>
         </div>
-        {}
-        {/* Orientação Importante */}
+
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-6 shadow-md mt-6">
           <div className="flex items-start gap-3 sm:gap-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
               <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold mb-2 text-base sm:text-lg">Orientação Importante</p>
+              <p className="font-bold mb-2 text-base sm:text-lg">
+                Orientação Importante
+              </p>
               <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
-                Antes de se dirigir à sala de consulta da psicóloga
-                responsável, é necessário passar pela recepção da unidade para
-                realização da ficha de atendimento. Esta medida é essencial para
-                agilizar o processo de atendimento e garantir a organização
-                adequada do fluxo de pacientes na unidade.
+                Antes de se dirigir à sala de consulta da psicóloga responsável,
+                é necessário passar pela recepção da unidade para realização da
+                ficha de atendimento. Esta medida é essencial para agilizar o
+                processo de atendimento e garantir a organização adequada do
+                fluxo de pacientes na unidade.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="psicologa" />
       </div>

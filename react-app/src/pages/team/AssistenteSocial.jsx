@@ -11,7 +11,6 @@ export default function AssistenteSocial() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Bolsa Família e Serviço Social
@@ -21,17 +20,18 @@ export default function AssistenteSocial() {
           </p>
         </div>
 
-        {/* Sobre o Serviço */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
             O Serviço Social na ESF Catalão atua na garantia dos direitos
-            sociais dos usuários, oferecendo informações e orientações sobre Bolsa Família, Serviço Social e outros programas sociais. Trabalhamos com encaminhamentos e
-            suporte em situações de vulnerabilidade social. Trabalhamos de forma
-            integrada com a equipe de saúde para promover o bem-estar e a
-            qualidade de vida da comunidade.
+            sociais dos usuários, oferecendo informações e orientações sobre
+            Bolsa Família, Serviço Social e outros programas sociais.
+            Trabalhamos com encaminhamentos e suporte em situações de
+            vulnerabilidade social. Trabalhamos de forma integrada com a equipe
+            de saúde para promover o bem-estar e a qualidade de vida da
+            comunidade.
           </p>
           <h3 className="font-bold text-blue-900 mb-4 text-base">
             Serviços Oferecidos:
@@ -62,7 +62,9 @@ export default function AssistenteSocial() {
             <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-neutral-800 text-sm">Acolhimento</strong>
+                <strong className="text-neutral-800 text-sm">
+                  Acolhimento
+                </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
                   Escuta qualificada e humanizada
                 </p>
@@ -71,7 +73,9 @@ export default function AssistenteSocial() {
             <div className="flex items-start gap-3 bg-white/70 rounded-lg p-4 border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
-                <strong className="text-neutral-800 text-sm">Articulação</strong>
+                <strong className="text-neutral-800 text-sm">
+                  Articulação
+                </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
                   Com outros serviços da rede de proteção social
                 </p>
@@ -263,7 +267,6 @@ export default function AssistenteSocial() {
         </InfoBox>
         {}
         <InfoBox title="Profissionais e Horários de Atendimento">
-          {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
@@ -288,8 +291,11 @@ export default function AssistenteSocial() {
                     07h00 às 11h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Noelia<br/>
-                    <span className="text-neutral-600 text-xs">Função: Assistente Social</span>
+                    Noelia
+                    <br />
+                    <span className="text-neutral-600 text-xs">
+                      Função: Assistente Social
+                    </span>
                   </td>
                 </tr>
                 <tr className="bg-white">
@@ -300,15 +306,17 @@ export default function AssistenteSocial() {
                     13h00 às 16h00
                   </td>
                   <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
-                    Noelia<br/>
-                    <span className="text-neutral-600 text-xs">Função: Assistente Social</span>
+                    Noelia
+                    <br />
+                    <span className="text-neutral-600 text-xs">
+                      Função: Assistente Social
+                    </span>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          {/* Versão Mobile */}
           <div className="md:hidden space-y-4">
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="mb-3">
@@ -319,14 +327,20 @@ export default function AssistenteSocial() {
               <div className="space-y-3">
                 <div className="pb-3 border-b border-neutral-300">
                   <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">07h00 às 11h00</p>
+                  <p className="text-sm font-semibold text-neutral-800">
+                    07h00 às 11h00
+                  </p>
                 </div>
                 <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-xs text-neutral-500 mb-2">
+                    <strong>Profissional Responsável</strong>
+                  </p>
                   <p className="text-sm text-neutral-700">Noelia</p>
                 </div>
                 <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Assistente Social</p>
+                  <p className="text-sm text-neutral-700">
+                    <strong>Função:</strong> Assistente Social
+                  </p>
                 </div>
               </div>
             </div>
@@ -340,14 +354,20 @@ export default function AssistenteSocial() {
               <div className="space-y-3">
                 <div className="pb-3 border-b border-neutral-300">
                   <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-neutral-800">13h00 às 16h00</p>
+                  <p className="text-sm font-semibold text-neutral-800">
+                    13h00 às 16h00
+                  </p>
                 </div>
                 <div className="pb-2 border-b border-neutral-300">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-xs text-neutral-500 mb-2">
+                    <strong>Profissional Responsável</strong>
+                  </p>
                   <p className="text-sm text-neutral-700">Noelia</p>
                 </div>
                 <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Assistente Social</p>
+                  <p className="text-sm text-neutral-700">
+                    <strong>Função:</strong> Assistente Social
+                  </p>
                 </div>
               </div>
             </div>
@@ -360,15 +380,17 @@ export default function AssistenteSocial() {
               <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold mb-2 text-base sm:text-lg">Orientação Importante</p>
+              <p className="font-bold mb-2 text-base sm:text-lg">
+                Orientação Importante
+              </p>
               <p className="text-xs sm:text-sm text-white/95 leading-relaxed mb-3 break-words">
                 <strong>Atendimento sigiloso:</strong> Todos os atendimentos do
                 Serviço Social são confidenciais. Suas informações pessoais são
                 protegidas pelo sigilo profissional.
               </p>
               <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
-                <strong>Você não está sozinho:</strong> O Serviço Social está aqui
-                para ajudar você a enfrentar dificuldades e garantir seus
+                <strong>Você não está sozinho:</strong> O Serviço Social está
+                aqui para ajudar você a enfrentar dificuldades e garantir seus
                 direitos. Não hesite em procurar apoio quando precisar!
               </p>
             </div>
@@ -376,7 +398,6 @@ export default function AssistenteSocial() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="assistente-social" />
       </div>

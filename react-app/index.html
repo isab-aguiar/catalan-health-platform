@@ -28,7 +28,6 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
 
-    <!-- VLibras Widget Container -->
     <div vw class="enabled">
       <div vw-access-button class="active"></div>
       <div vw-plugin-wrapper>
@@ -37,42 +36,42 @@
     </div>
 
     <script>
-      // Variável para controle de tentativas
       var vlibrasRetries = 0;
       var maxVlibrasRetries = 10;
       var vlibrasInitialized = false;
 
-      // Função para inicializar VLibras com tratamento de erro robusto
       function initVLibras() {
         if (vlibrasInitialized) return;
-        
+
         try {
           if (window.VLibras && window.VLibras.Widget) {
-            new window.VLibras.Widget('https://vlibras.gov.br/app');
+            new window.VLibras.Widget("https://vlibras.gov.br/app");
             vlibrasInitialized = true;
-            console.log('VLibras inicializado com sucesso');
+            console.log("VLibras inicializado com sucesso");
 
-            // Forçar posicionamento e visibilidade após inicialização
-            setTimeout(function() {
+            setTimeout(function () {
               fixVLibrasPosition();
             }, 1000);
 
-            // Verificar novamente após mais tempo (para garantir em dispositivos lentos)
-            setTimeout(function() {
+            setTimeout(function () {
               fixVLibrasPosition();
             }, 3000);
 
-            // Observer para garantir que o widget permaneça visível
             observeVLibras();
           } else if (vlibrasRetries < maxVlibrasRetries) {
             vlibrasRetries++;
-            console.log('VLibras não disponível, tentativa ' + vlibrasRetries + '/' + maxVlibrasRetries);
+            console.log(
+              "VLibras não disponível, tentativa " +
+                vlibrasRetries +
+                "/" +
+                maxVlibrasRetries
+            );
             setTimeout(initVLibras, 500);
           } else {
-            console.warn('VLibras: número máximo de tentativas atingido');
+            console.warn("VLibras: número máximo de tentativas atingido");
           }
         } catch (error) {
-          console.warn('VLibras não pôde ser carregado:', error.message);
+          console.warn("VLibras não pôde ser carregado:", error.message);
           if (vlibrasRetries < maxVlibrasRetries) {
             vlibrasRetries++;
             setTimeout(initVLibras, 500);
@@ -80,77 +79,87 @@
         }
       }
 
-      // Função para corrigir posição do VLibras
       function fixVLibrasPosition() {
-        var vwDiv = document.querySelector('div[vw]');
-        var accessButton = document.querySelector('[vw-access-button]');
-        var pluginWrapper = document.querySelector('[vw-plugin-wrapper]');
+        var vwDiv = document.querySelector("div[vw]");
+        var accessButton = document.querySelector("[vw-access-button]");
+        var pluginWrapper = document.querySelector("[vw-plugin-wrapper]");
 
         if (vwDiv) {
-          vwDiv.classList.add('enabled');
-          vwDiv.style.cssText = 'position: fixed !important; bottom: 100px !important; right: 10px !important; left: auto !important; z-index: 9999999 !important; display: block !important; visibility: visible !important; opacity: 1 !important;';
+          vwDiv.classList.add("enabled");
+          vwDiv.style.cssText =
+            "position: fixed !important; bottom: 100px !important; right: 10px !important; left: auto !important; z-index: 9999999 !important; display: block !important; visibility: visible !important; opacity: 1 !important;";
         }
 
         if (accessButton) {
-          accessButton.classList.add('active');
-          accessButton.style.cssText = 'display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; cursor: pointer !important;';
+          accessButton.classList.add("active");
+          accessButton.style.cssText =
+            "display: block !important; visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; cursor: pointer !important;";
         }
 
         if (pluginWrapper) {
-          pluginWrapper.style.cssText = 'pointer-events: auto !important;';
+          pluginWrapper.style.cssText = "pointer-events: auto !important;";
         }
 
-        // Corrigir para mobile
         if (window.innerWidth <= 768) {
           if (vwDiv) {
-            vwDiv.style.bottom = '80px';
-            vwDiv.style.right = '5px';
-            vwDiv.style.transform = 'scale(0.85)';
-            vwDiv.style.transformOrigin = 'bottom right';
+            vwDiv.style.bottom = "80px";
+            vwDiv.style.right = "5px";
+            vwDiv.style.transform = "scale(0.85)";
+            vwDiv.style.transformOrigin = "bottom right";
           }
         }
       }
 
-      // Observer para manter VLibras visível
       function observeVLibras() {
-        var observer = new MutationObserver(function(mutations) {
-          mutations.forEach(function(mutation) {
-            if (mutation.type === 'attributes' || mutation.type === 'childList') {
-              var vwDiv = document.querySelector('div[vw]');
-              if (vwDiv && (vwDiv.style.display === 'none' || vwDiv.style.visibility === 'hidden')) {
+        var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            if (
+              mutation.type === "attributes" ||
+              mutation.type === "childList"
+            ) {
+              var vwDiv = document.querySelector("div[vw]");
+              if (
+                vwDiv &&
+                (vwDiv.style.display === "none" ||
+                  vwDiv.style.visibility === "hidden")
+              ) {
                 fixVLibrasPosition();
               }
-              // Esconder/mostrar o ícone quando a janela abre/fecha
+
               toggleAccessButton();
             }
           });
         });
 
-        var vwDiv = document.querySelector('div[vw]');
+        var vwDiv = document.querySelector("div[vw]");
         if (vwDiv) {
-          observer.observe(vwDiv, { attributes: true, childList: true, subtree: true });
+          observer.observe(vwDiv, {
+            attributes: true,
+            childList: true,
+            subtree: true,
+          });
         }
       }
 
-      // Função para esconder o ícone quando a janela está aberta
       function toggleAccessButton() {
-        var accessButton = document.querySelector('[vw-access-button]');
-        var vpWrapper = document.querySelector('.vp-wrapper');
-        var vpWindow = document.querySelector('.vp-window');
-        var vpBox = document.querySelector('.vp-box');
-        var vwPluginWrapper = document.querySelector('[vw-plugin-wrapper]');
-        
+        var accessButton = document.querySelector("[vw-access-button]");
+        var vpWrapper = document.querySelector(".vp-wrapper");
+        var vpWindow = document.querySelector(".vp-window");
+        var vpBox = document.querySelector(".vp-box");
+        var vwPluginWrapper = document.querySelector("[vw-plugin-wrapper]");
+
         if (!accessButton) return;
-        
-        // Verificar se a janela está aberta (múltiplas formas)
+
         var isOpen = false;
-        
-        if (vpWrapper && getComputedStyle(vpWrapper).display !== 'none') isOpen = true;
-        if (vpWindow && getComputedStyle(vpWindow).display !== 'none') isOpen = true;
+
+        if (vpWrapper && getComputedStyle(vpWrapper).display !== "none")
+          isOpen = true;
+        if (vpWindow && getComputedStyle(vpWindow).display !== "none")
+          isOpen = true;
         if (vpBox && vpBox.offsetHeight > 0) isOpen = true;
         if (vwPluginWrapper) {
           var wrapperHeight = vwPluginWrapper.offsetHeight;
-          var wrapperChildren = vwPluginWrapper.querySelectorAll('*');
+          var wrapperChildren = vwPluginWrapper.querySelectorAll("*");
           for (var i = 0; i < wrapperChildren.length; i++) {
             if (wrapperChildren[i].offsetHeight > 100) {
               isOpen = true;
@@ -158,32 +167,29 @@
             }
           }
         }
-        
+
         if (isOpen) {
-          accessButton.style.setProperty('display', 'none', 'important');
-          accessButton.style.setProperty('visibility', 'hidden', 'important');
-          accessButton.style.setProperty('opacity', '0', 'important');
+          accessButton.style.setProperty("display", "none", "important");
+          accessButton.style.setProperty("visibility", "hidden", "important");
+          accessButton.style.setProperty("opacity", "0", "important");
         } else {
-          accessButton.style.setProperty('display', 'block', 'important');
-          accessButton.style.setProperty('visibility', 'visible', 'important');
-          accessButton.style.setProperty('opacity', '1', 'important');
+          accessButton.style.setProperty("display", "block", "important");
+          accessButton.style.setProperty("visibility", "visible", "important");
+          accessButton.style.setProperty("opacity", "1", "important");
         }
       }
 
-      // Verificar periodicamente se a janela está aberta
       setInterval(toggleAccessButton, 300);
 
-      // Reinicializar VLibras quando a janela for redimensionada
       var resizeTimeout;
-      window.addEventListener('resize', function() {
+      window.addEventListener("resize", function () {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function() {
+        resizeTimeout = setTimeout(function () {
           fixVLibrasPosition();
         }, 250);
       });
 
-      // Garantir que VLibras funcione após navegação SPA
-      window.addEventListener('popstate', function() {
+      window.addEventListener("popstate", function () {
         setTimeout(fixVLibrasPosition, 500);
       });
     </script>
@@ -191,12 +197,19 @@
     <script
       src="https://vlibras.gov.br/app/vlibras-plugin.js"
       onload="initVLibras()"
-      onerror="console.warn('Erro ao carregar script VLibras - tentando novamente'); setTimeout(function() { var s = document.createElement('script'); s.src = 'https://vlibras.gov.br/app/vlibras-plugin.js'; s.onload = initVLibras; document.body.appendChild(s); }, 2000);"
+      onerror="
+        console.warn('Erro ao carregar script VLibras - tentando novamente');
+        setTimeout(function () {
+          var s = document.createElement('script');
+          s.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+          s.onload = initVLibras;
+          document.body.appendChild(s);
+        }, 2000);
+      "
       async
     ></script>
 
     <style>
-      /* VLibras - Estilos base */
       div[vw] {
         position: fixed !important;
         bottom: 100px !important;
@@ -230,7 +243,6 @@
         visibility: visible !important;
       }
 
-      /* Popup/Badge de acessibilidade em Libras - aparece no hover */
       [vw-access-button] .vp-pop-up,
       .vp-pop-up {
         display: none !important;
@@ -244,7 +256,7 @@
         pointer-events: none !important;
         max-width: 200px !important;
         border-radius: 8px !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
       }
 
       [vw-access-button]:hover .vp-pop-up,
@@ -254,7 +266,6 @@
         opacity: 1 !important;
       }
 
-      /* Ícone do botão de acesso */
       [vw-access-button] .vp-access-button,
       .vp-access-button {
         display: block !important;
@@ -280,7 +291,6 @@
         pointer-events: auto !important;
       }
 
-      /* VLibras - Estilos para o player/tradutor */
       .vw-plugin-top-wrapper,
       .vp-box,
       .vw-plugin-wrapper .vp-box {
@@ -288,7 +298,6 @@
         touch-action: auto !important;
       }
 
-      /* Mobile - Telas pequenas */
       @media (max-width: 480px) {
         div[vw] {
           bottom: 70px !important;
@@ -303,7 +312,6 @@
         }
       }
 
-      /* Mobile - Tablets */
       @media (min-width: 481px) and (max-width: 768px) {
         div[vw] {
           bottom: 85px !important;
@@ -313,7 +321,6 @@
         }
       }
 
-      /* Desktop */
       @media (min-width: 769px) {
         div[vw] {
           bottom: 100px !important;
@@ -322,24 +329,21 @@
         }
       }
 
-      /* Garantir que não seja coberto por outros elementos */
       div[vw],
       div[vw] * {
         box-sizing: border-box !important;
       }
 
-      /* Fix para iOS Safari */
       @supports (-webkit-touch-callout: none) {
         div[vw] {
           bottom: 90px !important;
         }
 
         [vw-access-button] {
-          -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
         }
       }
 
-      /* Fix para evitar conflito com footer fixo */
       div[vw].enabled {
         margin-bottom: env(safe-area-inset-bottom, 0px) !important;
       }

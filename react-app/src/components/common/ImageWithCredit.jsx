@@ -4,11 +4,11 @@ export default function ImageWithCredit({
   credit,
   caption,
   className = "",
-  creditPosition = "below", // "bottom-right" ou "below"
-  centered = false, // centralizar a imagem
+  creditPosition = "below",
+  centered = false,
 }) {
   return (
-    <div className={`relative ${className} ${centered ? 'mx-auto' : ''}`}>
+    <div className={`relative ${className} ${centered ? "mx-auto" : ""}`}>
       <div className="relative rounded-lg overflow-hidden shadow-sm border border-neutral-200">
         <img
           src={src}

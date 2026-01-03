@@ -18,7 +18,6 @@ export default function Sala4() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Sala de Agendamentos
@@ -32,7 +31,6 @@ export default function Sala4() {
 
         <AvisosPaginaWrapper pagina="sala-4" />
 
-        {/* Sobre o Serviço */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -44,28 +42,27 @@ export default function Sala4() {
               Este setor da Unidade Básica de Saúde São José é responsável pelo
               gerenciamento e organização dos agendamentos de consultas médicas,
               consultas de enfermagem, exames laboratoriais, exames de imagem e
-              procedimentos diversos. O serviço atua como central de agendamento,
-              garantindo o acesso organizado aos serviços de saúde disponíveis na
-              unidade e na rede de atenção à saúde.
+              procedimentos diversos. O serviço atua como central de
+              agendamento, garantindo o acesso organizado aos serviços de saúde
+              disponíveis na unidade e na rede de atenção à saúde.
             </p>
 
             <h3 className="font-bold text-blue-900 mb-4 text-base">
               Serviços Oferecidos:
             </h3>
             <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <div id="puericultura" className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
-                <h3 className="font-semibold text-blue-900 mb-2">
-                  Consultas
-                </h3>
+              <div
+                id="puericultura"
+                className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4"
+              >
+                <h3 className="font-semibold text-blue-900 mb-2">Consultas</h3>
                 <p className="text-sm text-neutral-700 leading-relaxed">
                   Agendamento de consultas médicas e de enfermagem conforme
                   disponibilidade de horários e necessidade clínica do usuário.
                 </p>
               </div>
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
-                <h3 className="font-semibold text-blue-900 mb-2">
-                  Exames
-                </h3>
+                <h3 className="font-semibold text-blue-900 mb-2">Exames</h3>
                 <p className="text-sm text-neutral-700 leading-relaxed">
                   Agendamento de exames laboratoriais e de imagem mediante
                   apresentação de prescrição médica válida ou pedido de exame
@@ -102,12 +99,14 @@ export default function Sala4() {
                     SUS Fácil
                   </h3>
                   <p className="text-neutral-800 text-sm leading-relaxed mb-2">
-                    Este setor realiza a entrada de usuários na fila do SUS Fácil para
-                    agendamento de exames, consultas especializadas e cirurgias. É
-                    necessário apresentar documentação completa para protocolização.
+                    Este setor realiza a entrada de usuários na fila do SUS
+                    Fácil para agendamento de exames, consultas especializadas e
+                    cirurgias. É necessário apresentar documentação completa
+                    para protocolização.
                   </p>
                   <p className="text-xs text-neutral-700 italic">
-                    Nota: O acompanhamento da posição na fila é realizado na Sala de atendimento Administrativo.
+                    Nota: O acompanhamento da posição na fila é realizado na
+                    Sala de atendimento Administrativo.
                   </p>
                 </div>
               </div>
@@ -117,7 +116,6 @@ export default function Sala4() {
 
         <DocumentacaoPorServico />
 
-        {/* Como Agendar */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -135,10 +133,11 @@ export default function Sala4() {
                     Atendimento Presencial
                   </h3>
                   <p className="text-neutral-800 text-sm leading-relaxed">
-                    O agendamento é realizado exclusivamente de forma presencial,
-                    durante os horários de funcionamento estabelecidos. O usuário
-                    deve comparecer à unidade com a documentação necessária conforme
-                    o tipo de serviço solicitado.
+                    O agendamento é realizado exclusivamente de forma
+                    presencial, durante os horários de funcionamento
+                    estabelecidos. O usuário deve comparecer à unidade com a
+                    documentação necessária conforme o tipo de serviço
+                    solicitado.
                   </p>
                 </div>
               </div>
@@ -176,7 +175,6 @@ export default function Sala4() {
           titulo="Profissionais Escalados na Sala de Agendamentos"
         />
 
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -186,17 +184,16 @@ export default function Sala4() {
               <p className="font-bold mb-2 text-lg">Orientação Importante</p>
               <p className="text-sm text-white/95 leading-relaxed">
                 Para otimizar o atendimento e garantir a organização adequada do
-                fluxo de pacientes, é fundamental que o usuário compareça com toda
-                a documentação necessária conforme o tipo de serviço solicitado. A
-                falta de documentação pode resultar na impossibilidade de
-                realização do agendamento.
+                fluxo de pacientes, é fundamental que o usuário compareça com
+                toda a documentação necessária conforme o tipo de serviço
+                solicitado. A falta de documentação pode resultar na
+                impossibilidade de realização do agendamento.
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="sala-4" />
       </div>

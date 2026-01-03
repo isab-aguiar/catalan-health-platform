@@ -1,9 +1,9 @@
-import { useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { ArrowLeft } from 'lucide-react';
-import CampanhaInfoCard from '../components/campaign/CampanhaInfoCard';
-import { LoadingSpinner } from '../components/common';
-import { buscarCampanhaPorId } from '../services/campanhasService';
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { ArrowLeft } from "lucide-react";
+import CampanhaInfoCard from "../components/campaign/CampanhaInfoCard";
+import { LoadingSpinner } from "../components/common";
+import { buscarCampanhaPorId } from "../services/campanhasService";
 
 export default function CampanhaDetalhe() {
   const { id } = useParams();
@@ -65,7 +65,6 @@ export default function CampanhaDetalhe() {
   return (
     <div className="min-h-screen bg-neutral-50 py-8">
       <div className="container-custom max-w-4xl mx-auto px-4">
-        {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-primary-600 hover:text-primary-700 mb-6 font-semibold transition-colors"
@@ -74,7 +73,6 @@ export default function CampanhaDetalhe() {
           Voltar
         </button>
 
-        {/* Campaign Image */}
         {campanha.imagemURL && (
           <div className="relative mb-8 rounded-xl overflow-hidden shadow-medium">
             <img
@@ -92,34 +90,31 @@ export default function CampanhaDetalhe() {
           </div>
         )}
 
-        {/* Campaign Content */}
         <div className="bg-white rounded-xl shadow-soft p-4 sm:p-6 md:p-8 mb-8">
-          {/* Category Badge */}
           {campanha.categoria && (
-            <span className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 ${
-              campanha.categoria === 'vacina'
-                ? 'bg-info/10 text-primary-700'
-                : campanha.categoria === 'material'
-                  ? 'bg-purple-100 text-purple-700'
-                  : 'bg-success/10 text-green-700'
-            }`}>
+            <span
+              className={`inline-block text-xs font-semibold px-3 py-1 rounded-full mb-4 ${
+                campanha.categoria === "vacina"
+                  ? "bg-info/10 text-primary-700"
+                  : campanha.categoria === "material"
+                    ? "bg-purple-100 text-purple-700"
+                    : "bg-success/10 text-green-700"
+              }`}
+            >
               {campanha.categoria}
             </span>
           )}
 
-          {/* Title */}
           <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-4">
             {campanha.titulo}
           </h1>
 
-          {/* Subtitle */}
           {campanha.subtitulo && (
             <p className="text-lg text-neutral-600 italic mb-6">
               {campanha.subtitulo}
             </p>
           )}
 
-          {/* Description */}
           <div className="prose prose-lg max-w-none">
             <p className="text-neutral-700 leading-relaxed whitespace-pre-line">
               {campanha.descricao}
@@ -127,7 +122,6 @@ export default function CampanhaDetalhe() {
           </div>
         </div>
 
-        {/* Campaign Info Card */}
         <CampanhaInfoCard campanha={campanha} />
       </div>
     </div>

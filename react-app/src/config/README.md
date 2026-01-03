@@ -26,14 +26,15 @@ Para atualizar telefones, emails ou endereços:
 4. Salve o arquivo
 
 **Exemplo - Atualizar telefone da recepção:**
+
 ```javascript
 phones: {
   reception: { display: '(37) 3229-6080', tel: '+553732296080' },
-  // ...
 }
 ```
 
 **Importante:**
+
 - `display`: Formato exibido ao usuário (ex: "(37) 3229-6080")
 - `tel`: Formato para links `tel:` (ex: "+553732296080")
 - `wa`: Formato para links WhatsApp (ex: "5537991770200")
@@ -55,6 +56,7 @@ Para atualizar horários:
 4. Salve o arquivo
 
 **Exemplo - Atualizar horário da recepção:**
+
 ```javascript
 reception: {
   weekdays: '07:00 - 17:00',
@@ -77,6 +79,7 @@ Para atualizar links de redes sociais:
 4. Salve o arquivo
 
 **Exemplo - Atualizar Instagram da ESF Catalão:**
+
 ```javascript
 esfCatalao: {
   instagram: {
@@ -104,6 +107,7 @@ Para atualizar informações de funcionários:
 5. Salve o arquivo
 
 **Exemplo - Atualizar horário de um médico:**
+
 ```javascript
 {
   id: 'medico-joao-sousa',
@@ -127,6 +131,7 @@ Para atualizar informações de funcionários:
 4. Preencha todos os campos obrigatórios
 
 **Exemplo - Adicionar novo enfermeiro:**
+
 ```javascript
 {
   id: 'enfermeiro-maria-santos',
@@ -155,12 +160,11 @@ Não remova funcionários do arquivo. Em vez disso, marque como inativo:
 ```javascript
 {
   id: 'medico-joao-sousa',
-  // ... outros campos
-  active: false, // Marca como inativo
+  active: false,
   metadata: {
     createdAt: '2025-12-29',
     updatedAt: '2025-12-29',
-    inactivatedAt: '2025-12-30' // Data de inativação
+    inactivatedAt: '2025-12-30'
   }
 }
 ```
@@ -170,23 +174,19 @@ Não remova funcionários do arquivo. Em vez disso, marque como inativo:
 ### Importar os dados
 
 ```javascript
-import { contactInfo, openingHours, socialMedia } from '../config';
-// ou
-import { contactInfo } from '../config';
+import { contactInfo, openingHours, socialMedia } from "../config";
+import { contactInfo } from "../config";
 ```
 
 ### Usar telefones
 
 ```javascript
-// Telefone formatado para exibição
 {contactInfo.phones.reception.display}
 
-// Link tel:
 <a href={`tel:${contactInfo.phones.reception.tel}`}>
   {contactInfo.phones.reception.display}
 </a>
 
-// Link WhatsApp
 <a href={`https://wa.me/${contactInfo.phones.whatsapp.admin1.wa}`}>
   {contactInfo.phones.whatsapp.admin1.display}
 </a>
@@ -195,12 +195,10 @@ import { contactInfo } from '../config';
 ### Usar endereços
 
 ```javascript
-// Endereço completo
 {contactInfo.address.main.street}
 {contactInfo.address.main.neighborhood}
 {contactInfo.address.main.city} - {contactInfo.address.main.state}
 
-// Link do Google Maps
 <a href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.main.mapsQuery}`}>
   Ver no mapa
 </a>
@@ -209,18 +207,21 @@ import { contactInfo } from '../config';
 ### Usar horários
 
 ```javascript
-// Horário formatado
-{openingHours.reception.weekdays}
-{openingHours.reception.saudeNaHora}
+{
+  openingHours.reception.weekdays;
+}
+{
+  openingHours.reception.saudeNaHora;
+}
 
-// Horário completo
-{openingHours.reception.full}
+{
+  openingHours.reception.full;
+}
 ```
 
 ### Usar redes sociais
 
 ```javascript
-// Link do Instagram
 <a href={socialMedia.esfCatalao.instagram.url}>
   {socialMedia.esfCatalao.instagram.handle}
 </a>
@@ -231,23 +232,17 @@ import { contactInfo } from '../config';
 ```javascript
 import { employees, getEmployeesByEsf, getEmployeeById, getDepartmentEmployees } from '../config';
 
-// Buscar funcionários de uma ESF específica
 const saoJoseEmployees = getEmployeesByEsf('sao-jose');
 
-// Buscar funcionário por ID
 const drJoao = getEmployeeById('medico-joao-sousa');
 console.log(drJoao.displayName); // "Dr. João"
 
-// Listar todos os médicos de um departamento
 const medicos = getDepartmentEmployees('medicoGeneralistaPsf');
 
-// Filtrar funcionários ativos de uma ESF
 const activeDoctors = getEmployeesByEsf('catalao').filter(emp => emp.active);
 
-// Exibir nome e horário
 {drJoao.displayName} - {drJoao.schedule.morning.display}
 
-// Renderizar lista de médicos em uma tabela
 {medicos.map(medico => (
   <tr key={medico.id}>
     <td>{medico.displayName}</td>
@@ -270,6 +265,7 @@ const activeDoctors = getEmployeesByEsf('catalao').filter(emp => emp.active);
 ## Dados Centralizados
 
 ### Telefones
+
 - Recepção: (37) 3229-6080
 - Farmácia: (37) 3229-6081
 - Consultório Odontológico: (37) 3229-6082
@@ -284,15 +280,18 @@ const activeDoctors = getEmployeesByEsf('catalao').filter(emp => emp.active);
   - Prevenção HIV: (37) 3229-6890
 
 ### Emails
+
 - Geral: staff.sj21@gmail.com
 
 ### Endereço Principal
+
 - Rua Júlio Nogueira, 1320
 - Bairro São José
 - Divinópolis - MG
 - CEP: 35501-170
 
 ### Horários Principais
+
 - Recepção: Segunda a Sexta: 07:00 - 17:00 | Saúde na Hora: 17:00 - 22:00
 - Administrativo: 07:00 às 12:00 | 13:00 às 16:30
 - Consultório Odontológico: 07:00 às 12:00 | 13:00 às 17:00
@@ -300,6 +299,7 @@ const activeDoctors = getEmployeesByEsf('catalao').filter(emp => emp.active);
 - Vacinas: Manhã 07h00 às 11h00 | Tarde 13h00 às 17h00 | Saúde na Hora 17h00 às 22h00
 
 ### Redes Sociais
+
 - ESF Catalão: @esfcatalao
 - REMSA: @remsasaojose
 - Prefeitura de Divinópolis: Instagram, Facebook, YouTube
@@ -310,6 +310,7 @@ const activeDoctors = getEmployeesByEsf('catalao').filter(emp => emp.active);
 **Total:** 48 funcionários organizados em 14 departamentos
 
 **Departamentos:**
+
 1. Agente Comunitário de Saúde (6)
 2. Assistente Social (2)
 3. Atendente de Consultório Dentário - P.S.F. (2)
@@ -328,11 +329,13 @@ const activeDoctors = getEmployeesByEsf('catalao').filter(emp => emp.active);
 16. Técnico de Higiene Dental (2)
 
 **Equipes ESF:**
+
 - ESF São José: Dr. João (Médico), Fabíola (Enfermeiro), 2 ACS, 4 Técnicos de Enfermagem
 - ESF Catalão: Dr. Frederico (Médico), Aline Macedo (Enfermeiro), 2 Dentistas PSF, 2 ACS, 3 Técnicos de Enfermagem, 2 THD
 - ESF Bela Vista: Dr. Gustavo (Médico), Naiara (Enfermeiro), 2 ACS, 3 Técnicos de Enfermagem
 
 **Serviços Centrais:**
+
 - Farmácia: 4 farmacêuticos (Horário: 07h30 às 16h00)
 - Psicologia: Sandra
 - Assistência Social: Luciana, Noelia
@@ -356,16 +359,18 @@ Para alterar o avatar do VLibras Widget:
    - Atualize também o `index.html` para usar essa configuração
 
 **Avatares disponíveis:**
+
 - `'icaro'` - Avatar Ícaro (padrão)
 - `'hosana'` - Avatar Hosana
 - `'guga'` - Avatar Guga
 
 **Exemplo no `index.html`:**
+
 ```javascript
 const vlibrasConfig = {
-  avatar: 'hosana', // Altere aqui: 'icaro', 'hosana' ou 'guga'
+  avatar: "hosana",
   opacity: 0.7,
-  position: 'right'
+  position: "right",
 };
 ```
 
@@ -386,4 +391,3 @@ const vlibrasConfig = {
 - ✅ Consistência - Dados sempre sincronizados
 - ✅ Menos erros - Reduz chance de inconsistências
 - ✅ Melhor organização - Dados centralizados e documentados
-

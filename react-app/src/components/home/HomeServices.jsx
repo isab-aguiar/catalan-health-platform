@@ -14,10 +14,6 @@ import {
   Shield,
 } from "lucide-react";
 
-/**
- * HomeServices - Cards de serviços disponíveis
- * Exibe links para os principais serviços da unidade
- */
 export default function HomeServices() {
   const services = [
     {
@@ -48,7 +44,8 @@ export default function HomeServices() {
       to: "/remsa",
       icon: GraduationCap,
       title: "REMSA",
-      description: "Programa de Residência Multiprofissional em Saúde do Adolescente",
+      description:
+        "Programa de Residência Multiprofissional em Saúde do Adolescente",
     },
     {
       to: "/servicos/sala-4",
@@ -60,7 +57,8 @@ export default function HomeServices() {
       to: "/servicos/consultas",
       icon: Users,
       title: "Consultas e Atendimentos",
-      description: "Consultas médicas, de enfermagem, psicológicas e especializadas.",
+      description:
+        "Consultas médicas, de enfermagem, psicológicas e especializadas.",
     },
     {
       to: "/servicos/farmacia",
@@ -84,13 +82,15 @@ export default function HomeServices() {
       to: "/servicos/bolsa-familia",
       icon: HandHeart,
       title: "Bolsa Família e Serviços Sociais",
-      description: "Orientações, acompanhamento de benefícios sociais, CadÚnico e assistência.",
+      description:
+        "Orientações, acompanhamento de benefícios sociais, CadÚnico e assistência.",
     },
     {
       to: "/ouvidoria",
       icon: MessageSquareHeart,
       title: "Ouvidoria",
-      description: "Envie elogios, sugestões ou reclamações. Sua opinião é importante!",
+      description:
+        "Envie elogios, sugestões ou reclamações. Sua opinião é importante!",
       linkText: "Enviar Feedback",
     },
   ];
@@ -115,7 +115,10 @@ export default function HomeServices() {
                 className="relative overflow-hidden rounded-2xl p-4 md:p-8 bg-white border-2 border-primary-200 group hover:-translate-y-1 transition-all duration-300 hover:shadow-xl shadow-lg"
               >
                 <div className="mb-3 md:mb-4 w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-primary-100 flex items-center justify-center text-primary-600 group-hover:bg-primary-500 group-hover:text-white transition-colors">
-                  <IconComponent className="w-6 h-6 md:w-12 md:h-12" strokeWidth={2} />
+                  <IconComponent
+                    className="w-6 h-6 md:w-12 md:h-12"
+                    strokeWidth={2}
+                  />
                 </div>
                 <h3 className="text-base md:text-lg font-bold mb-2 text-neutral-900 line-clamp-2">
                   {service.title}
@@ -138,4 +141,3 @@ export default function HomeServices() {
     </section>
   );
 }
-

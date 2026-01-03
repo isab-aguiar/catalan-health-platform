@@ -1,36 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import { X, Upload, Trash2, Calendar, Clock, Users, MapPin, FileText, Bell, Check } from 'lucide-react';
-import { criarEvento, atualizarEvento, TIPOS_EVENTO } from '../../services/calendarioService';
-import { useAuth } from '../../contexts/AuthContext';
-import { useModal } from '../../contexts/ModalContext';
-import { getAllEmployees } from '../../services/employeesService';
+import React, { useState, useEffect } from "react";
+import {
+  X,
+  Upload,
+  Trash2,
+  Calendar,
+  Clock,
+  Users,
+  MapPin,
+  FileText,
+  Bell,
+  Check,
+} from "lucide-react";
+import {
+  criarEvento,
+  atualizarEvento,
+  TIPOS_EVENTO,
+} from "../../services/calendarioService";
+import { useAuth } from "../../contexts/AuthContext";
+import { useModal } from "../../contexts/ModalContext";
+import { getAllEmployees } from "../../services/employeesService";
 
-export default function EventoModal({ isOpen, onClose, eventoEditando = null, dataInicial = null, onEventoSalvo }) {
+export default function EventoModal({
+  isOpen,
+  onClose,
+  eventoEditando = null,
+  dataInicial = null,
+  onEventoSalvo,
+}) {
   const { currentUser } = useAuth();
   const { showModal } = useModal();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    titulo: '',
-    descricao: '',
+    titulo: "",
+    descricao: "",
     tipo: TIPOS_EVENTO.REUNIAO,
-    dataInicio: '',
-    dataFim: '',
-    horaInicio: '',
-    horaFim: '',
+    dataInicio: "",
+    dataFim: "",
+    horaInicio: "",
+    horaFim: "",
     participantes: [],
-    local: 'ESF Catalão',
-    ata: '',
+    local: "ESF Catalão",
+    ata: "",
     lembrete: false,
     lembreteMinutos: 30,
   });
 
-  const [participanteInput, setParticipanteInput] = useState('');
+  const [participanteInput, setParticipanteInput] = useState("");
   const [pdfFile, setPdfFile] = useState(null);
   const [profissionais, setProfissionais] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [loadingProfissionais, setLoadingProfissionais] = useState(false);
 
-  // Carregar profissionais quando o modal abrir
   useEffect(() => {
     if (isOpen) {
       carregarProfissionais();
@@ -42,14 +62,13 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
       setLoadingProfissionais(true);
       const result = await getAllEmployees();
       if (result.success) {
-        // Ordenar por nome
         const profissionaisOrdenados = result.data.sort((a, b) =>
-          (a.displayName || '').localeCompare(b.displayName || '')
+          (a.displayName || "").localeCompare(b.displayName || "")
         );
         setProfissionais(profissionaisOrdenados);
       }
     } catch (error) {
-      console.error('Erro ao carregar profissionais:', error);
+      console.error("Erro ao carregar profissionais:", error);
     } finally {
       setLoadingProfissionais(false);
     }
@@ -58,28 +77,28 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
   useEffect(() => {
     if (eventoEditando) {
       setFormData({
-        titulo: eventoEditando.titulo || '',
-        descricao: eventoEditando.descricao || '',
+        titulo: eventoEditando.titulo || "",
+        descricao: eventoEditando.descricao || "",
         tipo: eventoEditando.tipo || TIPOS_EVENTO.REUNIAO,
         dataInicio: eventoEditando.dataInicio
-          ? new Date(eventoEditando.dataInicio).toISOString().split('T')[0]
-          : '',
+          ? new Date(eventoEditando.dataInicio).toISOString().split("T")[0]
+          : "",
         dataFim: eventoEditando.dataFim
-          ? new Date(eventoEditando.dataFim).toISOString().split('T')[0]
-          : '',
-        horaInicio: eventoEditando.horaInicio || '',
-        horaFim: eventoEditando.horaFim || '',
+          ? new Date(eventoEditando.dataFim).toISOString().split("T")[0]
+          : "",
+        horaInicio: eventoEditando.horaInicio || "",
+        horaFim: eventoEditando.horaFim || "",
         participantes: eventoEditando.participantes || [],
-        local: eventoEditando.local || 'ESF Catalão',
-        ata: eventoEditando.ata || '',
+        local: eventoEditando.local || "ESF Catalão",
+        ata: eventoEditando.ata || "",
         lembrete: eventoEditando.lembrete || false,
         lembreteMinutos: eventoEditando.lembreteMinutos || 30,
       });
     } else if (dataInicial) {
       setFormData({
         ...formData,
-        dataInicio: dataInicial.toISOString().split('T')[0],
-        dataFim: dataInicial.toISOString().split('T')[0],
+        dataInicio: dataInicial.toISOString().split("T")[0],
+        dataFim: dataInicial.toISOString().split("T")[0],
       });
     }
   }, [eventoEditando, dataInicial]);
@@ -89,10 +108,10 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
 
     if (!formData.titulo || !formData.dataInicio) {
       await showModal({
-        type: 'warning',
-        title: 'Campos Obrigatórios',
-        message: 'Por favor, preencha o título e a data de início do evento.',
-        confirmText: 'OK'
+        type: "warning",
+        title: "Campos Obrigatórios",
+        message: "Por favor, preencha o título e a data de início do evento.",
+        confirmText: "OK",
       });
       return;
     }
@@ -108,34 +127,33 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
       if (eventoEditando?.id) {
         await atualizarEvento(eventoEditando.id, eventoData);
         await showModal({
-          type: 'success',
-          title: 'Evento Atualizado',
-          message: 'Evento atualizado com sucesso!',
-          confirmText: 'OK'
+          type: "success",
+          title: "Evento Atualizado",
+          message: "Evento atualizado com sucesso!",
+          confirmText: "OK",
         });
       } else {
         await criarEvento(eventoData, currentUser.uid);
         await showModal({
-          type: 'success',
-          title: 'Evento Criado',
-          message: 'Evento criado com sucesso!',
-          confirmText: 'OK'
+          type: "success",
+          title: "Evento Criado",
+          message: "Evento criado com sucesso!",
+          confirmText: "OK",
         });
       }
 
       if (onEventoSalvo) {
-        // Passa a data do evento para o callback
         onEventoSalvo(formData.dataInicio);
       }
 
       handleClose();
     } catch (error) {
-      console.error('Erro ao salvar evento:', error);
+      console.error("Erro ao salvar evento:", error);
       await showModal({
-        type: 'error',
-        title: 'Erro ao Salvar',
+        type: "error",
+        title: "Erro ao Salvar",
         message: `Não foi possível salvar o evento: ${error.message}`,
-        confirmText: 'OK'
+        confirmText: "OK",
       });
     } finally {
       setLoading(false);
@@ -144,32 +162,35 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
 
   const handleClose = () => {
     setFormData({
-      titulo: '',
-      descricao: '',
+      titulo: "",
+      descricao: "",
       tipo: TIPOS_EVENTO.REUNIAO,
-      dataInicio: '',
-      dataFim: '',
-      horaInicio: '',
-      horaFim: '',
+      dataInicio: "",
+      dataFim: "",
+      horaInicio: "",
+      horaFim: "",
       participantes: [],
-      local: 'ESF Catalão',
-      ata: '',
+      local: "ESF Catalão",
+      ata: "",
       lembrete: false,
       lembreteMinutos: 30,
     });
-    setParticipanteInput('');
+    setParticipanteInput("");
     setPdfFile(null);
     onClose();
   };
 
   const adicionarParticipante = (nome) => {
     const nomeParticipante = nome || participanteInput.trim();
-    if (nomeParticipante && !formData.participantes.includes(nomeParticipante)) {
+    if (
+      nomeParticipante &&
+      !formData.participantes.includes(nomeParticipante)
+    ) {
       setFormData({
         ...formData,
         participantes: [...formData.participantes, nomeParticipante],
       });
-      setParticipanteInput('');
+      setParticipanteInput("");
       setShowSuggestions(false);
     }
   };
@@ -181,31 +202,32 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
     });
   };
 
-  // Filtrar sugestões baseado no input
   const getSuggestions = () => {
     if (!participanteInput.trim() || participanteInput.length < 2) {
       return [];
     }
 
     const inputLower = participanteInput.toLowerCase();
-    return profissionais.filter(profissional => {
-      const nome = profissional.displayName || '';
-      const cargo = profissional.roleBase || profissional.role || '';
-      const jaAdicionado = formData.participantes.includes(nome);
+    return profissionais
+      .filter((profissional) => {
+        const nome = profissional.displayName || "";
+        const cargo = profissional.roleBase || profissional.role || "";
+        const jaAdicionado = formData.participantes.includes(nome);
 
-      // Buscar por nome ou cargo
-      return !jaAdicionado && (
-        nome.toLowerCase().includes(inputLower) ||
-        cargo.toLowerCase().includes(inputLower)
-      );
-    }).slice(0, 5); // Limitar a 5 sugestões
+        return (
+          !jaAdicionado &&
+          (nome.toLowerCase().includes(inputLower) ||
+            cargo.toLowerCase().includes(inputLower))
+        );
+      })
+      .slice(0, 5);
   };
 
   const getTipoLabel = (tipo) => {
     const labels = {
-      [TIPOS_EVENTO.REUNIAO]: 'Reunião',
-      [TIPOS_EVENTO.LEMBRETE]: 'Lembrete',
-      [TIPOS_EVENTO.AGENDAMENTO]: 'Agendamento',
+      [TIPOS_EVENTO.REUNIAO]: "Reunião",
+      [TIPOS_EVENTO.LEMBRETE]: "Lembrete",
+      [TIPOS_EVENTO.AGENDAMENTO]: "Agendamento",
     };
     return labels[tipo] || tipo;
   };
@@ -228,11 +250,10 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-full sm:max-w-3xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
-        {/* Header */}
         <div className="sticky top-0 bg-white px-4 sm:px-6 py-3 sm:py-4 border-b border-neutral-200 flex items-center justify-between z-10">
           <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
             <Calendar className="w-6 h-6 text-gov-blue" />
-            {eventoEditando ? 'Editar Evento' : 'Novo Evento'}
+            {eventoEditando ? "Editar Evento" : "Novo Evento"}
           </h3>
           <button
             onClick={handleClose}
@@ -242,9 +263,10 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
           </button>
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6">
-          {/* Tipo de Evento */}
+        <form
+          onSubmit={handleSubmit}
+          className="px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6"
+        >
           <div>
             <label className="block text-sm font-medium text-neutral-700 mb-2">
               Tipo de Evento *
@@ -257,18 +279,19 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
                   onClick={() => setFormData({ ...formData, tipo })}
                   className={`p-3 rounded-lg border-2 transition-all flex items-center justify-center gap-2 ${
                     formData.tipo === tipo
-                      ? 'border-gov-blue bg-blue-50 text-gov-blue'
-                      : 'border-neutral-200 hover:border-neutral-300 text-neutral-600'
+                      ? "border-gov-blue bg-blue-50 text-gov-blue"
+                      : "border-neutral-200 hover:border-neutral-300 text-neutral-600"
                   }`}
                 >
                   {getTipoIcon(tipo)}
-                  <span className="text-sm font-medium">{getTipoLabel(tipo)}</span>
+                  <span className="text-sm font-medium">
+                    {getTipoLabel(tipo)}
+                  </span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Título */}
           <div>
             <label className="block text-sm font-medium text-neutral-700 mb-2">
               Título *
@@ -276,28 +299,30 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
             <input
               type="text"
               value={formData.titulo}
-              onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, titulo: e.target.value })
+              }
               placeholder="Ex: Reunião de Equipe, Lembrete de Compra de Material, etc."
               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
               required
             />
           </div>
 
-          {/* Descrição */}
           <div>
             <label className="block text-sm font-medium text-neutral-700 mb-2">
               Descrição
             </label>
             <textarea
               value={formData.descricao}
-              onChange={(e) => setFormData({ ...formData, descricao: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, descricao: e.target.value })
+              }
               placeholder="Detalhes adicionais sobre o evento..."
               rows={3}
               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue resize-none"
             />
           </div>
 
-          {/* Datas */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-neutral-700 mb-2">
@@ -306,7 +331,9 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
               <input
                 type="date"
                 value={formData.dataInicio}
-                onChange={(e) => setFormData({ ...formData, dataInicio: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, dataInicio: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
                 required
               />
@@ -319,13 +346,14 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
               <input
                 type="date"
                 value={formData.dataFim}
-                onChange={(e) => setFormData({ ...formData, dataFim: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, dataFim: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
               />
             </div>
           </div>
 
-          {/* Horários */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-neutral-700 mb-2">
@@ -334,7 +362,9 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
               <input
                 type="time"
                 value={formData.horaInicio}
-                onChange={(e) => setFormData({ ...formData, horaInicio: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, horaInicio: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
               />
             </div>
@@ -346,13 +376,14 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
               <input
                 type="time"
                 value={formData.horaFim}
-                onChange={(e) => setFormData({ ...formData, horaFim: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, horaFim: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
               />
             </div>
           </div>
 
-          {/* Local */}
           <div>
             <label className="block text-sm font-medium text-neutral-700 mb-2 flex items-center gap-2">
               <MapPin className="w-4 h-4" />
@@ -361,13 +392,14 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
             <input
               type="text"
               value={formData.local}
-              onChange={(e) => setFormData({ ...formData, local: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, local: e.target.value })
+              }
               placeholder="Ex: Sala de Reuniões, Consultório 4, etc."
               className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue"
             />
           </div>
 
-          {/* Participantes (para Reuniões) */}
           {formData.tipo === TIPOS_EVENTO.REUNIAO && (
             <div>
               <label className="block text-sm font-medium text-neutral-700 mb-2 flex items-center gap-2">
@@ -385,11 +417,10 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
                     }}
                     onFocus={() => setShowSuggestions(true)}
                     onBlur={() => {
-                      // Delay para permitir click nas sugestões
                       setTimeout(() => setShowSuggestions(false), 200);
                     }}
                     onKeyPress={(e) => {
-                      if (e.key === 'Enter') {
+                      if (e.key === "Enter") {
                         e.preventDefault();
                         adicionarParticipante();
                       }
@@ -406,14 +437,15 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
                   </button>
                 </div>
 
-                {/* Sugestões de autocomplete */}
                 {showSuggestions && getSuggestions().length > 0 && (
                   <div className="absolute z-10 w-full bg-white border border-neutral-300 rounded-lg shadow-lg mt-1 max-h-48 overflow-y-auto">
                     {getSuggestions().map((profissional, index) => (
                       <button
                         key={profissional.id || index}
                         type="button"
-                        onClick={() => adicionarParticipante(profissional.displayName)}
+                        onClick={() =>
+                          adicionarParticipante(profissional.displayName)
+                        }
                         className="w-full px-3 py-2 text-left hover:bg-blue-50 transition-colors flex items-center gap-2 border-b border-neutral-100 last:border-b-0"
                       >
                         <Users className="w-4 h-4 text-neutral-500 flex-shrink-0" />
@@ -425,23 +457,34 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
                             {profissional.roleBase || profissional.role}
                             {profissional.esf && (
                               <span className="ml-1">
-                                • ESF {profissional.esf.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
+                                • ESF{" "}
+                                {profissional.esf
+                                  .split("-")
+                                  .map(
+                                    (w) =>
+                                      w.charAt(0).toUpperCase() + w.slice(1)
+                                  )
+                                  .join(" ")}
                               </span>
                             )}
                           </div>
                         </div>
                         <span className="text-xs text-neutral-500 px-2 py-0.5 bg-blue-100 rounded">
-                          {profissional.department === 'medico' ? 'Médico' :
-                           profissional.department === 'enfermeiro' ? 'Enfermeiro' :
-                           profissional.department === 'tecnicoEnfermagem' ? 'Técnico' :
-                           profissional.department === 'dentista' ? 'Dentista' : 'Profissional'}
+                          {profissional.department === "medico"
+                            ? "Médico"
+                            : profissional.department === "enfermeiro"
+                              ? "Enfermeiro"
+                              : profissional.department === "tecnicoEnfermagem"
+                                ? "Técnico"
+                                : profissional.department === "dentista"
+                                  ? "Dentista"
+                                  : "Profissional"}
                         </span>
                       </button>
                     ))}
                   </div>
                 )}
 
-                {/* Mensagem quando está carregando profissionais */}
                 {loadingProfissionais && showSuggestions && (
                   <div className="absolute z-10 w-full bg-white border border-neutral-300 rounded-lg shadow-lg mt-1 p-3 text-center text-sm text-neutral-500">
                     Carregando profissionais...
@@ -449,7 +492,6 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
                 )}
               </div>
 
-              {/* Lista de participantes adicionados */}
               {formData.participantes.length > 0 && (
                 <div className="flex flex-wrap gap-2 mt-2">
                   {formData.participantes.map((participante, index) => (
@@ -473,7 +515,6 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
             </div>
           )}
 
-          {/* Ata de Reunião (para Reuniões) */}
           {formData.tipo === TIPOS_EVENTO.REUNIAO && (
             <div>
               <label className="block text-sm font-medium text-neutral-700 mb-2 flex items-center gap-2">
@@ -482,7 +523,9 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
               </label>
               <textarea
                 value={formData.ata}
-                onChange={(e) => setFormData({ ...formData, ata: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, ata: e.target.value })
+                }
                 placeholder="Registre aqui os pontos discutidos na reunião..."
                 rows={4}
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gov-blue resize-none"
@@ -491,7 +534,6 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
           )}
         </form>
 
-        {/* Footer */}
         <div className="sticky bottom-0 bg-white px-4 sm:px-6 py-3 sm:py-4 border-t border-neutral-200 flex gap-3 justify-end">
           <button
             type="button"
@@ -512,9 +554,7 @@ export default function EventoModal({ isOpen, onClose, eventoEditando = null, da
                 Salvando...
               </>
             ) : (
-              <>
-                {eventoEditando ? 'Atualizar Evento' : 'Criar Evento'}
-              </>
+              <>{eventoEditando ? "Atualizar Evento" : "Criar Evento"}</>
             )}
           </button>
         </div>

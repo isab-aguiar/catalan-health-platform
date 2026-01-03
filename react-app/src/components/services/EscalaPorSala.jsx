@@ -1,23 +1,16 @@
-import { Calendar, Clock, Users, RefreshCw } from 'lucide-react';
-import { escalasTrabalho } from '../../data/escalasTrabalho';
+import { Calendar, Clock, Users, RefreshCw } from "lucide-react";
+import { escalasTrabalho } from "../../data/escalasTrabalho";
 
-/**
- * Componente para exibir escala de profissionais de uma sala/setor específico
- * usando os dados do arquivo escalasTrabalho.js
- */
 export default function EscalaPorSala({
   titulo = "Profissionais Escalados",
-  escalaKey // chave da escala no escalasTrabalho.js
+  escalaKey,
 }) {
-  // Buscar a escala pelo key
   const escala = escalasTrabalho[escalaKey];
 
-  // Se não encontrar a escala ou não for pública, não mostrar
   if (!escala || !escala.exibirNoPublico) {
     return null;
   }
 
-  // Se não tiver profissionais, mostrar mensagem
   if (!escala.profissionais || escala.profissionais.length === 0) {
     return (
       <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6">
@@ -41,7 +34,6 @@ export default function EscalaPorSala({
         {titulo}
       </h3>
 
-      {/* Horário de Funcionamento - Destaque Visual */}
       {(escala.horarios?.manha?.ativo || escala.horarios?.tarde?.ativo) && (
         <div className="mb-5 bg-gradient-to-r from-blue-50 to-teal-50 border-l-4 border-blue-600 rounded-lg p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-3">
@@ -53,7 +45,9 @@ export default function EscalaPorSala({
           <div className="flex flex-wrap gap-3">
             {escala.horarios?.manha?.ativo && (
               <div className="bg-white border border-blue-200 rounded-lg px-4 py-2 flex-1 min-w-[140px]">
-                <div className="text-xs text-blue-700 font-medium mb-1">Manhã</div>
+                <div className="text-xs text-blue-700 font-medium mb-1">
+                  Manhã
+                </div>
                 <div className="text-base font-bold text-neutral-900">
                   {escala.horarios.manha.display}
                 </div>
@@ -61,7 +55,9 @@ export default function EscalaPorSala({
             )}
             {escala.horarios?.tarde?.ativo && (
               <div className="bg-white border border-amber-200 rounded-lg px-4 py-2 flex-1 min-w-[140px]">
-                <div className="text-xs text-amber-700 font-medium mb-1">Tarde</div>
+                <div className="text-xs text-amber-700 font-medium mb-1">
+                  Tarde
+                </div>
                 <div className="text-base font-bold text-neutral-900">
                   {escala.horarios.tarde.display}
                 </div>
@@ -71,7 +67,6 @@ export default function EscalaPorSala({
         </div>
       )}
 
-      {/* Versão Desktop */}
       <div className="hidden md:block">
         <table className="w-full border-collapse border border-neutral-300">
           <thead>
@@ -98,18 +93,24 @@ export default function EscalaPorSala({
                 </td>
                 <td className="border border-neutral-300 px-4 py-3 text-neutral-700">
                   <div className="space-y-1">
-                    {escala.horarios?.manha?.ativo && (prof.turno === 'manha' || prof.turno === 'both') && (
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-3 h-3 text-blue-600" />
-                        <span className="text-xs">Manhã: {escala.horarios.manha.display}</span>
-                      </div>
-                    )}
-                    {escala.horarios?.tarde?.ativo && (prof.turno === 'tarde' || prof.turno === 'both') && (
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-3 h-3 text-amber-600" />
-                        <span className="text-xs">Tarde: {escala.horarios.tarde.display}</span>
-                      </div>
-                    )}
+                    {escala.horarios?.manha?.ativo &&
+                      (prof.turno === "manha" || prof.turno === "both") && (
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-3 h-3 text-blue-600" />
+                          <span className="text-xs">
+                            Manhã: {escala.horarios.manha.display}
+                          </span>
+                        </div>
+                      )}
+                    {escala.horarios?.tarde?.ativo &&
+                      (prof.turno === "tarde" || prof.turno === "both") && (
+                        <div className="flex items-center gap-2">
+                          <Clock className="w-3 h-3 text-amber-600" />
+                          <span className="text-xs">
+                            Tarde: {escala.horarios.tarde.display}
+                          </span>
+                        </div>
+                      )}
                   </div>
                 </td>
               </tr>
@@ -118,10 +119,12 @@ export default function EscalaPorSala({
         </table>
       </div>
 
-      {/* Versão Mobile */}
       <div className="md:hidden space-y-3">
         {escala.profissionais.map((prof, idx) => (
-          <div key={idx} className="bg-white border border-neutral-200 rounded-lg p-4">
+          <div
+            key={idx}
+            className="bg-white border border-neutral-200 rounded-lg p-4"
+          >
             <div className="mb-3 pb-3 border-b border-neutral-200">
               <div className="font-semibold text-neutral-800 mb-1">
                 {prof.nome}
@@ -130,32 +133,37 @@ export default function EscalaPorSala({
             </div>
 
             <div>
-              <p className="text-xs text-neutral-500 mb-1 font-medium">Horários:</p>
+              <p className="text-xs text-neutral-500 mb-1 font-medium">
+                Horários:
+              </p>
               <div className="space-y-1">
-                {escala.horarios?.manha?.ativo && (prof.turno === 'manha' || prof.turno === 'both') && (
-                  <div className="flex items-center gap-2 text-xs text-neutral-700">
-                    <Clock className="w-3 h-3 text-blue-600" />
-                    Manhã: {escala.horarios.manha.display}
-                  </div>
-                )}
-                {escala.horarios?.tarde?.ativo && (prof.turno === 'tarde' || prof.turno === 'both') && (
-                  <div className="flex items-center gap-2 text-xs text-neutral-700">
-                    <Clock className="w-3 h-3 text-amber-600" />
-                    Tarde: {escala.horarios.tarde.display}
-                  </div>
-                )}
+                {escala.horarios?.manha?.ativo &&
+                  (prof.turno === "manha" || prof.turno === "both") && (
+                    <div className="flex items-center gap-2 text-xs text-neutral-700">
+                      <Clock className="w-3 h-3 text-blue-600" />
+                      Manhã: {escala.horarios.manha.display}
+                    </div>
+                  )}
+                {escala.horarios?.tarde?.ativo &&
+                  (prof.turno === "tarde" || prof.turno === "both") && (
+                    <div className="flex items-center gap-2 text-xs text-neutral-700">
+                      <Clock className="w-3 h-3 text-amber-600" />
+                      Tarde: {escala.horarios.tarde.display}
+                    </div>
+                  )}
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Observações se houver */}
       {escala.observacoes && escala.observacoes.length > 0 && (
         <div className="mt-4 pt-4 border-t border-neutral-300">
           <div className="text-xs text-neutral-600 space-y-1">
             {escala.observacoes.map((obs, idx) => (
-              <p key={idx} className="italic">• {obs}</p>
+              <p key={idx} className="italic">
+                • {obs}
+              </p>
             ))}
           </div>
         </div>
@@ -163,7 +171,8 @@ export default function EscalaPorSala({
 
       <div className="mt-4 pt-4 border-t border-neutral-300">
         <p className="text-xs text-neutral-500 italic text-center">
-          Escalas atualizadas automaticamente • Última atualização: {new Date().toLocaleDateString('pt-BR')}
+          Escalas atualizadas automaticamente • Última atualização:{" "}
+          {new Date().toLocaleDateString("pt-BR")}
         </p>
       </div>
     </div>

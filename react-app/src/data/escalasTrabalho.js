@@ -1,50 +1,42 @@
-// ============================================
-// ARQUIVO: escalasTrabalho.js
-// Dados das escalas de trabalho dos profissionais
-// ============================================
-
-/**
- * Estrutura de dados para escalas de trabalho
- * Cada chave representa uma estação/sala de trabalho
- */
 export const escalasTrabalho = {
-  "triagem": {
+  triagem: {
     nome: "Triagem",
     categoria: "Enfermagem",
-    descricao: "Avaliação inicial de pacientes para classificação de risco e direcionamento adequado",
+    descricao:
+      "Avaliação inicial de pacientes para classificação de risco e direcionamento adequado",
     department: "tecnicoEnfermagem",
     horarios: {
       manha: {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "tecnico-enfermagem-alexsandra-santos",
         nome: "Alexsandra dos Santos",
         funcao: "Técnica de Enfermagem",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "tecnico-enfermagem-ellen-silva",
         nome: "Ellen Silva",
         funcao: "Técnica de Enfermagem",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: []
+    observacoes: [],
   },
-  "curativos": {
+  curativos: {
     nome: "Sala de Curativos",
     categoria: "Enfermagem",
     descricao: "Realização de curativos simples e complexos",
@@ -54,33 +46,33 @@ export const escalasTrabalho = {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "tecnico-enfermagem-cristiane-aparecida",
         nome: "Cristiane Aparecida",
         funcao: "Técnica de Enfermagem",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "tecnico-enfermagem-fadeslaine-soares",
         nome: "Fadeslaine Soares",
         funcao: "Técnica de Enfermagem",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: []
+    observacoes: [],
   },
-  "vacinas": {
+  vacinas: {
     nome: "Sala de Vacinação",
     categoria: "Enfermagem",
     descricao: "Aplicação de vacinas do calendário nacional de imunização",
@@ -90,69 +82,70 @@ export const escalasTrabalho = {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "tecnico-enfermagem-renata-kelly",
         nome: "Renata Kelly",
         funcao: "Técnica de Enfermagem",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "tecnico-enfermagem-silvania-pereira",
         nome: "Silvânia Pereira",
         funcao: "Técnica de Enfermagem",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: []
+    observacoes: [],
   },
-  "procedimentos": {
+  procedimentos: {
     nome: "Sala de Procedimentos",
     categoria: "Enfermagem",
-    descricao: "Administração de medicações, coleta de exames e outros procedimentos",
+    descricao:
+      "Administração de medicações, coleta de exames e outros procedimentos",
     department: "tecnicoEnfermagem",
     horarios: {
       manha: {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "tecnico-enfermagem-darlei-vieira",
         nome: "Darlei Vieira",
         funcao: "Técnica de Enfermagem",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "tecnico-enfermagem-valeria-cristina",
         nome: "Valéria Cristina",
         funcao: "Técnica de Enfermagem",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: []
+    observacoes: [],
   },
-  "ecg": {
+  ecg: {
     nome: "Eletrocardiograma (ECG)",
     categoria: "Exames",
     descricao: "Realização de exames de eletrocardiograma",
@@ -162,27 +155,27 @@ export const escalasTrabalho = {
         inicio: "12h00",
         fim: "17h00",
         display: "12h00 às 17h00",
-        ativo: false
+        ativo: false,
       },
       tarde: {
         inicio: "12h00",
         fim: "17h00",
         display: "12h00 às 17h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "tecnico-enfermagem-isabela-aguiar",
         nome: "Isabela Aguiar",
         funcao: "Técnica de Enfermagem",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: []
+    observacoes: [],
   },
-  "agendamentos": {
+  agendamentos: {
     nome: "Sala de Agendamentos",
     categoria: "Administrativo",
     descricao: "Agendamento de consultas, exames e procedimentos",
@@ -192,33 +185,33 @@ export const escalasTrabalho = {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "tecnico-enfermagem-isabela-aguiar",
         nome: "Isabela Aguiar",
         funcao: "Técnica de Enfermagem",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "tecnico-enfermagem-thaciane-souza",
         nome: "Thaciane Souza",
         funcao: "Técnica de Enfermagem",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: []
+    observacoes: [],
   },
-  "recepcao": {
+  recepcao: {
     nome: "Recepção",
     categoria: "Administrativo",
     descricao: "Atendimento inicial, cadastro e direcionamento de pacientes",
@@ -228,67 +221,68 @@ export const escalasTrabalho = {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "auxiliar-servicos-denivia-maria",
         nome: "Denívea Maria",
         funcao: "Auxiliar de Serviços II",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "auxiliar-servicos-rosana-candida",
         nome: "Rosana Cândida",
         funcao: "Auxiliar de Serviços II",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: []
+    observacoes: [],
   },
   "sala-administrativa": {
     nome: "Sala de Atendimento Administrativo",
     categoria: "Administrativo",
-    descricao: "Consulta de posição na fila do SUS, retirada de encaminhamentos e guias",
+    descricao:
+      "Consulta de posição na fila do SUS, retirada de encaminhamentos e guias",
     department: "auxiliarServicosII",
     horarios: {
       manha: {
         inicio: "08h00",
         fim: "11h00",
         display: "08h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h30",
         display: "13h00 às 16h30",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "auxiliar-servicos-priscila-santos",
         nome: "Priscila",
         funcao: "Auxiliar de Serviços II",
-        turno: "both"
+        turno: "both",
       },
       {
         id: "auxiliar-servicos-rosana-candida",
         nome: "Rosana",
         funcao: "Auxiliar de Serviços II",
-        turno: "both"
-      }
+        turno: "both",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: ["Atendimento apenas às Segundas, Quartas e Sextas-feiras"]
+    observacoes: ["Atendimento apenas às Segundas, Quartas e Sextas-feiras"],
   },
   "renovacao-receitas": {
     nome: "Renovação de Receitas",
@@ -300,33 +294,33 @@ export const escalasTrabalho = {
         inicio: "09h00",
         fim: "12h00",
         display: "09h00 às 12h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "tecnico-enfermagem-tatiana-costa",
         nome: "Tatiana Costa",
         funcao: "Técnica de Enfermagem",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "tecnico-enfermagem-cristiane-aparecida",
         nome: "Cristiane Aparecida",
         funcao: "Técnica de Enfermagem",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: []
+    observacoes: [],
   },
-  "farmacia": {
+  farmacia: {
     nome: "Farmácia",
     categoria: "Farmácia",
     descricao: "Dispensação de medicamentos e orientação farmacêutica",
@@ -336,45 +330,44 @@ export const escalasTrabalho = {
         inicio: "07h30",
         fim: "16h00",
         display: "07h30 às 16h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: false
-      }
+        ativo: false,
+      },
     },
     profissionais: [
       {
         id: "farmaceutico-marcella-oliveira",
         nome: "Marcella Oliveira",
         funcao: "Farmacêutica",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "farmaceutico-mariana-silva",
         nome: "Mariana",
         funcao: "Farmacêutica",
-        turno: "tarde"
+        turno: "tarde",
       },
       {
         id: "auxiliar-servicos-marinete-maria",
         nome: "Marinete Maria",
         funcao: "Atendente",
-        turno: "manha"
+        turno: "manha",
       },
       {
         id: "tecnico-enfermagem-zulmira-santos",
         nome: "Zulmira",
         funcao: "Atendente",
-        turno: "tarde"
-      }
+        turno: "tarde",
+      },
     ],
     exibirNoPublico: true,
-    observacoes: ["Horário especial: 07h30 às 16h00 de segunda a sexta-feira"]
+    observacoes: ["Horário especial: 07h30 às 16h00 de segunda a sexta-feira"],
   },
-  // Escalas internas (não exibidas no público)
   "medico-catalao": {
     nome: "Médico ESF Catalão",
     categoria: "Médico",
@@ -385,25 +378,25 @@ export const escalasTrabalho = {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "medico-frederico-mendes",
         nome: "Dr. Frederico",
         funcao: "Médico Generalista P.S.F.",
-        turno: "both"
-      }
+        turno: "both",
+      },
     ],
     exibirNoPublico: false,
-    observacoes: []
+    observacoes: [],
   },
   "medico-sao-jose": {
     nome: "Médico ESF São José",
@@ -415,25 +408,25 @@ export const escalasTrabalho = {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "medico-joao-sousa",
         nome: "Dr. João",
         funcao: "Médico Generalista P.S.F.",
-        turno: "both"
-      }
+        turno: "both",
+      },
     ],
     exibirNoPublico: false,
-    observacoes: []
+    observacoes: [],
   },
   "medico-bela-vista": {
     nome: "Médico ESF Bela Vista",
@@ -445,29 +438,28 @@ export const escalasTrabalho = {
         inicio: "07h00",
         fim: "11h00",
         display: "07h00 às 11h00",
-        ativo: true
+        ativo: true,
       },
       tarde: {
         inicio: "13h00",
         fim: "16h00",
         display: "13h00 às 16h00",
-        ativo: true
-      }
+        ativo: true,
+      },
     },
     profissionais: [
       {
         id: "medico-gustavo-cambraia",
         nome: "Dr. Gustavo",
         funcao: "Médico Generalista P.S.F.",
-        turno: "both"
-      }
+        turno: "both",
+      },
     ],
     exibirNoPublico: false,
-    observacoes: []
-  }
+    observacoes: [],
+  },
 };
 
-// Helper functions
 export const getEscalaByKey = (key) => {
   return escalasTrabalho[key] || null;
 };
@@ -503,11 +495,10 @@ export const getAllEscalas = () => {
   return escalasTrabalho;
 };
 
-// Categorias disponíveis
 export const categorias = [
   "Enfermagem",
   "Administrativo",
   "Farmácia",
   "Médico",
-  "Exames"
+  "Exames",
 ];

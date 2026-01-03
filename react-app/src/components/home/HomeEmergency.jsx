@@ -1,10 +1,6 @@
 import { Phone } from "lucide-react";
 import { contactInfo } from "../../config";
 
-/**
- * HomeEmergency - Seção de atendimento de urgência e emergência
- * Exibe informações sobre SAMU e plantão 24h
- */
 export default function HomeEmergency() {
   return (
     <section className="py-8 px-4 mb-8 bg-neutral-50 border-t border-b border-neutral-200">
@@ -20,10 +16,11 @@ export default function HomeEmergency() {
         <p className="text-neutral-700 mb-3 text-center text-base">
           Em situações de emergência médica, acione imediatamente o Serviço de
           Atendimento Móvel de Urgência (SAMU) pelo telefone{" "}
-          <span className="font-bold text-error">{contactInfo.emergency.samu.display}</span>
+          <span className="font-bold text-error">
+            {contactInfo.emergency.samu.display}
+          </span>
         </p>
       </div>
     </section>
   );
 }
-

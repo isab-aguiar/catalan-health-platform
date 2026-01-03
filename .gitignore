@@ -1,14 +1,11 @@
-# Dependencies
 node_modules/
 react-app/node_modules/
 
-# Build outputs
 dist/
 react-app/dist/
 build/
 react-app/build/
 
-# Environment variables
 .env
 .env.local
 .env.development.local
@@ -18,19 +15,16 @@ react-app/.env
 react-app/.env.local
 react-app/.env.*.local
 
-# Firebase Service Account Key (sensitive)
 serviceAccountKey.json
 react-app/serviceAccountKey.json
 **/serviceAccountKey.json
 *.serviceAccountKey.json
 
-# Credenciais e informações sensíveis
 CREDENCIAIS.md
 credenciais.md
 SENHAS.md
 senhas.md
 
-# Logs
 logs
 *.log
 npm-debug.log*
@@ -38,7 +32,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# Editor directories and files
 .vscode/
 .idea/
 .DS_Store
@@ -48,19 +41,14 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
-# OS
 Thumbs.db
 
-# Vercel
 .vercel
 
-# Claude
 .claude/
 
-# cursor
 .cursor/
 
-# Scripts (podem conter dados sensíveis ou temporários)
 scripts/
 react-app/scripts/
 
@@ -79,3 +67,4 @@ DADOS-FIRESTORE-ADMIN.json
 DADOS-FIRESTORE-USUARIOS.json
 DADOS-FIRESTORE-VACINAS.json
 DADOS-FIRESTORE-ADMIN.json
+.vscode/settings.json

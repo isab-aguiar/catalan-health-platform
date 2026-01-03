@@ -104,7 +104,8 @@ export default function Sugestoes() {
         await showModal({
           type: "success",
           title: "Sugestão Enviada!",
-          message: "Obrigado! Sua sugestão foi enviada com sucesso. Analisaremos sua ideia e consideraremos para melhorias!",
+          message:
+            "Obrigado! Sua sugestão foi enviada com sucesso. Analisaremos sua ideia e consideraremos para melhorias!",
           confirmText: "Entendi",
         });
 
@@ -122,7 +123,9 @@ export default function Sugestoes() {
         await showModal({
           type: "error",
           title: "Erro ao Enviar",
-          message: result.error || "Ocorreu um erro ao enviar sua sugestão. Tente novamente.",
+          message:
+            result.error ||
+            "Ocorreu um erro ao enviar sua sugestão. Tente novamente.",
           confirmText: "Fechar",
         });
       }
@@ -143,7 +146,6 @@ export default function Sugestoes() {
       <div className="max-w-3xl mx-auto">
         <BackButton />
 
-        {/* Header */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex items-center gap-4 mb-3">
             <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -159,14 +161,15 @@ export default function Sugestoes() {
           </p>
         </div>
 
-        {/* Aviso Importante */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-5 shadow-sm mb-6">
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
               <AlertCircle size={20} className="text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-blue-900 mb-2 text-base">Importante</h3>
+              <h3 className="font-bold text-blue-900 mb-2 text-base">
+                Importante
+              </h3>
               <p className="text-neutral-800 text-sm leading-relaxed">
                 Todas as sugestões são analisadas pela equipe administrativa.
                 Analisaremos sua ideia e consideraremos para melhorias!
@@ -175,7 +178,10 @@ export default function Sugestoes() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md border border-neutral-200 p-4 sm:p-6 md:p-8 space-y-6">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-lg shadow-md border border-neutral-200 p-4 sm:p-6 md:p-8 space-y-6"
+        >
           <div>
             <label className="block text-sm font-semibold text-neutral-800 mb-2">
               Nome <span className="text-error">*</span>
@@ -192,7 +198,9 @@ export default function Sugestoes() {
               placeholder="Seu nome completo"
             />
             {errors.nome && (
-              <p className="mt-1 text-xs sm:text-sm text-error">{errors.nome}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">
+                {errors.nome}
+              </p>
             )}
           </div>
 
@@ -229,7 +237,9 @@ export default function Sugestoes() {
               <option value="outro">Outro</option>
             </select>
             {errors.categoria && (
-              <p className="mt-1 text-xs sm:text-sm text-error">{errors.categoria}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">
+                {errors.categoria}
+              </p>
             )}
           </div>
 
@@ -248,7 +258,9 @@ export default function Sugestoes() {
               placeholder="seu@email.com"
             />
             {errors.email && (
-              <p className="mt-1 text-xs sm:text-sm text-error">{errors.email}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">
+                {errors.email}
+              </p>
             )}
           </div>
 
@@ -267,7 +279,9 @@ export default function Sugestoes() {
               placeholder="(37) 99999-9999"
             />
             {errors.telefone && (
-              <p className="mt-1 text-xs sm:text-sm text-error">{errors.telefone}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">
+                {errors.telefone}
+              </p>
             )}
           </div>
 
@@ -286,7 +300,9 @@ export default function Sugestoes() {
               placeholder="Descreva sua sugestão aqui..."
             />
             {errors.mensagem && (
-              <p className="mt-1 text-xs sm:text-sm text-error">{errors.mensagem}</p>
+              <p className="mt-1 text-xs sm:text-sm text-error">
+                {errors.mensagem}
+              </p>
             )}
             <p className="mt-1 text-xs text-neutral-500">
               Mínimo de 10 caracteres
@@ -315,27 +331,4 @@ export default function Sugestoes() {
     </PageContainer>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

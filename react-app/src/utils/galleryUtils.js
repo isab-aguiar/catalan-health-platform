@@ -1,7 +1,3 @@
-/**
- * Utilitários para processamento de imagens da galeria
- */
-
 const galleryImagesModules = import.meta.glob(
   "../assets/images/galeria-photos/*.{png,jpg,jpeg}",
   { eager: false }
@@ -78,9 +74,7 @@ export const loadGalleryImages = async () => {
     );
     const imageEntries = modules.map((module, index) => ({
       src: module.default,
-      caption: getCaptionFromFilename(
-        Object.keys(galleryImagesModules)[index]
-      ),
+      caption: getCaptionFromFilename(Object.keys(galleryImagesModules)[index]),
       credit: "Créditos: ESF Catalão - Arquivo próprio",
     }));
     const fotoUnidade = imageEntries.find((img) =>
@@ -96,4 +90,3 @@ export const loadGalleryImages = async () => {
     return [];
   }
 };
-

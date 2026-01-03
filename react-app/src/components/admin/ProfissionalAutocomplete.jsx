@@ -1,13 +1,9 @@
-import { useState, useRef, useEffect } from 'react';
-import { Search, X, Plus } from 'lucide-react';
-import { getAllEmployees } from '../../config/employees';
+import { useState, useRef, useEffect } from "react";
+import { Search, X, Plus } from "lucide-react";
+import { getAllEmployees } from "../../config/employees";
 
-/**
- * Componente de autocomplete para adicionar profissionais
- * Mostra sugestões conforme o usuário digita
- */
 export default function ProfissionalAutocomplete({ onAddProfissional }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -16,7 +12,6 @@ export default function ProfissionalAutocomplete({ onAddProfissional }) {
 
   const allEmployees = getAllEmployees();
 
-  // Atualizar sugestões conforme digita
   useEffect(() => {
     if (searchTerm.length < 2) {
       setSuggestions([]);
@@ -25,18 +20,20 @@ export default function ProfissionalAutocomplete({ onAddProfissional }) {
     }
 
     const term = searchTerm.toLowerCase();
-    const filtered = allEmployees.filter(emp =>
-      emp.displayName.toLowerCase().includes(term) ||
-      emp.fullName.toLowerCase().includes(term) ||
-      emp.role.toLowerCase().includes(term)
-    ).slice(0, 8); // Limitar a 8 sugestões
+    const filtered = allEmployees
+      .filter(
+        (emp) =>
+          emp.displayName.toLowerCase().includes(term) ||
+          emp.fullName.toLowerCase().includes(term) ||
+          emp.role.toLowerCase().includes(term)
+      )
+      .slice(0, 8);
 
     setSuggestions(filtered);
     setShowSuggestions(filtered.length > 0);
     setSelectedIndex(-1);
   }, [searchTerm]);
 
-  // Fechar sugestões ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -48,28 +45,27 @@ export default function ProfissionalAutocomplete({ onAddProfissional }) {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Navegação por teclado
   const handleKeyDown = (e) => {
     if (!showSuggestions || suggestions.length === 0) return;
 
-    if (e.key === 'ArrowDown') {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
-      setSelectedIndex(prev =>
+      setSelectedIndex((prev) =>
         prev < suggestions.length - 1 ? prev + 1 : prev
       );
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex(prev => (prev > 0 ? prev - 1 : -1));
-    } else if (e.key === 'Enter') {
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+    } else if (e.key === "Enter") {
       e.preventDefault();
       if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
         handleSelectSuggestion(suggestions[selectedIndex]);
       }
-    } else if (e.key === 'Escape') {
+    } else if (e.key === "Escape") {
       setShowSuggestions(false);
     }
   };
@@ -79,17 +75,17 @@ export default function ProfissionalAutocomplete({ onAddProfissional }) {
       id: employee.id,
       nome: employee.displayName,
       funcao: employee.role,
-      turno: 'manha' // Default, usuário pode alterar depois
+      turno: "manha",
     });
 
-    setSearchTerm('');
+    setSearchTerm("");
     setShowSuggestions(false);
     setSuggestions([]);
     setSelectedIndex(-1);
   };
 
   const handleClear = () => {
-    setSearchTerm('');
+    setSearchTerm("");
     setSuggestions([]);
     setShowSuggestions(false);
     inputRef.current?.focus();
@@ -125,7 +121,6 @@ export default function ProfissionalAutocomplete({ onAddProfissional }) {
         )}
       </div>
 
-      {/* Sugestões */}
       {showSuggestions && suggestions.length > 0 && (
         <div
           ref={suggestionsRef}
@@ -136,7 +131,7 @@ export default function ProfissionalAutocomplete({ onAddProfissional }) {
               key={employee.id}
               onClick={() => handleSelectSuggestion(employee)}
               className={`w-full text-left px-4 py-3 hover:bg-blue-50 focus:bg-blue-50 focus:outline-none border-b border-neutral-100 last:border-b-0 ${
-                index === selectedIndex ? 'bg-blue-50' : ''
+                index === selectedIndex ? "bg-blue-50" : ""
               }`}
             >
               <div className="flex items-center justify-between">
@@ -155,17 +150,18 @@ export default function ProfissionalAutocomplete({ onAddProfissional }) {
         </div>
       )}
 
-      {/* Mensagem quando não encontrar */}
-      {showSuggestions && searchTerm.length >= 2 && suggestions.length === 0 && (
-        <div
-          ref={suggestionsRef}
-          className="absolute z-50 w-full mt-1 bg-white border border-neutral-300 rounded-md shadow-lg p-4"
-        >
-          <p className="text-sm text-neutral-600 text-center">
-            Nenhum profissional encontrado para "{searchTerm}"
-          </p>
-        </div>
-      )}
+      {showSuggestions &&
+        searchTerm.length >= 2 &&
+        suggestions.length === 0 && (
+          <div
+            ref={suggestionsRef}
+            className="absolute z-50 w-full mt-1 bg-white border border-neutral-300 rounded-md shadow-lg p-4"
+          >
+            <p className="text-sm text-neutral-600 text-center">
+              Nenhum profissional encontrado para "{searchTerm}"
+            </p>
+          </div>
+        )}
     </div>
   );
 }

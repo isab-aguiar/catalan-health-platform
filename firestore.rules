@@ -3,249 +3,152 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // =====================================================
-    // FUNÇÕES AUXILIARES
-    // =====================================================
-
-    // Verifica se o usuário está autenticado
     function isAuthenticated() {
       return request.auth != null;
     }
 
-    // Obtém dados do usuário do Firestore
     function getUserData() {
       return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
     }
 
-    // Verifica se o documento do usuário existe
     function userExists() {
       return isAuthenticated() &&
              exists(/databases/$(database)/documents/users/$(request.auth.uid));
     }
 
-    // Verifica se o usuário é admin
     function isAdmin() {
       return userExists() &&
              getUserData().role == 'admin' &&
              getUserData().active == true;
     }
 
-    // Verifica se o usuário é profissional
     function isProfissional() {
       return userExists() &&
              getUserData().role == 'profissional' &&
              getUserData().active == true;
     }
 
-    // Verifica se o usuário é supervisor
     function isSupervisor() {
       return userExists() &&
              getUserData().role == 'supervisor' &&
              getUserData().active == true;
     }
 
-    // Verifica se o usuário tem role de staff (admin, profissional ou supervisor)
     function isStaff() {
       return isAdmin() || isProfissional() || isSupervisor();
     }
 
-    // Verifica se o usuário está ativo
     function isActive() {
       return userExists() && getUserData().active == true;
     }
 
-    // =====================================================
-    // COLEÇÃO: users
-    // =====================================================
     match /users/{userId} {
-      // Usuários autenticados podem ler seu próprio documento
-      // Admins podem ler todos os documentos
       allow read: if isAuthenticated() &&
                      (request.auth.uid == userId || isAdmin());
 
-      // Apenas admins podem criar usuários
       allow create: if isAdmin();
 
-      // Usuários podem atualizar seu próprio perfil
-      // MAS não podem alterar role ou active (prevenção de escalação de privilégios)
-      // Admins podem atualizar qualquer usuário
       allow update: if isAdmin() ||
                        (isAuthenticated() &&
                         request.auth.uid == userId &&
                         request.resource.data.role == resource.data.role &&
                         request.resource.data.active == resource.data.active);
 
-      // Apenas admins podem deletar usuários
       allow delete: if isAdmin();
     }
 
-    // =====================================================
-    // COLEÇÃO: vacinas
-    // =====================================================
     match /vacinas/{vacinaId} {
-      // LEITURA PÚBLICA: Qualquer pessoa pode ler vacinas
-      // O filtro de "publicado" é feito no cliente para melhor performance
       allow read: if true;
-      
-      // LEITURA ADMIN: Admins podem ler todas as vacinas (já coberto acima)
-      // A regra acima permite leitura pública de todas as vacinas
-      // O componente filtra por publicado === true no lado do cliente
 
-      // Apenas admins podem criar, atualizar e deletar vacinas
       allow create: if isAdmin();
       allow update: if isAdmin();
       allow delete: if isAdmin();
     }
 
-    // =====================================================
-    // COLEÇÃO: avisos
-    // =====================================================
     match /avisos/{avisoId} {
-      // Leitura pública de avisos ativos exibidos na homepage
-      // Staff pode ler todos os avisos
       allow read: if (resource.data.ativo == true &&
                      resource.data.exibirNaHomepage == true) ||
                      isStaff();
 
-      // Staff (admin + profissional + supervisor) pode criar e atualizar avisos
       allow create: if isStaff();
       allow update: if isStaff();
 
-      // Admins e supervisores podem deletar avisos
       allow delete: if isAdmin() || isSupervisor();
     }
 
-    // =====================================================
-    // COLEÇÃO: campanhas
-    // =====================================================
     match /campanhas/{campanhaId} {
-      // Leitura pública de campanhas ativas
-      // Staff pode ler todas as campanhas
       allow read: if resource.data.ativo == true || isStaff();
 
-      // Staff (admin + profissional) pode criar e atualizar campanhas
       allow create: if isStaff();
       allow update: if isStaff();
 
-      // Admins podem deletar qualquer campanha
-      // Profissionais podem deletar apenas campanhas que eles criaram
       allow delete: if isAdmin() ||
                        (isProfissional() && resource.data.criadoPor == request.auth.uid);
     }
 
-    // =====================================================
-    // COLEÇÃO: calendario_eventos
-    // =====================================================
     match /calendario_eventos/{eventoId} {
-      // Staff pode ler todos os eventos
       allow read: if isStaff();
 
-      // Staff (admin + profissional) pode criar eventos
       allow create: if isStaff();
 
-      // Staff pode atualizar eventos
       allow update: if isStaff();
 
-      // Admins podem deletar qualquer evento
-      // Profissionais podem deletar eventos que criaram
       allow delete: if isAdmin() ||
                        (isProfissional() && resource.data.criadoPor == request.auth.uid);
     }
 
-    // =====================================================
-    // COLEÇÃO: escalas
-    // =====================================================
     match /escalas/{escalaId} {
-      // Staff pode ler todas as escalas
       allow read: if isStaff();
 
-      // Staff pode criar escalas
       allow create: if isStaff();
 
-      // Staff pode atualizar escalas
       allow update: if isStaff();
 
-      // Apenas admins podem deletar escalas
       allow delete: if isAdmin();
     }
 
-    // =====================================================
-    // COLEÇÃO: agendas_semanais
-    // =====================================================
     match /agendas_semanais/{agendaId} {
-      // Leitura pública de agendas ativas
-      // Staff pode ler todas as agendas
-      allow read: if true; // Permite leitura pública para exibir agendas de atendimento
+      allow read: if true;
 
-      // Staff (admin + profissional) pode criar e atualizar agendas
       allow create: if isStaff();
       allow update: if isStaff();
 
-      // Apenas admins podem deletar agendas
       allow delete: if isAdmin();
     }
 
-    // =====================================================
-    // COLEÇÃO: notificacoes
-    // =====================================================
     match /notificacoes/{notificacaoId} {
-      // Usuários podem ler suas próprias notificações
-      // Admins podem ler todas
       allow read: if isAuthenticated() &&
                      (resource.data.userId == request.auth.uid || isAdmin());
 
-      // Admins podem criar notificações
       allow create: if isAdmin();
 
-      // Usuários podem atualizar suas notificações (marcar como lida)
-      // Mas não podem alterar dados críticos
       allow update: if isAuthenticated() &&
                        resource.data.userId == request.auth.uid;
 
-      // Usuários podem deletar suas notificações
-      // Admins podem deletar qualquer notificação
       allow delete: if isAuthenticated() &&
                        (resource.data.userId == request.auth.uid || isAdmin());
     }
 
-    // =====================================================
-    // COLEÇÃO: feedbacks
-    // =====================================================
     match /feedbacks/{feedbackId} {
-      // Qualquer pessoa pode criar feedbacks (elogios, sugestões, reclamações)
       allow create: if true;
 
-      // Apenas admins podem ler feedbacks
       allow read: if isAdmin();
 
-      // Apenas admins podem atualizar feedbacks (mudar status, adicionar resposta)
       allow update: if isAdmin();
 
-      // Apenas admins podem deletar feedbacks
       allow delete: if isAdmin();
     }
 
-    // =====================================================
-    // COLEÇÃO: employees
-    // =====================================================
     match /employees/{employeeId} {
-      // Staff pode ler todos os funcionários (para autocomplete e listagens)
       allow read: if isStaff();
 
-      // Apenas admins podem criar funcionários
       allow create: if isAdmin();
 
-      // Apenas admins podem atualizar funcionários
       allow update: if isAdmin();
 
-      // Apenas admins podem deletar funcionários
       allow delete: if isAdmin();
     }
 
-    // =====================================================
-    // PADRÃO: NEGAR TUDO
-    // =====================================================
-    // Qualquer coleção não explicitamente permitida acima é bloqueada
     match /{document=**} {
       allow read, write: if false;
     }

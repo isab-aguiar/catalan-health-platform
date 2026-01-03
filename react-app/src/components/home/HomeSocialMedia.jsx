@@ -4,10 +4,6 @@ import logoESF from "../../assets/logo-esf.png";
 import logoPrefeitura from "../../assets/logo_mobile.png";
 import logoSemusa from "../../assets/logo-semusa.png";
 
-/**
- * HomeSocialMedia - Seção de redes sociais
- * Exibe links para redes sociais da ESF, Prefeitura e SEMUSA
- */
 export default function HomeSocialMedia() {
   return (
     <section className="py-12 px-4 bg-gradient-to-b from-white to-neutral-50">
@@ -127,4 +123,3 @@ export default function HomeSocialMedia() {
     </section>
   );
 }
-

@@ -65,15 +65,18 @@ export async function createUser(userData, password, createdByUid) {
     if (!password || password.length < 6) {
       return { success: false, error: "Senha deve ter no mínimo 6 caracteres" };
     }
-    if (!["admin", "profissional", "diretoria", "supervisor"].includes(userData.role)) {
+    if (
+      !["admin", "profissional", "diretoria", "supervisor"].includes(
+        userData.role
+      )
+    ) {
       return { success: false, error: "Role inválido" };
     }
 
-    // Usar Cloud Function para criar usuário sem deslogar o admin
     if (!functions) {
       return {
         success: false,
-        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+        error: "Cloud Functions não disponível. Deploy as functions primeiro.",
       };
     }
 
@@ -150,17 +153,14 @@ export async function updateUser(uid, updates) {
       return { success: false, error: "UID é obrigatório" };
     }
 
-    // Se email está sendo atualizado, usar Cloud Function
     if (updates.email) {
       const emailResult = await updateUserEmail(uid, updates.email);
       if (!emailResult.success) {
         return emailResult;
       }
-      // Remove email from updates since it was handled by Cloud Function
       delete updates.email;
     }
 
-    // Se houver outras atualizações, aplicar no Firestore
     if (Object.keys(updates).length > 0) {
       const userRef = doc(db, COLLECTION_NAME, uid);
       const updateData = {
@@ -168,7 +168,6 @@ export async function updateUser(uid, updates) {
         updatedAt: Timestamp.now(),
       };
 
-      // Proteger campos sensíveis
       delete updateData.uid;
       delete updateData.createdAt;
       delete updateData.createdBy;
@@ -183,8 +182,6 @@ export async function updateUser(uid, updates) {
   }
 }
 export async function deleteUser(uid) {
-  // DEPRECADO: Usar deleteUserComplete ao invés
-  // Esta função apenas remove do Firestore, não do Authentication
   try {
     if (!uid) {
       return { success: false, error: "UID é obrigatório" };
@@ -198,22 +195,17 @@ export async function deleteUser(uid) {
   }
 }
 
-/**
- * Deletar usuário completamente (Authentication + Firestore)
- * Usa Cloud Function para maior segurança
- */
 export async function deleteUserComplete(uid) {
   try {
     if (!uid) {
       return { success: false, error: "UID é obrigatório" };
     }
 
-    // Verificar se functions está disponível
     if (!functions) {
       console.warn("Firebase Functions não inicializado");
       return {
         success: false,
-        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+        error: "Cloud Functions não disponível. Deploy as functions primeiro.",
       };
     }
 
@@ -227,13 +219,12 @@ export async function deleteUserComplete(uid) {
   } catch (error) {
     console.error("Erro ao deletar usuário:", error);
 
-    // Tratamento de erros específicos do Firebase Functions
     let errorMessage = error.message;
 
     if (error.code === "unauthenticated") {
       errorMessage = "Você precisa estar autenticado";
     } else if (error.code === "permission-denied") {
-      errorMessage = error.message; // Já vem com mensagem específica
+      errorMessage = error.message;
     } else if (error.code === "not-found") {
       errorMessage = "Usuário não encontrado";
     } else if (error.code === "invalid-argument") {
@@ -244,10 +235,6 @@ export async function deleteUserComplete(uid) {
   }
 }
 
-/**
- * Enviar email de reset de senha
- * Usa Cloud Function para gerar link seguro
- */
 export async function sendPasswordResetEmail(email) {
   try {
     if (!email) {
@@ -257,7 +244,7 @@ export async function sendPasswordResetEmail(email) {
     if (!functions) {
       return {
         success: false,
-        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+        error: "Cloud Functions não disponível. Deploy as functions primeiro.",
       };
     }
 
@@ -285,10 +272,6 @@ export async function sendPasswordResetEmail(email) {
   }
 }
 
-/**
- * Admin define senha diretamente
- * Usa Cloud Function para alterar senha sem enviar email
- */
 export async function setUserPasswordByAdmin(uid, newPassword) {
   try {
     if (!uid) {
@@ -302,7 +285,7 @@ export async function setUserPasswordByAdmin(uid, newPassword) {
     if (!functions) {
       return {
         success: false,
-        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+        error: "Cloud Functions não disponível. Deploy as functions primeiro.",
       };
     }
 
@@ -332,10 +315,6 @@ export async function setUserPasswordByAdmin(uid, newPassword) {
   }
 }
 
-/**
- * Admin atualiza email do usuário
- * Atualiza no Authentication e Firestore via Cloud Function
- */
 export async function updateUserEmail(uid, newEmail) {
   try {
     if (!uid) {
@@ -354,7 +333,7 @@ export async function updateUserEmail(uid, newEmail) {
     if (!functions) {
       return {
         success: false,
-        error: "Cloud Functions não disponível. Deploy as functions primeiro."
+        error: "Cloud Functions não disponível. Deploy as functions primeiro.",
       };
     }
 

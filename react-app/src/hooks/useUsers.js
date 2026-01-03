@@ -70,8 +70,6 @@ export function useUsers() {
   };
   const deleteUser = async (uid) => {
     setError(null);
-    // Usar deleteUserComplete se functions estiver disponível
-    // Caso contrário, usar deleteUser básico (apenas Firestore)
     try {
       const result = await usersService.deleteUserComplete(uid);
       if (!result.success) {
@@ -79,7 +77,6 @@ export function useUsers() {
       }
       return result;
     } catch (error) {
-      // Fallback para método antigo se functions não estiver disponível
       console.warn("Cloud Functions não disponível, usando método básico");
       const result = await usersService.deleteUser(uid);
       if (!result.success) {

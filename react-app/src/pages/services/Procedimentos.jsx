@@ -1,4 +1,16 @@
-import { AlertCircle, Droplet, Calendar, Info, Baby, ExternalLink, Clock, AlertTriangle, TestTube2, FileText, IdCard } from "lucide-react";
+import {
+  AlertCircle,
+  Droplet,
+  Calendar,
+  Info,
+  Baby,
+  ExternalLink,
+  Clock,
+  AlertTriangle,
+  TestTube2,
+  FileText,
+  IdCard,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
@@ -18,7 +30,6 @@ export default function Procedimentos() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Sala de Procedimentos
@@ -32,7 +43,6 @@ export default function Procedimentos() {
 
         <AvisosPaginaWrapper pagina="procedimentos" />
 
-        {/* Sobre o Serviço */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -41,7 +51,15 @@ export default function Procedimentos() {
           </div>
           <div className="p-4 sm:p-6">
             <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
-              A Sala de Procedimentos da Unidade Básica de Saúde São José realiza diversos procedimentos de enfermagem essenciais para o cuidado integral da população. Entre os serviços oferecidos estão: aplicação de medicamentos injetáveis prescritos por médicos, administração de Noripurum (Sacarato de Hidróxido Férrico III) por via endovenosa mediante prescrição médica e agendamento prévio, realização de Testes Rápidos para detecção de HIV, Sífilis, Hepatites B e C e Gravidez (sem necessidade de pedido médico), e coleta do Teste do Pezinho (Triagem Neonatal) para recém-nascidos.
+              A Sala de Procedimentos da Unidade Básica de Saúde São José
+              realiza diversos procedimentos de enfermagem essenciais para o
+              cuidado integral da população. Entre os serviços oferecidos estão:
+              aplicação de medicamentos injetáveis prescritos por médicos,
+              administração de Noripurum (Sacarato de Hidróxido Férrico III) por
+              via endovenosa mediante prescrição médica e agendamento prévio,
+              realização de Testes Rápidos para detecção de HIV, Sífilis,
+              Hepatites B e C e Gravidez (sem necessidade de pedido médico), e
+              coleta do Teste do Pezinho (Triagem Neonatal) para recém-nascidos.
             </p>
 
             <h3 className="font-bold text-blue-900 mb-4 text-base">
@@ -53,8 +71,8 @@ export default function Procedimentos() {
                   Aplicação de Injeções
                 </h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
-                  Administração de medicamentos por via intramuscular, subcutânea
-                  e endovenosa, conforme prescrição médica.
+                  Administração de medicamentos por via intramuscular,
+                  subcutânea e endovenosa, conforme prescrição médica.
                 </p>
               </div>
               <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
@@ -62,8 +80,8 @@ export default function Procedimentos() {
                   Administração de Noripurum
                 </h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
-                  Aplicação endovenosa de Noripurum para tratamento de anemia ferropriva,
-                  mediante prescrição médica e agendamento prévio.
+                  Aplicação endovenosa de Noripurum para tratamento de anemia
+                  ferropriva, mediante prescrição médica e agendamento prévio.
                 </p>
               </div>
               <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
@@ -71,8 +89,9 @@ export default function Procedimentos() {
                   Testes Rápidos
                 </h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
-                  Realização de testes rápidos (HIV, Sífilis, Hepatites B e C, Gravidez)
-                  sem necessidade de pedido médico, com resultados em minutos.
+                  Realização de testes rápidos (HIV, Sífilis, Hepatites B e C,
+                  Gravidez) sem necessidade de pedido médico, com resultados em
+                  minutos.
                 </p>
               </div>
               <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
@@ -80,8 +99,9 @@ export default function Procedimentos() {
                   Teste do Pezinho
                 </h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
-                  Coleta de Triagem Neonatal (Teste do Pezinho) para detecção precoce
-                  de doenças metabólicas, genéticas e infecciosas em recém-nascidos.
+                  Coleta de Triagem Neonatal (Teste do Pezinho) para detecção
+                  precoce de doenças metabólicas, genéticas e infecciosas em
+                  recém-nascidos.
                 </p>
               </div>
               <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
@@ -89,15 +109,15 @@ export default function Procedimentos() {
                   Aferição de Sinais Vitais
                 </h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
-                  Verificação de sinais vitais realizada de forma sistemática para
-                  controle ou conforme demanda e necessidade clínica do paciente.
+                  Verificação de sinais vitais realizada de forma sistemática
+                  para controle ou conforme demanda e necessidade clínica do
+                  paciente.
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Card Noripurum Endovenoso */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -108,17 +128,25 @@ export default function Procedimentos() {
                 Administração de Noripurum Endovenoso
               </h3>
               <p className="text-white/90 text-sm leading-relaxed mb-4">
-                O Noripurum (Sacarato de Hidróxido Férrico III) é um medicamento injetável indicado para o tratamento de anemia ferropriva quando a administração oral de ferro é ineficaz ou não tolerada. A aplicação endovenosa permite reposição rápida e eficaz dos níveis de ferro no organismo.
+                O Noripurum (Sacarato de Hidróxido Férrico III) é um medicamento
+                injetável indicado para o tratamento de anemia ferropriva quando
+                a administração oral de ferro é ineficaz ou não tolerada. A
+                aplicação endovenosa permite reposição rápida e eficaz dos
+                níveis de ferro no organismo.
               </p>
 
-              {/* Seção de Agendamento */}
               <div className="bg-white/10 rounded-md p-4 mb-4 border border-white/20">
                 <div className="flex items-start gap-3">
-                  <Calendar size={20} className="text-white mt-0.5 flex-shrink-0" />
+                  <Calendar
+                    size={20}
+                    className="text-white mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <h4 className="font-semibold mb-2">Como Solicitar</h4>
                     <p className="text-sm text-white/90 mb-3">
-                      Para realizar a administração de Noripurum endovenoso, é necessário agendamento prévio. Compareça presencialmente à Sala de Agendamentos com sua prescrição médica.
+                      Para realizar a administração de Noripurum endovenoso, é
+                      necessário agendamento prévio. Compareça presencialmente à
+                      Sala de Agendamentos com sua prescrição médica.
                     </p>
                     <Link
                       to="/servicos/sala-4"
@@ -131,7 +159,6 @@ export default function Procedimentos() {
                 </div>
               </div>
 
-              {/* Informações Importantes - VERSÃO RESUMIDA */}
               <div className="bg-white/10 rounded-md p-4 border border-white/20 mb-4">
                 <h4 className="font-semibold mb-3 flex items-center gap-2">
                   <Info size={18} />
@@ -139,10 +166,13 @@ export default function Procedimentos() {
                 </h4>
                 <div className="space-y-2 text-sm text-white/90">
                   <p>
-                    <strong>Indicado para:</strong> Tratamento de anemia ferropriva quando o ferro oral não é tolerado ou eficaz.
+                    <strong>Indicado para:</strong> Tratamento de anemia
+                    ferropriva quando o ferro oral não é tolerado ou eficaz.
                   </p>
                   <p>
-                    <strong>Efeitos colaterais:</strong> Podem ocorrer reações leves no local da aplicação, náusea ou dor de cabeça. Informe qualquer reação ao profissional de saúde.
+                    <strong>Efeitos colaterais:</strong> Podem ocorrer reações
+                    leves no local da aplicação, náusea ou dor de cabeça.
+                    Informe qualquer reação ao profissional de saúde.
                   </p>
                   <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 shadow-sm border border-green-200 mt-4">
                     <div className="flex items-start gap-3">
@@ -150,9 +180,12 @@ export default function Procedimentos() {
                         <AlertCircle size={18} className="text-white" />
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-bold text-green-900 mb-1 text-sm">Importante</h4>
+                        <h4 className="font-bold text-green-900 mb-1 text-sm">
+                          Importante
+                        </h4>
                         <p className="text-neutral-800 text-sm leading-relaxed">
-                          Este procedimento requer prescrição médica e acompanhamento profissional durante toda a aplicação.
+                          Este procedimento requer prescrição médica e
+                          acompanhamento profissional durante toda a aplicação.
                         </p>
                       </div>
                     </div>
@@ -163,7 +196,6 @@ export default function Procedimentos() {
           </div>
         </div>
 
-        {/* Card Teste do Pezinho */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
@@ -182,7 +214,6 @@ export default function Procedimentos() {
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Imagem */}
             <div className="mb-6 flex justify-center">
               <ImageWithCredit
                 src={testePezinhoImg}
@@ -194,73 +225,107 @@ export default function Procedimentos() {
               />
             </div>
 
-            {/* Descrição */}
             <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
-              O Teste do Pezinho é um exame de triagem neonatal obrigatório e gratuito oferecido pelo Sistema Único de Saúde (SUS). Realizado através da coleta de algumas gotas de sangue do calcanhar do recém-nascido, permite identificar precocemente doenças metabólicas, genéticas e infecciosas que podem causar danos irreversíveis ao desenvolvimento da criança se não tratadas a tempo.
+              O Teste do Pezinho é um exame de triagem neonatal obrigatório e
+              gratuito oferecido pelo Sistema Único de Saúde (SUS). Realizado
+              através da coleta de algumas gotas de sangue do calcanhar do
+              recém-nascido, permite identificar precocemente doenças
+              metabólicas, genéticas e infecciosas que podem causar danos
+              irreversíveis ao desenvolvimento da criança se não tratadas a
+              tempo.
             </p>
 
-            {/* Cronograma e Prazos */}
             <div className="mb-5">
               <h3 className="font-semibold text-neutral-800 text-base mb-4">
                 Cronograma e Prazos para Realização
               </h3>
 
               <div className="space-y-3">
-                {/* Período Ideal */}
                 <div className="bg-green-50 border-l-4 border-green-600 rounded-r-lg p-4">
                   <div className="flex items-start gap-3">
-                    <Clock size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
+                    <Clock
+                      size={20}
+                      className="text-green-600 mt-0.5 flex-shrink-0"
+                    />
                     <div>
                       <h4 className="font-semibold text-green-900 mb-2 text-sm">
                         Período Ideal: 3º ao 5º dia de vida
                       </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Este é o intervalo tecnicamente recomendado pelo Ministério da Saúde e pelas sociedades de pediatria. Após as primeiras 48 horas de vida, o metabolismo do recém-nascido já se estabilizou e houve ingestão proteica suficiente (leite materno ou fórmula) para a detecção precisa de distúrbios como a Fenilcetonúria. A coleta neste período permite que o diagnóstico e o tratamento ocorram antes do surgimento de sintomas clínicos ou sequelas irreversíveis.
+                        Este é o intervalo tecnicamente recomendado pelo
+                        Ministério da Saúde e pelas sociedades de pediatria.
+                        Após as primeiras 48 horas de vida, o metabolismo do
+                        recém-nascido já se estabilizou e houve ingestão
+                        proteica suficiente (leite materno ou fórmula) para a
+                        detecção precisa de distúrbios como a Fenilcetonúria. A
+                        coleta neste período permite que o diagnóstico e o
+                        tratamento ocorram antes do surgimento de sintomas
+                        clínicos ou sequelas irreversíveis.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Período Aceitável */}
                 <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
                   <div className="flex items-start gap-3">
-                    <Clock size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                    <Clock
+                      size={20}
+                      className="text-blue-600 mt-0.5 flex-shrink-0"
+                    />
                     <div>
                       <h4 className="font-semibold text-blue-900 mb-2 text-sm">
                         Período Aceitável: até o 7º dia de vida
                       </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Embora o 5º dia seja a meta prioritária das redes de saúde para otimizar o processamento laboratorial, a coleta realizada até o 7º dia ainda é considerada eficaz para a triagem. O cumprimento rigoroso desta primeira semana é fundamental para a agilidade na entrega dos resultados.
+                        Embora o 5º dia seja a meta prioritária das redes de
+                        saúde para otimizar o processamento laboratorial, a
+                        coleta realizada até o 7º dia ainda é considerada eficaz
+                        para a triagem. O cumprimento rigoroso desta primeira
+                        semana é fundamental para a agilidade na entrega dos
+                        resultados.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Período de Atenção */}
                 <div className="bg-amber-50 border-l-4 border-amber-600 rounded-r-lg p-4">
                   <div className="flex items-start gap-3">
-                    <AlertTriangle size={20} className="text-amber-600 mt-0.5 flex-shrink-0" />
+                    <AlertTriangle
+                      size={20}
+                      className="text-amber-600 mt-0.5 flex-shrink-0"
+                    />
                     <div>
                       <h4 className="font-semibold text-amber-900 mb-2 text-sm">
                         Coletas após o 7º dia
                       </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Caso o recém-nascido não tenha sido testado na primeira semana, o exame deve ser realizado em caráter de urgência, preferencialmente antes de completar 30 dias de vida. É importante ressaltar que o atraso na coleta pode comprometer a janela de intervenção precoce em doenças de progressão rápida, elevando o risco de danos ao desenvolvimento da criança.
+                        Caso o recém-nascido não tenha sido testado na primeira
+                        semana, o exame deve ser realizado em caráter de
+                        urgência, preferencialmente antes de completar 30 dias
+                        de vida. É importante ressaltar que o atraso na coleta
+                        pode comprometer a janela de intervenção precoce em
+                        doenças de progressão rápida, elevando o risco de danos
+                        ao desenvolvimento da criança.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Observação Importante */}
                 <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-lg p-5 shadow-sm border border-red-200">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <AlertCircle size={20} className="text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-red-900 mb-2 text-base">Importante</h3>
+                      <h3 className="font-bold text-red-900 mb-2 text-base">
+                        Importante
+                      </h3>
                       <p className="text-neutral-800 text-sm leading-relaxed mb-2">
-                        <strong>Não realizar antes de 48 horas:</strong> O teste não deve ser realizado antes das primeiras 48 horas de vida, pois a coleta precoce pode gerar resultados "falso-negativos" devido à ausência de estabilização metabólica fora do ambiente uterino.
+                        <strong>Não realizar antes de 48 horas:</strong> O teste
+                        não deve ser realizado antes das primeiras 48 horas de
+                        vida, pois a coleta precoce pode gerar resultados
+                        "falso-negativos" devido à ausência de estabilização
+                        metabólica fora do ambiente uterino.
                       </p>
                     </div>
                   </div>
@@ -268,9 +333,7 @@ export default function Procedimentos() {
               </div>
             </div>
 
-            {/* Grid de Links */}
             <div className="grid md:grid-cols-2 gap-4">
-              {/* Link para Lista de Doenças */}
               <a
                 href="https://www.gov.br/saude/pt-br/composicao/saes/triagem-neonatal"
                 target="_blank"
@@ -286,7 +349,8 @@ export default function Procedimentos() {
                       Lista de Doenças Triadas
                     </h3>
                     <p className="text-sm text-neutral-600 mb-2">
-                      Consulte a lista completa de doenças identificadas pelo Teste do Pezinho no site oficial do Ministério da Saúde.
+                      Consulte a lista completa de doenças identificadas pelo
+                      Teste do Pezinho no site oficial do Ministério da Saúde.
                     </p>
                     <div className="flex items-center gap-2 text-sm text-primary-600 font-semibold">
                       <ExternalLink size={16} />
@@ -296,7 +360,6 @@ export default function Procedimentos() {
                 </div>
               </a>
 
-              {/* Link para Agendamento */}
               <Link
                 to="/servicos/sala-4"
                 className="bg-white rounded-lg p-4 sm:p-5 border border-neutral-200 hover:shadow-md transition-shadow cursor-pointer block"
@@ -310,7 +373,8 @@ export default function Procedimentos() {
                       Como Solicitar
                     </h3>
                     <p className="text-sm text-neutral-600 mb-2">
-                      Para realizar o Teste do Pezinho, compareça presencialmente à Sala de Agendamentos da unidade.
+                      Para realizar o Teste do Pezinho, compareça
+                      presencialmente à Sala de Agendamentos da unidade.
                     </p>
                     <div className="flex items-center gap-2 text-sm text-green-600 font-semibold">
                       <Calendar size={16} />
@@ -323,8 +387,10 @@ export default function Procedimentos() {
           </div>
         </div>
 
-        {/* Card Testes Rápidos */}
-        <div id="testes-rapidos" className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
+        <div
+          id="testes-rapidos"
+          className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6"
+        >
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -342,12 +408,14 @@ export default function Procedimentos() {
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Descrição */}
             <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
-              A Sala de Procedimentos realiza testes rápidos para detecção de diversas condições de saúde. Os testes são gratuitos, realizados por profissionais capacitados e fornecem resultados em poucos minutos, não sendo necessária prescrição médica para sua realização.
+              A Sala de Procedimentos realiza testes rápidos para detecção de
+              diversas condições de saúde. Os testes são gratuitos, realizados
+              por profissionais capacitados e fornecem resultados em poucos
+              minutos, não sendo necessária prescrição médica para sua
+              realização.
             </p>
 
-            {/* Grid de Testes Disponíveis */}
             <div className="mb-6">
               <h3 className="font-semibold text-neutral-800 text-base mb-4 flex items-center gap-2">
                 <TestTube2 size={20} className="text-blue-600" />
@@ -355,61 +423,69 @@ export default function Procedimentos() {
               </h3>
 
               <div className="grid sm:grid-cols-2 gap-4">
-                {/* HIV */}
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <TestTube2 size={20} className="text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-neutral-900 mb-2 text-sm">Teste de HIV</h4>
+                      <h4 className="font-bold text-neutral-900 mb-2 text-sm">
+                        Teste de HIV
+                      </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Detecção de anticorpos contra o vírus HIV. Resultado em aproximadamente 20 minutos.
+                        Detecção de anticorpos contra o vírus HIV. Resultado em
+                        aproximadamente 20 minutos.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Sífilis */}
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <TestTube2 size={20} className="text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-neutral-900 mb-2 text-sm">Teste de Sífilis</h4>
+                      <h4 className="font-bold text-neutral-900 mb-2 text-sm">
+                        Teste de Sífilis
+                      </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Detecção de anticorpos para o diagnóstico de sífilis. Resultado em aproximadamente 15 minutos.
+                        Detecção de anticorpos para o diagnóstico de sífilis.
+                        Resultado em aproximadamente 15 minutos.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Hepatites */}
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <TestTube2 size={20} className="text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-neutral-900 mb-2 text-sm">Teste de Hepatites B e C</h4>
+                      <h4 className="font-bold text-neutral-900 mb-2 text-sm">
+                        Teste de Hepatites B e C
+                      </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Detecção de anticorpos para hepatites virais B e C. Resultado em aproximadamente 20 minutos.
+                        Detecção de anticorpos para hepatites virais B e C.
+                        Resultado em aproximadamente 20 minutos.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                {/* Gravidez */}
                 <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 hover:shadow-md transition-shadow">
                   <div className="flex items-start gap-3">
                     <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Baby size={20} className="text-white" />
                     </div>
                     <div className="flex-1">
-                      <h4 className="font-bold text-neutral-900 mb-2 text-sm">Teste de Gravidez</h4>
+                      <h4 className="font-bold text-neutral-900 mb-2 text-sm">
+                        Teste de Gravidez
+                      </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Detecção do hormônio beta-HCG para confirmação de gravidez. Resultado em aproximadamente 10 minutos.
+                        Detecção do hormônio beta-HCG para confirmação de
+                        gravidez. Resultado em aproximadamente 10 minutos.
                       </p>
                     </div>
                   </div>
@@ -417,38 +493,50 @@ export default function Procedimentos() {
               </div>
             </div>
 
-            {/* Documentação Necessária */}
             <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-5 mb-5">
               <h3 className="font-semibold text-neutral-800 text-base mb-4">
                 Documentação Necessária
               </h3>
               <div className="space-y-2 text-sm text-neutral-700 leading-relaxed">
-                <p>Documento oficial de identificação com foto (RG, CNH ou Carteira de Trabalho)</p>
+                <p>
+                  Documento oficial de identificação com foto (RG, CNH ou
+                  Carteira de Trabalho)
+                </p>
               </div>
             </div>
 
-            {/* Informações Importantes */}
             <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-5">
               <h3 className="font-semibold text-blue-900 text-base mb-3">
                 Informações Importantes
               </h3>
               <div className="space-y-3 text-sm text-neutral-700 leading-relaxed">
                 <p>
-                  <strong className="text-blue-900">Não é necessário pedido médico</strong> - Os testes rápidos podem ser realizados sem prescrição médica
+                  <strong className="text-blue-900">
+                    Não é necessário pedido médico
+                  </strong>{" "}
+                  - Os testes rápidos podem ser realizados sem prescrição médica
                 </p>
                 <p>
-                  <strong className="text-blue-900">Atendimento por ordem de chegada</strong> - Não é necessário agendamento prévio
+                  <strong className="text-blue-900">
+                    Atendimento por ordem de chegada
+                  </strong>{" "}
+                  - Não é necessário agendamento prévio
                 </p>
                 <p>
-                  <strong className="text-blue-900">Sigilo absoluto</strong> - Todos os resultados são confidenciais e entregues apenas ao paciente
+                  <strong className="text-blue-900">Sigilo absoluto</strong> -
+                  Todos os resultados são confidenciais e entregues apenas ao
+                  paciente
                 </p>
                 <p>
-                  <strong className="text-blue-900">Aconselhamento disponível</strong> - Profissionais de saúde estão disponíveis para orientação antes e após o teste
+                  <strong className="text-blue-900">
+                    Aconselhamento disponível
+                  </strong>{" "}
+                  - Profissionais de saúde estão disponíveis para orientação
+                  antes e após o teste
                 </p>
               </div>
             </div>
 
-            {/* Botão Saiba Mais sobre Prevenção ao HIV */}
             <div className="mt-5 bg-gradient-to-r from-primary-50 to-primary-100 border-2 border-primary-300 rounded-lg p-5">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex-1 text-center sm:text-left">
@@ -456,7 +544,8 @@ export default function Procedimentos() {
                     Prevenção Combinada ao HIV
                   </h3>
                   <p className="text-sm text-neutral-700">
-                    Conheça as estratégias de prevenção PrEP e PEP disponíveis no SUS
+                    Conheça as estratégias de prevenção PrEP e PEP disponíveis
+                    no SUS
                   </p>
                 </div>
                 <Link
@@ -471,13 +560,11 @@ export default function Procedimentos() {
           </div>
         </div>
 
-
         <EscalaFirestore
           titulo="Profissionais Escalados na Sala de Procedimentos"
           escalaKey="sala-procedimentos"
         />
 
-        {/* Documentação Necessária */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -486,13 +573,16 @@ export default function Procedimentos() {
           </div>
           <div className="p-4 sm:p-6">
             <p className="text-neutral-700 mb-4 text-sm leading-relaxed">
-              Para atendimento Sala de Medicações, é
-              obrigatória a apresentação da seguinte documentação:
+              Para atendimento Sala de Medicações, é obrigatória a apresentação
+              da seguinte documentação:
             </p>
             <div className="grid md:grid-cols-3 gap-3">
               <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
                 <div className="flex items-start gap-3">
-                  <FileText size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <FileText
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <strong className="text-neutral-800 text-sm block mb-1">
                       Documento com Foto
@@ -505,7 +595,10 @@ export default function Procedimentos() {
               </div>
               <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
                 <div className="flex items-start gap-3">
-                  <FileText size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <FileText
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <strong className="text-neutral-800 text-sm block mb-1">
                       CPF
@@ -518,7 +611,10 @@ export default function Procedimentos() {
               </div>
               <div className="bg-blue-50 p-4 rounded-lg border border-blue-100 shadow-sm">
                 <div className="flex items-start gap-3">
-                  <FileText size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <FileText
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <strong className="text-neutral-800 text-sm block mb-1">
                       Prescrição Médica
@@ -537,9 +633,12 @@ export default function Procedimentos() {
                     <FileText size={20} className="text-white" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-bold text-blue-900 mb-2 text-base">Normativa</h3>
+                    <h3 className="font-bold text-blue-900 mb-2 text-base">
+                      Normativa
+                    </h3>
                     <p className="text-neutral-800 text-sm leading-relaxed">
-                      Documento de identificação com foto e CPF são obrigatórios para qualquer atendimento na unidade.
+                      Documento de identificação com foto e CPF são obrigatórios
+                      para qualquer atendimento na unidade.
                     </p>
                   </div>
                 </div>
@@ -548,7 +647,6 @@ export default function Procedimentos() {
           </div>
         </div>
 
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-6 shadow-md mt-6">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -564,10 +662,8 @@ export default function Procedimentos() {
             </div>
           </div>
         </div>
-
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll até o final */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="procedimentos" />
       </div>

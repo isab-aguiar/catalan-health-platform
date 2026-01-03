@@ -40,11 +40,9 @@ if (!firebaseConfig.apiKey) {
   console.error("");
   process.exit(1);
 }
-// Nome da coleção no Firestore
 const COLLECTION_NAME = "vacinas";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "root@esfcatalao.com";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "";
-// Inicializar Firebase
 let app;
 let auth;
 let db;
@@ -56,9 +54,7 @@ try {
   console.error("❌ Erro ao inicializar Firebase:", error);
   process.exit(1);
 }
-/**
- * Autentica com um usuário admin
- */
+
 async function autenticarAdmin() {
   try {
     if (!ADMIN_PASSWORD) {
@@ -198,10 +194,7 @@ async function listarVacinas() {
     console.error("❌ Erro ao listar vacinas:", error);
   }
 }
-// =========================================
-// EXECUÇÃO DO SCRIPT
-// =========================================
-// Verificar argumentos da linha de comando
+
 const args = process.argv.slice(2);
 const comando = args[0];
 if (comando === "--list" || comando === "-l") {

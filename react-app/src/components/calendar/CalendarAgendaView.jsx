@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -17,16 +17,15 @@ import {
   AlertCircle,
   CheckCircle2,
   Tag,
-  MoreVertical
-} from 'lucide-react';
-import { TIPOS_EVENTO } from '../../services/calendarioService';
-import { getEventColors } from '../../constants/calendarDesign';
-import EmptyState from './EmptyState';
-import { normalizarDataParaMidnight, formatarDataParaISO } from '../../utils/dateUtils';
-
-/**
- * Vista de Agenda - Mostra eventos dia por dia com horários
- */
+  MoreVertical,
+} from "lucide-react";
+import { TIPOS_EVENTO } from "../../services/calendarioService";
+import { getEventColors } from "../../constants/calendarDesign";
+import EmptyState from "./EmptyState";
+import {
+  normalizarDataParaMidnight,
+  formatarDataParaISO,
+} from "../../utils/dateUtils";
 export default function CalendarAgendaView({
   eventos,
   agendas = [],
@@ -36,18 +35,24 @@ export default function CalendarAgendaView({
   onAgendaEdit,
   onAgendaDelete,
   onCreateAgenda,
-  initialDate = new Date()
+  initialDate = new Date(),
 }) {
   const [currentDate, setCurrentDate] = useState(initialDate);
-  const [daysToShow, setDaysToShow] = useState(7); // 7 ou 14 dias
+  const [daysToShow, setDaysToShow] = useState(7);
 
-  // Log para debug
   useEffect(() => {
-    console.log('[CalendarAgendaView] Eventos recebidos:', eventos?.length || 0, eventos);
-    console.log('📋 [CalendarAgendaView] Agendas recebidas:', agendas?.length || 0, agendas);
+    console.log(
+      "[CalendarAgendaView] Eventos recebidos:",
+      eventos?.length || 0,
+      eventos
+    );
+    console.log(
+      "📋 [CalendarAgendaView] Agendas recebidas:",
+      agendas?.length || 0,
+      agendas
+    );
   }, [eventos, agendas]);
 
-  // Gerar array de dias a partir da data atual
   const days = useMemo(() => {
     const daysArray = [];
     const startDate = new Date(currentDate);
@@ -62,27 +67,24 @@ export default function CalendarAgendaView({
     return daysArray;
   }, [currentDate, daysToShow]);
 
-  // Agrupar eventos por dia
   const eventosPorDia = useMemo(() => {
     const grupos = {};
 
-    days.forEach(day => {
+    days.forEach((day) => {
       const dayKey = formatarDataParaISO(day);
       grupos[dayKey] = [];
     });
 
-    eventos.forEach(evento => {
-      // Validação de data
+    eventos.forEach((evento) => {
       if (!evento.dataInicio) {
-        console.warn('[CalendarAgendaView] Evento sem dataInicio:', evento);
+        console.warn("[CalendarAgendaView] Evento sem dataInicio:", evento);
         return;
       }
 
       const eventoData = normalizarDataParaMidnight(evento.dataInicio);
 
-      // Verificar se data é válida
       if (!eventoData || isNaN(eventoData.getTime())) {
-        console.warn('[CalendarAgendaView] Evento com data inválida:', evento);
+        console.warn("[CalendarAgendaView] Evento com data inválida:", evento);
         return;
       }
 
@@ -93,8 +95,7 @@ export default function CalendarAgendaView({
       }
     });
 
-    // Ordenar eventos de cada dia por horário
-    Object.keys(grupos).forEach(dayKey => {
+    Object.keys(grupos).forEach((dayKey) => {
       grupos[dayKey].sort((a, b) => {
         if (!a.horaInicio && !b.horaInicio) return 0;
         if (!a.horaInicio) return 1;
@@ -137,9 +138,9 @@ export default function CalendarAgendaView({
 
   const getTipoLabel = (tipo) => {
     const labels = {
-      [TIPOS_EVENTO.REUNIAO]: 'Reunião',
-      [TIPOS_EVENTO.LEMBRETE]: 'Lembrete',
-      [TIPOS_EVENTO.AGENDAMENTO]: 'Agendamento',
+      [TIPOS_EVENTO.REUNIAO]: "Reunião",
+      [TIPOS_EVENTO.LEMBRETE]: "Lembrete",
+      [TIPOS_EVENTO.AGENDAMENTO]: "Agendamento",
     };
     return labels[tipo] || tipo;
   };
@@ -154,45 +155,44 @@ export default function CalendarAgendaView({
   };
 
   const formatarDiaSemana = (date) => {
-    return date.toLocaleDateString('pt-BR', { weekday: 'long' });
+    return date.toLocaleDateString("pt-BR", { weekday: "long" });
   };
 
   const formatarDataCompleta = (date) => {
-    return date.toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
+    return date.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
     });
   };
 
   const handleExportar = () => {
-    // Gerar conteúdo da agenda em texto
     let conteudo = `AGENDA - ${formatarDataCompleta(days[0])} até ${formatarDataCompleta(days[days.length - 1])}\n\n`;
 
-    days.forEach(day => {
+    days.forEach((day) => {
       const dayKey = formatarDataParaISO(day);
       const eventosDay = eventosPorDia[dayKey] || [];
 
       conteudo += `\n${formatarDiaSemana(day).toUpperCase()} - ${formatarDataCompleta(day)}\n`;
-      conteudo += '─'.repeat(60) + '\n';
+      conteudo += "─".repeat(60) + "\n";
 
       if (eventosDay.length === 0) {
-        conteudo += 'Nenhum evento\n';
+        conteudo += "Nenhum evento\n";
       } else {
-        eventosDay.forEach(evento => {
-          conteudo += `\n${evento.horaInicio || 'Dia inteiro'} - ${evento.titulo}\n`;
+        eventosDay.forEach((evento) => {
+          conteudo += `\n${evento.horaInicio || "Dia inteiro"} - ${evento.titulo}\n`;
           if (evento.descricao) conteudo += `  ${evento.descricao}\n`;
           if (evento.local) conteudo += `  📍 ${evento.local}\n`;
-          if (evento.participantes?.length) conteudo += `  👥 ${evento.participantes.length} participante(s)\n`;
+          if (evento.participantes?.length)
+            conteudo += `  👥 ${evento.participantes.length} participante(s)\n`;
         });
       }
-      conteudo += '\n';
+      conteudo += "\n";
     });
 
-    // Criar blob e download
-    const blob = new Blob([conteudo], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([conteudo], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = `agenda_${formatarDataParaISO(days[0])}.txt`;
     document.body.appendChild(link);
@@ -207,12 +207,12 @@ export default function CalendarAgendaView({
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Minha Agenda',
+          title: "Minha Agenda",
           text: textoAgenda,
         });
       } catch (error) {
-        if (error.name !== 'AbortError') {
-          console.error('Erro ao compartilhar:', error);
+        if (error.name !== "AbortError") {
+          console.error("Erro ao compartilhar:", error);
           copiarParaClipboard(textoAgenda);
         }
       }
@@ -222,21 +222,21 @@ export default function CalendarAgendaView({
   };
 
   const copiarParaClipboard = (texto) => {
-    navigator.clipboard.writeText(texto).then(() => {
-      alert('Agenda copiada para a área de transferência!');
-    }).catch(err => {
-      console.error('Erro ao copiar:', err);
-    });
+    navigator.clipboard
+      .writeText(texto)
+      .then(() => {
+        alert("Agenda copiada para a área de transferência!");
+      })
+      .catch((err) => {
+        console.error("Erro ao copiar:", err);
+      });
   };
 
   return (
     <div className="space-y-4 md:space-y-6 animate-fade-in">
-      {/* Controles Aprimorados */}
       <div className="bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 rounded-xl shadow-lg border border-neutral-200/50 p-3 md:p-6 backdrop-blur-sm">
         <div className="flex flex-col gap-3 md:gap-5">
-          {/* Header com Navegação */}
           <div className="flex flex-col gap-3 md:gap-4">
-            {/* Navegação */}
             <div className="flex items-center justify-center gap-2 md:gap-3">
               <button
                 onClick={handlePrevious}
@@ -264,7 +264,6 @@ export default function CalendarAgendaView({
               </button>
             </div>
 
-            {/* Ações Rápidas */}
             <div className="flex items-center gap-2 flex-wrap justify-center">
               <button
                 onClick={handleToday}
@@ -303,16 +302,14 @@ export default function CalendarAgendaView({
             </div>
           </div>
 
-          {/* Período de Visualização e Estatísticas */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-4 pt-3 md:pt-4 border-t border-neutral-200/50">
-            {/* Toggle de dias */}
             <div className="flex items-center gap-2 bg-white/80 rounded-xl p-1.5 shadow-sm border border-neutral-200 w-full sm:w-auto">
               <button
                 onClick={() => setDaysToShow(7)}
                 className={`flex-1 sm:flex-none px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 ${
                   daysToShow === 7
-                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md scale-105'
-                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md scale-105"
+                    : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
                 }`}
               >
                 7 dias
@@ -321,15 +318,14 @@ export default function CalendarAgendaView({
                 onClick={() => setDaysToShow(14)}
                 className={`flex-1 sm:flex-none px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-semibold transition-all duration-200 ${
                   daysToShow === 14
-                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md scale-105'
-                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md scale-105"
+                    : "text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50"
                 }`}
               >
                 14 dias
               </button>
             </div>
 
-            {/* Estatísticas Rápidas */}
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2 px-3 py-1.5 bg-white/80 rounded-lg border border-neutral-200">
                 <Calendar className="w-4 h-4 text-blue-600" />
@@ -350,8 +346,8 @@ export default function CalendarAgendaView({
         </div>
       </div>
 
-      {/* Grid de Dias */}
-      <div className="space-y-5">{days.map((day, index) => {
+      <div className="space-y-5">
+        {days.map((day, index) => {
           const dayKey = formatarDataParaISO(day);
           const eventosDay = eventosPorDia[dayKey] || [];
           const hoje = isToday(day);
@@ -360,28 +356,30 @@ export default function CalendarAgendaView({
             <div
               key={dayKey}
               className={`group relative bg-white rounded-xl shadow-md border overflow-hidden transition-all duration-300 hover:shadow-xl ${
-                hoje 
-                  ? 'border-blue-400 ring-2 ring-blue-100 shadow-blue-100' 
-                  : 'border-neutral-200 hover:border-blue-200'
+                hoje
+                  ? "border-blue-400 ring-2 ring-blue-100 shadow-blue-100"
+                  : "border-neutral-200 hover:border-blue-200"
               }`}
             >
-              {/* Indicador lateral para hoje */}
               {hoje && (
                 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-500 to-indigo-600" />
               )}
 
-              {/* Header do Dia Aprimorado */}
-              <div className={`p-5 border-b backdrop-blur-sm ${
-                hoje
-                  ? 'bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-blue-200'
-                  : 'bg-gradient-to-r from-neutral-50 to-neutral-100/50 border-neutral-200'
-              }`}>
+              <div
+                className={`p-5 border-b backdrop-blur-sm ${
+                  hoje
+                    ? "bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-blue-200"
+                    : "bg-gradient-to-r from-neutral-50 to-neutral-100/50 border-neutral-200"
+                }`}
+              >
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 md:gap-3 flex-wrap">
-                      <h4 className={`text-base md:text-xl font-bold capitalize truncate ${
-                        hoje ? 'text-blue-700' : 'text-neutral-900'
-                      }`}>
+                      <h4
+                        className={`text-base md:text-xl font-bold capitalize truncate ${
+                          hoje ? "text-blue-700" : "text-neutral-900"
+                        }`}
+                      >
                         {formatarDiaSemana(day)}
                       </h4>
                       {hoje && (
@@ -393,41 +391,65 @@ export default function CalendarAgendaView({
                       )}
                     </div>
                     <p className="text-xs md:text-sm text-neutral-600 mt-1 font-medium truncate">
-                      {day.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}
+                      {day.toLocaleDateString("pt-BR", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                      })}
                     </p>
                   </div>
-                  
-                  <div className={`text-right flex-shrink-0 ${hoje ? 'text-blue-600' : 'text-neutral-600'}`}>
-                    <div className="text-2xl md:text-4xl font-black leading-none">{day.getDate()}</div>
+
+                  <div
+                    className={`text-right flex-shrink-0 ${hoje ? "text-blue-600" : "text-neutral-600"}`}
+                  >
+                    <div className="text-2xl md:text-4xl font-black leading-none">
+                      {day.getDate()}
+                    </div>
                     <div className="text-xs font-semibold mt-1 opacity-70">
-                      {day.toLocaleDateString('pt-BR', { month: 'short' }).toUpperCase()}
+                      {day
+                        .toLocaleDateString("pt-BR", { month: "short" })
+                        .toUpperCase()}
                     </div>
                   </div>
                 </div>
 
-                {/* Resumo de Itens */}
                 <div className="mt-3 md:mt-4 flex flex-wrap items-center gap-2">
                   {eventosDay.length > 0 && (
                     <div className="flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1 md:py-1.5 bg-white/80 backdrop-blur-sm rounded-lg border border-neutral-200 shadow-sm">
                       <Calendar className="w-3 h-3 md:w-4 md:h-4 text-blue-600 flex-shrink-0" />
-                      <span className="text-xs md:text-sm font-bold text-neutral-900">{eventosDay.length}</span>
-                      <span className="text-xs md:text-sm text-neutral-600 hidden sm:inline">{eventosDay.length === 1 ? 'evento' : 'eventos'}</span>
+                      <span className="text-xs md:text-sm font-bold text-neutral-900">
+                        {eventosDay.length}
+                      </span>
+                      <span className="text-xs md:text-sm text-neutral-600 hidden sm:inline">
+                        {eventosDay.length === 1 ? "evento" : "eventos"}
+                      </span>
                     </div>
                   )}
                   {agendas.length > 0 && (
                     <>
                       {(() => {
-                        const agendasCount = agendas.filter(a => {
-                          const diaSemana = day.toLocaleDateString('pt-BR', { weekday: 'long' });
-                          const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
-                          return (a.agendaSemanal?.[diaSemanaCapitalizado] || []).length > 0;
+                        const agendasCount = agendas.filter((a) => {
+                          const diaSemana = day.toLocaleDateString("pt-BR", {
+                            weekday: "long",
+                          });
+                          const diaSemanaCapitalizado =
+                            diaSemana.charAt(0).toUpperCase() +
+                            diaSemana.slice(1);
+                          return (
+                            (a.agendaSemanal?.[diaSemanaCapitalizado] || [])
+                              .length > 0
+                          );
                         }).length;
-                        
+
                         return agendasCount > 0 ? (
                           <div className="flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1 md:py-1.5 bg-white/80 backdrop-blur-sm rounded-lg border border-indigo-200 shadow-sm">
                             <Users className="w-3 h-3 md:w-4 md:h-4 text-indigo-600 flex-shrink-0" />
-                            <span className="text-xs md:text-sm font-bold text-neutral-900">{agendasCount}</span>
-                            <span className="text-xs md:text-sm text-neutral-600 hidden sm:inline">{agendasCount === 1 ? 'agenda' : 'agendas'}</span>
+                            <span className="text-xs md:text-sm font-bold text-neutral-900">
+                              {agendasCount}
+                            </span>
+                            <span className="text-xs md:text-sm text-neutral-600 hidden sm:inline">
+                              {agendasCount === 1 ? "agenda" : "agendas"}
+                            </span>
                           </div>
                         ) : null;
                       })()}
@@ -436,106 +458,122 @@ export default function CalendarAgendaView({
                   {eventosDay.length === 0 && agendas.length === 0 && (
                     <div className="flex items-center gap-1.5 md:gap-2 px-2 md:px-3 py-1 md:py-1.5 bg-neutral-100 rounded-lg">
                       <AlertCircle className="w-3 h-3 md:w-4 md:h-4 text-neutral-400" />
-                      <span className="text-xs md:text-sm text-neutral-500">Sem atividades</span>
+                      <span className="text-xs md:text-sm text-neutral-500">
+                        Sem atividades
+                      </span>
                     </div>
                   )}
                 </div>
               </div>
 
-              {/* Eventos e Agendas do Dia */}
-              <div className="p-3 md:p-5">{eventosDay.length === 0 && agendas.length === 0 ? (
+              <div className="p-3 md:p-5">
+                {eventosDay.length === 0 && agendas.length === 0 ? (
                   <div className="text-center py-6 md:py-8">
                     <Calendar className="w-10 h-10 md:w-12 md:h-12 text-neutral-300 mx-auto mb-2" />
-                    <p className="text-xs md:text-sm text-neutral-500">Nenhum evento ou agenda neste dia</p>
+                    <p className="text-xs md:text-sm text-neutral-500">
+                      Nenhum evento ou agenda neste dia
+                    </p>
                   </div>
                 ) : (
                   <div className="space-y-3 md:space-y-4">
-                    {/* Agendas dos Profissionais */}
-                    {agendas.length > 0 && agendas.map(agenda => {
-                      const diaSemana = day.toLocaleDateString('pt-BR', { weekday: 'long' });
-                      const diaSemanaCapitalizado = diaSemana.charAt(0).toUpperCase() + diaSemana.slice(1);
-                      const atividadesDoDia = agenda.agendaSemanal?.[diaSemanaCapitalizado] || [];
+                    {agendas.length > 0 &&
+                      agendas.map((agenda) => {
+                        const diaSemana = day.toLocaleDateString("pt-BR", {
+                          weekday: "long",
+                        });
+                        const diaSemanaCapitalizado =
+                          diaSemana.charAt(0).toUpperCase() +
+                          diaSemana.slice(1);
+                        const atividadesDoDia =
+                          agenda.agendaSemanal?.[diaSemanaCapitalizado] || [];
 
-                      if (atividadesDoDia.length === 0) return null;
+                        if (atividadesDoDia.length === 0) return null;
 
-                      return (
-                        <div 
-                          key={agenda.id} 
-                          className="group/agenda relative border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/50 to-purple-50/30 rounded-xl p-3 md:p-5 transition-all duration-300 hover:shadow-lg hover:border-indigo-300"
-                        >
-                          {/* Header com botões e categoria - Mobile: botões primeiro */}
-                          <div className="flex flex-col-reverse sm:flex-row sm:items-start justify-between gap-2 sm:gap-3 mb-3 md:mb-4">
-                            {/* Categoria badge - Mobile: embaixo, Desktop: esquerda */}
-                            <span className="text-xs px-2 md:px-2.5 py-0.5 md:py-1 bg-indigo-600 text-white rounded-full font-bold uppercase tracking-wide shadow-md w-fit">
-                              {agenda.categoria}
-                            </span>
-                            
-                            {/* Botões de ação - Mobile: em cima, Desktop: direita */}
-                            <div className="flex items-center gap-1 md:gap-2 sm:ml-auto justify-end">
-                              {onAgendaEdit && (
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    onAgendaEdit(agenda);
-                                  }}
-                                  className="p-1.5 md:p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-1"
-                                  title="Editar agenda"
+                        return (
+                          <div
+                            key={agenda.id}
+                            className="group/agenda relative border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/50 to-purple-50/30 rounded-xl p-3 md:p-5 transition-all duration-300 hover:shadow-lg hover:border-indigo-300"
+                          >
+                            <div className="flex flex-col-reverse sm:flex-row sm:items-start justify-between gap-2 sm:gap-3 mb-3 md:mb-4">
+                              <span className="text-xs px-2 md:px-2.5 py-0.5 md:py-1 bg-indigo-600 text-white rounded-full font-bold uppercase tracking-wide shadow-md w-fit">
+                                {agenda.categoria}
+                              </span>
+
+                              <div className="flex items-center gap-1 md:gap-2 sm:ml-auto justify-end">
+                                {onAgendaEdit && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onAgendaEdit(agenda);
+                                    }}
+                                    className="p-1.5 md:p-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-1"
+                                    title="Editar agenda"
+                                  >
+                                    <Edit2 className="w-3 h-3 md:w-4 md:h-4" />
+                                    <span className="text-xs font-medium sm:hidden">
+                                      Editar
+                                    </span>
+                                  </button>
+                                )}
+                                {onAgendaDelete && (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onAgendaDelete(agenda);
+                                    }}
+                                    className="p-1.5 md:p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-1"
+                                    title="Excluir agenda"
+                                  >
+                                    <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
+                                    <span className="text-xs font-medium sm:hidden">
+                                      Excluir
+                                    </span>
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="flex items-start gap-3 mb-4">
+                              <div className="p-2 md:p-2.5 bg-indigo-600 rounded-lg shadow-md flex-shrink-0">
+                                <Users className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <h6 className="font-bold text-base md:text-lg text-indigo-900 leading-tight break-words">
+                                  {agenda.nome}
+                                </h6>
+                                <p className="text-xs md:text-sm text-indigo-600 mt-0.5">
+                                  Profissional de Saúde
+                                </p>
+                              </div>
+                            </div>
+
+                            <div className="space-y-2.5 mt-4">
+                              {atividadesDoDia.map((atividade, idx) => (
+                                <div
+                                  key={idx}
+                                  className="flex items-start gap-4 p-3 bg-white/80 backdrop-blur-sm rounded-lg border border-indigo-100 hover:border-indigo-200 transition-all duration-200 hover:shadow-md"
                                 >
-                                  <Edit2 className="w-3 h-3 md:w-4 md:h-4" />
-                                  <span className="text-xs font-medium sm:hidden">Editar</span>
-                                </button>
-                              )}
-                              {onAgendaDelete && (
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    onAgendaDelete(agenda);
-                                  }}
-                                  className="p-1.5 md:p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-1"
-                                  title="Excluir agenda"
-                                >
-                                  <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
-                                  <span className="text-xs font-medium sm:hidden">Excluir</span>
-                                </button>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Título e informações do profissional */}
-                          <div className="flex items-start gap-3 mb-4">
-                            <div className="p-2 md:p-2.5 bg-indigo-600 rounded-lg shadow-md flex-shrink-0">
-                              <Users className="w-4 h-4 md:w-5 md:h-5 text-white" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <h6 className="font-bold text-base md:text-lg text-indigo-900 leading-tight break-words">{agenda.nome}</h6>
-                              <p className="text-xs md:text-sm text-indigo-600 mt-0.5">Profissional de Saúde</p>
-                            </div>
-                          </div>
-
-                          <div className="space-y-2.5 mt-4">
-                            {atividadesDoDia.map((atividade, idx) => (
-                              <div 
-                                key={idx} 
-                                className="flex items-start gap-4 p-3 bg-white/80 backdrop-blur-sm rounded-lg border border-indigo-100 hover:border-indigo-200 transition-all duration-200 hover:shadow-md"
-                              >
-                                <div className="flex-shrink-0 min-w-[110px]">
-                                  <div className="flex items-center gap-2 px-3 py-1.5 bg-indigo-100 rounded-lg">
-                                    <Clock className="w-4 h-4 text-indigo-700" />
-                                    <span className="text-sm font-bold text-indigo-900">{atividade.horario}</span>
+                                  <div className="flex-shrink-0 min-w-[110px]">
+                                    <div className="flex items-center gap-2 px-3 py-1.5 bg-indigo-100 rounded-lg">
+                                      <Clock className="w-4 h-4 text-indigo-700" />
+                                      <span className="text-sm font-bold text-indigo-900">
+                                        {atividade.horario}
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div className="flex-1">
+                                    <p className="text-sm font-medium text-indigo-900 leading-relaxed">
+                                      {atividade.atividade}
+                                    </p>
                                   </div>
                                 </div>
-                                <div className="flex-1">
-                                  <p className="text-sm font-medium text-indigo-900 leading-relaxed">{atividade.atividade}</p>
-                                </div>
-                              </div>
-                            ))}
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
 
-                    {/* Eventos */}
-                    {eventosDay.map(evento => {
+                    {eventosDay.map((evento) => {
                       const IconeEvento = getIconeEvento(evento.tipo);
                       const colors = getEventColors(evento.tipo);
 
@@ -545,18 +583,24 @@ export default function CalendarAgendaView({
                           className="group/evento relative bg-white border-2 border-neutral-200 rounded-xl p-5 hover:shadow-xl hover:border-blue-300 transition-all duration-300 cursor-pointer overflow-hidden"
                           onClick={() => onEventClick(evento)}
                         >
-                          {/* Barra lateral colorida */}
-                          <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${colors.bg}`} />
+                          <div
+                            className={`absolute left-0 top-0 bottom-0 w-1.5 ${colors.bg}`}
+                          />
 
                           <div className="flex items-start gap-5 pl-3">
-                            {/* Horário em destaque */}
                             <div className="flex-shrink-0 text-center min-w-[100px]">
                               {evento.horaInicio ? (
-                                <div className={`p-3 rounded-xl ${colors.light} border-2 ${colors.border}`}>
+                                <div
+                                  className={`p-3 rounded-xl ${colors.light} border-2 ${colors.border}`}
+                                >
                                   <div className="flex items-center justify-center gap-1.5 mb-1">
-                                    <Clock className={`w-4 h-4 ${colors.text}`} />
+                                    <Clock
+                                      className={`w-4 h-4 ${colors.text}`}
+                                    />
                                   </div>
-                                  <div className={`text-xl font-black ${colors.text}`}>
+                                  <div
+                                    className={`text-xl font-black ${colors.text}`}
+                                  >
                                     {evento.horaInicio}
                                   </div>
                                   {evento.horaFim && (
@@ -566,8 +610,12 @@ export default function CalendarAgendaView({
                                   )}
                                 </div>
                               ) : (
-                                <div className={`p-3 rounded-xl ${colors.light} border-2 ${colors.border}`}>
-                                  <Calendar className={`w-6 h-6 ${colors.text} mx-auto mb-1`} />
+                                <div
+                                  className={`p-3 rounded-xl ${colors.light} border-2 ${colors.border}`}
+                                >
+                                  <Calendar
+                                    className={`w-6 h-6 ${colors.text} mx-auto mb-1`}
+                                  />
                                   <div className="text-xs font-bold text-neutral-600">
                                     Dia inteiro
                                   </div>
@@ -575,22 +623,20 @@ export default function CalendarAgendaView({
                               )}
                             </div>
 
-                            {/* Conteúdo */}
                             <div className="flex-1 min-w-0">
                               <div className="flex items-start justify-between gap-3 mb-3">
                                 <div className="flex-1">
-                                  {/* Badge tipo */}
-                                  <span className={`inline-flex items-center gap-2 px-3 py-1.5 ${colors.light} border-2 ${colors.border} rounded-full text-xs font-bold ${colors.text} mb-2 shadow-sm`}>
+                                  <span
+                                    className={`inline-flex items-center gap-2 px-3 py-1.5 ${colors.light} border-2 ${colors.border} rounded-full text-xs font-bold ${colors.text} mb-2 shadow-sm`}
+                                  >
                                     <IconeEvento className="w-4 h-4" />
                                     {getTipoLabel(evento.tipo)}
                                   </span>
 
-                                  {/* Título */}
                                   <h5 className="font-bold text-lg text-neutral-900 leading-tight mt-2">
                                     {evento.titulo}
                                   </h5>
 
-                                  {/* Descrição curta */}
                                   {evento.descricao && (
                                     <p className="text-sm text-neutral-600 mt-2 line-clamp-2">
                                       {evento.descricao}
@@ -598,7 +644,6 @@ export default function CalendarAgendaView({
                                   )}
                                 </div>
 
-                                {/* Ações */}
                                 <div className="flex items-center gap-1 opacity-100 sm:opacity-0 sm:group-hover/evento:opacity-100 transition-all duration-200 flex-shrink-0">
                                   <button
                                     onClick={(e) => {
@@ -633,38 +678,53 @@ export default function CalendarAgendaView({
                                 </div>
                               </div>
 
-                              {/* Detalhes em chips */}
                               <div className="flex flex-wrap gap-3 mt-4">
                                 {evento.local && (
                                   <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
                                     <MapPin className="w-4 h-4 text-neutral-500 flex-shrink-0" />
-                                    <span className="text-sm font-medium text-neutral-700">{evento.local}</span>
-                                  </div>
-                                )}
-                                {evento.participantes && evento.participantes.length > 0 && (
-                                  <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
-                                    <Users className="w-4 h-4 text-neutral-500 flex-shrink-0" />
                                     <span className="text-sm font-medium text-neutral-700">
-                                      {evento.participantes.length} {evento.participantes.length === 1 ? 'participante' : 'participantes'}
+                                      {evento.local}
                                     </span>
                                   </div>
                                 )}
+                                {evento.participantes &&
+                                  evento.participantes.length > 0 && (
+                                    <div className="flex items-center gap-2 px-3 py-1.5 bg-neutral-50 border border-neutral-200 rounded-lg">
+                                      <Users className="w-4 h-4 text-neutral-500 flex-shrink-0" />
+                                      <span className="text-sm font-medium text-neutral-700">
+                                        {evento.participantes.length}{" "}
+                                        {evento.participantes.length === 1
+                                          ? "participante"
+                                          : "participantes"}
+                                      </span>
+                                    </div>
+                                  )}
                                 {evento.lembrete && (
-                                  <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${
-                                    evento.lembreteEnviado 
-                                      ? 'bg-green-50 border border-green-200' 
-                                      : 'bg-amber-50 border border-amber-200'
-                                  }`}>
-                                    <Bell className={`w-4 h-4 ${evento.lembreteEnviado ? 'text-green-600' : 'text-amber-600'}`} />
-                                    <span className={`text-sm font-medium ${evento.lembreteEnviado ? 'text-green-700' : 'text-amber-700'}`}>
-                                      {evento.lembreteEnviado ? 'Notificado' : `${evento.lembreteMinutos} min antes`}
+                                  <div
+                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg ${
+                                      evento.lembreteEnviado
+                                        ? "bg-green-50 border border-green-200"
+                                        : "bg-amber-50 border border-amber-200"
+                                    }`}
+                                  >
+                                    <Bell
+                                      className={`w-4 h-4 ${evento.lembreteEnviado ? "text-green-600" : "text-amber-600"}`}
+                                    />
+                                    <span
+                                      className={`text-sm font-medium ${evento.lembreteEnviado ? "text-green-700" : "text-amber-700"}`}
+                                    >
+                                      {evento.lembreteEnviado
+                                        ? "Notificado"
+                                        : `${evento.lembreteMinutos} min antes`}
                                     </span>
                                   </div>
                                 )}
                                 {evento.concluido && (
                                   <div className="flex items-center gap-2 px-3 py-1.5 bg-green-50 border border-green-200 rounded-lg">
                                     <CheckCircle2 className="w-4 h-4 text-green-600" />
-                                    <span className="text-sm font-bold text-green-700">Concluído</span>
+                                    <span className="text-sm font-bold text-green-700">
+                                      Concluído
+                                    </span>
                                   </div>
                                 )}
                               </div>

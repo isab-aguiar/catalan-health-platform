@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { AlertCircle, ExternalLink } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+  Alert,
+  InfoBox,
+} from "../../components/common";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import farmaceuticaImg from "../../assets/farmaceutica/farmaceutica.jpg";
 import { PageContainer } from "../../components/layout";
@@ -11,7 +16,6 @@ export default function Farmaceutica() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Consultório Farmacêutico
@@ -21,7 +25,6 @@ export default function Farmaceutica() {
           </p>
         </div>
 
-        {/* Sobre o Serviço */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
@@ -95,7 +98,6 @@ export default function Farmaceutica() {
           </div>
         </div>
         {}
-        {/* Card Consultório Farmacêutico */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
             <div>
@@ -103,13 +105,13 @@ export default function Farmaceutica() {
                 Cuidado Farmacêutico Clínico
               </h2>
               <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                Acompanhamento especializado para uso seguro e eficaz de medicamentos
+                Acompanhamento especializado para uso seguro e eficaz de
+                medicamentos
               </p>
             </div>
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Imagem */}
             <div className="mb-6 flex justify-center">
               <ImageWithCredit
                 src={farmaceuticaImg}
@@ -119,14 +121,19 @@ export default function Farmaceutica() {
               />
             </div>
 
-            {/* Descrição */}
             <p className="text-neutral-700 leading-relaxed mb-5">
-              O consultório farmacêutico é um espaço dedicado ao cuidado clínico centrado no paciente, onde o farmacêutico atua de forma colaborativa com a equipe de saúde para garantir o uso racional de medicamentos. Por meio de consultas individualizadas, são identificados e resolvidos problemas relacionados aos medicamentos, orientando sobre o uso correto, interações medicamentosas, efeitos adversos e promovendo a adesão ao tratamento. Esse acompanhamento contribui para melhores resultados terapêuticos, redução de custos e qualidade de vida.
+              O consultório farmacêutico é um espaço dedicado ao cuidado clínico
+              centrado no paciente, onde o farmacêutico atua de forma
+              colaborativa com a equipe de saúde para garantir o uso racional de
+              medicamentos. Por meio de consultas individualizadas, são
+              identificados e resolvidos problemas relacionados aos
+              medicamentos, orientando sobre o uso correto, interações
+              medicamentosas, efeitos adversos e promovendo a adesão ao
+              tratamento. Esse acompanhamento contribui para melhores resultados
+              terapêuticos, redução de custos e qualidade de vida.
             </p>
 
-            {/* Grid de Links */}
             <div className="grid md:grid-cols-1 gap-4">
-              {/* Link para Governo de Minas Gerais */}
               <a
                 href="https://www.saude.mg.gov.br/servicosfarmaceuticos/"
                 target="_blank"
@@ -142,7 +149,9 @@ export default function Farmaceutica() {
                       Saiba Mais
                     </h3>
                     <p className="text-sm text-neutral-600 mb-2">
-                      Consulte informações completas sobre os serviços farmacêuticos no site oficial da Secretaria de Estado de Saúde de Minas Gerais.
+                      Consulte informações completas sobre os serviços
+                      farmacêuticos no site oficial da Secretaria de Estado de
+                      Saúde de Minas Gerais.
                     </p>
                     <div className="flex items-center gap-2 text-sm text-primary-600 font-semibold">
                       <ExternalLink size={16} />
@@ -156,7 +165,6 @@ export default function Farmaceutica() {
         </div>
         {}
         <InfoBox title="Profissionais e Horários de Atendimento">
-          {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto">
             <div className="overflow-hidden rounded-lg shadow-sm border border-primary-200">
               <table className="w-full border-collapse">
@@ -182,8 +190,11 @@ export default function Farmaceutica() {
                       13h00 às 16h00
                     </td>
                     <td className="px-4 py-3 text-neutral-700">
-                      Marcella Oliveira<br/>
-                      <span className="text-neutral-600 text-xs">Função: Farmacêutica Clínica</span>
+                      Marcella Oliveira
+                      <br />
+                      <span className="text-neutral-600 text-xs">
+                        Função: Farmacêutica Clínica
+                      </span>
                     </td>
                   </tr>
                 </tbody>
@@ -191,7 +202,6 @@ export default function Farmaceutica() {
             </div>
           </div>
 
-          {/* Versão Mobile */}
           <div className="md:hidden space-y-4">
             <div className="bg-white/70 border border-primary-200 rounded-lg p-4 shadow-sm">
               <div className="mb-3">
@@ -202,14 +212,20 @@ export default function Farmaceutica() {
               <div className="space-y-3">
                 <div className="pb-3 border-b border-primary-200">
                   <p className="text-xs text-neutral-500 mb-2">Horário</p>
-                  <p className="text-sm font-semibold text-primary-900">13h00 às 16h00</p>
+                  <p className="text-sm font-semibold text-primary-900">
+                    13h00 às 16h00
+                  </p>
                 </div>
                 <div className="pb-2 border-b border-primary-200">
-                  <p className="text-xs text-neutral-500 mb-2"><strong>Profissional Responsável</strong></p>
+                  <p className="text-xs text-neutral-500 mb-2">
+                    <strong>Profissional Responsável</strong>
+                  </p>
                   <p className="text-sm text-neutral-700">Marcella Oliveira</p>
                 </div>
                 <div className="pt-1">
-                  <p className="text-sm text-neutral-700"><strong>Função:</strong> Farmacêutica Clínica</p>
+                  <p className="text-sm text-neutral-700">
+                    <strong>Função:</strong> Farmacêutica Clínica
+                  </p>
                 </div>
               </div>
             </div>
@@ -253,7 +269,6 @@ export default function Farmaceutica() {
         {}
         <InfoBox title="Acesso ao Serviço" className="mb-8">
           <div className="space-y-4">
-            {/* Passo 1 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 1
@@ -282,7 +297,6 @@ export default function Farmaceutica() {
               </div>
             </div>
 
-            {/* Passo 2 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 2
@@ -297,7 +311,6 @@ export default function Farmaceutica() {
               </div>
             </div>
 
-            {/* Passo 3 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 3
@@ -312,11 +325,16 @@ export default function Farmaceutica() {
                 <div className="space-y-2">
                   <div className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-xs sm:text-sm text-neutral-700 break-words">Todos os medicamentos em uso (incluindo receitas e embalagens)</p>
+                    <p className="text-xs sm:text-sm text-neutral-700 break-words">
+                      Todos os medicamentos em uso (incluindo receitas e
+                      embalagens)
+                    </p>
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-green-600 rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="text-xs sm:text-sm text-neutral-700 break-words">Lista de problemas de saúde, se souber</p>
+                    <p className="text-xs sm:text-sm text-neutral-700 break-words">
+                      Lista de problemas de saúde, se souber
+                    </p>
                   </div>
                 </div>
               </div>
@@ -332,31 +350,46 @@ export default function Farmaceutica() {
 
           <div className="space-y-4">
             <div className="bg-white/60 rounded-lg p-4">
-              <h4 className="font-semibold text-blue-900 mb-2 text-sm">O que trazer na consulta:</h4>
+              <h4 className="font-semibold text-blue-900 mb-2 text-sm">
+                O que trazer na consulta:
+              </h4>
               <p className="text-neutral-700 text-sm leading-relaxed">
-                Traga <strong className="text-blue-800">TODOS os medicamentos</strong> que você usa, incluindo vitaminas, suplementos e medicamentos de uso ocasional.
-                Isso ajuda o farmacêutico a fazer uma avaliação completa e identificar possíveis interações medicamentosas.
+                Traga{" "}
+                <strong className="text-blue-800">TODOS os medicamentos</strong>{" "}
+                que você usa, incluindo vitaminas, suplementos e medicamentos de
+                uso ocasional. Isso ajuda o farmacêutico a fazer uma avaliação
+                completa e identificar possíveis interações medicamentosas.
               </p>
             </div>
 
             <div className="bg-white/60 rounded-lg p-4">
-              <h4 className="font-semibold text-blue-900 mb-3 text-sm">Benefícios do Consultório Farmacêutico:</h4>
+              <h4 className="font-semibold text-blue-900 mb-3 text-sm">
+                Benefícios do Consultório Farmacêutico:
+              </h4>
               <div className="grid md:grid-cols-2 gap-3">
                 <div className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-sm text-neutral-700">Melhora do uso dos medicamentos</p>
+                  <p className="text-sm text-neutral-700">
+                    Melhora do uso dos medicamentos
+                  </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-sm text-neutral-700">Redução de efeitos adversos</p>
+                  <p className="text-sm text-neutral-700">
+                    Redução de efeitos adversos
+                  </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-sm text-neutral-700">Economia evitando desperdícios</p>
+                  <p className="text-sm text-neutral-700">
+                    Economia evitando desperdícios
+                  </p>
                 </div>
                 <div className="flex items-start gap-2">
                   <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
-                  <p className="text-sm text-neutral-700">Melhor controle das condições de saúde</p>
+                  <p className="text-sm text-neutral-700">
+                    Melhor controle das condições de saúde
+                  </p>
                 </div>
               </div>
             </div>
@@ -369,7 +402,9 @@ export default function Farmaceutica() {
               <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold mb-2 text-base sm:text-lg">Orientação Importante</p>
+              <p className="font-bold mb-2 text-base sm:text-lg">
+                Orientação Importante
+              </p>
               <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
                 Antes de se dirigir à sala de consulta da farmacêutica
                 responsável, é necessário passar pela recepção da unidade para
@@ -382,7 +417,6 @@ export default function Farmaceutica() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="farmaceutica" />
       </div>

@@ -10,8 +10,10 @@ export default function RecommendedReadingCarousel({ pageId }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercentage = (scrollTop / scrollHeight) * 100;
       setIsVisible(scrollPercentage >= 60);
     };
@@ -48,13 +50,13 @@ export default function RecommendedReadingCarousel({ pageId }) {
   };
 
   const handleLinkClick = (e, path) => {
-    if (path.includes('#')) {
-      const [pathname, hash] = path.split('#');
+    if (path.includes("#")) {
+      const [pathname, hash] = path.split("#");
       if (window.location.pathname === pathname) {
         e.preventDefault();
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }
     }
@@ -63,7 +65,6 @@ export default function RecommendedReadingCarousel({ pageId }) {
   return (
     <div className="bg-gradient-to-r from-neutral-50 to-neutral-100 border-t-2 border-neutral-200 mt-5 pt-5 pb-8 px-4 animate-fade-in">
       <div className="max-w-5xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-2 mb-2">
             <Sparkles size={20} className="text-amber-500" />
@@ -76,9 +77,7 @@ export default function RecommendedReadingCarousel({ pageId }) {
           </p>
         </div>
 
-        {/* Carrossel */}
         <div className="relative flex items-center gap-4">
-          {/* Botão Anterior */}
           <button
             onClick={goToPrevious}
             className="hidden md:flex w-12 h-12 bg-white border-2 border-neutral-300 rounded-full items-center justify-center hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 hover:scale-110 hover:-translate-x-1 shadow-md group flex-shrink-0"
@@ -90,14 +89,12 @@ export default function RecommendedReadingCarousel({ pageId }) {
             />
           </button>
 
-          {/* Card Principal */}
           <Link
             to={currentRecommendation.path}
             onClick={(e) => handleLinkClick(e, currentRecommendation.path)}
             className="flex-1 bg-white border-2 border-neutral-200 rounded-lg p-6 hover:border-primary-400 hover:shadow-lg transition-all duration-300 group"
           >
             <div className="flex items-center gap-6">
-              {/* Categoria Badge */}
               <div className="hidden sm:flex flex-col items-center gap-2 flex-shrink-0">
                 <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-sm">
@@ -109,7 +106,6 @@ export default function RecommendedReadingCarousel({ pageId }) {
                 </span>
               </div>
 
-              {/* Conteúdo */}
               <div className="flex-1 min-w-0">
                 <h4 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2 group-hover:text-primary-700 transition-colors line-clamp-2">
                   {currentRecommendation.title}
@@ -123,7 +119,6 @@ export default function RecommendedReadingCarousel({ pageId }) {
                 </div>
               </div>
 
-              {/* Indicador de clique - apenas desktop */}
               <div className="hidden lg:flex items-center gap-2 flex-shrink-0 text-primary-600 group-hover:text-primary-700">
                 <span className="text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
                   Acessar
@@ -136,7 +131,6 @@ export default function RecommendedReadingCarousel({ pageId }) {
             </div>
           </Link>
 
-          {/* Botão Próximo */}
           <button
             onClick={goToNext}
             className="hidden md:flex w-12 h-12 bg-white border-2 border-neutral-300 rounded-full items-center justify-center hover:border-primary-500 hover:bg-primary-50 transition-all duration-300 hover:scale-110 hover:translate-x-1 shadow-md group flex-shrink-0"
@@ -149,7 +143,6 @@ export default function RecommendedReadingCarousel({ pageId }) {
           </button>
         </div>
 
-        {/* Navegação Mobile - Botões abaixo */}
         <div className="flex md:hidden items-center justify-center gap-4 mt-4">
           <button
             onClick={goToPrevious}
@@ -183,7 +176,6 @@ export default function RecommendedReadingCarousel({ pageId }) {
           </button>
         </div>
 
-        {/* Indicadores Desktop - Pontos */}
         <div className="hidden md:flex items-center justify-center gap-2 mt-6">
           {recommendations.map((_, index) => (
             <button

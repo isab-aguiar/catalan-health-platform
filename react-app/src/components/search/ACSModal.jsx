@@ -1,51 +1,53 @@
-import { useState } from 'react';
-import { MapPin, Phone, Stethoscope, UserCircle2, Users, X } from 'lucide-react';
-import { contactInfo } from '../../config';
+import { useState } from "react";
+import {
+  MapPin,
+  Phone,
+  Stethoscope,
+  UserCircle2,
+  Users,
+  X,
+} from "lucide-react";
+import { contactInfo } from "../../config";
 
-// Mapeamento de nomes curtos para nomes completos - ACS
 const nomesCompletosACS = {
-  'wasley': 'Wasley Borges',
-  'ênes júnior': 'Enes Junior',
-  'ênes': 'Enes Junior',
-  'enes júnior': 'Enes Junior',
-  'enes junior': 'Enes Junior',
-  'erika': 'Erika Roscoe',
-  'renata': 'Renata Rodrigues',
-  'daniel': 'Daniel Henrique',
-  'davi': 'Davi de Castro',
-  'matheus': 'Matheus José',
+  wasley: "Wasley Borges",
+  "ênes júnior": "Enes Junior",
+  ênes: "Enes Junior",
+  "enes júnior": "Enes Junior",
+  "enes junior": "Enes Junior",
+  erika: "Erika Roscoe",
+  renata: "Renata Rodrigues",
+  daniel: "Daniel Henrique",
+  davi: "Davi de Castro",
+  matheus: "Matheus José",
 };
 
-// Mapeamento de nomes curtos para nomes completos - Médicos
 const nomesCompletosMedicos = {
-  'dr. frederico': 'Dr. Frederico Mendes',
-  'dr. gustavo': 'Dr. Gustavo Cambraia',
-  'dr. joão': 'Dr. João Alves',
-  'dr. lúcio': 'Dr. Lúcio',
-  'dr. lucio': 'Dr. Lúcio',
+  "dr. frederico": "Dr. Frederico Mendes",
+  "dr. gustavo": "Dr. Gustavo Cambraia",
+  "dr. joão": "Dr. João Alves",
+  "dr. lúcio": "Dr. Lúcio",
+  "dr. lucio": "Dr. Lúcio",
 };
 
-// Mapeamento de nomes curtos para nomes completos - Enfermeiras
 const nomesCompletosEnfermeiras = {
-  'enf. aline macedo': 'Enf. Aline Macedo',
-  'enf. naiara': 'Enf. Naiara Cristina',
-  'enf. fabíola': 'Enf. Fabiola Cristina',
-  'enf. fabiola': 'Enf. Fabiola Cristina',
-  'enf. jéssica barros': 'Enf. Jéssica Barros',
-  'enf. jessica barros': 'Enf. Jéssica Barros',
+  "enf. aline macedo": "Enf. Aline Macedo",
+  "enf. naiara": "Enf. Naiara Cristina",
+  "enf. fabíola": "Enf. Fabiola Cristina",
+  "enf. fabiola": "Enf. Fabiola Cristina",
+  "enf. jéssica barros": "Enf. Jéssica Barros",
+  "enf. jessica barros": "Enf. Jéssica Barros",
 };
 
-// Mapeamento de nomes curtos para nomes completos - Dentistas
 const nomesCompletosDentistas = {
-  'dra. helena': 'Dra. Helena Dias',
-  'dra. mayra': 'Dra. Mayra Paula',
-  'dr. gabriel': 'Dr. Gabriel Couto',
+  "dra. helena": "Dra. Helena Dias",
+  "dra. mayra": "Dra. Mayra Paula",
+  "dr. gabriel": "Dr. Gabriel Couto",
 };
 
-// Mapeamento de nomes curtos para nomes completos - ASB
 const nomesCompletosASB = {
-  'maycon': 'Maycon Alves',
-  'cibele': 'Cibele Ribeiro',
+  maycon: "Maycon Alves",
+  cibele: "Cibele Ribeiro",
 };
 
 function getNomeCompleto(nome) {
@@ -79,103 +81,104 @@ function getNomeCompletoASB(nome) {
 }
 
 function getGenderFromName(nome) {
-  if (!nome) return 'feminino';
+  if (!nome) return "feminino";
   const nomeNormalizado = nome.trim().toLowerCase();
-  const primeiroNome = nomeNormalizado.split(' ')[0];
+  const primeiroNome = nomeNormalizado.split(" ")[0];
   const nomesMasculinos = [
-    'wasley',
-    'ênes',
-    'davi',
-    'matheus',
-    'maycon',
-    'josé',
-    'joão',
-    'pedro',
-    'carlos',
-    'paulo',
-    'marcos',
-    'lucas',
-    'gabriel',
-    'rafael',
-    'felipe',
-    'bruno',
-    'rodrigo',
-    'ricardo',
-    'andré',
-    'thiago',
-    'guilherme',
-    'daniel',
-    'júnior',
-    'junior',
-    'jose',
-    'antonio',
-    'antônio',
+    "wasley",
+    "ênes",
+    "davi",
+    "matheus",
+    "maycon",
+    "josé",
+    "joão",
+    "pedro",
+    "carlos",
+    "paulo",
+    "marcos",
+    "lucas",
+    "gabriel",
+    "rafael",
+    "felipe",
+    "bruno",
+    "rodrigo",
+    "ricardo",
+    "andré",
+    "thiago",
+    "guilherme",
+    "daniel",
+    "júnior",
+    "junior",
+    "jose",
+    "antonio",
+    "antônio",
   ];
   const nomesFemininos = [
-    'erika',
-    'renata',
-    'isabel',
-    'amanda',
-    'izabelle',
-    'aline',
-    'helena',
-    'maria',
-    'ana',
-    'juliana',
-    'patricia',
-    'fernanda',
-    'carla',
-    'sandra',
-    'adriana',
-    'vanessa',
-    'tatiane',
-    'cristiane',
-    'silvana',
-    'fabíola',
-    'naiara',
-    'denivia',
-    'thaciane',
-    'isabela',
+    "erika",
+    "renata",
+    "isabel",
+    "amanda",
+    "izabelle",
+    "aline",
+    "helena",
+    "maria",
+    "ana",
+    "juliana",
+    "patricia",
+    "fernanda",
+    "carla",
+    "sandra",
+    "adriana",
+    "vanessa",
+    "tatiane",
+    "cristiane",
+    "silvana",
+    "fabíola",
+    "naiara",
+    "denivia",
+    "thaciane",
+    "isabela",
   ];
   if (
     nomesMasculinos.includes(primeiroNome) ||
     nomesMasculinos.some((nomeM) => primeiroNome.includes(nomeM))
   ) {
-    return 'masculino';
+    return "masculino";
   }
   if (
     nomesFemininos.includes(primeiroNome) ||
     nomesFemininos.some((nomeF) => primeiroNome.includes(nomeF))
   ) {
-    return 'feminino';
+    return "feminino";
   }
   const ultimaLetra = primeiroNome.slice(-1);
   if (
-    ultimaLetra === 'a' &&
-    !primeiroNome.endsWith('joão') &&
-    !primeiroNome.endsWith('marcos')
+    ultimaLetra === "a" &&
+    !primeiroNome.endsWith("joão") &&
+    !primeiroNome.endsWith("marcos")
   ) {
-    return 'feminino';
+    return "feminino";
   }
-  return 'feminino';
+  return "feminino";
 }
 export default function ACSModal({ acs, onClose }) {
   const [imageError, setImageError] = useState(false);
 
   if (!acs) return null;
 
-  const photoUrl = acs.photo || 'https://via.placeholder.com/500x500/2196F3/ffffff?text=ACS';
+  const photoUrl =
+    acs.photo || "https://via.placeholder.com/500x500/2196F3/ffffff?text=ACS";
   const nomeOriginal = acs.nome || acs.acs;
   const nomeACS = getNomeCompleto(nomeOriginal);
-  const isAreaDescoberta = nomeOriginal.includes('Área Descoberta');
-  const isSaoJudas = acs.esf === 'ESF SÃO JUDAS';
+  const isAreaDescoberta = nomeOriginal.includes("Área Descoberta");
+  const isSaoJudas = acs.esf === "ESF SÃO JUDAS";
   const genero = getGenderFromName(nomeOriginal);
   const tituloAgente =
-    genero === 'masculino'
-      ? 'Agente Comunitário de Saúde (ACS)'
-      : 'Agente Comunitária de Saúde (ACS)';
+    genero === "masculino"
+      ? "Agente Comunitário de Saúde (ACS)"
+      : "Agente Comunitária de Saúde (ACS)";
   const microareaFormatada = acs.microarea
-    ? String(acs.microarea).padStart(2, '0')
+    ? String(acs.microarea).padStart(2, "0")
     : acs.microarea;
 
   return (
@@ -215,8 +218,18 @@ export default function ACSModal({ acs, onClose }) {
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-                      <svg className="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      <svg
+                        className="w-24 h-24 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
                       </svg>
                     </div>
                   )}
@@ -255,9 +268,9 @@ export default function ACSModal({ acs, onClose }) {
                     <>
                       <p className="mb-2">Olá!</p>
                       <p>
-                        Meu nome é <strong>{nomeACS}</strong>, sou{' '}
+                        Meu nome é <strong>{nomeACS}</strong>, sou{" "}
                         {tituloAgente} da <strong>{acs.esf}</strong>,
-                        responsável pela Microárea{' '}
+                        responsável pela Microárea{" "}
                         <strong>{microareaFormatada}</strong>.
                       </p>
                       <p className="mt-2">
@@ -283,10 +296,20 @@ export default function ACSModal({ acs, onClose }) {
                   </p>
                   <div className="bg-white rounded-lg p-4 space-y-2">
                     <p className="font-semibold text-neutral-900">
-                      <strong>Endereço:</strong> {contactInfo.address.referenceUnits.esfMoradaNova.street} - {contactInfo.address.referenceUnits.esfMoradaNova.neighborhood}
+                      <strong>Endereço:</strong>{" "}
+                      {contactInfo.address.referenceUnits.esfMoradaNova.street}{" "}
+                      -{" "}
+                      {
+                        contactInfo.address.referenceUnits.esfMoradaNova
+                          .neighborhood
+                      }
                     </p>
                     <p className="font-semibold text-neutral-900">
-                      <strong>Telefone:</strong> {contactInfo.phones.referenceUnits.esfMoradaNova.display.replace('(37) ', '')}
+                      <strong>Telefone:</strong>{" "}
+                      {contactInfo.phones.referenceUnits.esfMoradaNova.display.replace(
+                        "(37) ",
+                        ""
+                      )}
                     </p>
                   </div>
                 </div>
@@ -317,22 +340,30 @@ export default function ACSModal({ acs, onClose }) {
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="bg-white rounded-lg p-4 shadow-sm">
                   <p className="text-sm text-neutral-600 mb-1">Médico(a)</p>
-                  <p className="font-bold text-neutral-900">{getNomeCompletoMedico(acs.medico)}</p>
+                  <p className="font-bold text-neutral-900">
+                    {getNomeCompletoMedico(acs.medico)}
+                  </p>
                 </div>
                 <div className="bg-white rounded-lg p-4 shadow-sm">
                   <p className="text-sm text-neutral-600 mb-1">Enfermeira</p>
-                  <p className="font-bold text-neutral-900">{getNomeCompletoEnfermeira(acs.enfermeira)}</p>
+                  <p className="font-bold text-neutral-900">
+                    {getNomeCompletoEnfermeira(acs.enfermeira)}
+                  </p>
                 </div>
                 {!isSaoJudas && (
                   <div className="bg-white rounded-lg p-4 shadow-sm">
                     <p className="text-sm text-neutral-600 mb-1">Dentista</p>
-                    <p className="font-bold text-neutral-900">{getNomeCompletoDentista(acs.dentista)}</p>
+                    <p className="font-bold text-neutral-900">
+                      {getNomeCompletoDentista(acs.dentista)}
+                    </p>
                   </div>
                 )}
                 {acs.asb && !isSaoJudas && (
                   <div className="bg-white rounded-lg p-4 shadow-sm">
                     <p className="text-sm text-neutral-600 mb-1">ASB</p>
-                    <p className="font-bold text-neutral-900">{getNomeCompletoASB(acs.asb)}</p>
+                    <p className="font-bold text-neutral-900">
+                      {getNomeCompletoASB(acs.asb)}
+                    </p>
                   </div>
                 )}
               </div>

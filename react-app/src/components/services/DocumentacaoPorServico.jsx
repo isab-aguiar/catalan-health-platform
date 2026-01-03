@@ -33,59 +33,61 @@ function Alert({ type = "info", children }) {
   );
 }
 
-// Mapeamento dos procedimentos do novo formato para o antigo (somente documentos e observações)
 const mapearProcedimentos = (procedimentos) => {
   const mapeados = {};
 
   Object.entries(procedimentos).forEach(([key, proc]) => {
-    // Filtra procedimentos sem prestador disponível
     if (proc.semPrestador) {
       return;
     }
 
-    // Filtra apenas observações relevantes para o usuário (não informações operacionais)
-    const observacoesUsuario = proc.observacoes?.filter(obs => {
-      // Remove observações operacionais/internas
-      const obsLower = obs.toLowerCase();
-      return !obsLower.includes('protocolar') &&
-             !obsLower.includes('lançar') &&
-             !obsLower.includes('encaminhar') &&
-             !obsLower.includes('passar pela') &&
-             !obsLower.includes('deixar na pasta');
-    }) || [];
+    const observacoesUsuario =
+      proc.observacoes?.filter((obs) => {
+        const obsLower = obs.toLowerCase();
+        return (
+          !obsLower.includes("protocolar") &&
+          !obsLower.includes("lançar") &&
+          !obsLower.includes("encaminhar") &&
+          !obsLower.includes("passar pela") &&
+          !obsLower.includes("deixar na pasta")
+        );
+      }) || [];
 
     mapeados[key] = {
       nome: proc.nome,
-      documentos: proc.documentosNecessarios.map(doc => ({
+      documentos: proc.documentosNecessarios.map((doc) => ({
         titulo: doc,
-        descricao: "" // Não mostrar descrições detalhadas
+        descricao: "",
       })),
-      observacoes: observacoesUsuario
+      observacoes: observacoesUsuario,
     };
   });
 
   return mapeados;
 };
 
-
 export default function DocumentacaoPorServico() {
   const [servicoSelecionado, setServicoSelecionado] = useState("");
   const [menuAberto, setMenuAberto] = useState(false);
   const menuRef = useRef(null);
 
-  const servicosDocumentacao = useMemo(() => mapearProcedimentos(procedimentosMedicos), []);
+  const servicosDocumentacao = useMemo(
+    () => mapearProcedimentos(procedimentosMedicos),
+    []
+  );
 
   const servicoAtual = servicoSelecionado
     ? servicosDocumentacao[servicoSelecionado]
     : null;
 
-  const listaServicos = useMemo(() =>
-    Object.entries(servicosDocumentacao)
-      .map(([key, servico]) => ({
-        key,
-        nome: servico.nome,
-      }))
-      .sort((a, b) => a.nome.localeCompare(b.nome)), // Ordenar alfabeticamente
+  const listaServicos = useMemo(
+    () =>
+      Object.entries(servicosDocumentacao)
+        .map(([key, servico]) => ({
+          key,
+          nome: servico.nome,
+        }))
+        .sort((a, b) => a.nome.localeCompare(b.nome)),
     [servicosDocumentacao]
   );
 
@@ -133,7 +135,10 @@ export default function DocumentacaoPorServico() {
             {menuAberto ? (
               <X size={18} className="text-neutral-500 flex-shrink-0 ml-2" />
             ) : (
-              <ChevronDown size={18} className="text-neutral-500 flex-shrink-0 ml-2" />
+              <ChevronDown
+                size={18}
+                className="text-neutral-500 flex-shrink-0 ml-2"
+              />
             )}
           </button>
 
@@ -200,7 +205,8 @@ export default function DocumentacaoPorServico() {
             </Alert>
           )}
 
-          {(!servicoAtual.observacoes || servicoAtual.observacoes.length === 0) && (
+          {(!servicoAtual.observacoes ||
+            servicoAtual.observacoes.length === 0) && (
             <Alert type="warning">
               <strong>Normativa:</strong> Documento de identificação com foto e
               CPF do titular são obrigatórios para qualquer atendimento na
@@ -221,4 +227,3 @@ export default function DocumentacaoPorServico() {
     </div>
   );
 }
-

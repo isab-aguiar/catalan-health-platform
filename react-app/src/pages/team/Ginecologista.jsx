@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { AlertCircle, ExternalLink } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+  Alert,
+  InfoBox,
+} from "../../components/common";
 import ImageWithCredit from "../../components/common/ImageWithCredit";
 import ginecologiaImg from "../../assets/ginecologista/ilustracao-de-consulta-de-ginecologia.avif";
 import { PageContainer } from "../../components/layout";
@@ -12,7 +17,6 @@ export default function Ginecologista() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Ginecologia e Obstetrícia
@@ -22,20 +26,20 @@ export default function Ginecologista() {
           </p>
         </div>
 
-        {/* Sobre o Serviço */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
-            O atendimento de ginecologia e obstetrícia oferece cuidado integral à
-            saúde feminina em todas as fases da vida. Realizamos consultas
+            O atendimento de ginecologia e obstetrícia oferece cuidado integral
+            à saúde feminina em todas as fases da vida. Realizamos consultas
             ginecológicas, acompanhamento pré-natal intercalado com enfermagem,
             inserção e retirada de DIU de cobre, e planejamento familiar.
           </p>
           <div className="bg-blue-100/50 border border-blue-300 rounded-lg p-4 mb-5">
             <p className="text-neutral-700 text-sm leading-relaxed">
-              Para informações sobre a documentação necessária para acesso aos serviços oferecidos, favor consultar a{" "}
+              Para informações sobre a documentação necessária para acesso aos
+              serviços oferecidos, favor consultar a{" "}
               <Link
                 to="/servicos/sala-4#documentacao-necessaria"
                 className="text-blue-700 hover:text-blue-900 underline font-semibold"
@@ -105,7 +109,6 @@ export default function Ginecologista() {
           </div>
         </div>
         {}
-        {/* Card Cuidado Integral à Saúde Feminina */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
             <div>
@@ -113,13 +116,13 @@ export default function Ginecologista() {
                 Cuidado Integral à Saúde Feminina
               </h2>
               <p className="text-neutral-600 text-sm sm:text-base mt-1">
-                Atendimento especializado para mulheres em todas as fases da vida
+                Atendimento especializado para mulheres em todas as fases da
+                vida
               </p>
             </div>
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Imagem */}
             <div className="mb-6 flex justify-center">
               <ImageWithCredit
                 src={ginecologiaImg}
@@ -130,14 +133,20 @@ export default function Ginecologista() {
               />
             </div>
 
-            {/* Descrição */}
             <p className="text-neutral-700 leading-relaxed mb-5">
-              O cuidado integral à saúde feminina é fundamental para garantir o bem-estar e a qualidade de vida da mulher em todas as etapas da vida. Através do atendimento ginecológico e obstétrico, oferecemos acompanhamento desde a adolescência até a menopausa, incluindo consultas de rotina, prevenção de doenças, acompanhamento pré-natal, planejamento familiar e orientações sobre saúde reprodutiva. Este cuidado permite identificar precocemente possíveis alterações, promover hábitos saudáveis e intervir de forma adequada, contribuindo para uma vida saudável e com melhor qualidade de vida.
+              O cuidado integral à saúde feminina é fundamental para garantir o
+              bem-estar e a qualidade de vida da mulher em todas as etapas da
+              vida. Através do atendimento ginecológico e obstétrico, oferecemos
+              acompanhamento desde a adolescência até a menopausa, incluindo
+              consultas de rotina, prevenção de doenças, acompanhamento
+              pré-natal, planejamento familiar e orientações sobre saúde
+              reprodutiva. Este cuidado permite identificar precocemente
+              possíveis alterações, promover hábitos saudáveis e intervir de
+              forma adequada, contribuindo para uma vida saudável e com melhor
+              qualidade de vida.
             </p>
 
-            {/* Grid de Links */}
             <div className="grid md:grid-cols-1 gap-4">
-              {/* Link para Ministério da Saúde */}
               <a
                 href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-da-mulher"
                 target="_blank"
@@ -153,7 +162,8 @@ export default function Ginecologista() {
                       Saiba Mais
                     </h3>
                     <p className="text-sm text-neutral-600 mb-2">
-                      Consulte informações completas sobre saúde da mulher no site oficial do Ministério da Saúde.
+                      Consulte informações completas sobre saúde da mulher no
+                      site oficial do Ministério da Saúde.
                     </p>
                     <div className="flex items-center gap-2 text-sm text-primary-600 font-semibold">
                       <ExternalLink size={16} />
@@ -208,7 +218,6 @@ export default function Ginecologista() {
         {}
         <InfoBox title="Acesso ao Serviço" className="mb-8">
           <div className="space-y-4">
-            {/* Passo 1 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 1
@@ -218,7 +227,9 @@ export default function Ginecologista() {
                   Inserção e Retirada de DIU de Cobre
                 </strong>
                 <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
-                  O acesso ocorre mediante avaliação clínica e encaminhamento pela enfermeira ou pelo médico da unidade. Após o encaminhamento, dirija-se à{" "}
+                  O acesso ocorre mediante avaliação clínica e encaminhamento
+                  pela enfermeira ou pelo médico da unidade. Após o
+                  encaminhamento, dirija-se à{" "}
                   <Link
                     to="/servicos/sala-4"
                     className="text-blue-600 hover:text-blue-800 underline font-semibold"
@@ -230,7 +241,6 @@ export default function Ginecologista() {
               </div>
             </div>
 
-            {/* Passo 2 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 2
@@ -240,7 +250,9 @@ export default function Ginecologista() {
                   Consulta com Ginecologista (com encaminhamento)
                 </strong>
                 <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
-                  O encaminhamento é realizado pela enfermeira ou pelo médico da unidade, conforme avaliação clínica. Após o encaminhamento, dirija-se à{" "}
+                  O encaminhamento é realizado pela enfermeira ou pelo médico da
+                  unidade, conforme avaliação clínica. Após o encaminhamento,
+                  dirija-se à{" "}
                   <Link
                     to="/servicos/sala-4"
                     className="text-blue-600 hover:text-blue-800 underline font-semibold"
@@ -252,29 +264,30 @@ export default function Ginecologista() {
               </div>
             </div>
 
-            {/* Passo 3 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 3
               </div>
               <div className="flex-1 min-w-0 bg-gradient-to-r from-blue-50 to-transparent p-3 sm:p-4 rounded-lg border-l-4 border-blue-500">
                 <strong className="text-neutral-900 text-sm sm:text-base block mb-2">
-                  Agendamento de Retorno em Ginecologia (sem novo encaminhamento)
+                  Agendamento de Retorno em Ginecologia (sem novo
+                  encaminhamento)
                 </strong>
                 <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
-                  Para usuárias em acompanhamento ginecológico em retorno na unidade. Dirija-se diretamente à{" "}
+                  Para usuárias em acompanhamento ginecológico em retorno na
+                  unidade. Dirija-se diretamente à{" "}
                   <Link
                     to="/servicos/sala-4"
                     className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     Sala de Agendamentos
                   </Link>{" "}
-                  para realizar a marcação da consulta, sem necessidade de novo encaminhamento.
+                  para realizar a marcação da consulta, sem necessidade de novo
+                  encaminhamento.
                 </p>
               </div>
             </div>
 
-            {/* Passo 4 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 4
@@ -284,7 +297,10 @@ export default function Ginecologista() {
                   Pré-natal
                 </strong>
                 <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed break-words">
-                  O acompanhamento é realizado de forma intercalada entre enfermeira e médico. A primeira consulta é obrigatoriamente realizada pela enfermeira, que fará a avaliação inicial e os encaminhamentos necessários para a continuidade do cuidado.
+                  O acompanhamento é realizado de forma intercalada entre
+                  enfermeira e médico. A primeira consulta é obrigatoriamente
+                  realizada pela enfermeira, que fará a avaliação inicial e os
+                  encaminhamentos necessários para a continuidade do cuidado.
                 </p>
               </div>
             </div>
@@ -305,48 +321,59 @@ export default function Ginecologista() {
             <div className="space-y-2">
               <div className="bg-green-50 border-l-4 border-green-600 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-green-900">1ª Consulta:</strong> Realizada com Enfermagem
+                  <strong className="text-green-900">1ª Consulta:</strong>{" "}
+                  Realizada com Enfermagem
                 </p>
               </div>
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-blue-900">2ª Consulta:</strong> Realizada com Ginecologista
+                  <strong className="text-blue-900">2ª Consulta:</strong>{" "}
+                  Realizada com Ginecologista
                 </p>
               </div>
               <div className="bg-green-50 border-l-4 border-green-600 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-green-900">3ª Consulta:</strong> Realizada com Enfermagem
+                  <strong className="text-green-900">3ª Consulta:</strong>{" "}
+                  Realizada com Enfermagem
                 </p>
               </div>
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-blue-900">4ª Consulta:</strong> Realizada com Ginecologista
+                  <strong className="text-blue-900">4ª Consulta:</strong>{" "}
+                  Realizada com Ginecologista
                 </p>
               </div>
               <div className="bg-green-50 border-l-4 border-green-600 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-green-900">5ª Consulta:</strong> Realizada com Enfermagem
+                  <strong className="text-green-900">5ª Consulta:</strong>{" "}
+                  Realizada com Enfermagem
                 </p>
               </div>
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-blue-900">6ª Consulta:</strong> Realizada com Ginecologista
+                  <strong className="text-blue-900">6ª Consulta:</strong>{" "}
+                  Realizada com Ginecologista
                 </p>
               </div>
               <div className="bg-green-50 border-l-4 border-green-600 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-green-900">7ª Consulta:</strong> Realizada com Enfermagem
+                  <strong className="text-green-900">7ª Consulta:</strong>{" "}
+                  Realizada com Enfermagem
                 </p>
               </div>
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-blue-900">8ª Consulta:</strong> Realizada com Ginecologista
+                  <strong className="text-blue-900">8ª Consulta:</strong>{" "}
+                  Realizada com Ginecologista
                 </p>
               </div>
               <div className="bg-neutral-50 border-l-4 border-neutral-400 rounded-r p-3">
                 <p className="text-sm text-neutral-700">
-                  <strong className="text-neutral-900">Demais consultas:</strong> Continuam intercaladas entre
-                  Ginecologista e Enfermagem conforme demanda e necessidade clínica
+                  <strong className="text-neutral-900">
+                    Demais consultas:
+                  </strong>{" "}
+                  Continuam intercaladas entre Ginecologista e Enfermagem
+                  conforme demanda e necessidade clínica
                 </p>
               </div>
             </div>
@@ -359,15 +386,21 @@ export default function Ginecologista() {
             </h3>
             <div className="space-y-2 text-sm text-neutral-700">
               <p>
-                <strong className="text-amber-900">Gestação de Risco Habitual (baixo risco):</strong>{" "}
-                Acompanhamento realizado integralmente na ESF (Estratégia Saúde da Família),
-                com consultas intercaladas entre ginecologista e enfermagem.
+                <strong className="text-amber-900">
+                  Gestação de Risco Habitual (baixo risco):
+                </strong>{" "}
+                Acompanhamento realizado integralmente na ESF (Estratégia Saúde
+                da Família), com consultas intercaladas entre ginecologista e
+                enfermagem.
               </p>
               <p>
-                <strong className="text-amber-900">Gestação de Alto Risco:</strong>{" "}
+                <strong className="text-amber-900">
+                  Gestação de Alto Risco:
+                </strong>{" "}
                 Gestante é encaminhada para acompanhamento especializado no PNAR
-                (Pré-Natal de Alto Risco), mas <strong>continua sendo acompanhada
-                também na ESF</strong> para cuidado integral e coordenado.
+                (Pré-Natal de Alto Risco), mas{" "}
+                <strong>continua sendo acompanhada também na ESF</strong> para
+                cuidado integral e coordenado.
               </p>
             </div>
           </div>
@@ -378,22 +411,27 @@ export default function Ginecologista() {
                 <AlertCircle size={20} className="text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="font-bold text-green-900 mb-2 text-base">Importante</h3>
+                <h3 className="font-bold text-green-900 mb-2 text-base">
+                  Importante
+                </h3>
                 <p className="text-neutral-800 text-sm leading-relaxed">
-                  O padrão de intercalação é: 1ª consulta com Enfermagem, 2ª com Ginecologista, e assim sucessivamente, garantindo o acompanhamento completo e contínuo durante toda a gestação.
+                  O padrão de intercalação é: 1ª consulta com Enfermagem, 2ª com
+                  Ginecologista, e assim sucessivamente, garantindo o
+                  acompanhamento completo e contínuo durante toda a gestação.
                 </p>
               </div>
             </div>
           </div>
         </InfoBox>
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-6 shadow-md mt-6">
           <div className="flex items-start gap-3 sm:gap-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
               <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold mb-2 text-base sm:text-lg">Orientação Importante</p>
+              <p className="font-bold mb-2 text-base sm:text-lg">
+                Orientação Importante
+              </p>
               <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
                 Antes de se dirigir à sala de consulta do ginecologista
                 responsável, é necessário passar pela recepção da unidade para
@@ -406,7 +444,6 @@ export default function Ginecologista() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="ginecologista" />
       </div>

@@ -17,14 +17,12 @@ export default function CampanhasPaginaWrapper({ pagina }) {
 
   return (
     <div className="mb-8 px-4 sm:px-6 lg:px-8">
-      {/* Carrossel de imagens */}
       {comImagem.length > 0 && (
         <div className="mb-6">
           <CampanhaCarousel campanhas={comImagem} />
         </div>
       )}
 
-      {/* Card de informações abaixo do carrossel */}
       {comImagem.length > 0 && comImagem[0] && (
         <div className="mt-6">
           <CampanhaInfoCard campanha={comImagem[0]} />

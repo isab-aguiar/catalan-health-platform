@@ -1,5 +1,16 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, Users, FileText, Calendar, Phone, Heart, Stethoscope, Baby, UserCheck, CheckCircle } from "lucide-react";
+import {
+  AlertCircle,
+  Users,
+  FileText,
+  Calendar,
+  Phone,
+  Heart,
+  Stethoscope,
+  Baby,
+  UserCheck,
+  CheckCircle,
+} from "lucide-react";
 import BackButton from "../../components/common/BackButton";
 import PageContainer from "../../components/layout/PageContainer";
 import logoBolsaFamilia from "../../assets/bolsa-familia/Logo_Bolsa_Familia.png";
@@ -10,7 +21,6 @@ export default function BolsaFamilia() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Bolsa Família e Serviço Social
@@ -111,7 +121,8 @@ export default function BolsaFamilia() {
                   Programa Bolsa Família
                 </p>
                 <p className="text-neutral-600 text-sm mt-2 max-w-2xl">
-                  Cuidar da saúde da sua família é garantir o futuro. Estamos aqui para apoiar você nessa jornada.
+                  Cuidar da saúde da sua família é garantir o futuro. Estamos
+                  aqui para apoiar você nessa jornada.
                 </p>
               </div>
             </div>
@@ -122,9 +133,14 @@ export default function BolsaFamilia() {
             {/* Introdução */}
             <div className="bg-blue-50 rounded-lg p-4 sm:p-5 shadow-sm border border-blue-200">
               <p className="text-neutral-700 leading-relaxed text-sm">
-                O acompanhamento de saúde é uma <strong className="text-green-700">etapa obrigatória</strong> para as famílias beneficiárias do Programa Bolsa Família.
-                Mais do que garantir a continuidade do benefício financeiro, este procedimento visa assegurar o <strong>desenvolvimento saudável das crianças</strong>,
-                o <strong>cuidado integral com a saúde da mulher</strong> e o <strong>acompanhamento adequado das gestantes</strong>.
+                O acompanhamento de saúde é uma{" "}
+                <strong className="text-green-700">etapa obrigatória</strong>{" "}
+                para as famílias beneficiárias do Programa Bolsa Família. Mais
+                do que garantir a continuidade do benefício financeiro, este
+                procedimento visa assegurar o{" "}
+                <strong>desenvolvimento saudável das crianças</strong>, o{" "}
+                <strong>cuidado integral com a saúde da mulher</strong> e o{" "}
+                <strong>acompanhamento adequado das gestantes</strong>.
               </p>
             </div>
 
@@ -137,7 +153,8 @@ export default function BolsaFamilia() {
                 <span>Quem deve comparecer à Unidade de Saúde?</span>
               </h3>
               <p className="text-neutral-700 mb-4 text-sm">
-                O público-alvo para o acompanhamento das condicionalidades de saúde inclui:
+                O público-alvo para o acompanhamento das condicionalidades de
+                saúde inclui:
               </p>
               <div className="grid md:grid-cols-3 gap-4">
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border-2 border-blue-200">
@@ -192,7 +209,9 @@ export default function BolsaFamilia() {
                     <FileText className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-blue-900 mb-1 text-sm">Verificação do Calendário Vacinal</h4>
+                    <h4 className="font-bold text-blue-900 mb-1 text-sm">
+                      Verificação do Calendário Vacinal
+                    </h4>
                     <p className="text-sm text-neutral-700">
                       Conferência e atualização de doses atrasadas
                     </p>
@@ -204,9 +223,12 @@ export default function BolsaFamilia() {
                     <Users className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-blue-900 mb-1 text-sm">Acompanhamento Nutricional</h4>
+                    <h4 className="font-bold text-blue-900 mb-1 text-sm">
+                      Acompanhamento Nutricional
+                    </h4>
                     <p className="text-sm text-neutral-700">
-                      Medição de peso e altura para monitoramento do crescimento e desenvolvimento
+                      Medição de peso e altura para monitoramento do crescimento
+                      e desenvolvimento
                     </p>
                   </div>
                 </div>
@@ -216,9 +238,12 @@ export default function BolsaFamilia() {
                     <Heart className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-blue-900 mb-1 text-sm">Pré-natal</h4>
+                    <h4 className="font-bold text-blue-900 mb-1 text-sm">
+                      Pré-natal
+                    </h4>
                     <p className="text-sm text-neutral-700">
-                      Acompanhamento obrigatório e contínuo para gestantes beneficiárias
+                      Acompanhamento obrigatório e contínuo para gestantes
+                      beneficiárias
                     </p>
                   </div>
                 </div>
@@ -232,25 +257,42 @@ export default function BolsaFamilia() {
                   <Calendar className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-amber-900 mb-3 text-base">Acompanhamento de Vigências e Prazos</h3>
+                  <h3 className="font-bold text-amber-900 mb-3 text-base">
+                    Acompanhamento de Vigências e Prazos
+                  </h3>
                   <p className="text-neutral-700 leading-relaxed text-sm mb-3">
-                    Para garantir a continuidade do seu benefício no Programa Bolsa Família, é fundamental acompanhar
-                    os períodos de vigência estabelecidos pelo Ministério do Desenvolvimento Social.
+                    Para garantir a continuidade do seu benefício no Programa
+                    Bolsa Família, é fundamental acompanhar os períodos de
+                    vigência estabelecidos pelo Ministério do Desenvolvimento
+                    Social.
                   </p>
                   <div className="bg-white/60 rounded-md p-3 mb-3">
-                    <h4 className="font-semibold text-amber-900 mb-2 text-sm">Como se manter informado:</h4>
+                    <h4 className="font-semibold text-amber-900 mb-2 text-sm">
+                      Como se manter informado:
+                    </h4>
                     <ul className="space-y-2 text-sm text-neutral-700">
                       <li className="flex items-start gap-2">
-                        <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Consulte regularmente o site oficial da unidade</span>
+                        <span className="text-amber-600 font-bold mt-0.5">
+                          •
+                        </span>
+                        <span>
+                          Consulte regularmente o site oficial da unidade
+                        </span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Mantenha seus dados de contato atualizados no CadÚnico</span>
+                        <span className="text-amber-600 font-bold mt-0.5">
+                          •
+                        </span>
+                        <span>
+                          Mantenha seus dados de contato atualizados no CadÚnico
+                        </span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-amber-600 font-bold mt-0.5">•</span>
-                        <span>Fique atento às comunicações enviadas pelo seu{" "}
+                        <span className="text-amber-600 font-bold mt-0.5">
+                          •
+                        </span>
+                        <span>
+                          Fique atento às comunicações enviadas pelo seu{" "}
                           <Link
                             to="/acs"
                             className="text-amber-800 hover:text-amber-900 font-semibold underline"
@@ -263,7 +305,8 @@ export default function BolsaFamilia() {
                   </div>
                   <div className="bg-amber-100 rounded-md p-3">
                     <p className="text-amber-900 text-sm font-semibold">
-                      O não comparecimento dentro do prazo estabelecido pode resultar no bloqueio ou suspensão do benefício.
+                      O não comparecimento dentro do prazo estabelecido pode
+                      resultar no bloqueio ou suspensão do benefício.
                     </p>
                   </div>
                 </div>
@@ -273,7 +316,9 @@ export default function BolsaFamilia() {
         </div>
 
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 shadow-sm border border-blue-200 mb-6">
-          <h2 className="text-xl font-bold text-blue-900 mb-4">Como Acessar o Serviço</h2>
+          <h2 className="text-xl font-bold text-blue-900 mb-4">
+            Como Acessar o Serviço
+          </h2>
 
           <div className="space-y-3">
             {/* Acompanhamento de Saúde - Bolsa Família */}
@@ -285,8 +330,8 @@ export default function BolsaFamilia() {
                 <span>Acompanhamento de Condicionalidades de Saúde</span>
               </h3>
               <p className="text-sm text-neutral-700 mb-3 leading-relaxed">
-                Para o acompanhamento de saúde do Programa Bolsa Família (vacinação, pré-natal, nutrição),
-                dirija-se diretamente à{" "}
+                Para o acompanhamento de saúde do Programa Bolsa Família
+                (vacinação, pré-natal, nutrição), dirija-se diretamente à{" "}
                 <Link
                   to="/servicos/recepcao"
                   className="text-blue-600 hover:text-blue-700 font-semibold underline"
@@ -297,9 +342,12 @@ export default function BolsaFamilia() {
               </p>
               <div className="bg-blue-50 rounded-md p-3">
                 <p className="text-sm text-blue-900">
-                  <strong>Responsáveis:</strong> O acompanhamento é realizado pelos{" "}
-                  <span className="font-semibold">Agentes Comunitários de Saúde (ACS)</span> em parceria
-                  com a equipe de enfermagem da unidade.
+                  <strong>Responsáveis:</strong> O acompanhamento é realizado
+                  pelos{" "}
+                  <span className="font-semibold">
+                    Agentes Comunitários de Saúde (ACS)
+                  </span>{" "}
+                  em parceria com a equipe de enfermagem da unidade.
                 </p>
               </div>
             </div>
@@ -313,7 +361,8 @@ export default function BolsaFamilia() {
                 <span>Telefone da Recepção</span>
               </h3>
               <p className="text-sm text-neutral-700 leading-relaxed">
-                Para dúvidas ou informações adicionais sobre os programas sociais, entre em contato através do{" "}
+                Para dúvidas ou informações adicionais sobre os programas
+                sociais, entre em contato através do{" "}
                 <Link
                   to="/#contato"
                   className="text-blue-600 hover:text-blue-700 font-semibold underline"
@@ -333,7 +382,14 @@ export default function BolsaFamilia() {
                 <span>Documentos Necessários</span>
               </h3>
               <p className="text-sm text-neutral-700 mb-3 leading-relaxed">
-                Para realizar o acompanhamento, compareça à <Link to="/servicos/recepcao" className="text-blue-600 hover:text-blue-700 font-semibold underline">recepção</Link> munido de:
+                Para realizar o acompanhamento, compareça à{" "}
+                <Link
+                  to="/servicos/recepcao"
+                  className="text-blue-600 hover:text-blue-700 font-semibold underline"
+                >
+                  recepção
+                </Link>{" "}
+                munido de:
               </p>
               <div className="grid md:grid-cols-2 gap-3">
                 <div className="flex items-center gap-3 bg-blue-50 p-3 rounded border border-blue-100">
@@ -365,10 +421,13 @@ export default function BolsaFamilia() {
               <CheckCircle size={20} className="text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-green-900 mb-3 text-base">Manutenção do Benefício</h3>
+              <h3 className="font-bold text-green-900 mb-3 text-base">
+                Manutenção do Benefício
+              </h3>
               <p className="text-neutral-700 leading-relaxed text-sm mb-3">
-                O acompanhamento das condicionalidades do Programa Bolsa Família é essencial para garantir
-                a continuidade do benefício da sua família. Existem duas áreas principais de acompanhamento:
+                O acompanhamento das condicionalidades do Programa Bolsa Família
+                é essencial para garantir a continuidade do benefício da sua
+                família. Existem duas áreas principais de acompanhamento:
               </p>
               <div className="grid md:grid-cols-2 gap-3">
                 <div className="bg-white/60 rounded-md p-3">
@@ -377,7 +436,8 @@ export default function BolsaFamilia() {
                     Saúde
                   </h4>
                   <p className="text-sm text-neutral-700">
-                    Mantenha em dia as consultas de saúde, vacinação e acompanhamento nutricional das crianças e gestantes.
+                    Mantenha em dia as consultas de saúde, vacinação e
+                    acompanhamento nutricional das crianças e gestantes.
                   </p>
                 </div>
                 <div className="bg-white/60 rounded-md p-3">
@@ -386,13 +446,15 @@ export default function BolsaFamilia() {
                     Educação
                   </h4>
                   <p className="text-sm text-neutral-700">
-                    Garanta a frequência escolar mínima de 85% para crianças e adolescentes de 6 a 15 anos.
+                    Garanta a frequência escolar mínima de 85% para crianças e
+                    adolescentes de 6 a 15 anos.
                   </p>
                 </div>
               </div>
               <div className="mt-3 bg-green-100 rounded-md p-3">
                 <p className="text-green-900 text-sm font-semibold">
-                  O descumprimento das condicionalidades pode resultar em advertência, bloqueio ou suspensão do benefício.
+                  O descumprimento das condicionalidades pode resultar em
+                  advertência, bloqueio ou suspensão do benefício.
                 </p>
               </div>
             </div>

@@ -1,12 +1,16 @@
 import { Calendar, Clock, AlertCircle, Users } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, Alert, InfoBox } from "../../components/common";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+  Alert,
+  InfoBox,
+} from "../../components/common";
 import { PageContainer } from "../../components/layout";
 export default function Hiperdia() {
   return (
     <PageContainer>
       <div className="max-w-5xl mx-auto">
         <BackButton />
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-white">
             Grupo de Diabetes e Hipertensão
@@ -15,7 +19,6 @@ export default function Hiperdia() {
             Estratégia Saúde da Família Bela Vista - Catalão - São José
           </p>
         </div>
-        {/* Sobre o Grupo */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -28,8 +31,9 @@ export default function Hiperdia() {
               acompanhamento voltado para pessoas que convivem com diabetes
               mellitus e/ou hipertensão arterial sistêmica. O grupo oferece
               suporte multiprofissional para o manejo adequado dessas condições
-              crônicas, promovendo a adesão ao tratamento, a adoção de hábitos de
-              vida saudáveis e a melhoria da qualidade de vida dos participantes.
+              crônicas, promovendo a adesão ao tratamento, a adoção de hábitos
+              de vida saudáveis e a melhoria da qualidade de vida dos
+              participantes.
             </p>
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               <div className="bg-neutral-50 border border-neutral-200 rounded p-4">
@@ -55,7 +59,6 @@ export default function Hiperdia() {
             </div>
           </div>
         </div>
-        {/* Atividades Desenvolvidas */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -75,8 +78,8 @@ export default function Hiperdia() {
                     Verificação de Pressão Arterial e Glicemia
                   </strong>
                   <p className="text-xs text-neutral-600 mt-0.5 leading-relaxed">
-                    Aferição periódica dos parâmetros clínicos para monitoramento
-                    e controle das condições de saúde.
+                    Aferição periódica dos parâmetros clínicos para
+                    monitoramento e controle das condições de saúde.
                   </p>
                 </div>
               </div>
@@ -133,13 +136,11 @@ export default function Hiperdia() {
             </div>
           </div>
         </div>
-        {/* Dias e Horários */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Dias e Horários
           </h2>
 
-          {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full border-collapse border border-neutral-300">
               <thead>
@@ -171,21 +172,30 @@ export default function Hiperdia() {
             </table>
           </div>
 
-          {/* Versão Mobile */}
           <div className="md:hidden space-y-3">
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="space-y-2">
                 <div>
-                  <span className="text-xs font-semibold text-neutral-500 uppercase">Dia da Semana</span>
-                  <p className="text-sm font-semibold text-neutral-900">Quartas-feiras</p>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">
+                    Dia da Semana
+                  </span>
+                  <p className="text-sm font-semibold text-neutral-900">
+                    Quartas-feiras
+                  </p>
                 </div>
                 <div>
-                  <span className="text-xs font-semibold text-neutral-500 uppercase">Horário</span>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">
+                    Horário
+                  </span>
                   <p className="text-sm text-neutral-900">07h30</p>
                 </div>
                 <div>
-                  <span className="text-xs font-semibold text-neutral-500 uppercase">Local</span>
-                  <p className="text-sm text-neutral-900">Sala de Grupos - ESF Catalão</p>
+                  <span className="text-xs font-semibold text-neutral-500 uppercase">
+                    Local
+                  </span>
+                  <p className="text-sm text-neutral-900">
+                    Sala de Grupos - ESF Catalão
+                  </p>
                 </div>
               </div>
             </div>
@@ -196,7 +206,6 @@ export default function Hiperdia() {
             alterações conforme a programação da unidade.
           </p>
         </div>
-        {/* Como Participar */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -238,7 +247,6 @@ export default function Hiperdia() {
             </div>
           </div>
         </div>
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-5 shadow-md mb-6">
           <p className="font-semibold mb-2 text-base">Orientação Importante</p>
           <p className="text-sm text-white/90 leading-relaxed">
@@ -249,7 +257,6 @@ export default function Hiperdia() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="hiperdia" />
       </div>

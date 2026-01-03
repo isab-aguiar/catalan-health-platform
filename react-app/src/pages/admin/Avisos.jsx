@@ -5,12 +5,7 @@ import AdminLayout from "../../layouts/AdminLayout";
 import AvisosTable from "../../components/admin/AvisosTable";
 import PermissionGate from "../../components/auth/PermissionGate";
 import { LoadingSpinner } from "../../components/common";
-import {
-  Plus,
-  X,
-  Save,
-  AlertCircle,
-} from "lucide-react";
+import { Plus, X, Save, AlertCircle } from "lucide-react";
 import { allPages } from "../../data/services";
 export default function Avisos() {
   const { avisos, loading, error, createAviso, updateAviso, deleteAviso } =
@@ -34,16 +29,16 @@ export default function Avisos() {
   useEffect(() => {
     if (showModal) {
       const scrollY = window.scrollY;
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
+      document.body.style.width = "100%";
 
       return () => {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
         window.scrollTo(0, scrollY);
       };
     }
@@ -246,7 +241,6 @@ export default function Avisos() {
   return (
     <AdminLayout currentPage="avisos">
       <div className="max-w-7xl mx-auto space-y-6">
-        {}
         <div className="bg-white border border-neutral-300 rounded-md shadow-sm p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
             <div>
@@ -270,7 +264,6 @@ export default function Avisos() {
             </div>
           </div>
         </div>
-        {}
         {error && (
           <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-md">
             <div className="flex gap-3">
@@ -282,7 +275,6 @@ export default function Avisos() {
             </div>
           </div>
         )}
-        {}
         {avisos.length === 0 ? (
           <div className="bg-white rounded-md p-12 text-center border border-neutral-300 shadow-sm">
             <div className="w-20 h-20 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-4 border border-neutral-200">
@@ -292,7 +284,8 @@ export default function Avisos() {
               Nenhum Aviso Cadastrado
             </h3>
             <p className="text-neutral-600 mb-6 max-w-md mx-auto">
-              Cadastre o primeiro aviso do sistema utilizando o formulário manual
+              Cadastre o primeiro aviso do sistema utilizando o formulário
+              manual
             </p>
             <div className="flex items-center justify-center gap-3">
               {permissions.canCreateAvisos() && (
@@ -315,11 +308,9 @@ export default function Avisos() {
           />
         )}
       </div>
-      {}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-3 sm:p-4">
           <div className="bg-white rounded-md max-w-full sm:max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-neutral-300">
-            {/* Modal Header */}
             <div className="sticky top-0 bg-neutral-50 border-b border-neutral-300 px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
               <h3 className="text-lg sm:text-xl font-bold text-neutral-900">
                 {editingAviso ? "Editar Aviso" : "Cadastrar Novo Aviso"}
@@ -331,7 +322,6 @@ export default function Avisos() {
                 <X className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
-            {/* Modal Body */}
             <div className="p-4 sm:p-6 space-y-4">
               {formError && (
                 <div className="bg-error/10 border-l-4 border-error p-4 rounded-r-md">
@@ -344,7 +334,6 @@ export default function Avisos() {
                   </div>
                 </div>
               )}
-              {}
               <div>
                 <label className="block text-sm font-semibold text-neutral-700 mb-2">
                   Título do Aviso <span className="text-error">*</span>
@@ -360,7 +349,6 @@ export default function Avisos() {
                   maxLength={100}
                 />
               </div>
-              {}
               <div>
                 <label className="block text-sm font-semibold text-neutral-700 mb-2">
                   Descrição Completa <span className="text-error">*</span>
@@ -379,7 +367,6 @@ export default function Avisos() {
                   {formData.descricao.length}/500 caracteres
                 </p>
               </div>
-              {}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-neutral-700 mb-2">
@@ -411,7 +398,6 @@ export default function Avisos() {
                   />
                 </div>
               </div>
-              {}
               <div className="space-y-4">
                 <div className="flex items-center gap-2 p-4 bg-neutral-50 rounded-md border border-neutral-200">
                   <input
@@ -466,7 +452,6 @@ export default function Avisos() {
                 )}
               </div>
             </div>
-            {/* Modal Footer */}
             <div className="sticky bottom-0 bg-neutral-50 border-t border-neutral-300 px-4 sm:px-6 py-3 sm:py-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2 sm:gap-3">
               <button
                 onClick={handleFecharModal}

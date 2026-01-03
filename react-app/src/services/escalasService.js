@@ -14,9 +14,6 @@ import { db } from "../config/firebase";
 
 const COLLECTION_NAME = "escalas";
 
-/**
- * Busca todas as escalas do Firestore
- */
 export async function getAllEscalas() {
   try {
     const escalasRef = collection(db, COLLECTION_NAME);
@@ -37,9 +34,6 @@ export async function getAllEscalas() {
   }
 }
 
-/**
- * Busca uma escala específica pelo ID
- */
 export async function getEscalaById(escalaId) {
   try {
     if (!escalaId) {
@@ -70,9 +64,6 @@ export async function getEscalaById(escalaId) {
   }
 }
 
-/**
- * Busca escalas públicas (exibirNoPublico = true)
- */
 export async function getEscalasPublicas() {
   try {
     const escalasRef = collection(db, COLLECTION_NAME);
@@ -94,9 +85,6 @@ export async function getEscalasPublicas() {
   }
 }
 
-/**
- * Busca escalas por departamento
- */
 export async function getEscalasByDepartment(department) {
   try {
     const escalasRef = collection(db, COLLECTION_NAME);
@@ -118,9 +106,6 @@ export async function getEscalasByDepartment(department) {
   }
 }
 
-/**
- * Busca escalas por categoria
- */
 export async function getEscalasByCategoria(categoria) {
   try {
     const escalasRef = collection(db, COLLECTION_NAME);
@@ -142,9 +127,6 @@ export async function getEscalasByCategoria(categoria) {
   }
 }
 
-/**
- * Cria ou atualiza uma escala
- */
 export async function saveEscala(escalaId, escalaData) {
   try {
     if (!escalaId) {
@@ -154,21 +136,22 @@ export async function saveEscala(escalaId, escalaData) {
     const escalaRef = doc(db, COLLECTION_NAME, escalaId);
     const now = Timestamp.now();
 
-    // Verifica se já existe
     const existingDoc = await getDoc(escalaRef);
 
     const dataToSave = {
       ...escalaData,
       updatedAt: now,
-      ...(existingDoc.exists() ? {} : { createdAt: now })
+      ...(existingDoc.exists() ? {} : { createdAt: now }),
     };
 
     await setDoc(escalaRef, dataToSave);
 
     return {
       success: true,
-      message: existingDoc.exists() ? "Escala atualizada com sucesso" : "Escala criada com sucesso",
-      data: { id: escalaId, ...dataToSave }
+      message: existingDoc.exists()
+        ? "Escala atualizada com sucesso"
+        : "Escala criada com sucesso",
+      data: { id: escalaId, ...dataToSave },
     };
   } catch (error) {
     console.error("Erro ao salvar escala:", error);
@@ -176,9 +159,6 @@ export async function saveEscala(escalaId, escalaData) {
   }
 }
 
-/**
- * Atualiza uma escala existente
- */
 export async function updateEscala(escalaId, updates) {
   try {
     if (!escalaId) {
@@ -195,14 +175,14 @@ export async function updateEscala(escalaId, updates) {
     const now = Timestamp.now();
     const updateData = {
       ...updates,
-      updatedAt: now
+      updatedAt: now,
     };
 
     await updateDoc(escalaRef, updateData);
 
     return {
       success: true,
-      message: "Escala atualizada com sucesso"
+      message: "Escala atualizada com sucesso",
     };
   } catch (error) {
     console.error("Erro ao atualizar escala:", error);
@@ -210,9 +190,6 @@ export async function updateEscala(escalaId, updates) {
   }
 }
 
-/**
- * Deleta uma escala
- */
 export async function deleteEscala(escalaId) {
   try {
     if (!escalaId) {
@@ -224,7 +201,7 @@ export async function deleteEscala(escalaId) {
 
     return {
       success: true,
-      message: "Escala deletada com sucesso"
+      message: "Escala deletada com sucesso",
     };
   } catch (error) {
     console.error("Erro ao deletar escala:", error);
@@ -232,17 +209,10 @@ export async function deleteEscala(escalaId) {
   }
 }
 
-/**
- * Busca uma escala específica pelo ID (chave)
- */
 export async function getEscalaByKey(escalaKey) {
   return await getEscalaById(escalaKey);
 }
 
-/**
- * Deleta TODAS as escalas do Firestore
- * CUIDADO: Esta operação é irreversível!
- */
 export async function deleteAllEscalas() {
   try {
     const escalasRef = collection(db, COLLECTION_NAME);
@@ -258,7 +228,7 @@ export async function deleteAllEscalas() {
     return {
       success: true,
       message: `${querySnapshot.size} escalas deletadas com sucesso`,
-      count: querySnapshot.size
+      count: querySnapshot.size,
     };
   } catch (error) {
     console.error("Erro ao deletar todas as escalas:", error);
@@ -266,15 +236,12 @@ export async function deleteAllEscalas() {
   }
 }
 
-/**
- * Importa múltiplas escalas de uma vez (usado para migração)
- */
 export async function bulkImportEscalas(escalasData) {
   try {
     const results = {
       success: 0,
       failed: 0,
-      errors: []
+      errors: [],
     };
 
     for (const [id, escala] of Object.entries(escalasData)) {
@@ -286,7 +253,7 @@ export async function bulkImportEscalas(escalasData) {
         results.failed++;
         results.errors.push({
           id,
-          error: result.error
+          error: result.error,
         });
       }
     }
@@ -294,7 +261,7 @@ export async function bulkImportEscalas(escalasData) {
     return {
       success: true,
       message: `Importação concluída: ${results.success} sucesso, ${results.failed} falhas`,
-      results
+      results,
     };
   } catch (error) {
     console.error("Erro na importação em lote:", error);
@@ -302,39 +269,21 @@ export async function bulkImportEscalas(escalasData) {
   }
 }
 
-// ============================================
-// ESCALAS MENSAIS (HISTÓRICO/VERSIONAMENTO)
-// ============================================
-
 const ESCALAS_MENSAIS_COLLECTION = "escalas_mensais";
 
-/**
- * Gera ID para escala mensal no formato: escalaKey_YYYY-MM
- * Exemplo: "recepcao_2025-01"
- */
 function gerarIdEscalaMensal(escalaKey, ano, mes) {
-  const mesFormatado = String(mes).padStart(2, '0');
+  const mesFormatado = String(mes).padStart(2, "0");
   return `${escalaKey}_${ano}-${mesFormatado}`;
 }
 
-/**
- * Obtém o mês/ano atual
- */
 function obterMesAnoAtual() {
   const agora = new Date();
   return {
     ano: agora.getFullYear(),
-    mes: agora.getMonth() + 1 // JS retorna 0-11
+    mes: agora.getMonth() + 1,
   };
 }
 
-/**
- * Salva uma escala mensal específica
- * @param {string} escalaKey - Chave da escala (ex: "recepcao")
- * @param {number} ano - Ano da escala
- * @param {number} mes - Mês da escala (1-12)
- * @param {object} escalaData - Dados da escala
- */
 export async function saveEscalaMensal(escalaKey, ano, mes, escalaData) {
   try {
     if (!escalaKey || !ano || !mes) {
@@ -345,7 +294,6 @@ export async function saveEscalaMensal(escalaKey, ano, mes, escalaData) {
     const escalaRef = doc(db, ESCALAS_MENSAIS_COLLECTION, id);
     const now = Timestamp.now();
 
-    // Verifica se já existe
     const existingDoc = await getDoc(escalaRef);
 
     const dataToSave = {
@@ -353,17 +301,19 @@ export async function saveEscalaMensal(escalaKey, ano, mes, escalaData) {
       escalaKey,
       ano,
       mes,
-      mesReferencia: `${ano}-${String(mes).padStart(2, '0')}`,
+      mesReferencia: `${ano}-${String(mes).padStart(2, "0")}`,
       updatedAt: now,
-      ...(existingDoc.exists() ? {} : { createdAt: now })
+      ...(existingDoc.exists() ? {} : { createdAt: now }),
     };
 
     await setDoc(escalaRef, dataToSave);
 
     return {
       success: true,
-      message: existingDoc.exists() ? "Escala mensal atualizada com sucesso" : "Escala mensal criada com sucesso",
-      data: { id, ...dataToSave }
+      message: existingDoc.exists()
+        ? "Escala mensal atualizada com sucesso"
+        : "Escala mensal criada com sucesso",
+      data: { id, ...dataToSave },
     };
   } catch (error) {
     console.error("Erro ao salvar escala mensal:", error);
@@ -371,9 +321,6 @@ export async function saveEscalaMensal(escalaKey, ano, mes, escalaData) {
   }
 }
 
-/**
- * Busca escala mensal específica
- */
 export async function getEscalaMensal(escalaKey, ano, mes) {
   try {
     const id = gerarIdEscalaMensal(escalaKey, ano, mes);
@@ -384,7 +331,7 @@ export async function getEscalaMensal(escalaKey, ano, mes) {
       return {
         success: false,
         error: "Escala mensal não encontrada",
-        notFound: true
+        notFound: true,
       };
     }
 
@@ -392,8 +339,8 @@ export async function getEscalaMensal(escalaKey, ano, mes) {
       success: true,
       data: {
         id: escalaDoc.id,
-        ...escalaDoc.data()
-      }
+        ...escalaDoc.data(),
+      },
     };
   } catch (error) {
     console.error("Erro ao buscar escala mensal:", error);
@@ -401,39 +348,33 @@ export async function getEscalaMensal(escalaKey, ano, mes) {
   }
 }
 
-/**
- * Busca escala do mês atual OU escala padrão
- * Esta é a função principal para usar nas páginas públicas
- */
 export async function getEscalaAtiva(escalaKey) {
   try {
     const { ano, mes } = obterMesAnoAtual();
 
-    // Tenta buscar escala mensal do mês atual
     const escalaMensal = await getEscalaMensal(escalaKey, ano, mes);
 
     if (escalaMensal.success) {
       return {
         success: true,
         data: escalaMensal.data,
-        tipo: "mensal"
+        tipo: "mensal",
       };
     }
 
-    // Se não encontrar escala mensal, busca escala padrão
     const escalaPadrao = await getEscalaById(escalaKey);
 
     if (escalaPadrao.success) {
       return {
         success: true,
         data: escalaPadrao.data,
-        tipo: "padrao"
+        tipo: "padrao",
       };
     }
 
     return {
       success: false,
-      error: "Nenhuma escala encontrada (mensal ou padrão)"
+      error: "Nenhuma escala encontrada (mensal ou padrão)",
     };
   } catch (error) {
     console.error("Erro ao buscar escala ativa:", error);
@@ -441,13 +382,10 @@ export async function getEscalaAtiva(escalaKey) {
   }
 }
 
-/**
- * Lista todas as escalas mensais de um determinado mês/ano
- */
 export async function getEscalasMensaisPorPeriodo(ano, mes) {
   try {
     const escalasRef = collection(db, ESCALAS_MENSAIS_COLLECTION);
-    const mesReferencia = `${ano}-${String(mes).padStart(2, '0')}`;
+    const mesReferencia = `${ano}-${String(mes).padStart(2, "0")}`;
     const q = query(escalasRef, where("mesReferencia", "==", mesReferencia));
     const querySnapshot = await getDocs(q);
 
@@ -455,7 +393,7 @@ export async function getEscalasMensaisPorPeriodo(ano, mes) {
     querySnapshot.forEach((doc) => {
       escalas.push({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       });
     });
 
@@ -466,9 +404,6 @@ export async function getEscalasMensaisPorPeriodo(ano, mes) {
   }
 }
 
-/**
- * Lista histórico de escalas mensais de uma escala específica
- */
 export async function getHistoricoEscalasMensais(escalaKey) {
   try {
     const escalasRef = collection(db, ESCALAS_MENSAIS_COLLECTION);
@@ -479,11 +414,10 @@ export async function getHistoricoEscalasMensais(escalaKey) {
     querySnapshot.forEach((doc) => {
       escalas.push({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       });
     });
 
-    // Ordenar por data (mais recente primeiro)
     escalas.sort((a, b) => {
       const dataA = new Date(a.ano, a.mes - 1);
       const dataB = new Date(b.ano, b.mes - 1);
@@ -497,9 +431,6 @@ export async function getHistoricoEscalasMensais(escalaKey) {
   }
 }
 
-/**
- * Deleta uma escala mensal específica
- */
 export async function deleteEscalaMensal(escalaKey, ano, mes) {
   try {
     const id = gerarIdEscalaMensal(escalaKey, ano, mes);
@@ -508,7 +439,7 @@ export async function deleteEscalaMensal(escalaKey, ano, mes) {
 
     return {
       success: true,
-      message: "Escala mensal deletada com sucesso"
+      message: "Escala mensal deletada com sucesso",
     };
   } catch (error) {
     console.error("Erro ao deletar escala mensal:", error);
@@ -516,16 +447,12 @@ export async function deleteEscalaMensal(escalaKey, ano, mes) {
   }
 }
 
-/**
- * Importação em massa de escalas mensais para um mês específico
- * Útil para criar escalas de um mês inteiro de uma vez
- */
 export async function bulkImportEscalasMensais(escalasData, ano, mes) {
   try {
     const results = {
       success: 0,
       failed: 0,
-      errors: []
+      errors: [],
     };
 
     for (const [escalaKey, escalaData] of Object.entries(escalasData)) {
@@ -537,7 +464,7 @@ export async function bulkImportEscalasMensais(escalasData, ano, mes) {
         results.failed++;
         results.errors.push({
           escalaKey,
-          error: result.error
+          error: result.error,
         });
       }
     }
@@ -545,7 +472,7 @@ export async function bulkImportEscalasMensais(escalasData, ano, mes) {
     return {
       success: true,
       message: `Importação mensal concluída: ${results.success} sucesso, ${results.failed} falhas`,
-      results
+      results,
     };
   } catch (error) {
     console.error("Erro na importação em lote de escalas mensais:", error);

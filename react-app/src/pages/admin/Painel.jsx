@@ -93,7 +93,9 @@ export default function Painel() {
       material: "bg-success/10 text-green-800 border-green-200",
       campanha: "bg-warning/20 text-amber-800 border-amber-200",
     };
-    return colors[categoria] || "bg-neutral-100 text-neutral-800 border-neutral-200";
+    return (
+      colors[categoria] || "bg-neutral-100 text-neutral-800 border-neutral-200"
+    );
   };
   if (avisosLoading || (permissions.canManageUsers() && usersLoading)) {
     return (
@@ -286,7 +288,6 @@ export default function Painel() {
           </div>
         </div>
 
-        {/* Avisos Recentes */}
         {ultimosAvisos.length > 0 && (
           <div className="bg-white rounded-md p-4 sm:p-6 shadow-sm border border-neutral-300">
             <div className="flex items-center justify-between mb-3 sm:mb-4">

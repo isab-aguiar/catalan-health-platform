@@ -27,7 +27,6 @@ const categoriaConfig = {
 };
 function formatarData(timestamp) {
   if (!timestamp) return "";
-  // Se for Timestamp do Firestore, converter para Date
   let date;
   if (timestamp.toDate) {
     date = timestamp.toDate();

@@ -18,7 +18,8 @@ export default function Farmacia() {
     {
       id: "renovacao",
       title: "Renovação de Receitas",
-      description: "Renovação de receitas de uso contínuo para medicamentos controlados",
+      description:
+        "Renovação de receitas de uso contínuo para medicamentos controlados",
       icon: FileText,
       path: "/servicos/renovacao",
       colorScheme: "primary",
@@ -30,7 +31,6 @@ export default function Farmacia() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Farmácia
@@ -40,7 +40,6 @@ export default function Farmacia() {
           </p>
         </div>
 
-        {/* Seção de Serviços */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -67,7 +66,6 @@ export default function Farmacia() {
           </div>
         </div>
 
-        {/* Consulte o Estoque */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
@@ -86,7 +84,6 @@ export default function Farmacia() {
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Desktop: Card horizontal */}
             <div className="hidden md:block bg-gradient-to-r from-blue-50 to-blue-100 border-2 border-blue-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <a
                 href="https://www.divinopolis.mg.gov.br/portal/servicos/1074/estoque-de-medicamentos-das-farmacias-municipais/"
@@ -102,14 +99,14 @@ export default function Farmacia() {
                     Portal da Prefeitura - Estoque de Medicamentos
                   </h3>
                   <p className="text-neutral-700 text-sm">
-                    Verifique em tempo real a disponibilidade de medicamentos nas farmácias municipais
+                    Verifique em tempo real a disponibilidade de medicamentos
+                    nas farmácias municipais
                   </p>
                 </div>
                 <ExternalLink className="w-6 h-6 text-blue-600 group-hover:translate-x-1 transition-transform" />
               </a>
             </div>
 
-            {/* Mobile: Card vertical */}
             <a
               href="https://www.divinopolis.mg.gov.br/portal/servicos/1074/estoque-de-medicamentos-das-farmacias-municipais/"
               target="_blank"
@@ -128,7 +125,8 @@ export default function Farmacia() {
                     Estoque de Medicamentos
                   </p>
                   <p className="text-xs text-neutral-600">
-                    Verifique em tempo real a disponibilidade de medicamentos nas farmácias municipais
+                    Verifique em tempo real a disponibilidade de medicamentos
+                    nas farmácias municipais
                   </p>
                 </div>
                 <div className="flex items-center gap-2 text-blue-600 font-semibold text-sm">
@@ -140,7 +138,6 @@ export default function Farmacia() {
           </div>
         </div>
 
-        {/* Informações Gerais */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 shadow-sm border border-blue-200">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Informações Gerais
@@ -149,7 +146,9 @@ export default function Farmacia() {
             <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">Horário da Farmácia:</strong>
+                <strong className="text-neutral-800 text-sm">
+                  Horário da Farmácia:
+                </strong>
                 <p className="text-sm text-neutral-700 leading-relaxed mt-0.5">
                   Segunda a sexta-feira, das 07h30 às 16h00
                 </p>
@@ -158,7 +157,9 @@ export default function Farmacia() {
             <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">Documentação:</strong>
+                <strong className="text-neutral-800 text-sm">
+                  Documentação:
+                </strong>
                 <p className="text-sm text-neutral-700 leading-relaxed mt-0.5">
                   Sempre traga receita médica válida e documento com foto
                 </p>

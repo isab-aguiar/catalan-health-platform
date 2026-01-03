@@ -1,14 +1,6 @@
 <div align="center">
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🎨 HEADER ANIMADO COM WAVE -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:1351B4,50:2670E8,100:0BC5EA&height=200&section=header&text=ESF%20Catalão&fontSize=50&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Sistema%20Web%20de%20Gestão%20de%20Saúde%20Pública&descAlignY=55&descSize=18"/>
-
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🏷️ BADGES ANIMADOS -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 <p>
 <a href="#"><img src="https://img.shields.io/badge/🚀_Status-Em_Produção-00C851?style=for-the-badge&labelColor=121212"/></a>
@@ -18,10 +10,6 @@
 <a href="#"><img src="https://img.shields.io/badge/🎨_Tailwind-3.4.19-06B6D4?style=for-the-badge&labelColor=121212"/></a>
 <a href="#"><img src="https://img.shields.io/badge/⚡_Vite-7.2.4-646CFF?style=for-the-badge&labelColor=121212"/></a>
 </p>
-
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- ⌨️ EFEITO MÁQUINA DE ESCREVER -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 <br/>
 
@@ -34,10 +22,6 @@
 </div>
 
 <br/>
-
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 📊 CARDS DE ESTATÍSTICAS -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 <table>
 <tr>
@@ -81,10 +65,6 @@
 
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🖥️ SIMULADOR DE IDE - VISUAL STUDIO CODE -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 <br/>
 
 <div align="center">
@@ -122,16 +102,11 @@
 </tr>
 </table>
 
-<!-- Código sendo digitado em tempo real -->
 <img src="https://readme-typing-svg.herokuapp.com?font=JetBrains+Mono&weight=400&size=13&duration=25&pause=3000&color=9CDCFE&center=true&vCenter=true&multiline=true&repeat=true&width=700&height=250&lines=const+ESFCatalao+%3D+{;++nome%3A+'UAPS+São+José'%2C;++cidade%3A+'Divinópolis'%2C;++estado%3A+'MG'%2C;++servicos%3A+13%2C;++profissionais%3A+115%2C;++microareas%3A+16%2C;++tecnologias%3A+['React'%2C+'Firebase'%2C+'Tailwind']%2C;++status%3A+'🟢+Em+Produção';};;" alt="Code Typing Animation" />
 
 </div>
 
 ---
-
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 📑 ÍNDICE COM LINKS RÁPIDOS -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 ## 📑 Navegação Rápida
 
@@ -216,10 +191,6 @@ Informações rápidas
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🎯 FUNCIONALIDADES -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 ## 🎯 Funcionalidades
 
 <div align="center">
@@ -235,27 +206,27 @@ Informações rápidas
 <tr>
 <td>
 
-| # | Serviço | Descrição |
-|:-:|:--------|:----------|
-| 1 | 📋 **Agendamento** | Central de consultas, exames e procedimentos |
-| 2 | 🏢 **Atendimento Administrativo** | Encaminhamentos e fila do SUS |
-| 3 | 🩺 **Triagem de Enfermagem** | Demanda espontânea e classificação de risco |
-| 4 | 💉 **Vacinação** | Calendário nacional para todas as idades |
-| 5 | 💊 **Farmácia** | Dispensação e orientação de medicamentos |
-| 6 | 📝 **Renovação de Receitas** | Receitas de uso contínuo |
-| 7 | 🩹 **Curativos** | Realização e troca de curativos |
+|  #  | Serviço                           | Descrição                                    |
+| :-: | :-------------------------------- | :------------------------------------------- |
+|  1  | 📋 **Agendamento**                | Central de consultas, exames e procedimentos |
+|  2  | 🏢 **Atendimento Administrativo** | Encaminhamentos e fila do SUS                |
+|  3  | 🩺 **Triagem de Enfermagem**      | Demanda espontânea e classificação de risco  |
+|  4  | 💉 **Vacinação**                  | Calendário nacional para todas as idades     |
+|  5  | 💊 **Farmácia**                   | Dispensação e orientação de medicamentos     |
+|  6  | 📝 **Renovação de Receitas**      | Receitas de uso contínuo                     |
+|  7  | 🩹 **Curativos**                  | Realização e troca de curativos              |
 
 </td>
 <td>
 
-| # | Serviço | Descrição |
-|:-:|:--------|:----------|
-| 8 | ❤️ **ECG** | Eletrocardiograma mediante agendamento |
-| 9 | 🔬 **Procedimentos** | Medicamentos injetáveis e sinais vitais |
-| 10 | 🛡️ **Prevenção HIV** | PrEP e PEP - Estratégias de prevenção |
-| 11 | 👨‍👩‍👧 **Bolsa Família** | CadÚnico e benefícios sociais |
-| 12 | 🏥 **Recepção** | Primeiro atendimento |
-| 13 | 🩺 **Consultas** | Médicas, psicológicas, odontológicas |
+|  #  | Serviço              | Descrição                               |
+| :-: | :------------------- | :-------------------------------------- |
+|  8  | ❤️ **ECG**           | Eletrocardiograma mediante agendamento  |
+|  9  | 🔬 **Procedimentos** | Medicamentos injetáveis e sinais vitais |
+| 10  | 🛡️ **Prevenção HIV** | PrEP e PEP - Estratégias de prevenção   |
+| 11  | 👨‍👩‍👧 **Bolsa Família** | CadÚnico e benefícios sociais           |
+| 12  | 🏥 **Recepção**      | Primeiro atendimento                    |
+| 13  | 🩺 **Consultas**     | Médicas, psicológicas, odontológicas    |
 
 </td>
 </tr>
@@ -298,26 +269,26 @@ Informações rápidas
 <tr>
 <td width="50%">
 
-| Módulo | Funcionalidades |
-|:-------|:----------------|
-| 📊 **Dashboard** | Métricas, gráficos e estatísticas |
-| 📢 **Avisos** | CRUD completo com categorização |
-| 📸 **Campanhas** | Upload imagens/PDFs até 10MB |
-| 👥 **Usuários** | Gerenciamento (apenas admin) |
-| 💉 **Estoque Vacinas** | Controle com estatísticas |
-| 📅 **Calendário** | Eventos e reuniões |
+| Módulo                 | Funcionalidades                   |
+| :--------------------- | :-------------------------------- |
+| 📊 **Dashboard**       | Métricas, gráficos e estatísticas |
+| 📢 **Avisos**          | CRUD completo com categorização   |
+| 📸 **Campanhas**       | Upload imagens/PDFs até 10MB      |
+| 👥 **Usuários**        | Gerenciamento (apenas admin)      |
+| 💉 **Estoque Vacinas** | Controle com estatísticas         |
+| 📅 **Calendário**      | Eventos e reuniões                |
 
 </td>
 <td width="50%">
 
-| Módulo | Funcionalidades |
-|:-------|:----------------|
-| 📋 **Agendas Semanais** | Atividades dos profissionais |
-| ⏰ **Escalas de Trabalho** | Por profissional e sala |
-| 🔔 **Notificações** | Sistema de alertas |
-| 📝 **Feedbacks** | Ouvidoria (3 categorias) |
-| 📄 **Orientações** | Pós-consulta |
-| 🔧 **Permissões** | Correção de acessos |
+| Módulo                     | Funcionalidades              |
+| :------------------------- | :--------------------------- |
+| 📋 **Agendas Semanais**    | Atividades dos profissionais |
+| ⏰ **Escalas de Trabalho** | Por profissional e sala      |
+| 🔔 **Notificações**        | Sistema de alertas           |
+| 📝 **Feedbacks**           | Ouvidoria (3 categorias)     |
+| 📄 **Orientações**         | Pós-consulta                 |
+| 🔧 **Permissões**          | Correção de acessos          |
 
 </td>
 </tr>
@@ -364,15 +335,12 @@ Informações rápidas
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🛠️ STACK TECNOLÓGICA -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 ## 🛠️ Stack Tecnológica
 
 <div align="center">
 
 <!-- Tech Icons Animados -->
+
 <a href="https://react.dev"><img src="https://skillicons.dev/icons?i=react" height="50" alt="React"/></a>
 <a href="https://firebase.google.com"><img src="https://skillicons.dev/icons?i=firebase" height="50" alt="Firebase"/></a>
 <a href="https://tailwindcss.com"><img src="https://skillicons.dev/icons?i=tailwind" height="50" alt="Tailwind"/></a>
@@ -396,35 +364,35 @@ Informações rápidas
 <tr>
 <td>
 
-| Tecnologia | Versão |
-|:----------:|:------:|
-| ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black) | `19.2.0` |
-| ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) | `3.4.19` |
-| ![Router](https://img.shields.io/badge/Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white) | `7.10.1` |
-| ![Lucide](https://img.shields.io/badge/Lucide-F56040?style=flat-square&logo=lucide&logoColor=white) | `0.561.0` |
-| ![Fuse.js](https://img.shields.io/badge/Fuse.js-00C4CC?style=flat-square) | `7.1.0` |
+|                                                  Tecnologia                                                  |  Versão   |
+| :----------------------------------------------------------------------------------------------------------: | :-------: |
+|       ![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)       | `19.2.0`  |
+| ![Tailwind](https://img.shields.io/badge/Tailwind-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white) | `3.4.19`  |
+|   ![Router](https://img.shields.io/badge/Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white)   | `7.10.1`  |
+|     ![Lucide](https://img.shields.io/badge/Lucide-F56040?style=flat-square&logo=lucide&logoColor=white)      | `0.561.0` |
+|                  ![Fuse.js](https://img.shields.io/badge/Fuse.js-00C4CC?style=flat-square)                   |  `7.1.0`  |
 
 </td>
 <td>
 
-| Tecnologia | Versão |
-|:----------:|:------:|
-| ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black) | `12.7.0` |
-| ![Firestore](https://img.shields.io/badge/Firestore-FF6F00?style=flat-square&logo=firebase&logoColor=white) | NoSQL |
-| ![Auth](https://img.shields.io/badge/Auth-039BE5?style=flat-square&logo=firebase&logoColor=white) | Email |
-| ![Storage](https://img.shields.io/badge/Storage-4285F4?style=flat-square&logo=googlecloud&logoColor=white) | Cloud |
-| ![Admin](https://img.shields.io/badge/Admin_SDK-13.6.0-FFA000?style=flat-square) | `13.6.0` |
+|                                                 Tecnologia                                                  |  Versão  |
+| :---------------------------------------------------------------------------------------------------------: | :------: |
+|  ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)  | `12.7.0` |
+| ![Firestore](https://img.shields.io/badge/Firestore-FF6F00?style=flat-square&logo=firebase&logoColor=white) |  NoSQL   |
+|      ![Auth](https://img.shields.io/badge/Auth-039BE5?style=flat-square&logo=firebase&logoColor=white)      |  Email   |
+| ![Storage](https://img.shields.io/badge/Storage-4285F4?style=flat-square&logo=googlecloud&logoColor=white)  |  Cloud   |
+|              ![Admin](https://img.shields.io/badge/Admin_SDK-13.6.0-FFA000?style=flat-square)               | `13.6.0` |
 
 </td>
 <td>
 
-| Tecnologia | Versão |
-|:----------:|:------:|
-| ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) | `7.2.4` |
-| ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white) | `9.39.1` |
-| ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=black) | `3.7.4` |
-| ![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=flat-square&logo=postcss&logoColor=white) | `8.5.6` |
-| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white) | Deploy |
+|                                                Tecnologia                                                 |  Versão  |
+| :-------------------------------------------------------------------------------------------------------: | :------: |
+|       ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)       | `7.2.4`  |
+|    ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white)    | `9.39.1` |
+| ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=black) | `3.7.4`  |
+|  ![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=flat-square&logo=postcss&logoColor=white)   | `8.5.6`  |
+|    ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)    |  Deploy  |
 
 </td>
 </tr>
@@ -433,10 +401,6 @@ Informações rápidas
 </div>
 
 ---
-
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🚀 INSTALAÇÃO -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 ## 🚀 Instalação & Configuração
 
@@ -660,6 +624,7 @@ Faça login em `http://localhost:5173/admin/login`
 #### 3. Clique em "Novo Aviso"
 
 Preencha:
+
 - **Título**: Ex: "Vacina contra Gripe disponível"
 - **Descrição**: Informações detalhadas
 - **Categoria**: vacina / material / campanha
@@ -725,12 +690,14 @@ Navegue até `http://localhost:5173/ouvidoria`
 #### 3. Preencha o Formulário
 
 Campos obrigatórios:
+
 - **Nome**: Seu nome completo (ou marque "Enviar anonimamente")
 - **Email**: Endereço de email para contato
 - **Telefone**: Telefone com DDD (formato: (37) 99999-9999)
 - **Mensagem**: Detalhes do seu feedback (mínimo 10 caracteres)
 
 Campos adicionais (apenas Sugestões):
+
 - **Categoria**: Tipo de sugestão (atendimento, infraestrutura, etc.)
 
 #### 4. Opção de Anonimato
@@ -742,6 +709,7 @@ Campos adicionais (apenas Sugestões):
 Clique em "Enviar" e aguarde a confirmação.
 
 **Validações Automáticas:**
+
 - Email em formato válido
 - Telefone com 10-11 dígitos
 - Mensagem com no mínimo 10 caracteres
@@ -754,11 +722,11 @@ Clique em "Enviar" e aguarde a confirmação.
 
 ### Sistema de Permissões
 
-| Role | Permissões |
-|------|-----------|
-| 👑 **admin** | Acesso total (CRUD usuários, campanhas, avisos, vacinas) |
-| ✏️ **profissional** | Criar e editar campanhas e avisos (vê apenas próprios) |
-| 👁️ **diretoria** | Visualizar dashboard (somente leitura) |
+| Role                | Permissões                                               |
+| ------------------- | -------------------------------------------------------- |
+| 👑 **admin**        | Acesso total (CRUD usuários, campanhas, avisos, vacinas) |
+| ✏️ **profissional** | Criar e editar campanhas e avisos (vê apenas próprios)   |
+| 👁️ **diretoria**    | Visualizar dashboard (somente leitura)                   |
 
 ### Criar Novo Usuário
 
@@ -787,40 +755,33 @@ Use o toggle ao lado do nome do usuário na lista.
 > **📝 Nota**: Os screenshots serão adicionados em breve. Veja [ASSETS-GUIDE.md](ASSETS-GUIDE.md) para instruções.
 
 ### Homepage Pública
-<!-- <img src="screenshots/homepage.png" width="100%"/> -->
+
 _Busca de ACS, galeria de fotos, avisos e campanhas_
 
 ### Busca de ACS
-<!-- <img src="screenshots/busca-acs.png" width="100%"/> -->
+
 _Sistema de busca territorial por endereço_
 
 ### Dashboard Administrativo
-<!-- <img src="screenshots/dashboard.png" width="100%"/> -->
+
 _Painel de controle com estatísticas_
 
 ### Gerenciar Avisos
-<!-- <img src="screenshots/avisos.png" width="100%"/> -->
+
 _Lista e criação de avisos_
 
 ### Gerenciar Campanhas
-<!-- <img src="screenshots/campanhas.png" width="100%"/> -->
+
 _Upload de imagens e criação de campanhas_
 
 ### Mobile Responsivo
 
 <p align="center">
-<!-- <img src="screenshots/mobile-home.png" width="30%"/> -->
-<!-- <img src="screenshots/mobile-servicos.png" width="30%"/> -->
-<!-- <img src="screenshots/mobile-acs.png" width="30%"/> -->
 </p>
 
 </details>
 
 ---
-
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🏗️ ARQUITETURA -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 ## 🏗️ Arquitetura do Projeto
 
@@ -918,10 +879,6 @@ _Upload de imagens e criação de campanhas_
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🔒 SEGURANÇA -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 ## 🔒 Segurança
 
 <div align="center">
@@ -1012,10 +969,6 @@ _Upload de imagens e criação de campanhas_
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🚢 DEPLOY -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 ## 🚢 Deploy
 
 <div align="center">
@@ -1031,16 +984,19 @@ _Upload de imagens e criação de campanhas_
 <td width="60%">
 
 **1. Conecte o Repositório**
+
 ```
 vercel.com → New Project → Import GitHub
 ```
 
 **2. Configure Variáveis**
+
 ```
 Settings → Environment Variables
 ```
 
 **3. Deploy!**
+
 ```
 Auto-deploy em cada push na main 🚀
 ```
@@ -1049,6 +1005,7 @@ Auto-deploy em cada push na main 🚀
 <td width="40%">
 
 **📝 vercel.json**
+
 ```json
 {
   "buildCommand": "cd react-app && npm ci && npm run build",
@@ -1068,10 +1025,6 @@ cd react-app && npm run build
 ```
 
 ---
-
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🤝 CONTRIBUINDO -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 ## 🤝 Contribuindo
 
@@ -1107,15 +1060,15 @@ git push origin feature/NovaFeature
 
 ### 📝 Padrão de Commits
 
-| Prefixo | Uso |
-|:-------:|:----|
-| `feat:` | Nova funcionalidade |
-| `fix:` | Correção de bug |
-| `docs:` | Documentação |
-| `style:` | Formatação |
-| `refactor:` | Refatoração |
-| `test:` | Testes |
-| `chore:` | Configurações |
+|   Prefixo   | Uso                 |
+| :---------: | :------------------ |
+|   `feat:`   | Nova funcionalidade |
+|   `fix:`    | Correção de bug     |
+|   `docs:`   | Documentação        |
+|  `style:`   | Formatação          |
+| `refactor:` | Refatoração         |
+|   `test:`   | Testes              |
+|  `chore:`   | Configurações       |
 
 </td>
 </tr>
@@ -1128,10 +1081,6 @@ git push origin feature/NovaFeature
 Este projeto é de uso exclusivo da **ESF Catalão - Divinópolis, MG**.
 
 ---
-
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 👥 AUTORES & CONTATO -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
 
 ## 👥 Autores
 
@@ -1194,10 +1143,6 @@ R. Júlio Nogueira, 1320 - Bela Vista, Divinópolis - MG
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🗺️ ROADMAP -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 ## 🗺️ Roadmap
 
 <div align="center">
@@ -1247,10 +1192,6 @@ R. Júlio Nogueira, 1320 - Bela Vista, Divinópolis - MG
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 📚 RECURSOS -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 ## 📚 Recursos & Documentação
 
 <div align="center">
@@ -1265,13 +1206,8 @@ R. Júlio Nogueira, 1320 - Bela Vista, Divinópolis - MG
 
 ---
 
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-<!-- 🎬 FOOTER -->
-<!-- ═══════════════════════════════════════════════════════════════════════════════ -->
-
 <div align="center">
 
-<!-- Wave Footer -->
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12&height=100&section=footer" width="100%" />
 
 <br/>
@@ -1284,12 +1220,10 @@ R. Júlio Nogueira, 1320 - Bela Vista, Divinópolis - MG
 
 <br/><br/>
 
-<!-- Tech Stack Final -->
 <img src="https://skillicons.dev/icons?i=react,firebase,tailwind,vite,vercel,js,nodejs,git" />
 
 <br/><br/>
 
-<!-- Final Badges -->
 ![Made with React](https://img.shields.io/badge/Made%20with-React_19-61DAFB?style=for-the-badge&logo=react&logoColor=white)
 ![Powered by Firebase](https://img.shields.io/badge/Powered%20by-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 ![Styled with Tailwind](https://img.shields.io/badge/Styled%20with-Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)

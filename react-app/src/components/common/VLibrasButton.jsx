@@ -5,18 +5,20 @@ export default function VLibrasButton() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [vlibrasReady, setVlibrasReady] = useState(false);
 
-  // Verificar se VLibras está disponível
   const checkVLibrasAvailability = useCallback(() => {
     const vlibrasButton = document.querySelector("[vw-access-button]");
     const vlibrasWidget = window.VLibras && window.VLibras.Widget;
     return !!(vlibrasButton || vlibrasWidget);
   }, []);
 
-  // Função para reinicializar VLibras se necessário
   const reinitializeVLibras = useCallback(() => {
-    if (window.VLibras && window.VLibras.Widget && !document.querySelector("[vw-access-button]")) {
+    if (
+      window.VLibras &&
+      window.VLibras.Widget &&
+      !document.querySelector("[vw-access-button]")
+    ) {
       try {
-        new window.VLibras.Widget('https://vlibras.gov.br/app');
+        new window.VLibras.Widget("https://vlibras.gov.br/app");
         console.log("VLibras reinicializado pelo componente React");
       } catch (error) {
         console.warn("Erro ao reinicializar VLibras:", error);
@@ -32,10 +34,9 @@ export default function VLibrasButton() {
       if (checkVLibrasAvailability()) {
         setVlibrasReady(true);
         setIsVisible(true);
-        
-        // Garantir que o botão nativo esteja visível
+
         setTimeout(() => {
-          if (typeof window.fixVLibrasPosition === 'function') {
+          if (typeof window.fixVLibrasPosition === "function") {
             window.fixVLibrasPosition();
           }
         }, 500);
@@ -43,28 +44,25 @@ export default function VLibrasButton() {
         attempts++;
         setTimeout(checkAndInit, 500);
       } else {
-        // Mesmo sem VLibras, mostrar botão para tentar inicializar
         setIsVisible(true);
       }
     };
 
-    // Aguardar um pouco antes de verificar
     const timer = setTimeout(checkAndInit, 1500);
 
-    // Listener para mudanças de rota (SPA)
     const handleRouteChange = () => {
       setTimeout(() => {
-        if (typeof window.fixVLibrasPosition === 'function') {
+        if (typeof window.fixVLibrasPosition === "function") {
           window.fixVLibrasPosition();
         }
       }, 500);
     };
 
-    window.addEventListener('popstate', handleRouteChange);
+    window.addEventListener("popstate", handleRouteChange);
 
     return () => {
       clearTimeout(timer);
-      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener("popstate", handleRouteChange);
     };
   }, [checkVLibrasAvailability]);
 
@@ -72,27 +70,22 @@ export default function VLibrasButton() {
     e.preventDefault();
     e.stopPropagation();
 
-    // Procurar pelo botão nativo do VLibras
     const vlibrasButton = document.querySelector("[vw-access-button]");
-    
+
     if (vlibrasButton) {
-      // Simular clique no botão nativo
       vlibrasButton.click();
-      
-      // Para mobile, garantir que o clique foi registrado
-      if ('ontouchstart' in window) {
-        const touchEvent = new TouchEvent('touchend', {
+
+      if ("ontouchstart" in window) {
+        const touchEvent = new TouchEvent("touchend", {
           bubbles: true,
           cancelable: true,
-          view: window
+          view: window,
         });
         vlibrasButton.dispatchEvent(touchEvent);
       }
     } else {
-      // Tentar reinicializar VLibras
       reinitializeVLibras();
-      
-      // Tentar novamente após reinicialização
+
       setTimeout(() => {
         const button = document.querySelector("[vw-access-button]");
         if (button) {
@@ -101,16 +94,13 @@ export default function VLibrasButton() {
       }, 1000);
     }
 
-    // Corrigir posição após clique
     setTimeout(() => {
-      if (typeof window.fixVLibrasPosition === 'function') {
+      if (typeof window.fixVLibrasPosition === "function") {
         window.fixVLibrasPosition();
       }
     }, 300);
   };
 
-  // Não renderizar este botão auxiliar - usar apenas o nativo do VLibras
-  // Este componente agora serve apenas como fallback/helper
   if (!isVisible || vlibrasReady) return null;
 
   return (

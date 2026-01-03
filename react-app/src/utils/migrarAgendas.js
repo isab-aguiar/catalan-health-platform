@@ -1,28 +1,19 @@
-// ============================================
-// ARQUIVO: migrarAgendas.js
-// Script para migrar agendas mockadas para Firestore
-// ============================================
+import { agendasSemanais } from "../data/agendasSemanais";
+import { migrarDadosMockados } from "../services/agendasService";
 
-import { agendasSemanais } from '../data/agendasSemanais';
-import { migrarDadosMockados } from '../services/agendasService';
-
-/**
- * Executa a migração das agendas semanais para o Firestore
- * IMPORTANTE: Executar apenas UMA VEZ
- */
 export async function executarMigracao() {
   try {
-    console.log('🚀 Iniciando migração de agendas semanais...');
-    console.log('📊 Dados a migrar:', agendasSemanais);
+    console.log("🚀 Iniciando migração de agendas semanais...");
+    console.log("📊 Dados a migrar:", agendasSemanais);
 
     await migrarDadosMockados(agendasSemanais);
 
-    console.log('✅ Migração concluída com sucesso!');
-    console.log('ℹ️ As agendas agora estão salvas no Firestore');
+    console.log("✅ Migração concluída com sucesso!");
+    console.log("ℹ️ As agendas agora estão salvas no Firestore");
 
     return true;
   } catch (error) {
-    console.error('❌ Erro na migração:', error);
+    console.error("❌ Erro na migração:", error);
     throw error;
   }
 }

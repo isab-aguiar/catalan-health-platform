@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import { AlertCircle, ExternalLink } from "lucide-react";
-import { BackButton, RecommendedReadingCarousel, Alert, InfoBox, ImageWithCredit } from "../../components/common";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+  Alert,
+  InfoBox,
+  ImageWithCredit,
+} from "../../components/common";
 import enfermeiraImg from "../../assets/enfermeiras/enfermeira-examinando-um-paciente.avif";
 import { PageContainer } from "../../components/layout";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
@@ -11,7 +17,6 @@ export default function Enfermeiras() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Consultório de Enfermagem
@@ -21,7 +26,6 @@ export default function Enfermeiras() {
           </p>
         </div>
 
-        {/* Sobre o Serviço */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Serviço
@@ -35,8 +39,8 @@ export default function Enfermeiras() {
             cuidados de enfermagem e medicamentos quando indicado, além de
             orientações para promoção da saúde e prevenção de agravos. O
             atendimento abrange desde a atenção à saúde da criança, gestante,
-            adulto e idoso, até o acompanhamento de condições crônicas e
-            agudas, garantindo um cuidado integral e humanizado.
+            adulto e idoso, até o acompanhamento de condições crônicas e agudas,
+            garantindo um cuidado integral e humanizado.
           </p>
           <h3 className="font-bold text-blue-900 mb-4 text-base">
             Serviços Oferecidos:
@@ -80,9 +84,9 @@ export default function Enfermeiras() {
                 <p className="text-xs text-neutral-600 mt-0.5">
                   Consultas intercaladas com o médico, avaliação obstétrica,
                   solicitação de exames laboratoriais e complementares conforme
-                  protocolos, prescrição de cuidados de enfermagem e
-                  orientações sobre gestação, parto e puerpério, promovendo uma
-                  gestação saudável.
+                  protocolos, prescrição de cuidados de enfermagem e orientações
+                  sobre gestação, parto e puerpério, promovendo uma gestação
+                  saudável.
                 </p>
               </div>
             </div>
@@ -123,8 +127,7 @@ export default function Enfermeiras() {
                 <p className="text-xs text-neutral-600 mt-0.5">
                   Prescrição e solicitação de exames laboratoriais e de imagem
                   conforme necessidade clínica e protocolos estabelecidos,
-                  garantindo a continuidade do cuidado e o diagnóstico
-                  adequado.
+                  garantindo a continuidade do cuidado e o diagnóstico adequado.
                 </p>
               </div>
             </div>
@@ -132,7 +135,8 @@ export default function Enfermeiras() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Acompanhamento de Lesões e Prescrição de Cuidados de Enfermagem
+                  Acompanhamento de Lesões e Prescrição de Cuidados de
+                  Enfermagem
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
                   Avaliação de feridas e lesões cutâneas, prescrição de
@@ -163,10 +167,10 @@ export default function Enfermeiras() {
                   Consultas de Demanda Espontânea
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Atendimento para avaliação e encaminhamento de condições agudas
-                  e crônicas, orientações em saúde, prescrição de cuidados
-                  conforme necessidade individual e acolhimento das demandas de
-                  saúde da população adscrita.
+                  Atendimento para avaliação e encaminhamento de condições
+                  agudas e crônicas, orientações em saúde, prescrição de
+                  cuidados conforme necessidade individual e acolhimento das
+                  demandas de saúde da população adscrita.
                 </p>
               </div>
             </div>
@@ -201,7 +205,6 @@ export default function Enfermeiras() {
           </div>
         </div>
         {}
-        {/* Card Assistência de Enfermagem */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div>
@@ -215,7 +218,6 @@ export default function Enfermeiras() {
           </div>
 
           <div className="p-4 sm:p-6">
-            {/* Imagem */}
             <div className="mb-6 flex justify-center items-center px-4 md:px-8 lg:px-12">
               <ImageWithCredit
                 src={enfermeiraImg}
@@ -225,19 +227,19 @@ export default function Enfermeiras() {
               />
             </div>
 
-            {/* Descrição */}
             <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
-              A assistência de enfermagem na Atenção Primária à Saúde constitui-se
-              como um componente essencial do Sistema Único de Saúde (SUS),
-              fundamentada na Sistematização da Assistência de Enfermagem (SAE) e
-              no Processo de Enfermagem. As consultas de enfermagem promovem o
-              cuidado integral ao indivíduo, família e comunidade, abrangendo
-              desde a prevenção de agravos até o tratamento de condições agudas e
-              crônicas. Através de uma abordagem holística e baseada em evidências
-              científicas, as enfermeiras contribuem significativamente para a
-              melhoria da qualidade de vida e dos indicadores de saúde da
-              população, fortalecendo os princípios de universalidade, integralidade
-              e equidade do SUS.
+              A assistência de enfermagem na Atenção Primária à Saúde
+              constitui-se como um componente essencial do Sistema Único de
+              Saúde (SUS), fundamentada na Sistematização da Assistência de
+              Enfermagem (SAE) e no Processo de Enfermagem. As consultas de
+              enfermagem promovem o cuidado integral ao indivíduo, família e
+              comunidade, abrangendo desde a prevenção de agravos até o
+              tratamento de condições agudas e crônicas. Através de uma
+              abordagem holística e baseada em evidências científicas, as
+              enfermeiras contribuem significativamente para a melhoria da
+              qualidade de vida e dos indicadores de saúde da população,
+              fortalecendo os princípios de universalidade, integralidade e
+              equidade do SUS.
             </p>
           </div>
         </div>
@@ -248,15 +250,17 @@ export default function Enfermeiras() {
         />
         {}
         <div className="bg-white rounded-lg p-6 shadow-sm mb-6 border border-neutral-200">
-          <h2 className="text-xl font-bold text-green-900 mb-4">Calendário de Consultas de Puericultura</h2>
+          <h2 className="text-xl font-bold text-green-900 mb-4">
+            Calendário de Consultas de Puericultura
+          </h2>
 
           <p className="text-neutral-700 text-sm mb-5 leading-relaxed">
             O acompanhamento regular da criança através da puericultura é
-            fundamental para garantir seu desenvolvimento físico, motor, cognitivo
-            e emocional saudável. As consultas de puericultura realizadas pelas
-            enfermeiras complementam o acompanhamento pediátrico, garantindo
-            atenção integral à saúde da criança conforme as diretrizes do
-            Ministério da Saúde.
+            fundamental para garantir seu desenvolvimento físico, motor,
+            cognitivo e emocional saudável. As consultas de puericultura
+            realizadas pelas enfermeiras complementam o acompanhamento
+            pediátrico, garantindo atenção integral à saúde da criança conforme
+            as diretrizes do Ministério da Saúde.
           </p>
 
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-3 sm:p-4 mb-5 shadow-sm border border-blue-200">
@@ -268,24 +272,33 @@ export default function Enfermeiras() {
           </div>
 
           <div className="bg-white rounded-lg p-3 sm:p-4 mb-5 shadow-md border-2 border-neutral-300">
-            <p className="font-bold text-neutral-900 mb-3 text-sm sm:text-base">Legenda dos Profissionais:</p>
+            <p className="font-bold text-neutral-900 mb-3 text-sm sm:text-base">
+              Legenda dos Profissionais:
+            </p>
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3 bg-blue-50 border-2 border-blue-400 rounded-lg p-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">M</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">
+                    M
+                  </span>
                 </div>
-                <span className="text-neutral-900 font-semibold text-xs sm:text-sm">Consulta com Médico Pediatra</span>
+                <span className="text-neutral-900 font-semibold text-xs sm:text-sm">
+                  Consulta com Médico Pediatra
+                </span>
               </div>
               <div className="flex items-center gap-3 bg-pink-50 border-2 border-pink-400 rounded-lg p-3">
                 <div className="w-6 h-6 sm:w-7 sm:h-7 bg-pink-500 rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-xs sm:text-sm">E</span>
+                  <span className="text-white font-bold text-xs sm:text-sm">
+                    E
+                  </span>
                 </div>
-                <span className="text-neutral-900 font-semibold text-xs sm:text-sm">Consulta com Enfermeira</span>
+                <span className="text-neutral-900 font-semibold text-xs sm:text-sm">
+                  Consulta com Enfermeira
+                </span>
               </div>
             </div>
           </div>
 
-          {/* Versão Desktop */}
           <div className="hidden md:block overflow-x-auto mb-4">
             <div className="overflow-hidden rounded-lg shadow-sm border border-green-200">
               <table className="w-full border-collapse">
@@ -305,7 +318,9 @@ export default function Enfermeiras() {
                 <tbody className="text-sm bg-white">
                   <tr className="bg-blue-50 hover:bg-blue-100 transition-colors border-l-4 border-blue-500">
                     <td className="border-b border-blue-200 px-4 py-3">
-                      <strong className="text-neutral-900">Recém-nascido</strong>
+                      <strong className="text-neutral-900">
+                        Recém-nascido
+                      </strong>
                     </td>
                     <td className="border-b border-blue-200 px-4 py-3 text-neutral-900">
                       1ª semana
@@ -313,9 +328,13 @@ export default function Enfermeiras() {
                     <td className="border-b border-blue-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">M</span>
+                          <span className="text-white font-bold text-xs">
+                            M
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Médico Pediatra</span>
+                        <span className="text-neutral-900 font-medium">
+                          Médico Pediatra
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -329,9 +348,13 @@ export default function Enfermeiras() {
                     <td className="border-b border-blue-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">M</span>
+                          <span className="text-white font-bold text-xs">
+                            M
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Médico Pediatra</span>
+                        <span className="text-neutral-900 font-medium">
+                          Médico Pediatra
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -345,9 +368,13 @@ export default function Enfermeiras() {
                     <td className="border-b border-pink-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">E</span>
+                          <span className="text-white font-bold text-xs">
+                            E
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Enfermeira</span>
+                        <span className="text-neutral-900 font-medium">
+                          Enfermeira
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -361,9 +388,13 @@ export default function Enfermeiras() {
                     <td className="border-b border-pink-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">E</span>
+                          <span className="text-white font-bold text-xs">
+                            E
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Enfermeira</span>
+                        <span className="text-neutral-900 font-medium">
+                          Enfermeira
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -377,9 +408,13 @@ export default function Enfermeiras() {
                     <td className="border-b border-blue-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">M</span>
+                          <span className="text-white font-bold text-xs">
+                            M
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Médico Pediatra</span>
+                        <span className="text-neutral-900 font-medium">
+                          Médico Pediatra
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -393,9 +428,13 @@ export default function Enfermeiras() {
                     <td className="border-b border-pink-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">E</span>
+                          <span className="text-white font-bold text-xs">
+                            E
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Enfermeira</span>
+                        <span className="text-neutral-900 font-medium">
+                          Enfermeira
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -409,9 +448,13 @@ export default function Enfermeiras() {
                     <td className="border-b border-blue-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">M</span>
+                          <span className="text-white font-bold text-xs">
+                            M
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Médico Pediatra</span>
+                        <span className="text-neutral-900 font-medium">
+                          Médico Pediatra
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -425,9 +468,13 @@ export default function Enfermeiras() {
                     <td className="border-b border-pink-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-pink-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">E</span>
+                          <span className="text-white font-bold text-xs">
+                            E
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Enfermeira</span>
+                        <span className="text-neutral-900 font-medium">
+                          Enfermeira
+                        </span>
                       </span>
                     </td>
                   </tr>
@@ -441,15 +488,21 @@ export default function Enfermeiras() {
                     <td className="border-b border-blue-200 px-4 py-3">
                       <span className="inline-flex items-center gap-2">
                         <span className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xs">M</span>
+                          <span className="text-white font-bold text-xs">
+                            M
+                          </span>
                         </span>
-                        <span className="text-neutral-900 font-medium">Médico Pediatra</span>
+                        <span className="text-neutral-900 font-medium">
+                          Médico Pediatra
+                        </span>
                       </span>
                     </td>
                   </tr>
                   <tr className="bg-green-100 hover:bg-green-200 transition-colors border-l-4 border-green-500">
                     <td className="px-4 py-3 border-b border-green-200">
-                      <strong className="text-neutral-900">Após 24 meses</strong>
+                      <strong className="text-neutral-900">
+                        Após 24 meses
+                      </strong>
                     </td>
                     <td className="px-4 py-3 text-neutral-900 border-b border-green-200">
                       Consultas anuais
@@ -463,16 +516,19 @@ export default function Enfermeiras() {
             </div>
           </div>
 
-          {/* Versão Mobile */}
           <div className="md:hidden space-y-3 mb-4">
             <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-3 shadow-md border-l-4 border-l-blue-500">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-white font-bold text-xs">M</span>
                 </span>
-                <p className="text-sm font-bold text-neutral-900">Recém-nascido</p>
+                <p className="text-sm font-bold text-neutral-900">
+                  Recém-nascido
+                </p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">1ª semana • Médico Pediatra</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                1ª semana • Médico Pediatra
+              </p>
             </div>
             <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-3 shadow-md border-l-4 border-l-blue-500">
               <div className="flex items-center gap-2 mb-2">
@@ -481,7 +537,9 @@ export default function Enfermeiras() {
                 </span>
                 <p className="text-sm font-bold text-neutral-900">1 mês</p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">1 mês de vida • Médico Pediatra</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                1 mês de vida • Médico Pediatra
+              </p>
             </div>
             <div className="bg-pink-50 border-2 border-pink-400 rounded-lg p-3 shadow-md border-l-4 border-l-pink-500">
               <div className="flex items-center gap-2 mb-2">
@@ -490,7 +548,9 @@ export default function Enfermeiras() {
                 </span>
                 <p className="text-sm font-bold text-neutral-900">2 meses</p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">2 meses de vida • Enfermeira</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                2 meses de vida • Enfermeira
+              </p>
             </div>
             <div className="bg-pink-50 border-2 border-pink-400 rounded-lg p-3 shadow-md border-l-4 border-l-pink-500">
               <div className="flex items-center gap-2 mb-2">
@@ -499,7 +559,9 @@ export default function Enfermeiras() {
                 </span>
                 <p className="text-sm font-bold text-neutral-900">4 meses</p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">4 meses de vida • Enfermeira</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                4 meses de vida • Enfermeira
+              </p>
             </div>
             <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-3 shadow-md border-l-4 border-l-blue-500">
               <div className="flex items-center gap-2 mb-2">
@@ -508,7 +570,9 @@ export default function Enfermeiras() {
                 </span>
                 <p className="text-sm font-bold text-neutral-900">6 meses</p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">6 meses de vida • Médico Pediatra</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                6 meses de vida • Médico Pediatra
+              </p>
             </div>
             <div className="bg-pink-50 border-2 border-pink-400 rounded-lg p-3 shadow-md border-l-4 border-l-pink-500">
               <div className="flex items-center gap-2 mb-2">
@@ -517,7 +581,9 @@ export default function Enfermeiras() {
                 </span>
                 <p className="text-sm font-bold text-neutral-900">9 meses</p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">9 meses de vida • Enfermeira</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                9 meses de vida • Enfermeira
+              </p>
             </div>
             <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-3 shadow-md border-l-4 border-l-blue-500">
               <div className="flex items-center gap-2 mb-2">
@@ -526,7 +592,9 @@ export default function Enfermeiras() {
                 </span>
                 <p className="text-sm font-bold text-neutral-900">12 meses</p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">12 meses de vida • Médico Pediatra</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                12 meses de vida • Médico Pediatra
+              </p>
             </div>
             <div className="bg-pink-50 border-2 border-pink-400 rounded-lg p-3 shadow-md border-l-4 border-l-pink-500">
               <div className="flex items-center gap-2 mb-2">
@@ -535,7 +603,9 @@ export default function Enfermeiras() {
                 </span>
                 <p className="text-sm font-bold text-neutral-900">18 meses</p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">18 meses de vida • Enfermeira</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                18 meses de vida • Enfermeira
+              </p>
             </div>
             <div className="bg-blue-50 border-2 border-blue-400 rounded-lg p-3 shadow-md border-l-4 border-l-blue-500">
               <div className="flex items-center gap-2 mb-2">
@@ -544,11 +614,17 @@ export default function Enfermeiras() {
                 </span>
                 <p className="text-sm font-bold text-neutral-900">24 meses</p>
               </div>
-              <p className="text-xs text-neutral-800 ml-7">24 meses (2 anos) • Médico Pediatra</p>
+              <p className="text-xs text-neutral-800 ml-7">
+                24 meses (2 anos) • Médico Pediatra
+              </p>
             </div>
             <div className="bg-green-100 border-2 border-green-400 rounded-lg p-3 shadow-md border-l-4 border-l-green-500">
-              <p className="text-sm font-bold text-neutral-900 mb-2">Após 24 meses</p>
-              <p className="text-xs text-neutral-800">Consultas anuais • Conforme necessidade</p>
+              <p className="text-sm font-bold text-neutral-900 mb-2">
+                Após 24 meses
+              </p>
+              <p className="text-xs text-neutral-800">
+                Consultas anuais • Conforme necessidade
+              </p>
             </div>
           </div>
 
@@ -558,9 +634,13 @@ export default function Enfermeiras() {
                 <AlertCircle size={16} className="text-white sm:w-5 sm:h-5" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-green-900 mb-1.5 sm:mb-2 text-sm sm:text-base">Importante</h3>
+                <h3 className="font-bold text-green-900 mb-1.5 sm:mb-2 text-sm sm:text-base">
+                  Importante
+                </h3>
                 <p className="text-neutral-800 text-xs sm:text-sm leading-relaxed break-words">
-                  SEMPRE traga a carteira de vacinação da criança. É através dela que acompanhamos o desenvolvimento e verificamos se as vacinas estão em dia.
+                  SEMPRE traga a carteira de vacinação da criança. É através
+                  dela que acompanhamos o desenvolvimento e verificamos se as
+                  vacinas estão em dia.
                 </p>
               </div>
             </div>
@@ -637,7 +717,6 @@ export default function Enfermeiras() {
         {}
         <InfoBox title="Acesso ao Serviço" className="mb-8">
           <div className="space-y-4">
-            {/* Passo 1 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 1
@@ -653,21 +732,20 @@ export default function Enfermeiras() {
                     className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     Sala de Agendamentos
-                  </Link>
-                  {" "}para agendamento de consulta de enfermagem. Não esqueça de
+                  </Link>{" "}
+                  para agendamento de consulta de enfermagem. Não esqueça de
                   consultar os{" "}
                   <Link
                     to="/servicos/sala-4#documentacao-necessaria"
                     className="text-blue-600 hover:text-blue-800 underline font-semibold"
                   >
                     documentos necessários
-                  </Link>
-                  {" "}antes de comparecer.
+                  </Link>{" "}
+                  antes de comparecer.
                 </p>
               </div>
             </div>
 
-            {/* Passo 2 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-emerald-500 to-emerald-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 2
@@ -684,7 +762,6 @@ export default function Enfermeiras() {
               </div>
             </div>
 
-            {/* Passo 3 */}
             <div className="flex items-start gap-3 sm:gap-4">
               <div className="w-7 h-7 sm:w-9 sm:h-9 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-full flex items-center justify-center text-sm sm:text-base font-bold shadow-md flex-shrink-0 mt-0.5">
                 3
@@ -702,14 +779,15 @@ export default function Enfermeiras() {
             </div>
           </div>
         </InfoBox>
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg p-4 sm:p-6 shadow-md mt-6">
           <div className="flex items-start gap-3 sm:gap-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
               <AlertCircle size={20} className="text-white sm:w-6 sm:h-6" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold mb-2 text-base sm:text-lg">Orientação Importante</p>
+              <p className="font-bold mb-2 text-base sm:text-lg">
+                Orientação Importante
+              </p>
               <p className="text-xs sm:text-sm text-white/95 leading-relaxed break-words">
                 Antes de se dirigir à sala de consulta da enfermeira
                 responsável, é necessário passar pela recepção da unidade para
@@ -722,7 +800,6 @@ export default function Enfermeiras() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="enfermeiras" />
       </div>

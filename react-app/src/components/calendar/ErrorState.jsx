@@ -1,9 +1,6 @@
-import React from 'react';
-import { AlertCircle, RefreshCw } from 'lucide-react';
+import React from "react";
+import { AlertCircle, RefreshCw } from "lucide-react";
 
-/**
- * Componente para exibir estados de erro de forma clara
- */
 export default function ErrorState({ error, onRetry }) {
   return (
     <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center animate-fade-in">
@@ -16,7 +13,8 @@ export default function ErrorState({ error, onRetry }) {
       </h3>
 
       <p className="text-sm text-red-700 mb-4">
-        {error?.message || 'Ocorreu um erro inesperado. Por favor, tente novamente.'}
+        {error?.message ||
+          "Ocorreu um erro inesperado. Por favor, tente novamente."}
       </p>
 
       {onRetry && (

@@ -144,11 +144,9 @@ export const buscarCampanhas = async (filtros = {}) => {
       const dateB = b.criadoEm || new Date(0);
       return dateB - dateA;
     });
-    // Se incluirExpiradas for true, retorna todas as campanhas (para área admin)
     if (filtros.incluirExpiradas) {
       return campanhas;
     }
-    // Caso contrário, filtra campanhas expiradas (para exibição pública)
     const campanhasValidas = campanhas.filter((camp) => {
       if (!camp.dataFim) return true;
       return camp.dataFim >= new Date();

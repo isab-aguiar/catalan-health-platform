@@ -15,7 +15,7 @@ import {
   Heart,
   TestTube2,
   ArrowRight,
-  Sparkles
+  Sparkles,
 } from "lucide-react";
 import { getRecommendations } from "../../data/recommendedReading";
 
@@ -33,7 +33,7 @@ const iconMap = {
   Hospital,
   GraduationCap,
   Heart,
-  TestTube2
+  TestTube2,
 };
 
 const colorSchemes = {
@@ -45,7 +45,7 @@ const colorSchemes = {
     iconBg: "bg-primary-600",
     textColor: "text-primary-700",
     badgeBg: "bg-primary-100",
-    badgeText: "text-primary-700"
+    badgeText: "text-primary-700",
   },
   secondary: {
     bg: "from-secondary-500 to-secondary-700",
@@ -55,7 +55,7 @@ const colorSchemes = {
     iconBg: "bg-secondary-600",
     textColor: "text-secondary-700",
     badgeBg: "bg-secondary-100",
-    badgeText: "text-secondary-700"
+    badgeText: "text-secondary-700",
   },
   accent: {
     bg: "from-accent-500 to-accent-700",
@@ -65,7 +65,7 @@ const colorSchemes = {
     iconBg: "bg-accent-600",
     textColor: "text-accent-700",
     badgeBg: "bg-accent-100",
-    badgeText: "text-accent-700"
+    badgeText: "text-accent-700",
   },
   green: {
     bg: "from-emerald-500 to-emerald-700",
@@ -75,8 +75,8 @@ const colorSchemes = {
     iconBg: "bg-emerald-600",
     textColor: "text-emerald-700",
     badgeBg: "bg-emerald-100",
-    badgeText: "text-emerald-700"
-  }
+    badgeText: "text-emerald-700",
+  },
 };
 
 export default function RecommendedReading({ pageId }) {
@@ -113,16 +113,18 @@ export default function RecommendedReading({ pageId }) {
               to={rec.path}
               className={`block ${colors.cardBg} border-2 ${colors.cardBorder} ${colors.cardHoverBorder} rounded-xl p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group`}
             >
-              {/* Badge de Categoria */}
               <div className="mb-4">
-                <span className={`inline-flex items-center gap-1.5 px-3 py-1 ${colors.badgeBg} ${colors.badgeText} rounded-full text-xs font-semibold`}>
+                <span
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 ${colors.badgeBg} ${colors.badgeText} rounded-full text-xs font-semibold`}
+                >
                   {rec.category}
                 </span>
               </div>
 
-              {/* Ícone e Título */}
               <div className="flex items-start gap-4 mb-4">
-                <div className={`w-12 h-12 ${colors.iconBg} rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                <div
+                  className={`w-12 h-12 ${colors.iconBg} rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}
+                >
                   <Icon size={24} className="text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -135,27 +137,28 @@ export default function RecommendedReading({ pageId }) {
                 </div>
               </div>
 
-              {/* Razão */}
               <div className="bg-white/60 border-l-4 border-neutral-300 rounded-r px-3 py-2 mb-4">
-                <p className="text-xs text-neutral-700 italic">
-                  {rec.reason}
-                </p>
+                <p className="text-xs text-neutral-700 italic">{rec.reason}</p>
               </div>
 
-              {/* Link de Ação */}
-              <div className={`flex items-center gap-2 ${colors.textColor} font-semibold text-sm group-hover:gap-3 transition-all`}>
+              <div
+                className={`flex items-center gap-2 ${colors.textColor} font-semibold text-sm group-hover:gap-3 transition-all`}
+              >
                 <span>Acessar</span>
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight
+                  size={16}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
               </div>
             </Link>
           );
         })}
       </div>
 
-      {/* Mensagem Final */}
       <div className="mt-8 text-center">
         <p className="text-sm text-neutral-600">
-          Explore mais conteúdos para entender melhor nossos serviços e cuidar da sua saúde
+          Explore mais conteúdos para entender melhor nossos serviços e cuidar
+          da sua saúde
         </p>
       </div>
     </section>

@@ -1,11 +1,9 @@
-import {
-  Clock,
-  Package,
-  AlertCircle,
-  CheckCircle,
-} from "lucide-react";
+import { Clock, Package, AlertCircle, CheckCircle } from "lucide-react";
 import { PageContainer } from "../../components/layout";
-import { BackButton, RecommendedReadingCarousel } from "../../components/common";
+import {
+  BackButton,
+  RecommendedReadingCarousel,
+} from "../../components/common";
 import CampanhasPaginaWrapper from "../../components/campanha/CampanhasPaginaWrapper";
 import EscalaFirestore from "../../components/services/EscalaFirestore";
 import AvisosPaginaWrapper from "../../components/avisos/AvisosPaginaWrapper";
@@ -16,7 +14,6 @@ export default function Curativos() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-xl sm:text-2xl font-bold text-white">
             Serviço de Curativos
@@ -25,9 +22,9 @@ export default function Curativos() {
             Estratégia Saúde da Família Bela Vista - Catalão - São José
           </p>
         </div>
-        {}
+
         <CampanhasPaginaWrapper pagina="curativos" />
-        {}
+
         <AvisosPaginaWrapper pagina="curativos" />
 
         {/* Sobre o Serviço */}
@@ -56,13 +53,18 @@ export default function Curativos() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
                 <div className="flex items-start gap-3">
-                  <CheckCircle size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <strong className="text-neutral-800 text-sm block mb-1">
                       Curativos simples e complexos
                     </strong>
                     <p className="text-xs text-neutral-600">
-                      Úlceras, feridas operatórias, queimaduras, lesões por pressão e demais condições que requerem acompanhamento clínico específico
+                      Úlceras, feridas operatórias, queimaduras, lesões por
+                      pressão e demais condições que requerem acompanhamento
+                      clínico específico
                     </p>
                   </div>
                 </div>
@@ -70,13 +72,17 @@ export default function Curativos() {
 
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
                 <div className="flex items-start gap-3">
-                  <CheckCircle size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <strong className="text-neutral-800 text-sm block mb-1">
                       Retirada de pontos (suturas)
                     </strong>
                     <p className="text-xs text-neutral-600">
-                      Procedimento realizado conforme prescrição médica e protocolos estabelecidos
+                      Procedimento realizado conforme prescrição médica e
+                      protocolos estabelecidos
                     </p>
                   </div>
                 </div>
@@ -84,13 +90,17 @@ export default function Curativos() {
 
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
                 <div className="flex items-start gap-3">
-                  <CheckCircle size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <strong className="text-neutral-800 text-sm block mb-1">
                       Tratamento de pé diabético
                     </strong>
                     <p className="text-xs text-neutral-600">
-                      Cuidados especializados para prevenção e tratamento de lesões nos pés de pacientes diabéticos
+                      Cuidados especializados para prevenção e tratamento de
+                      lesões nos pés de pacientes diabéticos
                     </p>
                   </div>
                 </div>
@@ -98,13 +108,17 @@ export default function Curativos() {
 
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
                 <div className="flex items-start gap-3">
-                  <CheckCircle size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                  <CheckCircle
+                    size={20}
+                    className="text-blue-600 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <strong className="text-neutral-800 text-sm block mb-1">
                       Cuidados com sondas em geral
                     </strong>
                     <p className="text-xs text-neutral-600">
-                      Troca, manutenção e cuidados com sondas vesicais, nasogástricas e outras
+                      Troca, manutenção e cuidados com sondas vesicais,
+                      nasogástricas e outras
                     </p>
                   </div>
                 </div>
@@ -122,7 +136,8 @@ export default function Curativos() {
               </div>
               <div>
                 <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
-                  Dispensação de Insumos para Curativo e Equipos de Sonda Enteral
+                  Dispensação de Insumos para Curativo e Equipos de Sonda
+                  Enteral
                 </h2>
               </div>
             </div>
@@ -131,23 +146,30 @@ export default function Curativos() {
           <div className="p-4 sm:p-6">
             <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
               A unidade disponibiliza materiais para realização de curativos
-              domiciliares e equipos de sonda enteral, mediante apresentação de prescrição médica válida. O
-              estoque disponível compreende gazes estéreis, fitas adesivas
-              micropore, esparadrapo, luvas descartáveis, solução fisiológica,
-              ataduras, equipos de sonda enteral e demais insumos necessários para o tratamento.
+              domiciliares e equipos de sonda enteral, mediante apresentação de
+              prescrição médica válida. O estoque disponível compreende gazes
+              estéreis, fitas adesivas micropore, esparadrapo, luvas
+              descartáveis, solução fisiológica, ataduras, equipos de sonda
+              enteral e demais insumos necessários para o tratamento.
             </p>
 
             <div className="space-y-4">
               <div className="bg-amber-50 border-l-4 border-amber-600 rounded-r-lg p-5">
                 <div className="flex items-start gap-3">
-                  <AlertCircle size={20} className="text-amber-700 mt-0.5 flex-shrink-0" />
+                  <AlertCircle
+                    size={20}
+                    className="text-amber-700 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <p className="text-sm text-neutral-700">
-                      <strong className="text-amber-900">Normativa de Dispensação:</strong> A entrega de materiais
-                      é realizada exclusivamente conforme a quantidade prescrita pelo
-                      médico assistente ou em quantidade inferior à prescrita. É vedada
-                      a dispensação de materiais em quantidade superior à estabelecida
-                      na prescrição médica.
+                      <strong className="text-amber-900">
+                        Normativa de Dispensação:
+                      </strong>{" "}
+                      A entrega de materiais é realizada exclusivamente conforme
+                      a quantidade prescrita pelo médico assistente ou em
+                      quantidade inferior à prescrita. É vedada a dispensação de
+                      materiais em quantidade superior à estabelecida na
+                      prescrição médica.
                     </p>
                   </div>
                 </div>
@@ -155,13 +177,17 @@ export default function Curativos() {
 
               <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-5">
                 <div className="flex items-start gap-3">
-                  <AlertCircle size={20} className="text-blue-700 mt-0.5 flex-shrink-0" />
+                  <AlertCircle
+                    size={20}
+                    className="text-blue-700 mt-0.5 flex-shrink-0"
+                  />
                   <div>
                     <p className="text-sm text-neutral-700">
-                      <strong className="text-blue-900">Orientação:</strong> Solicitamos que o usuário traga seu
-                      próprio recipiente ou saco plástico para transporte dos materiais
-                      dispensados. Os sacos plásticos da unidade são de uso exclusivo
-                      interno e não podem ser disponibilizados para transporte externo
+                      <strong className="text-blue-900">Orientação:</strong>{" "}
+                      Solicitamos que o usuário traga seu próprio recipiente ou
+                      saco plástico para transporte dos materiais dispensados.
+                      Os sacos plásticos da unidade são de uso exclusivo interno
+                      e não podem ser disponibilizados para transporte externo
                       de materiais.
                     </p>
                   </div>
@@ -196,9 +222,7 @@ export default function Curativos() {
             <div className="flex items-start gap-3 bg-white/70 p-3 rounded border border-blue-100">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div className="flex-1">
-                <strong className="text-neutral-800 text-sm">
-                  CPF
-                </strong>
+                <strong className="text-neutral-800 text-sm">CPF</strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
                   Documento ou número
                 </p>
@@ -247,7 +271,8 @@ export default function Curativos() {
               </p>
               <p className="text-neutral-700 leading-relaxed text-sm">
                 O atendimento é realizado mediante horários agendados, conforme
-                disponibilidade da equipe e protocolos estabelecidos pela unidade.
+                disponibilidade da equipe e protocolos estabelecidos pela
+                unidade.
               </p>
             </div>
           </div>
@@ -258,15 +283,15 @@ export default function Curativos() {
           titulo="Profissionais Escalados na Sala de Curativos"
         />
 
-
-        {/* Orientação Importante */}
         <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-5 shadow-sm border border-green-200 mt-6">
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
               <AlertCircle size={20} className="text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-bold text-green-900 mb-2 text-base">Orientação Importante</h3>
+              <h3 className="font-bold text-green-900 mb-2 text-base">
+                Orientação Importante
+              </h3>
               <p className="text-neutral-800 text-sm leading-relaxed">
                 Antes de se dirigir à sala de curativos, é necessário passar
                 pela recepção da unidade para realização da ficha de
@@ -279,7 +304,6 @@ export default function Curativos() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="curativos" />
       </div>

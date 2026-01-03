@@ -35,8 +35,14 @@ import {
   X as XIcon,
 } from "lucide-react";
 export default function Campanhas() {
-  const { currentUser, userData, isAdmin, isProfissional, isDiretoria, isSupervisor } =
-    useAuth();
+  const {
+    currentUser,
+    userData,
+    isAdmin,
+    isProfissional,
+    isDiretoria,
+    isSupervisor,
+  } = useAuth();
   const { showModal } = useModal();
   const permissions = usePermissions();
   const [campanhas, setCampanhas] = useState([]);
@@ -78,16 +84,16 @@ export default function Campanhas() {
   useEffect(() => {
     if (showCreateModal) {
       const scrollY = window.scrollY;
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
+      document.body.style.width = "100%";
 
       return () => {
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.width = "";
         window.scrollTo(0, scrollY);
       };
     }
@@ -126,26 +132,28 @@ export default function Campanhas() {
     }
   };
   const handleDelete = async (id) => {
-    const campanha = campanhas.find(c => c.id === id);
-    const podeDeletear = permissions.isAdmin() ||
-                        (isProfissional && campanha?.criadoPor === currentUser?.uid);
+    const campanha = campanhas.find((c) => c.id === id);
+    const podeDeletear =
+      permissions.isAdmin() ||
+      (isProfissional && campanha?.criadoPor === currentUser?.uid);
 
     if (!podeDeletear) {
       await showModal({
-        type: 'error',
-        title: 'Sem Permissão',
-        message: 'Você só pode deletar campanhas criadas por você.',
-        confirmText: 'OK',
+        type: "error",
+        title: "Sem Permissão",
+        message: "Você só pode deletar campanhas criadas por você.",
+        confirmText: "OK",
       });
       return;
     }
 
     const confirmed = await showModal({
-      type: 'warning',
-      title: 'Confirmar Exclusão',
-      message: 'Tem certeza que deseja deletar esta campanha PERMANENTEMENTE do Firebase?',
-      confirmText: 'Deletar',
-      cancelText: 'Cancelar',
+      type: "warning",
+      title: "Confirmar Exclusão",
+      message:
+        "Tem certeza que deseja deletar esta campanha PERMANENTEMENTE do Firebase?",
+      confirmText: "Deletar",
+      cancelText: "Cancelar",
     });
 
     if (!confirmed) return;
@@ -156,18 +164,18 @@ export default function Campanhas() {
       await loadCampanhas();
 
       await showModal({
-        type: 'success',
-        title: 'Campanha Deletada',
-        message: 'A campanha foi removida permanentemente do Firebase.',
-        confirmText: 'OK',
+        type: "success",
+        title: "Campanha Deletada",
+        message: "A campanha foi removida permanentemente do Firebase.",
+        confirmText: "OK",
       });
     } catch (err) {
       console.error("Erro ao deletar campanha:", err);
       await showModal({
-        type: 'error',
-        title: 'Erro ao Deletar',
+        type: "error",
+        title: "Erro ao Deletar",
         message: `Não foi possível deletar a campanha: ${err.message}`,
-        confirmText: 'OK',
+        confirmText: "OK",
       });
       await loadCampanhas();
     }
@@ -184,10 +192,10 @@ export default function Campanhas() {
       );
     } catch (err) {
       await showModal({
-        type: 'error',
-        title: 'Erro',
+        type: "error",
+        title: "Erro",
         message: err.message,
-        confirmText: 'OK',
+        confirmText: "OK",
       });
     }
   };
@@ -237,19 +245,19 @@ export default function Campanhas() {
     ];
     if (!allowedTypes.includes(file.type)) {
       await showModal({
-        type: 'warning',
-        title: 'Tipo de Arquivo Inválido',
-        message: 'Tipo de arquivo não suportado. Use: JPG, PNG, WebP ou PDF',
-        confirmText: 'OK',
+        type: "warning",
+        title: "Tipo de Arquivo Inválido",
+        message: "Tipo de arquivo não suportado. Use: JPG, PNG, WebP ou PDF",
+        confirmText: "OK",
       });
       return;
     }
     if (file.size > 10 * 1024 * 1024) {
       await showModal({
-        type: 'warning',
-        title: 'Arquivo Muito Grande',
-        message: 'O arquivo excede o tamanho máximo de 10MB',
-        confirmText: 'OK',
+        type: "warning",
+        title: "Arquivo Muito Grande",
+        message: "O arquivo excede o tamanho máximo de 10MB",
+        confirmText: "OK",
       });
       return;
     }
@@ -272,10 +280,10 @@ export default function Campanhas() {
       let updatedData = { ...editForm };
       if (!currentUser?.uid && !userData?.uid) {
         await showModal({
-          type: 'error',
-          title: 'Erro de Autenticação',
-          message: 'Usuário não autenticado. Faça login novamente.',
-          confirmText: 'OK',
+          type: "error",
+          title: "Erro de Autenticação",
+          message: "Usuário não autenticado. Faça login novamente.",
+          confirmText: "OK",
         });
         return;
       }
@@ -308,18 +316,18 @@ export default function Campanhas() {
       setNewImagePreview(null);
 
       await showModal({
-        type: 'success',
-        title: 'Campanha Atualizada',
-        message: 'As alterações foram salvas com sucesso.',
-        confirmText: 'OK',
+        type: "success",
+        title: "Campanha Atualizada",
+        message: "As alterações foram salvas com sucesso.",
+        confirmText: "OK",
       });
     } catch (err) {
       console.error("Erro ao atualizar campanha:", err);
       await showModal({
-        type: 'error',
-        title: 'Erro ao Atualizar',
+        type: "error",
+        title: "Erro ao Atualizar",
         message: `Não foi possível atualizar a campanha: ${err.message}`,
-        confirmText: 'OK',
+        confirmText: "OK",
       });
     } finally {
       setUploadingImage(false);
@@ -407,10 +415,11 @@ export default function Campanhas() {
       !createForm.descricao
     ) {
       await showModal({
-        type: 'warning',
-        title: 'Campos Obrigatórios',
-        message: 'Por favor, adicione pelo menos uma imagem OU preencha título/descrição.',
-        confirmText: 'OK',
+        type: "warning",
+        title: "Campos Obrigatórios",
+        message:
+          "Por favor, adicione pelo menos uma imagem OU preencha título/descrição.",
+        confirmText: "OK",
       });
       return;
     }
@@ -421,7 +430,7 @@ export default function Campanhas() {
         const userId = currentUser?.uid || userData?.uid;
 
         if (!userId) {
-          throw new Error('Usuário não autenticado');
+          throw new Error("Usuário não autenticado");
         }
 
         const uploadedImages = [];
@@ -435,7 +444,9 @@ export default function Campanhas() {
               caminho: uploadResult.caminho,
             });
           } catch (uploadError) {
-            throw new Error(`Erro ao enviar ${file.name}: ${uploadError.message}`);
+            throw new Error(
+              `Erro ao enviar ${file.name}: ${uploadError.message}`
+            );
           }
         }
 
@@ -465,10 +476,10 @@ export default function Campanhas() {
       );
 
       await showModal({
-        type: 'success',
-        title: 'Campanha Criada',
-        message: 'A campanha foi criada e publicada com sucesso!',
-        confirmText: 'OK',
+        type: "success",
+        title: "Campanha Criada",
+        message: "A campanha foi criada e publicada com sucesso!",
+        confirmText: "OK",
       });
 
       handleCloseCreateModal();
@@ -476,10 +487,10 @@ export default function Campanhas() {
     } catch (err) {
       console.error("Erro ao criar campanha:", err);
       await showModal({
-        type: 'error',
-        title: 'Erro ao Criar Campanha',
+        type: "error",
+        title: "Erro ao Criar Campanha",
         message: `Não foi possível criar a campanha: ${err.message}`,
-        confirmText: 'OK',
+        confirmText: "OK",
       });
     } finally {
       setCreatingCampanha(false);
@@ -503,7 +514,6 @@ export default function Campanhas() {
       <div className="min-h-screen bg-neutral-50">
         <div className="p-4 sm:p-6 lg:p-8">
           <div className="max-w-7xl mx-auto space-y-4 sm:space-y-6">
-            {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
               <div className="min-w-0">
                 <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 truncate">
@@ -523,10 +533,8 @@ export default function Campanhas() {
                 </button>
               </div>
             </div>
-            {/* Filters */}
             <div className="bg-white rounded-xl shadow-sm border border-neutral-200 p-3 sm:p-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                {/* Search */}
                 <div className="relative sm:col-span-2 lg:col-span-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
                   <input
@@ -537,7 +545,6 @@ export default function Campanhas() {
                     className="w-full pl-10 pr-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                   />
                 </div>
-                {/* Categoria Filter */}
                 <div>
                   <select
                     value={filterCategoria}
@@ -550,7 +557,6 @@ export default function Campanhas() {
                     <option value="campanha">Campanha</option>
                   </select>
                 </div>
-                {/* Status Filter */}
                 <div>
                   <select
                     value={filterStatus}
@@ -564,7 +570,6 @@ export default function Campanhas() {
                 </div>
               </div>
             </div>
-            {/* Stats Cards */}
             <div className="grid grid-cols-3 gap-2 sm:gap-4">
               <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-3 sm:p-4">
                 <p className="text-[10px] sm:text-sm text-neutral-600 mb-0.5 sm:mb-1">
@@ -575,19 +580,22 @@ export default function Campanhas() {
                 </p>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-3 sm:p-4">
-                <p className="text-[10px] sm:text-sm text-neutral-600 mb-0.5 sm:mb-1">Ativas</p>
+                <p className="text-[10px] sm:text-sm text-neutral-600 mb-0.5 sm:mb-1">
+                  Ativas
+                </p>
                 <p className="text-lg sm:text-2xl font-bold text-success">
                   {campanhas.filter((c) => c.ativo).length}
                 </p>
               </div>
               <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-3 sm:p-4">
-                <p className="text-[10px] sm:text-sm text-neutral-600 mb-0.5 sm:mb-1">Inativas</p>
+                <p className="text-[10px] sm:text-sm text-neutral-600 mb-0.5 sm:mb-1">
+                  Inativas
+                </p>
                 <p className="text-lg sm:text-2xl font-bold text-error">
                   {campanhas.filter((c) => !c.ativo).length}
                 </p>
               </div>
             </div>
-            {}
             {loading && (
               <div className="text-center py-12">
                 <div className="inline-block w-8 h-8 border-4 border-info border-t-transparent rounded-full animate-spin"></div>
@@ -599,7 +607,6 @@ export default function Campanhas() {
                 <strong>Erro:</strong> {error}
               </div>
             )}
-            {}
             {!loading && !error && (
               <div className="space-y-4">
                 {campanhasFiltradas.length === 0 ? (
@@ -650,14 +657,11 @@ export default function Campanhas() {
                             </div>
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {}
                             <div className="md:col-span-2">
                               <label className="block text-sm font-medium text-neutral-700 mb-2">
                                 Imagem ou PDF da Campanha
                               </label>
-                              {}
                               <div className="space-y-3">
-                                {}
                                 {!newImagePreview && editForm.imagemURL && (
                                   <div className="relative">
                                     <img
@@ -670,7 +674,6 @@ export default function Campanhas() {
                                     </p>
                                   </div>
                                 )}
-                                {}
                                 {newImagePreview &&
                                   newImagePreview !== "PDF" && (
                                     <div className="relative">
@@ -692,7 +695,6 @@ export default function Campanhas() {
                                       </p>
                                     </div>
                                   )}
-                                {}
                                 {newImagePreview === "PDF" && (
                                   <div className="relative p-4 border-2 border-blue-500 rounded-lg bg-info/10">
                                     <div className="flex items-center gap-3">
@@ -716,7 +718,6 @@ export default function Campanhas() {
                                     </div>
                                   </div>
                                 )}
-                                {}
                                 <div>
                                   <input
                                     type="file"
@@ -796,7 +797,8 @@ export default function Campanhas() {
                               <label className="block text-sm font-medium text-neutral-700 mb-1">
                                 Descrição *
                                 <span className="text-xs text-neutral-500 ml-2">
-                                  ({editForm.descricao?.length || 0}/300 caracteres)
+                                  ({editForm.descricao?.length || 0}/300
+                                  caracteres)
                                 </span>
                               </label>
                               <textarea
@@ -812,7 +814,8 @@ export default function Campanhas() {
                                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                               />
                               <p className="text-xs text-neutral-500 mt-1">
-                                Máximo de 300 caracteres para melhor visualização
+                                Máximo de 300 caracteres para melhor
+                                visualização
                               </p>
                             </div>
                             <div>
@@ -1031,7 +1034,6 @@ export default function Campanhas() {
                         </div>
                       ) : (
                         <div className="flex flex-col md:flex-row">
-                          {}
                           {campanha.imagemURL && (
                             <div className="md:w-1/3 bg-neutral-100">
                               <img
@@ -1041,11 +1043,9 @@ export default function Campanhas() {
                               />
                             </div>
                           )}
-                          {}
                           <div
                             className={`flex-1 p-6 ${campanha.imagemURL ? "md:w-2/3" : "w-full"}`}
                           >
-                            {}
                             <div className="flex items-start justify-between mb-4">
                               <div className="flex-1">
                                 <div className="flex items-center gap-2 mb-2 flex-wrap">
@@ -1093,7 +1093,6 @@ export default function Campanhas() {
                                 <p className="text-sm text-neutral-700 mb-3">
                                   {campanha.descricao}
                                 </p>
-                                {}
                                 <div className="space-y-1 text-xs text-neutral-600">
                                   {campanha.dataInicio && (
                                     <div className="flex items-center gap-2">
@@ -1134,9 +1133,7 @@ export default function Campanhas() {
                                 </div>
                               </div>
                             </div>
-                            {}
-                            <div className="flex flex-wrap gap-2 pt-4 border-t border-neutral-200">
-                              {}
+                            <div className="flex flex-wrap gap-2 pt-4 border-neutral-200">
                               {(isAdmin ||
                                 (isProfissional &&
                                   campanha.criadoPor === currentUser?.uid)) && (
@@ -1189,14 +1186,12 @@ export default function Campanhas() {
                                   Deletar
                                 </button>
                               )}
-                              {}
                               {isDiretoria && (
                                 <div className="text-sm text-neutral-500 italic py-2">
                                   👁️ Diretoria: Você pode visualizar todas as
                                   campanhas, mas não pode editar ou deletar
                                 </div>
                               )}
-                              {}
                               {isProfissional &&
                                 campanha.criadoPor !== currentUser?.uid && (
                                   <div className="text-sm text-neutral-400 italic py-2">
@@ -1216,7 +1211,6 @@ export default function Campanhas() {
           </div>
         </div>
       </div>
-      {/* Modal de Criação Manual */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
           <div className="bg-white rounded-xl shadow-2xl max-w-full sm:max-w-4xl w-full max-h-[90vh] overflow-y-auto">
@@ -1233,13 +1227,11 @@ export default function Campanhas() {
               </button>
             </div>
             <div className="p-6 space-y-4">
-              {/* Upload de Múltiplas Imagens */}
               <div>
                 <label className="block text-sm font-medium text-neutral-700 mb-2">
                   Imagens ou PDFs da Campanha (Múltiplas)
                 </label>
                 <div className="space-y-3">
-                  {/* Grid de Previews */}
                   {createImagePreviews.length > 0 && (
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {createImagePreviews.map((preview, index) => (
@@ -1297,12 +1289,12 @@ export default function Campanhas() {
                         : "Selecionar Imagens/PDFs"}
                     </label>
                     <p className="text-xs text-neutral-500 mt-1">
-                      Formatos: JPG, PNG, WebP, PDF (máx 10MB cada) - Selecione múltiplos arquivos
+                      Formatos: JPG, PNG, WebP, PDF (máx 10MB cada) - Selecione
+                      múltiplos arquivos
                     </p>
                   </div>
                 </div>
               </div>
-              {/* Crédito da Imagem */}
               <div>
                 <label className="block text-sm font-medium text-neutral-700 mb-1">
                   Crédito da Imagem
@@ -1311,7 +1303,10 @@ export default function Campanhas() {
                   type="text"
                   value={createForm.imageCredit || ""}
                   onChange={(e) =>
-                    setCreateForm({ ...createForm, imageCredit: e.target.value })
+                    setCreateForm({
+                      ...createForm,
+                      imageCredit: e.target.value,
+                    })
                   }
                   placeholder="Ex:Ministério da Saúde"
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -1320,7 +1315,6 @@ export default function Campanhas() {
                   Crédito exibido abaixo da imagem (opcional)
                 </p>
               </div>
-              {/* Formulário */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-1">
@@ -1577,7 +1571,6 @@ export default function Campanhas() {
                   </label>
                 </div>
               </div>
-              {/* Botões */}
               <div className="flex gap-3 pt-4 border-t border-neutral-200">
                 <button
                   onClick={handleCreateCampanha}

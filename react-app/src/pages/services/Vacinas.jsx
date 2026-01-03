@@ -1,4 +1,11 @@
-import { AlertCircle, Syringe, MapPin, Phone, Clock, Shield } from "lucide-react";
+import {
+  AlertCircle,
+  Syringe,
+  MapPin,
+  Phone,
+  Clock,
+  Shield,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import CalendarioVacinal from "../../components/vacinas/CalendarioVacinal";
@@ -19,7 +26,7 @@ const horariosVacinas = [
     profissional: "Thaciane Souza",
     funcao: "Técnica de Enfermagem",
     bgColor: "bg-white",
-    badgeColor: "bg-blue-100 text-blue-700"
+    badgeColor: "bg-blue-100 text-blue-700",
   },
   {
     periodo: "Tarde",
@@ -27,7 +34,7 @@ const horariosVacinas = [
     profissional: "Tatiane Aparecida",
     funcao: "Técnica de Enfermagem",
     bgColor: "bg-white",
-    badgeColor: "bg-blue-100 text-blue-700"
+    badgeColor: "bg-blue-100 text-blue-700",
   },
   {
     periodo: "Saúde na Hora",
@@ -35,8 +42,8 @@ const horariosVacinas = [
     profissional: "Alessandra Silva",
     funcao: "Técnica de Enfermagem",
     bgColor: "bg-blue-50",
-    badgeColor: "bg-blue-600 text-white"
-  }
+    badgeColor: "bg-blue-600 text-white",
+  },
 ];
 
 export default function Vacinas() {
@@ -45,7 +52,6 @@ export default function Vacinas() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-white">
             Sala de Vacinação
@@ -68,7 +74,6 @@ export default function Vacinas() {
           titulo="Profissionais Escalados na Sala de Vacinação"
         />
 
-        {/* Vacinas Disponíveis e Documentação */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <div className="mb-6">
             <VacinasDisponiveis />
@@ -89,7 +94,8 @@ export default function Vacinas() {
                   Documento de Identificação com Foto
                 </strong>
                 <p className="text-xs text-neutral-600 mt-0.5">
-                  Documento de identidade com foto e/ou Carteira de Habilitação do titular
+                  Documento de identidade com foto e/ou Carteira de Habilitação
+                  do titular
                 </p>
               </div>
             </div>
@@ -123,9 +129,14 @@ export default function Vacinas() {
                   <AlertCircle size={20} className="text-white" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-green-900 mb-2 text-base">Observação sobre Carteira de Vacinação</h3>
+                  <h3 className="font-bold text-green-900 mb-2 text-base">
+                    Observação sobre Carteira de Vacinação
+                  </h3>
                   <p className="text-neutral-800 text-sm leading-relaxed">
-                    Apresente sua carteira de vacinação em todas as consultas, mesmo que considere estar em dia. A equipe de saúde pode identificar vacinas que necessitam de reforço ou atualização conforme o calendário nacional.
+                    Apresente sua carteira de vacinação em todas as consultas,
+                    mesmo que considere estar em dia. A equipe de saúde pode
+                    identificar vacinas que necessitam de reforço ou atualização
+                    conforme o calendário nacional.
                   </p>
                 </div>
               </div>
@@ -133,7 +144,6 @@ export default function Vacinas() {
           </div>
         </div>
 
-        {/* Seção Profilaxia da Raiva Humana */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
@@ -158,24 +168,30 @@ export default function Vacinas() {
                 Sobre o Tratamento
               </h3>
               <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
-                A profilaxia da raiva humana é um tratamento preventivo composto por dois tipos de imunobiológicos,
-                indicados conforme a gravidade da exposição ao vírus da raiva. O protocolo é aplicado em casos de
-                mordidas, arranhões ou contato com mucosas de animais suspeitos ou confirmados com a doença:
+                A profilaxia da raiva humana é um tratamento preventivo composto
+                por dois tipos de imunobiológicos, indicados conforme a
+                gravidade da exposição ao vírus da raiva. O protocolo é aplicado
+                em casos de mordidas, arranhões ou contato com mucosas de
+                animais suspeitos ou confirmados com a doença:
               </p>
 
               <div className="grid md:grid-cols-2 gap-4 mb-5">
                 {/* Vacina */}
                 <div className="bg-blue-50 border-l-4 border-blue-600 rounded-r-lg p-4">
                   <div className="flex items-start gap-3">
-                    <Syringe size={20} className="text-blue-600 mt-0.5 flex-shrink-0" />
+                    <Syringe
+                      size={20}
+                      className="text-blue-600 mt-0.5 flex-shrink-0"
+                    />
                     <div>
                       <h4 className="font-semibold text-blue-900 mb-2">
                         Vacina Antirrábica
                       </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Estimula o sistema imunológico a produzir seus próprios anticorpos
-                        contra o vírus da raiva. É utilizada na prevenção da doença após
-                        exposições de risco, promovendo imunidade ativa.
+                        Estimula o sistema imunológico a produzir seus próprios
+                        anticorpos contra o vírus da raiva. É utilizada na
+                        prevenção da doença após exposições de risco, promovendo
+                        imunidade ativa.
                       </p>
                     </div>
                   </div>
@@ -184,15 +200,19 @@ export default function Vacinas() {
                 {/* Soro */}
                 <div className="bg-green-50 border-l-4 border-green-600 rounded-r-lg p-4">
                   <div className="flex items-start gap-3">
-                    <Shield size={20} className="text-green-600 mt-0.5 flex-shrink-0" />
+                    <Shield
+                      size={20}
+                      className="text-green-600 mt-0.5 flex-shrink-0"
+                    />
                     <div>
                       <h4 className="font-semibold text-green-900 mb-2">
                         Imunoglobulina (Soro) Antirrábica
                       </h4>
                       <p className="text-sm text-neutral-700 leading-relaxed">
-                        Indicada para casos graves ou específicos. Fornece anticorpos prontos
-                        para uma proteção imediata enquanto o organismo desenvolve a resposta
-                        vacinal, conferindo imunidade passiva.
+                        Indicada para casos graves ou específicos. Fornece
+                        anticorpos prontos para uma proteção imediata enquanto o
+                        organismo desenvolve a resposta vacinal, conferindo
+                        imunidade passiva.
                       </p>
                     </div>
                   </div>
@@ -206,29 +226,43 @@ export default function Vacinas() {
                 Como Solicitar o Atendimento
               </h3>
               <p className="text-neutral-700 mb-4 text-sm leading-relaxed">
-                Em caso de acidente com animal (mordida, arranhão ou contato com mucosas), siga o fluxo de atendimento abaixo:
+                Em caso de acidente com animal (mordida, arranhão ou contato com
+                mucosas), siga o fluxo de atendimento abaixo:
               </p>
               <div className="space-y-3 text-sm text-neutral-700">
                 <div className="flex items-start gap-2">
-                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">1</div>
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">
+                    1
+                  </div>
                   <p>
-                    <strong className="text-blue-900">Primeiro Passo:</strong> Dirija-se à ESF Catalão e comunique na recepção
-                    que sofreu um acidente com animal.
+                    <strong className="text-blue-900">Primeiro Passo:</strong>{" "}
+                    Dirija-se à ESF Catalão e comunique na recepção que sofreu
+                    um acidente com animal.
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">2</div>
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">
+                    2
+                  </div>
                   <p>
-                    <strong className="text-blue-900">Avaliação Profissional:</strong> Você será encaminhado para avaliação
-                    com a enfermeira de sua área de abrangência, que irá analisar a necessidade do tratamento profilático.
+                    <strong className="text-blue-900">
+                      Avaliação Profissional:
+                    </strong>{" "}
+                    Você será encaminhado para avaliação com a enfermeira de sua
+                    área de abrangência, que irá analisar a necessidade do
+                    tratamento profilático.
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">3</div>
+                  <div className="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-xs font-semibold mt-0.5">
+                    3
+                  </div>
                   <p>
-                    <strong className="text-blue-900">Encaminhamento:</strong> Após a avaliação, caso seja identificada a
-                    necessidade de profilaxia da raiva humana, você será encaminhado para uma das unidades de referência
-                    listadas abaixo, conforme protocolos estabelecidos pelo Ministério da Saúde.
+                    <strong className="text-blue-900">Encaminhamento:</strong>{" "}
+                    Após a avaliação, caso seja identificada a necessidade de
+                    profilaxia da raiva humana, você será encaminhado para uma
+                    das unidades de referência listadas abaixo, conforme
+                    protocolos estabelecidos pelo Ministério da Saúde.
                   </p>
                 </div>
               </div>
@@ -241,18 +275,32 @@ export default function Vacinas() {
               </h3>
               <div className="space-y-3 text-sm text-neutral-700">
                 <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-green-600 mt-0.5 flex-shrink-0" />
+                  <AlertCircle
+                    size={16}
+                    className="text-green-600 mt-0.5 flex-shrink-0"
+                  />
                   <p>
-                    <strong className="text-green-900">Protocolo Oficial:</strong> A aplicação dos imunobiológicos segue
-                    rigorosamente os protocolos definidos pelo Ministério da Saúde, sendo condicionada à avaliação profissional prévia.
+                    <strong className="text-green-900">
+                      Protocolo Oficial:
+                    </strong>{" "}
+                    A aplicação dos imunobiológicos segue rigorosamente os
+                    protocolos definidos pelo Ministério da Saúde, sendo
+                    condicionada à avaliação profissional prévia.
                   </p>
                 </div>
                 <div className="flex items-start gap-2">
-                  <AlertCircle size={16} className="text-green-600 mt-0.5 flex-shrink-0" />
+                  <AlertCircle
+                    size={16}
+                    className="text-green-600 mt-0.5 flex-shrink-0"
+                  />
                   <p>
-                    <strong className="text-green-900">Unidades de Referência:</strong> As unidades listadas abaixo são
-                    referências técnicas exclusivas para este procedimento. Elas não realizam atendimentos de rotina ou
-                    outras vacinações fora deste escopo específico nos horários indicados.
+                    <strong className="text-green-900">
+                      Unidades de Referência:
+                    </strong>{" "}
+                    As unidades listadas abaixo são referências técnicas
+                    exclusivas para este procedimento. Elas não realizam
+                    atendimentos de rotina ou outras vacinações fora deste
+                    escopo específico nos horários indicados.
                   </p>
                 </div>
               </div>
@@ -264,7 +312,8 @@ export default function Vacinas() {
                 Unidades de Referência
               </h3>
               <p className="text-neutral-700 mb-5 text-sm">
-                Relação das unidades de saúde habilitadas para a aplicação da vacina e do soro antirrábico:
+                Relação das unidades de saúde habilitadas para a aplicação da
+                vacina e do soro antirrábico:
               </p>
 
               <div className="space-y-4">
@@ -275,35 +324,65 @@ export default function Vacinas() {
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
-                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <MapPin
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.centralImunizacao.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        {contactInfo.address.referenceUnits.centralImunizacao.street} – {contactInfo.address.referenceUnits.centralImunizacao.neighborhood}
+                        {
+                          contactInfo.address.referenceUnits.centralImunizacao
+                            .street
+                        }{" "}
+                        –{" "}
+                        {
+                          contactInfo.address.referenceUnits.centralImunizacao
+                            .neighborhood
+                        }
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <Phone
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <div className="flex flex-wrap gap-2">
-                        <a href={`tel:${contactInfo.phones.referenceUnits.centralImunizacao.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          {contactInfo.phones.referenceUnits.centralImunizacao.display}
+                        <a
+                          href={`tel:${contactInfo.phones.referenceUnits.centralImunizacao.tel}`}
+                          className="text-neutral-700 hover:text-primary-600 transition-colors"
+                        >
+                          {
+                            contactInfo.phones.referenceUnits.centralImunizacao
+                              .display
+                          }
                         </a>
-                        {contactInfo.phones.referenceUnits.centralImunizacao.extensions.map((ext, idx) => (
-                          <span key={idx}>
-                            <span className="text-neutral-400">/</span>
-                            <a href={`tel:+55373229${ext}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
-                              {ext}
-                            </a>
-                          </span>
-                        ))}
+                        {contactInfo.phones.referenceUnits.centralImunizacao.extensions.map(
+                          (ext, idx) => (
+                            <span key={idx}>
+                              <span className="text-neutral-400">/</span>
+                              <a
+                                href={`tel:+55373229${ext}`}
+                                className="text-neutral-700 hover:text-primary-600 transition-colors"
+                              >
+                                {ext}
+                              </a>
+                            </span>
+                          )
+                        )}
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">{openingHours.referenceUnits.centralImunizacao.full}</p>
+                      <Clock
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
+                      <p className="text-neutral-700">
+                        {openingHours.referenceUnits.centralImunizacao.full}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -315,35 +394,65 @@ export default function Vacinas() {
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
-                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <MapPin
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.esfAfonsoPena.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        {contactInfo.address.referenceUnits.esfAfonsoPena.street} – {contactInfo.address.referenceUnits.esfAfonsoPena.neighborhood}
+                        {
+                          contactInfo.address.referenceUnits.esfAfonsoPena
+                            .street
+                        }{" "}
+                        –{" "}
+                        {
+                          contactInfo.address.referenceUnits.esfAfonsoPena
+                            .neighborhood
+                        }
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <Phone
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <div className="flex flex-wrap gap-2">
-                        <a href={`tel:${contactInfo.phones.referenceUnits.esfAfonsoPena.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          {contactInfo.phones.referenceUnits.esfAfonsoPena.display}
+                        <a
+                          href={`tel:${contactInfo.phones.referenceUnits.esfAfonsoPena.tel}`}
+                          className="text-neutral-700 hover:text-primary-600 transition-colors"
+                        >
+                          {
+                            contactInfo.phones.referenceUnits.esfAfonsoPena
+                              .display
+                          }
                         </a>
-                        {contactInfo.phones.referenceUnits.esfAfonsoPena.extensions.map((ext, idx) => (
-                          <span key={idx}>
-                            <span className="text-neutral-400">/</span>
-                            <a href={`tel:+55373229${ext}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
-                              {ext}
-                            </a>
-                          </span>
-                        ))}
+                        {contactInfo.phones.referenceUnits.esfAfonsoPena.extensions.map(
+                          (ext, idx) => (
+                            <span key={idx}>
+                              <span className="text-neutral-400">/</span>
+                              <a
+                                href={`tel:+55373229${ext}`}
+                                className="text-neutral-700 hover:text-primary-600 transition-colors"
+                              >
+                                {ext}
+                              </a>
+                            </span>
+                          )
+                        )}
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">{openingHours.referenceUnits.esfAfonsoPena.full}</p>
+                      <Clock
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
+                      <p className="text-neutral-700">
+                        {openingHours.referenceUnits.esfAfonsoPena.full}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -355,35 +464,58 @@ export default function Vacinas() {
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
-                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <MapPin
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.esfNiteroi.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        {contactInfo.address.referenceUnits.esfNiteroi.street} – {contactInfo.address.referenceUnits.esfNiteroi.neighborhood}
+                        {contactInfo.address.referenceUnits.esfNiteroi.street} –{" "}
+                        {
+                          contactInfo.address.referenceUnits.esfNiteroi
+                            .neighborhood
+                        }
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <Phone
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <div className="flex flex-wrap gap-2">
-                        <a href={`tel:${contactInfo.phones.referenceUnits.esfNiteroi.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
+                        <a
+                          href={`tel:${contactInfo.phones.referenceUnits.esfNiteroi.tel}`}
+                          className="text-neutral-700 hover:text-primary-600 transition-colors"
+                        >
                           {contactInfo.phones.referenceUnits.esfNiteroi.display}
                         </a>
-                        {contactInfo.phones.referenceUnits.esfNiteroi.extensions.map((ext, idx) => (
-                          <span key={idx}>
-                            <span className="text-neutral-400">/</span>
-                            <a href={`tel:+55373229${ext}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
-                              {ext}
-                            </a>
-                          </span>
-                        ))}
+                        {contactInfo.phones.referenceUnits.esfNiteroi.extensions.map(
+                          (ext, idx) => (
+                            <span key={idx}>
+                              <span className="text-neutral-400">/</span>
+                              <a
+                                href={`tel:+55373229${ext}`}
+                                className="text-neutral-700 hover:text-primary-600 transition-colors"
+                              >
+                                {ext}
+                              </a>
+                            </span>
+                          )
+                        )}
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">{openingHours.referenceUnits.esfNiteroi.full}</p>
+                      <Clock
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
+                      <p className="text-neutral-700">
+                        {openingHours.referenceUnits.esfNiteroi.full}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -395,35 +527,62 @@ export default function Vacinas() {
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
-                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <MapPin
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.esfPlanalto.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        {contactInfo.address.referenceUnits.esfPlanalto.street} – {contactInfo.address.referenceUnits.esfPlanalto.neighborhood}
+                        {contactInfo.address.referenceUnits.esfPlanalto.street}{" "}
+                        –{" "}
+                        {
+                          contactInfo.address.referenceUnits.esfPlanalto
+                            .neighborhood
+                        }
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <Phone
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <div className="flex flex-wrap gap-2">
-                        <a href={`tel:${contactInfo.phones.referenceUnits.esfPlanalto.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
-                          {contactInfo.phones.referenceUnits.esfPlanalto.display}
+                        <a
+                          href={`tel:${contactInfo.phones.referenceUnits.esfPlanalto.tel}`}
+                          className="text-neutral-700 hover:text-primary-600 transition-colors"
+                        >
+                          {
+                            contactInfo.phones.referenceUnits.esfPlanalto
+                              .display
+                          }
                         </a>
-                        {contactInfo.phones.referenceUnits.esfPlanalto.extensions.map((ext, idx) => (
-                          <span key={idx}>
-                            <span className="text-neutral-400">/</span>
-                            <a href={`tel:+55373229${ext}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
-                              {ext}
-                            </a>
-                          </span>
-                        ))}
+                        {contactInfo.phones.referenceUnits.esfPlanalto.extensions.map(
+                          (ext, idx) => (
+                            <span key={idx}>
+                              <span className="text-neutral-400">/</span>
+                              <a
+                                href={`tel:+55373229${ext}`}
+                                className="text-neutral-700 hover:text-primary-600 transition-colors"
+                              >
+                                {ext}
+                              </a>
+                            </span>
+                          )
+                        )}
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">{openingHours.referenceUnits.esfPlanalto.full}</p>
+                      <Clock
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
+                      <p className="text-neutral-700">
+                        {openingHours.referenceUnits.esfPlanalto.full}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -435,25 +594,50 @@ export default function Vacinas() {
                   </h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex items-start gap-2">
-                      <MapPin size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
+                      <MapPin
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.esfMoradaNova.mapsQuery}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-neutral-700 hover:text-primary-600 transition-colors"
                       >
-                        {contactInfo.address.referenceUnits.esfMoradaNova.street} – {contactInfo.address.referenceUnits.esfMoradaNova.neighborhood}
+                        {
+                          contactInfo.address.referenceUnits.esfMoradaNova
+                            .street
+                        }{" "}
+                        –{" "}
+                        {
+                          contactInfo.address.referenceUnits.esfMoradaNova
+                            .neighborhood
+                        }
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Phone size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <a href={`tel:${contactInfo.phones.referenceUnits.esfMoradaNova.tel}`} className="text-neutral-700 hover:text-primary-600 transition-colors">
-                        {contactInfo.phones.referenceUnits.esfMoradaNova.display}
+                      <Phone
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
+                      <a
+                        href={`tel:${contactInfo.phones.referenceUnits.esfMoradaNova.tel}`}
+                        className="text-neutral-700 hover:text-primary-600 transition-colors"
+                      >
+                        {
+                          contactInfo.phones.referenceUnits.esfMoradaNova
+                            .display
+                        }
                       </a>
                     </div>
                     <div className="flex items-start gap-2">
-                      <Clock size={16} className="text-primary-600 mt-0.5 flex-shrink-0" />
-                      <p className="text-neutral-700">{openingHours.referenceUnits.esfMoradaNova.full}</p>
+                      <Clock
+                        size={16}
+                        className="text-primary-600 mt-0.5 flex-shrink-0"
+                      />
+                      <p className="text-neutral-700">
+                        {openingHours.referenceUnits.esfMoradaNova.full}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -467,11 +651,15 @@ export default function Vacinas() {
                   <AlertCircle size={20} className="text-white" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-bold text-green-900 mb-2 text-base">Importante</h3>
+                  <h3 className="font-bold text-green-900 mb-2 text-base">
+                    Importante
+                  </h3>
                   <p className="text-neutral-800 text-sm leading-relaxed">
-                    Em caso de exposição ao vírus da raiva (mordida, arranhão ou contato com mucosas de
-                    animais), dirija-se imediatamente à ESF Catalão para avaliação inicial. O tratamento profilático
-                    deve ser iniciado o mais breve possível após a avaliação profissional para garantir sua eficácia.
+                    Em caso de exposição ao vírus da raiva (mordida, arranhão ou
+                    contato com mucosas de animais), dirija-se imediatamente à
+                    ESF Catalão para avaliação inicial. O tratamento profilático
+                    deve ser iniciado o mais breve possível após a avaliação
+                    profissional para garantir sua eficácia.
                   </p>
                 </div>
               </div>
@@ -480,7 +668,6 @@ export default function Vacinas() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="vacinas" />
       </div>

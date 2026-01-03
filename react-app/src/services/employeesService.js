@@ -15,23 +15,23 @@ import { db } from "../config/firebase";
 
 const COLLECTION_NAME = "employees";
 
-/**
- * Busca todos os funcionários do Firestore
- */
 export async function getAllEmployees() {
   try {
-    console.log('👥 [getAllEmployees] Buscando todos os funcionários...');
+    console.log("👥 [getAllEmployees] Buscando todos os funcionários...");
     const employeesRef = collection(db, COLLECTION_NAME);
 
-    // Tentar com ordenação primeiro
     let querySnapshot;
     try {
       const q = query(employeesRef, orderBy("displayName", "asc"));
       querySnapshot = await getDocs(q);
-      console.log('✅ [getAllEmployees] Query com orderBy executada com sucesso');
+      console.log(
+        "✅ [getAllEmployees] Query com orderBy executada com sucesso"
+      );
     } catch (orderError) {
-      // Se falhar, buscar sem ordenação
-      console.log('⚠️ [getAllEmployees] orderBy falhou, buscando sem ordenação:', orderError.message);
+      console.log(
+        "⚠️ [getAllEmployees] orderBy falhou, buscando sem ordenação:",
+        orderError.message
+      );
       querySnapshot = await getDocs(employeesRef);
     }
 
@@ -43,14 +43,15 @@ export async function getAllEmployees() {
       });
     });
 
-    // Ordenar no cliente por displayName
     employees.sort((a, b) => {
-      const nomeA = (a.displayName || '').toLowerCase();
-      const nomeB = (b.displayName || '').toLowerCase();
+      const nomeA = (a.displayName || "").toLowerCase();
+      const nomeB = (b.displayName || "").toLowerCase();
       return nomeA.localeCompare(nomeB);
     });
 
-    console.log(`✅ [getAllEmployees] ${employees.length} funcionários encontrados`);
+    console.log(
+      `✅ [getAllEmployees] ${employees.length} funcionários encontrados`
+    );
     return { success: true, data: employees };
   } catch (error) {
     console.error("❌ [getAllEmployees] Erro ao buscar funcionários:", error);
@@ -58,9 +59,6 @@ export async function getAllEmployees() {
   }
 }
 
-/**
- * Busca um funcionário específico pelo ID
- */
 export async function getEmployeeById(employeeId) {
   try {
     if (!employeeId) {
@@ -91,9 +89,6 @@ export async function getEmployeeById(employeeId) {
   }
 }
 
-/**
- * Busca funcionários por ESF
- */
 export async function getEmployeesByEsf(esfCode) {
   try {
     const employeesRef = collection(db, COLLECTION_NAME);
@@ -115,9 +110,6 @@ export async function getEmployeesByEsf(esfCode) {
   }
 }
 
-/**
- * Busca funcionários por departamento
- */
 export async function getEmployeesByDepartment(department) {
   try {
     const employeesRef = collection(db, COLLECTION_NAME);
@@ -139,9 +131,6 @@ export async function getEmployeesByDepartment(department) {
   }
 }
 
-/**
- * Cria ou atualiza um funcionário
- */
 export async function saveEmployee(employeeId, employeeData) {
   try {
     if (!employeeId) {
@@ -151,24 +140,27 @@ export async function saveEmployee(employeeId, employeeData) {
     const employeeRef = doc(db, COLLECTION_NAME, employeeId);
     const now = Timestamp.now();
 
-    // Verifica se já existe
     const existingDoc = await getDoc(employeeRef);
 
     const dataToSave = {
       ...employeeData,
       metadata: {
         ...employeeData.metadata,
-        updatedAt: now.toDate().toISOString().split('T')[0],
-        ...(existingDoc.exists() ? {} : { createdAt: now.toDate().toISOString().split('T')[0] })
-      }
+        updatedAt: now.toDate().toISOString().split("T")[0],
+        ...(existingDoc.exists()
+          ? {}
+          : { createdAt: now.toDate().toISOString().split("T")[0] }),
+      },
     };
 
     await setDoc(employeeRef, dataToSave);
 
     return {
       success: true,
-      message: existingDoc.exists() ? "Funcionário atualizado com sucesso" : "Funcionário criado com sucesso",
-      data: { id: employeeId, ...dataToSave }
+      message: existingDoc.exists()
+        ? "Funcionário atualizado com sucesso"
+        : "Funcionário criado com sucesso",
+      data: { id: employeeId, ...dataToSave },
     };
   } catch (error) {
     console.error("Erro ao salvar funcionário:", error);
@@ -176,9 +168,6 @@ export async function saveEmployee(employeeId, employeeData) {
   }
 }
 
-/**
- * Atualiza um funcionário existente
- */
 export async function updateEmployee(employeeId, updates) {
   try {
     if (!employeeId) {
@@ -195,14 +184,14 @@ export async function updateEmployee(employeeId, updates) {
     const now = Timestamp.now();
     const updateData = {
       ...updates,
-      "metadata.updatedAt": now.toDate().toISOString().split('T')[0]
+      "metadata.updatedAt": now.toDate().toISOString().split("T")[0],
     };
 
     await updateDoc(employeeRef, updateData);
 
     return {
       success: true,
-      message: "Funcionário atualizado com sucesso"
+      message: "Funcionário atualizado com sucesso",
     };
   } catch (error) {
     console.error("Erro ao atualizar funcionário:", error);
@@ -210,9 +199,6 @@ export async function updateEmployee(employeeId, updates) {
   }
 }
 
-/**
- * Deleta um funcionário (não recomendado - use inativação)
- */
 export async function deleteEmployee(employeeId) {
   try {
     if (!employeeId) {
@@ -224,7 +210,7 @@ export async function deleteEmployee(employeeId) {
 
     return {
       success: true,
-      message: "Funcionário deletado com sucesso"
+      message: "Funcionário deletado com sucesso",
     };
   } catch (error) {
     console.error("Erro ao deletar funcionário:", error);
@@ -232,9 +218,6 @@ export async function deleteEmployee(employeeId) {
   }
 }
 
-/**
- * Inativa um funcionário (recomendado em vez de deletar)
- */
 export async function inactivateEmployee(employeeId) {
   try {
     if (!employeeId) {
@@ -244,8 +227,8 @@ export async function inactivateEmployee(employeeId) {
     const now = Timestamp.now();
     const updates = {
       active: false,
-      "metadata.updatedAt": now.toDate().toISOString().split('T')[0],
-      "metadata.inactivatedAt": now.toDate().toISOString().split('T')[0]
+      "metadata.updatedAt": now.toDate().toISOString().split("T")[0],
+      "metadata.inactivatedAt": now.toDate().toISOString().split("T")[0],
     };
 
     return await updateEmployee(employeeId, updates);
@@ -255,9 +238,6 @@ export async function inactivateEmployee(employeeId) {
   }
 }
 
-/**
- * Reativa um funcionário
- */
 export async function reactivateEmployee(employeeId) {
   try {
     if (!employeeId) {
@@ -269,13 +249,13 @@ export async function reactivateEmployee(employeeId) {
 
     await updateDoc(employeeRef, {
       active: true,
-      "metadata.updatedAt": now.toDate().toISOString().split('T')[0],
-      "metadata.reactivatedAt": now.toDate().toISOString().split('T')[0]
+      "metadata.updatedAt": now.toDate().toISOString().split("T")[0],
+      "metadata.reactivatedAt": now.toDate().toISOString().split("T")[0],
     });
 
     return {
       success: true,
-      message: "Funcionário reativado com sucesso"
+      message: "Funcionário reativado com sucesso",
     };
   } catch (error) {
     console.error("Erro ao reativar funcionário:", error);
@@ -283,15 +263,12 @@ export async function reactivateEmployee(employeeId) {
   }
 }
 
-/**
- * Importa múltiplos funcionários de uma vez (usado para migração)
- */
 export async function bulkImportEmployees(employeesData) {
   try {
     const results = {
       success: 0,
       failed: 0,
-      errors: []
+      errors: [],
     };
 
     for (const employee of employeesData) {
@@ -303,7 +280,7 @@ export async function bulkImportEmployees(employeesData) {
         results.failed++;
         results.errors.push({
           id: employee.id,
-          error: result.error
+          error: result.error,
         });
       }
     }
@@ -311,7 +288,7 @@ export async function bulkImportEmployees(employeesData) {
     return {
       success: true,
       message: `Importação concluída: ${results.success} sucesso, ${results.failed} falhas`,
-      results
+      results,
     };
   } catch (error) {
     console.error("Erro na importação em lote:", error);

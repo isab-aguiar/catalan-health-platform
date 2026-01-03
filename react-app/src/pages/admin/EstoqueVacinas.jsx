@@ -77,7 +77,6 @@ export default function EstoqueVacinas() {
   return (
     <AdminLayout currentPage="estoque-vacinas">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
         <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-4 sm:p-6">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary-700 rounded-md flex items-center justify-center flex-shrink-0">
@@ -93,7 +92,6 @@ export default function EstoqueVacinas() {
             </div>
           </div>
         </div>
-        {/* Stats Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-3 sm:p-4">
             <div className="flex items-center justify-between mb-1 sm:mb-2">
@@ -130,8 +128,7 @@ export default function EstoqueVacinas() {
           </div>
           <div className="bg-white rounded-md shadow-sm border border-neutral-300 p-3 sm:p-4">
             <div className="flex items-center justify-between mb-1 sm:mb-2">
-              <span className="text-[10px] sm:text-xs font-semibold text-neutral-600 uppercase tracking-wide"
-              >
+              <span className="text-[10px] sm:text-xs font-semibold text-neutral-600 uppercase tracking-wide">
                 Total de Doses
               </span>
               <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-info" />
@@ -152,7 +149,6 @@ export default function EstoqueVacinas() {
             </p>
           </div>
         </div>
-        {/* Vacinas Table */}
         <div className="bg-white rounded-md shadow-sm border border-neutral-300 overflow-hidden">
           <div className="bg-primary-700 p-4 sm:p-5">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
@@ -178,57 +174,46 @@ export default function EstoqueVacinas() {
               </button>
             </div>
           </div>
-          {/* Mobile Cards */}
           <div className="md:hidden divide-y divide-neutral-200">
             {vacinas.length === 0 ? (
               <div className="p-8 text-center text-neutral-500">
-                Nenhuma vacina cadastrada. Clique em "Nova Vacina" para adicionar.
+                Nenhuma vacina cadastrada. Clique em "Nova Vacina" para
+                adicionar.
               </div>
             ) : (
               vacinas.map((vacina) => (
-                <VacinaCard key={vacina.id} vacina={vacina} updateVacina={updateVacina} />
+                <VacinaCard
+                  key={vacina.id}
+                  vacina={vacina}
+                  updateVacina={updateVacina}
+                />
               ))
             )}
           </div>
 
-          {/* Desktop Table */}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full text-sm">
               <thead className="bg-neutral-100 border-b-2 border-neutral-300">
                 <tr>
-                  <th
-                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
-                  >
+                  <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Vacina
                   </th>
-                  <th
-                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
-                  >
+                  <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Finalidade
                   </th>
-                  <th
-                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
-                  >
+                  <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Público-Alvo
                   </th>
-                  <th
-                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
-                  >
+                  <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Quantidade
                   </th>
-                  <th
-                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
-                  >
+                  <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Início do Período
                   </th>
-                  <th
-                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
-                  >
+                  <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Fim do Período
                   </th>
-                  <th
-                    className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide"
-                  >
+                  <th className="text-left p-4 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
                     Publicado
                   </th>
                 </tr>
@@ -289,9 +274,7 @@ const VacinaEstoqueRow = memo(({ vacina, formatarNumero }) => {
     return <TrendingUp className="w-3.5 h-3.5" />;
   };
   return (
-    <tr
-      className="hover:bg-neutral-50 transition-colors"
-    >
+    <tr className="hover:bg-neutral-50 transition-colors">
       <td className="p-4">
         <div className="font-semibold text-neutral-900">{vacina.nome}</div>
       </td>
@@ -347,7 +330,6 @@ const VacinaRow = memo(({ vacina, updateVacina }) => {
     timestampToDateString(vacina.periodoFim)
   );
   const [publicado, setPublicado] = useState(vacina.publicado ?? false);
-  // Sincronizar estado quando vacina mudar (atualização do Firestore)
   useEffect(() => {
     setQuantidade(vacina.quantidade || 0);
     setPeriodoInicio(timestampToDateString(vacina.periodoInicio));
@@ -358,9 +340,7 @@ const VacinaRow = memo(({ vacina, updateVacina }) => {
     await updateVacina(vacina.id, campo, valor);
   };
   return (
-    <tr
-      className="hover:bg-neutral-50 transition-colors"
-    >
+    <tr className="hover:bg-neutral-50 transition-colors">
       <td className="p-4">
         <div className="font-semibold text-neutral-900">{vacina.nome}</div>
       </td>
@@ -472,12 +452,12 @@ const VacinaCard = memo(({ vacina, updateVacina }) => {
 
   return (
     <div className="p-4 space-y-4">
-      {/* Nome da Vacina */}
       <div>
-        <h3 className="font-bold text-base text-neutral-900 mb-1">{vacina.nome}</h3>
+        <h3 className="font-bold text-base text-neutral-900 mb-1">
+          {vacina.nome}
+        </h3>
       </div>
 
-      {/* Finalidade */}
       <div>
         <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-1">
           Finalidade
@@ -485,7 +465,6 @@ const VacinaCard = memo(({ vacina, updateVacina }) => {
         <p className="text-sm text-neutral-700">{vacina.finalidade}</p>
       </div>
 
-      {/* Público-Alvo */}
       <div>
         <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-1">
           Público-Alvo
@@ -493,7 +472,6 @@ const VacinaCard = memo(({ vacina, updateVacina }) => {
         <p className="text-sm text-neutral-700">{vacina.publicoAlvo}</p>
       </div>
 
-      {/* Quantidade */}
       <div>
         <label className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-2">
           Quantidade
@@ -508,7 +486,6 @@ const VacinaCard = memo(({ vacina, updateVacina }) => {
         />
       </div>
 
-      {/* Períodos */}
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-2">
@@ -546,7 +523,6 @@ const VacinaCard = memo(({ vacina, updateVacina }) => {
         </div>
       </div>
 
-      {/* Publicado */}
       <div>
         <span className="text-xs font-semibold text-neutral-600 uppercase tracking-wide block mb-2">
           Publicado
@@ -595,19 +571,15 @@ const ModalCriarVacina = memo(
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [vacinaSelecionada, setVacinaSelecionada] = useState("");
-    // Filtrar vacinas que ainda não foram cadastradas
     const vacinasDisponiveis = vacinas2025.filter((vacina) => {
-      // Verificar se a vacina já existe (por ID ou nome)
       return !vacinasExistentes.some(
         (existente) =>
           existente.id === vacina.id ||
           existente.nome.toLowerCase() === vacina.nome.toLowerCase()
       );
     });
-    // Preencher formulário quando selecionar uma vacina pré-definida
     const handleSelecionarVacina = (vacinaId) => {
       if (!vacinaId) {
-        // Limpar formulário
         setFormData({
           nome: "",
           finalidade: "",
@@ -638,7 +610,6 @@ const ModalCriarVacina = memo(
       e.preventDefault();
       setError(null);
       setLoading(true);
-      // Validações
       if (!formData.nome.trim()) {
         setError("O nome da vacina é obrigatório");
         setLoading(false);
@@ -698,14 +669,8 @@ const ModalCriarVacina = memo(
                 <Plus className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2
-                  className="text-xl font-bold text-white"
-                >
-                  Nova Vacina
-                </h2>
-                <p
-                  className="text-neutral-200 text-sm"
-                >
+                <h2 className="text-xl font-bold text-white">Nova Vacina</h2>
+                <p className="text-neutral-200 text-sm">
                   Adicione uma nova vacina ao sistema
                 </p>
               </div>
@@ -726,20 +691,14 @@ const ModalCriarVacina = memo(
                     size={20}
                     className="text-error flex-shrink-0 mt-0.5"
                   />
-                  <div
-                    className="text-sm text-error"
-                  >
-                    {error}
-                  </div>
+                  <div className="text-sm text-error">{error}</div>
                 </div>
               </div>
             )}
             {}
             {vacinasDisponiveis.length > 0 && (
               <div className="bg-neutral-50 border border-neutral-200 rounded-md p-4">
-                <label
-                  className="block text-sm font-semibold text-neutral-700 mb-2"
-                >
+                <label className="block text-sm font-semibold text-neutral-700 mb-2">
                   Ou selecione uma vacina pré-definida do SUS:
                 </label>
                 <select
@@ -754,9 +713,7 @@ const ModalCriarVacina = memo(
                     </option>
                   ))}
                 </select>
-                <p
-                  className="text-xs text-neutral-600 mt-2"
-                >
+                <p className="text-xs text-neutral-600 mt-2">
                   {vacinasDisponiveis.length} vacina(s) disponível(is) para
                   cadastro
                 </p>
@@ -764,9 +721,7 @@ const ModalCriarVacina = memo(
             )}
             {}
             <div>
-              <label
-                className="block text-sm font-semibold text-neutral-700 mb-2"
-              >
+              <label className="block text-sm font-semibold text-neutral-700 mb-2">
                 Nome da Vacina <span className="text-red-500">*</span>
               </label>
               <input
@@ -782,9 +737,7 @@ const ModalCriarVacina = memo(
             </div>
             {}
             <div>
-              <label
-                className="block text-sm font-semibold text-neutral-700 mb-2"
-              >
+              <label className="block text-sm font-semibold text-neutral-700 mb-2">
                 Finalidade <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -800,9 +753,7 @@ const ModalCriarVacina = memo(
             </div>
             {}
             <div>
-              <label
-                className="block text-sm font-semibold text-neutral-700 mb-2"
-              >
+              <label className="block text-sm font-semibold text-neutral-700 mb-2">
                 Público-Alvo <span className="text-red-500">*</span>
               </label>
               <input
@@ -819,9 +770,7 @@ const ModalCriarVacina = memo(
             {}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label
-                  className="block text-sm font-semibold text-neutral-700 mb-2"
-                >
+                <label className="block text-sm font-semibold text-neutral-700 mb-2">
                   Quantidade
                 </label>
                 <input
@@ -835,9 +784,7 @@ const ModalCriarVacina = memo(
                 />
               </div>
               <div>
-                <label
-                  className="block text-sm font-semibold text-neutral-700 mb-2"
-                >
+                <label className="block text-sm font-semibold text-neutral-700 mb-2">
                   Início do Período
                 </label>
                 <input
@@ -850,9 +797,7 @@ const ModalCriarVacina = memo(
                 />
               </div>
               <div>
-                <label
-                  className="block text-sm font-semibold text-neutral-700 mb-2"
-                >
+                <label className="block text-sm font-semibold text-neutral-700 mb-2">
                   Fim do Período
                 </label>
                 <input

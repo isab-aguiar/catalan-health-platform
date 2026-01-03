@@ -1,5 +1,9 @@
 import { PageContainer } from "../components/layout";
-import { InfoBox, BackButton, RecommendedReadingCarousel } from "../components/common";
+import {
+  InfoBox,
+  BackButton,
+  RecommendedReadingCarousel,
+} from "../components/common";
 import { MessageCircle, Instagram } from "lucide-react";
 import remsaImage from "../assets/remsa/remsa.jpeg";
 import { contactInfo, openingHours, socialMedia } from "../config";
@@ -11,35 +15,37 @@ export default function REMSA() {
       <div className="max-w-5xl mx-auto">
         <BackButton />
 
-        {/* Header com gradiente */}
         <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg shadow-md p-6 mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">
-            REMSA
-          </h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">REMSA</h1>
           <p className="text-primary-100 text-sm mt-1">
             Programa de Residência Multiprofissional em Saúde do Adolescente
           </p>
         </div>
 
-        {/* Sobre o Programa */}
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 shadow-sm border border-blue-200 mb-6">
           <h2 className="text-xl font-bold text-blue-900 mb-4">
             Sobre o Programa
           </h2>
           <p className="text-neutral-700 leading-relaxed mb-5">
-            O <strong>Programa de Residência Multiprofissional em Saúde do Adolescente (REMSA)</strong> é um programa de
-            pós-graduação que capacita profissionais de diversas áreas da saúde para atuar de
-            forma integrada no Sistema Único de Saúde (SUS).
+            O{" "}
+            <strong>
+              Programa de Residência Multiprofissional em Saúde do Adolescente
+              (REMSA)
+            </strong>{" "}
+            é um programa de pós-graduação que capacita profissionais de
+            diversas áreas da saúde para atuar de forma integrada no Sistema
+            Único de Saúde (SUS).
           </p>
           <p className="text-neutral-700 leading-relaxed mb-5">
-            Na UAPS São José, os residentes trabalham em equipe multiprofissional, promovendo
-            uma abordagem integral e humanizada no atendimento à população, sempre com a
-            orientação de preceptores experientes.
+            Na UAPS São José, os residentes trabalham em equipe
+            multiprofissional, promovendo uma abordagem integral e humanizada no
+            atendimento à população, sempre com a orientação de preceptores
+            experientes.
           </p>
           <p className="text-neutral-700 leading-relaxed mb-5">
-            O programa tem como objetivo qualificar o cuidado em saúde, ampliando ações de
-            promoção, prevenção e acompanhamento voltadas especialmente para crianças e
-            adolescentes de 10 a 19 anos.
+            O programa tem como objetivo qualificar o cuidado em saúde,
+            ampliando ações de promoção, prevenção e acompanhamento voltadas
+            especialmente para crianças e adolescentes de 10 a 19 anos.
           </p>
           <h3 className="font-bold text-blue-900 mb-4 text-base">
             Serviços Oferecidos:
@@ -81,7 +87,8 @@ export default function REMSA() {
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mt-2 flex-shrink-0"></div>
               <div>
                 <strong className="text-neutral-800 text-sm">
-                  Orientações sobre autocuidado, saúde mental e hábitos de vida saudáveis
+                  Orientações sobre autocuidado, saúde mental e hábitos de vida
+                  saudáveis
                 </strong>
               </div>
             </div>
@@ -108,33 +115,57 @@ export default function REMSA() {
         <InfoBox title="Áreas de Atendimento" className="mb-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">Fisioterapia</h3>
-              <p className="text-neutral-700 text-sm mb-1"><strong>Residente:</strong> Lais</p>
+              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                Fisioterapia
+              </h3>
+              <p className="text-neutral-700 text-sm mb-1">
+                <strong>Residente:</strong> Lais
+              </p>
               <p className="text-neutral-600 text-xs">Preceptor responsável</p>
             </div>
             <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">Enfermagem</h3>
-              <p className="text-neutral-700 text-sm mb-1"><strong>Residente:</strong> Fernanda</p>
+              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                Enfermagem
+              </h3>
+              <p className="text-neutral-700 text-sm mb-1">
+                <strong>Residente:</strong> Fernanda
+              </p>
               <p className="text-neutral-600 text-xs">Preceptor responsável</p>
             </div>
             <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">Nutrição</h3>
-              <p className="text-neutral-700 text-sm mb-1"><strong>Residente:</strong> Marina</p>
+              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                Nutrição
+              </h3>
+              <p className="text-neutral-700 text-sm mb-1">
+                <strong>Residente:</strong> Marina
+              </p>
               <p className="text-neutral-600 text-xs">Preceptor responsável</p>
             </div>
             <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">Odontologia</h3>
-              <p className="text-neutral-700 text-sm mb-1"><strong>Residente:</strong> Daiane</p>
+              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                Odontologia
+              </h3>
+              <p className="text-neutral-700 text-sm mb-1">
+                <strong>Residente:</strong> Daiane
+              </p>
               <p className="text-neutral-600 text-xs">Preceptor responsável</p>
             </div>
             <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">Serviço Social</h3>
-              <p className="text-neutral-700 text-sm mb-1"><strong>Residente:</strong> Residente responsável</p>
+              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                Serviço Social
+              </h3>
+              <p className="text-neutral-700 text-sm mb-1">
+                <strong>Residente:</strong> Residente responsável
+              </p>
               <p className="text-neutral-600 text-xs">Preceptor responsável</p>
             </div>
             <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
-              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">Psicologia</h3>
-              <p className="text-neutral-700 text-sm mb-1"><strong>Residente:</strong> Luara</p>
+              <h3 className="font-semibold text-neutral-900 mb-2 text-sm">
+                Psicologia
+              </h3>
+              <p className="text-neutral-700 text-sm mb-1">
+                <strong>Residente:</strong> Luara
+              </p>
               <p className="text-neutral-600 text-xs">Preceptor responsável</p>
             </div>
           </div>
@@ -142,7 +173,8 @@ export default function REMSA() {
 
         <InfoBox title="Oficinas REMSA" className="mb-6">
           <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
-            Participe das nossas oficinas semanais em diferentes locais da comunidade:
+            Participe das nossas oficinas semanais em diferentes locais da
+            comunidade:
           </p>
           <div className="space-y-3">
             <div className="bg-white/70 rounded-lg p-4 border border-blue-100">
@@ -153,7 +185,10 @@ export default function REMSA() {
                   </span>
                 </div>
                 <div className="flex-1">
-                  <p className="text-neutral-900 font-semibold mb-1 text-sm"><strong>Horário:</strong> {openingHours.remsa.workshops.tuesday.display}</p>
+                  <p className="text-neutral-900 font-semibold mb-1 text-sm">
+                    <strong>Horário:</strong>{" "}
+                    {openingHours.remsa.workshops.tuesday.display}
+                  </p>
                   <p className="text-neutral-700 text-sm">
                     <strong>Local:</strong>{" "}
                     <a
@@ -176,7 +211,10 @@ export default function REMSA() {
                   </span>
                 </div>
                 <div className="flex-1">
-                  <p className="text-neutral-900 font-semibold mb-1 text-sm"><strong>Horário:</strong> {openingHours.remsa.workshops.wednesday.display}</p>
+                  <p className="text-neutral-900 font-semibold mb-1 text-sm">
+                    <strong>Horário:</strong>{" "}
+                    {openingHours.remsa.workshops.wednesday.display}
+                  </p>
                   <p className="text-neutral-700 text-sm">
                     <strong>Local:</strong>{" "}
                     <a
@@ -199,7 +237,10 @@ export default function REMSA() {
                   </span>
                 </div>
                 <div className="flex-1">
-                  <p className="text-neutral-900 font-semibold mb-1 text-sm"><strong>Horário:</strong> {openingHours.remsa.workshops.thursday.display}</p>
+                  <p className="text-neutral-900 font-semibold mb-1 text-sm">
+                    <strong>Horário:</strong>{" "}
+                    {openingHours.remsa.workshops.thursday.display}
+                  </p>
                   <p className="text-neutral-700 text-sm">
                     <strong>Local:</strong>{" "}
                     <a
@@ -219,7 +260,8 @@ export default function REMSA() {
 
         <InfoBox title="Como Acessar" className="mb-6">
           <p className="text-neutral-700 leading-relaxed mb-4 text-sm">
-            Para ter acesso aos serviços da REMSA, compareça diretamente a uma das unidades participantes:
+            Para ter acesso aos serviços da REMSA, compareça diretamente a uma
+            das unidades participantes:
           </p>
           <p className="text-neutral-700 leading-relaxed mb-5 text-sm">
             <strong>Atendimento:</strong> Por demanda ou agendamento pelo{" "}
@@ -236,44 +278,67 @@ export default function REMSA() {
 
           <div className="space-y-4">
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h4 className="font-semibold text-neutral-900 text-sm mb-2">UAPS São José</h4>
+              <h4 className="font-semibold text-neutral-900 text-sm mb-2">
+                UAPS São José
+              </h4>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.main.mapsQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 underline text-sm mb-1 block"
               >
-                {contactInfo.address.main.street} - {contactInfo.address.main.neighborhood}, {contactInfo.address.main.city} - {contactInfo.address.main.state}
+                {contactInfo.address.main.street} -{" "}
+                {contactInfo.address.main.neighborhood},{" "}
+                {contactInfo.address.main.city} -{" "}
+                {contactInfo.address.main.state}
               </a>
-              <p className="text-neutral-600 text-sm mb-2">CEP: {contactInfo.address.main.cep}</p>
+              <p className="text-neutral-600 text-sm mb-2">
+                CEP: {contactInfo.address.main.cep}
+              </p>
               <div className="text-neutral-700 text-sm">
-                <p className="mb-1"><strong>Atendimento ao Público:</strong></p>
+                <p className="mb-1">
+                  <strong>Atendimento ao Público:</strong>
+                </p>
                 <p className="mb-0.5">Segunda a Sexta-feira</p>
-                <p><strong>Horário:</strong> {openingHours.remsa.uapsSaoJose.weekdays}</p>
+                <p>
+                  <strong>Horário:</strong>{" "}
+                  {openingHours.remsa.uapsSaoJose.weekdays}
+                </p>
               </div>
             </div>
 
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h4 className="font-semibold text-neutral-900 text-sm mb-2">UAPS Icaraí</h4>
+              <h4 className="font-semibold text-neutral-900 text-sm mb-2">
+                UAPS Icaraí
+              </h4>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${contactInfo.address.referenceUnits.uapsIcarai.mapsQuery}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 underline text-sm mb-1 block"
               >
-                {contactInfo.address.referenceUnits.uapsIcarai.street} - {contactInfo.address.referenceUnits.uapsIcarai.neighborhood}, {contactInfo.address.referenceUnits.uapsIcarai.city} - {contactInfo.address.referenceUnits.uapsIcarai.state}
+                {contactInfo.address.referenceUnits.uapsIcarai.street} -{" "}
+                {contactInfo.address.referenceUnits.uapsIcarai.neighborhood},{" "}
+                {contactInfo.address.referenceUnits.uapsIcarai.city} -{" "}
+                {contactInfo.address.referenceUnits.uapsIcarai.state}
               </a>
-              <p className="text-neutral-600 text-sm mb-2">CEP: {contactInfo.address.referenceUnits.uapsIcarai.cep}</p>
+              <p className="text-neutral-600 text-sm mb-2">
+                CEP: {contactInfo.address.referenceUnits.uapsIcarai.cep}
+              </p>
               <div className="text-neutral-700 text-sm">
-                <p className="mb-1"><strong>Atendimento ao Público:</strong></p>
+                <p className="mb-1">
+                  <strong>Atendimento ao Público:</strong>
+                </p>
                 <p className="mb-0.5">Segunda a Sexta-feira</p>
-                <p><strong>Horário:</strong> {openingHours.remsa.uapsIcarai.weekdays}</p>
+                <p>
+                  <strong>Horário:</strong>{" "}
+                  {openingHours.remsa.uapsIcarai.weekdays}
+                </p>
               </div>
             </div>
           </div>
         </InfoBox>
 
-        {/* Card Conheça o Nosso Trabalho */}
         <div className="bg-white rounded-lg shadow-md border border-neutral-200 mb-6">
           <div className="border-b border-neutral-200 px-4 sm:px-6 py-4 bg-neutral-50">
             <h2 className="text-xl sm:text-2xl font-semibold text-neutral-900">
@@ -310,7 +375,10 @@ export default function REMSA() {
                     </h3>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900">
-                        <MessageCircle size={18} className="text-green-600 flex-shrink-0" />
+                        <MessageCircle
+                          size={18}
+                          className="text-green-600 flex-shrink-0"
+                        />
                         <span>{contactInfo.phones.whatsapp.remsa.display}</span>
                       </div>
                     </div>
@@ -334,7 +402,10 @@ export default function REMSA() {
                     </h3>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2 text-base sm:text-lg font-semibold text-neutral-900">
-                        <Instagram size={18} className="text-pink-600 flex-shrink-0" />
+                        <Instagram
+                          size={18}
+                          className="text-pink-600 flex-shrink-0"
+                        />
                         <span>{socialMedia.remsa.instagram.handle}</span>
                       </div>
                     </div>
@@ -346,7 +417,6 @@ export default function REMSA() {
         </div>
       </div>
 
-      {/* Leitura Recomendada - Aparece após scroll */}
       <div className="pb-4">
         <RecommendedReadingCarousel pageId="remsa" />
       </div>
